@@ -1,0 +1,3663 @@
+
+
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:projectscoid/core/AppProvider.dart';
+import 'package:projectscoid/views/components/index.dart';
+import 'package:projectscoid/core/AppProvider.dart';
+import 'package:projectscoid/core/components/utility/widget/SearchSelectDialog.dart';
+import 'package:projectscoid/controllers/controllers.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:projectscoid/core/components/helpers/string_helpers.dart';
+import 'package:projectscoid/core/components/helpers/color_helpers.dart';
+import 'package:projectscoid/core/components/helpers/action_helpers.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
+import 'package:projectscoid/app/Env.dart';
+import 'dart:convert';
+import 'image_fields.dart';
+import 'file_fields.dart';
+import 'option_fields.dart';
+import 'meta.dart';
+import 'item_button.dart';
+import 'button.dart';
+import 'credit.dart';
+import 'payment.dart';
+import 'selection.dart';
+import 'past_projects_item.dart';
+import 'past_projects_item_base.dart';
+import 'photo.dart';
+import 'paging.dart';
+import 'package:horizontal_data_table/horizontal_data_table.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:projectscoid/models/PastProjects/action.dart';
+import 'package:projectscoid/views/route.dart' as rt;
+part 'past_projects_base.g.dart';
+
+
+
+
+
+
+
+
+@JsonSerializable()
+
+class ModelPastProjects {
+  int?    age;
+  int?    cnt;
+  int?    page;
+  String? id;
+  String? ttl;
+  String? pht;
+  String? sbttl;
+
+  String? project_id;
+  int? owner_id;
+  String? owner_url;
+  String? owner_str;
+  List<int?>? owner_list;
+  List<String?>? owner_list_str;
+  List<int?>? channels_id;
+  List<String?>?  channels_str;
+  List<String?>? channels_url;
+  List<int?>? channels_list;
+  List<String?>? channels_list_str;
+
+  String? project_owner;
+  int? category_id;
+  String? category_url;
+  String? category_str;
+  List<int?>? category_list;
+  List<String?>? category_list_str;
+  String? title;
+  String? description;
+  String? short_description;
+  String? attachments_name;
+  List<FileField?>? attachments;
+  int? finish_days;
+  String? finish_days_str;
+  String? search_text;
+  DateTime? last_bump;
+  DateTime? select_deadline;
+  DateTime? start_date;
+  DateTime? finish_deadline;
+  DateTime? finish_date;
+  DateTime? closed_date;
+  int? bid_count;
+  String? bid_count_str;
+  int? progress;
+  int? project_status_id;
+  String? project_status_str;
+  List<int?>? project_status_list;
+  List<String?>? project_status_list_str;
+  int? project_ending_id;
+  String? project_ending_str;
+  List<int?>? project_ending_list;
+  List<String?>? project_ending_list_str;
+  int? project_type_id;
+  String? project_type_str;
+  List<int?>? project_type_list;
+  List<String?>? project_type_list_str;
+  int? project_class_id;
+  String? project_class_str;
+  List<int?>? project_class_list;
+  List<String?>? project_class_list_str;
+  double? published_budget;
+  String? published_budget_str;
+   String? budget_range;
+   double? budget_range_min;
+   String? budget_range_min_str;
+   double? budget_range_max;
+   String? budget_range_max_str;
+   String? budget_range_str;
+  int? fee_percent;
+  String? fee_percent_str;
+  int? service_id;
+  String? service_url;
+  String? service_str;
+  List<int?>? service_list;
+  List<String?>? service_list_str;
+  int? private_worker_id;
+  String? private_worker_url;
+  String? private_worker_str;
+  List<int?>? private_worker_list;
+  List<String?>? private_worker_list_str;
+  String? invited_users;
+  int? accepted_bid_id;
+  String? accepted_bid_url;
+  String? accepted_bid_str;
+  List<int?>? accepted_bid_list;
+  List<String?>? accepted_bid_list_str;
+  int? accepted_worker_id;
+  String? accepted_worker_url;
+  String? accepted_worker_str;
+  List<int?>? accepted_worker_list;
+  List<String?>? accepted_worker_list_str;
+  double? accepted_budget;
+  String? accepted_budget_str;
+  int? accepted_work_id;
+  String? accepted_work_url;
+  String? accepted_work_str;
+  List<int?>? accepted_work_list;
+  List<String?>? accepted_work_list_str;
+  DateTime? accepted_date;
+  double? available_budget;
+  String? available_budget_str;
+  bool?need_weekly_report;
+  bool?weekly_report_needed;
+  bool?weekly_report_posted;
+  bool?deadline_passed_sent;
+  bool?deadline_approaching_sent;
+  String? rating_for_worker;
+  int? work_quality;
+  int? expertise;
+  int? worker_communication;
+  int? worker_professionalism;
+  int? worker_rating;
+  double? worker_rating_num;
+  String? worker_rating_num_str;
+  String? worker_feedback;
+  String? rating_for_owner;
+  int? clarity;
+  int? friendliness;
+  int? owner_communication;
+  int? owner_professionalism;
+  int? owner_rating;
+  double? owner_rating_num;
+  String? owner_rating_num_str;
+  String? owner_feedback;
+  String? owner_signature_ip;
+  DateTime? owner_signature_date;
+  String? worker_signature_ip;
+  DateTime? worker_signature_date;
+  int? owner_escrow_id;
+  String? owner_escrow_url;
+  String? owner_escrow_str;
+  List<int?>? owner_escrow_list;
+  List<String?>? owner_escrow_list_str;
+  int? worker_credit_id;
+  String? worker_credit_url;
+  String? worker_credit_str;
+  List<int?>? worker_credit_list;
+  List<String?>? worker_credit_list_str;
+  int? arbitration_id;
+  String? arbitration_url;
+  String? arbitration_str;
+  List<int?>? arbitration_list;
+  List<String?>? arbitration_list_str;
+  int? owner_credit_id;
+  String? owner_credit_url;
+  String? owner_credit_str;
+  List<int?>? owner_credit_list;
+  List<String?>? owner_credit_list_str;
+  int? registered_by_id;
+  String? registered_by_url;
+  String? registered_by_str;
+  List<int?>? registered_by_list;
+  List<String?>? registered_by_list_str;
+  DateTime? registered_date;
+  String? registered_from_ip;
+  int? canceled_by_id;
+  String? canceled_by_url;
+  String? canceled_by_str;
+  List<int?>? canceled_by_list;
+  List<String?>? canceled_by_list_str;
+  DateTime? canceled_date;
+  String? canceled_from_ip;
+  int? published_by_id;
+  String? published_by_url;
+  String? published_by_str;
+  List<int?>? published_by_list;
+  List<String?>? published_by_list_str;
+  DateTime? published_date;
+  String? published_from_ip;
+  int? rejected_by_id;
+  String? rejected_by_url;
+  String? rejected_by_str;
+  List<int?>? rejected_by_list;
+  List<String?>? rejected_by_list_str;
+  DateTime? rejected_date;
+  String? rejected_from_ip;
+  String? admin_note;
+  bool?announced;
+  String? your_wishes;
+  int? extend_deadline_days;
+  String? extend_deadline_days_str;
+  String? testimony;
+  String? pick_user_name;
+  String? enter_email_address;
+  String? handphone;
+  String? broadcast_message;
+  String? attach_file_name;
+  List<FileField?>? attach_file;
+  bool?automatic_send_to_new_bidder;
+  bool?is_system_message;
+  String? admin_notes;
+
+	
+	  ModelPastProjects(
+            this.id,
+            this.project_id,
+			this.owner_id,
+			this.owner_str,
+			this.owner_list,
+			this.owner_list_str,
+			this.channels_id,
+			this.channels_str,
+			this.channels_url,
+			this.channels_list,
+			this.channels_list_str,
+			this.category_id,
+			this.category_str,
+			this.category_list,
+			this.category_list_str,
+			this.attachments,
+			this.attachments_name,
+			this.finish_days,
+			this.finish_days_str,
+			this.bid_count,
+			this.bid_count_str,
+			this.project_status_id,
+			this.project_status_str,
+			this.project_status_list,
+			this.project_status_list_str,
+			this.project_ending_id,
+			this.project_ending_str,
+			this.project_ending_list,
+			this.project_ending_list_str,
+			this.project_type_id,
+			this.project_type_str,
+			this.project_type_list,
+			this.project_type_list_str,
+			this.project_class_id,
+			this.project_class_str,
+			this.project_class_list,
+			this.project_class_list_str,
+			this.published_budget,
+			this.published_budget_str,
+			this.budget_range,
+			this.budget_range_min,
+			this.budget_range_min_str,
+			this.budget_range_max,
+			this.budget_range_max_str,
+      this.budget_range_str,
+			this.fee_percent,
+			this.fee_percent_str,
+			this.service_id,
+			this.service_str,
+			this.service_list,
+			this.service_list_str,
+			this.private_worker_id,
+			this.private_worker_str,
+			this.private_worker_list,
+			this.private_worker_list_str,
+			this.accepted_bid_id,
+			this.accepted_bid_str,
+			this.accepted_bid_list,
+			this.accepted_bid_list_str,
+			this.accepted_worker_id,
+			this.accepted_worker_str,
+			this.accepted_worker_list,
+			this.accepted_worker_list_str,
+			this.accepted_budget,
+			this.accepted_budget_str,
+			this.accepted_work_id,
+			this.accepted_work_str,
+			this.accepted_work_list,
+			this.accepted_work_list_str,
+			this.available_budget,
+			this.available_budget_str,
+			this.worker_rating_num,
+			this.worker_rating_num_str,
+			this.owner_rating_num,
+			this.owner_rating_num_str,
+			this.owner_escrow_id,
+			this.owner_escrow_str,
+			this.owner_escrow_list,
+			this.owner_escrow_list_str,
+			this.worker_credit_id,
+			this.worker_credit_str,
+			this.worker_credit_list,
+			this.worker_credit_list_str,
+			this.arbitration_id,
+			this.arbitration_str,
+			this.arbitration_list,
+			this.arbitration_list_str,
+			this.owner_credit_id,
+			this.owner_credit_str,
+			this.owner_credit_list,
+			this.owner_credit_list_str,
+			this.registered_by_id,
+			this.registered_by_str,
+			this.registered_by_list,
+			this.registered_by_list_str,
+			this.canceled_by_id,
+			this.canceled_by_str,
+			this.canceled_by_list,
+			this.canceled_by_list_str,
+			this.published_by_id,
+			this.published_by_str,
+			this.published_by_list,
+			this.published_by_list_str,
+			this.rejected_by_id,
+			this.rejected_by_str,
+			this.rejected_by_list,
+			this.rejected_by_list_str,
+			this.extend_deadline_days,
+			this.extend_deadline_days_str,
+			this.attach_file,
+			this.attach_file_name,
+
+  );
+    factory ModelPastProjects.fromJson(Map<String, dynamic> json) => _$ModelPastProjectsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ModelPastProjectsToJson(this);
+
+}
+
+
+
+
+class PastProjectsBase{
+	var model;
+	Map<String, dynamic> json;
+	PastProjectsBase(this.json){
+		model = PastProjectsSuperBase.fromJson(this.json);
+			
+	}
+	
+   Map<String, dynamic> convertFormDataEdit(var data){
+   
+
+		
+
+   
+	String? attachments = '';
+	if (model.model.attachments!= null) {
+		if (model.model.attachments[0].temp != '') {
+			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
+		}
+	}
+	String? attach_file = '';
+	if (model.model.attach_file!= null) {
+		if (model.model.attach_file[0].temp != '') {
+			attach_file = '[{"name":"${model.model.attach_file[0].name}","size":${model.model.attach_file[0].size},"created":${model.model.attach_file[0].date},"modified":${model.model.attach_file[0].date},"temp":"${model.model.attach_file[0].temp}","remote":"${model.model.attach_file[0].remote}","dir":"${model.model.attach_file[0].dir}"}]';
+		}
+	}
+   
+   
+      var formData = {
+      "past_projects[_trigger_]":"",
+   "past_projects[project_id]": "${model.model.project_id }",
+  "past_projects[owner_id]": "${model.model.owner_id }",
+  "past_projects[project_owner]": "${model.model.project_owner }",
+  "past_projects[category_id]": "${model.model.category_id }",
+  "past_projects[title]": "${model.model.title }",
+  "past_projects[description]": "${model.model.description }",
+  "past_projects[short_description]": "${model.model.short_description }",
+  "past_projects[attachments]": '$attachments',
+  "past_projects[attachments_lastval]": '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size.toString()},"created":${model.model.attachments[0].date.toString()},"modified":${model.model.attachments[0].date.toString()},"temp":"${model.model.attachments[0].temp}","remote":"","dir":"temp"}]',
+  "past_projects[finish_days]": "${model.model.finish_days }",
+  "past_projects[search_text]": "${model.model.search_text }",
+  "past_projects[last_bump]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.last_bump)}",
+  "past_projects[select_deadline]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.select_deadline)}",
+  "past_projects[start_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.start_date)}",
+  "past_projects[finish_deadline]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.finish_deadline)}",
+  "past_projects[finish_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.finish_date)}",
+  "past_projects[closed_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.closed_date)}",
+  "past_projects[bid_count]": "${model.model.bid_count }",
+  "past_projects[progress]": "${model.model.progress }",
+   "past_projects[project_status_id]": "${model.model.project_status_id}",
+   "past_projects[project_ending_id]": "${model.model.project_ending_id}",
+   "past_projects[project_type_id]": "${model.model.project_type_id}",
+   "past_projects[project_class_id]": "${model.model.project_class_id}",
+  "past_projects[published_budget]": "${model.model.published_budget}",
+  "past_projects[budget_range]": "${model.model.budget_range }",
+  "past_projects[fee_percent]": "${model.model.fee_percent }",
+  "past_projects[service_id]": "${model.model.service_id }",
+  "past_projects[private_worker_id]": "${model.model.private_worker_id }",
+  "past_projects[invited_users]": "${model.model.invited_users }",
+  "past_projects[accepted_bid_id]": "${model.model.accepted_bid_id }",
+  "past_projects[accepted_worker_id]": "${model.model.accepted_worker_id }",
+  "past_projects[accepted_budget]": "${model.model.accepted_budget}",
+  "past_projects[accepted_work_id]": "${model.model.accepted_work_id }",
+  "past_projects[accepted_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.accepted_date)}",
+  "past_projects[available_budget]": "${model.model.available_budget}",
+  "past_projects[need_weekly_report]": "${model.model.need_weekly_report ? 1 : 0}",
+  "past_projects[weekly_report_needed]": "${model.model.weekly_report_needed ? 1 : 0}",
+  "past_projects[weekly_report_posted]": "${model.model.weekly_report_posted ? 1 : 0}",
+  "past_projects[deadline_passed_sent]": "${model.model.deadline_passed_sent ? 1 : 0}",
+  "past_projects[deadline_approaching_sent]": "${model.model.deadline_approaching_sent ? 1 : 0}",
+  "past_projects[rating_for_worker]": "${model.model.rating_for_worker }",
+  "past_projects[work_quality]": "${model.model.work_quality }",
+  "past_projects[expertise]": "${model.model.expertise }",
+  "past_projects[worker_communication]": "${model.model.worker_communication }",
+  "past_projects[worker_professionalism]": "${model.model.worker_professionalism }",
+  "past_projects[worker_rating]": "${model.model.worker_rating }",
+  "past_projects[worker_rating_num]": "${model.model.worker_rating_num}",
+  "past_projects[worker_feedback]": "${model.model.worker_feedback }",
+  "past_projects[rating_for_owner]": "${model.model.rating_for_owner }",
+  "past_projects[clarity]": "${model.model.clarity }",
+  "past_projects[friendliness]": "${model.model.friendliness }",
+  "past_projects[owner_communication]": "${model.model.owner_communication }",
+  "past_projects[owner_professionalism]": "${model.model.owner_professionalism }",
+  "past_projects[owner_rating]": "${model.model.owner_rating }",
+  "past_projects[owner_rating_num]": "${model.model.owner_rating_num}",
+  "past_projects[owner_feedback]": "${model.model.owner_feedback }",
+  "past_projects[owner_signature_ip]": "${model.model.owner_signature_ip }",
+  "past_projects[owner_signature_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.owner_signature_date)}",
+  "past_projects[worker_signature_ip]": "${model.model.worker_signature_ip }",
+  "past_projects[worker_signature_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.worker_signature_date)}",
+  "past_projects[owner_escrow_id]": "${model.model.owner_escrow_id }",
+  "past_projects[worker_credit_id]": "${model.model.worker_credit_id }",
+  "past_projects[arbitration_id]": "${model.model.arbitration_id }",
+  "past_projects[owner_credit_id]": "${model.model.owner_credit_id }",
+  "past_projects[registered_by_id]": "${model.model.registered_by_id }",
+  "past_projects[registered_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.registered_date)}",
+  "past_projects[registered_from_ip]": "${model.model.registered_from_ip }",
+  "past_projects[canceled_by_id]": "${model.model.canceled_by_id }",
+  "past_projects[canceled_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.canceled_date)}",
+  "past_projects[canceled_from_ip]": "${model.model.canceled_from_ip }",
+  "past_projects[published_by_id]": "${model.model.published_by_id }",
+  "past_projects[published_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.published_date)}",
+  "past_projects[published_from_ip]": "${model.model.published_from_ip }",
+  "past_projects[rejected_by_id]": "${model.model.rejected_by_id }",
+  "past_projects[rejected_date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.rejected_date)}",
+  "past_projects[rejected_from_ip]": "${model.model.rejected_from_ip }",
+  "past_projects[admin_note]": "${model.model.admin_note }",
+  "past_projects[announced]": "${model.model.announced ? 1 : 0}",
+  "past_projects[your_wishes]": "${model.model.your_wishes }",
+  "past_projects[extend_deadline_days]": "${model.model.extend_deadline_days }",
+  "past_projects[testimony]": "${model.model.testimony }",
+  "past_projects[pick_user_name]": "${model.model.pick_user_name }",
+  "past_projects[enter_email_address]": "${model.model.enter_email_address }",
+  "past_projects[handphone]": "${model.model.handphone }",
+  "past_projects[broadcast_message]": "${model.model.broadcast_message }",
+  "past_projects[attach_file]": '$attach_file',
+  "past_projects[attach_file_lastval]": '[{"name":"${model.model.attach_file[0].name}","size":${model.model.attach_file[0].size.toString()},"created":${model.model.attach_file[0].date.toString()},"modified":${model.model.attach_file[0].date.toString()},"temp":"${model.model.attach_file[0].temp}","remote":"","dir":"temp"}]',
+  "past_projects[automatic_send_to_new_bidder]": "${model.model.automatic_send_to_new_bidder ? 1 : 0}",
+  "past_projects[is_system_message]": "${model.model.is_system_message ? 1 : 0}",
+  "past_projects[admin_notes]": "${model.model.admin_notes }",
+	  
+  };  
+      int  count = 0;
+      for(var tag in model.model.channels_id){
+        formData.addAll({"past_projects[inline_tags][selection][$count]": "$tag"});
+        count++;
+      }
+
+    return( formData);
+
+  } 
+	
+  List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, PastProjectsController past_projects,
+  var postPastProjectsResult, State state, String? sendPath, String? id,  String? title){
+    final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
+    ];
+	for(var i = 0; i < model.buttons.length; i++)
+    {
+      if(model.buttons[i].text != "Table View"){
+      buttonChildren!.add(ButtonEditPastProjectsWidget(model.buttons[i], context,formKey, controller,past_projects, postPastProjectsResult, state, sendPath, id,  title ));
+      }  
+    }
+       return(
+	        buttonChildren 
+	   );
+   } 
+   
+    SpeedDial	 Buttons(BuildContext context, bool?visible, var formKey, ScrollController controller, PastProjectsController past_projects,
+  var postPastProjectsResult, State state, String? sendPath, String? id,  String? title ){
+     return(
+	 SpeedDial(
+				//marginRight: 18,
+				//marginBottom: 20,
+				 childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+				animatedIcon: AnimatedIcons.menu_close,
+				animatedIconTheme: IconThemeData(size: 22.0),
+				// this is ignored if animatedIcon is non null
+				// child: Icon(Icons.add),
+				visible: visible!,
+				// If true user is forced to close dial manually
+				// by tapping main button and overlay is not rendered.
+				closeManually: false,
+				curve: Curves.bounceIn,
+				overlayColor: CurrentTheme.MainAccentColor,
+				overlayOpacity: 0.5,
+				onOpen: () => print('OPENING DIAL'),
+				onClose: () => print('DIAL CLOSED'),
+				tooltip: 'Speed Dial',
+				heroTag: 'speed-dial-hero-tag',
+				backgroundColor: CurrentTheme.SecondaryColor,
+				foregroundColor: Colors.white,
+				elevation: 8.0,
+				shape: CircleBorder(),
+				children:listButton(context, formKey,controller,past_projects, postPastProjectsResult, state, sendPath!, id!,  title! )
+	    )
+	 );
+   } 
+
+SpeedDialChild ButtonEditPastProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, PastProjectsController past_projects,
+ var postPastProjectsResult, State state, String? sendPath, String? id,  String? title){
+  if(button.type == 'custom_filter'){
+    return (
+	       SpeedDialChild(
+                        child: Icon(Icons.save),
+                        backgroundColor: Colors.red,
+                        label: button!.text!,
+                        labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+                        onTap: (){ showSearchSelectDialog(context: context,
+                        caption:button!.text!,
+                        initialitems: button.selections,
+                        initvalue: button!.selections![0]);
+                        //AppProvider.getRouter(context)!.navigateTo(context,
+                        },
+                      )
+
+	);  
+  }else{
+	return(	SpeedDialChild(
+		  child: Icon(Icons.save),
+		  backgroundColor: Colors.red,
+		  label: button!.text!,
+		  labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+		  onTap: ()async{
+		  {
+                        controller.animateTo(controller.position.minScrollExtent,
+                        duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                        if (formKey.currentState.validate()) {
+                        //Map<String, dynamic> res = model.toJson();
+                        //print('json result == $res');
+						var formData = await convertFormDataEdit(model);
+                        past_projects = new  PastProjectsController(AppProvider.getApplication(context),
+                        sendPath,
+                        AppAction.post,
+                        id,
+                        title,
+                        formData,
+						false);
+                        final future = past_projects.postPastProjects();
+                        future.then((value) {
+                        state.setState(() {
+                        postPastProjectsResult = value;
+						//AppProvider.getRouter(context)!.pop(context);	
+                        });
+                        }).catchError((Error){
+							AppProvider.getRouter(context)!.pop(context);	
+						});
+
+                        } else {}
+                  }
+		  }
+	  ));
+  }
+
+}
+   
+
+
+	  	    Widget editOwner (State state) {
+	   return(  StringView(
+		value: model.model.owner_str,
+		caption: 'Owner',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.owner_id,
+	  caption: 'Owner',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.owner_id_list,
+	  nameenum: model.model.owner_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.owner_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editChannels (State state) {
+      return(
+	
+	new InlineTagsWidget(
+	  value: model.model.channels_id,
+	  caption: 'Channels',
+	  hint: ' ',
+	  required: true,
+	  idtags: model.model.channels_list,
+	  nametags: model.model.channels_list_str,
+	  getValue: (List<int?>? val) {
+    model.model.channels_id.clear();
+		state.setState(() {
+		  model.model.channels_id.addAll(val);
+		});
+	  },
+	  removeValue: (int? val) {
+		state.setState(() {
+		  model.model.channels_id.remove(val);
+		});
+	  },
+	));}
+
+	  	    Widget editProjectOwner (State state) {
+      return(
+	TitleWidget(
+		value: model.model.project_owner,
+		caption: 'Project Owner',
+		hint: 'Isi dengan Title Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.project_owner = val;
+		  });
+		},
+	));}
+
+
+	  	    Widget editCategory (State state) {
+	   return(  StringView(
+		value: model.model.category_str,
+		caption: 'Category',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.category_id,
+	  caption: 'Category',
+	  hint: 'pilih Model',
+	  required: true,
+	  idenum: model.model.category_id_list,
+	  nameenum: model.model.category_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.category_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editTitle (State state) {
+      return(
+	TitleWidget(
+		value: model.model.title,
+		caption: 'Title',
+		hint: 'Isi dengan Title Anda',
+		required: true,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.title = val;
+		  });
+		},
+	));}
+
+	  	    Widget editDescription (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.description,
+	  caption: 'Description',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.description = val;
+		});
+	  },
+	));}
+
+	  	    Widget editShortDescription (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.short_description,
+		caption: 'Short Description',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.short_description = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editAttachments (State state) {
+	 if(model.model.attachments== null){
+		FileField? file = new FileField('', '',0,0,0, '', '', '','' );
+		model.model.attachments = [file];
+		}
+      return(
+	FileWidget(
+		value: model.model.attachments[0],
+		caption: 'Attachments',
+		hint: 'Isi dengan File Anda',
+		required: false,
+		getValue: (var val) {
+		
+		  state.setState(() {
+			model.model.attachments[0] = val;
+		  });
+		},
+	));} 
+
+	  	    Widget editFinishDays (State state) {
+      return(
+	NumberWidget(
+	  value: model.model.finish_days,
+	  caption: 'Finish Days',
+	  hint: 'Isi dengan Number Anda',
+	  required: true,
+      min: '0',
+	  max: '1000000',
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.finish_days = val;
+		});
+	  },
+	));}
+
+	  	    Widget editSearchText (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.search_text,
+		caption: 'Search Text',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.search_text = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editLastBump (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.last_bump,
+	  caption: 'Last Bump',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.last_bump = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editSelectDeadline (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.select_deadline,
+	  caption: 'Select Deadline',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.select_deadline = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editStartDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.start_date,
+	  caption: 'Start Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.start_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editFinishDeadline (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.finish_deadline,
+	  caption: 'Finish Deadline',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.finish_deadline = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editFinishDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.finish_date,
+	  caption: 'Finish Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.finish_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editClosedDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.closed_date,
+	  caption: 'Closed Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.closed_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editBidCount (State state) {
+      return(
+	NumberWidget(
+	  value: model.model.bid_count,
+	  caption: 'Bid Count',
+	  hint: 'Isi dengan Number Anda',
+	  required: false,
+      min: '0',
+	  max: '1000000',
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.bid_count = val;
+		});
+	  },
+	));}
+
+	  	    Widget editProgress (State state) {
+      return(
+	PercentWidget(
+	  value: model.model.progress,
+	  caption: 'Progress',
+	  hint: 'Isi dengan double? Anda',
+	  required: false,
+	  min:'0.0',
+	  max:'100.0',
+	  getValue: (int? val) {
+	  
+		state.setState(() {
+		  model.model.progress = val;
+		});
+	  },
+	));}
+
+   	    Widget editProjectStatus (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.project_status_id,
+	  caption: 'Project Status',
+	  hint: 'pilih Enum',
+	  required: false,
+	  idenum: model.model.project_status_list,
+	  nameenum: model.model.project_status_list_str,
+	  getValue: (int? val) {
+	  	;
+		state.setState(() {
+		  model.model.project_status_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editProjectEnding (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.project_ending_id,
+	  caption: 'Project Ending',
+	  hint: 'pilih Enum',
+	  required: false,
+	  idenum: model.model.project_ending_list,
+	  nameenum: model.model.project_ending_list_str,
+	  getValue: (int? val) {
+	  	;
+		state.setState(() {
+		  model.model.project_ending_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editProjectType (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.project_type_id,
+	  caption: 'Project Type',
+	  hint: 'pilih Enum',
+	  required: false,
+	  idenum: model.model.project_type_list,
+	  nameenum: model.model.project_type_list_str,
+	  getValue: (int? val) {
+	  	;
+		state.setState(() {
+		  model.model.project_type_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editProjectClass (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.project_class_id,
+	  caption: 'Project Class',
+	  hint: 'pilih Enum',
+	  required: true,
+	  idenum: model.model.project_class_list,
+	  nameenum: model.model.project_class_list_str,
+	  getValue: (int? val) {
+	  	;
+		state.setState(() {
+		  model.model.project_class_id = val;
+		});
+	  },
+	));}
+
+	  	    Widget editPublishedBudget (State state) {
+      return(
+	MoneyWidget(
+	  value: model.model.published_budget,
+	  caption: 'Published Budget',
+	  hint: 'Isi dengan Money Anda',
+	  required: true,
+      min: '0',
+	  max: '1000000000',
+	  getValue: (double? val) {
+		state.setState(() {	
+		  model.model.published_budget = val;
+		});
+	  },
+	));}
+
+	  	    Widget editBudgetRange (State state) {
+      return(   
+        new RangeWidget( 
+          value: model.model.budget_range,
+          valuemin: model.model.budget_range_min,
+          valuemax: model.model.budget_range_max,
+          caption: 'Range Budget',
+          hint: 'Isi dengan Range penawaran Anda',
+          required:true,
+         min: '0',
+         max: '100000000000',
+
+          getValue1: (double? val) {
+            state.setState(() {
+              model.model.budget_range_min = val;
+            });
+          },
+          getValue2: (double? val) {
+            state.setState(() {
+              model.model.budget_range_max = val;
+            });
+          },
+          getValue: (String? val) {
+            state.setState(() {
+              model.model.budget_range = val;
+            });
+          },
+        )
+      );} 
+
+	  	    Widget editFeePercent (State state) {
+      return(
+	NumberWidget(
+	  value: model.model.fee_percent,
+	  caption: 'Fee Percent',
+	  hint: 'Isi dengan Number Anda',
+	  required: false,
+      min: '0',
+	  max: '1000000',
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.fee_percent = val;
+		});
+	  },
+	));}
+
+	  	    Widget editService (State state) {
+	   return(  StringView(
+		value: model.model.service_str,
+		caption: 'Service',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.service_id,
+	  caption: 'Service',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.service_id_list,
+	  nameenum: model.model.service_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.service_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editPrivateWorker (State state) {
+	   return(  StringView(
+		value: model.model.private_worker_str,
+		caption: 'Private Worker',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.private_worker_id,
+	  caption: 'Private Worker',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.private_worker_id_list,
+	  nameenum: model.model.private_worker_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.private_worker_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editInvitedUsers (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.invited_users,
+		caption: 'Invited Users',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.invited_users = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editAcceptedBid (State state) {
+	   return(  StringView(
+		value: model.model.accepted_bid_str,
+		caption: 'Accepted Bid',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.accepted_bid_id,
+	  caption: 'Accepted Bid',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.accepted_bid_id_list,
+	  nameenum: model.model.accepted_bid_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.accepted_bid_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editAcceptedWorker (State state) {
+	   return(  StringView(
+		value: model.model.accepted_worker_str,
+		caption: 'Accepted Worker',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.accepted_worker_id,
+	  caption: 'Accepted Worker',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.accepted_worker_id_list,
+	  nameenum: model.model.accepted_worker_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.accepted_worker_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editAcceptedBudget (State state) {
+      return(
+	MoneyWidget(
+	  value: model.model.accepted_budget,
+	  caption: 'Accepted Budget',
+	  hint: 'Isi dengan Money Anda',
+	  required: false,
+      min: '0',
+	  max: '1000000000',
+	  getValue: (double? val) {
+		state.setState(() {	
+		  model.model.accepted_budget = val;
+		});
+	  },
+	));}
+
+	  	    Widget editAcceptedWork (State state) {
+	   return(  StringView(
+		value: model.model.accepted_work_str,
+		caption: 'Accepted Work',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.accepted_work_id,
+	  caption: 'Accepted Work',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.accepted_work_id_list,
+	  nameenum: model.model.accepted_work_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.accepted_work_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editAcceptedDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.accepted_date,
+	  caption: 'Accepted Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.accepted_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editAvailableBudget (State state) {
+      return(
+	MoneyWidget(
+	  value: model.model.available_budget,
+	  caption: 'Available Budget',
+	  hint: 'Isi dengan Money Anda',
+	  required: false,
+      min: '0',
+	  max: '1000000000',
+	  getValue: (double? val) {
+		state.setState(() {	
+		  model.model.available_budget = val;
+		});
+	  },
+	));}
+
+	  	    Widget editNeedWeeklyReport (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.need_weekly_report,
+	  caption: 'Need Weekly Report',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.need_weekly_report = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editWeeklyReportNeeded (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.weekly_report_needed,
+	  caption: 'Weekly Report Needed',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.weekly_report_needed = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editWeeklyReportPosted (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.weekly_report_posted,
+	  caption: 'Weekly Report Posted',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.weekly_report_posted = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editDeadlinePassedSent (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.deadline_passed_sent,
+	  caption: 'Deadline Passed Sent',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.deadline_passed_sent = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editDeadlineApproachingSent (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.deadline_approaching_sent,
+	  caption: 'Deadline Approaching sent',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.deadline_approaching_sent = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editRatingForWorker (State state) {
+      return(
+	TitleWidget(
+		value: model.model.rating_for_worker,
+		caption: 'Rating For Worker',
+		hint: 'Isi dengan Title Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.rating_for_worker = val;
+		  });
+		},
+	));}
+
+	  	    Widget editWorkQuality (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.work_quality,
+	  caption: 'Work Quality',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.work_quality = val;
+		});
+	  },
+	));}
+
+	  	    Widget editExpertise (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.expertise,
+	  caption: 'Expertise',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.expertise = val;
+		});
+	  },
+	));}
+
+	  	    Widget editWorkerCommunication (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.worker_communication,
+	  caption: 'Worker Communication',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.worker_communication = val;
+		});
+	  },
+	));}
+
+	  	    Widget editWorkerProfessionalism (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.worker_professionalism,
+	  caption: 'Worker Professionalism',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.worker_professionalism = val;
+		});
+	  },
+	));}
+
+	  	    Widget editWorkerRating (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.worker_rating,
+	  caption: 'Worker Rating',
+	  hint: 'isi dengan Rating diatas.',
+	  required: false,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.worker_rating = val;
+		});
+	  },
+	));}
+
+	  	    Widget editWorkerRatingNum (State state) {
+      return(
+	  
+	DoubleWidget(
+	  value: model.model.worker_rating_num,
+	  caption: 'Worker Rating Num',
+	  hint: 'Isi dengan double? Anda',
+	  required: false,
+      min: '0',
+	  max: '10000000',
+	  getValue: (double? val) {
+		state.setState(() {
+		  
+	     model.model.worker_rating_num = val;
+		});
+	  },
+	));}
+
+	  	    Widget editWorkerFeedback (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.worker_feedback,
+	  caption: 'Worker Feedback',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.worker_feedback = val;
+		});
+	  },
+	));}
+
+	  	    Widget editRatingForOwner (State state) {
+      return(
+	TitleWidget(
+		value: model.model.rating_for_owner,
+		caption: 'Rating For Owner',
+		hint: 'Isi dengan Title Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.rating_for_owner = val;
+		  });
+		},
+	));}
+
+	  	    Widget editClarity (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.clarity,
+	  caption: 'Clarity',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.clarity = val;
+		});
+	  },
+	));}
+
+	  	    Widget editFriendliness (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.friendliness,
+	  caption: 'Friendliness',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.friendliness = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerCommunication (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.owner_communication,
+	  caption: 'Owner Communication',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.owner_communication = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerProfessionalism (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.owner_professionalism,
+	  caption: 'Owner Professionalism',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.owner_professionalism = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerRating (State state) {
+      return(
+	new RatingWidget(
+	  value: model.model.owner_rating,
+	  caption: 'Owner Rating',
+	  hint: 'isi dengan Rating diatas.',
+	  required: false,
+	  getValue:(int? val) {
+	  
+		state.setState(() {
+		  model.model.owner_rating = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerRatingNum (State state) {
+      return(
+	  
+	DoubleWidget(
+	  value: model.model.owner_rating_num,
+	  caption: 'Owner Rating Num',
+	  hint: 'Isi dengan double? Anda',
+	  required: false,
+      min: '0',
+	  max: '10000000',
+	  getValue: (double? val) {
+		state.setState(() {
+		  
+	     model.model.owner_rating_num = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerFeedback (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.owner_feedback,
+	  caption: 'Owner Feedback',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.owner_feedback = val;
+		});
+	  },
+	));}
+
+	  	    Widget editOwnerSignatureIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.owner_signature_ip,
+		caption: 'Owner Signature IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.owner_signature_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editOwnerSignatureDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.owner_signature_date,
+	  caption: 'Owner Signature Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.owner_signature_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editWorkerSignatureIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.worker_signature_ip,
+		caption: 'Worker Signature IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.worker_signature_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editWorkerSignatureDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.worker_signature_date,
+	  caption: 'Worker Signature Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.worker_signature_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editOwnerEscrow (State state) {
+	   return(  StringView(
+		value: model.model.owner_escrow_str,
+		caption: 'Owner Escrow',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.owner_escrow_id,
+	  caption: 'Owner Escrow',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.owner_escrow_id_list,
+	  nameenum: model.model.owner_escrow_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.owner_escrow_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editWorkerCredit (State state) {
+	   return(  StringView(
+		value: model.model.worker_credit_str,
+		caption: 'Worker Credit',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.worker_credit_id,
+	  caption: 'Worker Credit',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.worker_credit_id_list,
+	  nameenum: model.model.worker_credit_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.worker_credit_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editArbitration (State state) {
+	   return(  StringView(
+		value: model.model.arbitration_str,
+		caption: 'Arbitration',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.arbitration_id,
+	  caption: 'Arbitration',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.arbitration_id_list,
+	  nameenum: model.model.arbitration_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.arbitration_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editOwnerCredit (State state) {
+	   return(  StringView(
+		value: model.model.owner_credit_str,
+		caption: 'Owner Credit',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.owner_credit_id,
+	  caption: 'Owner Credit',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.owner_credit_id_list,
+	  nameenum: model.model.owner_credit_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.owner_credit_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editRegisteredBy (State state) {
+	   return(  StringView(
+		value: model.model.registered_by_str,
+		caption: 'Registered By',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.registered_by_id,
+	  caption: 'Registered By',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.registered_by_id_list,
+	  nameenum: model.model.registered_by_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.registered_by_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editRegisteredDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.registered_date,
+	  caption: 'Registered Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.registered_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editRegisteredFromIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.registered_from_ip,
+		caption: 'Registered From IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.registered_from_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editCanceledBy (State state) {
+	   return(  StringView(
+		value: model.model.canceled_by_str,
+		caption: 'Canceled By',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.canceled_by_id,
+	  caption: 'Canceled By',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.canceled_by_id_list,
+	  nameenum: model.model.canceled_by_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.canceled_by_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editCanceledDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.canceled_date,
+	  caption: 'Canceled Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.canceled_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editCanceledFromIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.canceled_from_ip,
+		caption: 'Canceled From IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.canceled_from_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editPublishedBy (State state) {
+	   return(  StringView(
+		value: model.model.published_by_str,
+		caption: 'Published By',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.published_by_id,
+	  caption: 'Published By',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.published_by_id_list,
+	  nameenum: model.model.published_by_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.published_by_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editPublishedDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.published_date,
+	  caption: 'Published Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.published_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editPublishedFromIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.published_from_ip,
+		caption: 'Published From IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.published_from_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editRejectedBy (State state) {
+	   return(  StringView(
+		value: model.model.rejected_by_str,
+		caption: 'Rejected By',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.rejected_by_id,
+	  caption: 'Rejected By',
+	  hint: 'pilih Model',
+	  required: false,
+	  idenum: model.model.rejected_by_id_list,
+	  nameenum: model.model.rejected_by_id_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.rejected_by_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editRejectedDate (State state) {
+      return(
+	new DateTimeWidget(
+	  value: model.model.rejected_date,
+	  caption: 'Rejected Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: false,
+	  getValue:(DateTime? val) {
+	  ;
+		state.setState(() {
+		  model.model.rejected_date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editRejectedFromIp (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.rejected_from_ip,
+		caption: 'Rejected From IP',
+		hint: 'Isi dengan Website Anda',
+		required: false,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.rejected_from_ip = val;
+		  });
+		},
+    ));}
+
+	  	    Widget editAdminNote (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.admin_note,
+	  caption: 'Admin Note',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.admin_note = val;
+		});
+	  },
+	));}
+
+	  	    Widget editAnnounced (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.announced,
+	  caption: 'Announced',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.announced = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editYourWishes (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.your_wishes,
+	  caption: 'Your Wishes',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.your_wishes = val;
+		});
+	  },
+	));}
+
+	  	    Widget editExtendDeadlineDays (State state) {
+      return(
+	NumberWidget(
+	  value: model.model.extend_deadline_days,
+	  caption: 'Extend Deadline Days',
+	  hint: 'Isi dengan Number Anda',
+	  required: false,
+      min: '0',
+	  max: '1000000',
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.extend_deadline_days = val;
+		});
+	  },
+	));}
+
+	  	    Widget editTestimony (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.testimony,
+	  caption: 'Testimony',
+	  hint: 'isi dengan Article Anda',
+	  required: false,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.testimony = val;
+		});
+	  },
+	));}
+
+	  	    Widget editPickUserName (State state) {
+      return(
+	UsernameWidget(
+		value: model.model.pick_user_name,
+		caption: 'Pick User Name',
+		hint: 'Isi dengan Username Anda',
+		required: true,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.pick_user_name = val;
+		  });
+		}
+	));}
+
+	  	    Widget editEnterEmailAddress (State state) {
+      return(
+	 EmailWidget(
+		value: model.model.enter_email_address,
+		caption: 'Enter Email Address',
+		hint: 'Isi dengan Email Anda',
+		required: true,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.enter_email_address = val;
+		  });
+		},
+	));}
+
+	  	    Widget editHandphone (State state) {
+      return(
+	HandphoneWidget(
+		value: model.model.handphone,
+		caption: 'Handphone',
+		hint: 'Isi dengan Handphone Anda',
+		required: true,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.handphone = val;
+		  });
+		},
+	));}
+
+	  	    Widget editBroadcastMessage (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.broadcast_message,
+	  caption: 'Broadcast Message',
+	  hint: 'isi dengan Article Anda',
+	  required: false,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.broadcast_message = val;
+		});
+	  },
+	));}
+
+	  	    Widget editAttachFile (State state) {
+	 if(model.model.attach_file== null){
+		FileField? file = new FileField('', '',0,0,0, '', '', '','' );
+		model.model.attach_file = [file];
+		}
+      return(
+	FileWidget(
+		value: model.model.attach_file[0],
+		caption: 'Attach File',
+		hint: 'Isi dengan File Anda',
+		required: false,
+		getValue: (var val) {
+		
+		  state.setState(() {
+			model.model.attach_file[0] = val;
+		  });
+		},
+	));} 
+
+	  	    Widget editAutomaticSendToNewBidder (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.automatic_send_to_new_bidder,
+	  caption: 'Automatic Send to New Bidder',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.automatic_send_to_new_bidder = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editIsSystemMessage (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.is_system_message,
+	  caption: 'Is System Message',
+	  hint: 'Isi dengan Boolean Anda',
+	  required: false,
+	  getValue: (bool?val) {
+	  
+		state.setState(() {
+		  model.model.is_system_message = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editAdminNotes (State state) {
+      return(
+	new ArticleWidget(
+	  value: model.model.admin_notes,
+	  caption: 'Admin Notes',
+	  hint: 'isi dengan Article Anda',
+	  required: false,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.admin_notes = val;
+		});
+	  },
+	));}
+	
+}
+
+
+@JsonSerializable()
+
+class PastProjectsSuperBase {
+
+  String? id;
+  Meta? meta;
+  List<Button?>? buttons;
+  ModelPastProjects? model;
+  PastProjectsSuperBase(
+	  this.id,
+	  this.buttons,
+	  this.meta,
+	  this.model,
+	  );
+	
+  
+	
+  factory PastProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$PastProjectsSuperBaseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PastProjectsSuperBaseToJson(this);
+   
+}
+
+
+
+
+
+
+@JsonSerializable()
+class ViewModelPastProjects {
+  int?    age;
+  int?    cnt;
+  int?    page;
+  String? id;
+  String? ttl;
+  String? pht;
+  String? sbttl;
+  
+
+  String? description;
+  List<int?>? channels_id;
+  List<String?>?  channels_str;
+  List<String?>? channels_url;
+  int? project_class_id;
+  String? project_class_str;
+  List<int?>? project_class_list;
+  List<String?>? project_class_list_str;
+  String? budget_range;
+  double? budget_range_min;
+  String? budget_range_min_str;
+  double? budget_range_max;
+  String? budget_range_max_str;
+  String? budget_range_str;
+  double? published_budget;
+  String? published_budget_str;
+  int? finish_days;
+  String? finish_days_str;
+  DateTime? published_date;
+  DateTime? start_date;
+  DateTime? finish_date;
+  int? project_status_id;
+  String? project_status_str;
+  List<int?>? project_status_list;
+  List<String?>? project_status_list_str;
+  int? accepted_worker_id;
+  String? accepted_worker_str;
+  String? accepted_worker_url;
+  List<int?>? accepted_worker_list;
+  List<String?>? accepted_worker_list_str;
+  double? accepted_budget;
+  String? accepted_budget_str;
+  int? project_ending_id;
+  String? project_ending_str;
+  List<int?>? project_ending_list;
+  List<String?>? project_ending_list_str;
+  int? owner_id;
+  String? owner_str;
+  String? owner_url;
+  List<int?>? owner_list;
+  List<String?>? owner_list_str;
+  String? owner_photo_url;
+  Photo?owner_photo; 
+  String? owner_user_name;
+  int? owner_kabupaten_id;
+  String? owner_kabupaten_str;
+  int?  owner_owner_rating;
+  double?  owner_owner_rating_num;
+  String? owner_owner_rating_num_str;
+  int?  owner_owner_point;
+  String? owner_owner_point_str;
+  int?  owner_owner_ranking;
+  String? owner_owner_ranking_str;
+  double? worker_rating_num;
+  String? worker_rating_num_str;
+  String? worker_feedback;
+  int?  accepted_worker_worker_rating;
+  int?  accepted_worker_worker_point;
+  String? accepted_worker_worker_point_str;
+  int?  accepted_worker_worker_ranking;
+  String? accepted_worker_worker_ranking_str;
+  String? owner_feedback;
+  int? arbitration_id;
+  String? arbitration_str;
+  String? arbitration_url;
+  List<int?>? arbitration_list;
+  List<String?>? arbitration_list_str;
+   //UserBids user_bids;
+
+	//
+	  ViewModelPastProjects(
+            this.id,
+			this.description,
+			this.channels_id,
+			this.channels_str,
+			this.channels_url,
+			this.project_class_id,
+			this.project_class_str,
+			this.project_class_list,
+			this.project_class_list_str,
+      this.budget_range,
+      this.budget_range_min,
+      this.budget_range_min_str,
+      this.budget_range_max,
+      this.budget_range_max_str,
+      this.budget_range_str,
+			this.published_budget,
+			this.published_budget_str,
+			this.finish_days,
+			this.finish_days_str,
+			this.published_date,
+			this.start_date,
+			this.finish_date,
+			this.project_status_id,
+			this.project_status_str,
+			this.project_status_list,
+			this.project_status_list_str,
+			this.accepted_worker_id,
+			this.accepted_worker_str,
+			this.accepted_worker_url,
+			this.accepted_worker_list,
+			this.accepted_worker_list_str,
+			this.accepted_budget,
+			this.accepted_budget_str,
+			this.project_ending_id,
+			this.project_ending_str,
+			this.project_ending_list,
+			this.project_ending_list_str,
+			this.owner_id,
+			this.owner_str,
+			this.owner_url,
+			this.owner_list,
+			this.owner_list_str,
+			this.owner_photo_url,
+			this.owner_photo,
+			this.owner_kabupaten_id,
+			this.owner_kabupaten_str,
+			this.owner_owner_rating_num,
+			this.owner_owner_rating_num_str,
+			this.owner_owner_point,
+			this.owner_owner_point_str,
+			this.owner_owner_ranking,
+			this.owner_owner_ranking_str,
+			this.worker_rating_num,
+			this.worker_rating_num_str,
+			this.worker_feedback,
+			this.accepted_worker_worker_point,
+			this.accepted_worker_worker_point_str,
+			this.accepted_worker_worker_ranking,
+			this.accepted_worker_worker_ranking_str,
+			this.owner_feedback,
+			this.arbitration_id,
+			this.arbitration_str,
+			this.arbitration_url,
+			this.arbitration_list,
+			this.arbitration_list_str,
+
+  );
+
+  
+   factory ViewModelPastProjects.fromJson(Map<String, dynamic> json) => _$ViewModelPastProjectsFromJson(json);
+
+   Map<String, dynamic> toJson() => _$ViewModelPastProjectsToJson(this); 
+  
+}
+
+
+class PastProjectsViewBase{
+	var model;
+	Map<String, dynamic> json;
+	final List<Widget> viewChildren = <Widget>[
+	];
+	PastProjectsViewBase(this.json);
+	
+	
+   List<SpeedDialChild>	 listButton(BuildContext context, bool?visible, var formKey, ScrollController controller, PastProjectsController past_projects,
+    State state, String? sendPath, String? id,  String? title, bool? account){
+    final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
+    ];
+	for(var i = 0; i < model.buttons.length; i++)
+    {
+      if(model.buttons[i].text != "Table View"){
+
+      buttonChildren!.add(ButtonViewPastProjectsWidget(model.buttons[i],context,  formKey, controller, past_projects,
+                                    state, sendPath, id,  title, account!));
+      }
+    }
+
+       return(
+	        buttonChildren 
+	   );
+   } 
+   
+   
+ SpeedDialChild ButtonViewPastProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, PastProjectsController past_projects,
+  State state, String? sendPath, String? id,  String? title, bool?account){
+  if(button.type == 'custom_filter'){
+    return (
+	       SpeedDialChild(
+                        child: Icon(Icons.search!),
+                        backgroundColor: Colors.green,
+                        label: button!.text!,
+                        labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+                        onTap: (){ showSearchSelectDialog(context: context,
+                        caption:button!.text!,
+                        initialitems: button.selections,
+                        initvalue: button!.selections![0]);
+                        //AppProvider.getRouter(context)!.navigateTo(context,
+                        },
+                      )
+
+	);  
+  }else{
+    var cl;
+	var ic;
+  	if (button.color == 'green'){
+  		cl = Colors.green;
+		}
+		if (button.color == 'yellow'){
+			cl = Colors.yellow;
+		}
+		if (button.color == 'blue'){
+			cl = Colors.blue;
+		}
+		if (button.color == 'red'){
+			cl = Colors.red;
+		}
+		if (button.color == 'orange'){
+			cl = Colors.orange;
+		}
+		if (button.color == 'grey'){
+			cl = Colors.grey;
+		}
+		if (button.color == 'black'){
+			cl = Colors.black;
+		}
+		if (button.color == 'brown'){
+			cl = Colors.brown;
+		}
+		if (button.icon == 'fa fa-briefcase'){
+		  ic = Icons.work;
+		}
+		if (button.icon == 'fa fa-plus'){
+		  ic = Icons.add;
+		}
+		if (button.icon == 'fa fa-list-alt'){
+		  ic = Icons.list;
+		}
+
+	  if (button.icon == 'fa fa-credit-card'){
+		ic = Icons.credit_card;
+	  }
+	  if (button.icon == 'fa fa-paypal'){
+		ic = Icons.account_balance_wallet;
+	  }
+	  if (button.icon == 'fa fa-bank'){
+		ic = Icons.account_balance;
+	  }
+	  if (button.icon == 'fa fa-dollar'){
+		ic = Icons.attach_money;
+	  }
+	  if (button.icon == 'fa fa-user'){
+		ic = Icons.person;
+	  }
+	  if (button.icon == 'fa fa-edit'){
+		ic = Icons.edit;
+	  }
+	  if (button.icon == 'fa fa-picture-o'){
+		ic = Icons.picture_in_picture;
+	  }
+	  if (button.icon == 'fa fa-asterisk'){
+		ic = Icons.ac_unit;
+	  }
+	  if (button.icon == 'fa fa-envelope-o'){
+		ic = Icons.local_post_office;
+	  }
+	  if (button.icon == 'fa fa-mobile'){
+		ic = Icons.phone_iphone;
+	  }
+  
+		if (button.icon == 'fa fa-bullhorn'){
+		  ic = Icons.wifi_tethering;
+		}
+
+		if (button.icon == 'fa fa-arrow-circle-down'){
+		  ic = Icons.arrow_downward;
+		}
+		if (button.icon == 'fa fa-comment'){
+		  ic = Icons.comment;
+		}
+		 if (button.icon == 'fa fa-comments'){
+        ic = Icons.comment_bank;
+      }
+      if (button.icon == 'fa fa-files-o'){
+        ic = Icons.file_copy_outlined;
+      }
+		if (button.icon == 'fa fa-send'){
+		  ic = Icons.send;
+		} 
+    
+    if(button!.url!.contains('user/my_purchases/download/')){
+	return(	SpeedDialChild(
+		  child: Icon(ic),
+		  backgroundColor: cl,
+		  label: button!.text!,
+		  labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+		  onTap: ()async{
+		  {
+                        controller.animateTo(controller.position.minScrollExtent,
+                        duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                        
+                        past_projects = new  PastProjectsController(AppProvider.getApplication(context),
+                        sendPath! + button!.url!,
+                        AppAction.post,
+                        id,
+                        title,
+                        null,
+						false);
+                        final future = past_projects.downloadFile();
+                        future.then((value) {
+                        state.setState(() {
+                       // postPastProjectsResult = value;
+						//AppProvider.getRouter(context)!.pop(context);	
+                        });
+                        }).catchError((Error){
+							AppProvider.getRouter(context)!.pop(context);	
+						});
+
+                       
+                  }
+		  }
+	  ));
+	  }else{
+	     	return(	SpeedDialChild(
+		  child: Icon(ic),
+		  backgroundColor: cl,
+		  label: button!.text!,
+		  labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+		  onTap: (){
+		  
+		  if(account!){	   
+			AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(button!.url! ));
+		  }else{
+		    AppProvider.getRouter(context)!.navigateTo(context,'/login/1');
+		   }
+		  }
+	  ));
+	  }
+	  
+  }
+
+}  
+   
+   
+   
+   
+   
+    SpeedDial	 Buttons(BuildContext context, bool?visible, var formKey, ScrollController controller, PastProjectsController past_projects,
+    State state, String? sendPath, String? id,  String? title, bool? account){
+     return(
+	 SpeedDial(
+				//marginRight: 18,
+				//marginBottom: 20,
+				 childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+				animatedIcon: AnimatedIcons.menu_close,
+				animatedIconTheme: IconThemeData(size: 22.0),
+				// this is ignored if animatedIcon is non null
+				// child: Icon(Icons.add),
+				visible: visible!,
+				// If true user is forced to close dial manually
+				// by tapping main button and overlay is not rendered.
+				closeManually: false,
+				curve: Curves.bounceIn,
+				overlayColor: CurrentTheme.MainAccentColor,
+				overlayOpacity: 0.5,
+				onOpen: () => print('OPENING DIAL'),
+				onClose: () => print('DIAL CLOSED'),
+				tooltip: 'Speed Dial',
+				heroTag: 'speed-dial-hero-tag',
+				backgroundColor: CurrentTheme.SecondaryColor,
+				foregroundColor: Colors.white,
+				elevation: 8.0,
+				shape: CircleBorder(),
+				children:listButton(context, visible!, formKey, controller, past_projects,
+                                    state, sendPath, id!,  title!, account! )
+	    )
+	 );
+   } 	
+	
+	PreferredSizeWidget  appBar(BuildContext context, String? idHash){
+	  return(
+	      AppBar(
+		   iconTheme: IconThemeData(
+            color: Colors.white, //change your color here
+            ),
+			title: Text('', style : TextStyle( color: Colors.white, )),
+		  )
+	  );
+	}
+
+   	Widget body (BuildContext context, ScrollController controller, bool?account, GlobalKey<ScaffoldState> ss, State state) {
+		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
+	}
+
+	Widget view (BuildContext context, ScrollController controller, bool?account) {
+
+
+	  viewChildren!.clear();
+	  
+	  if(this.model.meta.before_title != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.before_title),
+	  ));}
+	  if(this.model.meta.title != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.title),
+	  ));}
+	  if(this.model.meta.after_title != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.after_title),
+	  ));}
+	  if(this.model.meta.warning != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.warning.message,
+		             style: {
+							"html": Style(
+							  backgroundColor: CurrentTheme.WarningColor,
+							   ),
+							},
+					),
+	  ));}
+
+	  if(this.model.meta.before_content != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.before_content),
+	  ));}	  
+
+	 	  
+	   viewChildren!.add(viewDescription(context)); 
+	   viewChildren!.add(viewChannels(context)); 
+	   viewChildren!.add(viewProjectClass(context)); 
+	   viewChildren!.add(viewBudgetRange(context)); 
+	   viewChildren!.add(viewPublishedBudget(context)); 
+	   viewChildren!.add(viewFinishDays(context)); 
+	   viewChildren!.add(viewPublishedDate(context)); 
+	   viewChildren!.add(viewStartDate(context)); 
+	   viewChildren!.add(viewFinishDate(context)); 
+	   viewChildren!.add(viewProjectStatus(context)); 
+	   viewChildren!.add(viewAcceptedWorker(context)); 
+	   viewChildren!.add(viewAcceptedBudget(context)); 
+	   viewChildren!.add(viewProjectEnding(context)); 
+	   viewChildren!.add(viewOwner(context)); 
+	   viewChildren!.add(viewPhoto(context));
+	   viewChildren!.add(viewUserName(context));
+	   viewChildren!.add(viewKabupaten(context));
+	   viewChildren!.add(viewOwnerRating(context));
+	   viewChildren!.add(viewOwnerRatingNum(context));
+	   viewChildren!.add(viewOwnerPoint(context));
+	   viewChildren!.add(viewOwnerRanking(context));
+	   viewChildren!.add(viewWorkerRatingNum(context)); 
+	   viewChildren!.add(viewWorkerFeedback(context)); 
+	   viewChildren!.add(viewWorkerRating(context));
+	   viewChildren!.add(viewWorkerPoint(context));
+	   viewChildren!.add(viewWorkerRanking(context));
+	   viewChildren!.add(viewOwnerFeedback(context)); 
+	   viewChildren!.add(viewArbitration(context)); 
+		
+
+	 //
+	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child:  Html(data: this.model.meta.after_content),
+	  ));}	 
+   return(  SingleChildScrollView(
+                     controller: controller,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  reverse: false,
+				  
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+					 					  
+                       children: viewChildren!
+                  ) 
+     ));
+	} 
+
+ 
+		    Widget viewDescription (BuildContext context) {  
+	if(model.model.description != null){
+		return(  ArticleView(
+		value: model.model.description,
+		caption: 'Description',
+    	));
+	}else{
+			return(  StringView(
+			value: '',
+			caption: 'Description',
+		    ));
+	}		
+     }
+	Widget viewChannels (BuildContext context) {  
+	if(model.model.channels_url != null){
+			return( 	ChannelRouteTagsWidget(
+						value: model.model.channels_id,
+						caption: '',
+						hint: ' ',
+						required: true,
+						idroutetags: model.model.channels_id,
+						nameroutetags: model.model.channels_str,
+						urlroutetags: model.model.channels_url,
+						getValue: (String? val) {
+						 // Navigator.pushReplacementNamed(context, "/projectscoid");
+						  AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(val!));
+						},
+					  ));
+	}else{
+				return( 	ChannelNonURLRouteWidget(
+						value: model.model.channels_id,
+						caption: '',
+						hint: ' ',
+						required: true,
+						idroutetags: model.model.channels_id,
+						nameroutetags: model.model.channels_str,
+					  ));
+	
+    }	
+			  } 
+	    Widget viewProjectClass (BuildContext context) {
+		  return( 
+		 EnumView(
+			value: model.model.project_class_id,
+			caption: 'Project Class',
+			idenum: model.model.project_class_list,
+			nameenum: model.model.project_class_str,
+		));} 
+		    Widget viewBudgetRange (BuildContext context) {  
+	if(model.model.budget_range != null){
+		return(  StringView(
+		value: model.model.budget_range_str,
+		caption: 'Budget Range',
+    	));
+	}else{
+			return(  StringView(
+			value: '',
+			caption: 'Budget Range',
+		    ));
+	}		
+     }
+		    Widget viewPublishedBudget (BuildContext context) {  			
+    if(model.model.published_budget != null){
+		return(  MoneyView(
+		value: model.model.published_budget,
+		caption: 'Published Budget',
+		));
+	}else{
+		   	return(  StringView(
+			value: '',
+			caption: 'Published Budget',
+		    ));
+	}			
+     }
+		    Widget viewFinishDays (BuildContext context) { 
+    if(model.model.finish_days != null){
+		return(  NumberView(
+		value: model.model.finish_days,
+		caption: 'Finish Days',
+	    ));
+	}else{
+	   return(  StringView(
+			value: '',
+			caption: 'Finish Days',
+		));
+	}		
+     }
+		    Widget viewPublishedDate (BuildContext context) {  
+	if(model.model.published_date != null){
+	return(  DateTimeView(
+		value: model.model.published_date,
+		caption: 'Published Date',
+	));
+	}else{
+	       return(  StringView(
+			value: '',
+			caption: 'Published Date',
+		    ));
+	}			 
+	 } 
+		    Widget viewStartDate (BuildContext context) {  
+	if(model.model.start_date != null){
+	return(  DateTimeView(
+		value: model.model.start_date,
+		caption: 'Start Date',
+	));
+	}else{
+	       return(  StringView(
+			value: '',
+			caption: 'Start Date',
+		    ));
+	}			 
+	 } 
+		    Widget viewFinishDate (BuildContext context) {  
+	if(model.model.finish_date != null){
+	return(  DateTimeView(
+		value: model.model.finish_date,
+		caption: 'Finish Date',
+	));
+	}else{
+	       return(  StringView(
+			value: '',
+			caption: 'Finish Date',
+		    ));
+	}			 
+	 } 
+	    Widget viewProjectStatus (BuildContext context) {
+		  return( 
+		 EnumView(
+			value: model.model.project_status_id,
+			caption: 'Project Status',
+			idenum: model.model.project_status_list,
+			nameenum: model.model.project_status_str,
+		));} 
+				Widget viewAcceptedWorker (BuildContext context) {  
+		return(  ModelView(
+			value: model.model.accepted_worker_id,
+			caption: 'Accepted Worker',
+			idenum: model.model.accepted_worker_list,
+			nameenum: model.model.accepted_worker_str,
+		));} 
+		    Widget viewAcceptedBudget (BuildContext context) {  			
+    if(model.model.accepted_budget != null){
+		return(  MoneyView(
+		value: model.model.accepted_budget,
+		caption: 'Accepted Budget',
+		));
+	}else{
+		   	return(  StringView(
+			value: '',
+			caption: 'Accepted Budget',
+		    ));
+	}			
+     }
+	    Widget viewProjectEnding (BuildContext context) {
+		  return( 
+		 EnumView(
+			value: model.model.project_ending_id,
+			caption: 'Project Ending',
+			idenum: model.model.project_ending_list,
+			nameenum: model.model.project_ending_str,
+		));} 
+				Widget viewOwner (BuildContext context) {  
+		return(  ModelView(
+			value: model.model.owner_id,
+			caption: 'Owner',
+			idenum: model.model.owner_list,
+			nameenum: model.model.owner_str,
+		));} 
+	  Widget viewPhoto (BuildContext context) {  
+		return(  ImageView(
+			value: model.model.owner_photo_url,
+			caption: 'Photo',
+		));} 
+		Widget viewUserName (BuildContext context) {  
+	    return(  StringView(
+			value: model.model.owner_user_name,
+			caption: 'User Name',
+		));}
+	  Widget viewKabupaten (BuildContext context) {  
+	  return(  StringView(
+			value: model.model.owner_kabupaten_str,
+			caption: 'Kabupaten',
+		));}
+	   Widget viewOwnerRating (BuildContext context) {
+	   if(model.model.owner_owner_rating != null){
+	   		return(  RatingView(
+			value: model.model.owner_owner_rating,
+			caption: 'Owner Rating',
+		    ));
+	   }else{
+	     return(  StringView(
+		 value: '',
+		 caption: 'Owner Rating',
+		 ));
+	   }
+        }
+	  Widget viewOwnerRatingNum (BuildContext context) {  
+	   if(model.model.owner_owner_rating_num != null){
+	   	  return(  StringView(
+			value: model.model.owner_owner_rating_num.toString(),
+			caption: 'Owner Rating Num',
+		));
+	   } else{
+	       return(  StringView(
+			value: model.model.owner_owner_rating_num_str,
+			caption: 'Owner Rating Num',
+		));
+	   }
+        }
+	  Widget viewOwnerPoint (BuildContext context) {  
+	   if(model.model.owner_owner_point != null){
+	   	  return(  StringView(
+			value: model.model.owner_owner_point.toString(),
+			caption: 'Owner Point',
+		));
+	   } else{
+	       return(  StringView(
+			value: model.model.owner_owner_point_str,
+			caption: 'Owner Point',
+		));
+	   }
+        }
+	  Widget viewOwnerRanking (BuildContext context) {  
+	   if(model.model.owner_owner_ranking != null){
+	   	  return(  StringView(
+			value: model.model.owner_owner_ranking.toString(),
+			caption: 'Owner Ranking',
+		));
+	   } else{
+	       return(  StringView(
+			value: model.model.owner_owner_ranking_str,
+			caption: 'Owner Ranking',
+		));
+	   }
+        }
+		    Widget viewWorkerRatingNum (BuildContext context) {  
+	   if(model.model.worker_rating_num != null){
+	   	   	return(  DoubleView(
+		    value: model.model.worker_rating_num,
+			caption: 'Worker Rating Num',
+		));
+	   }else{
+	   	   return(  StringView(
+			value: '',
+			caption: 'Worker Rating Num',
+		    ));
+	   }
+      }
+		    Widget viewWorkerFeedback (BuildContext context) {  
+	if(model.model.worker_feedback != null){
+		return(  ArticleView(
+		value: model.model.worker_feedback,
+		caption: 'Worker Feedback',
+    	));
+	}else{
+			return(  StringView(
+			value: '',
+			caption: 'Worker Feedback',
+		    ));
+	}		
+     }
+	   Widget viewWorkerRating (BuildContext context) {
+	   if(model.model.accepted_worker_worker_rating != null){
+	   		return(  RatingView(
+			value: model.model.accepted_worker_worker_rating,
+			caption: 'Worker Rating',
+		    ));
+	   }else{
+	     return(  StringView(
+		 value: '',
+		 caption: 'Worker Rating',
+		 ));
+	   }
+        }
+	  Widget viewWorkerPoint (BuildContext context) {  
+	   if(model.model.accepted_worker_worker_point != null){
+	   	  return(  StringView(
+			value: model.model.accepted_worker_worker_point.toString(),
+			caption: 'Worker Point',
+		));
+	   } else{
+	       return(  StringView(
+			value: model.model.accepted_worker_worker_point_str,
+			caption: 'Worker Point',
+		));
+	   }
+        }
+	  Widget viewWorkerRanking (BuildContext context) {  
+	   if(model.model.accepted_worker_worker_ranking != null){
+	   	  return(  StringView(
+			value: model.model.accepted_worker_worker_ranking.toString(),
+			caption: 'Worker Ranking',
+		));
+	   } else{
+	       return(  StringView(
+			value: model.model.accepted_worker_worker_ranking_str,
+			caption: 'Worker Ranking',
+		));
+	   }
+        }
+		    Widget viewOwnerFeedback (BuildContext context) {  
+	if(model.model.owner_feedback != null){
+		return(  ArticleView(
+		value: model.model.owner_feedback,
+		caption: 'Owner Feedback',
+    	));
+	}else{
+			return(  StringView(
+			value: '',
+			caption: 'Owner Feedback',
+		    ));
+	}		
+     }
+				Widget viewArbitration (BuildContext context) {  
+		return(  ModelView(
+			value: model.model.arbitration_id,
+			caption: 'Arbitration',
+			idenum: model.model.arbitration_list,
+			nameenum: model.model.arbitration_str,
+		));} 
+  
+}
+
+
+@JsonSerializable()
+class PastProjectsViewSuperBase {
+
+  String? id;
+  Meta? meta;
+  List<Button?>? buttons;
+  ViewModelPastProjects? model;
+  PastProjectsViewSuperBase(
+      this.id,
+      this.buttons,
+      this.meta,
+      this.model,
+      );
+  	
+
+
+        
+      
+      factory PastProjectsViewSuperBase.fromJson(Map<String, dynamic> json) => _$PastProjectsViewSuperBaseFromJson(json);
+      Map<String, dynamic> toJson() => _$PastProjectsViewSuperBaseToJson(this);
+      
+    }
+
+
+    ///////////////////////////////////////////////////
+
+class PastProjectsListingBase{
+  var items;
+  var tools;
+	Map<String, dynamic> json;
+	PastProjectsListingBase(this.json){
+		items = PastProjectsListingItems.fromJson(this.json);
+		tools = PastProjectsListingTools.fromJson(this.json);
+	}
+	
+  Widget viewItem (ItemPastProjectsModel item,String? search, bool?account) {
+	ShapeBorder? shape;
+    double? height = 0;
+	double? totalHeight = 0;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	totalHeight = totalHeight + 8 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	  height = totalHeight * 50;
+
+	    return Visibility (
+        visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
+        child:  ItemPastProjectsCard(destination :item, search : search!, shape : shape!, height : height!)
+    );
+
+
+	}
+	
+	
+  Widget viewItemId(ItemPastProjectsModel item,String? search, int? index, bool?account, String? id) {
+	ShapeBorder? shape;
+    double? height = 0;
+	double? totalHeight = 0;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	totalHeight = totalHeight + 8 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	  height = totalHeight * 50;
+
+	    return Visibility (
+        visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
+        child:  ItemPastProjectsCard(destination :item, search : search!, shape : shape!, height : height!)
+    );
+
+
+	}
+	
+	  Widget viewItemIndex (ItemPastProjectsModel item,String? search, int? index, bool?account) {
+	ShapeBorder? shape;
+    double? height = 0;
+	double? totalHeight = 0;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	totalHeight = totalHeight + 8 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	  height = totalHeight * 50;
+
+	    return Visibility (
+        visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
+        child:  ItemPastProjectsCard(destination :item, search : search!, shape : shape!, height : height!)
+    );
+
+
+	}
+	
+	
+Widget viewItem1 (ItemPastProjectsModel item,ItemPastProjectsModel item1, String? search, BuildContext context,bool?account, String? id , bool?isMax, int? max, int? index) {
+	ShapeBorder? shape;
+    double? height = 0;
+	double? totalHeight = 0;
+	    return Visibility (
+        visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
+        child:  ItemPastProjectsCard(destination :item, search : search!, shape : shape, height: height)
+    );
+
+
+	}	   
+	
+
+
+	Widget viewItemState (ItemPastProjectsModel item,String? search, int? index, BuildContext context, bool?account, State st, VoidCallback onrefresh) {
+	ShapeBorder? shape;
+    double? height = 0;
+	double? totalHeight = 0;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	totalHeight = totalHeight + 8 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	   totalHeight = totalHeight + 2 ;
+	  height = totalHeight * 50;
+
+	    return Visibility (
+        visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
+        child:  ItemPastProjectsCard(destination :item, search : search!, shape : shape!, height : height!)
+    );
+
+
+	}
+	
+   List<SpeedDialChild>	 listButton(BuildContext context, bool?account){
+    final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
+    ];
+	for(var i = 0; i < tools.buttons.length; i++)
+    {
+   // if(tools.buttons[i].text != "Table View"){
+
+      buttonChildren!.add(ListButtonPastProjectsWidget(tools.buttons[i],context, account));
+   // }  
+    }
+
+       return(
+	        buttonChildren 
+	   );
+   } 
+   
+    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     return(
+	 SpeedDial(
+				//marginRight: 18,
+				//marginBottom: 20,
+				 childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+				animatedIcon: AnimatedIcons.menu_close,
+				animatedIconTheme: IconThemeData(size: 22.0),
+				// this is ignored if animatedIcon is non null
+				// child: Icon(Icons.add),
+				visible: visible!,
+				// If true user is forced to close dial manually
+				// by tapping main button and overlay is not rendered.
+				closeManually: false,
+				curve: Curves.bounceIn,
+				overlayColor: CurrentTheme.MainAccentColor,
+				overlayOpacity: 0.5,
+				onOpen: () => print('OPENING DIAL'),
+				onClose: () => print('DIAL CLOSED'),
+				tooltip: 'Speed Dial',
+				heroTag: 'speed-dial-hero-tag',
+				backgroundColor: CurrentTheme.SecondaryColor,
+				foregroundColor: Colors.white,
+				elevation: 8.0,
+				shape: CircleBorder(),
+				children:listButton(context, account)
+	    )
+	 );
+   } 
+   
+   
+   
+   
+   
+}
+
+
+
+
+
+class PastProjectsListingItems{
+  List<ItemPastProjectsModel?>? items;
+  PastProjectsListingItems(
+      this.items,
+      );
+
+  factory PastProjectsListingItems.fromJson(Map<String, dynamic> json) {
+  	return PastProjectsListingItems(
+				(json['items'] as List)
+						?.map((e) => e == null
+						? null
+						: ItemPastProjectsModel(e as Map<String, dynamic>))
+						?.toList());
+	}
+}
+
+
+@JsonSerializable()
+class PastProjectsListingTools{
+
+	String? id;
+	Meta? meta;
+	List<Button?>? buttons;
+	Paging? paging;
+	List<ItemPastProjects?>? items;
+	PastProjectsListingTools(
+			this.id,
+			this.buttons,
+			this.meta,
+			this.paging,
+			this.items,
+			);
+
+
+	factory PastProjectsListingTools.fromJson(Map<String, dynamic> json) => _$PastProjectsListingToolsFromJson(json);
+
+	Map<String, dynamic> toJson() => _$PastProjectsListingToolsToJson(this);
+
+}
+
+
+
+
+class ItemPastProjectsCard extends StatelessWidget {
+  const ItemPastProjectsCard({ Key? key, @required this.destination, this.search, this.shape, this.height})
+      : assert(destination != null),
+        super(key: key);
+
+  // This height will allow for all the Card's content to fit comfortably within the card.
+  final double? height ;
+  final ItemPastProjectsModel? destination;
+  final String? search;
+  final ShapeBorder? shape;
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      top: false,
+      bottom: false,
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Column(
+          children: <Widget>[
+            // const SectionTitle(title: ''),
+            Container(
+             // height: height,
+              child: Card(
+                // This ensures that the Card's children are clipped correctly.
+                clipBehavior: Clip.antiAlias,
+                shape: shape,
+                child: ItemPastProjectsContent(destination: destination),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ItemPastProjectsContent extends StatelessWidget {
+  const ItemPastProjectsContent({ Key? key, @required this.destination })
+      : assert(destination != null),
+        super(key: key);
+
+  final ItemPastProjectsModel? destination;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    // final TextStyle?titleStyle = theme.textTheme.headline.copyWith(color: CurrentTheme.ShadeColor);
+    final TextStyle?descriptionStyle = theme.textTheme.headline5;
+
+    final List<Widget>buttonChildren = <Widget>[
+    ];
+	  if (destination!.item.buttons != null) {
+		for(var i = 0; i < destination!.item.buttons.length; i++)
+		{
+		  buttonChildren!.add(itemPastProjectsButton(destination,i , context));
+		}
+    }
+	
+    final List<Widget> children = [
+
+    ];
+	 /* children!.add(Padding(
+		padding: const EdgeInsets.fromLTRB(
+			8.0, 14.0, 8.0, 2.0),
+		child: Html(data: "<h3>Header</h3>"),
+	  ));
+	  */
+	   children!.add(destination!.viewPhoto(context));
+	   children!.add(destination!.viewUserName(context));
+	   children!.add(destination!.viewKabupaten(context));
+	   children!.add(destination!.viewOwnerRating(context));
+	   children!.add(destination!.viewOwnerRatingNum(context));
+	   children!.add(destination!.viewOwnerPoint(context));
+	   children!.add(destination!.viewOwnerRanking(context));
+	   children!.add(destination!.viewTitle(context)); 
+	   children!.add(destination!.viewProjectType(context)); 
+	   children!.add(destination!.viewShortDescription(context)); 
+	   children!.add(destination!.viewChannels(context)); 
+	   children!.add(destination!.viewProjectClass(context)); 
+	   children!.add(destination!.viewBudgetRange(context)); 
+	   children!.add(destination!.viewPublishedBudget(context)); 
+	   children!.add(destination!.viewFinishDays(context)); 
+	   children!.add(destination!.viewPublishedDate(context)); 
+	   children!.add(destination!.viewStartDate(context)); 
+	   children!.add(destination!.viewFinishDate(context)); 
+	   children!.add(destination!.viewProjectStatus(context)); 
+	   children!.add(destination!.viewAcceptedWorker(context)); 
+	   children!.add(destination!.viewAcceptedBudget(context)); 
+	   children!.add(destination!.viewProjectEnding(context)); 
+      /*    children!.add(Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                8.0, 14.0, 8.0, 2.0),
+                            child: Html(data: "<h3>footer</h3>"),
+                           )
+     ); */
+
+
+  if (destination!.item.buttons != null) {
+        if(buttonChildren!.length > 4){
+		if(buttonChildren!.length == 5){
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[0],
+			  buttonChildren[1],
+			  buttonChildren[2],
+			  buttonChildren[3],
+			  ]
+			),
+		  ),
+		);
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[4],
+			  ]
+			),
+		  ),
+		);
+		}
+		if(buttonChildren!.length == 6){
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[0],
+			  buttonChildren[1],
+			  buttonChildren[2],
+			  buttonChildren[3],
+			  ]
+			),
+		  ),
+		);
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[4],
+			  buttonChildren[5],
+			  ]
+			),
+		  ),
+		);
+		}
+		if(buttonChildren!.length == 7){
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[0],
+			  buttonChildren[1],
+			  buttonChildren[2],
+			  buttonChildren[3],
+			  ]
+			),
+		  ),
+		);
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[4],
+			  buttonChildren[5],
+			  buttonChildren[6],
+			  ]
+			),
+		  ),
+		);
+		}
+				if(buttonChildren!.length == 8){
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[0],
+			  buttonChildren[1],
+			  buttonChildren[2],
+			  buttonChildren[3],
+			  ]
+			),
+		  ),
+		);
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: <Widget>[
+			  buttonChildren[4],
+			  buttonChildren[5],
+			  buttonChildren[6],
+			  buttonChildren[7],
+			  ]
+			),
+		  ),
+		);
+		}
+		}else{
+		children!.add(
+		  // share, explore buttons
+		  ButtonTheme(
+			child: ButtonBar(
+			  alignment: MainAxisAlignment.end ,
+			  children: buttonChildren
+			),
+		  ),
+		);
+      }
+	}	
+    // }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: children!,
+    );
+  }
+}
+
+Widget itemPastProjectsButton(ItemPastProjectsModel? destination, int? index, BuildContext context){
+  PastProjectsController past_projects; 
+  
+   if(destination!.item.buttons[index].url.contains('user/my_purchases/download/')){
+		return(	FlatButton(
+			  child: Text(destination!.item.buttons[index].text, semanticsLabel: 'Share ${destination!.item.ttl}'),
+			  textColor: CurrentTheme.MainAccentColor,
+			  splashColor : CurrentTheme.ShadeColor,
+			  color : CurrentTheme.SecondaryAccentColor,
+			  onPressed: () {
+		  {
+                       // controller.animateTo(controller.position.minScrollExtent,
+                       // duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                        
+                        past_projects = new  PastProjectsController(AppProvider.getApplication(context),
+                        Env.value!.baseUrl! + destination!.item.buttons[index].url,
+                        AppAction.post,
+                        '',
+                        'projectscoiddownloadFile',
+                        null,
+						false);
+                        final future = past_projects.downloadFile();
+                        future.then((value) {
+                       // state.setState(() {
+                       // postPastProjectsResult = value;
+						//AppProvider.getRouter(context)!.pop(context);	
+                       // });
+                        }).catchError((Error){
+							AppProvider.getRouter(context)!.pop(context);	
+						});
+
+                       
+                  }
+		  }
+	  ));
+	  }else{
+			  return(
+				FlatButton(
+				  child: Text(destination!.item.buttons[index].text, semanticsLabel: 'Share ${destination!.item.ttl}'),
+				  textColor: CurrentTheme.MainAccentColor,
+				  splashColor : CurrentTheme.ShadeColor,
+				  color : CurrentTheme.SecondaryAccentColor,
+				  onPressed: () {
+					print('${destination!.item.buttons[index].url}');
+					if(destination!.item.buttons[index].url.contains('show_conversation')){
+						AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(destination!.item.buttons[index].url + '/' ));
+					}else{
+						AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(destination!.item.buttons[index].url ));
+					}
+
+				  },
+				)
+			  );
+  }
+}
+
+
+
+class ItemPastProjectsWidget extends StatelessWidget {
+
+	final ItemPastProjectsModel?  item;
+	final String? search;
+	const  ItemPastProjectsWidget({Key? key, @required this.item, this.search}) : super(key: key);
+
+
+	@override
+	Widget build(BuildContext context) {
+		return Visibility (
+			// visible: (this.search == '' || this.browse_projects.item.title.contains(this.search!) || this.browse_projects.items.items.article.contains(this.search!)),
+			visible: (this.search == '' || allModelWords(jsonEncode(this.item!.item!.toJson())).contains(this.search!)),
+			child: ListTile(
+				leading:  Container(
+					height: 50.0,
+					width : 50.0,
+					child:
+
+					ClipRRect(
+						borderRadius: BorderRadius.circular(50),
+						child: Image.network( this.item!.item!.pht!,
+						),
+					),
+
+				),
+				title: Text(this.item!.item!.ttl!),
+				isThreeLine: true,
+				subtitle: Html(
+						data:item!.item!.sbttl! ,
+						//style: TextStyle(fontSize: 16, color: CurrentTheme.ShadeColor),
+						//defaultTextStyle: TextStyle(color: CurrentTheme.DisableTextColor)
+						style: {
+								"html": Style(
+								 color: CurrentTheme.DisableTextColor
+								),
+					   }
+				),
+				dense: true,
+				onTap: () 
+				{ AppProvider.getRouter(context)!.navigateTo(
+						context,
+						"/public/browse_projects/view/" + this.item!.item!.id! + "/" +
+								// this.browse_projects.title.replaceAll(' ', '-'))},
+								"title");},
+			),
+		);
+	}
+}
+
+
+SpeedDialChild ListButtonPastProjectsWidget(Button button, BuildContext context, bool?account){
+    var cl;
+	var ic;
+  	if (button.color == 'green'){
+  		cl = Colors.green;
+		}
+		if (button.color == 'yellow'){
+			cl = Colors.yellow;
+		}
+		if (button.color == 'blue'){
+			cl = Colors.blue;
+		}
+		if (button.color == 'red'){
+			cl = Colors.red;
+		}
+		if (button.color == 'orange'){
+			cl = Colors.orange;
+		}
+		if (button.color == 'grey'){
+			cl = Colors.grey;
+		}
+		if (button.color == 'black'){
+			cl = Colors.black;
+		}
+		if (button.color == 'brown'){
+			cl = Colors.brown;
+		}
+		   if (button.icon == 'fa fa-briefcase'){
+      ic = Icons.work;
+    }
+    if (button.icon == 'fa fa-plus'){
+      ic = Icons.add;
+    }
+    if (button.icon == 'fa fa-list-alt'){
+      ic = Icons.list;
+    }
+
+  if (button.icon == 'fa fa-credit-card'){
+    ic = Icons.credit_card;
+  }
+  if (button.icon == 'fa fa-paypal'){
+    ic = Icons.account_balance_wallet;
+  }
+  if (button.icon == 'fa fa-bank'){
+    ic = Icons.account_balance;
+  }
+  if (button.icon == 'fa fa-dollar'){
+    ic = Icons.attach_money;
+  }
+  if (button.icon == 'fa fa-user'){
+    ic = Icons.person;
+  }
+  if (button.icon == 'fa fa-edit'){
+    ic = Icons.edit;
+  }
+  if (button.icon == 'fa fa-picture-o'){
+    ic = Icons.picture_in_picture;
+  }
+  if (button.icon == 'fa fa-asterisk'){
+    ic = Icons.ac_unit;
+  }
+  if (button.icon == 'fa fa-envelope-o'){
+    ic = Icons.local_post_office;
+  }
+  if (button.icon == 'fa fa-mobile'){
+    ic = Icons.phone_iphone;
+  }
+  
+      if (button.icon == 'fa fa-bullhorn'){
+      ic = Icons.wifi_tethering;
+    }
+
+    if (button.icon == 'fa fa-arrow-circle-down'){
+      ic = Icons.arrow_downward;
+    }
+    if (button.icon == 'fa fa-comment'){
+      ic = Icons.comment;
+    }
+    if (button.icon == 'fa fa-send'){
+      ic = Icons.send;
+    }
+  if(button.type == 'custom_filter'){
+    return (
+	       SpeedDialChild(
+                        child: Icon(Icons.search!),
+                        backgroundColor: Colors.green,
+                        label: button.text == 'Order by ...' ?  button.text :'Order : ' + button!.text!,
+                        labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+                        onTap: (){ showSearchSelectDialog(context: context,
+                        caption:button!.text!,
+                        initialitems: button.selections,
+                        initvalue: button!.selections![0]);
+                        //AppProvider.getRouter(context)!.navigateTo(context,
+                        },
+                      )
+
+	);  
+  }else{
+	return(	SpeedDialChild(
+		  child: Icon(ic),
+		  backgroundColor: cl,
+		  label: button!.text!,
+		  labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
+		  onTap: ()
+		  {
+		     if (account!){
+           if(button!.url!.contains('/listing') || button!.url!.contains('/index')){
+			          AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(button!.url! + '/')) ;
+           }else{
+             	 AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(button!.url! + '//')) ;
+           }
+			 }else{
+			   AppProvider.getRouter(context)!.navigateTo(context, '/login/1') ;
+			 } 
+		  
+		  }
+	  ));
+  }
+
+}
+
+
+
+/////////////////////////////////
+
+
+///
+////////////////////////////////////////////////
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+

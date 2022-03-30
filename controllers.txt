@@ -1,0 +1,2493 @@
+//-----------------------------------------------------------------------------------------------
+
+   pengenalan => "Pengenalan" => page,   
+   // Pengenalan
+   cara_kerja => "Cara Kerja" => page,   
+   // Cara Kerja
+   keunggulan => "Keunggulan" => page,   
+   // Keunggulan
+   aturan_main => "Aturan Main" => page,   
+   // Aturan Main
+   pricing => "Pricing" => page,   
+   // Pricing
+   faq_umum => "FAQ Umum" => page,   
+   // FAQ Umum
+   all_rankings => "All Rankings" => page,   
+   // All Rankings
+   create_project => "Create Project" => link,   
+   // Create Project
+   bid_placed => "Bid Placed" => page,   
+   // Bid Placed
+   verification_sent => "Verification Sent" => page,   
+   // Verification Sent
+   account_activated => "Account Activated" => page,   
+   // Account Activated
+   remainder_sent => "Remainder Sent" => page,   
+   // Remainder Sent
+   contact_form_sent => "Contact Form Sent" => page,   
+   // Contact Form Sent
+   menjadi_worker => "Menjadi Worker" => page,   
+   // Menjadi Worker
+   faq_worker => "FAQ Worker" => page,   
+   // FAQ Worker
+   menjadi_owner => "Menjadi Owner" => page,   
+   // Menjadi Owner
+   faq_owner => "FAQ Owner" => page,   
+   // FAQ Owner
+   tentang_arbitrase => "Tentang Arbitrase" => page,   
+   // Tentang Arbitrase
+   service_seller_contacted => "Service Seller Contacted" => page,   
+   // Service Seller Contacted
+   worker_contacted => "Worker Contacted" => page,   
+   // Worker Contacted
+   worker_already_bid_or_invited => "Worker Already Bid or Invited" => page,   
+   // Worker Already Bid or Invited
+   no_published_project => "No Published Project" => page,   
+   // No Published Project
+   sell_service => "Sell Service" => link,   
+   // Sell Service
+   faq_service => "FAQ Service" => page,   
+   // FAQ Service
+   order_complete => "Order Complete" => page,   
+   // Order Complete
+   payment_failed => "Payment Failed" => page,   
+   // Payment Failed
+   payment_canceled => "Payment Canceled" => page,   
+   // Payment Canceled
+   buy_instruction_sent => "Buy Instruction Sent" => page,   
+   // Buy Instruction Sent
+   sell_product => "Sell Product" => link,   
+   // Sell Product
+   menjadi_buyer => "Menjadi Buyer" => page,   
+   // Menjadi Buyer
+   faq_buyer => "FAQ Buyer" => page,   
+   // FAQ Buyer
+   menjadi_seller => "Menjadi Seller" => page,   
+   // Menjadi Seller
+   faq_seller => "FAQ Seller" => page,   
+   // FAQ Seller
+   menjadi_affiliate => "Menjadi Affiliate" => page,   
+   // Menjadi Affiliate
+   aturan_affiliate => "Aturan Affiliate" => page,   
+   // Aturan Affiliate
+   faq_affiliate => "FAQ Affiliate" => page,   
+   // FAQ Affiliate
+   media_kit => "Media Kit" => page,   
+   // Media Kit
+   community => "Community" => link,   
+   // Community
+   overview => "Overview" => account_home,   
+   // Overview
+   bid_already_retracted => "Bid Already Retracted" => page,   
+   // Bid Already Retracted
+   bid_accepted => "Bid Accepted" => page,   
+   // Bid Accepted
+   project_saved_for_verification => "Project Saved for Verification" => page,   
+   // Project Saved for Verification
+   payment_confirmation_sent => "Payment Confirmation Sent" => page,   
+   // Payment Confirmation Sent
+   project_canceled => "Project Canceled" => page,   
+   // Project Canceled
+   bid_canceled => "Bid Canceled" => page,   
+   // Bid Canceled
+   project_bumped => "Project Bumped" => page,   
+   // Project Bumped
+   project_not_bumped => "Project Not Bumped" => page,   
+   // Project Not Bumped
+   product_saved_for_verification => "Product Saved for Verification" => page,   
+   // Product Saved for Verification
+   product_bumped => "Product Bumped" => page,   
+   // Product Bumped
+   product_not_bumped => "Product Not Bumped" => page,   
+   // Product Not Bumped
+   service_saved_for_verification => "Service Saved for Verification" => page,   
+   // Service Saved for Verification
+   service_bumped => "Service Bumped" => page,   
+   // Service Bumped
+   service_not_bumped => "Service Not Bumped" => page,   
+   // Service Not Bumped
+   technical_problem => "Technical Problem" => page,   
+   // Technical Problem
+   payment_unavailable => "Payment Unavailable" => page,   
+   // Payment Unavailable
+   payment_queued => "Payment Queued" => page,   
+   // Payment Queued
+   you_are_banned => "You Are Banned" => page,   
+   // You Are Banned
+   tentang_kami => "Tentang Kami" => page,   
+   // Tentang Kami
+   pengelola => "Pengelola" => page,   
+   // Pengelola
+   syarat_layanan => "Syarat Layanan" => page,   
+   // Syarat Layanan
+   kebijakan_privasi => "Kebijakan Privasi" => page,   
+   // Kebijakan Privasi
+   kontak => "Kontak" => page,   
+   // Kontak
+   pesta_point => "Pesta Point" => page,   
+   // Pesta Point
+   status => "Status" => page,   
+   // Status
+
+
+----------------------------
+Model UCase: Test
+Model ID: test
+Model Title: Test
+
+
+Listing1
+helooo test_id 
+
+- 3 test_id => primary => Test ID
+- 3 user_name => username => User Name
+- 3 password => password => Password
+- 3 display_name => name => Display Name
+- 3 title => title => Title
+- 3 email => email => Email
+- 2 model => model => Model
+- 2 enum => enum => Enum
+- 3 address => address => Address
+- 3 multiline => multiline => Multiline
+- 3 date => date => Date
+- 3 date_time => datetime => Date Time
+- 3 time => time => Time
+- 3 rating => rating => Rating
+- 3 number => number => Number
+- 3 money => money => Money
+- 3 double => double => Double
+- 3 boolean => boolean => Boolean
+- 3 percent => percent => Percent
+- 3 website => url => Website
+- 3 article => article => Article
+- 3 inline_tags => inlinetags => Inline Tags
+- 3 handphone => phone => Handphone
+- 3 image => image => Image
+- 3 file => file => File
+- 3 captcha => captcha => Captcha
+
+
+Listing Index
+helooo test_id 
+
+- 3 test_id => primary => Test ID
+- 3 user_name => username => User Name
+- 3 display_name => name => Display Name
+- 3 email => email => Email
+- 3 handphone => phone => Handphone
+
+
+
+View1
+- 3 test_id => primary => Test ID
+- 3 user_name => username => User Name
+- 3 password => password => Password
+- 3 display_name => name => Display Name
+- 3 title => title => Title
+- 3 email => email => Email
+- 2 model => model => Model
+- 2 enum => enum => Enum
+- 3 address => address => Address
+- 3 multiline => multiline => Multiline
+- 3 date => date => Date
+- 3 date_time => datetime => Date Time
+- 3 time => time => Time
+- 3 rating => rating => Rating
+- 3 number => number => Number
+- 3 money => money => Money
+- 3 double => double => Double
+- 3 boolean => boolean => Boolean
+- 3 percent => percent => Percent
+- 3 website => url => Website
+- 3 article => article => Article
+- 3 inline_tags => inlinetags => Inline Tags
+- 3 handphone => phone => Handphone
+- 3 image => image => Image
+- 3 file => file => File
+- 3 captcha => captcha => Captcha
+
+
+
+
+
+----------------------------
+Model UCase: Testimonial
+Model ID: testimonial
+Model Title: Testimonial
+
+
+Listing1
+helooo testimony_id 
+
+- 3 feedback => article => Feedback
+- 2 user => model => User
+- 1 user_photo => expose => Photo => image
+- 3 date => datetime => Date
+- 2 project => model => Project
+
+
+Listing Index
+helooo testimony_id 
+
+- 3 testimony_id => primary => Testimonial ID
+- 2 user => model => User
+- 2 project => model => Project
+- 3 date => datetime => Date
+- 3 feedback => article => Feedback
+- 2 status => enum => Status
+- 3 published_date => datetime => Published Date
+
+
+
+View1
+- 3 testimony_id => primary => Testimonial ID
+- 2 user => model => User
+- 2 project => model => Project
+- 3 date => datetime => Date
+- 3 feedback => article => Feedback
+- 3 published => boolean => Published
+- 2 status => enum => Status
+- 3 published_date => datetime => Published Date
+
+
+Indexhalo
+- Id => primary => Testimonial ID
+- User => model => User
+- Project => model => Project
+- Date => datetime => Date
+- Feedback => article => Feedback
+- Status => enum => Status
+- PublishedDate => datetime => Published Date
+
+
+
+----------------------------
+Model UCase: CeritaSukses
+Model ID: cerita_sukses
+Model Title: Cerita Sukses
+
+
+Listing1
+helooo article_id 
+
+- 3 title => title => Title
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+- 3 image => image => Image
+
+
+Listing Index
+helooo article_id 
+
+- 3 article_id => primary => Cerita Sukses ID
+- 2 category => enum => Category
+- 2 author => model => Author
+- 3 title => title => Title
+- 3 published => boolean => Published
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+
+
+
+View1
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 image => image => Image
+- 3 content => article => Content
+- 3 files => file => Files
+
+
+Indexhalo
+- Id => primary => Cerita Sukses ID
+- Category => enum => Category
+- Author => model => Author
+- Title => title => Title
+- Published => boolean => Published
+- PublishedDate => datetime => Published Date
+- Teaser => multiline => Teaser
+
+
+
+----------------------------
+Model UCase: Tips
+Model ID: tips
+Model Title: Tips
+
+
+Listing1
+helooo article_id 
+
+- 3 title => title => Title
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+- 3 image => image => Image
+
+
+Listing Index
+helooo article_id 
+
+- 3 article_id => primary => Tips ID
+- 2 category => enum => Category
+- 2 author => model => Author
+- 3 title => title => Title
+- 3 published => boolean => Published
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+
+
+
+View1
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 image => image => Image
+- 3 content => article => Content
+- 3 files => file => Files
+
+
+Indexhalo
+- Id => primary => Tips ID
+- Category => enum => Category
+- Author => model => Author
+- Title => title => Title
+- Published => boolean => Published
+- PublishedDate => datetime => Published Date
+- Teaser => multiline => Teaser
+
+
+
+----------------------------
+Model UCase: BrowseProjects
+Model ID: browse_projects
+Model Title: Browse Projects
+
+
+Listing1
+helooo project_id 
+
+- 1 owner_photo => expose => Photo => image
+- 1 owner_user_name => expose => User Name => username
+- 1 owner_kabupaten => expose => Kabupaten => model
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_projects_owned => expose => Projects Owned => number
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 2 owner => model => Owner
+- 3 title => title => Title
+- 3 short_description => string => Short Description
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_budget => money => Published Budget
+- 3 published_date => datetime => Published Date
+- 3 select_deadline => datetime => Select Deadline
+- 3 finish_days => number => Finish Days
+- 2 project_status => enum => Project Status
+- 3 bid_count => number => Bid Count
+- 3 need_weekly_report => boolean => Need Weekly Report
+
+
+Listing Index
+helooo project_id 
+
+- 3 project_id => primary => Browse Projects ID
+- 2 owner => model => Owner
+- 2 category => model => Category
+- 3 title => title => Title
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_date => datetime => Published Date
+
+
+
+View1
+- 3 description => article => Description
+- 3 attachments => file => Attachments
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_budget => money => Published Budget
+- 3 finish_days => number => Finish Days
+- 3 need_weekly_report => boolean => Need Weekly Report
+- 3 published_date => datetime => Published Date
+- 3 select_deadline => datetime => Select Deadline
+- 2 project_status => enum => Project Status
+- 2 accepted_worker => model => Accepted Worker
+- 3 accepted_budget => money => Accepted Budget
+- 3 start_date => datetime => Start Date
+- 3 finish_date => datetime => Finish Date
+- 3 bid_count => number => Bid Count
+- 2 owner => model => Owner
+- 1 owner_photo => expose => Photo => image
+- 1 owner_user_name => expose => User Name => username
+- 1 owner_kabupaten => expose => Kabupaten => model
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 1 owner_last_seen => expose => Last Seen => datetime
+- 1 owner_projects_owned => expose => Projects Owned => number
+- 1 owner_projects_arbitrated => expose => Projects Arbitrated => number
+- 1 owner_projects_won_in_arbitration => expose => Projects Won in Arbitration => number
+- 1 owner_projects_lost_in_arbitration => expose => Projects Lost in Arbitration => number
+- 3 worker_rating_num => double => Worker Rating Num
+- 3 worker_feedback => article => Worker Feedback
+- 1 accepted_worker_worker_rating => expose => Worker Rating => rating
+- 1 accepted_worker_worker_point => expose => Worker Point => number
+- 1 accepted_worker_worker_ranking => expose => Worker Ranking => number
+- 1 accepted_worker_projects_won => expose => Projects Won => number
+- 1 accepted_worker_projects_completed => expose => Projects Completed => number
+- 3 owner_feedback => article => Owner Feedback
+- 3 user_bids => submodel => User Bids
+
+
+Indexhalo
+- Id => primary => Browse Projects ID
+- Owner => model => Owner
+- Category => model => Category
+- Title => title => Title
+- ProjectClass => enum => Project Class
+- BudgetRange => range => Budget Range
+- PublishedDate => datetime => Published Date
+
+
+CreateProject => create_project => Create Project => insert =>model
+- redirect: baseUrl() . '/user/my_projects/create_project'
+
+
+PlaceNewBid => place_new_bid => Place New Bid => edit =>submodel
+- ProjectTitle => title => Project Title => read_only
+- ProjectOwner => string => Project Owner => read_only
+- Description => string => Description => read_only
+- PublishedBudget => string => Published Budget => read_only
+- Amount => money => Amount => editable
+- Message => article => Message => editable
+- Attachments => file => Attachments => editable
+- Captcha => captcha => Captcha => editable
++ button: PlaceNewBid => place_new_bid => Place New Bid => green 
+
+
+AskOwner => ask_owner => Ask Owner => edit =>submodel
+- Project => model => Project => read_only
+- Message => article => Message => editable
+- Attachments => file => Attachments => editable
+- Captcha => captcha => Captcha => editable
++ button: AskOwner => ask_owner => Ask Owner => green 
+
+
+ChatWithOwner => chat_with_owner => Chat with Owner => edit =>model
+- redirect: PushEngine::getJavascriptPrivateChatUrl($model->owner_id)
+
+
+GuestCreateProject => guest_create_project => Guest Create Project => insert =>model
+- PickUserName => username => Pick User Name => editable
+- EnterEmailAddress => email => Enter Email Address => editable
+- Handphone => phone => Handphone => editable
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Attachments => file => Attachments => editable
+- FinishDays => number => Finish Days => editable
+- BudgetRange => range => Budget Range => editable
+- Channels => inlinetags => Channels => editable
++ button: GuestCreateProject => guest_create_project => Guest Create Project => green 
+
+
+
+----------------------------
+Model UCase: PastProjects
+Model ID: past_projects
+Model Title: Past Projects
+
+
+Listing1
+helooo project_id 
+
+- 1 owner_photo => expose => Photo => image
+- 1 owner_user_name => expose => User Name => username
+- 1 owner_kabupaten => expose => Kabupaten => model
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 3 title => title => Title
+- 2 project_type => enum => Project Type
+- 3 short_description => string => Short Description
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_budget => money => Published Budget
+- 3 finish_days => number => Finish Days
+- 3 published_date => datetime => Published Date
+- 3 start_date => datetime => Start Date
+- 3 finish_date => datetime => Finish Date
+- 2 project_status => enum => Project Status
+- 2 accepted_worker => model => Accepted Worker
+- 3 accepted_budget => money => Accepted Budget
+- 2 project_ending => enum => Project Ending
+
+
+Listing Index
+helooo project_id 
+
+- 3 project_id => primary => Past Projects ID
+- 2 owner => model => Owner
+- 2 category => model => Category
+- 3 title => title => Title
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_date => datetime => Published Date
+
+
+
+View1
+- 3 description => article => Description
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_budget => money => Published Budget
+- 3 finish_days => number => Finish Days
+- 3 published_date => datetime => Published Date
+- 3 start_date => datetime => Start Date
+- 3 finish_date => datetime => Finish Date
+- 2 project_status => enum => Project Status
+- 2 accepted_worker => model => Accepted Worker
+- 3 accepted_budget => money => Accepted Budget
+- 2 project_ending => enum => Project Ending
+- 2 owner => model => Owner
+- 1 owner_photo => expose => Photo => image
+- 1 owner_user_name => expose => User Name => username
+- 1 owner_kabupaten => expose => Kabupaten => model
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 3 worker_rating_num => double => Worker Rating Num
+- 3 worker_feedback => article => Worker Feedback
+- 1 accepted_worker_worker_rating => expose => Worker Rating => rating
+- 1 accepted_worker_worker_point => expose => Worker Point => number
+- 1 accepted_worker_worker_ranking => expose => Worker Ranking => number
+- 3 owner_feedback => article => Owner Feedback
+- 2 arbitration => model => Arbitration
+- 3 user_bids => submodel => User Bids
+
+
+Indexhalo
+- Id => primary => Past Projects ID
+- Owner => model => Owner
+- Category => model => Category
+- Title => title => Title
+- ProjectClass => enum => Project Class
+- BudgetRange => range => Budget Range
+- PublishedDate => datetime => Published Date
+
+
+
+----------------------------
+Model UCase: NewUser
+Model ID: new_user
+Model Title: New User
+
+
+Register => register => Register => insert =>model
+- Email => email => Email => editable
+- UserName => username => User Name => editable
+- Captcha => captcha => Captcha => editable
++ button: Register => register => Register => green 
+
+
+Verify => verify => Verify => edit =>model
+- Handphone => phone => Handphone => editable
++ button: Verify => verify => Verify => green 
+
+
+
+----------------------------
+Model UCase: Program
+Model ID: program
+Model Title: Program
+
+
+Promo => promo => Promo => edit =>model
+- LastSeen => datetime => Last Seen => editable
++ button: Promo => promo => Promo => green 
+
+
+
+----------------------------
+Model UCase: ExistingUser
+Model ID: existing_user
+Model Title: Existing User
+
+
+ForgotPassword => forgot_password => Forgot Password => insert =>model
+- YourEmail => email => Your Email => editable
+- Captcha => captcha => Captcha => editable
++ button: ForgotPassword => forgot_password => Forgot Password => green 
+
+
+ResetPassword => reset_password => Reset Password => edit =>model
+- Password => password => Password => editable
++ button: ResetPassword => reset_password => Reset Password => green 
+
+
+
+----------------------------
+Model UCase: Support
+Model ID: support
+Model Title: Support
+
+
+ContactForm => contact_form => Contact Form => insert =>model
+- YourName => name => Your Name => editable
+- EmailAddress => email => Email Address => editable
+- Question => multiline => Question => editable
+- Captcha => captcha => Captcha => editable
++ button: ContactForm => contact_form => Contact Form => green 
+
+
+
+----------------------------
+Model UCase: BrowseServices
+Model ID: browse_services
+Model Title: Browse Services
+
+
+Listing1
+helooo service_id 
+
+- 3 title => title => Title
+- 3 rating => rating => Rating
+- 3 rating_num => double => Rating Num
+- 3 sales_count => number => Sales Count
+- 3 price => money => Price
+- 3 finish_days => number => Finish Days
+- 2 seller => model => Seller
+- 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_product_sold => expose => Product Sold => number
+- 3 short_description => string => Short Description
+- 3 tags => inlinetags => Tags
+- 3 logo => image => Logo
+
+
+Listing Index
+helooo service_id 
+
+- 3 service_id => primary => Browse Services ID
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 2 category => model => Category
+- 3 title => title => Title
+- 3 finish_days => number => Finish Days
+- 3 price => money => Price
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+
+
+
+View1
+- 3 description => article => Description
+- 3 finish_days => number => Finish Days
+- 3 tags => inlinetags => Tags
+- 3 screenshots => submodel => Screenshots
+- 3 price => money => Price
+- 3 options => subtable => Options
+- 3 logo => image => Logo
+- 2 seller => model => Seller
+- 1 seller_photo => expose => Photo => image
+- 1 seller_user_name => expose => User Name => username
+- 1 seller_kabupaten => expose => Kabupaten => model
+- 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_seller_rating_num => expose => Seller Rating Num => double
+- 1 seller_seller_ranking => expose => Seller Ranking => number
+- 1 seller_date_registered => expose => Date Registered => datetime
+- 1 seller_last_seen => expose => Last Seen => datetime
+- 1 seller_online_hours => expose => Online Hours => double
+- 1 seller_projects_won => expose => Projects Won => number
+- 1 seller_projects_completed => expose => Projects Completed => number
+- 1 seller_projects_arbitrated => expose => Projects Arbitrated => number
+- 1 seller_projects_won_in_arbitration => expose => Projects Won in Arbitration => number
+- 1 seller_projects_lost_in_arbitration => expose => Projects Lost in Arbitration => number
+- 1 seller_current_projects => expose => Current Projects => number
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+- 3 service_reviews => submodel => Service Reviews
+- 3 service_comments => submodel => Service Comments
+
+
+Indexhalo
+- Id => primary => Browse Services ID
+- Seller => model => Seller
+- Logo => image => Logo
+- Category => model => Category
+- Title => title => Title
+- FinishDays => number => Finish Days
+- Price => money => Price
+- SalesCount => number => Sales Count
+- Rating => rating => Rating
+
+
+SellService => sell_service => Sell Service => insert =>model
+- redirect: baseUrl() . '/user/my_services/add_new_service'
+
+
+ChatWithSeller => chat_with_seller => Chat with Seller => edit =>model
+- redirect: PushEngine::getJavascriptPrivateChatUrl($model->seller_id)
+
+
+PlaceOrder => place_order => Place Order => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- FinishDays => number => Finish Days => read_only
+- Seller => model => Seller => read_only
+- SelectedOptions => article => Selected Options => read_only
+- TotalPrice => money => Total Price => read_only
+- SpecialRequirements => article => Special Requirements => editable
++ button: PlaceOrder => place_order => Place Order => green 
+
+
+
+----------------------------
+Model UCase: BrowseUsers
+Model ID: browse_users
+Model Title: Browse Users
+
+
+Listing1
+helooo user_id 
+
+- 3 photo => image => Photo
+- 3 online => boolean => Online
+- 3 user_name => username => User Name
+- 3 worker_rating => rating => Worker Rating
+- 3 worker_rating_num => double => Worker Rating Num
+- 3 worker_point => number => Worker Point
+- 3 worker_ranking => number => Worker Ranking
+- 3 projects_completed => number => Projects Completed
+- 3 owner_rating => rating => Owner Rating
+- 3 owner_rating_num => double => Owner Rating Num
+- 3 owner_point => number => Owner Point
+- 3 owner_ranking => number => Owner Ranking
+- 3 projects_owned => number => Projects Owned
+- 3 seller_rating => rating => Seller Rating
+- 3 seller_rating_num => double => Seller Rating Num
+- 3 seller_point => number => Seller Point
+- 3 seller_ranking => number => Seller Ranking
+- 3 product_sold => number => Product Sold
+- 3 affiliate_rating => rating => Affiliate Rating
+- 3 affiliate_rating_num => double => Affiliate Rating Num
+- 3 affiliate_point => number => Affiliate Point
+- 3 affiliate_ranking => number => Affiliate Ranking
+- 3 refered_users => number => Refered Users
+- 3 self_introduction => article => Self Introduction
+- 3 skills => inlinetags => Skills
+
+
+Listing Index
+helooo user_id 
+
+- 3 user_id => primary => Browse Users ID
+- 3 user_name => username => User Name
+- 3 email => email => Email
+- 2 account_status => enum => Account Status
+- 2 account_type => enum => Account Type
+- 3 last_seen => datetime => Last Seen
+- 3 display_name => name => Display Name
+
+
+
+View1
+- 3 self_introduction => article => Self Introduction
+- 3 skills => inlinetags => Skills
+- 3 photo => image => Photo
+- 3 user_name => username => User Name
+- 2 account_type => enum => Account Type
+- 3 date_registered => datetime => Date Registered
+- 3 last_seen => datetime => Last Seen
+- 2 provinsi => model => Provinsi
+- 2 kabupaten => model => Kabupaten
+- 3 website => url => Website
+- 3 online_hours => double => Online Hours
+- 3 projects_won => number => Projects Won
+- 3 projects_completed => number => Projects Completed
+- 3 projects_arbitrated => number => Projects Arbitrated
+- 3 projects_arbit_won => number => Projects Won in Arbitration
+- 3 projects_arbit_lost => number => Projects Lost in Arbitration
+- 3 current_projects => number => Current Projects
+- 3 worker_rating => rating => Worker Rating
+- 3 worker_rating_num => double => Worker Rating Num
+- 3 worker_point => number => Worker Point
+- 3 worker_ranking => number => Worker Ranking
+- 3 owner_rating => rating => Owner Rating
+- 3 owner_rating_num => double => Owner Rating Num
+- 3 owner_point => number => Owner Point
+- 3 owner_ranking => number => Owner Ranking
+- 3 projects_owned => number => Projects Owned
+- 3 seller_rating => rating => Seller Rating
+- 3 seller_rating_num => double => Seller Rating Num
+- 3 seller_point => number => Seller Point
+- 3 seller_ranking => number => Seller Ranking
+- 3 product_sold => number => Product Sold
+- 3 affiliate_rating => rating => Affiliate Rating
+- 3 affiliate_rating_num => double => Affiliate Rating Num
+- 3 affiliate_point => number => Affiliate Point
+- 3 affiliate_ranking => number => Affiliate Ranking
+- 3 refered_users => number => Refered Users
+- 3 work_quality => rating => Work Quality
+- 3 expertise => rating => Expertise
+- 3 worker_communication => rating => Worker Communication
+- 3 worker_professionalism => rating => Worker Professionalism
+- 3 clarity => rating => Clarity
+- 3 friendliness => rating => Friendliness
+- 3 owner_communication => rating => Owner Communication
+- 3 owner_professionalism => rating => Owner Professionalism
+- 3 projects_won_cumulative => money => Projects Won Cumulative
+- 3 projects_owned_cumulative => money => Projects Owned Cumulative
+- 3 projects_noaction => number => Projects No-Action
+- 3 projects_canceled => number => Projects Canceled
+- 3 missed_payment => number => Missed Payment
+- 3 missed_weekly_report => number => Missed Weekly Report
+- 3 product_sold_cumulative => money => Product Sold Cumulative
+- 3 product_bought => number => Product Bought
+- 3 product_bought_cumulative => money => Product Bought Cumulative
+- 3 bid_count => number => Bid Count
+- 3 post_count => number => Post Count
+- 3 services => submodel => Services
+- 3 products => submodel => Products
+- 3 portofolio => submodel => Portofolio
+- 3 as_project_worker => submodel => As Project Worker
+- 3 as_project_owner => submodel => As Project Owner
+- 3 user_arbitrations => submodel => User Arbitrations
+
+
+Indexhalo
+- Id => primary => Browse Users ID
+- UserName => username => User Name
+- Email => email => Email
+- AccountStatus => enum => Account Status
+- AccountType => enum => Account Type
+- LastSeen => datetime => Last Seen
+- DisplayName => name => Display Name
+
+
+InviteToBid => invite_to_bid => Invite to Bid => edit =>model
+- UserName => username => User Name => read_only
+- DisplayName => name => Display Name => read_only
+- LastSeen => datetime => Last Seen => read_only
+- WorkerRating => rating => Worker Rating => read_only
+- ProjectsCompleted => number => Projects Completed => read_only
+- CurrentProjects => number => Current Projects => read_only
+- InvitationMessage => article => Invitation Message => editable
++ button: InviteToBid => invite_to_bid => Invite to Bid => green 
+
+
+HireMe => hire_me => Hire Me => edit =>submodel
+- PrivateWorker => model => Private Worker => read_only
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Attachments => file => Attachments => editable
+- FinishDays => number => Finish Days => editable
+- BudgetRange => range => Budget Range => editable
+- Channels => inlinetags => Channels => editable
++ button: CreatePrivateProject => create_private_project => Create Private Project => green 
+
+
+ChatWithUser => chat_with_user => Chat with User => edit =>model
+- redirect: "projectscoid://projects.co.id/chat/" . encodeID($model->user_id)
+
+
+
+----------------------------
+Model UCase: BrowseProducts
+Model ID: browse_products
+Model Title: Browse Products
+
+
+Listing1
+helooo product_id 
+
+- 3 title => title => Title
+- 3 rating => rating => Rating
+- 3 rating_num => double => Rating Num
+- 3 sales_count => number => Sales Count
+- 3 price => money => Price
+- 2 seller => model => Seller
+- 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_product_sold => expose => Product Sold => number
+- 3 short_description => string => Short Description
+- 3 trial_version => file => Trial Version
+- 3 tags => inlinetags => Tags
+- 3 logo => image => Logo
+
+
+Listing Index
+helooo product_id 
+
+- 3 product_id => primary => Browse Products ID
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 2 category => model => Category
+- 3 title => title => Title
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+
+
+
+View1
+- 3 description => article => Description
+- 3 tags => inlinetags => Tags
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+- 3 screenshots => submodel => Screenshots
+- 3 trial_version => file => Trial Version
+- 3 product_reviews => submodel => Product Reviews
+- 3 product_comments => submodel => Product Comments
+- 3 price => money => Price
+- 3 logo => image => Logo
+- 2 seller => model => Seller
+- 1 seller_photo => expose => Photo => image
+- 1 seller_user_name => expose => User Name => username
+- 1 seller_kabupaten => expose => Kabupaten => model
+- 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_seller_rating_num => expose => Seller Rating Num => double
+- 1 seller_seller_ranking => expose => Seller Ranking => number
+
+
+Indexhalo
+- Id => primary => Browse Products ID
+- Seller => model => Seller
+- Logo => image => Logo
+- Category => model => Category
+- Title => title => Title
+- SalesCount => number => Sales Count
+- Rating => rating => Rating
+
+
+SellProduct => sell_product => Sell Product => insert =>model
+- redirect: baseUrl() . '/user/my_products/add_new_product'
+
+
+ChatWithSeller => chat_with_seller => Chat with Seller => edit =>model
+- redirect: PushEngine::getJavascriptPrivateChatUrl($model->seller_id)
+
+
+AddToCart => add_to_cart => Add to Cart => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- Price => money => Price => read_only
+- Seller => model => Seller => read_only
++ button: AddToCart => add_to_cart => Add to Cart => green 
+
+
+
+----------------------------
+Model UCase: Cart
+Model ID: cart
+Model Title: Cart
+
+
+EmptyCart => empty_cart => Empty Cart => edit =>model
+- UserName => username => User Name => read_only
++ button: EmptyCart => empty_cart => Empty Cart => green 
+
+
+ApplyCoupon => apply_coupon => Apply Coupon => edit =>model
+- Coupon => username => Coupon => editable
++ button: ApplyCoupon => apply_coupon => Apply Coupon => green 
+
+
+ContinueShopping => continue_shopping => Continue Shopping => edit =>model
+- redirect: baseUrl() . '/public/browse_products'
+
+
+
+----------------------------
+Model UCase: Checkout
+Model ID: checkout
+Model Title: Checkout
+
+
+PayWithAvailableBalance => pay_with_available_balance => Pay with Available Balance => edit =>model
+- UserName => username => User Name => read_only
+- AvailableBalance => money => Available Balance => read_only
++ button: PayWithAvailableBalance => pay_with_available_balance => Pay with Available Balance => green 
+
+
+PayViaBankTransfer => pay_via_bank_transfer => Pay via Bank Transfer => edit =>model
+- UserName => username => User Name => read_only
+- DisplayName => name => Display Name => read_only
+- Handphone => phone => Handphone => read_only
+- Npwp => string => NPWP => read_only
++ button: PayViaBankTransfer => pay_via_bank_transfer => Pay via Bank Transfer => green 
+
+
+PayWithCreditCard => pay_with_credit_card => Pay with Credit Card => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithCreditCard => pay_with_credit_card => Pay with Credit Card => green 
+
+
+PayWithCimbClicks => pay_with_cimb_clicks => Pay with CIMB Clicks => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithCimbClicks => pay_with_cimb_clicks => Pay with CIMB Clicks => green 
+
+
+PayWithBcaKlikpay => pay_with_bca_klikpay => Pay with BCA KlikPay => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithBcaKlikpay => pay_with_bca_klikpay => Pay with BCA KlikPay => green 
+
+
+PayWithMandiriClickpay => pay_with_mandiri_clickpay => Pay with Mandiri ClickPay => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithMandiriClickpay => pay_with_mandiri_clickpay => Pay with Mandiri ClickPay => green 
+
+
+PayWithQris => pay_with_qris => Pay with QRIS => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithQris => pay_with_qris => Pay with QRIS => green 
+
+
+PayWithPaypal => pay_with_paypal => Pay with PayPal => edit =>model
+- UserName => username => User Name => read_only
++ button: PayWithPaypal => pay_with_paypal => Pay with PayPal => green 
+
+
+
+----------------------------
+Model UCase: Blog
+Model ID: blog
+Model Title: Blog
+
+
+Listing1
+helooo article_id 
+
+- 3 title => title => Title
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+- 3 image => image => Image
+
+
+Listing Index
+helooo article_id 
+
+- 3 article_id => primary => Blog ID
+- 2 category => enum => Category
+- 2 author => model => Author
+- 3 title => title => Title
+- 3 published => boolean => Published
+- 3 published_date => datetime => Published Date
+- 3 teaser => multiline => Teaser
+
+
+
+View1
+- 2 author => model => Author
+- 3 published_date => datetime => Published Date
+- 3 image => image => Image
+- 3 content => article => Content
+- 3 files => file => Files
+
+
+Indexhalo
+- Id => primary => Blog ID
+- Category => enum => Category
+- Author => model => Author
+- Title => title => Title
+- Published => boolean => Published
+- PublishedDate => datetime => Published Date
+- Teaser => multiline => Teaser
+
+
+
+----------------------------
+Model UCase: MyProjects
+Model ID: my_projects
+Model Title: My Projects
+
+
+Listing1
+helooo project_id 
+
+- 2 owner => model => Owner
+- 2 accepted_worker => model => Accepted Worker
+- 1 accepted_worker_photo => expose => Photo => image
+- 1 accepted_worker_user_name => expose => User Name => username
+- 1 accepted_worker_kabupaten => expose => Kabupaten => model
+- 1 accepted_worker_worker_rating => expose => Worker Rating => rating
+- 1 accepted_worker_worker_rating_num => expose => Worker Rating Num => double
+- 1 accepted_worker_worker_point => expose => Worker Point => number
+- 1 accepted_worker_worker_ranking => expose => Worker Ranking => number
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 3 title => title => Title
+- 3 short_description => string => Short Description
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_budget => money => Published Budget
+- 3 published_date => datetime => Published Date
+- 3 select_deadline => datetime => Select Deadline
+- 3 finish_days => number => Finish Days
+- 2 project_status => enum => Project Status
+- 2 project_ending => enum => Project Ending
+- 3 bid_count => number => Bid Count
+- 3 need_weekly_report => boolean => Need Weekly Report
+- 3 weekly_report_needed => boolean => Weekly Report Needed
+- 3 weekly_report_posted => boolean => Weekly Report Posted
+- 3 start_date => datetime => Start Date
+- 3 finish_deadline => datetime => Finish Deadline
+- 3 finish_date => datetime => Finish Date
+- 3 closed_date => datetime => Closed Date
+- 3 accepted_budget => money => Accepted Budget
+- 3 progress => percent => Progress
+- 2 arbitration => model => Arbitration
+- 3 last_bump => datetime => Last Bump
+
+
+Listing Index
+helooo project_id 
+
+- 3 project_id => primary => My Projects ID
+- 2 owner => model => Owner
+- 2 category => model => Category
+- 3 title => title => Title
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 3 published_date => datetime => Published Date
+
+
+
+View1
+- 3 admin_note => article => Admin Note
+- 3 description => article => Description
+- 3 attachments => file => Attachments
+- 3 channels => inlinetags => Channels
+- 2 project_class => enum => Project Class
+- 3 budget_range => range => Budget Range
+- 2 project_status => enum => Project Status
+- 3 published_budget => money => Published Budget
+- 3 published_date => datetime => Published Date
+- 3 finish_days => number => Finish Days
+- 2 project_ending => enum => Project Ending
+- 3 bid_count => number => Bid Count
+- 3 select_deadline => datetime => Select Deadline
+- 3 need_weekly_report => boolean => Need Weekly Report
+- 3 start_date => datetime => Start Date
+- 3 finish_deadline => datetime => Finish Deadline
+- 3 finish_date => datetime => Finish Date
+- 3 closed_date => datetime => Closed Date
+- 2 accepted_worker => model => Accepted Worker
+- 3 accepted_budget => money => Accepted Budget
+- 3 progress => percent => Progress
+- 2 arbitration => model => Arbitration
+- 3 last_bump => datetime => Last Bump
+- 2 owner => model => Owner
+- 1 owner_photo => expose => Photo => image
+- 1 owner_user_name => expose => User Name => username
+- 1 owner_kabupaten => expose => Kabupaten => model
+- 1 owner_owner_rating => expose => Owner Rating => rating
+- 1 owner_owner_rating_num => expose => Owner Rating Num => double
+- 1 owner_owner_point => expose => Owner Point => number
+- 1 owner_owner_ranking => expose => Owner Ranking => number
+- 3 worker_rating_num => double => Worker Rating Num
+- 3 worker_feedback => article => Worker Feedback
+- 1 accepted_worker_worker_rating => expose => Worker Rating => rating
+- 1 accepted_worker_worker_point => expose => Worker Point => number
+- 1 accepted_worker_worker_ranking => expose => Worker Ranking => number
+- 3 owner_feedback => article => Owner Feedback
+- 3 shortlisted_bids => submodel => Shortlisted Bids
+
+
+Indexhalo
+- Id => primary => My Projects ID
+- Owner => model => Owner
+- Category => model => Category
+- Title => title => Title
+- ProjectClass => enum => Project Class
+- BudgetRange => range => Budget Range
+- PublishedDate => datetime => Published Date
+
+
+BumpUp => bump_up => Bump Up => edit =>model
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Attachments => file => Attachments => read_only
+- FinishDays => number => Finish Days => read_only
+- BudgetRange => range => Budget Range => read_only
+- Channels => inlinetags => Channels => read_only
++ button: BumpUp => bump_up => Bump Up => green 
+
+
+BroadcastMessage => broadcast_message => Broadcast Message => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- BroadcastMessage => article => Broadcast Message => editable
+- AttachFile => file => Attach File => editable
+- AutomaticSendToNewBidder => boolean => Automatic Send to New Bidder => editable
++ button: CancelBroadcast => cancel_broadcast => Cancel Broadcast => red 
++ button: BroadcastMessage => broadcast_message => Broadcast Message => green 
+
+
+ShowBids => show_bids => Show Bids => list =>submodel
+--- ini list dan index
++ button: ShowBids => show_bids => Show Bids => green 
+Id123
+Worker123
+Project123
+Status123
+Date123
+Location123
+Rating123
+MatchingSkills123
+Amount123
+Message123
+Attachments123
+ReadByOwner123
+Shortlisted123
+Captcha123
+ProjectTitle123
+ProjectOwner123
+Description123
+PublishedBudget123
+BudgetRange123
++ button: ShowBids => show_bids => Show Bids => green 
+
+
+ShowThread => show_thread => Show Thread => list =>submodel
+--- ini list dan index
++ button: ShowThread => show_thread => Show Thread => green 
+Id123
+User123
+Project123
+Thread123
+PostType123
+PostDate123
+BidAmount123
+Message123
+Attachments123
+ReadByOwner123
+ReadByWorker123
++ button: ShowThread => show_thread => Show Thread => green 
+
+
+ShowFiles => show_files => Show Files => list =>submodel
+--- ini list dan index
++ button: ShowFiles => show_files => Show Files => green 
+Id123
+User123
+Project123
+Thread123
+PostType123
+PostDate123
+BidAmount123
+Message123
+Attachments123
+ReadByOwner123
+ReadByWorker123
++ button: ShowFiles => show_files => Show Files => green 
+
+
+ShowConversation => show_conversation => Show Conversation => list =>submodel
+--- ini list dan index
++ button: ShowConversation => show_conversation => Show Conversation => green 
+Id123
+User123
+Project123
+Thread123
+PostType123
+PostDate123
+BidAmount123
+Message123
+Attachments123
+ReadByOwner123
+ReadByWorker123
++ button: ShowConversation => show_conversation => Show Conversation => green 
+
+
+CreateProject => create_project => Create Project => insert =>model
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Attachments => file => Attachments => editable
+- FinishDays => number => Finish Days => editable
+- BudgetRange => range => Budget Range => editable
+- Channels => inlinetags => Channels => editable
++ button: SaveAsDraft => save_as_draft => Save as Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+EditDraft => edit_draft => Edit Draft => edit =>model
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Attachments => file => Attachments => editable
+- FinishDays => number => Finish Days => editable
+- BudgetRange => range => Budget Range => editable
+- Channels => inlinetags => Channels => editable
++ button: SaveDraft => save_draft => Save Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+PublishProject => publish_project => Publish Project => edit =>model
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Attachments => file => Attachments => read_only
+- FinishDays => number => Finish Days => read_only
+- BudgetRange => range => Budget Range => read_only
+- Channels => inlinetags => Channels => read_only
++ button: PublishProject => publish_project => Publish Project => green 
+
+
+CancelProject => cancel_project => Cancel Project => edit =>model
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Attachments => file => Attachments => read_only
+- FinishDays => number => Finish Days => read_only
+- BudgetRange => range => Budget Range => read_only
+- Channels => inlinetags => Channels => read_only
++ button: CancelProject => cancel_project => Cancel Project => green 
+
+
+AcceptOrRejectWork => accept_or_reject_work => Accept or Reject Work => edit =>submodel
+- Message => article => Message => editable
+- Attachments => file => Attachments => editable
++ button: AcceptWork => accept_work => Accept Work => green 
++ button: NeedRevision => need_revision => Need Revision => green 
++ button: FileArbitration => file_arbitration => File Arbitration => yellow 
+
+
+RateWorker => rate_worker => Rate Worker => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- AcceptedWorker => model => Accepted Worker => read_only
+- WorkQuality => rating => Work Quality => editable
+- Expertise => rating => Expertise => editable
+- WorkerCommunication => rating => Worker Communication => editable
+- WorkerProfessionalism => rating => Worker Professionalism => editable
+- WorkerFeedback => article => Worker Feedback => editable
+- TestimonialForProjectsCoId => heading => Testimonial for Projects.co.id => editable
+- Testimony => article => Testimony => editable
++ button: RateWorker => rate_worker => Rate Worker => green 
+
+
+ReportProgress => report_progress => Report Progress => edit =>model
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- FinishDays => number => Finish Days => read_only
+- AcceptedBudget => money => Accepted Budget => read_only
+- Progress => percent => Progress => editable
++ button: ReportProgress => report_progress => Report Progress => green 
+
+
+WeeklyReport => weekly_report => Weekly Report => edit =>submodel
+- Message => article => Message => editable
+- Attachments => file => Attachments => editable
++ button: WeeklyReport => weekly_report => Weekly Report => green 
+
+
+ReportDone => report_done => Report Done => edit =>submodel
+- Message => article => Message => editable
+- Attachments => file => Attachments => editable
++ button: ReportDone => report_done => Report Done => green 
+
+
+RateOwner => rate_owner => Rate Owner => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- Owner => model => Owner => read_only
+- Clarity => rating => Clarity => editable
+- Friendliness => rating => Friendliness => editable
+- OwnerCommunication => rating => Owner Communication => editable
+- OwnerProfessionalism => rating => Owner Professionalism => editable
+- OwnerFeedback => article => Owner Feedback => editable
+- TestimonialForProjectsCoId => heading => Testimonial for Projects.co.id => editable
+- Testimony => article => Testimony => editable
++ button: RateOwner => rate_owner => Rate Owner => green 
+
+
+FileArbitration => file_arbitration => File Arbitration => edit =>submodel
+- ProjectTitle => string => Project Title => read_only
+- ProjectOwner => string => Project Owner => read_only
+- ProjectWorker => string => Project Worker => read_only
+- ProblemDescription => article => Problem Description => editable
+- YourWishes => article => Your Wishes => editable
+- YourOffer => heading => Your Offer => editable
+- Budget => money => Budget => read_only
+- WorkerReceives => money => Worker Receives => editable
+- OwnerReceives => money => Owner Receives => editable
++ button: FileArbitration => file_arbitration => File Arbitration => green 
+
+
+NewOffer => new_offer => New Offer => edit =>submodel
+- ProjectTitle => string => Project Title => read_only
+- ProjectOwner => string => Project Owner => read_only
+- ProjectWorker => string => Project Worker => read_only
+- Budget => money => Budget => read_only
+- WorkerReceives => money => Worker Receives => editable
+- OwnerReceives => money => Owner Receives => editable
++ button: NewOffer => new_offer => New Offer => green 
+
+
+AcceptOffer => accept_offer => Accept Offer => edit =>submodel
+- Project => model => Project => read_only
+- RequestedDate => datetime => Requested Date => read_only
+- Type => enum => Type => read_only
+- Plaintiff => model => Plaintiff => read_only
+- Defendant => model => Defendant => read_only
+- WorkerReceives => money => Worker Receives => read_only
+- OwnerReceives => money => Owner Receives => read_only
++ button: AcceptOffer => accept_offer => Accept Offer => green 
+
+
+RespondArbitration => respond_arbitration => Respond Arbitration => edit =>submodel
+- ProjectTitle => string => Project Title => read_only
+- ProjectOwner => string => Project Owner => read_only
+- ProjectWorker => string => Project Worker => read_only
+- RequestedDate => datetime => Requested Date => read_only
+- Plaintiff => model => Plaintiff => read_only
+- PlaintiffDescription => article => Plaintiff Description => read_only
+- PlaintiffWishes => article => Plaintiff Wishes => read_only
+- ProblemDescription => article => Problem Description => editable
+- YourWishes => article => Your Wishes => editable
+- YourOffer => heading => Your Offer => read_only
+- Budget => money => Budget => read_only
+- WorkerReceives => money => Worker Receives => editable
+- OwnerReceives => money => Owner Receives => editable
++ button: RespondArbitration => respond_arbitration => Respond Arbitration => green 
+
+
+CancelArbitration => cancel_arbitration => Cancel Arbitration => edit =>model
+- Title => title => Title => read_only
+- ShortDescription => string => Short Description => read_only
+- StartDate => datetime => Start Date => read_only
+- FinishDeadline => datetime => Finish Deadline => read_only
+- ExtendDeadlineDays => number => Extend Deadline Days => editable
+- YourWishes => article => Your Wishes => editable
++ button: CancelArbitration => cancel_arbitration => Cancel Arbitration => green 
+
+
+
+----------------------------
+Model UCase: MyBids
+Model ID: my_bids
+Model Title: My Bids
+
+
+Listing1
+helooo bid_id 
+
+- 2 project => model => Project
+- 1 project_project_status => expose => Project Status => enum
+- 2 worker => model => Worker
+- 2 status => enum => Status
+- 3 shortlisted => boolean => Shortlisted
+- 3 date => datetime => Date
+- 3 amount => money => Amount
+- 3 message => article => Message
+- 3 attachments => file => Attachments
+
+
+Listing Index
+helooo bid_id 
+
+- 3 bid_id => primary => My Bids ID
+- 3 date => datetime => Date
+- 2 worker => model => Worker
+- 2 location => model => Location
+- 3 rating => rating => Rating
+- 3 matching_skills => percent => Matching Skills
+- 3 amount => money => Amount
+- 3 shortlisted => boolean => Shortlisted
+
+
+
+View1
+
+
+Indexhalo
+- Id => primary => My Bids ID
+- Date => datetime => Date
+- Worker => model => Worker
+- Location => model => Location
+- Rating => rating => Rating
+- MatchingSkills => percent => Matching Skills
+- Amount => money => Amount
+- Shortlisted => boolean => Shortlisted
+
+
+ShowConversation => show_conversation => Show Conversation => list =>submodel
+--- ini list dan index
++ button: ShowConversation => show_conversation => Show Conversation => green 
+Id123
+User123
+Project123
+Thread123
+PostType123
+PostDate123
+BidAmount123
+Message123
+Attachments123
+ReadByOwner123
+ReadByWorker123
++ button: ShowConversation => show_conversation => Show Conversation => green 
+
+
+PlaceNewBid => place_new_bid => Place New Bid => edit =>model
+- redirect: baseUrl() . '/public/browse_projects/place_new_bid/' . encodeID($model->project_id) . '/' . makeSlug($model->getProject()->title)
+
+
+CancelBid => cancel_bid => Cancel Bid => edit =>model
+- Project => model => Project => read_only
+- Date => datetime => Date => read_only
+- Amount => money => Amount => read_only
+- Message => article => Message => read_only
+- Attachments => file => Attachments => read_only
+- Captcha => captcha => Captcha => editable
++ button: CancelBid => cancel_bid => Cancel Bid => green 
+
+
+
+----------------------------
+Model UCase: MyProducts
+Model ID: my_products
+Model Title: My Products
+
+
+Listing1
+helooo product_id 
+
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 3 title => title => Title
+- 3 short_description => string => Short Description
+- 3 tags => inlinetags => Tags
+- 3 price => money => Price
+- 3 published_date => datetime => Published Date
+- 3 last_bump => datetime => Last Bump
+- 2 status => enum => Status
+- 3 admin_note => article => Admin Note
+
+
+Listing Index
+helooo product_id 
+
+- 3 product_id => primary => My Products ID
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 2 category => model => Category
+- 3 title => title => Title
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+
+
+
+View1
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 3 title => title => Title
+- 3 description => article => Description
+- 3 short_description => string => Short Description
+- 3 tags => inlinetags => Tags
+- 3 deliverable => file => Deliverable
+- 3 trial_version => file => Trial Version
+- 3 registered_date => datetime => Registered Date
+- 3 published_date => datetime => Published Date
+- 3 last_bump => datetime => Last Bump
+- 3 price => money => Price
+- 2 status => enum => Status
+- 3 sales_count => number => Sales Count
+- 3 sales_amount => money => Sales Amount
+- 3 rating => rating => Rating
+- 3 points => number => Points
+- 3 ranking => number => Ranking
+- 3 admin_note => article => Admin Note
+
+
+Indexhalo
+- Id => primary => My Products ID
+- Seller => model => Seller
+- Logo => image => Logo
+- Category => model => Category
+- Title => title => Title
+- SalesCount => number => Sales Count
+- Rating => rating => Rating
+
+
+ProductPage => product_page => Product Page => edit =>model
+- redirect: baseUrl() . '/public/browse_products/view/' . encodeID($model->getPrimaryKeyValue()) . '/' . makeSlug($model->title)
+
+
+Sales => sales => Sales => list =>submodel
+--- ini list dan index
++ button: Sales => sales => Sales => green 
+Id123
+Buyer123
+Order123
+Title123
+Type123
+Product123
+Project123
+Service123
+Bid123
+Iklan123
+Date123
+Price123
+Status123
+Seller123
+BuyerPayment123
+SellerCredit123
+Rating123
+Testimony123
++ button: Sales => sales => Sales => green 
+
+
+Comments => comments => Comments => list =>submodel
+--- ini list dan index
++ button: Comments => comments => Comments => green 
+Id123
+User123
+Product123
+Thread123
+PostType123
+PostDate123
+Message123
+Attachments123
+ReadBySeller123
+ReadByBuyer123
+Captcha123
++ button: Comments => comments => Comments => green 
+
+
+AddNewProduct => add_new_product => Add New Product => insert =>model
+- Logo => image => Logo => editable
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Deliverable => file => Deliverable => editable
+- TrialVersion => file => Trial Version => editable
+- Price => money => Price => editable
+- Tags => inlinetags => Tags => editable
++ button: SaveAsDraft => save_as_draft => Save as Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+PublishProduct => publish_product => Publish Product => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Deliverable => file => Deliverable => read_only
+- TrialVersion => file => Trial Version => read_only
+- Price => money => Price => read_only
+- Tags => inlinetags => Tags => read_only
++ button: PublishProduct => publish_product => Publish Product => green 
+
+
+EditProduct => edit_product => Edit Product => edit =>model
+- Logo => image => Logo => editable
+- Title => title => Title => editable
+- Description => article => Description => editable
+- Deliverable => file => Deliverable => editable
+- TrialVersion => file => Trial Version => editable
+- Price => money => Price => editable
+- Tags => inlinetags => Tags => editable
++ button: SaveAsDraft => save_as_draft => Save as Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+BumpUp => bump_up => Bump Up => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Deliverable => file => Deliverable => read_only
+- TrialVersion => file => Trial Version => read_only
+- Price => money => Price => read_only
+- Tags => inlinetags => Tags => read_only
++ button: BumpUp => bump_up => Bump Up => green 
+
+
+Screenshots => screenshots => Screenshots => list =>submodel
+--- ini list dan index
++ button: Screenshots => screenshots => Screenshots => green 
+Id123
+Product123
+Description123
+Image123
++ button: Screenshots => screenshots => Screenshots => green 
+
+
+Unlist => unlist => Unlist => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Deliverable => file => Deliverable => read_only
+- TrialVersion => file => Trial Version => read_only
+- Price => money => Price => read_only
+- Tags => inlinetags => Tags => read_only
++ button: Unlist => unlist => Unlist => red 
+
+
+ReactivateProduct => reactivate_product => Reactivate Product => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- Deliverable => file => Deliverable => read_only
+- TrialVersion => file => Trial Version => read_only
+- Price => money => Price => read_only
+- Tags => inlinetags => Tags => read_only
++ button: ReactivateProduct => reactivate_product => Reactivate Product => green 
+
+
+
+----------------------------
+Model UCase: MyServices
+Model ID: my_services
+Model Title: My Services
+
+
+Listing1
+helooo service_id 
+
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 3 title => title => Title
+- 3 short_description => string => Short Description
+- 3 tags => inlinetags => Tags
+- 3 published_date => datetime => Published Date
+- 3 last_bump => datetime => Last Bump
+- 3 price => money => Price
+- 3 finish_days => number => Finish Days
+- 2 status => enum => Status
+- 3 admin_note => article => Admin Note
+
+
+Listing Index
+helooo service_id 
+
+- 3 service_id => primary => My Services ID
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 2 category => model => Category
+- 3 title => title => Title
+- 3 finish_days => number => Finish Days
+- 3 price => money => Price
+- 3 sales_count => number => Sales Count
+- 3 rating => rating => Rating
+
+
+
+View1
+- 2 seller => model => Seller
+- 3 logo => image => Logo
+- 3 title => title => Title
+- 3 description => article => Description
+- 3 short_description => string => Short Description
+- 3 tags => inlinetags => Tags
+- 3 registered_date => datetime => Registered Date
+- 3 published_date => datetime => Published Date
+- 3 last_bump => datetime => Last Bump
+- 3 price => money => Price
+- 3 options => subtable => Options
+- 3 finish_days => number => Finish Days
+- 2 status => enum => Status
+- 3 sales_count => number => Sales Count
+- 3 sales_amount => money => Sales Amount
+- 3 rating => rating => Rating
+- 3 points => number => Points
+- 3 ranking => number => Ranking
+- 3 admin_note => article => Admin Note
+
+
+Indexhalo
+- Id => primary => My Services ID
+- Seller => model => Seller
+- Logo => image => Logo
+- Category => model => Category
+- Title => title => Title
+- FinishDays => number => Finish Days
+- Price => money => Price
+- SalesCount => number => Sales Count
+- Rating => rating => Rating
+
+
+ServicePage => service_page => Service Page => edit =>model
+- redirect: baseUrl() . '/public/browse_services/view/' . encodeID($model->getPrimaryKeyValue()) . '/' . makeSlug($model->title)
+
+
+Sales => sales => Sales => list =>submodel
+--- ini list dan index
++ button: Sales => sales => Sales => green 
+Id123
+Buyer123
+Order123
+Title123
+Type123
+Product123
+Project123
+Service123
+Bid123
+Iklan123
+Date123
+Price123
+Status123
+Seller123
+BuyerPayment123
+SellerCredit123
+Rating123
+Testimony123
++ button: Sales => sales => Sales => green 
+
+
+Comments => comments => Comments => list =>submodel
+--- ini list dan index
++ button: Comments => comments => Comments => green 
+Id123
+User123
+Service123
+Thread123
+PostType123
+PostDate123
+Message123
+Attachments123
+ReadBySeller123
+ReadByBuyer123
+Captcha123
++ button: Comments => comments => Comments => green 
+
+
+AddNewService => add_new_service => Add New Service => insert =>model
+- Logo => image => Logo => editable
+- Title => title => Title => editable
+- Description => article => Description => editable
+- FinishDays => number => Finish Days => editable
+- Price => money => Price => editable
+- Options => subtable => Options => editable
+- Tags => inlinetags => Tags => editable
++ button: SaveAsDraft => save_as_draft => Save as Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+PublishService => publish_service => Publish Service => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- FinishDays => number => Finish Days => read_only
+- Price => money => Price => read_only
+- Options => subtable => Options => read_only
+- Tags => inlinetags => Tags => read_only
++ button: PublishService => publish_service => Publish Service => green 
+
+
+BumpUp => bump_up => Bump Up => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- FinishDays => number => Finish Days => read_only
+- Price => money => Price => read_only
+- Options => subtable => Options => read_only
+- Tags => inlinetags => Tags => read_only
++ button: BumpUp => bump_up => Bump Up => green 
+
+
+EditService => edit_service => Edit Service => edit =>model
+- Logo => image => Logo => editable
+- Title => title => Title => editable
+- Description => article => Description => editable
+- FinishDays => number => Finish Days => editable
+- Price => money => Price => editable
+- Options => subtable => Options => editable
+- Tags => inlinetags => Tags => editable
++ button: SaveAsDraft => save_as_draft => Save as Draft => yellow 
++ button: SaveAndPublish => save_and_publish => Save and Publish => green 
+
+
+Screenshots => screenshots => Screenshots => list =>submodel
+--- ini list dan index
++ button: Screenshots => screenshots => Screenshots => green 
+Id123
+Service123
+Description123
+Image123
++ button: Screenshots => screenshots => Screenshots => green 
+
+
+Unlist => unlist => Unlist => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- FinishDays => number => Finish Days => read_only
+- Price => money => Price => read_only
+- Options => subtable => Options => read_only
+- Tags => inlinetags => Tags => read_only
++ button: Unlist => unlist => Unlist => red 
+
+
+ReactivateService => reactivate_service => Reactivate Service => edit =>model
+- Logo => image => Logo => read_only
+- Title => title => Title => read_only
+- Description => article => Description => read_only
+- FinishDays => number => Finish Days => read_only
+- Price => money => Price => read_only
+- Options => subtable => Options => read_only
+- Tags => inlinetags => Tags => read_only
++ button: ReactivateService => reactivate_service => Reactivate Service => green 
+
+
+
+----------------------------
+Model UCase: MySales
+Model ID: my_sales
+Model Title: My Sales
+
+
+Listing1
+helooo order_item_id 
+
+- 3 order_item_id => primary => My Sales ID
+- 2 buyer => model => Buyer
+- 2 product => model => Product
+- 2 order => model => Order
+- 3 title => string => Title
+- 2 type => enum => Type
+- 2 project => model => Project
+- 2 service => model => Service
+- 2 bid => model => Bid
+- 2 iklan => model => Iklan
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+- 2 buyer_payment => model => Buyer Payment
+- 2 seller_credit => model => Seller Credit
+- 3 rating => rating => Rating
+- 3 testimony => article => Testimony
+
+
+Listing Index
+helooo order_item_id 
+
+- 3 order_item_id => primary => My Sales ID
+- 2 buyer => model => Buyer
+- 2 product => model => Product
+- 3 title => string => Title
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+
+
+
+View1
+- 3 order_item_id => primary => My Sales ID
+- 2 buyer => model => Buyer
+- 2 product => model => Product
+- 2 order => model => Order
+- 3 title => string => Title
+- 2 type => enum => Type
+- 2 project => model => Project
+- 2 service => model => Service
+- 2 bid => model => Bid
+- 2 iklan => model => Iklan
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+- 2 buyer_payment => model => Buyer Payment
+- 2 seller_credit => model => Seller Credit
+- 3 rating => rating => Rating
+- 3 testimony => article => Testimony
+
+
+
+
+
+----------------------------
+Model UCase: MyOrders
+Model ID: my_orders
+Model Title: My Orders
+
+
+Listing1
+helooo order_id 
+
+- 3 order_id => primary => My Orders ID
+- 3 track_code => string => Track Code
+- 2 buyer => model => Buyer
+- 3 date => datetime => Date
+- 2 status => enum => Status
+- 2 payment_method => enum => Payment Method
+- 2 buyer_payment => model => Buyer Payment
+- 3 total_price => money => Total Price
+- 3 coupon => string => Coupon
+- 3 coupon_value => money => Coupon Value
+- 3 used_balance => money => Used Balance
+- 3 total_sum => money => Total Sum
+- 3 unique_code => money => Unique Code
+- 3 notes => multiline => Notes
+- 3 cimb_ref => number => CIMB Ref
+- 3 is_test => boolean => Is Test
+
+
+Listing Index
+helooo order_id 
+
+- 3 order_id => primary => My Orders ID
+- 3 date => datetime => Date
+- 3 track_code => string => Track Code
+- 2 payment_method => enum => Payment Method
+- 3 total_price => money => Total Price
+- 3 used_balance => money => Used Balance
+- 3 total_sum => money => Total Sum
+- 2 status => enum => Status
+
+
+
+View1
+- 3 track_code => string => Track Code
+- 3 date => datetime => Date
+- 2 status => enum => Status
+- 2 payment_method => enum => Payment Method
+- 3 total_price => money => Total Price
+- 3 used_balance => money => Used Balance
+- 3 total_sum => money => Total Sum
+- 3 table => string => Table
+
+
+
+
+ConfirmPayment => confirm_payment => Confirm Payment => edit =>submodel
+- OurAccount => model => Our Account => editable
+- Bank => model => Bank => editable
+- AccountNo => string => Account No => editable
+- AccountName => name => Account Name => editable
+- TransferDate => datetime => Transfer Date => editable
+- Amount => money => Amount => editable
+- Message => multiline => Message => editable
+- Attachment => image => Attachment => editable
++ button: ConfirmPayment => confirm_payment => Confirm Payment => green 
+
+
+
+----------------------------
+Model UCase: MyPurchases
+Model ID: my_purchases
+Model Title: My Purchases
+
+
+Listing1
+helooo order_item_id 
+
+- 3 order_item_id => primary => My Purchases ID
+- 2 seller => model => Seller
+- 2 order => model => Order
+- 3 title => string => Title
+- 2 type => enum => Type
+- 2 product => model => Product
+- 2 project => model => Project
+- 2 service => model => Service
+- 2 bid => model => Bid
+- 2 iklan => model => Iklan
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+- 2 buyer => model => Buyer
+- 2 buyer_payment => model => Buyer Payment
+- 2 seller_credit => model => Seller Credit
+- 3 rating => rating => Rating
+- 3 testimony => article => Testimony
+
+
+Listing Index
+helooo order_item_id 
+
+- 3 order_item_id => primary => My Purchases ID
+- 2 seller => model => Seller
+- 3 title => string => Title
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+
+
+
+View1
+- 3 order_item_id => primary => My Purchases ID
+- 2 seller => model => Seller
+- 2 order => model => Order
+- 3 title => string => Title
+- 2 type => enum => Type
+- 2 product => model => Product
+- 2 project => model => Project
+- 2 service => model => Service
+- 2 bid => model => Bid
+- 2 iklan => model => Iklan
+- 3 date => datetime => Date
+- 3 price => money => Price
+- 2 status => enum => Status
+- 2 buyer => model => Buyer
+- 2 buyer_payment => model => Buyer Payment
+- 2 seller_credit => model => Seller Credit
+- 3 rating => rating => Rating
+- 3 testimony => article => Testimony
+
+
+
+
+Download => download => Download => edit =>model
+- Id => primary => My Purchases ID => editable
+- Seller => model => Seller => editable
+- Order => model => Order => editable
+- Title => string => Title => editable
+- Type => enum => Type => editable
+- Product => model => Product => editable
+- Project => model => Project => editable
+- Service => model => Service => editable
+- Bid => model => Bid => editable
+- Iklan => model => Iklan => editable
+- Date => datetime => Date => editable
+- Price => money => Price => editable
+- Status => enum => Status => editable
+- Buyer => model => Buyer => editable
+- BuyerPayment => model => Buyer Payment => editable
+- SellerCredit => model => Seller Credit => editable
+- Rating => rating => Rating => editable
+- Testimony => article => Testimony => editable
++ button: Download => download => Download => green 
+
+
+RateProduct => rate_product => Rate Product => edit =>model
+- Product => model => Product => read_only
+- Seller => model => Seller => read_only
+- Date => datetime => Date => read_only
+- Price => money => Price => read_only
+- Rating => rating => Rating => editable
+- Testimony => article => Testimony => editable
++ button: RateProduct => rate_product => Rate Product => green 
+
+
+
+----------------------------
+Model UCase: MyReferals
+Model ID: my_referals
+Model Title: My Referals
+
+
+
+----------------------------
+Model UCase: MyFinance
+Model ID: my_finance
+Model Title: My Finance
+
+
+ChangePaymentSettings => change_payment_settings => Change Payment Settings => edit =>model
+- Bank => model => Bank => editable
+- Branch => string => Branch => editable
+- City => string => City => editable
+- AccountNumber => string => Account Number => editable
+- AccountName => string => Account Name => editable
+- CutOffPeriod => enum => Cut-off Period => editable
+- CutOffAmount => money => Cut-off Amount => editable
+- DataPajak => heading => Data Pajak => editable
+- Npwp => string => NPWP => editable
+- StatusMarital => enum => Status Marital => editable
+- JumlahTanggungan => number => Jumlah Tanggungan => editable
+- Security => heading => Security => editable
+- SecureCode => secure_code => Secure Code => editable
++ button: ChangePaymentSettings => change_payment_settings => Change Payment Settings => green 
+
+
+WithdrawPayment => withdraw_payment => Withdraw Payment => edit =>submodel
+- Amount => money => Amount => editable
+- TransferFee => money => Transfer Fee => read_only
+- Bank => model => Bank => read_only
+- AccountNo => string => Account No => read_only
+- AccountName => name => Account Name => read_only
+- SecureCode => secure_code => Secure Code => editable
++ button: WithdrawPayment => withdraw_payment => Withdraw Payment => green 
+
+
+DepositBalance => deposit_balance => Deposit Balance => edit =>model
+- DepositAmount => money => Deposit Amount => editable
++ button: DepositBalance => deposit_balance => Deposit Balance => green 
+
+
+
+----------------------------
+Model UCase: MyPoints
+Model ID: my_points
+Model Title: My Points
+
+
+
+----------------------------
+Model UCase: MyProfile
+Model ID: my_profile
+Model Title: My Profile
+
+
+ViewProfile => view_profile => View Profile => edit =>model
+- redirect: baseUrl() . '/public/browse_users/view/' . encodeID(App::session()->user_id) . '/' . makeSlug(App::session()->user_display)
+
+
+EditProfile => edit_profile => Edit Profile => edit =>model
+- UserName => username => User Name => read_only
+- Email => email => Email => read_only
+- Photo => image => Photo => editable
+- DisplayName => name => Display Name => editable
+- BirthDate => date => Birth Date => editable
+- JenisKelamin => enum => Jenis Kelamin => editable
+- Address => address => Address => editable
+- Country => model => Country => editable
+- Provinsi => model => Provinsi => editable
+- Kabupaten => model => Kabupaten => editable
+- Kecamatan => model => Kecamatan => editable
+- Kelurahan => model => Kelurahan => editable
+- PostCode => string => Post Code => editable
+- SelfIntroduction => article => Self Introduction => editable
+- Website => url => Website => editable
+- Language => model => Language => editable
+- NotifyMeNewProjects => boolean => Notify Me New Projects => editable
+- Skills => inlinetags => Skills => editable
++ button: SaveProfile => save_profile => Save Profile => green 
+
+
+Portofolio => portofolio => Portofolio => list =>submodel
+--- ini list dan index
++ button: Portofolio => portofolio => Portofolio => green 
+Id123
+User123
+Year123
+Description123
+Link123
+Image123
++ button: Portofolio => portofolio => Portofolio => green 
+
+
+ChangePassword => change_password => Change Password => edit =>model
+- UserName => username => User Name => read_only
+- OldPassword => password => Old Password => editable
+- Password => password => Password => editable
++ button: ChangePassword => change_password => Change Password => green 
+
+
+ChangeEmail => change_email => Change Email => edit =>model
+- UserName => username => User Name => read_only
+- NewEmail => email => New Email => editable
+- SecureCode => secure_code => Secure Code => editable
++ button: ChangeEmail => change_email => Change Email => green 
+
+
+ChangeHandphone => change_handphone => Change Handphone => edit =>model
+- UserName => username => User Name => read_only
+- Handphone => phone => Handphone => editable
+- SecureCode => secure_code => Secure Code => editable
++ button: ChangeHandphone => change_handphone => Change Handphone => green 
+
+
+
+----------------------------
+Model UCase: Kelurahan
+Model ID: kelurahan
+Model Title: Kelurahan
+
+
+Listing1
+helooo kelurahan_id 
+
+- 3 kelurahan_id => primary => Kelurahan ID
+- 2 provinsi => model => Provinsi
+- 2 kabupaten => model => Kabupaten
+- 2 kecamatan => model => Kecamatan
+- 3 kelurahan_name => string => Nama Kelurahan
+- 3 kode_pos => string => Kode Pos
+
+
+Listing Index
+helooo kelurahan_id 
+
+- 3 kelurahan_id => primary => Kelurahan ID
+- 2 provinsi => model => Provinsi
+- 2 kabupaten => model => Kabupaten
+- 2 kecamatan => model => Kecamatan
+- 3 kelurahan_name => string => Nama Kelurahan
+- 3 kode_pos => string => Kode Pos
+
+
+
+View1
+- 3 kelurahan_id => primary => Kelurahan ID
+- 2 provinsi => model => Provinsi
+- 2 kabupaten => model => Kabupaten
+- 2 kecamatan => model => Kecamatan
+- 3 kelurahan_name => string => Nama Kelurahan
+- 3 kode_pos => string => Kode Pos
+
+
+
+
+
+----------------------------
+Model UCase: MyPortofolio
+Model ID: my_portofolio
+Model Title: My Portofolio
+
+
+Listing1
+helooo portofolio_id 
+
+- 3 year => number => Year
+- 3 description => multiline => Description
+- 3 link => url => Link
+- 3 image => image => Image
+
+
+Listing Index
+helooo portofolio_id 
+
+- 3 portofolio_id => primary => My Portofolio ID
+- 2 user => model => User
+- 3 year => number => Year
+- 3 description => multiline => Description
+- 3 link => url => Link
+
+
+
+View1
+
+
+
+
+AddPortofolio => add_portofolio => Add Portofolio => insert =>model
+- Year => number => Year => editable
+- Description => multiline => Description => editable
+- Link => url => Link => editable
+- Image => image => Image => editable
++ button: Save => save => Save => green 
+
+
+Edit => edit => Edit => edit =>model
+- Year => number => Year => editable
+- Description => multiline => Description => editable
+- Link => url => Link => editable
+- Image => image => Image => editable
++ button: Save => save => Save => green 
+
+
+
+----------------------------
+Model UCase: MyBookmarks
+Model ID: my_bookmarks
+Model Title: My Bookmarks
+
+
+Listing1
+helooo bookmark_id 
+
+- 3 url => url => URL
+- 3 logo => title => Logo
+- 3 title => title => Title
+
+
+Listing Index
+helooo bookmark_id 
+
+- 3 bookmark_id => primary => My Bookmarks ID
+- 3 title => title => Title
+- 3 url => url => URL
+- 3 logo => title => Logo
+- 3 date_added => datetime => Date Added
+
+
+
+View1
+
+
+Indexhalo
+- Id => primary => My Bookmarks ID
+- Title => title => Title
+- Url => url => URL
+- Logo => title => Logo
+- DateAdded => datetime => Date Added
+
+
+
+----------------------------
+Model UCase: MyBuddies
+Model ID: my_buddies
+Model Title: My Buddies
+
+
+Listing1
+helooo buddy_id 
+
+- 1 fav_photo => expose => Photo => image
+- 1 fav_user_name => expose => User Name => username
+- 1 fav_display_name => expose => Display Name => name
+- 1 fav_country => expose => Country => model
+- 1 fav_provinsi => expose => Provinsi => model
+- 1 fav_kabupaten => expose => Kabupaten => model
+- 1 fav_website => expose => Website => url
+- 1 fav_self_introduction => expose => Self Introduction => article
+- 1 fav_worker_ranking => expose => Worker Ranking => number
+- 1 fav_worker_point => expose => Worker Point => number
+- 1 fav_worker_rating => expose => Worker Rating => rating
+- 1 fav_owner_ranking => expose => Owner Ranking => number
+- 1 fav_owner_point => expose => Owner Point => number
+- 1 fav_owner_rating => expose => Owner Rating => rating
+- 1 fav_seller_ranking => expose => Seller Ranking => number
+- 1 fav_seller_point => expose => Seller Point => number
+- 1 fav_seller_rating => expose => Seller Rating => rating
+
+
+Listing Index
+helooo buddy_id 
+
+- 3 buddy_id => primary => My Buddies ID
+
+
+
+View1
+- 1 fav_photo => expose => Photo => image
+- 1 fav_user_name => expose => User Name => username
+- 1 fav_display_name => expose => Display Name => name
+- 1 fav_country => expose => Country => model
+- 1 fav_provinsi => expose => Provinsi => model
+- 1 fav_kabupaten => expose => Kabupaten => model
+- 1 fav_website => expose => Website => url
+- 1 fav_self_introduction => expose => Self Introduction => article
+- 1 fav_worker_ranking => expose => Worker Ranking => number
+- 1 fav_worker_point => expose => Worker Point => number
+- 1 fav_worker_rating => expose => Worker Rating => rating
+- 1 fav_owner_ranking => expose => Owner Ranking => number
+- 1 fav_owner_point => expose => Owner Point => number
+- 1 fav_owner_rating => expose => Owner Rating => rating
+- 1 fav_seller_ranking => expose => Seller Ranking => number
+- 1 fav_seller_point => expose => Seller Point => number
+- 1 fav_seller_rating => expose => Seller Rating => rating
+- 1 fav_projects_won => expose => Projects Won => number
+- 1 fav_projects_won_cumulative => expose => Projects Won Cumulative => money
+- 1 fav_projects_owned => expose => Projects Owned => number
+- 1 fav_projects_owned_cumulative => expose => Projects Owned Cumulative => money
+- 1 fav_projects_noaction => expose => Projects No-Action => number
+- 1 fav_projects_canceled => expose => Projects Canceled => number
+- 1 fav_missed_payment => expose => Missed Payment => number
+- 1 fav_projects_completed => expose => Projects Completed => number
+- 1 fav_projects_arbitrated => expose => Projects Arbitrated => number
+- 1 fav_projects_won_in_arbitration => expose => Projects Won in Arbitration => number
+- 1 fav_projects_lost_in_arbitration => expose => Projects Lost in Arbitration => number
+- 1 fav_current_projects => expose => Current Projects => number
+- 1 fav_missed_weekly_report => expose => Missed Weekly Report => number
+- 1 fav_product_sold => expose => Product Sold => number
+- 1 fav_product_sold_cumulative => expose => Product Sold Cumulative => money
+- 1 fav_product_bought => expose => Product Bought => number
+- 1 fav_product_bought_cumulative => expose => Product Bought Cumulative => money
+
+
+Indexhalo
+- Id => primary => My Buddies ID
+
+
+Remove => remove => Remove => edit =>model
+- Id => primary => My Buddies ID => editable
+- User => model => User => editable
+- Fav => model => Fav => editable
++ button: Remove => remove => Remove => red 
+
+
+

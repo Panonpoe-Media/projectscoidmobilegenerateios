@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import package="package:flutter/material.dart"/>
+        <var name="title" type="String" />
+    </data>
+
+    <Container height = "56.0">
+        <Row>
+
+            <IconButton icon = "Icon(Icons.menu)"  onPressed= "null" />
+            <Text _text="title" style="TextStyle(color: Colors.red, fontSize: 16.0)" />
+        </Row>
+    </Container>
+</layout>

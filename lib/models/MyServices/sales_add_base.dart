@@ -1,0 +1,650 @@
+
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter/material.dart';
+import 'package:projectscoid/core/AppProvider.dart';
+import 'package:projectscoid/views/components/index.dart';
+import 'package:projectscoid/core/components/utility/widget/SearchSelectDialog.dart';
+import 'package:projectscoid/controllers/controllers.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:projectscoid/core/components/helpers/string_helpers.dart';
+import 'package:projectscoid/core/components/helpers/color_helpers.dart';
+import 'package:projectscoid/core/components/helpers/action_helpers.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'dart:convert';
+import '../meta.dart';
+import '../item_button.dart';
+import '../button.dart';
+import '../selection.dart';
+import '../photo.dart';
+import '../paging.dart';
+import '../option_fields.dart';
+import '../image_fields.dart';
+import '../file_fields.dart';
+part 'sales_add_base.g.dart';
+
+
+
+SpeedDialChild ButtonEditSalesWidget(Button button, BuildContext context,var formKey, ScrollController controller, SubModelController sales,
+ var postSalesResult, State state, String? sendPath, String? id,  String? title, var formData){
+  if(button.type == 'custom_filter'){
+    return (
+	       SpeedDialChild(
+                        child: Icon(Icons.save),
+                        backgroundColor: Colors.red,
+                        label: button.text,
+                        labelStyle: TextStyle(fontSize: 18.0),
+                        onTap: ()=>{ showSearchSelectDialog(context: context,
+                        caption:button.text,
+                        initialitems: button.selections,
+                        initvalue: button.selections![0])
+                        //AppProvider.getRouter(context).navigateTo(context,
+                        },
+                      )
+
+	);  
+  }else{
+	return(	SpeedDialChild(
+		  child: Icon(Icons.save),
+		  backgroundColor: Colors.red,
+		  label: button.text,
+		  labelStyle: TextStyle(fontSize: 18.0),
+		  onTap: ()async{
+		  {
+                        controller.animateTo(controller.position.minScrollExtent,
+                        duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                        if (formKey.currentState.validate()) {
+                        //Map<String, dynamic> res = model.toJson();
+                        //print('json result == $res');
+                        sales =    SubModelController(AppProvider.getApplication(context),
+                        sendPath,
+                        formData);
+                        final future = sales.sendData();
+                        future.then((value) {
+                        state.setState(() {
+                        postSalesResult = value;
+                        });
+                        });
+
+                        } else {}
+                  }
+		  }
+	  ));
+  }
+
+}
+
+@JsonSerializable()
+
+class AddModelSales {
+   int?   age;
+   int?   cnt;
+   int?   page;
+  String? id;
+  String? ttl;
+  String? pht;
+  String? sbttl;
+
+
+   int?order_item_id;
+   int?buyer_id;
+  String? buyer_url;
+  String? buyer_str;
+  List<int?>? buyer_list;
+  List<String?>? buyer_list_str;
+   int?order_id;
+  String? order_url;
+  String? order_str;
+  List<int?>? order_list;
+  List<String?>? order_list_str;
+  String? title;
+   int?type_id;
+  String? type_str;
+  List<int?>? type_list;
+  List<String?>? type_list_str;
+   int?product_id;
+  String? product_url;
+  String? product_str;
+  List<int?>? product_list;
+  List<String?>? product_list_str;
+   int?project_id;
+  String? project_url;
+  String? project_str;
+  List<int?>? project_list;
+  List<String?>? project_list_str;
+   int?service_id;
+  String? service_url;
+  String? service_str;
+  List<int?>? service_list;
+  List<String?>? service_list_str;
+   int?bid_id;
+  String? bid_url;
+  String? bid_str;
+  List<int?>? bid_list;
+  List<String?>? bid_list_str;
+   int?iklan_id;
+  String? iklan_url;
+  String? iklan_str;
+  List<int?>? iklan_list;
+  List<String?>? iklan_list_str;
+  DateTime? date;
+  double? price;
+  String? price_str;
+   int?status_id;
+  String? status_str;
+  List<int?>? status_list;
+  List<String?>? status_list_str;
+   int?seller_id;
+  String? seller_url;
+  String? seller_str;
+  List<int?>? seller_list;
+  List<String?>? seller_list_str;
+   int?buyer_payment_id;
+  String? buyer_payment_url;
+  String? buyer_payment_str;
+  List<int?>? buyer_payment_list;
+  List<String?>? buyer_payment_list_str;
+   int?seller_credit_id;
+  String? seller_credit_url;
+  String? seller_credit_str;
+  List<int?>? seller_credit_list;
+  List<String?>? seller_credit_list_str;
+   int?rating;
+  String? testimony;
+
+	
+	  AddModelSales(
+            this.id,
+            this.order_item_id,
+			this.buyer_id,
+			this.buyer_str,
+			this.buyer_list,
+			this.buyer_list_str,
+			this.order_id,
+			this.order_str,
+			this.order_list,
+			this.order_list_str,
+			this.type_id,
+			this.type_str,
+			this.type_list,
+			this.type_list_str,
+			this.product_id,
+			this.product_str,
+			this.product_list,
+			this.product_list_str,
+			this.project_id,
+			this.project_str,
+			this.project_list,
+			this.project_list_str,
+			this.service_id,
+			this.service_str,
+			this.service_list,
+			this.service_list_str,
+			this.bid_id,
+			this.bid_str,
+			this.bid_list,
+			this.bid_list_str,
+			this.iklan_id,
+			this.iklan_str,
+			this.iklan_list,
+			this.iklan_list_str,
+			this.price,
+			this.price_str,
+			this.status_id,
+			this.status_str,
+			this.status_list,
+			this.status_list_str,
+			this.seller_id,
+			this.seller_str,
+			this.seller_list,
+			this.seller_list_str,
+			this.buyer_payment_id,
+			this.buyer_payment_str,
+			this.buyer_payment_list,
+			this.buyer_payment_list_str,
+			this.seller_credit_id,
+			this.seller_credit_str,
+			this.seller_credit_list,
+			this.seller_credit_list_str,
+
+  );
+    factory AddModelSales.fromJson(Map<String, dynamic> json) => _$AddModelSalesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AddModelSalesToJson(this);
+
+}
+
+
+
+@JsonSerializable()
+
+class SalesSuperBase {
+
+  String? id;
+  Meta? meta;
+  List<Button?>? buttons;
+  AddModelSales? model;
+  SalesSuperBase(
+	  this.id,
+	  this.buttons,
+	  this.meta,
+	  this.model,
+	  );
+	
+  
+	
+  factory SalesSuperBase.fromJson(Map<String, dynamic> json) => _$SalesSuperBaseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SalesSuperBaseToJson(this);
+   
+}
+
+
+
+
+class SalesAddBase{
+	var model;
+	Map<String, dynamic> json;
+	SalesAddBase(this.json){
+		model = SalesSuperBase.fromJson(this.json);
+	}
+	
+   Map<String, dynamic> convertFormDataEdit(var data){
+      var formData = {
+      "service_sales[_trigger_]":"",
+  "service_sales[buyer_id]": "${model.model.buyer_id }",
+  "service_sales[order_id]": "${model.model.order_id }",
+  "service_sales[title]": "${model.model.title }",
+   "service_sales[type_id]": "${model.model.type_id}",
+  "service_sales[product_id]": "${model.model.product_id }",
+  "service_sales[project_id]": "${model.model.project_id }",
+  "service_sales[service_id]": "${model.model.service_id }",
+  "service_sales[bid_id]": "${model.model.bid_id }",
+  "service_sales[iklan_id]": "${model.model.iklan_id }",
+  "service_sales[date]": "${model.model.date}",
+  "service_sales[price]": "${model.model.price}",
+   "service_sales[status_id]": "${model.model.status_id}",
+  "service_sales[seller_id]": "${model.model.seller_id }",
+  "service_sales[buyer_payment_id]": "${model.model.buyer_payment_id }",
+  "service_sales[seller_credit_id]": "${model.model.seller_credit_id }",
+  "service_sales[rating]": "${model.model.rating }",
+  "service_sales[testimony]": "${model.model.testimony }",
+	  
+  };  
+
+    return( formData);
+
+  } 
+	
+  List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, SubModelController sales,
+  var postSalesResult, State state, String? sendPath, String? id,  String? title){
+	var formData = convertFormDataEdit(model);   
+    final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
+    ];
+	for(var i = 0; i < model.buttons.length; i++)
+    {
+      buttonChildren.add(ButtonEditSalesWidget(model.buttons[i], context,formKey, controller,sales, postSalesResult, state, sendPath, id,  title, formData ));
+    }
+       return(
+	        buttonChildren 
+	   );
+   } 
+   
+    SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, SubModelController sales,
+  var postSalesResult, State state, String? sendPath, String? id,  String? title ){
+     return(
+	 SpeedDial(
+				//marginRight: 18,
+				//marginBottom: 20,
+				 childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+				animatedIcon: AnimatedIcons.menu_close,
+				animatedIconTheme: IconThemeData(size: 22.0),
+				// this is ignored if animatedIcon is non null
+				// child: Icon(Icons.add),
+				visible: visible!,
+				// If true user is forced to close dial manually
+				// by tapping main button and overlay is not rendered.
+				closeManually: false,
+				curve: Curves.bounceIn,
+				overlayColor: Colors.black,
+				overlayOpacity: 0.5,
+				onOpen: () => print('OPENING DIAL'),
+				onClose: () => print('DIAL CLOSED'),
+				tooltip: 'Speed Dial',
+				heroTag: 'speed-dial-hero-tag',
+				backgroundColor: CurrentTheme.MainAccentColor,
+				foregroundColor: Colors.white,
+				elevation: 8.0,
+				shape: CircleBorder(),
+				children:listButton(context, formKey,controller,sales, postSalesResult, state, sendPath, id,  title )
+	    )
+	 );
+   } 	
+
+
+	  	    Widget editBuyer (State state) {
+	   return(  StringView(
+		value: model.model.buyer_str,
+		caption: 'Buyer',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.buyer_id,
+	  caption: 'Buyer',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.buyer_id_list,
+	  nameenum: model.model.buyer_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.buyer_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editOrder (State state) {
+	   return(  StringView(
+		value: model.model.order_str,
+		caption: 'Order',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.order_id,
+	  caption: 'Order',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.order_id_list,
+	  nameenum: model.model.order_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.order_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editTitle (State state) {
+      return(
+	DisplayNameWidget(
+		value: model.model.title,
+		caption: 'Title',
+		hint: 'Isi dengan Website Anda',
+		required:true,
+		getValue: (String? val) {
+		  state.setState(() {
+			model.model.title = val;
+		  });
+		},
+    ));}
+
+   	    Widget editType (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.type_id,
+	  caption: 'Type',
+	  hint: 'pilih Enum',
+	  required:true,
+	  idenum: model.model.type_list,
+	  nameenum: model.model.type_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.type_id = val;
+		});
+	  },
+	));}
+
+	  	    Widget editProduct (State state) {
+	   return(  StringView(
+		value: model.model.product_str,
+		caption: 'Product',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.product_id,
+	  caption: 'Product',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.product_id_list,
+	  nameenum: model.model.product_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.product_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editProject (State state) {
+	   return(  StringView(
+		value: model.model.project_str,
+		caption: 'Project',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.project_id,
+	  caption: 'Project',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.project_id_list,
+	  nameenum: model.model.project_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.project_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editService (State state) {
+	   return(  StringView(
+		value: model.model.service_str,
+		caption: 'Service',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.service_id,
+	  caption: 'Service',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.service_id_list,
+	  nameenum: model.model.service_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.service_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editBid (State state) {
+	   return(  StringView(
+		value: model.model.bid_str,
+		caption: 'Bid',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.bid_id,
+	  caption: 'Bid',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.bid_id_list,
+	  nameenum: model.model.bid_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.bid_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editIklan (State state) {
+	   return(  StringView(
+		value: model.model.iklan_str,
+		caption: 'Iklan',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.iklan_id,
+	  caption: 'Iklan',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.iklan_id_list,
+	  nameenum: model.model.iklan_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.iklan_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editDate (State state) {
+      return(
+	  DateTimeWidget(
+	  value: model.model.date,
+	  caption: 'Date',
+	  hint: 'isi dengan DateTime? diatas.',
+	  required: true,
+	  getValue:(DateTime val) {
+		state.setState(() {
+		  model.model.date = val;
+		});
+	  },
+	));} 
+
+	  	    Widget editPrice (State state) {
+      return(
+	MoneyWidget(
+	  value: model.model.price,
+	  caption: 'Price',
+	  hint: 'Isi dengan Money Anda',
+	  required:true,
+	  min:'10',
+	  max:'2000000',
+	  getValue: (double? val) {
+		state.setState(() {	
+		  model.model.price = val;
+		});
+	  },
+	));}
+
+   	    Widget editStatus (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.status_id,
+	  caption: 'Status',
+	  hint: 'pilih Enum',
+	  required:true,
+	  idenum: model.model.status_list,
+	  nameenum: model.model.status_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.status_id = val;
+		});
+	  },
+	));}
+
+	  	    Widget editSeller (State state) {
+	   return(  StringView(
+		value: model.model.seller_str,
+		caption: 'Seller',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.seller_id,
+	  caption: 'Seller',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.seller_id_list,
+	  nameenum: model.model.seller_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.seller_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editBuyerPayment (State state) {
+	   return(  StringView(
+		value: model.model.buyer_payment_str,
+		caption: 'Buyer Payment',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.buyer_payment_id,
+	  caption: 'Buyer Payment',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.buyer_payment_id_list,
+	  nameenum: model.model.buyer_payment_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.buyer_payment_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editSellerCredit (State state) {
+	   return(  StringView(
+		value: model.model.seller_credit_str,
+		caption: 'Seller Credit',
+	));		
+    /*  return(
+	  ModelWidget(
+	  value: model.model.seller_credit_id,
+	  caption: 'Seller Credit',
+	  hint: 'pilih Model',
+	  required:true,
+	  idenum: model.model.seller_credit_id_list,
+	  nameenum: model.model.seller_credit_id_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.seller_credit_id = val;
+		});
+	  },
+	));*/
+	}
+
+	  	    Widget editRating (State state) {
+      return(
+	  RatingWidget(
+	  value: model.model.rating,
+	  caption: 'Rating',
+	  hint: 'isi dengan Rating diatas.',
+	  required: true,
+	  getValue:( int?val) {
+		state.setState(() {
+		  model.model.rating = val;
+		});
+	  },
+	));}
+
+	  	    Widget editTestimony (State state) {
+      return(
+	  ArticleWidget(
+	  value: model.model.testimony,
+	  caption: 'Testimony',
+	  hint: 'isi dengan Article Anda',
+	  required: true,
+	  getValue:(String? val) {
+		state.setState(() {
+		  model.model.testimony = val;
+		});
+	  },
+	));}
+	
+}
+
+
+
+
+
+
+
+
+
+  
+

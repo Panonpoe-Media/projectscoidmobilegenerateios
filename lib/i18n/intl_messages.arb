@@ -1,0 +1,21 @@
+{
+  "@@last_modified": "2019-03-27T09:46:00.200720",
+  "browserprojectstitle": "<Browser Projects>",
+  "@browserprojectstitle": {
+    "description": "Title for the Browser Projects",
+    "type": "text",
+    "placeholders": {}
+  },
+  "browseruserstitle": "Browser Users",
+  "@browseruserstitle": {
+    "description": "Title for the Browser Users",
+    "type": "text",
+    "placeholders": {}
+  },
+  "browserservicestitle": "Browser Services",
+  "@browserservicestitle": {
+    "description": "Title for the Browser Services",
+    "type": "text",
+    "placeholders": {}
+  }
+}

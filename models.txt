@@ -1,0 +1,1721 @@
+//-----------------------------------------------------------------------------------------------
+
+----------------------------
+Model UCase: Test
+Model ID: test
+Model Title: Test
+
+- TestId => test_id => Test ID
+- UserName => user_name => User Name
+- Password => password => Password
+- DisplayName => display_name => Display Name
+- Title => title => Title
+- Email => email => Email
+- Model => model_id => Model
+- Enum => enum_id => Enum
+- Address => address => Address
+- Multiline => multiline => Multiline
+- Date => date => Date
+- DateTime => date_time => Date Time
+- Time => time => Time
+- Rating => rating => Rating
+- Number => number => Number
+- Money => money => Money
+- Double => double => Double
+- Boolean => boolean => Boolean
+- Percent => percent => Percent
+- Website => website => Website
+- Article => article => Article
+- InlineTags => inline_tags => Inline Tags
+- Handphone => handphone => Handphone
+- Image => image => Image
+- File => file => File
+- Captcha => captcha => Captcha
+
+----------------------------
+Model UCase: AdminGroup
+Model ID: admin_group
+Model Title: Admin Group
+
+- AdminGroupId => admin_group_id => Admin Group ID
+- GroupName => group_name => Group Name
+- Folder => folder_id => Folder
+- Privileges => privileges => Privileges
+
+----------------------------
+Model UCase: AdminRole
+Model ID: admin_role
+Model Title: Admin Role
+
+- AdminRoleId => admin_role_id => Admin Role ID
+- AdminRoleName => admin_role_name => Admin Role Name
+
+----------------------------
+Model UCase: Admin
+Model ID: admin
+Model Title: Admin
+
+- AdminId => admin_id => Admin ID
+- UserName => user_name => User Name
+- Password => password => Password
+- DisplayName => display_name => Display Name
+- Photo => photo => Photo
+- Group => group_id => Group
+- Role => role_id => Role
+- Active => active => Active
+
+----------------------------
+Model UCase: MessageFolder
+Model ID: message_folder
+Model Title: Message Folder
+
+- MessageFolderId => message_folder_id => Message Folder ID
+- MessageFolderName => message_folder_name => Message Folder Name
+
+----------------------------
+Model UCase: Message
+Model ID: message
+Model Title: Message
+
+- MessageId => message_id => Message ID
+- Owner => owner_id => Owner
+- Folder => folder_id => Folder
+- Sender => sender_id => Sender
+- Receiver => receiver => Receiver
+- DateSent => date_sent => Date Sent
+- DateRead => date_read => Date Read
+- Subject => subject => Subject
+- Content => content => Content
+- Attachment => attachment => Attachment
+- Read => read => Read
+
+----------------------------
+Model UCase: TaskStatus
+Model ID: task_status
+Model Title: Task Status
+
+- TaskStatusId => task_status_id => Task Status ID
+- TaskStatusName => task_status_name => Task Status Name
+
+----------------------------
+Model UCase: TaskAssignment
+Model ID: task_assignment
+Model Title: Task Assignment
+
+- TaskAssignmentId => task_assignment_id => Task Assignment ID
+- GivenBy => given_by_id => Given By
+- GivenTo => given_to => Given To
+- Date => date => Date
+- Title => title => Title
+- Description => description => Description
+- Attachment => attachment => Attachment
+- TargetFinish => target_finish => Target Finish
+
+----------------------------
+Model UCase: Tasks
+Model ID: tasks
+Model Title: Tasks
+
+- TasksId => tasks_id => Tasks ID
+- Assignment => assignment_id => Assignment
+- GivenBy => given_by_id => Given By
+- GivenTo => given_to_id => Given To
+- Date => date => Date
+- Title => title => Title
+- Description => description => Description
+- Attachment => attachment => Attachment
+- Status => status_id => Status
+- TargetFinish => target_finish => Target Finish
+- Progress => progress => Progress
+- DateAcknowledged => date_acknowledged => Date Acknowledged
+- DateFinished => date_finished => Date Finished
+- Comment => comment => Comment
+- ResultFile => result_file => Result File
+
+----------------------------
+Model UCase: Document
+Model ID: document
+Model Title: Document
+
+- DocumentId => document_id => Document ID
+- Owner => owner_id => Owner
+- DatePut => date_put => Date Put
+- Title => title => Title
+- Description => description => Description
+- File => file => File
+
+----------------------------
+Model UCase: News
+Model ID: news
+Model Title: News
+
+- NewsId => news_id => News ID
+- Writer => writer_id => Writer
+- DateWritten => date_written => Date Written
+- Title => title => Title
+- Image => image => Image
+- Content => content => Content
+
+----------------------------
+Model UCase: ArticleCategories
+Model ID: article_categories
+Model Title: Article Categories
+
+- ArticleCategoriesId => article_categories_id => Article Categories ID
+- ArticleCategoriesName => article_categories_name => Article Categories Name
+
+----------------------------
+Model UCase: Article
+Model ID: article
+Model Title: Article
+
+- ArticleId => article_id => Article ID
+- Category => category_id => Category
+- Author => author_id => Author
+- Title => title => Title
+- Published => published => Published
+- PublishedDate => published_date => Published Date
+- Teaser => teaser => Teaser
+- Content => content => Content
+- Keywords => keywords => Keywords
+- Image => image => Image
+- Files => files => Files
+
+----------------------------
+Model UCase: LandingType
+Model ID: landing_type
+Model Title: Landing Type
+
+- LandingTypeId => landing_type_id => Landing Type ID
+- LandingTypeName => landing_type_name => Landing Type Name
+
+----------------------------
+Model UCase: LandingPage
+Model ID: landing_page
+Model Title: Landing Page
+
+- LandingPageId => landing_page_id => Landing Page ID
+- Type => type_id => Type
+- Title => title => Title
+- Published => published => Published
+- Teaser => teaser => Teaser
+- Content => content => Content
+- Keywords => keywords => Keywords
+- Image => image => Image
+
+----------------------------
+Model UCase: FeatureGroup
+Model ID: feature_group
+Model Title: Feature Group
+
+- FeatureGroupId => feature_group_id => Feature Group ID
+- GroupName => group_name => Group Name
+
+----------------------------
+Model UCase: Feature
+Model ID: feature
+Model Title: Feature
+
+- FeatureId => feature_id => Feature ID
+- Group => group_id => Group
+- Title => title => Title
+- Description => description => Description
+- Image => image => Image
+
+----------------------------
+Model UCase: PublishStatus
+Model ID: publish_status
+Model Title: Publish Status
+
+- PublishStatusId => publish_status_id => Publish Status ID
+- PublishStatusName => publish_status_name => Publish Status Name
+
+----------------------------
+Model UCase: ContactForm
+Model ID: contact_form
+Model Title: Contact Form
+
+- ContactFormId => contact_form_id => Contact Form ID
+- YourName => your_name => Your Name
+- EmailAddress => email_address => Email Address
+- Question => question => Question
+- Date => date => Date
+- IpAddress => ip_address => IP Address
+- Replied => replied => Replied
+- Status => status_id => Status
+- Reply => reply => Reply
+- RepliedBy => replied_by_id => Replied By
+- RepliedDate => replied_date => Replied Date
+- RepliedIp => replied_ip => Replied IP
+- Captcha => captcha => Captcha
+
+----------------------------
+Model UCase: ContactUser
+Model ID: contact_user
+Model Title: Contact User
+
+- ContactUserId => contact_user_id => Contact User ID
+- Date => date => Date
+- User => user_id => User
+- Admin => admin_id => Admin
+- Subject => subject => Subject
+- Message => message => Message
+- SmsMessage => sms_message => SMS Message
+
+----------------------------
+Model UCase: Testimony
+Model ID: testimony
+Model Title: Testimony
+
+- TestimonyId => testimony_id => Testimony ID
+- User => user_id => User
+- Project => project_id => Project
+- Date => date => Date
+- Feedback => feedback => Feedback
+- Published => published => Published
+- Status => status_id => Status
+- PublishedDate => published_date => Published Date
+
+----------------------------
+Model UCase: DeliveryStatus
+Model ID: delivery_status
+Model Title: Delivery Status
+
+- DeliveryStatusId => delivery_status_id => Delivery Status ID
+- DeliveryStatusName => delivery_status_name => Delivery Status Name
+
+----------------------------
+Model UCase: Mail
+Model ID: mail
+Model Title: Mail
+
+- MailId => mail_id => Mail ID
+- Date => date => Date
+- Priority => priority => Priority
+- Template => template => Template
+- Subject => subject => Subject
+- Receiver => receiver => Receiver
+- Status => status_id => Status
+- Vars => vars => Vars
+- ReplyTo => reply_to => Reply To
+
+----------------------------
+Model UCase: Sms
+Model ID: sms
+Model Title: Sms
+
+- SmsId => sms_id => Sms ID
+- Date => date => Date
+- Priority => priority => Priority
+- Receiver => receiver => Receiver
+- Handphone => handphone => Handphone
+- Template => template => Template
+- Content => content => Content
+- Status => status_id => Status
+
+----------------------------
+Model UCase: WhatsappStatus
+Model ID: whatsapp_status
+Model Title: Whatsapp Status
+
+- WhatsappStatusId => whatsapp_status_id => Whatsapp Status ID
+- WhatsappStatusName => whatsapp_status_name => Whatsapp Status Name
+
+----------------------------
+Model UCase: WhatsappNumber
+Model ID: whatsapp_number
+Model Title: Whatsapp Number
+
+- WhatsappNumberId => whatsapp_number_id => Whatsapp Number ID
+- Handphone => handphone => Handphone
+- ActiveStatus => active_status_id => Active Status
+- LastCheck => last_check => Last Check
+
+----------------------------
+Model UCase: WhatsappQueue
+Model ID: whatsapp_queue
+Model Title: Whatsapp Queue
+
+- WhatsappQueueId => whatsapp_queue_id => Whatsapp Queue ID
+- Date => date => Date
+- Handphone => handphone => Handphone
+- Content => content => Content
+
+----------------------------
+Model UCase: Bookmark
+Model ID: bookmark
+Model Title: Bookmark
+
+- BookmarkId => bookmark_id => Bookmark ID
+- User => user_id => User
+- Title => title => Title
+- Url => url => URL
+- Md5 => md5 => MD5
+- Logo => logo => Logo
+- DateAdded => date_added => Date Added
+
+----------------------------
+Model UCase: Group
+Model ID: group
+Model Title: Group
+
+- GroupId => group_id => Group ID
+- GroupName => group_name => Group Name
+- Folder => folder_id => Folder
+- Privileges => privileges => Privileges
+
+----------------------------
+Model UCase: AccountStatus
+Model ID: account_status
+Model Title: Account Status
+
+- AccountStatusId => account_status_id => Account Status ID
+- AccountStatusName => account_status_name => Account Status Name
+
+----------------------------
+Model UCase: AccountType
+Model ID: account_type
+Model Title: Account Type
+
+- AccountTypeId => account_type_id => Account Type ID
+- AccountTypeName => account_type_name => Account Type Name
+
+----------------------------
+Model UCase: StatusMarital
+Model ID: status_marital
+Model Title: Status Marital
+
+- StatusMaritalId => status_marital_id => Status Marital ID
+- StatusMaritalName => status_marital_name => Status Marital Name
+
+----------------------------
+Model UCase: JenisKelamin
+Model ID: jenis_kelamin
+Model Title: Jenis Kelamin
+
+- JenisKelaminId => jenis_kelamin_id => Jenis Kelamin ID
+- JenisKelaminName => jenis_kelamin_name => Jenis Kelamin Name
+
+----------------------------
+Model UCase: User
+Model ID: user
+Model Title: User
+
+- UserId => user_id => User ID
+- UserName => user_name => User Name
+- Group => group_id => Group
+- Email => email => Email
+- Password => password => Password
+- Auth => auth => Auth
+- AccountStatus => account_status_id => Account Status
+- AccountType => account_type_id => Account Type
+- DateRegistered => date_registered => Date Registered
+- LastLogin => last_login => Last Login
+- LastSeen => last_seen => Last Seen
+- Online => online => Online
+- LastOnlineMark => last_online_mark => Last Online Mark
+- OnlineHours => online_hours => Online Hours
+- NomorKtp => nomor_ktp => Nomor KTP
+- ScanKtp => scan_ktp => Scan KTP
+- NomorSiup => nomor_siup => Nomor SIUP
+- ScanSiup => scan_siup => Scan SIUP
+- Npwp => npwp => NPWP
+- StatusMarital => status_marital_id => Status Marital
+- JumlahTanggungan => jumlah_tanggungan => Jumlah Tanggungan
+- PersonalData => personal_data => Personal Data
+- Photo => photo => Photo
+- DisplayName => display_name => Display Name
+- BirthDate => birth_date => Birth Date
+- BirthCode => birth_code => Birth Code
+- JenisKelamin => jenis_kelamin_id => Jenis Kelamin
+- Address => address => Address
+- Country => country_id => Country
+- Provinsi => provinsi_id => Provinsi
+- Kabupaten => kabupaten_id => Kabupaten
+- Kecamatan => kecamatan_id => Kecamatan
+- Kelurahan => kelurahan_id => Kelurahan
+- PostCode => post_code => Post Code
+- Handphone => handphone => Handphone
+- SelfIntroduction => self_introduction => Self Introduction
+- Website => website => Website
+- Language => language_id => Language
+- Skills => skills => Skills
+- FullName => full_name => Full Name
+- Captcha => captcha => Captcha
+- SecureCode => secure_code => Secure Code
+- OldPassword => old_password => Old Password
+- NewEmail => new_email => New Email
+- YourEmail => your_email => Your Email
+- InvitationMessage => invitation_message => Invitation Message
+- FinancialData => financial_data => Financial Data
+- Bank => bank_id => Bank
+- Branch => branch => Branch
+- City => city => City
+- AccountNumber => account_number => Account Number
+- AccountName => account_name => Account Name
+- CutOffPeriod => cutoff_period_id => Cut-off Period
+- CutOffAmount => cutoff_amount => Cut-off Amount
+- DepositAmount => deposit_amount => Deposit Amount
+- Statistics => statistics => Statistics
+- MoneyEarned => money_earned => Money Earned
+- MoneySpent => money_spent => Money Spent
+- AvailableBalance => available_balance => Available Balance
+- WithheldBalance => withheld_balance => Withheld Balance
+- AdminNotes => admin_notes => Admin Notes
+- PestaPoint => pesta_point => Pesta Point
+- WorkerRating => worker_rating => Worker Rating
+- WorkerRanking => worker_ranking => Worker Ranking
+- WorkerPoint => worker_point => Worker Point
+- WorkerRatingNum => worker_rating_num => Worker Rating Num
+- WorkerRatingSum => worker_rating_sum => Worker Rating Sum
+- WorkerRatingDiv => worker_rating_div => Worker Rating Div
+- OwnerRating => owner_rating => Owner Rating
+- OwnerRanking => owner_ranking => Owner Ranking
+- OwnerPoint => owner_point => Owner Point
+- OwnerRatingNum => owner_rating_num => Owner Rating Num
+- OwnerRatingSum => owner_rating_sum => Owner Rating Sum
+- OwnerRatingDiv => owner_rating_div => Owner Rating Div
+- SellerRating => seller_rating => Seller Rating
+- SellerRanking => seller_ranking => Seller Ranking
+- SellerPoint => seller_point => Seller Point
+- SellerRatingNum => seller_rating_num => Seller Rating Num
+- SellerRatingSum => seller_rating_sum => Seller Rating Sum
+- SellerRatingDiv => seller_rating_div => Seller Rating Div
+- BuyerRating => buyer_rating => Buyer Rating
+- BuyerRanking => buyer_ranking => Buyer Ranking
+- BuyerPoint => buyer_point => Buyer Point
+- BuyerRatingNum => buyer_rating_num => Buyer Rating Num
+- BuyerRatingSum => buyer_rating_sum => Buyer Rating Sum
+- BuyerRatingDiv => buyer_rating_div => Buyer Rating Div
+- AffiliateRating => affiliate_rating => Affiliate Rating
+- AffiliateRanking => affiliate_ranking => Affiliate Ranking
+- AffiliatePoint => affiliate_point => Affiliate Point
+- AffiliateRatingNum => affiliate_rating_num => Affiliate Rating Num
+- AffiliateRatingSum => affiliate_rating_sum => Affiliate Rating Sum
+- AffiliateRatingDiv => affiliate_rating_div => Affiliate Rating Div
+- ProjectsWon => projects_won => Projects Won
+- ProjectsWonCumulative => projects_won_cumulative => Projects Won Cumulative
+- ProjectsOwned => projects_owned => Projects Owned
+- ProjectsOwnedCumulative => projects_owned_cumulative => Projects Owned Cumulative
+- ProjectsNoAction => projects_noaction => Projects No-Action
+- ProjectsCanceled => projects_canceled => Projects Canceled
+- MissedPayment => missed_payment => Missed Payment
+- ProjectsCompleted => projects_completed => Projects Completed
+- ProjectsArbitrated => projects_arbitrated => Projects Arbitrated
+- ProjectsWonInArbitration => projects_arbit_won => Projects Won in Arbitration
+- ProjectsLostInArbitration => projects_arbit_lost => Projects Lost in Arbitration
+- CurrentProjects => current_projects => Current Projects
+- MissedWeeklyReport => missed_weekly_report => Missed Weekly Report
+- ProductSold => product_sold => Product Sold
+- ProductSoldCumulative => product_sold_cumulative => Product Sold Cumulative
+- ProductBought => product_bought => Product Bought
+- ProductBoughtCumulative => product_bought_cumulative => Product Bought Cumulative
+- BidCount => bid_count => Bid Count
+- PostCount => post_count => Post Count
+- WorkQuality => work_quality => Work Quality
+- WorkQualityNum => work_quality_num => Work Quality Num
+- WorkQualitySum => work_quality_sum => Work Quality Sum
+- WorkQualityDiv => work_quality_div => Work Quality Div
+- Expertise => expertise => Expertise
+- ExpertiseNum => expertise_num => Expertise Num
+- ExpertiseSum => expertise_sum => Expertise Sum
+- ExpertiseDiv => expertise_div => Expertise Div
+- WorkerCommunication => worker_communication => Worker Communication
+- WorkerCommunicationNum => worker_communication_num => Worker Communication Num
+- WorkerCommunicationSum => worker_communication_sum => Worker Communication Sum
+- WorkerCommunicationDiv => worker_communication_div => Worker Communication Div
+- WorkerProfessionalism => worker_professionalism => Worker Professionalism
+- WorkerProfessionalismNum => worker_professionalism_num => Worker Professionalism Num
+- WorkerProfessionalismSum => worker_professionalism_sum => Worker Professionalism Sum
+- WorkerProfessionalismDiv => worker_professionalism_div => Worker Professionalism Div
+- Clarity => clarity => Clarity
+- ClarityNum => clarity_num => Clarity Num
+- ClaritySum => clarity_sum => Clarity Sum
+- ClarityDiv => clarity_div => Clarity Div
+- Friendliness => friendliness => Friendliness
+- FriendlinessNum => friendliness_num => Friendliness Num
+- FriendlinessSum => friendliness_sum => Friendliness Sum
+- FriendlinessDiv => friendliness_div => Friendliness Div
+- OwnerCommunication => owner_communication => Owner Communication
+- OwnerCommunicationNum => owner_communication_num => Owner Communication Num
+- OwnerCommunicationSum => owner_communication_sum => Owner Communication Sum
+- OwnerCommunicationDiv => owner_communication_div => Owner Communication Div
+- OwnerProfessionalism => owner_professionalism => Owner Professionalism
+- OwnerProfessionalismNum => owner_professionalism_num => Owner Professionalism Num
+- OwnerProfessionalismSum => owner_professionalism_sum => Owner Professionalism Sum
+- OwnerProfessionalismDiv => owner_professionalism_div => Owner Professionalism Div
+- ProductQuality => product_quality => Product Quality
+- ProductQualityNum => product_quality_num => Product Quality Num
+- ProductQualitySum => product_quality_sum => Product Quality Sum
+- ProductQualityDiv => product_quality_div => Product Quality Div
+- ServiceQuality => service_quality => Service Quality
+- ServiceQualityNum => service_quality_num => Service Quality Num
+- ServiceQualitySum => service_quality_sum => Service Quality Sum
+- ServiceQualityDiv => service_quality_div => Service Quality Div
+- SellerCommunication => seller_communication => Seller Communication
+- SellerCommunicationNum => seller_communication_num => Seller Communication Num
+- SellerCommunicationSum => seller_communication_sum => Seller Communication Sum
+- SellerCommunicationDiv => seller_communication_div => Seller Communication Div
+- SellerProfessionalism => seller_professionalism => Seller Professionalism
+- SellerProfessionalismNum => seller_professionalism_num => Seller Professionalism Num
+- SellerProfessionalismSum => seller_professionalism_sum => Seller Professionalism Sum
+- SellerProfessionalismDiv => seller_professionalism_div => Seller Professionalism Div
+- Referer => referer_id => Referer
+- RefererExpires => referer_expires => Referer Expires
+- ReferalThisMonth => referal_this_month => Referal This Month
+- CookiesThisMonth => cookies_this_month => Cookies This Month
+- PremiumAffiliate => premium_affiliate => Premium Affiliate
+- ReferedUsers => refered_users => Refered Users
+- ReferalEarnings => referal_earnings => Referal Earnings
+- AffiliateId => affiliate_id => Affiliate ID
+- LastAnnouncedProject => last_announced_project => Last Announced Project
+- NotifCount => notif_count => Notif Count
+- NotifyMeNewProjects => notify_projects => Notify Me New Projects
+- LostArbitrationRecently => lost_arbitration_recently => Lost Arbitration Recently
+- Coupon => coupon => Coupon
+
+----------------------------
+Model UCase: UserRanking
+Model ID: user_ranking
+Model Title: User Ranking
+
+- UserRankingId => user_ranking_id => User Ranking ID
+- User => user_id => User
+- CategPoint28 => categ_point_28 => Categ Point 28
+- CategPoint24 => categ_point_24 => Categ Point 24
+- CategPoint16 => categ_point_16 => Categ Point 16
+- CategPoint29 => categ_point_29 => Categ Point 29
+- CategPoint2 => categ_point_2 => Categ Point 2
+- CategPoint31 => categ_point_31 => Categ Point 31
+- CategPoint8 => categ_point_8 => Categ Point 8
+- CategPoint18 => categ_point_18 => Categ Point 18
+- CategPoint10 => categ_point_10 => Categ Point 10
+- CategPoint4 => categ_point_4 => Categ Point 4
+- CategPoint26 => categ_point_26 => Categ Point 26
+- CategPoint14 => categ_point_14 => Categ Point 14
+- CategPoint6 => categ_point_6 => Categ Point 6
+- CategPoint12 => categ_point_12 => Categ Point 12
+- CategPoint22 => categ_point_22 => Categ Point 22
+- CategRanking28 => categ_ranking_28 => Categ Ranking 28
+- CategRanking24 => categ_ranking_24 => Categ Ranking 24
+- CategRanking16 => categ_ranking_16 => Categ Ranking 16
+- CategRanking29 => categ_ranking_29 => Categ Ranking 29
+- CategRanking2 => categ_ranking_2 => Categ Ranking 2
+- CategRanking31 => categ_ranking_31 => Categ Ranking 31
+- CategRanking8 => categ_ranking_8 => Categ Ranking 8
+- CategRanking18 => categ_ranking_18 => Categ Ranking 18
+- CategRanking10 => categ_ranking_10 => Categ Ranking 10
+- CategRanking4 => categ_ranking_4 => Categ Ranking 4
+- CategRanking26 => categ_ranking_26 => Categ Ranking 26
+- CategRanking14 => categ_ranking_14 => Categ Ranking 14
+- CategRanking6 => categ_ranking_6 => Categ Ranking 6
+- CategRanking12 => categ_ranking_12 => Categ Ranking 12
+- CategRanking22 => categ_ranking_22 => Categ Ranking 22
+
+----------------------------
+Model UCase: ServiceRanking
+Model ID: service_ranking
+Model Title: Service Ranking
+
+- ServiceRankingId => service_ranking_id => Service Ranking ID
+- Service => service_id => Service
+- CategPoint28 => categ_point_28 => Categ Point 28
+- CategPoint24 => categ_point_24 => Categ Point 24
+- CategPoint16 => categ_point_16 => Categ Point 16
+- CategPoint29 => categ_point_29 => Categ Point 29
+- CategPoint2 => categ_point_2 => Categ Point 2
+- CategPoint31 => categ_point_31 => Categ Point 31
+- CategPoint8 => categ_point_8 => Categ Point 8
+- CategPoint18 => categ_point_18 => Categ Point 18
+- CategPoint10 => categ_point_10 => Categ Point 10
+- CategPoint4 => categ_point_4 => Categ Point 4
+- CategPoint26 => categ_point_26 => Categ Point 26
+- CategPoint14 => categ_point_14 => Categ Point 14
+- CategPoint6 => categ_point_6 => Categ Point 6
+- CategPoint12 => categ_point_12 => Categ Point 12
+- CategPoint22 => categ_point_22 => Categ Point 22
+- CategRanking28 => categ_ranking_28 => Categ Ranking 28
+- CategRanking24 => categ_ranking_24 => Categ Ranking 24
+- CategRanking16 => categ_ranking_16 => Categ Ranking 16
+- CategRanking29 => categ_ranking_29 => Categ Ranking 29
+- CategRanking2 => categ_ranking_2 => Categ Ranking 2
+- CategRanking31 => categ_ranking_31 => Categ Ranking 31
+- CategRanking8 => categ_ranking_8 => Categ Ranking 8
+- CategRanking18 => categ_ranking_18 => Categ Ranking 18
+- CategRanking10 => categ_ranking_10 => Categ Ranking 10
+- CategRanking4 => categ_ranking_4 => Categ Ranking 4
+- CategRanking26 => categ_ranking_26 => Categ Ranking 26
+- CategRanking14 => categ_ranking_14 => Categ Ranking 14
+- CategRanking6 => categ_ranking_6 => Categ Ranking 6
+- CategRanking12 => categ_ranking_12 => Categ Ranking 12
+- CategRanking22 => categ_ranking_22 => Categ Ranking 22
+
+----------------------------
+Model UCase: Portofolio
+Model ID: portofolio
+Model Title: Portofolio
+
+- PortofolioId => portofolio_id => Portofolio ID
+- User => user_id => User
+- Year => year => Year
+- Description => description => Description
+- Link => link => Link
+- Image => image => Image
+
+----------------------------
+Model UCase: Buddy
+Model ID: buddy
+Model Title: Buddy
+
+- BuddyId => buddy_id => Buddy ID
+- User => user_id => User
+- Fav => fav_id => Fav
+
+----------------------------
+Model UCase: Friends
+Model ID: friends
+Model Title: Friends
+
+- FriendsId => friends_id => Friends ID
+- Fromid => fromid => fromid
+- Toid => toid => toid
+- Status => status => status
+- ProjectId => project_id => project_id
+
+----------------------------
+Model UCase: NotificationType
+Model ID: notification_type
+Model Title: Notification Type
+
+- NotificationTypeId => notification_type_id => Notification Type ID
+- NotificationTypeName => notification_type_name => Notification Type Name
+
+----------------------------
+Model UCase: Notification
+Model ID: notification
+Model Title: Notification
+
+- NotificationId => notification_id => Notification ID
+- User => user_id => User
+- Type => type_id => Type
+- From => from_id => From
+- Date => date => Date
+- Message => message => Message
+- Read => read => Read
+
+----------------------------
+Model UCase: ExtractQueue
+Model ID: extract_queue
+Model Title: Extract Queue
+
+- ExtractQueueId => extract_queue_id => Extract Queue ID
+- User => user_id => User
+- EmailAddress => email_address => Email Address
+- Password => password => Password
+- RegisteredDate => registered_date => Registered Date
+- ExtractedDate => extracted_date => Extracted Date
+- IsDone => is_done => Is Done
+
+----------------------------
+Model UCase: Invitation
+Model ID: invitation
+Model Title: Invitation
+
+- InvitationId => invitation_id => Invitation ID
+- Name => name => Name
+- EmailAddress => email_address => Email Address
+- LastSent => last_sent => Last Sent
+- IsValid => is_valid => Is Valid
+- Selected => selected => Selected
+- InvitedBy => invited_by_id => Invited By
+
+----------------------------
+Model UCase: ProjectCategory
+Model ID: project_category
+Model Title: Project Category
+
+- ProjectCategoryId => project_category_id => Project Category ID
+- Name => name => Name
+- MenuOrder => menu_order => Menu Order
+- Count => count => Count
+
+----------------------------
+Model UCase: ProductCategory
+Model ID: product_category
+Model Title: Product Category
+
+- ProductCategoryId => product_category_id => Product Category ID
+- Name => name => Name
+- MenuOrder => menu_order => Menu Order
+- Count => count => Count
+
+----------------------------
+Model UCase: ServiceCategory
+Model ID: service_category
+Model Title: Service Category
+
+- ServiceCategoryId => service_category_id => Service Category ID
+- Name => name => Name
+- MenuOrder => menu_order => Menu Order
+- Count => count => Count
+
+----------------------------
+Model UCase: JobCategory
+Model ID: job_category
+Model Title: Job Category
+
+- JobCategoryId => job_category_id => Job Category ID
+- Name => name => Name
+- MenuOrder => menu_order => Menu Order
+- Count => count => Count
+
+----------------------------
+Model UCase: ProjectStatus
+Model ID: project_status
+Model Title: Project Status
+
+- ProjectStatusId => project_status_id => Project Status ID
+- ProjectStatusName => project_status_name => Project Status Name
+
+----------------------------
+Model UCase: ProjectType
+Model ID: project_type
+Model Title: Project Type
+
+- ProjectTypeId => project_type_id => Project Type ID
+- ProjectTypeName => project_type_name => Project Type Name
+
+----------------------------
+Model UCase: ProjectClass
+Model ID: project_class
+Model Title: Project Class
+
+- ProjectClassId => project_class_id => Project Class ID
+- ProjectClassName => project_class_name => Project Class Name
+
+----------------------------
+Model UCase: ProjectEnding
+Model ID: project_ending
+Model Title: Project Ending
+
+- ProjectEndingId => project_ending_id => Project Ending ID
+- ProjectEndingName => project_ending_name => Project Ending Name
+
+----------------------------
+Model UCase: ProjectTemplate
+Model ID: project_template
+Model Title: Project Template
+
+- ProjectTemplateId => project_template_id => Project Template ID
+- Category => category_id => Category
+- Title => title => Title
+- Description => description => Description
+- FinishDays => finish_days => Finish Days
+- ProjectClass => project_class_id => Project Class
+- PublishedBudget => published_budget => Published Budget
+- Channels => channels => Channels
+
+----------------------------
+Model UCase: Project
+Model ID: project
+Model Title: Project
+
+- ProjectId => project_id => Project ID
+- Owner => owner_id => Owner
+- Category => category_id => Category
+- Title => title => Title
+- Description => description => Description
+- ShortDescription => short_description => Short Description
+- Attachments => attachments => Attachments
+- FinishDays => finish_days => Finish Days
+- SearchText => search_text => Search Text
+- Channels => channels => Channels
+- LastBump => last_bump => Last Bump
+- SelectDeadline => select_deadline => Select Deadline
+- StartDate => start_date => Start Date
+- FinishDeadline => finish_deadline => Finish Deadline
+- FinishDate => finish_date => Finish Date
+- ClosedDate => closed_date => Closed Date
+- BidCount => bid_count => Bid Count
+- Progress => progress => Progress
+- ProjectStatus => project_status_id => Project Status
+- ProjectEnding => project_ending_id => Project Ending
+- ProjectType => project_type_id => Project Type
+- ProjectClass => project_class_id => Project Class
+- PublishedBudget => published_budget => Published Budget
+- BudgetRange => budget_range => Budget Range
+- FeePercent => fee_percent => Fee Percent
+- Service => service_id => Service
+- PrivateWorker => private_worker_id => Private Worker
+- InvitedUsers => invited_users => Invited Users
+- AcceptedBid => accepted_bid_id => Accepted Bid
+- AcceptedWorker => accepted_worker_id => Accepted Worker
+- AcceptedBudget => accepted_budget => Accepted Budget
+- AcceptedWork => accepted_work_id => Accepted Work
+- AcceptedDate => accepted_date => Accepted Date
+- AvailableBudget => available_budget => Available Budget
+- NeedWeeklyReport => need_weekly_report => Need Weekly Report
+- WeeklyReportNeeded => weekly_report_needed => Weekly Report Needed
+- WeeklyReportPosted => weekly_report_posted => Weekly Report Posted
+- DeadlinePassedSent => deadline_passed_sent => Deadline Passed Sent
+- DeadlineApproachingSent => deadline_approaching_sent => Deadline Approaching sent
+- RatingForWorker => rating_for_worker => Rating For Worker
+- WorkQuality => work_quality => Work Quality
+- Expertise => expertise => Expertise
+- WorkerCommunication => worker_communication => Worker Communication
+- WorkerProfessionalism => worker_professionalism => Worker Professionalism
+- WorkerRating => worker_rating => Worker Rating
+- WorkerRatingNum => worker_rating_num => Worker Rating Num
+- WorkerFeedback => worker_feedback => Worker Feedback
+- RatingForOwner => rating_for_owner => Rating For Owner
+- Clarity => clarity => Clarity
+- Friendliness => friendliness => Friendliness
+- OwnerCommunication => owner_communication => Owner Communication
+- OwnerProfessionalism => owner_professionalism => Owner Professionalism
+- OwnerRating => owner_rating => Owner Rating
+- OwnerRatingNum => owner_rating_num => Owner Rating Num
+- OwnerFeedback => owner_feedback => Owner Feedback
+- OwnerSignatureIp => owner_signature_ip => Owner Signature IP
+- OwnerSignatureDate => owner_signature_date => Owner Signature Date
+- WorkerSignatureIp => worker_signature_ip => Worker Signature IP
+- WorkerSignatureDate => worker_signature_date => Worker Signature Date
+- OwnerEscrow => owner_escrow_id => Owner Escrow
+- WorkerCredit => worker_credit_id => Worker Credit
+- Arbitration => arbitration_id => Arbitration
+- OwnerCredit => owner_credit_id => Owner Credit
+- RegisteredBy => registered_by_id => Registered By
+- RegisteredDate => registered_date => Registered Date
+- RegisteredFromIp => registered_from_ip => Registered From IP
+- CanceledBy => canceled_by_id => Canceled By
+- CanceledDate => canceled_date => Canceled Date
+- CanceledFromIp => canceled_from_ip => Canceled From IP
+- PublishedBy => published_by_id => Published By
+- PublishedDate => published_date => Published Date
+- PublishedFromIp => published_from_ip => Published From IP
+- RejectedBy => rejected_by_id => Rejected By
+- RejectedDate => rejected_date => Rejected Date
+- RejectedFromIp => rejected_from_ip => Rejected From IP
+- AdminNote => admin_note => Admin Note
+- Announced => announced => Announced
+- YourWishes => your_wishes => Your Wishes
+- ExtendDeadlineDays => extend_deadline_days => Extend Deadline Days
+- Testimony => testimony => Testimony
+- PickUserName => pick_user_name => Pick User Name
+- EnterEmailAddress => enter_email_address => Enter Email Address
+- Handphone => handphone => Handphone
+- BroadcastMessage => broadcast_message => Broadcast Message
+- AttachFile => attach_file => Attach File
+- AutomaticSendToNewBidder => automatic_send_to_new_bidder => Automatic Send to New Bidder
+- IsSystemMessage => is_system_message => Is System Message
+- AdminNotes => admin_notes => Admin Notes
+
+----------------------------
+Model UCase: ArbitrationStatus
+Model ID: arbitration_status
+Model Title: Arbitration Status
+
+- ArbitrationStatusId => arbitration_status_id => Arbitration Status ID
+- ArbitrationStatusName => arbitration_status_name => Arbitration Status Name
+
+----------------------------
+Model UCase: ArbitrationType
+Model ID: arbitration_type
+Model Title: Arbitration Type
+
+- ArbitrationTypeId => arbitration_type_id => Arbitration Type ID
+- ArbitrationTypeName => arbitration_type_name => Arbitration Type Name
+
+----------------------------
+Model UCase: Arbitration
+Model ID: arbitration
+Model Title: Arbitration
+
+- ArbitrationId => arbitration_id => Arbitration ID
+- Project => project_id => Project
+- Status => status_id => Status
+- StatusDate => status_date => Status Date
+- Type => type_id => Type
+- Plaintiff => plaintiff_id => Plaintiff
+- PlaintiffDescription => plaintiff_description => Plaintiff Description
+- PlaintiffWishes => plaintiff_wishes => Plaintiff Wishes
+- PlaintiffHasOffer => plaintiff_has_offer => Plaintiff Has Offer
+- PlaintiffOfferForWorker => plaintiff_offer_for_worker => Plaintiff Offer For Worker
+- PlaintiffOfferForOwner => plaintiff_offer_for_owner => Plaintiff Offer For Owner
+- PlaintiffResponseDate => plaintiff_response_date => Plaintiff Response Date
+- PlaintiffIp => plaintiff_ip => Plaintiff IP
+- Defendant => defendant_id => Defendant
+- DefendantDescription => defendant_description => Defendant Description
+- DefendantWishes => defendant_wishes => Defendant Wishes
+- DefendantHasOffer => defendant_has_offer => Defendant Has Offer
+- DefendantOfferForWorker => defendant_offer_for_worker => Defendant Offer For Worker
+- DefendantOfferForOwner => defendant_offer_for_owner => Defendant Offer For Owner
+- DefendantResponseDate => defendant_response_date => Defendant Response Date
+- DefendantLastStatus => defendant_last_status_id => Defendant Last Status
+- DefendantIp => defendant_ip => Defendant IP
+- RequestedDate => requested_date => Requested Date
+- RequestedBy => requested_by_id => Requested By
+- RequestedIp => requested_ip => Requested IP
+- DecidedDate => decided_date => Decided Date
+- DecidedBy => decided_by_id => Decided By
+- DecidedIp => decided_ip => Decided IP
+- CanceledDate => canceled_date => Canceled Date
+- CanceledBy => canceled_by_id => Canceled By
+- CanceledIp => canceled_ip => Canceled IP
+- Arbitrator2 => arbitrator_2_id => Arbitrator 2
+- Arbitrator3 => arbitrator_3_id => Arbitrator 3
+- OwnerRating => owner_rating => Owner Rating
+- OwnerPoint => owner_point => Owner Point
+- OwnerPointBase => owner_point_base_id => Owner Point Base
+- OwnerAmount => owner_amount => Owner Amount
+- OwnerPercentage => owner_percentage => Owner Percentage
+- WorkerRating => worker_rating => Worker Rating
+- WorkerPoint => worker_point => Worker Point
+- WorkerPointBase => worker_point_base_id => Worker Point Base
+- WorkerAmount => worker_amount => Worker Amount
+- WorkerPercentage => worker_percentage => Worker Percentage
+- Analysis => analysis => Analysis
+- ProjectTitle => project_title => Project Title
+- ProjectOwner => project_owner => Project Owner
+- ProjectWorker => project_worker => Project Worker
+- Budget => budget => Budget
+- ProblemDescription => problem_description => Problem Description
+- YourWishes => your_wishes => Your Wishes
+- YourOffer => your_offer => Your Offer
+- WorkerReceives => worker_receives => Worker Receives
+- OwnerReceives => owner_receives => Owner Receives
+
+----------------------------
+Model UCase: Rating
+Model ID: rating
+Model Title: Rating
+
+- RatingId => rating_id => Rating ID
+- Label => label => Label
+- Value => value => Value
+
+----------------------------
+Model UCase: PostType
+Model ID: post_type
+Model Title: Post Type
+
+- PostTypeId => post_type_id => Post Type ID
+- PostTypeName => post_type_name => Post Type Name
+
+----------------------------
+Model UCase: Post
+Model ID: post
+Model Title: Post
+
+- PostId => post_id => Post ID
+- Project => project_id => Project
+- Thread => thread_id => Thread
+- User => user_id => User
+- PostType => post_type_id => Post Type
+- PostDate => post_date => Post Date
+- BidAmount => bid_amount => Bid Amount
+- Message => message => Message
+- Attachments => attachments => Attachments
+- ReadByOwner => read_by_owner => Read By Owner
+- ReadByWorker => read_by_worker => Read By Worker
+
+----------------------------
+Model UCase: BidStatus
+Model ID: bid_status
+Model Title: Bid Status
+
+- BidStatusId => bid_status_id => Bid Status ID
+- BidStatusName => bid_status_name => Bid Status Name
+
+----------------------------
+Model UCase: Bid
+Model ID: bid
+Model Title: Bid
+
+- BidId => bid_id => Bid ID
+- Project => project_id => Project
+- Status => status_id => Status
+- Date => date => Date
+- Worker => worker_id => Worker
+- Location => location_id => Location
+- Rating => rating => Rating
+- MatchingSkills => matching_skills => Matching Skills
+- Amount => amount => Amount
+- Message => message => Message
+- Attachments => attachments => Attachments
+- ReadByOwner => read_by_owner => Read By Owner
+- Shortlisted => shortlisted => Shortlisted
+- Captcha => captcha => Captcha
+- ProjectTitle => project_title => Project Title
+- ProjectOwner => project_owner => Project Owner
+- Description => description => Description
+- PublishedBudget => published_budget => Published Budget
+- BudgetRange => budget_range => Budget Range
+
+----------------------------
+Model UCase: PointType
+Model ID: point_type
+Model Title: Point Type
+
+- PointTypeId => point_type_id => Point Type ID
+- PointTypeName => point_type_name => Point Type Name
+
+----------------------------
+Model UCase: Point
+Model ID: point
+Model Title: Point
+
+- PointId => point_id => Point ID
+- User => user_id => User
+- Type => type_id => Type
+- Date => date => Date
+- Title => title => Title
+- Amount => amount => Amount
+- Balance => balance => Balance
+
+----------------------------
+Model UCase: Product
+Model ID: product
+Model Title: Product
+
+- ProductId => product_id => Product ID
+- Seller => seller_id => Seller
+- Logo => logo => Logo
+- Category => category_id => Category
+- Title => title => Title
+- Description => description => Description
+- ShortDescription => short_description => Short Description
+- Deliverable => deliverable => Deliverable
+- TrialVersion => trial_version => Trial Version
+- Price => price => Price
+- Tags => tags => Tags
+- Status => status_id => Status
+- RegisteredBy => registered_by_id => Registered By
+- RegisteredDate => registered_date => Registered Date
+- RegisteredFromIp => registered_from_ip => Registered From IP
+- VerifiedBy => verified_by_id => Verified By
+- VerifiedDate => verified_date => Verified Date
+- VerifiedFromIp => verified_from_ip => Verified From IP
+- VerifierNote => verifier_note => Verifier Note
+- ApprovedBy => approved_by_id => Approved By
+- ApprovedDate => approved_date => Approved Date
+- ApprovedFromIp => approved_from_ip => Approved From IP
+- ApproverNote => approver_note => Approver Note
+- PublishedBy => published_by_id => Published By
+- PublishedDate => published_date => Published Date
+- PublishedFromIp => published_from_ip => Published From IP
+- RejectedBy => rejected_by_id => Rejected By
+- RejectedDate => rejected_date => Rejected Date
+- RejectedFromIp => rejected_from_ip => Rejected From IP
+- AdminNote => admin_note => Admin Note
+- LastBump => last_bump => Last Bump
+- SalesCount => sales_count => Sales Count
+- SalesAmount => sales_amount => Sales Amount
+- Rating => rating => Rating
+- Points => points => Points
+- Ranking => ranking => Ranking
+- RatingNum => rating_num => Rating Num
+- RatingSum => rating_sum => Rating Sum
+- RatingDiv => rating_div => Rating Div
+
+----------------------------
+Model UCase: ProductStatus
+Model ID: product_status
+Model Title: Product Status
+
+- ProductStatusId => product_status_id => Product Status ID
+- ProductStatusName => product_status_name => Product Status Name
+
+----------------------------
+Model UCase: ProductImages
+Model ID: product_images
+Model Title: Product Images
+
+- ProductImagesId => product_images_id => Product Images ID
+- Product => product_id => Product
+- Description => description => Description
+- Image => image => Image
+
+----------------------------
+Model UCase: ProductPostType
+Model ID: product_post_type
+Model Title: Product Post Type
+
+- ProductPostTypeId => product_post_type_id => Product Post Type ID
+- ProductPostTypeName => product_post_type_name => Product Post Type Name
+
+----------------------------
+Model UCase: ProductPost
+Model ID: product_post
+Model Title: Product Post
+
+- ProductPostId => product_post_id => Product Post ID
+- Product => product_id => Product
+- Thread => thread_id => Thread
+- User => user_id => User
+- PostType => post_type_id => Post Type
+- PostDate => post_date => Post Date
+- Message => message => Message
+- Attachments => attachments => Attachments
+- ReadBySeller => read_by_seller => Read By Seller
+- ReadByBuyer => read_by_buyer => Read By Buyer
+- Captcha => captcha => Captcha
+
+----------------------------
+Model UCase: ProductThread
+Model ID: product_thread
+Model Title: Product Thread
+
+- ProductThreadId => product_thread_id => Product Thread ID
+- Product => product_id => Product
+- Seller => seller_id => Seller
+- Buyer => buyer_id => Buyer
+- LastActivity => last_activity => Last Activity
+- LastMessage => last_message => Last Message
+- ReadBySeller => read_by_seller => Read By Seller
+- ReadByBuyer => read_by_buyer => Read By Buyer
+- ProductName => product_name => Product Name
+- ProductSeller => product_seller => Product Seller
+- Description => description => Description
+- Price => price => Price
+
+----------------------------
+Model UCase: Service
+Model ID: service
+Model Title: Service
+
+- ServiceId => service_id => Service ID
+- Seller => seller_id => Seller
+- Logo => logo => Logo
+- Category => category_id => Category
+- Title => title => Title
+- Description => description => Description
+- ShortDescription => short_description => Short Description
+- FinishDays => finish_days => Finish Days
+- Price => price => Price
+- Options => options => Options
+- Tags => tags => Tags
+- Status => status_id => Status
+- RegisteredBy => registered_by_id => Registered By
+- RegisteredDate => registered_date => Registered Date
+- RegisteredFromIp => registered_from_ip => Registered From IP
+- VerifiedBy => verified_by_id => Verified By
+- VerifiedDate => verified_date => Verified Date
+- VerifiedFromIp => verified_from_ip => Verified From IP
+- VerifierNote => verifier_note => Verifier Note
+- ApprovedBy => approved_by_id => Approved By
+- ApprovedDate => approved_date => Approved Date
+- ApprovedFromIp => approved_from_ip => Approved From IP
+- ApproverNote => approver_note => Approver Note
+- PublishedBy => published_by_id => Published By
+- PublishedDate => published_date => Published Date
+- PublishedFromIp => published_from_ip => Published From IP
+- RejectedBy => rejected_by_id => Rejected By
+- RejectedDate => rejected_date => Rejected Date
+- RejectedFromIp => rejected_from_ip => Rejected From IP
+- AdminNote => admin_note => Admin Note
+- LastBump => last_bump => Last Bump
+- SalesCount => sales_count => Sales Count
+- SalesAmount => sales_amount => Sales Amount
+- Rating => rating => Rating
+- Points => points => Points
+- Ranking => ranking => Ranking
+- RatingNum => rating_num => Rating Num
+- RatingSum => rating_sum => Rating Sum
+- RatingDiv => rating_div => Rating Div
+- SelectedOptions => selected_options => Selected Options
+- TotalPrice => total_price => Total Price
+- SpecialRequirements => special_requirements => Special Requirements
+
+----------------------------
+Model UCase: ServiceImages
+Model ID: service_images
+Model Title: Service Images
+
+- ServiceImagesId => service_images_id => Service Images ID
+- Service => service_id => Service
+- Description => description => Description
+- Image => image => Image
+
+----------------------------
+Model UCase: ServicePost
+Model ID: service_post
+Model Title: Service Post
+
+- ServicePostId => service_post_id => Service Post ID
+- Service => service_id => Service
+- Thread => thread_id => Thread
+- User => user_id => User
+- PostType => post_type_id => Post Type
+- PostDate => post_date => Post Date
+- Message => message => Message
+- Attachments => attachments => Attachments
+- ReadBySeller => read_by_seller => Read By Seller
+- ReadByBuyer => read_by_buyer => Read By Buyer
+- Captcha => captcha => Captcha
+
+----------------------------
+Model UCase: ServiceThread
+Model ID: service_thread
+Model Title: Service Thread
+
+- ServiceThreadId => service_thread_id => Service Thread ID
+- Service => service_id => Service
+- Seller => seller_id => Seller
+- Buyer => buyer_id => Buyer
+- LastActivity => last_activity => Last Activity
+- LastMessage => last_message => Last Message
+- ReadBySeller => read_by_seller => Read By Seller
+- ReadByBuyer => read_by_buyer => Read By Buyer
+- ServiceName => service_name => Service Name
+- ServiceSeller => service_seller => Service Seller
+- Description => description => Description
+- Price => price => Price
+
+----------------------------
+Model UCase: Channel
+Model ID: channel
+Model Title: Channel
+
+- ChannelId => channel_id => Channel ID
+- Name => name => Name
+
+----------------------------
+Model UCase: ProjectChannel
+Model ID: project_channel
+Model Title: Project Channel
+
+- ProjectChannelId => project_channel_id => Project Channel ID
+- Project => project_id => Project
+- Channel => channel_id => Channel
+
+----------------------------
+Model UCase: UserChannel
+Model ID: user_channel
+Model Title: User Channel
+
+- UserChannelId => user_channel_id => User Channel ID
+- User => user_id => User
+- Channel => channel_id => Channel
+
+----------------------------
+Model UCase: ProductChannel
+Model ID: product_channel
+Model Title: Product Channel
+
+- ProductChannelId => product_channel_id => Product Channel ID
+- Product => product_id => Product
+- Channel => channel_id => Channel
+
+----------------------------
+Model UCase: ItemType
+Model ID: item_type
+Model Title: Item Type
+
+- ItemTypeId => item_type_id => Item Type ID
+- ItemTypeName => item_type_name => Item Type Name
+
+----------------------------
+Model UCase: Cart
+Model ID: cart
+Model Title: Cart
+
+- CartId => cart_id => Cart ID
+- User => user_id => User
+- Type => type_id => Type
+- Title => title => Title
+- Product => product_id => Product
+- Project => project_id => Project
+- Service => service_id => Service
+- Bid => bid_id => Bid
+- Iklan => iklan_id => Iklan
+- Seller => seller_id => Seller
+- ItemPrice => item_price => Item Price
+- Quantity => quantity => Quantity
+- TotalPrice => total_price => Total Price
+
+----------------------------
+Model UCase: OrderStatus
+Model ID: order_status
+Model Title: Order Status
+
+- OrderStatusId => order_status_id => Order Status ID
+- OrderStatusName => order_status_name => Order Status Name
+
+----------------------------
+Model UCase: Order
+Model ID: order
+Model Title: Order
+
+- OrderId => order_id => Order ID
+- TrackCode => track_code => Track Code
+- Buyer => buyer_id => Buyer
+- Date => date => Date
+- Status => status_id => Status
+- PaymentMethod => payment_method_id => Payment Method
+- BuyerPayment => buyer_payment_id => Buyer Payment
+- TotalPrice => total_price => Total Price
+- Coupon => coupon => Coupon
+- CouponValue => coupon_value => Coupon Value
+- UsedBalance => used_balance => Used Balance
+- TotalSum => total_sum => Total Sum
+- UniqueCode => unique_code => Unique Code
+- Table => table => Table
+- Notes => notes => Notes
+- CimbRef => cimb_ref => CIMB Ref
+- IsTest => is_test => Is Test
+
+----------------------------
+Model UCase: OrderItem
+Model ID: order_item
+Model Title: Order Item
+
+- OrderItemId => order_item_id => Order Item ID
+- Order => order_id => Order
+- Title => title => Title
+- Type => type_id => Type
+- Product => product_id => Product
+- Project => project_id => Project
+- Service => service_id => Service
+- Bid => bid_id => Bid
+- Iklan => iklan_id => Iklan
+- Date => date => Date
+- Price => price => Price
+- Status => status_id => Status
+- Buyer => buyer_id => Buyer
+- Seller => seller_id => Seller
+- BuyerPayment => buyer_payment_id => Buyer Payment
+- SellerCredit => seller_credit_id => Seller Credit
+- Rating => rating => Rating
+- Testimony => testimony => Testimony
+
+----------------------------
+Model UCase: Coupon
+Model ID: coupon
+Model Title: Coupon
+
+- CouponId => coupon_id => Coupon ID
+- Code => code => Code
+- Description => description => Description
+- Activated => activated => Activated
+- ValidFrom => valid_from => Valid From
+- ValidUntil => valid_until => Valid Until
+- AllowSameUsers => allow_same_users => Allow Same Users
+- MinimumTransaction => minimum_transaction => Minimum Transaction
+- MaximumTransaction => maximum_transaction => Maximum Transaction
+- MaximumUsage => maximum_usage => Maximum Usage
+- Value => value => Value
+- UsePercentage => use_percentage => Use Percentage
+- Percentage => percentage => Percentage
+- MaximumValue => maximum_value => Maximum Value
+- UsageCount => usage_count => Usage Count
+
+----------------------------
+Model UCase: CouponUsage
+Model ID: coupon_usage
+Model Title: Coupon Usage
+
+- CouponUsageId => coupon_usage_id => Coupon Usage ID
+- Coupon => coupon_id => Coupon
+- User => user_id => User
+- Order => order_id => Order
+- Code => code => Code
+- Date => date => Date
+- Value => value => Value
+- TotalOrder => total_order => Total Order
+
+----------------------------
+Model UCase: CreditType
+Model ID: credit_type
+Model Title: Credit Type
+
+- CreditTypeId => credit_type_id => Credit Type ID
+- CreditTypeName => credit_type_name => Credit Type Name
+
+----------------------------
+Model UCase: Credit
+Model ID: credit
+Model Title: Credit
+
+- CreditId => credit_id => Credit ID
+- Date => date => Date
+- User => user_id => User
+- Type => type_id => Type
+- Title => title => Title
+- Amount => amount => Amount
+- Balance => balance => Balance
+- RefId => ref_id => Ref Id
+- AdjustmentAmount => adjustment_amount => Adjustment Amount
+
+----------------------------
+Model UCase: Fee
+Model ID: fee
+Model Title: Fee
+
+- FeeId => fee_id => Fee ID
+- Type => type_id => Type
+- RefId => ref_id => Ref Id
+- Date => date => Date
+- Title => title => Title
+- Amount => amount => Amount
+- Affiliate1 => affiliate_1 => Affiliate 1
+- Affiliate2 => affiliate_2 => Affiliate 2
+
+----------------------------
+Model UCase: CutOffPeriod
+Model ID: cutoff_period
+Model Title: Cut-off Period
+
+- CutOffPeriodId => cutoff_period_id => Cut-off Period ID
+- CutOffPeriodName => cutoff_period_name => Cut-off Period Name
+
+----------------------------
+Model UCase: TransferStatus
+Model ID: transfer_status
+Model Title: Transfer Status
+
+- TransferStatusId => transfer_status_id => Transfer Status ID
+- TransferStatusName => transfer_status_name => Transfer Status Name
+
+----------------------------
+Model UCase: TransferDirection
+Model ID: transfer_direction
+Model Title: Transfer Direction
+
+- TransferDirectionId => transfer_direction_id => Transfer Direction ID
+- TransferDirectionName => transfer_direction_name => Transfer Direction Name
+
+----------------------------
+Model UCase: Bank
+Model ID: bank
+Model Title: Bank
+
+- BankId => bank_id => Bank ID
+- NamaBank => name => Nama Bank
+- NamaPerusahaan => perusahaan => Nama Perusahaan
+- KodeBi => kode_bi => Kode BI
+- KodeBersama => kode_bersama => Kode Bersama
+- KodePrima => kode_prima => Kode Prima
+- KodeAlto => kode_alto => Kode Alto
+- Logo => logo => Logo
+
+----------------------------
+Model UCase: OurBankAccount
+Model ID: our_bank_account
+Model Title: Our Bank Account
+
+- OurBankAccountId => our_bank_account_id => Our Bank Account ID
+- Label => label => Label
+- Bank => bank_id => Bank
+- AccountNo => account_no => Account No
+- AccountName => account_name => Account Name
+- Active => active => Active
+
+----------------------------
+Model UCase: PaymentMethod
+Model ID: payment_method
+Model Title: Payment Method
+
+- PaymentMethodId => payment_method_id => Payment Method ID
+- PaymentMethodName => payment_method_name => Payment Method Name
+
+----------------------------
+Model UCase: Payment
+Model ID: payment
+Model Title: Payment
+
+- PaymentId => payment_id => Payment ID
+- User => user_id => User
+- OurAccount => our_account_id => Our Account
+- Direction => direction_id => Direction
+- Status => status_id => Status
+- Bank => bank_id => Bank
+- Branch => branch => Branch
+- City => city => City
+- AccountNo => account_no => Account No
+- AccountName => account_name => Account Name
+- TransferDate => transfer_date => Transfer Date
+- Amount => amount => Amount
+- TransferFee => transfer_fee => Transfer Fee
+- Message => message => Message
+- Attachment => attachment => Attachment
+- Type => type_id => Type
+- RefId => ref_id => Ref Id
+- ApprovedDate => approved_date => Approved Date
+- ApprovedBy => approved_by_id => Approved By
+- ApprovedFromIp => approved_from_ip => Approved From IP
+- ApproverNote => approver_note => Approver Note
+- SecureCode => secure_code => Secure Code
+
+----------------------------
+Model UCase: Mutasi
+Model ID: mutasi
+Model Title: Mutasi
+
+- MutasiId => mutasi_id => Mutasi ID
+- BankAccount => bank_account_id => Bank Account
+- DateTime => date_time => Date Time
+- Key => key => Key
+- Description => description => Description
+- Debit => debit => Debit
+- Credit => credit => Credit
+- Balance => balance => Balance
+
+----------------------------
+Model UCase: Stats
+Model ID: stats
+Model Title: Stats
+
+- StatsId => stats_id => Stats ID
+- Date => date => Date
+- RegisteredUsers => registered_users => Registered Users
+- AffiliateUsers => affiliate_users => Affiliate Users
+- AffiliateEarnings => affiliate_earnings => Affiliate Earnings
+- TotalEscrow => total_escrow => Total Escrow
+- TotalBalance => total_balance => Total Balance
+- PublishedProjects => published_projects => Published Projects
+- PublishedProjectsSum => published_projects_sum => Published Projects Sum
+- RunningProjects => running_projects => Running Projects
+- RunningProjectsSum => running_projects_sum => Running Projects Sum
+- ClosedProjects => closed_projects => Closed Projects
+- ClosedProjectsSum => closed_projects_sum => Closed Projects Sum
+- BidCount => bid_count => Bid Count
+- PostCount => post_count => Post Count
+- TotalOnline => total_online => Total Online
+
+----------------------------
+Model UCase: Config
+Model ID: config
+Model Title: Config
+
+- ConfigId => config_id => Config ID
+- ConfigValue => config_value => Config Value
+
+----------------------------
+Model UCase: GroupFolder
+Model ID: group_folder
+Model Title: Group Folder
+
+- GroupFolderId => group_folder_id => Group Folder ID
+- GroupFolderName => group_folder_name => Group Folder Name
+
+----------------------------
+Model UCase: Country
+Model ID: country
+Model Title: Country
+
+- CountryId => country_id => Country ID
+- CountryName => country_name => Country Name
+- Code2 => code2 => Code 2
+- Code3 => code3 => Code 3
+- NumericCode => num_code => Numeric Code
+- IsoCode => iso_code => ISO Code
+- Logo => logo => Logo
+
+----------------------------
+Model UCase: Provinsi
+Model ID: provinsi
+Model Title: Provinsi
+
+- ProvinsiId => provinsi_id => Provinsi ID
+- Country => country_id => Country
+- NamaProvinsi => provinsi_name => Nama Provinsi
+- KodeBps => kode_bps => Kode BPS
+- Logo => logo => Logo
+- Peta => peta => Peta
+
+----------------------------
+Model UCase: Kabupaten
+Model ID: kabupaten
+Model Title: Kabupaten
+
+- KabupatenId => kabupaten_id => Kabupaten ID
+- Provinsi => provinsi_id => Provinsi
+- NamaKabupaten => kabupaten_name => Nama Kabupaten
+
+----------------------------
+Model UCase: Kecamatan
+Model ID: kecamatan
+Model Title: Kecamatan
+
+- KecamatanId => kecamatan_id => Kecamatan ID
+- Provinsi => provinsi_id => Provinsi
+- Kabupaten => kabupaten_id => Kabupaten
+- NamaKecamatan => kecamatan_name => Nama Kecamatan
+
+----------------------------
+Model UCase: Kelurahan
+Model ID: kelurahan
+Model Title: Kelurahan
+
+- KelurahanId => kelurahan_id => Kelurahan ID
+- Provinsi => provinsi_id => Provinsi
+- Kabupaten => kabupaten_id => Kabupaten
+- Kecamatan => kecamatan_id => Kecamatan
+- NamaKelurahan => kelurahan_name => Nama Kelurahan
+- KodePos => kode_pos => Kode Pos
+
+----------------------------
+Model UCase: Language
+Model ID: language
+Model Title: Language
+
+- LanguageId => language_id => Language ID
+- LanguageName => language_name => Language Name
+- Code => code => Code
+
+----------------------------
+Model UCase: SpotIklan
+Model ID: spot_iklan
+Model Title: Spot Iklan
+
+- SpotIklanId => spot_iklan_id => Spot Iklan ID
+- SpotIklanName => spot_iklan_name => Spot Iklan Name
+
+----------------------------
+Model UCase: StatusIklan
+Model ID: status_iklan
+Model Title: Status Iklan
+
+- StatusIklanId => status_iklan_id => Status Iklan ID
+- StatusIklanName => status_iklan_name => Status Iklan Name
+
+----------------------------
+Model UCase: Iklan
+Model ID: iklan
+Model Title: Iklan
+
+- IklanId => iklan_id => Iklan ID
+- Owner => owner_id => Owner
+- Judul => judul => Judul
+- Website => website => Website
+- Deskripsi1 => deskripsi_1 => Deskripsi 1
+- Deskripsi2 => deskripsi_2 => Deskripsi 2
+- Spot => spot_id => Spot
+- Status => status_id => Status
+- Cpi => cpi => CPI
+- Impression => impression => Impression
+- Budget => budget => Budget
+- Saldo => saldo => Saldo
+- DialyBudget => dialy_budget => Dialy Budget
+- TodayCost => today_cost => Today Cost
+
+----------------------------
+Model UCase: ChatIndex
+Model ID: chat_index
+Model Title: Chat Index
+
+- ChatIndexId => chat_index_id => Chat Index ID
+- UserId => user_id => User ID
+- OtherUser => other_user_id => Other User
+- Topic => topic => Topic
+- LastMessage => last_message => Last Message
+
+----------------------------
+Model UCase: ChatConv
+Model ID: chat_conv
+Model Title: Chat Conv
+
+- ChatConvId => chat_conv_id => Chat Conv ID
+- ConversationId => conversation_id => Conversation ID
+- Content => content => Content
+

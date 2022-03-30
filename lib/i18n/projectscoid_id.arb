@@ -1,0 +1,20 @@
+{"@@last_modified": "2019-03-27T09:46:00.200720",
+  "browserprojectstitle": "Cari Projek-projek",
+  "@browserprojectstitle": {
+    "description": "Title for the Browser Projects",
+    "type": "text",
+    "placeholders": {}
+  },
+  "browseruserstitle": "Cari User",
+  "@browseruserstitle": {
+    "description": "Title for the Browser Users",
+    "type": "text",
+    "placeholders": {}
+  },
+  "browserservicestitle": "Cari Service",
+  "@browserservicestitle": {
+    "description": "Title for the Browser Services",
+    "type": "text",
+    "placeholders": {}
+  }
+}
