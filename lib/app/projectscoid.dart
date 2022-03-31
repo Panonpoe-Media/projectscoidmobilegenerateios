@@ -2506,7 +2506,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                                                 } ,
                                                                 // => launch("tel://085692287785"),62 813 1222 9959
                                                                 child:
-                                                                Text('WhatsApp:  +62 813 1222 9959', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100 ),),
+                                                                Text('WhatsApp:  +62 858 9105 5785 ', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100 ),),
                                                               ),
                                                             ),
 
@@ -2719,7 +2719,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                                                 } ,
                                                                 // => launch("tel://085692287785"),
                                                                 child:
-                                                                Text('Komp. Permata Mekar Mulya G-1', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100 ),),
+                                                                Text('Buana Hilltop View Residence C2-6', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100 ),),
                                                               ),
                                                             ),
 
@@ -2729,7 +2729,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                                                  GestureDetector(
                                                                 onTap:() => launch("tel://02287882588"),
                                                                 child:
-                                                                Text('Bandung 40614 - Indonesia', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100  ),),
+                                                                Text('Bandung 40618 - Indonesia', style: TextStyle(fontSize: 10, color : Colors.white, fontWeight: FontWeight.w100  ),),
                                                               ),
                                                             ),
                                                             Padding(
@@ -3313,7 +3313,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
 
 
   _launchWhatsApp() async {
-    String phoneNumber = '  +6281312229959';
+    String phoneNumber = '  +6285891055785 ';
     String message = '';
     var whatsappUrl = "whatsapp://send?phone=$phoneNumber&text=$message";
     if (await canLaunch(whatsappUrl)) {

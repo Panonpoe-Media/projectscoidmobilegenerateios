@@ -13,6 +13,8 @@ import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:projectscoid/core/components/utility/firebase/firebase_config.dart';
+//lib/core/components/utility/firebase/firebase_config.dart
 
 enum EnvType {
   DEVELOPMENT,
@@ -103,12 +105,21 @@ class Env {
     await FlutterDownloader.initialize(debug: debug);
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-    await Firebase.initializeApp(options:  const FirebaseOptions(
+    await Firebase.initializeApp(
+      options: DefaultFirebaseConfig.platformOptions,
+      /*
+             options:  const FirebaseOptions(
              apiKey: 'AIzaSyDC6NSEYBNQXwTmxrKtW4zSFfMyW6eD3FI',
              appId: '1:206955057202:android:bec4a2a4b8a188a3b42c2b',
              messagingSenderId: '206955057202',
              projectId: 'projectscoid-125dd',
-           ));
+
+
+           )
+
+       */
+           );
+
     BlocOverrides.runZoned(
           () {
             runApp(App(application));
