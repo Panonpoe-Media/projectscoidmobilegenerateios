@@ -1236,7 +1236,7 @@ final RestorableInt _counter = RestorableInt(0);
                               this.model.viewBank(context),
                               this.model.viewAccountNo(context),
                               this.model.viewAccountName(context),
-                              this.model.editSecureCode(this), 
+                            // this.model.editSecureCode(this),
                               
                             this.model.model.meta.after_content == null ? Container(width: 0.0, height: 0.0) :
                               Padding(

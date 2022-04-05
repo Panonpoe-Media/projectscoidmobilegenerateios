@@ -1562,9 +1562,8 @@ dio!.options.headers = {
 	Response response = await dio!.get(sprintf(url, [id,title]));
 	dio!.options.connectTimeout = 15000;
 	var data;
-      print('mantapppppp');
 		   data =  BrowseServicesViewModel(response.data);
-       print('mantapppppp1234');
+
     return data;
   }
 
@@ -1660,9 +1659,8 @@ dio!.options.headers = {
 	Response response = await dio!.get(sprintf(url, [id,title]));
 	dio!.options.connectTimeout = 15000;
 	var data;
-	  print('merdeka');
 		   data =  BrowseUsersViewModel(response.data);
-  print('merdeka1234');
+
     return data;
   }
 
@@ -1758,9 +1756,8 @@ dio!.options.headers = {
 	Response response = await dio!.get(sprintf(url, [id,title]));
 	dio!.options.connectTimeout = 15000;
 	var data;
-	    print('sampai');
 		   data =  BrowseProductsViewModel(response.data);
-       print('sampai tidak');
+
     return data;
   }
 

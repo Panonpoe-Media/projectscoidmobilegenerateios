@@ -2198,7 +2198,6 @@ WithdrawPayment => withdraw_payment => Withdraw Payment => edit =>submodel
 - Bank => model => Bank => read_only
 - AccountNo => string => Account No => read_only
 - AccountName => name => Account Name => read_only
-- SecureCode => secure_code => Secure Code => editable
 + button: WithdrawPayment => withdraw_payment => Withdraw Payment => green 
 
 

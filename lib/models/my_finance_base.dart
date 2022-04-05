@@ -809,7 +809,6 @@ String? user_id;
 	  List<String?>? bank_list_str;
 	  String? account_no;
 	  String? account_name;
-  String? secure_code;
 
 	
 	  ModelActionWithdrawPaymentMyFinance(
@@ -825,7 +824,6 @@ String? user_id;
 				this.bank_list_str,
         this.account_no,
         this.account_name,
-			this.secure_code,
 
   );
     factory ModelActionWithdrawPaymentMyFinance.fromJson(Map<String, dynamic> json) => _$ModelActionWithdrawPaymentMyFinanceFromJson(json);
@@ -1230,7 +1228,6 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
       var formData = {
       "user[_trigger_]":"$tgr",
   "user[amount]": "${model.model.amount }",
-  "user[secure_code]": "${model.model.secure_code }",
 	  
   };  
 
@@ -1384,8 +1381,6 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 								}			
 								
 								}
-								  
-								 // String? model.model.secure_code;
  	
 
 }

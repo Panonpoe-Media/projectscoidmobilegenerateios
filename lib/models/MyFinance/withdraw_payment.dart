@@ -9,7 +9,6 @@
       String tgr = triger.toLowerCase().replaceAll(' ', '_');
       var formData = {"payment[_trigger_]":"$tgr"};
   formData.addAll({"payment[amount]": "${model.model.amount }"});
-  formData.addAll({"payment[secure_code]": "${model.model.secure_code }"});
  
 
 

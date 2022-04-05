@@ -131,7 +131,7 @@ ModelActionWithdrawPaymentMyFinance
               .toList(),
           json['account_no'] as String?,
           json['account_name'] as String?,
-          json['secure_code'] as String?,
+         // json['secure_code'] as String?,
         )
           ..age = json['age'] as int?
           ..cnt = json['cnt'] as int?
@@ -161,7 +161,7 @@ Map<String, dynamic> _$ModelActionWithdrawPaymentMyFinanceToJson(
       'bank_list_str': instance.bank_list_str,
       'account_no': instance.account_no,
       'account_name': instance.account_name,
-      'secure_code': instance.secure_code,
+    //  'secure_code': instance.secure_code,
     };
 
 WithdrawPaymentMyFinanceSuperBase _$WithdrawPaymentMyFinanceSuperBaseFromJson(

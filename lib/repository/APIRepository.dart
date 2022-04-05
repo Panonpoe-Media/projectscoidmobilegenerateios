@@ -247,7 +247,7 @@ class APIRepository{
        userHash = map['user_hash'];
      }
    }
-   return userHash;
+   return userHash!;
  }
 
   Future <bool> getHash()async{
