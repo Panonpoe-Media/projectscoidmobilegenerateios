@@ -11,12 +11,12 @@ class WebsiteWidget extends StatefulWidget {
    this.getValue,
    }) 
    {
-    contr!.text = value!;
+    //contr!.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = TextEditingController();
+ // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -35,10 +35,13 @@ class _WebsiteWidget extends State<WebsiteWidget> {
   bool validation = true;
   bool isvalid = true;
   String?  errormessage = '';
-  //TextEditingController contr;
- // _WebsiteWidget({this.contr});
-
-
+  TextEditingController? contr;
+  // _EmailWidget({this.contr});
+  @override
+  initState(){
+    contr?.text = widget.value!;
+    super.initState();
+  }
   String? validateWebsite(String? _value,bool?_require) {
     String value = _value!;
     bool   require = _require!;
@@ -112,7 +115,7 @@ class _WebsiteWidget extends State<WebsiteWidget> {
                     border: const OutlineInputBorder(),
                   ),
 
-                  controller: widget.contr!,
+                  controller: contr!,
                   validator: (value) {
                     // widget.value = value;
                     errormessage = validateWebsite(value!, widget.required!);

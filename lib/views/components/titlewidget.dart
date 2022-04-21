@@ -13,12 +13,12 @@ class TitleWidget extends StatefulWidget {
    this.getValue,
    }) : super(key: key)
    {
-    contr?.text = value!;
+   // contr?.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = TextEditingController();
+ // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -37,12 +37,13 @@ class _TitleWidget extends State<TitleWidget> {
   bool validation = true;
   bool isvalid = true;
   String  errormessage = '';
- // TextEditingController contr;
- // _TitleWidget({this.contr});
-  //@override
-  //initState(){
-  //contr.text = 'ok';
-  //}
+  TextEditingController? contr;
+  // _EmailWidget({this.contr});
+  @override
+  initState(){
+    contr?.text = widget.value!;
+    super.initState();
+  }
 
   String? validateTitle(_value, _require) {
     String value = _value;
@@ -107,7 +108,7 @@ class _TitleWidget extends State<TitleWidget> {
                   border: const OutlineInputBorder(),
                 ),
 
-                controller: widget.contr,
+                controller: contr,
                 validator: (value) {
                   // widget.value = value;
                   errormessage = validateTitle(value, widget.required)!;

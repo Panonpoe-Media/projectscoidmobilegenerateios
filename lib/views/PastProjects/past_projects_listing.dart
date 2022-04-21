@@ -15,7 +15,7 @@ import 'package:projectscoid/app/Env.dart';
  import 'package:projectscoid/app/projectscoid.dart';
 import 'dart:convert';
 import 'dart:async';
-
+ /** AUTOGENERATE OFF **/
 class  PublicPastProjectsListing extends StatefulWidget {
   static const String PATH = '/public/past_projects/listing/:id';
     final String? id ;
@@ -289,7 +289,7 @@ final RestorableDouble cs = RestorableDouble(0);
 									  state.past_projects!.tools.paging.total_pages == state.past_projects!.tools.paging.current_page?
                                       Container(height: 0.0, width: 0.0,):
 									  PublicPastProjectsBottomLoader()
-									   : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, account );
+									   : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index,  account );
 								},
 								itemCount: state.hasReachedMax!
 									? state.past_projects!.items.items.length
@@ -312,7 +312,7 @@ final RestorableDouble cs = RestorableDouble(0);
                                       Container(height: 0.0, width: 0.0,):
 									  PublicPastProjectsBottomLoader()
 									 // viewItemIndex(ItemBlogModel item,String search, int index, bool account) 
-									   : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, account );
+									   : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index, account );
 									
 								},
 								itemCount: state.hasReachedMax!
@@ -623,7 +623,7 @@ final RestorableDouble cs = RestorableDouble(0);
 									  state.past_projects!.tools.paging.total_pages == state.past_projects!.tools.paging.current_page?
                                       Container(height: 0.0, width: 0.0,):
 									  PublicPastProjectsBottomLoader()
-									   : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, account );
+									   : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index, account );
 								},
 								itemCount: state.hasReachedMax!
 									? state.past_projects!.items.items.length
@@ -646,7 +646,7 @@ final RestorableDouble cs = RestorableDouble(0);
                                       Container(height: 0.0, width: 0.0,):
 									  PublicPastProjectsBottomLoader()
 									 // viewItemIndex(ItemBlogModel item,String search, int index, bool account) 
-									   : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, account );
+									   : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index,  account );
 									
 								},
 								itemCount: state.hasReachedMax!

@@ -56,6 +56,8 @@ import 'dart:developer';
 import 'package:projectscoid/views/BrowseServices/browse_services_view.dart';
 import 'package:projectscoid/views/BrowseServices/browse_services_listing.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'browse_services.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -3565,7 +3567,7 @@ class BrowseServicesListingModel extends BrowseServicesListingBase{
     double? height = 210;
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson()))!.contains(search!)),
-        child:  ItemBrowseServicesCard3(destination :item, search : search, shape : shape, height : height, account : account, idHash: id, cb : cb)
+        child:  ItemBrowseServicesCard3(index: index,destination :item, search : search, shape : shape, height : height, account : account, idHash: id, cb : cb)
     );
   }
 
@@ -4082,8 +4084,8 @@ class ItemBrowseServicesCard2 extends StatelessWidget {
 }
 
 
-class ItemBrowseServicesCard3 extends StatelessWidget {
-  ItemBrowseServicesCard3({ Key? key, @required this.destination, this.search, this.shape, this.height, this.account, this.idHash, this.cb})
+class ItemBrowseServicesCard3 extends StatefulWidget {
+  ItemBrowseServicesCard3({ Key? key, @required this.destination, this.index,  this.search, this.shape, this.height, this.account, this.idHash, this.cb})
       : assert(destination != null),
         super(key: key);
 
@@ -4094,8 +4096,56 @@ class ItemBrowseServicesCard3 extends StatelessWidget {
   final ShapeBorder? shape;
   final bool? account;
   final String? idHash;
+  final int? index;
   ChatBloc? cb;
 
+
+  @override
+  _ItemBrowseServicesCard3State createState() => _ItemBrowseServicesCard3State();
+}
+
+
+class _ItemBrowseServicesCard3State extends State<ItemBrowseServicesCard3>  {
+
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+    //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
 
 
   @override
@@ -4117,7 +4167,8 @@ class ItemBrowseServicesCard3 extends StatelessWidget {
                   ),
                   child:
 
-                  ItemBrowseServicesContent3(destination: destination, account : account, idHash: idHash, cb: cb),
+                  _isBannerAdReady? ItemBrowseServicesContent3(bannerAd: _bannerAd, isBanner:_isBannerAdReady, destination: widget.destination, account : widget.account, idHash: widget.idHash, cb: widget.cb) :
+                  ItemBrowseServicesContent3(bannerAd: null, isBanner:_isBannerAdReady, destination: widget.destination, account : widget.account, idHash: widget.idHash, cb: widget.cb),
 
                 ),
               //  margin: EdgeInsets.all(5.0),
@@ -4663,7 +4714,7 @@ class ItemBrowseServicesContent2 extends StatelessWidget {
 
 
 class ItemBrowseServicesContent3 extends StatelessWidget {
-  ItemBrowseServicesContent3({ Key? key, @required this.destination, this.account, this.idHash, this.cb })
+  ItemBrowseServicesContent3({ Key? key,this.bannerAd, this.isBanner, @required this.destination, this.account, this.idHash, this.cb })
       : assert(destination != null),
         super(key: key);
 
@@ -4671,6 +4722,8 @@ class ItemBrowseServicesContent3 extends StatelessWidget {
 
   final bool? account;
   final String? idHash;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
   ChatBloc? cb;
 
   static String? _capitalize(String name) {
@@ -5461,7 +5514,14 @@ class ItemBrowseServicesContent3 extends StatelessWidget {
             ]
         ),
       ),
-
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
     ];
 
     /*

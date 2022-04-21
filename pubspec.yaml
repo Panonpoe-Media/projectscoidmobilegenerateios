@@ -32,7 +32,6 @@ dependencies:
 
   animated_text_kit: ^4.2.1
   adaptive_breakpoints: ^0.1.1
-
   badges: ^2.0.2
   # blockquote: ^0.0.1  unsound-null-safety
   bubble: ^1.2.1
@@ -80,6 +79,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
 
   getwidget: ^2.0.5
+  google_mobile_ads: ^1.2.0
 
   html2md: ^1.2.5
   http: ^0.13.4

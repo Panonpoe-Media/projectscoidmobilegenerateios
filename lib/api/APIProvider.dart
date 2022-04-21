@@ -1562,7 +1562,9 @@ dio!.options.headers = {
 	Response response = await dio!.get(sprintf(url, [id,title]));
 	dio!.options.connectTimeout = 15000;
 	var data;
+      print('gagal1');
 		   data =  BrowseServicesViewModel(response.data);
+      print('gagal2');
 
     return data;
   }

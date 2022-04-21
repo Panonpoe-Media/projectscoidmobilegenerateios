@@ -45,6 +45,7 @@ import 'package:projectscoid/core/components/utility/widget/widget_function.dart
 import 'package:projectscoid/core/components/utility/tool/menu_tabbar.dart';
 import 'package:projectscoid/core/components/utility/tool/speed_dial_varian.dart';
 import 'package:projectscoid/core/components/utility/tool/speed_dial_child.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:intl/intl.dart';
 import 'package:bubble/bubble.dart';
 import 'package:recase/recase.dart';
@@ -73,7 +74,7 @@ import 'package:projectscoid/ProjectscoidApplication.dart';
 import 'package:flutter/scheduler.dart' as SC;
 
 import 'package:package_info_plus/package_info_plus.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:koukicons_jw/addApp.dart';
 import 'package:koukicons_jw/moneyTransfer.dart';
 import 'package:koukicons_jw/camcorderPro.dart';
@@ -115,10 +116,11 @@ class  homeView extends StatefulWidget {
   ValueChanged<bool?>? activeFab;
   bool? hasID;
   bool? isDark;
+  bool? isAds;
   BuildContext? ctx;
 
   ChatBloc? notif;
-  homeView({Key? key, this.hasID, this.isDark, this.ctx, this.scrollUp, this.activeFab,  this.notif}) : super(key: key);
+  homeView({Key? key, this.hasID, this.isAds, this.isDark, this.ctx, this.scrollUp, this.activeFab,  this.notif}) : super(key: key);
   @override
   homeViewState createState() =>  homeViewState();
 }
@@ -160,6 +162,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
   List<TestimonialItemModel?>? _cte = [];
   List<TestimonialItemModel?>? _ctet = [];
   String oldCte = '';
+
   void scrollup(bool? su) {
     widget.scrollUp!(su!);
   }
@@ -192,8 +195,10 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
     Home =     SubModelController(AppProvider.getApplication(widget.ctx!),
         getPath,
         null);
-    super.initState();
+
     fetchData(Home);
+    super.initState();
+
   }
 
   Future<void> fetchData(SubModelController? Home)async {
@@ -1409,6 +1414,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                   child: Stack(
 
                                     children: <Widget>[
+
                                       Positioned.fill(
                                           bottom: 0.0,
                                           left: 0.0,
@@ -1539,7 +1545,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                     )
                                 ),
 
-                                Container(
+                                   Container(
                                   height: 214.0,
                                   padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
                                   /// To set FlashSale Scrolling horizontal
@@ -1572,6 +1578,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
                                     controller: controller2,
                                   )
                                 ),
+
 
                                    Container(
                                     decoration:
@@ -2871,7 +2878,8 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
 
 
 
-                )
+                ),
+
               ]
           )
 
@@ -2879,7 +2887,7 @@ class  homeViewState extends State< homeView>   with RestorationMixin{
       floatingActionButton:
            SpeedDialVarian(
               marginRight: 35,
-              marginBottom: 35,
+              marginBottom: widget.isAds! ? 35 : 70,
               animatedIcon: AnimatedIcons.menu_close,
               animatedIconTheme: IconThemeData(size: 22.0),
               // this is ignored if animatedIcon is non null
@@ -7602,7 +7610,7 @@ class  CartViewState extends State< CartView> with RestorationMixin{
 
                                         ),
                                       ),
-                                         Container(
+                                         SizedBox(
                                         height : 100,
                                         child:ButtonBarTheme(
                                           data: ButtonBarThemeData(
@@ -7655,6 +7663,9 @@ class  CartViewState extends State< CartView> with RestorationMixin{
                                           ),
                                         ),
                                       ),
+                                         SizedBox(
+                                           height: 50
+                                         ),
 
                                     ]
 
@@ -10347,7 +10358,11 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
   String _scanBarcode = '';
   SubModelController? logout;
   bool firstimeConnect = true ;
+  // TODO: Add _bannerAd
+  late BannerAd _bannerAd;
 
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
 
   Timer? _timer;
   PackageInfo _packageInfo = PackageInfo(
@@ -10496,7 +10511,26 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
 
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
+    // TODO: Initialize _bannerAd
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
 
+    _bannerAd.load();
    // _save[];
    // print('widget id = ${widget.id}');
     //_scrollViewController =    ScrollController();
@@ -11733,6 +11767,7 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
       }
     });
   }
+
   Future<void> _checkCart()async{
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
@@ -11763,6 +11798,7 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
               }
             );
   }
+
   Future<void> _checkNotif(BuildContext context)async{
     DatabaseHelper _db;
     //DBRepository projectsDBRepository = DBRepository(_db.database);
@@ -11871,6 +11907,8 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
     _connectivitySubscription!.cancel();
    // AppProvider.getApplication(context).chat!.dispose();
     WidgetsBinding.instance!.removeObserver(this);
+    // TODO: Dispose a BannerAd object
+    _bannerAd.dispose();
     super.dispose();
   }
 
@@ -12296,6 +12334,7 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
     appBarHide = true;
 
   }
+
   String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();
   }
@@ -12307,10 +12346,12 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
     });
     // next = false;
   }
+
   Future<void> setPref1() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('chat_link', '');
   }
+
   fetchData( AccountController? accountController, BuildContext context, String? id)async {
 
     final ftr = _getChatSharedPrefs();
@@ -12561,7 +12602,6 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
    */
 
 
-
   notifRoute(BuildContext context)async{
     String ntf = await _getNotif();
    // print('saya di sini ini notifnya === $ntf');
@@ -12730,7 +12770,7 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
     if(_children.length <5){
      // _children.add(Text('hello'));
 
-     _children.add(homeView(hasID : username != ''? true:false, isDark: darkMode , ctx : context,scrollUp: (su)=> setState(() => appBarHide=su!), activeFab: (fab){activeFab = fab!;},notif: AppProvider.getApplication(context).chat,));
+     _children.add(homeView(hasID : username != ''? true:false, isAds : _isBannerAdReady,  isDark: darkMode , ctx : context,scrollUp: (su)=> setState(() => appBarHide=su!), activeFab: (fab){activeFab = fab!;},notif: AppProvider.getApplication(context).chat,));
    //  username == ''?  _children.add(Container(height:0.0, width:0.0, child : Center(child: Text('Silahkan Login terlebih dahulu.'),)))
     //      :
     _children.add(notification(title: '1', scrollUp: (su)=> setState(() => appBarHide=su!), zeroNotif: (zn)=> setState(() => notifunread = 0),ctx : context,notif: AppProvider.getApplication(context).chat, user : widget.id == ''? 0 : 1, username: username, forlgn: forlgn));
@@ -13261,412 +13301,427 @@ class _ProjectscoidState extends State<Projectscoid> with TickerProviderStateMix
           MyCustomAppBar(
               height: 80, menu : _currentIndex, user : username == ''? 0 : 1, chatBloc : AppProvider.getApplication(context).chat, forlgn: forlgn, username: username),
           body:
-          Column(
-            children: <Widget>[
-                     Container(
-                        height:appBarHide? 80.0 : 50.0 ,
-                        padding: EdgeInsets.only(top:appBarHide? 24.0 : 0.0),
-                        constraints: BoxConstraints(maxHeight: appBarHide? 80.0 : 50.0),
-                        child:    Material(
-                          color: darkMode? Colors.black38 : CurrentTheme.PrimaryColor,
-                            child:
-                            TabBar(
+          Stack(
+            children: [
 
-                              isScrollable: false,
-                              controller: _tabController,
+              Column(
+                children: <Widget>[
+                  Container(
+                    height:appBarHide? 80.0 : 50.0 ,
+                    padding: EdgeInsets.only(top:appBarHide? 24.0 : 0.0),
+                    constraints: BoxConstraints(maxHeight: appBarHide? 80.0 : 50.0),
+                    child:    Material(
+                      color: darkMode? Colors.black38 : CurrentTheme.PrimaryColor,
+                      child:
+                      TabBar(
 
-                              indicatorColor: darkMode? CurrentTheme.PrimaryColor :CurrentTheme.NormalTextColor ,
-                              labelColor: darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor,
-                              labelPadding: EdgeInsets.only(top: 0.0),
-                              unselectedLabelColor: CurrentTheme.NormalTextColor,
-                              tabs: choices.map<Widget>((Choice choice) {
+                        isScrollable: false,
+                        controller: _tabController,
 
-                               return StreamBuilder(//
-                                                    stream: cb!.onMessage,
-                                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                                      if(snapshot!.hasData){
-                                                        if(jsonDecode(snapshot!.data).isEmpty){
-                                                          return Tab(
+                        indicatorColor: darkMode? CurrentTheme.PrimaryColor :CurrentTheme.NormalTextColor ,
+                        labelColor: darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor,
+                        labelPadding: EdgeInsets.only(top: 0.0),
+                        unselectedLabelColor: CurrentTheme.NormalTextColor,
+                        tabs: choices.map<Widget>((Choice choice) {
 
-                                                            // text: choice!.title!,
-                                                            //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                              child : Container(
-                                                                  height: 50,
-                                                                  child:Column(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                    children: <Widget>[
-                                                                      choice!.title! == 'Cart' &&  cartcount > 0 ?
+                          return StreamBuilder(//
+                              stream: cb!.onMessage,
+                              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                if(snapshot!.hasData){
+                                  if(jsonDecode(snapshot!.data).isEmpty){
+                                    return Tab(
 
-
-                                                                      Container(
-                                                                          width: 38,
-                                                                          height: 18,
-                                                                          child: Stack(
-                                                                              children: <Widget>[
-                                                                                Positioned.fill(
-                                                                                  child:
-                                                                                  Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                                ),
-                                                                                Align(
-                                                                                    alignment: Alignment.topRight,
-                                                                                    child: Container(
-                                                                                      alignment: Alignment.center,
-                                                                                      height: 15,
-                                                                                      width: 15,
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: Colors.red,
-                                                                                        shape: BoxShape.circle,
-                                                                                      ),
-                                                                                      child:  Text(
-                                                                                        "${cartcount.toString()}",
-                                                                                        style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                      ),
-                                                                                    )
-                                                                                )
-                                                                              ]
-                                                                          )
-                                                                      )
-                                                                          : choice!.title! == 'Chat' && unread > 0  ?
-                                                                      Container(
-                                                                          width: 38,
-                                                                          height: 18,
-                                                                          child: Stack(
-                                                                              children: <Widget>[
-                                                                                Positioned.fill(
-                                                                                  child:
-                                                                                  Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                                ),
-                                                                                Align(
-                                                                                    alignment: Alignment.topRight,
-                                                                                    child: Container(
-                                                                                      alignment: Alignment.center,
-                                                                                      height: 15,
-                                                                                      width: 15,
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: Colors.red,
-                                                                                        shape: BoxShape.circle,
-                                                                                      ),
-                                                                                      child:  Text(
-                                                                                        "${unread!.toString()}",
-                                                                                        style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                      ),
-                                                                                    )
-                                                                                )
-                                                                              ]
-                                                                          )
-                                                                      )
+                                      // text: choice!.title!,
+                                      //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                        child : Container(
+                                            height: 50,
+                                            child:Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                choice!.title! == 'Cart' &&  cartcount > 0 ?
 
 
-
-
-                                                                      //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                                          :
-                                                                      choice!.title! == 'Notif' && notifunread > 0 ?
-                                                                      Container(
-                                                                          width: 38,
-                                                                          height: 18,
-                                                                          child: Stack(
-                                                                              children: <Widget>[
-                                                                                Positioned.fill(
-                                                                                  child:
-                                                                                  Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                                ),
-                                                                                Align(
-                                                                                    alignment: Alignment.topRight,
-                                                                                    child: Container(
-                                                                                      alignment: Alignment.center,
-                                                                                      height: 15,
-                                                                                      width: 15,
-                                                                                      decoration: BoxDecoration(
-                                                                                        color: Colors.red,
-                                                                                        shape: BoxShape.circle,
-                                                                                      ),
-                                                                                      child:  Text(
-                                                                                        "${notifunread!.toString()}",
-                                                                                        style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                      ),
-                                                                                    )
-                                                                                )
-                                                                              ]
-                                                                          )
-                                                                      )
-
-
-
-                                                                          : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                      Text(choice!.title!, style: TextStyle(fontSize: 10),),
-                                                                    ],
-                                                                  )
-                                                              )
-                                                          );
-                                                        }
-
-                                                        if(jsonDecode(snapshot!.data)['type'] == 'index' && widget.id != ''){
-                                                          unread = 0;
-
-                                                          for(var obj in jsonDecode(snapshot!.data)['list']){
-
-                                                            //lastmesssage
-                                                           // if(obj['blocked'] != 1){
-                                                             // print('aku disini saja man');
-                                                            unread = ((unread! + obj['unread']) as int?)!;
-                                                          //  }
-                                                          }
-
-
-                                                        }
-
-                                                        if(jsonDecode(snapshot!.data)['type'] == 'notify'){
-                                                            //  print('hanya satu kali');
-                                                            //  notifunread = notifunread + 1;
-                                                        }
-                                                        return Tab(
-
-                                                          // text: choice!.title!,
-                                                          //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                            child : Container(
-                                                                height: 50,
-                                                                child:Column(
-                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                  children: <Widget>[
-                                                                    choice!.title! == 'Cart' &&  cartcount > 0 ?
-
-
-                                                                    Container(
-                                                                        width: 38,
-                                                                        height: 18,
-                                                                        child: Stack(
-                                                                            children: <Widget>[
-                                                                              Positioned.fill(
-                                                                                child:
-                                                                                Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                              ),
-                                                                              Align(
-                                                                                  alignment: Alignment.topRight,
-                                                                                  child: Container(
-                                                                                    alignment: Alignment.center,
-                                                                                    height: 15,
-                                                                                    width: 15,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Colors.red,
-                                                                                      shape: BoxShape.circle,
-                                                                                    ),
-                                                                                    child:  Text(
-                                                                                      "${cartcount.toString()}",
-                                                                                      style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                    ),
-                                                                                  )
-                                                                              )
-                                                                            ]
-                                                                        )
-                                                                    )
-                                                                        : choice!.title! == 'Chat' && unread > 0  ?
-                                                                    Container(
-                                                                        width: 38,
-                                                                        height: 18,
-                                                                        child: Stack(
-                                                                            children: <Widget>[
-                                                                              Positioned.fill(
-                                                                                child:
-                                                                                Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                              ),
-                                                                              Align(
-                                                                                  alignment: Alignment.topRight,
-                                                                                  child: Container(
-                                                                                    alignment: Alignment.center,
-                                                                                    height: 15,
-                                                                                    width: 15,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Colors.red,
-                                                                                      shape: BoxShape.circle,
-                                                                                    ),
-                                                                                    child:  Text(
-                                                                                      "${unread!.toString()}",
-                                                                                      style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                    ),
-                                                                                  )
-                                                                              )
-                                                                            ]
-                                                                        )
-                                                                    )
-
-
-
-
-                                                                    //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                                        :
-                                                                    choice!.title! == 'Notif' && notifunread > 0 ?
-                                                                    Container(
-                                                                        width: 38,
-                                                                        height: 18,
-                                                                        child: Stack(
-                                                                            children: <Widget>[
-                                                                              Positioned.fill(
-                                                                                child:
-                                                                                Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                              ),
-                                                                              Align(
-                                                                                  alignment: Alignment.topRight,
-                                                                                  child: Container(
-                                                                                    alignment: Alignment.center,
-                                                                                    height: 15,
-                                                                                    width: 15,
-                                                                                    decoration: BoxDecoration(
-                                                                                      color: Colors.red,
-                                                                                      shape: BoxShape.circle,
-                                                                                    ),
-                                                                                    child:  Text(
-                                                                                      "${notifunread!.toString()}",
-                                                                                      style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                    ),
-                                                                                  )
-                                                                              )
-                                                                            ]
-                                                                        )
-                                                                    )
-
-
-
-                                                                        : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                    Text(choice!.title!, style: TextStyle(fontSize: 10),),
-                                                                  ],
-                                                                )
-                                                            )
-                                                        );
-                                                      }
-                                                      return Tab(
-
-                                                        // text: choice!.title!,
-                                                        //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                          child : Container(
-                                                              height: 50,
-                                                              child:Column(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                children: <Widget>[
-                                                                  choice!.title! == 'Cart' &&  cartcount > 0 ?
-
-
-                                                                  Container(
-                                                                      width: 38,
-                                                                      height: 18,
-                                                                      child: Stack(
-                                                                          children: <Widget>[
-                                                                            Positioned.fill(
-                                                                              child:
-                                                                              Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                            ),
-                                                                            Align(
-                                                                                alignment: Alignment.topRight,
-                                                                                child: Container(
-                                                                                  alignment: Alignment.center,
-                                                                                  height: 15,
-                                                                                  width: 15,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Colors.red,
-                                                                                    shape: BoxShape.circle,
-                                                                                  ),
-                                                                                  child:  Text(
-                                                                                    "${cartcount.toString()}",
-                                                                                    style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                  ),
-                                                                                )
-                                                                            )
-                                                                          ]
-                                                                      )
-                                                                  )
-                                                                      : choice!.title! == 'Chat' && unread > 0  ?
-                                                                  Container(
-                                                                      width: 38,
-                                                                      height: 18,
-                                                                      child: Stack(
-                                                                          children: <Widget>[
-                                                                            Positioned.fill(
-                                                                              child:
-                                                                              Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                            ),
-                                                                            Align(
-                                                                                alignment: Alignment.topRight,
-                                                                                child: Container(
-                                                                                  alignment: Alignment.center,
-                                                                                  height: 15,
-                                                                                  width: 15,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Colors.red,
-                                                                                    shape: BoxShape.circle,
-                                                                                  ),
-                                                                                  child:  Text(
-                                                                                    "${unread!.toString()}",
-                                                                                    style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                  ),
-                                                                                )
-                                                                            )
-                                                                          ]
-                                                                      )
-                                                                  )
-
-
-
-
-                                                                  //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                                      :
-                                                                  choice!.title! == 'Notif' && notifunread > 0 ?
-                                                                  Container(
-                                                                      width: 38,
-                                                                      height: 18,
-                                                                      child: Stack(
-                                                                          children: <Widget>[
-                                                                            Positioned.fill(
-                                                                              child:
-                                                                              Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                            ),
-                                                                            Align(
-                                                                                alignment: Alignment.topRight,
-                                                                                child: Container(
-                                                                                  alignment: Alignment.center,
-                                                                                  height: 15,
-                                                                                  width: 15,
-                                                                                  decoration: BoxDecoration(
-                                                                                    color: Colors.red,
-                                                                                    shape: BoxShape.circle,
-                                                                                  ),
-                                                                                  child:  Text(
-                                                                                    "${notifunread!.toString()}",
-                                                                                    style: TextStyle(fontSize: 8,color: Colors.white),
-                                                                                  ),
-                                                                                )
-                                                                            )
-                                                                          ]
-                                                                      )
-                                                                  )
-
-
-
-                                                                      : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                                                  Text(choice!.title!, style: TextStyle(fontSize: 10),),
-                                                                ],
+                                                Container(
+                                                    width: 38,
+                                                    height: 18,
+                                                    child: Stack(
+                                                        children: <Widget>[
+                                                          Positioned.fill(
+                                                            child:
+                                                            Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                          ),
+                                                          Align(
+                                                              alignment: Alignment.topRight,
+                                                              child: Container(
+                                                                alignment: Alignment.center,
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.red,
+                                                                  shape: BoxShape.circle,
+                                                                ),
+                                                                child:  Text(
+                                                                  "${cartcount.toString()}",
+                                                                  style: TextStyle(fontSize: 8,color: Colors.white),
+                                                                ),
                                                               )
                                                           )
-                                                      );
-                                                    });
+                                                        ]
+                                                    )
+                                                )
+                                                    : choice!.title! == 'Chat' && unread > 0  ?
+                                                Container(
+                                                    width: 38,
+                                                    height: 18,
+                                                    child: Stack(
+                                                        children: <Widget>[
+                                                          Positioned.fill(
+                                                            child:
+                                                            Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                          ),
+                                                          Align(
+                                                              alignment: Alignment.topRight,
+                                                              child: Container(
+                                                                alignment: Alignment.center,
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.red,
+                                                                  shape: BoxShape.circle,
+                                                                ),
+                                                                child:  Text(
+                                                                  "${unread!.toString()}",
+                                                                  style: TextStyle(fontSize: 8,color: Colors.white),
+                                                                ),
+                                                              )
+                                                          )
+                                                        ]
+                                                    )
+                                                )
 
 
-                              }).toList(),
-                            ),
-                          ),
+
+
+                                                //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                    :
+                                                choice!.title! == 'Notif' && notifunread > 0 ?
+                                                Container(
+                                                    width: 38,
+                                                    height: 18,
+                                                    child: Stack(
+                                                        children: <Widget>[
+                                                          Positioned.fill(
+                                                            child:
+                                                            Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                          ),
+                                                          Align(
+                                                              alignment: Alignment.topRight,
+                                                              child: Container(
+                                                                alignment: Alignment.center,
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.red,
+                                                                  shape: BoxShape.circle,
+                                                                ),
+                                                                child:  Text(
+                                                                  "${notifunread!.toString()}",
+                                                                  style: TextStyle(fontSize: 8,color: Colors.white),
+                                                                ),
+                                                              )
+                                                          )
+                                                        ]
+                                                    )
+                                                )
+
+
+
+                                                    : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                Text(choice!.title!, style: TextStyle(fontSize: 10),),
+                                              ],
+                                            )
+                                        )
+                                    );
+                                  }
+
+                                  if(jsonDecode(snapshot!.data)['type'] == 'index' && widget.id != ''){
+                                    unread = 0;
+
+                                    for(var obj in jsonDecode(snapshot!.data)['list']){
+
+                                      //lastmesssage
+                                      // if(obj['blocked'] != 1){
+                                      // print('aku disini saja man');
+                                      unread = ((unread! + obj['unread']) as int?)!;
+                                      //  }
+                                    }
+
+
+                                  }
+
+                                  if(jsonDecode(snapshot!.data)['type'] == 'notify'){
+                                    //  print('hanya satu kali');
+                                    //  notifunread = notifunread + 1;
+                                  }
+                                  return Tab(
+
+                                    // text: choice!.title!,
+                                    //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                      child : Container(
+                                          height: 50,
+                                          child:Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              choice!.title! == 'Cart' &&  cartcount > 0 ?
+
+
+                                              Container(
+                                                  width: 38,
+                                                  height: 18,
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned.fill(
+                                                          child:
+                                                          Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                        ),
+                                                        Align(
+                                                            alignment: Alignment.topRight,
+                                                            child: Container(
+                                                              alignment: Alignment.center,
+                                                              height: 15,
+                                                              width: 15,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.red,
+                                                                shape: BoxShape.circle,
+                                                              ),
+                                                              child:  Text(
+                                                                "${cartcount.toString()}",
+                                                                style: TextStyle(fontSize: 8,color: Colors.white),
+                                                              ),
+                                                            )
+                                                        )
+                                                      ]
+                                                  )
+                                              )
+                                                  : choice!.title! == 'Chat' && unread > 0  ?
+                                              Container(
+                                                  width: 38,
+                                                  height: 18,
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned.fill(
+                                                          child:
+                                                          Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                        ),
+                                                        Align(
+                                                            alignment: Alignment.topRight,
+                                                            child: Container(
+                                                              alignment: Alignment.center,
+                                                              height: 15,
+                                                              width: 15,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.red,
+                                                                shape: BoxShape.circle,
+                                                              ),
+                                                              child:  Text(
+                                                                "${unread!.toString()}",
+                                                                style: TextStyle(fontSize: 8,color: Colors.white),
+                                                              ),
+                                                            )
+                                                        )
+                                                      ]
+                                                  )
+                                              )
+
+
+
+
+                                              //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                  :
+                                              choice!.title! == 'Notif' && notifunread > 0 ?
+                                              Container(
+                                                  width: 38,
+                                                  height: 18,
+                                                  child: Stack(
+                                                      children: <Widget>[
+                                                        Positioned.fill(
+                                                          child:
+                                                          Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                        ),
+                                                        Align(
+                                                            alignment: Alignment.topRight,
+                                                            child: Container(
+                                                              alignment: Alignment.center,
+                                                              height: 15,
+                                                              width: 15,
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.red,
+                                                                shape: BoxShape.circle,
+                                                              ),
+                                                              child:  Text(
+                                                                "${notifunread!.toString()}",
+                                                                style: TextStyle(fontSize: 8,color: Colors.white),
+                                                              ),
+                                                            )
+                                                        )
+                                                      ]
+                                                  )
+                                              )
+
+
+
+                                                  : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                              Text(choice!.title!, style: TextStyle(fontSize: 10),),
+                                            ],
+                                          )
+                                      )
+                                  );
+                                }
+                                return Tab(
+
+                                  // text: choice!.title!,
+                                  //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                    child : Container(
+                                        height: 50,
+                                        child:Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: <Widget>[
+                                            choice!.title! == 'Cart' &&  cartcount > 0 ?
+
+
+                                            Container(
+                                                width: 38,
+                                                height: 18,
+                                                child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned.fill(
+                                                        child:
+                                                        Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                      ),
+                                                      Align(
+                                                          alignment: Alignment.topRight,
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.red,
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                            child:  Text(
+                                                              "${cartcount.toString()}",
+                                                              style: TextStyle(fontSize: 8,color: Colors.white),
+                                                            ),
+                                                          )
+                                                      )
+                                                    ]
+                                                )
+                                            )
+                                                : choice!.title! == 'Chat' && unread > 0  ?
+                                            Container(
+                                                width: 38,
+                                                height: 18,
+                                                child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned.fill(
+                                                        child:
+                                                        Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                      ),
+                                                      Align(
+                                                          alignment: Alignment.topRight,
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.red,
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                            child:  Text(
+                                                              "${unread!.toString()}",
+                                                              style: TextStyle(fontSize: 8,color: Colors.white),
+                                                            ),
+                                                          )
+                                                      )
+                                                    ]
+                                                )
+                                            )
+
+
+
+
+                                            //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                :
+                                            choice!.title! == 'Notif' && notifunread > 0 ?
+                                            Container(
+                                                width: 38,
+                                                height: 18,
+                                                child: Stack(
+                                                    children: <Widget>[
+                                                      Positioned.fill(
+                                                        child:
+                                                        Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                      ),
+                                                      Align(
+                                                          alignment: Alignment.topRight,
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 15,
+                                                            width: 15,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.red,
+                                                              shape: BoxShape.circle,
+                                                            ),
+                                                            child:  Text(
+                                                              "${notifunread!.toString()}",
+                                                              style: TextStyle(fontSize: 8,color: Colors.white),
+                                                            ),
+                                                          )
+                                                      )
+                                                    ]
+                                                )
+                                            )
+
+
+
+                                                : Icon(choice!.icon, size: 21.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                            Text(choice!.title!, style: TextStyle(fontSize: 10),),
+                                          ],
+                                        )
+                                    )
+                                );
+                              });
+
+
+                        }).toList(),
+                      ),
+                    ),
                   ),
 
 
-             Expanded(
-                       child:TabBarView(
-                       controller: _tabController,
-                       children: _children
-                   ),
-               ),
+                  Expanded(
+                    child:TabBarView(
+                        controller: _tabController,
+                        children: _children
+                    ),
+                  ),
 
-             // )
+                  // )
 
+                ],
+              ),
+              if (_isBannerAdReady)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: _bannerAd.size.width.toDouble(),
+                    height: _bannerAd.size.height.toDouble(),
+                    child: AdWidget(ad: _bannerAd),
+                  ),
+                ),
             ],
-          ),
+          )
+
 
         ),
       )

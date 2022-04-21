@@ -329,7 +329,7 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
     return(
         SpeedDialVarian(
             marginRight: 35,
-            marginBottom: 35,
+            marginBottom: 70,
            // animatedIcon: AnimatedIcons.menu_close,
             animatedIconTheme: const IconThemeData(size: 22.0),
             // this is ignored if animatedIcon is non null

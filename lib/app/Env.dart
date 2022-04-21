@@ -14,6 +14,7 @@ import 'package:html/dom.dart' as dom;
 import 'package:http/http.dart' as http;
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:projectscoid/core/components/utility/firebase/firebase_config.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 //lib/core/components/utility/firebase/firebase_config.dart
 
 enum EnvType {
@@ -93,6 +94,10 @@ class Env {
   }
 
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
   void _init() async{
    // await Firebase.initializeApp();
     if(EnvType.DEVELOPMENT == environmentType || EnvType.STAGING == environmentType){
@@ -103,7 +108,7 @@ class Env {
     var application = ProjectscoidApplication();
     await application.onCreate();
     await FlutterDownloader.initialize(debug: debug);
-
+    await _initGoogleMobileAds();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     await Firebase.initializeApp(
       options: DefaultFirebaseConfig.platformOptions,

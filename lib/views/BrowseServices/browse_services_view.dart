@@ -74,8 +74,10 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
             hash.then((value) {
                 this.idHash = value;
             });
+            print('gagal');
             final future = browse_services!.viewBrowseServices();
             future.then((value) {
+                print('berhasil');
                 setState(() {
                     isLoading = false;
                 });
@@ -84,7 +86,7 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
             }).catchError((Error){
                 _onWidgetDidBuild(() {
                     ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                             content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
                             backgroundColor: Colors.red,
                         ),

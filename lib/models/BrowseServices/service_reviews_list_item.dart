@@ -108,8 +108,8 @@ class ItemServiceReviewsRev{
  int?owner_id;
  String? owner_str;
  String? owner_url;
- List<int?>? owner_list;
- List<String?>? owner_list_str;
+ //List<int?>? owner_list;
+ //List<String?>? owner_list_str;
  DateTime? start_date;
 
 
@@ -122,8 +122,8 @@ class ItemServiceReviewsRev{
      this.owner_id,
      this.owner_str,
      this.owner_url,
-     this.owner_list,
-     this.owner_list_str,
+    // this.owner_list,
+    // this.owner_list_str,
      this.start_date,
 
      );
@@ -142,29 +142,29 @@ class ItemServiceReviewsRev{
 
 ItemServiceReviewsRev _$ItemServiceReviewsRevFromJson(Map<String, dynamic> json) {
  return ItemServiceReviewsRev(
-     (json['buttons'] as List)
+     (json['buttons'] as List<dynamic>?)
          ?.map((e) =>
      e == null ? null : ItemButton.fromJson(e as Map<String, dynamic>))
-         ?.toList(),
-     json['project_id'] as String,
-     json['worker_rating'] as int,
-     json['owner_photo_url'] as String,
-     json['worker_feedback'] as String,
-     json['owner_id'] as int,
-     json['owner_str'] as String,
-     json['owner_url'] as String,
-     (json['owner_list'] as List)?.map((e) => e as int)?.toList(),
-     (json['owner_list_str'] as List)?.map((e) => e as String)?.toList(),
+         .toList(),
+     json['project_id'] as String?,
+     json['worker_rating'] as int?,
+     json['owner_photo_url'] as String?,
+     json['worker_feedback'] as String?,
+     json['owner_id'] as int?,
+     json['owner_str'] as String?,
+     json['owner_url'] as String?,
+    // (json['owner_list'] as List)?.map((e) => e as int)?.toList(),
+    // (json['owner_list_str'] as List)?.map((e) => e as String)?.toList(),
      json['start_date'] == null
          ? null
          : DateTime.parse(json['start_date'] as String))
-  ..age = json['age'] as int
-  ..cnt = json['cnt'] as int
-  ..page = json['page'] as int
-  ..id = json['id'] as String
-  ..ttl = json['ttl'] as String
-  ..pht = json['pht'] as String
-  ..sbttl = json['sbttl'] as String;
+  ..age = json['age'] as int?
+  ..cnt = json['cnt'] as int?
+  ..page = json['page'] as int?
+  ..id = json['id'] as String?
+  ..ttl = json['ttl'] as String?
+  ..pht = json['pht'] as String?
+  ..sbttl = json['sbttl'] as String?;
 }
 
 Map<String, dynamic> _$ItemServiceReviewsRevToJson(ItemServiceReviewsRev instance) =>
@@ -184,8 +184,8 @@ Map<String, dynamic> _$ItemServiceReviewsRevToJson(ItemServiceReviewsRev instanc
      'owner_id': instance.owner_id,
      'owner_str': instance.owner_str,
      'owner_url': instance.owner_url,
-     'owner_list': instance.owner_list,
-     'owner_list_str': instance.owner_list_str,
+    // 'owner_list': instance.owner_list,
+    // 'owner_list_str': instance.owner_list_str,
      'start_date': instance.start_date?.toIso8601String()
     };
 

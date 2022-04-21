@@ -16,7 +16,8 @@ import 'package:projectscoid/app/Env.dart';
 import 'dart:convert';
 import 'dart:async';
  import 'package:projectscoid/views/Chat/blocs/blocs.dart';
-
+ import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+ import 'package:google_mobile_ads/google_mobile_ads.dart';
  /** AUTOGENERATE OFF **/
 class  PublicBrowseProjectsListing extends StatefulWidget {
   static const String PATH = '/public/browse_projects/listing/:id';
@@ -42,8 +43,14 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
   String searchText = '';
    double initscroll = 0.0;
    String? userid;
-   PublicBrowseProjectsListingState() {
+ //  PublicBrowseProjectsListingState() {
    // scrollController!.addListener(_onScroll);
+ // }
+
+  void initState() {
+
+    super.initState();
+
   }
 
   @override
@@ -279,14 +286,14 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
 				Scaffold(
 					body:
 							RefreshIndicator(
-							child: new ListView.builder(
+							child: ListView.builder(
 								itemBuilder: (BuildContext context, int index) {
 
 								 	  return index >= state.browse_projects!.items.items.length ? 
 									  state.browse_projects!.tools.paging.total_pages == state.browse_projects!.tools.paging.current_page?
                                       Container(height: 0.0, width: 0.0,):
 									  PublicBrowseProjectsBottomLoader()
-									   : state.browse_projects!.viewItemId1(state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
+									   : state.browse_projects!.viewItemId1( state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
 								},
 								itemCount: state.hasReachedMax!
 									? state.browse_projects!.items.items.length
@@ -302,14 +309,14 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
 		  Scaffold(
                     body:    
 							RefreshIndicator(
-							child: new ListView.builder(
+							child: ListView.builder(
 								itemBuilder: (BuildContext context, int index) {
 								 	  return index >= state.browse_projects!.items.items.length ? 
 									  state.browse_projects!.tools.paging.total_pages == state.browse_projects!.tools.paging.current_page?
                                       Container(height: 0.0, width: 0.0,):
 									  PublicBrowseProjectsBottomLoader()
 									 // viewItemIndex(ItemBlogModel item,String search, int index, bool account) 
-									   : state.browse_projects!.viewItemId1 (state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
+									   : state.browse_projects!.viewItemId1 ( state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
 									
 								},
 								itemCount: state.hasReachedMax!

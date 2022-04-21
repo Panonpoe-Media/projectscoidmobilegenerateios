@@ -50,6 +50,8 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'browse_products.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -3417,7 +3419,7 @@ class BrowseProductsListingModel extends BrowseProductsListingBase{
 
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson()))!.contains(search!)),
-        child:  ItemBrowseProductsCard3(destination :item, search : search, shape : shape, height : height, account:account, idHash : id, cb : cb)
+        child:  ItemBrowseProductsCard3(destination :item, search : search,index: index, shape : shape, height : height, account:account, idHash : id, cb : cb)
       //  child:  ItemBrowseProductsCard2(destination :item, search : search, shape : shape, height : height)
     );
   }
@@ -3973,8 +3975,9 @@ class ItemBrowseProductsCard2 extends StatelessWidget {
   }
 }
 
-class ItemBrowseProductsCard3 extends StatelessWidget {
-   ItemBrowseProductsCard3({ Key? key, @required this.destination, this.search, this.shape, this.height, this.account, this.idHash, this.cb})
+
+class ItemBrowseProductsCard3 extends StatefulWidget {
+  ItemBrowseProductsCard3({ Key? key, @required this.destination, this.index, this.search, this.shape, this.height, this.account, this.idHash, this.cb})
       : assert(destination != null),
         super(key: key);
   final double? height ;
@@ -3984,6 +3987,56 @@ class ItemBrowseProductsCard3 extends StatelessWidget {
   final bool? account;
   final  String? idHash;
   ChatBloc? cb;
+  final int? index;
+
+
+  @override
+  _ItemBrowseProductsCard3State createState() => _ItemBrowseProductsCard3State();
+}
+
+class _ItemBrowseProductsCard3State extends State<ItemBrowseProductsCard3>  {
+
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -4000,8 +4053,8 @@ class ItemBrowseProductsCard3 extends StatelessWidget {
             ),
             child:
 
-            ItemBrowseProductsContent3(destination: destination, account : account, idHash: idHash, cb: cb),
-
+            _isBannerAdReady?  ItemBrowseProductsContent3(index: widget.index,isBanner:_isBannerAdReady,bannerAd : _bannerAd,destination: widget.destination, account : widget.account, idHash: widget.idHash, cb: widget.cb):
+            ItemBrowseProductsContent3(index: widget.index,isBanner:_isBannerAdReady,bannerAd : null,destination: widget.destination, account : widget.account, idHash: widget.idHash, cb: widget.cb),
           ),
           //  margin: EdgeInsets.all(5.0),
 
@@ -4247,12 +4300,15 @@ class ItemBrowseProductsContent2 extends StatelessWidget {
 
 //real content
 class ItemBrowseProductsContent3 extends StatelessWidget {
-  ItemBrowseProductsContent3({ Key? key, @required this.destination, this.account, this.idHash, this.cb })
+  ItemBrowseProductsContent3({ Key? key, this.index, @required this.destination,this.bannerAd, this.isBanner, this.account, this.idHash, this.cb })
       : assert(destination != null),
         super(key: key);
   final ItemBrowseProductsModel? destination;
   final bool? account;
   final  String? idHash;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
+  final int? index;
   ChatBloc? cb;
 
 
@@ -4283,243 +4339,7 @@ class ItemBrowseProductsContent3 extends StatelessWidget {
     int?owner_id1 = destination!.item.seller_id;
     var ownerID = encode(owner_id1!);
 
-    /*
 
-    final List<Widget> children = <Widget>[
-      // Photo? and title.
-      SizedBox(
-        height: (mediaQueryData.size.height - (4*55) )/3.8 ,
-        child: Stack(
-
-          children: <Widget>[
-            Positioned.fill(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                top : 0.0,
-                // In order to have the ink splash appear above the image, you
-                // must use Ink.image. This allows the image to be painted as part
-                // of the Material and display ink effects above it. Using a
-                // standard Image will obscure the ink splash.
-                child:
-                Image.network(
-                  destination!.item.logo_url,
-                 fit: BoxFit.cover,
-                )
-            ),
-            Positioned.fill(
-                child: new Material(
-                    color: Colors.transparent,
-                    child: new InkWell(
-                      splashColor: Colors.lightGreenAccent,
-                      onTap: () {
-                        AppProvider.getRouter(context)!.navigateTo(
-                            context,
-                            urlToRoute(destination!.item.buttons[2].url ));
-                      },
-                    )
-                )
-            ),
-          ],
-        ),
-      ),
-    ];
-
-    final List<Widget> children1 = <Widget>[
-      // Photo? and title.
-      SizedBox(
-        height: 55,
-       // padding: const EdgeInsets.fromLTRB(5.0, 2.0, 0.0 , 0.0),
-        child:
-          Stack(
-          children: <Widget>[
-                Positioned.fill(
-                bottom: 0.0,
-                left: 0.0,
-                right: 0.0,
-                top : 0.0,
-                // In order to have the ink splash appear above the image, you
-                // must use Ink.image. This allows the image to be painted as part
-                // of the Material and display ink effects above it. Using a
-                // standard Image will obscure the ink splash.
-                child:   Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              // three line description
-                              //newly added
-                              Flexible(
-                                  fit : FlexFit.tight,
-                                  child: Container(
-                                      padding: const EdgeInsets.fromLTRB(5.0, 10.0, 0.0 , 0.0),
-                                      child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children : <Widget>[
-                                            GestureDetector(
-                                              onTap: () {
-                                                AppProvider.getRouter(context)!.navigateTo(
-                                                    context,
-                                                    urlToRoute(destination!.item.buttons[2].url ));
-                                              },
-                                              child:
-
-                                              Text(
-                                                destination!.item.title.replaceAll('&amp;','&')  + ' . ' , overflow : TextOverflow.ellipsis ,style: TextStyle(fontSize: 10),
-
-                                                  ),
-                                            ),
-
-                                            Row(
-                                                children: <Widget>[
-                                                  // three line description
-                                                  Text(
-                                                    destination!.item.seller_str ,
-                                                    style: descriptionStyle!.copyWith( fontSize: 10),
-                                                  ),
-                                                ]
-                                            ),
-                                            Row(
-                                                children: <Widget>[
-                                                  // three line description
-                                                  Text(
-                                                    ratingMean(destination!.item.rating_num)  + ' . ' ,
-                                                    style: descriptionStyle!.copyWith(fontSize: 10),
-                                                  ),
-
-                                                  Text(
-                                                    destination!.item.sales_count.toString() + ' sales' + ' . ',
-                                                    style: descriptionStyle!.copyWith( fontSize: 10),
-                                                  ),
-                                                  Text(
-                                                    destination!.item.price_str ,
-                                                    style: descriptionStyle!.copyWith( fontSize: 10),
-                                                  ),
-                                                ]
-                                            ),
-
-                                          ]
-                                      )
-                                  )
-                              ),
-
-                            ]
-
-                        ),
-
-                ),
-                    Positioned.fill(
-                      bottom: 0.0,
-                      left:mediaQueryData.size.width < 350 ?  mediaQueryData.size.width * 1/3 : mediaQueryData.size.width * 1/2.8,
-                      right: 0.0,
-                      top : 0.0,
-                      // In order to have the ink splash appear above the image, you
-                      // must use Ink.image. This allows the image to be painted as part
-                      // of the Material and display ink effects above it. Using a
-                      // standard Image will obscure the ink splash.
-                      child:  Container(
-                          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0 , 0.0),
-                          child: Column(
-                              children : <Widget>[
-                                          Container(
-                                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0 , 0.0),
-                                  child: PopupMenuButton<int>(
-                                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 12.0),
-                                    onSelected: (int value) {
-
-                                      if(value == 1) {
-                                        if(account!){
-                                          var owner_id_str = destination!.item.buttons[0].url.replaceAll(new RegExp(r'[^0-9]'),'');
-
-                                          int?owner_id = int.parse(owner_id_str);
-                                          _chatBloc = new ChatBloc();
-
-                                          // if(widget.id == '')
-
-                                          _chatBloc.wsSetHandlers();
-                                          //_chatBloc.lgn(widget.id);
-                                          _chatBloc.lg(idHash!);
-                                          //$idHash/${encode(this.model!.model!.owner_id)}
-                                           String? thread = '';
-                                          if(decode(idHash!)> owner_id ){
-                                            thread = '${encode(owner_id)}/$idHash';
-                                          }else{
-                                            thread = '$idHash/${encode(owner_id)}';
-                                          }
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (_) => ChatScreen(
-                                                  user: {
-
-                                                    "thread":"$thread",
-                                                    "username":"${destination!.item.seller_str}",
-                                                    "userid":"${encode(owner_id)}",
-                                                    "display":"${destination!.item.seller_str}",
-                                                    "avatar":"${destination!.item.logo_url}",
-                                                    "lastmesssage":"",
-                                                    "lastseen":1606880840,
-                                                    "lasttime":1234567890
-
-                                                  },
-                                                  userID : idHash,
-                                                  chatBloc : _chatBloc,
-                                                  trans : true,
-                                                  ctx: context,
-                                                ),
-                                              )
-                                          );
-                                        }else{
-                                          AppProvider.getRouter(context)!.navigateTo(
-                                              context,
-                                              '/login/1');
-                                        }
-                                      }
-                                      if(value == 2) {
-                                        if(account!){
-                                          AppProvider.getRouter(context)!.navigateTo(
-                                              context,
-                                              urlToRoute(destination!.item.buttons[1].url ));
-                                        }else{
-                                          AppProvider.getRouter(context)!.navigateTo(
-                                              context,
-                                              '/login/1');
-                                        }
-                                      }
-                                      if(value == 3) {
-                                        AppProvider.getRouter(context)!.navigateTo(
-                                            context,
-                                            urlToRoute(destination!.item.buttons[2].url ));
-                                      }
-
-
-                                    },
-                                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                                      const PopupMenuItem<int>(
-                                        value: 1,
-                                        child: Text('Chat with seller'),
-                                      ),
-                                      const PopupMenuItem<int>(
-                                        value: 2,
-                                        child: Text('Add to chart'),
-                                      ),
-                                      const PopupMenuItem<int>(
-                                        value: 3,
-                                        child: Text('View'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ])
-                      )
-
-                    ),
-             ])
-
-      )
-
-    ];
-
-     */
     final List<Widget> children = <Widget>[
       //viewHeader(context, account, _chatBloc),
       Row(
@@ -5214,6 +5034,14 @@ class ItemBrowseProductsContent3 extends StatelessWidget {
             ]
         ),
       ),
+      if (isBanner!)
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
 
     ];
 

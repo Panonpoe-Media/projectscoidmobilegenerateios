@@ -52,7 +52,7 @@ class RegisterNewUser extends StatefulWidget {
   RegisterNewUserState createState() => RegisterNewUserState();
 }
 
-class RegisterNewUserState extends State<RegisterNewUser>{
+class RegisterNewUserState extends State<RegisterNewUser>with RestorationMixin{
   String getPath = Env.value!.baseUrl! + '/public/new_user/register';
  // String sendPath = Env.value!.baseUrl! + '/public/new_user/add';
   String sendPath = Env.value!.baseUrl! + '/public/new_user/register';
@@ -69,6 +69,16 @@ class RegisterNewUserState extends State<RegisterNewUser>{
   var isError = false;
   final List<Widget> actionChildren = <Widget>[
 	];
+  final RestorableInt _counter = RestorableInt(0);
+
+  @override
+  String? get restorationId => 'RegisterNewUser';
+
+  @override
+  void restoreState(RestorationBucket?  oldBucket, bool initialRestore) {
+    registerForRestoration(_counter, 'counter');
+  }
+
   @override
   initState(){
     super.initState();
@@ -88,7 +98,18 @@ class RegisterNewUserState extends State<RegisterNewUser>{
         setState(() {
           isLoading = false;
         });
+
+        try{
           this.model = value;
+          try{
+          //  errmsg = value;
+          }catch(e){
+
+          }
+        }catch(e){
+         // errmsg = value;
+          isError = true;
+        }
 		  if(this.model.model.meta == null){
             isError = true;
 			  _onWidgetDidBuild(() {
@@ -136,17 +157,18 @@ class RegisterNewUserState extends State<RegisterNewUser>{
 		) ??
 				false;
 	}
+
   @override
   Widget build(BuildContext context) {
    bool darkMode = false;
    final themeManager =  Provider.of<ThemeManager>(context);
       themeManager.themeMode == ThemeMode.dark? darkMode = true : darkMode = false;
     bool _dialVisible = true;
-    register = new NewUserController(AppProvider.getApplication(context),
+    register = NewUserController(AppProvider.getApplication(context),
         getPath,
         AppAction.edit,
-        widget.id,
-        widget.title,
+        widget.id!,
+        widget.title!,
         null,
 		false);
 		
@@ -168,13 +190,13 @@ class RegisterNewUserState extends State<RegisterNewUser>{
                                 GestureDetector(
                                   onTap: _onWillPop,
                                   child:
-                                  Padding(padding: EdgeInsets.only(right: 6.0),
+                                  const Padding(padding: EdgeInsets.only(right: 6.0),
                                     child: Icon(Icons.arrow_back,
                                                   color: Colors.white),
 
                                   ),
                                 ),
-                                Text('Register', style: TextStyle(color: Colors.white),),
+                                const Text('Register', style: TextStyle(color: Colors.white),),
                               ]
                             ),
 
@@ -187,7 +209,7 @@ class RegisterNewUserState extends State<RegisterNewUser>{
                         // )
                           Center( 
                       child:CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
+                      valueColor: AlwaysStoppedAnimation<Color>(
                         Colors.green),
                       )):isError?
 				 				  
@@ -437,11 +459,11 @@ class RegisterNewUserState extends State<RegisterNewUser>{
                                   }),
                               ),
                               
-                                
-                              this.model.editEmail(this), 							  
-                              this.model.editUserName(this), 							  
-                              this.model.editCaptcha(this), 							  
-                              
+
+                              this.model.editEmail(this),
+                              this.model.editUserName(this),
+                              this.model.editCaptcha(this),
+
                             this.model.model.meta.after_content == null ? Container(width: 0.0, height: 0.0) :
                               Padding(
                               padding: const EdgeInsets.fromLTRB(
@@ -480,6 +502,8 @@ class RegisterNewUserState extends State<RegisterNewUser>{
                                   }
                               ),
                               ),
+
+
                               
                             /* Padding(
                                 padding: const EdgeInsets.fromLTRB(
@@ -489,7 +513,7 @@ class RegisterNewUserState extends State<RegisterNewUser>{
                         	Container(
                               height: 30,
                             ),
-                            isLoading?  null : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,register, postRegisterResult, this, sendPath, widget.id, widget.title),
+                         isLoading!? []  : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,register, postRegisterResult, this, sendPath, widget.id, widget.title!),
                       
                         Container(
                           height: 60,

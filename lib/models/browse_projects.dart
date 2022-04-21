@@ -46,7 +46,11 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:projectscoid/views/BrowseProjects/browse_projects_view.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:admob_flutter/admob_flutter.dart';
 part 'browse_projects.g.dart';
+
 /** AUTOGENERATE OFF **/
 
 class PlaceNewBidBrowseProjectsModel extends PlaceNewBidBrowseProjectsBase{
@@ -818,7 +822,7 @@ class BrowseProjectsViewModel  extends BrowseProjectsViewBase{
                                 AppProvider.getRouter(context)!.navigateTo(
                                     context,
                                     urlToRoute(
-                                        'public/browse_projects/place_ _bid/${this.model!.model!.project_id}/${this.model!.meta.title.replaceAll('/', ' ')}'));
+                                        'public/browse_projects/place_new_bid/${this.model!.model!.project_id}/${this.model!.meta.title.replaceAll('/', ' ')}'));
                               } else {
                                // print('helooooooooooo1');
                                 AppProvider.getRouter(context)!.navigateTo(
@@ -2672,7 +2676,7 @@ class BrowseProjectsListingModel extends BrowseProjectsListingBase{
   Map<String, dynamic> json;
   BrowseProjectsListingModel(Map<String, dynamic> this.json):super(json);
 
-
+/*
   @override
   Widget viewItemIndex(ItemBrowseProjectsModel item,String? search, int?index, bool? account) {
     ShapeBorder? shape;
@@ -2694,17 +2698,19 @@ class BrowseProjectsListingModel extends BrowseProjectsListingBase{
         child:  ItemBrowseProjectsCard1(destination :item, search : search, shape : shape, height : height, account : account, idHash : '')
     );
   }
+  
+ */
 
 
 
   //@override
-  Widget viewItemId1 (ItemBrowseProjectsModel item,String? search, int?index, bool account, String? id, ChatBloc? cb) {
+  Widget viewItemId1 ( ItemBrowseProjectsModel item,String? search, int?index, bool account, String? id, ChatBloc? cb) {
     ShapeBorder? shape;
     double? height = 160;
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
         //  child:  ItemBrowseProjectsCard2(destination :item, search : search, shape : shape, height : height, account : account)
-        child:  ItemBrowseProjectsCard1(destination :item, search : search, shape : shape, height : height, account : account, idHash : id, cb : cb)
+        child:  ItemBrowseProjectsCard1( destination :item, search : search, shape : shape, index: index, height : height, account : account, idHash : id, cb : cb)
     );
   }
 
@@ -2770,9 +2776,19 @@ class  SearchBrowseProjectsListingState extends State< SearchBrowseProjectsListi
   String? searchText = '';
   double? initscroll = 0.0;
   String? userid;
-  SearchBrowseProjectsListingState() {
-   // scrollController!.addListener(_onScroll);
+
+
+
+  void initState() {
+
+    super.initState();
+
+
+
   }
+  //SearchBrowseProjectsListingState() {
+   // scrollController!.addListener(_onScroll);
+ // }
 
   final RestorableDouble cs = RestorableDouble(0);
 
@@ -2995,7 +3011,7 @@ class  SearchBrowseProjectsListingState extends State< SearchBrowseProjectsListi
                       Container(height: 0.0, width: 0.0,):
                       SearchBrowseProjectsBottomLoader()
                       // viewItemIndex(ItemBlogModel item,String? search, int?index, bool account)
-                          : state.browse_projects!.viewItemId1 (state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
+                          : state.browse_projects!.viewItemId1 ( state.browse_projects!.items.items[index] , searchText, index, account, userid, widget.cb );
 
                     },
                     itemCount: state.hasReachedMax!
@@ -3162,11 +3178,11 @@ class  SearchBrowseProjectsBottomLoader extends StatelessWidget {
 
 ////////////////////////////
 
-class ItemBrowseProjectsCard1 extends StatelessWidget {
-  const ItemBrowseProjectsCard1({ Key? key, @required this.destination, this.search, this.shape, this.height, this.index, this.account, this.idHash, this.cb})
+
+class ItemBrowseProjectsCard1 extends StatefulWidget {
+  const ItemBrowseProjectsCard1({ Key? key, @required this.destination,   this.search, this.shape, this.height, this.index, this.account, this.idHash, this.cb})
       : assert(destination != null),
         super(key: key);
-  // This height will allow for all the Card's content to fit comfortably within the card.
   final double? height ;
   final ItemBrowseProjectsModel? destination;
   final String? search;
@@ -3176,8 +3192,61 @@ class ItemBrowseProjectsCard1 extends StatelessWidget {
   final String? idHash;
   final ChatBloc? cb;
 
+
+
+  @override
+  _ItemBrowseProjectsCard1State createState() => _ItemBrowseProjectsCard1State();
+}
+
+
+class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1>  {
+ // const ItemBrowseProjectsCard1({ Key? key, @required this.destination, this.isBanner,this.bannerAd,  this.search, this.shape, this.height, this.index, this.account, this.idHash, this.cb})
+ //    : assert(destination != null),
+  //      super(key: key);
+  // This height will allow for all the Card's content to fit comfortably within the card.
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+  //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
+   // return (const Text('ocehhhhhhh'));
+
     return SafeArea(
       top: false,
       bottom: false,
@@ -3191,9 +3260,11 @@ class ItemBrowseProjectsCard1 extends StatelessWidget {
               ),
               //  shadowColor: CurrentTheme.ListColor,
               child:
-              [4,5,6].contains(index)? ItemBrowseProjectsContent3( destination: destination,  account : account, idHash: idHash, cb: cb):
-              [7,8,9].contains(index)? ItemBrowseProjectsContent4( destination: destination,  account : account, idHash: idHash, cb: cb):
-              ItemBrowseProjectsContent2( destination: destination,  account : account, idHash: idHash, cb: cb)
+           //   [4,5,6].contains(index)? ItemBrowseProjectsContent3( destination: destination,  account : account, idHash: idHash, cb: cb):
+           //   [7,8,9].contains(index)? ItemBrowseProjectsContent4( destination: destination,  account : account, idHash: idHash, cb: cb):
+              _isBannerAdReady?
+              ItemBrowseProjectsContent2( index: widget.index,isBanner:_isBannerAdReady,bannerAd : _bannerAd, destination: widget.destination,  account : widget.account, idHash: widget.idHash, cb: widget.cb):
+              ItemBrowseProjectsContent2( index: widget.index,isBanner:_isBannerAdReady,bannerAd : null, destination: widget.destination,  account : widget.account, idHash: widget.idHash, cb: widget.cb)
             ),
         /*
         Column(
@@ -3218,6 +3289,8 @@ class ItemBrowseProjectsCard1 extends StatelessWidget {
          */
       ),
     );
+
+
   }
 }
 
@@ -3526,14 +3599,19 @@ class ItemBrowseProjectsContent1 extends StatelessWidget {
 }
 
 class ItemBrowseProjectsContent2 extends StatelessWidget {
-   ItemBrowseProjectsContent2({ Key? key, @required this.destination, this.account, this.idHash, this.cb })
+   ItemBrowseProjectsContent2({ Key? key, this.index,this.isBanner,this.bannerAd, @required this.destination, this.account, this.idHash, this.cb })
       : assert(destination != null),
         super(key: key);
 
   final ItemBrowseProjectsModel? destination;
   final bool? account ;
   final String? idHash;
+  final int? index;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
   ChatBloc? cb;
+
+
   int?getViewBackground(int?userid){
     int?i = 0;
     if (userid! % 13 == 0) {
@@ -3551,6 +3629,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
     }
     return i;
   }
+
   Widget _buildCoverImage(Size screenSize, int?number) {
     List<String> image = [
       'assets/img/workerbg1.jpg',
@@ -3572,6 +3651,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
       ),
     );
   }
+
   String? readDate(DateTime? dt) {
     var now = DateTime.now();
     var format = DateFormat('dd MMMM yyyy');
@@ -3583,6 +3663,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
     time = '  $day, ${format.format(dt!)}';
     return time;
   }
+
   Widget viewHeader (BuildContext context, bool account, ChatBloc cb) {
     final ThemeData theme = Theme.of(context);
     final TextStyle titleStyle = theme.textTheme.headline1!.copyWith(color: CurrentTheme.NormalTextColor);
@@ -3864,6 +3945,8 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
     return name!.substring(0, 1).toUpperCase() + name!.substring(1);
   }
 
+
+
   @override
   Widget build(BuildContext context) {
    // ChatBloc _chatBloc;
@@ -3872,7 +3955,8 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
     final TextStyle descriptionStyle = theme.textTheme.headline5!;
    // var owner_id_str1 = destination!.item.buttons[2].url.replaceAll(  RegExp(r'[^0-9]'),'');
     var owner_id_str1 = destination!.item.buttons[2].url.split('/')[4];
-   // print('owner str $owner_id_str1');
+   // _loadRewardedAd();
+    // print('owner str $owner_id_str1');
    // int?owner_id1 = int.parse(owner_id_str1);
     var ownerID = owner_id_str1 ; //encode(owner_id1);
     final List<Widget> children = <Widget>[
@@ -4204,17 +4288,23 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                             ),
                           ),
                         ),
-
+                      // if(_isRewardedAdReady)
                           GestureDetector(
                             onTap:(){
                               if(account!){
                                 AppProvider.getRouter(context)!.navigateTo(
                                     context,
                                     urlToRoute(destination!.item.buttons[0].url ));
+                              //  _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                                  // Reward the user for watching an ad.
+                              //  });
                               }else{
                                 AppProvider.getRouter(context)!.navigateTo(
                                     context,
                                     '/login/1');
+                              //  _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                                  // Reward the user for watching an ad.
+                               // });
                               }
                             },
                             child:
@@ -4523,6 +4613,11 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
         height: 0.3,
         color: Colors.grey,
       ),
+
+    //  if(index! % 10 == 0 )
+
+
+
       Padding(
         padding: EdgeInsets.only(bottom: 0),
         child: Row(
@@ -4685,6 +4780,15 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
             ]
         ),
       ),
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
+
 
     ];
     // }
@@ -5271,157 +5375,7 @@ class ItemBrowseProjectsContent3 extends StatelessWidget {
       SizedBox(height: 15),
 
       // Description and share/explore buttons.
-      /*
-      Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 10.0),
-        child: DefaultTextStyle(
-          softWrap: false,
-          overflow: TextOverflow.ellipsis,
-          style: descriptionStyle,
 
-          child: Row(
-            children: <Widget>[
-              // three line description
-              //  Text(
-              //    'Published . ',
-              //    style: descriptionStyle.copyWith( fontSize: 13),
-              //  ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 2.0),
-                child: Text(timeago.format(destination!.item.published_date),
-                  style: descriptionStyle.copyWith( fontSize: 13),
-                ),
-              ),
-              Text(
-                ' . ',
-                style: descriptionStyle.copyWith( fontSize: 13),
-              ),
-              destination!.item.project_class_str == 'Open to Suggestions'? Text(
-                  'Open to Suggestions', style: descriptionStyle.copyWith(  fontSize: 13)): Text(
-                destination!.item.project_class_str == "Specific Range" ? destination!.item.budget_range_str??'-':destination!.item.published_budget_str,
-                style: descriptionStyle.copyWith( fontSize: 13),
-              ),
-              /*
-                Expanded(
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      PopupMenuButton<int>(
-                        onSelected: (int?value) {
-                          if(value == 1) {
-                            if(account!){
-                              AppProvider.getRouter(context)!.navigateTo(
-                                  context,
-                                  urlToRoute(destination!.item.buttons[0].url ));
-                            }else{
-                              AppProvider.getRouter(context)!.navigateTo(
-                                  context,
-                                  '/login/1');
-                            }
-                          }
-                          if(value == 2) {
-                            if(account!){
-                              AppProvider.getRouter(context)!.navigateTo(
-                                  context,
-                                  urlToRoute(destination!.item.buttons[1].url ));
-                            }else{
-                              AppProvider.getRouter(context)!.navigateTo(
-                                  context,
-                                  '/login/1');
-                            }
-                          }
-                          if(value == 3) {
-                            if(account!){
-
-
-                              var owner_id_str = destination!.item.buttons[2].url.replaceAll(  RegExp(r'[^0-9]'),'');
-
-                              int?owner_id = int.parse(owner_id_str);
-                              _chatBloc =   ChatBloc();
-
-                              // if(widget.id == '')
-
-                              _chatBloc.wsSetHandlers();
-                              //_chatBloc.lgn(widget.id);
-                              _chatBloc.lg(idHash!);
-                              //$idHash/${encode(this.model!.model!.owner_id)}
-                              String? thread = '';
-                              if(decode(idHash!)> owner_id ){
-                                thread = '${encode(owner_id)}/$idHash';
-                              }else{
-                                thread = '$idHash/${encode(owner_id)}';
-                              }
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => ChatScreen(
-                                      user: {
-
-                                        "thread":"$thread",
-                                        "username":"${destination!.item.owner_user_name}",
-                                        "userid":"${encode(owner_id)}",
-                                        "display":"${destination!.item.owner_user_name}",
-                                        "avatar":"${destination!.item.owner_photo_url}",
-                                        "lastmesssage":"",
-                                        "lastseen":1606880840,
-                                        "lasttime":1234567890
-
-                                      },
-                                      userID : idHash,
-                                      chatBloc : _chatBloc,
-                                      trans : true,
-                                      ctx: context,
-                                    ),
-                                  )
-                              );
-                            }else{
-                              AppProvider.getRouter(context)!.navigateTo(
-                                  context,
-                                  '/login/1');
-                            }
-
-
-                          }
-                          if(value == 4) {
-                            AppProvider.getRouter(context)!.navigateTo(
-                                context,
-                                urlToRoute(destination!.item.buttons[3].url ));
-                          }
-                        },
-                        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                          const PopupMenuItem<int>(
-                            value: 1,
-                            child: Text('Place   bid'),
-                          ),
-                          const PopupMenuItem<int>(
-                            value: 2,
-                            child: Text('Ask owner'),
-                          ),
-                          const PopupMenuItem<int>(
-                            value: 3,
-                            child: Text('Chat with owner'),
-                          ),
-                          const PopupMenuItem<int>(
-                            value: 4,
-                            child: Text('View'),
-                          ),
-                        ],
-                      ),
-                    ]
-                ),
-                //settingsRow,
-              ),
-
-               */
-            ],
-          ),
-
-
-        ),
-      ),
-
-       */
     ];
     // }
     return Column(

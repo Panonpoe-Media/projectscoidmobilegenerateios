@@ -4596,6 +4596,7 @@ class BrowseProjectsViewBase{
 						false);
                         final future = browse_projects.downloadFile();
                         future.then((value) {
+
                         state.setState(() {
                        // postBrowseProjectsResult = value;
 						//AppProvider.getRouter(context)!.pop(context);	

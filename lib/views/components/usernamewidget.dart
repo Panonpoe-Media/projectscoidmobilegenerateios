@@ -11,12 +11,12 @@ class UsernameWidget extends StatefulWidget {
    this.getValue,
    }) : super(key: key)
    {
-    contr?.text = value!;
+  //  contr?.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = new TextEditingController();
+ // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -35,11 +35,12 @@ class _UsernameWidget extends State<UsernameWidget> {
   bool validation = true;
   bool isvalid = true;
   String  errormessage = '';
- // TextEditingController contr;
- // _UsernameWidget({this.contr});
+  TextEditingController? contr;
+//  _UsernameWidget(TextEditingController? contr);
   @override
   initState(){
-  //contr.text = 'ok';
+    contr?.text = widget.value!;
+    super.initState();
   }
 
   String validateUserName(_value, _require) {
@@ -80,7 +81,7 @@ class _UsernameWidget extends State<UsernameWidget> {
   }
 
   void  _getvalue(String? val){
-      widget.getValue!(val);
+      widget.getValue!(val!);
   }
 
   @override
@@ -109,7 +110,6 @@ class _UsernameWidget extends State<UsernameWidget> {
                 height: 45.0,
 
                 child: TextFormField(
-
                   style: TextStyle(color: validation ? CurrentTheme.NormalTextColor : CurrentTheme.BackgroundColor, fontSize: 14),
 
                   decoration: InputDecoration(
@@ -124,7 +124,7 @@ class _UsernameWidget extends State<UsernameWidget> {
                     border: const OutlineInputBorder(),
                   ),
 
-                  controller: widget.contr,
+                  controller: contr,
                   validator: (value) {
                     // widget.value = value;
                     errormessage = validateUserName(value, widget.required);

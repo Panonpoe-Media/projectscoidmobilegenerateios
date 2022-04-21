@@ -35,7 +35,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_html/style.dart';
-
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /** AUTOGENERATE OFF **/
 
@@ -524,7 +525,7 @@ class ItemTipsCard1 extends StatelessWidget {
   }
 }
 
-class ItemTipsCard2 extends StatelessWidget {
+class ItemTipsCard2 extends StatefulWidget {
   const ItemTipsCard2({ Key? key, @required this.destination, this.search, this.shape, this.height, this.index, this.account})
       : assert(destination != null),
         super(key: key);
@@ -537,6 +538,52 @@ class ItemTipsCard2 extends StatelessWidget {
   final int? index;
   final bool? account;
 
+  @override
+  _ItemTipsCard2State createState() => _ItemTipsCard2State();
+}
+
+
+class _ItemTipsCard2State extends State<ItemTipsCard2>  {
+
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+    //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -545,7 +592,7 @@ class ItemTipsCard2 extends StatelessWidget {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => PublicTipsView(id: destination!.item.article_id, title:destination!.item.title)),
+                      MaterialPageRoute(builder: (context) => PublicTipsView(id: widget.destination!.item.article_id, title:widget.destination!.item.title)),
                     );
                   },
                   child: Card(
@@ -554,7 +601,8 @@ class ItemTipsCard2 extends StatelessWidget {
                     borderOnForeground: false,
                     margin : EdgeInsets.all(6.0),
                     child:
-                    [1,3,6,8,9].contains(index)?  ItemTipsContent1(destination: destination!, account: account) : ItemTipsContent2(destination: destination!, account: account),
+                    [1,3,6,8,9].contains(widget.index)?  ItemTipsContent1(destination: widget.destination!, account: widget.account) :_isBannerAdReady? ItemTipsContent2(bannerAd: _bannerAd, isBanner:_isBannerAdReady,destination: widget.destination!, account: widget.account):
+                    ItemTipsContent2(bannerAd: null, isBanner:_isBannerAdReady,destination: widget.destination!, account: widget.account),
                   ),
               ),
     );
@@ -731,12 +779,14 @@ class ItemTipsContent1 extends StatelessWidget {
 }
 
 class ItemTipsContent2 extends StatelessWidget {
-  const ItemTipsContent2({ Key? key, @required this.destination, this.account })
+  const ItemTipsContent2({ Key? key, this.bannerAd, this.isBanner, @required this.destination, this.account })
       : assert(destination != null),
         super(key: key);
 
   final ItemTipsModel? destination;
   final bool? account ;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -860,6 +910,14 @@ class ItemTipsContent2 extends StatelessWidget {
           ),
         ),
       ),
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
     ];
 
 

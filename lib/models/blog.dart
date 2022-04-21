@@ -14,7 +14,8 @@ import 'package:projectscoid/views/route.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:flutter_html/style.dart';
-
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 /** AUTOGENERATE OFF **/
 
 class BlogModel extends BlogBase{
@@ -393,7 +394,9 @@ class BlogListingModel extends BlogListingBase{
   }
 }
 
-class ItemBlogCard2 extends StatelessWidget {
+
+
+class ItemBlogCard2 extends StatefulWidget {
   const ItemBlogCard2({ Key? key, @required this.destination, this.search, this.shape, this.height, this.index, this.account})
       : assert(destination != null),
         super(key: key);
@@ -404,6 +407,55 @@ class ItemBlogCard2 extends StatelessWidget {
   final int? index;
   final bool? account;
 
+
+  @override
+  _ItemBlogCard2State createState() => _ItemBlogCard2State();
+}
+
+
+class _ItemBlogCard2State extends State<ItemBlogCard2>  {
+//class ItemBlogCard2 extends StatelessWidget {
+  // This height will allow for all the Card's content to fit comfortably within the card.
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+    //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -411,7 +463,7 @@ class ItemBlogCard2 extends StatelessWidget {
         onTap: (){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PublicBlogView(id: destination!.item.article_id, title:destination!.item.title)),
+            MaterialPageRoute(builder: (context) => PublicBlogView(id: widget.destination!.item.article_id, title:widget.destination!.item.title)),
           );
         },
         child: Card(
@@ -420,7 +472,7 @@ class ItemBlogCard2 extends StatelessWidget {
           borderOnForeground: false,
           margin : EdgeInsets.all(6.0),
           child:
-          [1,3,6,8,9].contains(index)?  ItemBlogContent1(destination: destination, account: account) : ItemBlogContent2(destination: destination, account: account),
+          [1,3,6,8,9].contains(widget.index)?  ItemBlogContent1(destination: widget.destination, account: widget.account) : _isBannerAdReady ? ItemBlogContent2(bannerAd: _bannerAd,isBanner:  _isBannerAdReady, destination: widget.destination, account: widget.account): ItemBlogContent2(bannerAd: null,isBanner:  _isBannerAdReady, destination: widget.destination, account: widget.account) ,
         ),
       ),
     );
@@ -560,12 +612,14 @@ class ItemBlogContent1 extends StatelessWidget {
 }
 
 class ItemBlogContent2 extends StatelessWidget {
-  const ItemBlogContent2({ Key? key, @required this.destination, this.account })
+  const ItemBlogContent2({ Key? key,this.bannerAd, this.isBanner, @required this.destination, this.account })
       : assert(destination != null),
         super(key: key);
 
   final ItemBlogModel? destination;
   final bool? account ;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -664,6 +718,14 @@ class ItemBlogContent2 extends StatelessWidget {
           ),
         ),
       ),
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
     ];
 
 

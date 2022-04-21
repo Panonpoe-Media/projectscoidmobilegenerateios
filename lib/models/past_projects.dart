@@ -51,6 +51,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:projectscoid/views/PastProjects/past_projects_listing.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'past_projects.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -2175,36 +2177,99 @@ class PastProjectsListingModel extends PastProjectsListingBase{
   PastProjectsListingModel(Map<String, dynamic> this.json):super(json);
 
   @override
-  Widget viewItem (ItemPastProjectsModel item,String? search, bool? account) {
+  Widget viewItemIndex (ItemPastProjectsModel item,String? search, int? index, bool?account){
+ // Widget viewItem (ItemPastProjectsModel item,String? search, bool? account) {
     ShapeBorder? shape;
     double? height = 160;
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
         //  child:  ItemPastProjectsCard2(destination :item, search : search, shape : shape, height : height, account : account)
-        child:  ItemPastProjectsCard1(destination :item, search : search, shape : shape, height : height, account : account)
+        child:  ItemPastProjectsCard1(index: index, destination :item, search : search, shape : shape, height : height, account : account)
     );
   }
 
 }
 
+class ItemPastProjectsCard1 extends StatefulWidget {
+const ItemPastProjectsCard1({ Key? key, @required this.destination, this.search, this.shape, this.height, this.index, this.account})
+: assert(destination != null),
+super(key: key);
+
+// This height will allow for all the Card's content to fit comfortably within the card.
+final double? height ;
+final ItemPastProjectsModel? destination;
+final String?  search;
+final ShapeBorder? shape;
+final  int? index;
+final bool? account;
+
+  @override
+  _ItemPastProjectsCard1State createState() => _ItemPastProjectsCard1State();
+}
 
 
-class ItemPastProjectsCard1 extends StatelessWidget {
-  const ItemPastProjectsCard1({ Key? key, @required this.destination, this.search, this.shape, this.height, this.index, this.account})
-      : assert(destination != null),
-        super(key: key);
+class _ItemPastProjectsCard1State extends State<ItemPastProjectsCard1>  {
 
-  // This height will allow for all the Card's content to fit comfortably within the card.
-  final double? height ;
-  final ItemPastProjectsModel? destination;
-  final String?  search;
-  final ShapeBorder? shape;
-  final  int? index;
-  final bool? account;
+  late BannerAd _bannerAd;
 
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+    //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    return Center(
+      child :   GestureDetector(
+        onTap: (){
+
+        },
+        child: Card(
+          elevation : 10.0,
+
+          borderOnForeground: false,
+          margin : EdgeInsets.all(6.0),
+          child: _isBannerAdReady? ItemPastProjectsContent2(bannerAd: _bannerAd, isBanner:_isBannerAdReady,destination: widget.destination,  account : widget.account):
+          ItemPastProjectsContent2(bannerAd: null, isBanner:_isBannerAdReady,destination: widget.destination,  account : widget.account),
+          //  child: index == 0 ? ItemPastProjectsContent2(destination: destination,  account : account) :ItemPastProjectsContent1(destination: destination, account : account),
+          //   ),
+        ),
+      ),
+    );
+    /*
     return SafeArea(
       top: false,
       bottom: false,
@@ -2216,7 +2281,7 @@ class ItemPastProjectsCard1 extends StatelessWidget {
 
               SizedBox(
                 // height:index == 0 ?  315 : height,
-                height: destination!.item!.published_date == null? 315 : destination!.item!.short_description!.length < 100? 240 :destination!.item!.short_description!.length < 200? 285 : 330,
+                height: widget.destination!.item!.published_date == null? 315 : widget.destination!.item!.short_description!.length < 100? 240 :widget.destination!.item!.short_description!.length < 200? 285 : 330,
                 /*  height: destination!.item!.short_description!.length < 200 ?  destination!.item!.short_description!.length.toDouble()*3.3
                      : destination!.item!.short_description!.length < 400 ?  destination!.item!.short_description!.length.toDouble()*3.7/4
                      : destination!.item!.short_description!.length < 600 ?  destination!.item!.short_description!.length.toDouble()*3.4/4
@@ -2229,7 +2294,8 @@ class ItemPastProjectsCard1 extends StatelessWidget {
                 shape: shape,
                 margin: EdgeInsets.all(0.0),
                 borderOnForeground : false, */
-                child: ItemPastProjectsContent2(destination: destination,  account : account) ,
+                child: _isBannerAdReady? ItemPastProjectsContent2(bannerAd: _bannerAd, isBanner:_isBannerAdReady,destination: widget.destination,  account : widget.account):
+                ItemPastProjectsContent2(bannerAd: null, isBanner:_isBannerAdReady,destination: widget.destination,  account : widget.account),
                 //  child: index == 0 ? ItemPastProjectsContent2(destination: destination,  account : account) :ItemPastProjectsContent1(destination: destination, account : account),
                 //   ),
               ),
@@ -2248,16 +2314,20 @@ class ItemPastProjectsCard1 extends StatelessWidget {
           )
       ),
     );
+
+     */
   }
 }
 
 class ItemPastProjectsContent2 extends StatelessWidget {
-  const ItemPastProjectsContent2({ Key? key, @required this.destination, this.account })
+  const ItemPastProjectsContent2({ Key? key,this.bannerAd, this.isBanner, @required this.destination, this.account })
       : assert(destination != null),
         super(key: key);
 
   final ItemPastProjectsModel? destination;
   final bool? account ;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -2905,6 +2975,14 @@ class ItemPastProjectsContent2 extends StatelessWidget {
           ),
         ),
       ),
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
     ];
 
 
@@ -3100,7 +3178,7 @@ class  SearchPastProjectsListingState extends State< SearchPastProjectsListing> 
 
                         return index! >= state.past_projects!.items.items.length
                             ?  SearchPastProjectsBottomLoader()
-                            : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, widget.account );
+                            : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText,index,  widget.account );
                       },
                       itemCount: state.hasReachedMax!
                           ? state.past_projects!.items.items.length
@@ -3120,7 +3198,7 @@ class  SearchPastProjectsListingState extends State< SearchPastProjectsListing> 
 
                     return index! >= state.past_projects!.items.items.length
                         ?  SearchPastProjectsBottomLoader()
-                        : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, widget.account );
+                        : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText,index,  widget.account );
                   },
                   itemCount: state.hasReachedMax!
                       ? state.past_projects!.items.items.length
@@ -3351,7 +3429,7 @@ class  SearchPastProjectsListing1State extends State< SearchPastProjectsListing1
 
                         return index! >= state.past_projects!.items.items.length
                             ?  SearchPastProjectsBottomLoader()
-                            : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, widget.account );
+                            : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index,  widget.account );
                       },
                       itemCount: state.hasReachedMax!
                           ? state.past_projects!.items.items.length
@@ -3371,7 +3449,7 @@ class  SearchPastProjectsListing1State extends State< SearchPastProjectsListing1
 
                     return index! >= state.past_projects!.items.items.length
                         ?  SearchPastProjectsBottomLoader()
-                        : state.past_projects!.viewItem (state.past_projects!.items.items[index] , searchText, widget.account );
+                        : state.past_projects!.viewItemIndex (state.past_projects!.items.items[index] , searchText, index, widget.account );
                   },
                   itemCount: state.hasReachedMax!
                       ? state.past_projects!.items.items.length

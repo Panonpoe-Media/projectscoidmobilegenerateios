@@ -55,6 +55,8 @@ import 'package:projectscoid/views/BrowseUsers/browse_users_listing.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:projectscoid/api/api.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'browse_users.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -6056,13 +6058,13 @@ class BrowseUsersListingModel extends BrowseUsersListingBase{
 
 
   //@override
-  Widget viewItemcb (ItemBrowseUsersModel item,String? search, bool? account, ChatBloc? cb) {
+  Widget viewItemcb (ItemBrowseUsersModel item,String? search, int? index, bool? account, ChatBloc? cb) {
     ShapeBorder? shape;
     double? height = 302;
 
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson()))!.contains(search!)),
-        child:  ItemBrowseUsersCard2(destination :item, search : search, shape : shape, height : height, account: account, cb : cb)
+        child:  ItemBrowseUsersCard2(index: index , destination :item, search : search, shape : shape, height : height, account: account, cb : cb)
     );
   }
 
@@ -6683,7 +6685,7 @@ class  SearchBrowseUsersListing1State extends State< SearchBrowseUsersListing1>{
                             : 1 == state.browse_users!.tools.paging.current_page?
                         Container(height: 0.0, width: 0.0,):
                         SearchBrowseUsersBottomLoader()
-                            : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, account!, widget.cb );
+                            : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, index,  account!, widget.cb );
                       },
                       itemCount: state.hasReachedMax!
                           ? state.browse_users!.items.items.length
@@ -6709,7 +6711,7 @@ class  SearchBrowseUsersListing1State extends State< SearchBrowseUsersListing1>{
                           : 1 == state.browse_users!.tools.paging.current_page?
                       Container(height: 0.0, width: 0.0,):
                       SearchBrowseUsersBottomLoader()
-                          : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, account , widget.cb);
+                          : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, index,  account , widget.cb);
                     },
                     itemCount: state.hasReachedMax!
                         ? state.browse_users!.items.items.length
@@ -6944,8 +6946,8 @@ class ItemBrowseUsersCard1 extends StatelessWidget {
   }
 }
 
-class ItemBrowseUsersCard2 extends StatelessWidget {
-  const ItemBrowseUsersCard2({ Key? key, @required this.destination, this.search, this.shape, this.height, this.account, this.cb})
+class ItemBrowseUsersCard2 extends StatefulWidget {
+  const ItemBrowseUsersCard2({ Key? key, this.index, @required this.destination, this.search, this.shape, this.height, this.account, this.cb})
       : assert(destination != null),
         super(key: key);
 
@@ -6955,8 +6957,56 @@ class ItemBrowseUsersCard2 extends StatelessWidget {
   final String? search;
   final ShapeBorder? shape;
   final bool? account;
+  final int? index;
   final ChatBloc? cb;
 
+
+  @override
+  _ItemBrowseUsersCard2State createState() => _ItemBrowseUsersCard2State();
+}
+
+
+class _ItemBrowseUsersCard2State extends State<ItemBrowseUsersCard2>  {
+
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
+  void initState() {
+
+    super.initState();
+    //  print('halooo aku index ${widget.index.toString()}');
+    if(widget.index! % 10 == 0){
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+    }
+  }
+
+  @override
+  void dispose() {
+    if(widget.index! % 10 == 0) {
+      _bannerAd.dispose();
+    }
+    super.dispose();
+  }
 
 
   @override
@@ -6969,7 +7019,8 @@ class ItemBrowseUsersCard2 extends StatelessWidget {
         elevation: 5.0,
         shadowColor: CurrentTheme.ListColor,
         color: Colors.deepPurple,
-        child: ItemBrowseUsersContent1(destination: destination!, account: account!, cb : cb),
+        child: _isBannerAdReady? ItemBrowseUsersContent1(bannerAd: _bannerAd, isBanner:_isBannerAdReady,destination: widget.destination!, account: widget.account!, cb : widget.cb):
+        ItemBrowseUsersContent1(bannerAd: null, isBanner:_isBannerAdReady,destination: widget.destination!, account: widget.account!, cb : widget.cb),
       ),
 
       /*
@@ -7007,12 +7058,14 @@ class ItemBrowseUsersCard2 extends StatelessWidget {
 }
 
 class ItemBrowseUsersContent1 extends StatelessWidget {
-  const ItemBrowseUsersContent1({ Key? key, @required this.destination , this.account, this.cb})
+  const ItemBrowseUsersContent1({ Key? key,this.bannerAd, this.isBanner, @required this.destination , this.account, this.cb})
       : assert(destination != null),
         super(key: key);
 
   final ItemBrowseUsersModel? destination;
   final bool? account;
+  final BannerAd? bannerAd;
+  final bool? isBanner;
   final ChatBloc? cb;
 
 
@@ -7454,6 +7507,15 @@ class ItemBrowseUsersContent1 extends StatelessWidget {
             )
         ),
       ),
+
+      if (isBanner! )
+        Center(
+          child: Container(
+            width: bannerAd!.size.width.toDouble(),
+            height: bannerAd!.size.height.toDouble(),
+            child: AdWidget(ad: bannerAd!),
+          ),
+        ),
       SizedBox(height: 15),
       /*
       Padding(

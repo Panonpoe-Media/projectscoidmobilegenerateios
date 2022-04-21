@@ -295,7 +295,7 @@ final RestorableDouble cs = RestorableDouble(0);
 									  : 1 == state.browse_users!.tools.paging.current_page?
 									   Container(height: 0.0, width: 0.0,):
 									  PublicBrowseUsersBottomLoader()
-									  : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, account , widget.cb);
+									  : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, index,  account , widget.cb);
 								},
 								itemCount: state.hasReachedMax!
 									? state.browse_users!.items.items.length
@@ -321,7 +321,7 @@ final RestorableDouble cs = RestorableDouble(0);
 									  : 1 == state.browse_users!.tools.paging.current_page?
 									   Container(height: 0.0, width: 0.0,):
 									  PublicBrowseUsersBottomLoader()
-									  : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, account, widget.cb );
+									  : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, index, account, widget.cb );
 								},
 								itemCount: state.hasReachedMax!
 									? state.browse_users!.items.items.length

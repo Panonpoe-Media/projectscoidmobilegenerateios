@@ -12,12 +12,12 @@ class EmailWidget extends StatefulWidget {
    this.getValue,
    }) 
    {
-    contr?.text = value!;
+   // contr?.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = new TextEditingController();
+  //TextEditingController? contr = new TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -36,9 +36,13 @@ class _EmailWidget extends State<EmailWidget> {
   bool validation = true;
   bool isvalid = true;
   String?  errormessage = '';
- // TextEditingController contr;
+  TextEditingController? contr;
  // _EmailWidget({this.contr});
-
+  @override
+  initState(){
+    contr?.text = widget.value!;
+    super.initState();
+  }
 
   String? validateEmail(_value, _require) {
     String? value = _value;
@@ -110,7 +114,7 @@ class _EmailWidget extends State<EmailWidget> {
                     border: const OutlineInputBorder(),
                   ),
 
-                  controller: widget.contr,
+                  controller: contr,
                   validator: (value) {
                     // widget.value = value;
                     errormessage = validateEmail(value, widget.required);
