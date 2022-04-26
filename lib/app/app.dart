@@ -7,7 +7,6 @@ import 'package:projectscoid/app/Env.dart';
 import 'package:projectscoid/core/components/utility/log/Log.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/i18n/projectscoid_strings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +15,6 @@ import 'package:projectscoid/models/model.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 //import 'package:load_toast/load_toast.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
@@ -29,7 +26,7 @@ class App extends StatefulWidget {
   App(this._application);
   @override
   State createState() {
-    return new AppState(this._application);
+    return AppState(_application);
   }
 }
 

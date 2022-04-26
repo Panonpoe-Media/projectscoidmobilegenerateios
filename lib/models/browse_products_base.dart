@@ -2367,6 +2367,7 @@ class BrowseProductsListingBase{
 	   totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	totalHeight = totalHeight + 8 ;
@@ -2394,6 +2395,7 @@ class BrowseProductsListingBase{
 	   totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	totalHeight = totalHeight + 8 ;
@@ -2418,6 +2420,7 @@ class BrowseProductsListingBase{
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
@@ -2459,6 +2462,7 @@ Widget viewItem1 (ItemBrowseProductsModel item,ItemBrowseProductsModel item1, St
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
@@ -2651,6 +2655,7 @@ class ItemBrowseProductsContent extends StatelessWidget {
 	   children!.add(destination!.viewPrice(context)); 
 	   children!.add(destination!.viewSeller(context)); 
 	   children!.add(destination!.viewSellerRating(context));
+	   children!.add(destination!.viewSellerRanking(context));
 	   children!.add(destination!.viewProductSold(context));
 	   children!.add(destination!.viewShortDescription(context)); 
 	   children!.add(destination!.viewTrialVersion(context)); 

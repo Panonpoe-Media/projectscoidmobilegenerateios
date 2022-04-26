@@ -2,7 +2,6 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:bloc/bloc.dart';
 import 'package:projectscoid/ProjectscoidApplication.dart';
-import 'package:equatable/equatable.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/core/components/helpers/action_helpers.dart';
@@ -32,38 +31,39 @@ class BlogController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    // ignore: unnecessary_non_null_assertion
     return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editBlog()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBlog;
     editBlog = await apiRepProvider?.getBlogEdit(url!, id!, title!);
     return editBlog;
   }
   
     Future viewBlog()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewBlog;
     viewBlog = await apiRepProvider?.getBlogView(url!, id!, title!);
     return viewBlog;
   }
 
   Future postBlog() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBlog;
     postBlog = await apiRepProvider?.sendBlogPost(url!,formData);
     return postBlog;
   }
   
     Future postBlogWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBlog;
     postBlog = await apiRepProvider?.sendBlogPostWithID(url!,formData, id!, title!);
     return postBlog;
@@ -72,7 +72,7 @@ class BlogController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

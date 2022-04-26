@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 //////////////////
 
@@ -84,6 +87,8 @@ class  SalesMyServicesState1 extends State<SalesMyServices> with TickerProviderS
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -605,6 +610,8 @@ class  CommentsMyServicesState1 extends State<CommentsMyServices> with TickerPro
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1124,7 +1131,6 @@ class AddNewServiceMyServicesState extends State<AddNewServiceMyServices> with R
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Add New Service';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1764,7 +1770,6 @@ class PublishServiceMyServicesState extends State<PublishServiceMyServices> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Publish Service';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -2403,7 +2408,6 @@ class BumpUpMyServicesState extends State<BumpUpMyServices> with RestorationMixi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Bump Up';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3042,7 +3046,6 @@ class EditServiceMyServicesState extends State<EditServiceMyServices> with Resto
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Service';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3684,6 +3687,8 @@ class  ScreenshotsMyServicesState1 extends State<ScreenshotsMyServices> with Tic
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -4203,7 +4208,6 @@ class UnlistMyServicesState extends State<UnlistMyServices> with RestorationMixi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Unlist';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -4842,7 +4846,6 @@ class ReactivateServiceMyServicesState extends State<ReactivateServiceMyServices
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Reactivate Service';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

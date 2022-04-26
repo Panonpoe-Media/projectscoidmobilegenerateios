@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 //////////////////
 
@@ -84,6 +87,8 @@ class  SalesMyProductsState1 extends State<SalesMyProducts> with TickerProviderS
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -605,6 +610,8 @@ class  CommentsMyProductsState1 extends State<CommentsMyProducts> with TickerPro
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1124,7 +1131,6 @@ class AddNewProductMyProductsState extends State<AddNewProductMyProducts> with R
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Add New Product';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1766,7 +1772,6 @@ class PublishProductMyProductsState extends State<PublishProductMyProducts> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Publish Product';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -2405,7 +2410,6 @@ class EditProductMyProductsState extends State<EditProductMyProducts> with Resto
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Product';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3047,7 +3051,6 @@ class BumpUpMyProductsState extends State<BumpUpMyProducts> with RestorationMixi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Bump Up';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3688,6 +3691,8 @@ class  ScreenshotsMyProductsState1 extends State<ScreenshotsMyProducts> with Tic
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -4207,7 +4212,6 @@ class UnlistMyProductsState extends State<UnlistMyProducts> with RestorationMixi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Unlist';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -4846,7 +4850,6 @@ class ReactivateProductMyProductsState extends State<ReactivateProductMyProducts
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Reactivate Product';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

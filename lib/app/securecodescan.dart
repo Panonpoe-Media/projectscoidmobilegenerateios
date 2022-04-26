@@ -226,7 +226,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                 ),
               ]),
 
-                string!.length! == 5 &&  minuteBetween! <= 10 && string![1] != widget.userID ?
+                string!.length== 5 &&  minuteBetween! <= 10 && string![1] != widget.userID ?
                 Container(
                   height: 0.50 * height,
                   child : Column(

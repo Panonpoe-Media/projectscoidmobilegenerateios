@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class EmptyCartCart extends StatefulWidget {
 
@@ -79,7 +82,6 @@ class EmptyCartCartState extends State<EmptyCartCart> with RestorationMixin{
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Empty Cart';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -712,7 +714,6 @@ class ApplyCouponCartState extends State<ApplyCouponCart> with RestorationMixin{
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Apply Coupon';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

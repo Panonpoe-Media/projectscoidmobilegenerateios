@@ -6,13 +6,17 @@ part of 'my_orders.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-OrderItem _$OrderItemFromJson(Map<String, dynamic> json) => OrderItem(
-      json['no'] as int?,
-      json['title'] as String?,
-      json['price_str'] as String?,
-      json['quantity'] as int?,
-      json['total_str'] as String?,
-    );
+OrderItem _$OrderItemFromJson(Map<String, dynamic> json) {
+      var qty = json['quantity'].toString();
+     return OrderItem(
+
+            json['no'] as int?,
+            json['title'] as String?,
+            json['price_str'] as String?,
+             int.tryParse(qty),
+            json['total_str'] as String?,
+      );
+}
 
 Map<String, dynamic> _$OrderItemToJson(OrderItem instance) => <String, dynamic>{
       'no': instance.no,

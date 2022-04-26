@@ -17,7 +17,7 @@ import 'selection.dart';
 import 'photo.dart';
 import 'paging.dart';
 part 'my_buddies_item_base.g.dart';
-
+//
 
 
 class ItemMyBuddiesBase {

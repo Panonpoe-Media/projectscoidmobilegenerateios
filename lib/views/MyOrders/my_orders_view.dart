@@ -80,8 +80,11 @@ final RestorableDouble cs = RestorableDouble(0);
 	   hash.then((value) {
           this.idHash = value;
         });
+      print('selamat1');
       final future = my_orders!.viewMyOrders();
+       print('selamat2');
       future.then((value) {
+        print('selamat3');
         setState(() {
           isLoading = false;
         });
@@ -115,7 +118,7 @@ final RestorableDouble cs = RestorableDouble(0);
 
         null,
 		false);
-  
+    print('selamat');
 	  fetchData(my_orders, context);
 	  	accountController =  AccountController(AppProvider.getApplication(context),
 	AppAction.view   );

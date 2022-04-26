@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class InviteToBidBrowseUsers extends StatefulWidget {
 
@@ -79,7 +82,6 @@ class InviteToBidBrowseUsersState extends State<InviteToBidBrowseUsers> with Res
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Invite to Bid';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -718,7 +720,6 @@ class HireMeBrowseUsersState extends State<HireMeBrowseUsers> with RestorationMi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Hire Me';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

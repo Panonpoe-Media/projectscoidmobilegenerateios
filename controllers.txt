@@ -665,6 +665,7 @@ helooo service_id
 - 3 finish_days => number => Finish Days
 - 2 seller => model => Seller
 - 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_seller_ranking => expose => Seller Ranking => number
 - 1 seller_product_sold => expose => Product Sold => number
 - 3 short_description => string => Short Description
 - 3 tags => inlinetags => Tags
@@ -914,6 +915,7 @@ helooo product_id
 - 3 price => money => Price
 - 2 seller => model => Seller
 - 1 seller_seller_rating => expose => Seller Rating => rating
+- 1 seller_seller_ranking => expose => Seller Ranking => number
 - 1 seller_product_sold => expose => Product Sold => number
 - 3 short_description => string => Short Description
 - 3 trial_version => file => Trial Version

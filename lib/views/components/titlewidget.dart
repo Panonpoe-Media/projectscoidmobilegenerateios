@@ -2,112 +2,111 @@ import 'package:flutter/material.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 
-
 class TitleWidget extends StatefulWidget {
-   TitleWidget({Key? key,
-
-   this.value, 
-   this.caption, 
-   this.hint, 
-   this.required,
-   this.getValue,
-   }) : super(key: key)
-   {
-   // contr?.text = value!;
-   if(required!){
+  TitleWidget({
+    Key? key,
+    this.value,
+    this.caption,
+    this.hint,
+    this.required,
+    this.getValue,
+  }) : super(key: key) {
+    // contr?.text = value!;
+    if (required!) {
       caption = caption! + '*';
     }
-   } 
- // TextEditingController? contr = TextEditingController();
+  }
+  // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
   String? caption;
   final ValueChanged<String?>? getValue;
 
- // String
+  // String
 
   @override
   State<StatefulWidget> createState() {
     return _TitleWidget();
-  }  
+  }
 }
 
 class _TitleWidget extends State<TitleWidget> {
   bool validation = true;
   bool isvalid = true;
-  String  errormessage = '';
-  TextEditingController? contr;
+  String errormessage = '';
+  TextEditingController? contr = TextEditingController();
   // _EmailWidget({this.contr});
   @override
-  initState(){
+  initState() {
     contr?.text = widget.value!;
     super.initState();
   }
 
   String? validateTitle(_value, _require) {
     String value = _value;
-    bool   require = _require;
-    String? result = '' ;
+    bool require = _require;
+    String? result = '';
     isvalid = true;
-    if(require){
-      if (value.isEmpty){
+    if (require) {
+      if (value.isEmpty) {
         result = 'This field is required';
-        isvalid= false;
+        isvalid = false;
       }
-    } else{
-      if (value.isEmpty){
+    } else {
+      if (value.isEmpty) {
         result = null;
         isvalid = true;
-      }      
+      }
     }
     return result;
   }
 
-  void  _getvalue(String? val){
-      widget.getValue!(val);
+  void _getvalue(String? val) {
+    widget.getValue!(val);
   }
 
   @override
-  Widget build (BuildContext context){
-   // InputComponent Title;
-    return
-      ItemListWidget(
+  Widget build(BuildContext context) {
+    // InputComponent Title;
+    return ItemListWidget(
         tooltip: 'Send message',
-        onPressed: (){
-        },
-        lines:
-        widget.caption,
-        lines1:
-        errormessage,
-          isdivided: false,
-        wgt:
-        Padding(
+        onPressed: () {},
+        lines: widget.caption,
+        lines1: errormessage,
+        isdivided: false,
+        wgt: Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
-            child:// <Widget>[
+            child: // <Widget>[
 
-            Container(
+                Container(
               // padding: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
               alignment: Alignment.center,
               height: 45.0,
 
               child: TextFormField(
-
-                style: TextStyle(color: validation ? CurrentTheme.NormalTextColor : CurrentTheme.BackgroundColor, fontSize: 14),
-
+                style: TextStyle(
+                    color: validation
+                        ? CurrentTheme.NormalTextColor
+                        : CurrentTheme.BackgroundColor,
+                    fontSize: 14),
                 decoration: InputDecoration(
                   hintText: widget.hint,
                   // hintStyle: TextStyle(color: Colors.grey[500]),
-                  hintStyle: TextStyle(color: validation ? CurrentTheme.ShadeColor : CurrentTheme.BackgroundColor),
+                  hintStyle: TextStyle(
+                      color: validation
+                          ? CurrentTheme.ShadeColor
+                          : CurrentTheme.BackgroundColor),
                   //  errorStyle:
                   errorBorder: const UnderlineInputBorder(),
-                 filled: true,
-                 fillColor: validation ? CurrentTheme.BackgroundColor : CurrentTheme.ErrorColor,
-                 // focusedErrorBorder: errorBorder,
+                  filled: true,
+                  fillColor: validation
+                      ? CurrentTheme.BackgroundColor
+                      : CurrentTheme.ErrorColor,
+                  // focusedErrorBorder: errorBorder,
                   border: const OutlineInputBorder(),
                 ),
-
                 controller: contr,
                 validator: (value) {
                   // widget.value = value;
@@ -128,17 +127,11 @@ class _TitleWidget extends State<TitleWidget> {
                     return null;
                   }
                 },
-
               ),
-
-
             )
 
-          // ]
-        )
-
-
-      );
+            // ]
+            ));
 
     /*
       new Column(
@@ -216,7 +209,4 @@ class _TitleWidget extends State<TitleWidget> {
 
      */
   }
-
-
 }
-

@@ -46,7 +46,7 @@ typedef PopupMenuStateChanged = Function(bool isShow);
 
 class PopupMenu {
   static var itemWidth = 100.0;
-  static var itemHeight = 65.0;
+  static var itemHeight = 100.0;
   static var arrowHeight = 10.0;
   OverlayEntry?_entry;
   List<MenuItemProvider>? items;

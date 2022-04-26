@@ -35,7 +35,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:projectscoid/core/components/utility/tool/popup_menu.dart';
-
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
 /** AUTOGENERATE OFF **/
 
@@ -246,6 +246,12 @@ class ItemMySalesContent2 extends StatelessWidget {
 //class ItemMySales extends class ItemMySalesBase{
 //
 //}
+class ItemModel2 {
+  String title;
+  IconData icon;
+
+  ItemModel2(this.title, this.icon);
+}
 
 class MySalesIndexModel extends MySalesIndexBase{
   Map<String, dynamic> json;
@@ -307,6 +313,63 @@ class MySalesIndexModel extends MySalesIndexBase{
   @override
   Widget _generateRightHandSideColumnRow(BuildContext context, int index) {
     GlobalKey btnKey = GlobalKey();
+    CustomPopupMenuController _controller = CustomPopupMenuController();
+    List<ItemModel2> menuItems = [
+      ItemModel2(items.items[index!].item.buttons[0].text ,  Icons.remove_red_eye_outlined,),
+    ];
+
+    Widget _buildLongPressMenu() {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Container(
+          width: 220,
+          color: const Color(0xFF4C4C4C),
+          child: GridView.count(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            crossAxisCount: 5,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 10,
+            shrinkWrap: true,
+            physics: const  NeverScrollableScrollPhysics(),
+            children: menuItems
+                .map((item) =>
+                GestureDetector(child:
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Icon(
+                      item.icon,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 2),
+                      child: Text(
+                        item.title,
+                        style: const  TextStyle(color: Colors.white, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
+                    //  behavior: HitTestBehavior.translucent,
+                    onTap: () {
+                      print('ini saya ${urlToRoute(items.items[index!].item
+                          .buttons[0].url)}');
+                      if(item.title == items.items[index].item.buttons[0].text){
+                        AppProvider.getRouter(context)!.navigateTo(
+                            context,
+                            urlToRoute(items.items[index].item.buttons[0].url));
+                      }
+                      _controller.hideMenu();
+                    }
+                )
+
+            )
+                .toList(),
+          ),
+        ),
+      );
+    }
     void stateChanged(bool isShow) {
       print('menu is ${isShow ? 'showing' : 'closed'}');
     }
@@ -347,12 +410,31 @@ class MySalesIndexModel extends MySalesIndexBase{
     }
 
     final List<Widget> children = [];
+    double avatarSize = 40;
     children.add(Container(
       width: 50,
       height: 56,
       padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
       alignment: Alignment.centerLeft,
       child:
+      CustomPopupMenu(
+        child: Container(
+          padding: const  EdgeInsets.all(5),
+          constraints: BoxConstraints(maxWidth: 240, minHeight: avatarSize),
+          decoration: BoxDecoration(
+            color:  Colors.white ,
+            borderRadius: BorderRadius.circular(3.0),
+          ),
+          child: const Icon(
+            Icons.more_horiz_rounded,
+          ),
+        ),
+        menuBuilder: _buildLongPressMenu,
+        barrierColor: Colors.transparent,
+        pressType: PressType.singleClick,
+        controller: _controller,
+      )
+          /*
       MaterialButton(
         height: 45.0,
         key: btnKey,
@@ -362,6 +444,8 @@ class MySalesIndexModel extends MySalesIndexBase{
           Icons.more_horiz_rounded,
         ),
       ),
+
+           */
 
 
     ));

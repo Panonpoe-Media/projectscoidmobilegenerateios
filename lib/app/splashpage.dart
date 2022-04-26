@@ -308,8 +308,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             if(data!.isEmpty){
               _setListSharedPrefs(pusher);
             }else{
-              data!.add(pusher);
-              _setListSharedPrefs(data!);
+              data.add(pusher);
+              _setListSharedPrefs(data);
             }
 
 

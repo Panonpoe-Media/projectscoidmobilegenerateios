@@ -17,7 +17,7 @@ import 'selection.dart';
 import 'photo.dart';
 import 'paging.dart';
 part 'my_projects_item_base.g.dart';
-
+//
 
 
 class ItemMyProjectsBase {

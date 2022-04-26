@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 //////////////////
 
@@ -85,7 +88,6 @@ class PlaceOrderBrowseServicesState extends State<PlaceOrderBrowseServices> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Place Order';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

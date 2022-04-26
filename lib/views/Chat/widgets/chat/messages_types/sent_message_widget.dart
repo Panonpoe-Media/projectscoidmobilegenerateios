@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:projectscoid/views/Chat/models/models.dart';
@@ -96,12 +98,12 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
   @override
   void initState() {
     super.initState();
-    if(widget.play!.length! > 0){
+    if(widget.play!.length> 0){
       if(widget.play![0] == widget.idx) {
         isPlay = true;
       }
     }
-    if(widget.pause!.length! > 0){
+    if(widget.pause!.length> 0){
       if(widget.pause![0] == widget.idx) {
         isPause = true;
       }
@@ -215,9 +217,9 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
 
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-          widget.audioPlayer!.positionStream!,
-          widget.audioPlayer!.bufferedPositionStream!,
-          widget.audioPlayer!.durationStream!,
+          widget.audioPlayer!.positionStream,
+          widget.audioPlayer!.bufferedPositionStream,
+          widget.audioPlayer!.durationStream,
               (position, bufferedPosition, duration) => PositionData(
               position, bufferedPosition, duration ?? Duration.zero));
 
@@ -259,8 +261,8 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
        // widget.audioPlayer!.setSpeed(1.0);
       }
       final dr  = await widget.audioPlayer?.durationFuture;
-      if(widget.audioPlayer?.position != Duration.zero && (transformMilliSeconds(widget.audioPlayer!.position!.inMilliseconds!) != transformMilliSeconds(dr!.inMilliseconds!)) ){
-        print(transformMilliSeconds(widget.audioPlayer!.position!.inMilliseconds!));
+      if(widget.audioPlayer?.position != Duration.zero && (transformMilliSeconds(widget.audioPlayer!.position.inMilliseconds) != transformMilliSeconds(dr!.inMilliseconds)) ){
+        print(transformMilliSeconds(widget.audioPlayer!.position.inMilliseconds));
         print('ini' + transformMilliSeconds(dr.inMilliseconds));
         print('ada1');
         /*
@@ -310,8 +312,8 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
   Future _playLocal(bool sts) async {
    // widget.audioPlayer!.play(localFilePath, isLocal: true);
     final dr  = await widget.audioPlayer?.durationFuture;
-    if(widget.audioPlayer?.position != Duration.zero && (transformMilliSeconds(widget.audioPlayer!.position!.inMilliseconds!) != transformMilliSeconds(dr!.inMilliseconds!)) ){
-      print(transformMilliSeconds(widget.audioPlayer!.position! .inMilliseconds));
+    if(widget.audioPlayer?.position != Duration.zero && (transformMilliSeconds(widget.audioPlayer!.position.inMilliseconds) != transformMilliSeconds(dr!.inMilliseconds)) ){
+      print(transformMilliSeconds(widget.audioPlayer!.position.inMilliseconds));
      // print('ini' + transformMilliSeconds(dr.inMilliseconds));
      // print('ada1');
       /*
@@ -1013,8 +1015,8 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
 
   bool isImage(String? ext ){
     bool isImage = false;
-    if(['.tif','.tiff','.bmp','.jpg', '.jpeg', '.gif', '.png', '.eps'].contains(p.extension(ext!)) && ext!.contains('https://upload.projects.co.id/upload/')){
-      if(ext!.contains('[')){
+    if(['.tif','.tiff','.bmp','.jpg', '.jpeg', '.gif', '.png', '.eps'].contains(p.extension(ext!)) && ext.contains('https://upload.projects.co.id/upload/')){
+      if(ext.contains('[')){
         isImage = false;
       }else{
         
@@ -1023,7 +1025,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
       }
 
     }else{
-      if(ext!.contains('<img') && ext!.contains('thumbnail')){
+      if(ext.contains('<img') && ext.contains('thumbnail')){
         isImage = true;
       }
       
@@ -1037,8 +1039,8 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
 
   bool isFile(String? ext ){
     bool isFile = false;
-    if( ext!.contains('https://upload.projects.co.id/upload/')|| ext!.contains('https://cdn.projects.co.id/upload/')||ext!.contains('https://upload.projects.co.id/files/download.php')){
-      if(ext!.contains('[')){
+    if( ext!.contains('https://upload.projects.co.id/upload/')|| ext.contains('https://cdn.projects.co.id/upload/')||ext.contains('https://upload.projects.co.id/files/download.php')){
+      if(ext.contains('[')){
         isFile = false;
       }else{
         var document = parse(ext);
@@ -1064,11 +1066,11 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
   }
 
   String?addTag(String? keyword, String? str){
-    int length = keyword!.length!;
+    int length = keyword!.length;
     if(keyword == ''){
       return str!;
     }else{
-      int idx = str!.toLowerCase().indexOf(keyword!.toLowerCase());
+      int idx = str!.toLowerCase().indexOf(keyword.toLowerCase());
       if(idx > -1){
         str = str.substring(0, idx + length) + '</a>' +str.substring(idx + length);
         str = str.substring(0, idx ) + '<a style="background-color:red">' +str.substring(idx );
@@ -1183,7 +1185,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
         fileName = dt[0].attributes['href'];
         fileInfo = d[0].text;
         var doc = document.firstChild?.children.elementAt(1);
-        if(doc!.nodes.last.hasChildNodes() || doc!.nodes.last.toString().contains('://')){
+        if(doc!.nodes.last.hasChildNodes() || doc.nodes.last.toString().contains('://')){
 
           fileMessage = doc.nodes.last.toString().substring(1, doc.nodes.last.toString().length - 1);
           if(fileMessage == 'html div'){
@@ -1191,7 +1193,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
           }
          // print('ini saya $fileMessage');
         }else{
-          fileMessage = doc!.nodes.last.text;
+          fileMessage = doc.nodes.last.text;
         }
         
       }else {
@@ -1209,7 +1211,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
           // print('haloo man');
           // print('child1 == ${document.children[0].text!.replaceAll(dt[0].text, '')}');
 
-          fileMessage = document.children[0].text!.replaceAll(dt[0].text, '');
+          fileMessage = document.children[0].text.replaceAll(dt[0].text, '');
 
           basename = data1[0].text;
           var tempbname = basename;
@@ -1264,7 +1266,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
       if(dt.isNotEmpty){
        // print('child2 == ${document.children[0].text!.replaceAll(dt[0].text, '')}');
 
-        fileMessage = document.children[0].text!.replaceAll(dt[0].text, '').replaceFirst('<', '');
+        fileMessage = document.children[0].text.replaceAll(dt[0].text, '').replaceFirst('<', '');
       }
 
     }
@@ -1278,12 +1280,12 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
       if (startIndex == -1){
         start = "blockquote";
         end = "/blockquote";
-        startIndex = str!.indexOf(start);
+        startIndex = str.indexOf(start);
       }
       final endIndex = str.indexOf(end, startIndex + start.length);
 
       quote = str.substring(startIndex + start.length, endIndex);
-      quoteName = str.substring(0, str!.indexOf(start)) ;
+      quoteName = str.substring(0, str.indexOf(start)) ;
       quoteContent = str.substring(str.indexOf(end) + end.length , str.length - 1);
     }
     /*
@@ -1364,8 +1366,8 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -1426,7 +1428,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -1600,8 +1602,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -1661,7 +1663,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -1929,8 +1931,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -1990,7 +1992,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -2162,8 +2164,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -2223,7 +2225,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -2495,8 +2497,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -2556,7 +2558,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -2727,8 +2729,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -2788,7 +2790,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -3062,8 +3064,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -3123,7 +3125,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -3272,7 +3274,7 @@ Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('$basename', style: const TextStyle(color: Colors.red, fontSize: 15), overflow: TextOverflow.ellipsis,maxLines: 1, ),
+                                    Text(basename, style: const TextStyle(color: Colors.red, fontSize: 15), overflow: TextOverflow.ellipsis,maxLines: 1, ),
                                     fileSize == null? fileInfo == ''? Container() :  Text(fileInfo,style: const TextStyle(fontSize: 12)) : Text('(${filesize(fileSize)}, ${dateformat.format(date!)} WIB)', style: const TextStyle(fontSize: 12)),
                                   ],
                                 ),
@@ -3296,8 +3298,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -3357,7 +3359,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -3634,8 +3636,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -3695,7 +3697,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -3867,8 +3869,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -3928,7 +3930,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -4114,8 +4116,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -4175,7 +4177,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -4346,8 +4348,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -4407,7 +4409,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -4599,8 +4601,8 @@ Row(
                         )
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -4660,7 +4662,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -4830,8 +4832,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -4891,7 +4893,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -5091,8 +5093,8 @@ Row(
                        // file: myFile),
                     ),
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -5152,7 +5154,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )
@@ -5325,8 +5327,8 @@ Row(
 
 
                     const SizedBox(height: 5,),
-                    fileMessage!.contains('<')|| fileMessage!.contains('://') ?
-                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage!)!)  ,
+                    fileMessage!.contains('<')|| fileMessage.contains('://') ?
+                    HtmlWidget(parser.emojify(addTag(widget.search!, fileMessage)!)  ,
                       //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                       textStyle: const TextStyle(fontSize:14, color: Colors.black),
                       onTapUrl: (url) async{
@@ -5386,7 +5388,7 @@ Row(
                         throw 'Could not launch';
                       },
                     )
-                        : Text(parser.emojify(addTag(widget.search!, fileMessage!)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
+                        : Text(parser.emojify(addTag(widget.search!, fileMessage)!), style: const TextStyle(fontSize:14, color: Colors.black) ,),
 
                   ],
                 )

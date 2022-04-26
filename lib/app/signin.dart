@@ -231,8 +231,8 @@ String toPicFile(String json){
                   MaterialPageRoute(builder: (context) =>
                       ShowConversationMyProjects(
                           id: '${payload!.split('/')[6]}',
-                          title: '${payload!.split('/')[7]}',
-                          id1: '${payload!.split('/')[8]}',
+                          title: '${payload.split('/')[7]}',
+                          id1: '${payload.split('/')[8]}',
                           cb: cb)),
                 );
               } else {
@@ -240,8 +240,8 @@ String toPicFile(String json){
                   context,
                   MaterialPageRoute(builder: (context) =>
                       ShowConversationMyBids(id: '${payload!.split('/')[6]}',
-                          title: '${payload!.split('/')[7]}',
-                          id1: '${payload!.split('/')[8]}',
+                          title: '${payload.split('/')[7]}',
+                          id1: '${payload.split('/')[8]}',
                           cb: cb)),
                 );
               }
@@ -281,7 +281,7 @@ String toPicFile(String json){
                 context,
                 MaterialPageRoute(builder: (context) =>
                     ShowThreadMyProjects(id: '${payload!.split('/')[6]}',
-                        title: '${payload!.split('/')[7]}*20**l',
+                        title: '${payload.split('/')[7]}*20**l',
                         cb: cb)),
               );
 
@@ -971,7 +971,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               );
             });
-            _loginBloc?.add!(ResetError(
+            _loginBloc?.add(ResetError(
               username: _username,
               password: _password,
             ));

@@ -35,7 +35,7 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:projectscoid/core/components/utility/tool/popup_menu.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
 part 'my_orders.g.dart';
 /** AUTOGENERATE OFF **/
@@ -720,10 +720,16 @@ class ItemMyOrdersContent2 extends StatelessWidget {
 //class ItemMyOrders extends class ItemMyOrdersBase{
 //
 //}
+class ItemModel {
+  String title;
+  IconData icon;
 
+  ItemModel(this.title, this.icon);
+}
 class MyOrdersIndexModel extends MyOrdersIndexBase{
   Map<String, dynamic> json;
   MyOrdersIndexModel(Map<String, dynamic> this.json):super(json);
+  late List<ItemModel> menuItems;
 
 
   @override
@@ -747,6 +753,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
 
     return children;
   }
+
   @override
   Widget _generateFirstColumnRow(BuildContext context, int? index) {
     return Container(
@@ -788,6 +795,61 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
   Widget _generateRightHandSideColumnRow(BuildContext context, int? index) {
     var rv = new List.from(items.items.reversed);
     GlobalKey btnKey = GlobalKey();
+    CustomPopupMenuController _controller = CustomPopupMenuController();
+    List<ItemModel> menuItems = [
+      ItemModel(rv[index!].item.buttons[0].text ,  Icons.circle,),
+    ];
+    Widget _buildLongPressMenu() {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Container(
+          width: 220,
+          color: const Color(0xFF4C4C4C),
+          child: GridView.count(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            crossAxisCount: 5,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 10,
+            shrinkWrap: true,
+            physics: const  NeverScrollableScrollPhysics(),
+            children: menuItems
+                .map((item) =>
+               GestureDetector(child:
+                                     Column(
+                                       mainAxisSize: MainAxisSize.min,
+                                       children: <Widget>[
+                                         Icon(
+                                           item.icon,
+                                           size: 20,
+                                           color: Colors.white,
+                                         ),
+                                         Container(
+                                           margin: const EdgeInsets.only(top: 2),
+                                           child: Text(
+                                             item.title,
+                                             style: const  TextStyle(color: Colors.white, fontSize: 12),
+                                           ),
+                                         ),
+                                       ],
+                                     ),
+                               //  behavior: HitTestBehavior.translucent,
+                                 onTap: (){
+                                  print('ini saya ${urlToRoute(rv[index!].item.buttons[0].url)}');
+                                   if(item.title == rv[index!].item.buttons[0].text){
+                                     AppProvider.getRouter(context)!.navigateTo(
+                                         context,
+                                         urlToRoute(rv[index!].item.buttons[0].url));
+                                   }
+                                   _controller.hideMenu();
+                                 },
+                 )
+
+            )
+                .toList(),
+          ),
+        ),
+      );
+    }
     void stateChanged(bool?isShow) {
       print('menu is ${isShow! ? 'showing' : 'closed'}');
     }
@@ -815,7 +877,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
 
             MenuItem(
                 title: rv[index!].item.buttons[0].text ,
-                image: Icon(
+                image: const Icon(
                   Icons.circle,
                   color: Colors.white,
                   size: 10,
@@ -833,12 +895,31 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
 
 
     final List<Widget> children = [];
+    double avatarSize = 40;
     children.add(Container(
         width: 50,
         height: 56,
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         alignment: Alignment.centerLeft,
         child:
+        CustomPopupMenu(
+          child: Container(
+            padding: const  EdgeInsets.all(5),
+            constraints: BoxConstraints(maxWidth: 240, minHeight: avatarSize),
+            decoration: BoxDecoration(
+              color:  Colors.white ,
+              borderRadius: BorderRadius.circular(3.0),
+            ),
+            child: const Icon(
+                                Icons.more_horiz_rounded,
+                             ),
+          ),
+          menuBuilder: _buildLongPressMenu,
+          barrierColor: Colors.transparent,
+          pressType: PressType.singleClick,
+          controller: _controller,
+        )
+      /*
         MaterialButton(
           height: 45.0,
           key: btnKey,
@@ -848,6 +929,8 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
             Icons.more_horiz_rounded,
           ),
         ),
+
+       */
 
 
     ));

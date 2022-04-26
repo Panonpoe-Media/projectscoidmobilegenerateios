@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class BumpUpMyProjects extends StatefulWidget {
 
@@ -79,7 +82,6 @@ class BumpUpMyProjectsState extends State<BumpUpMyProjects> with RestorationMixi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Bump Up';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -717,7 +719,6 @@ class BroadcastMessageMyProjectsState extends State<BroadcastMessageMyProjects> 
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Broadcast Message';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1357,6 +1358,8 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1914,6 +1917,41 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
       var data;
       List<Map> listAccount = [];
 	
+	    late RewardedAd _rewardedAd;
+	  // TODO: Add _isRewardedAdReady
+	  bool _isRewardedAdReady = false;
+		void _loadRewardedAd() {
+		RewardedAd.load(
+		  adUnitId: AdHelper.rewardedAdUnitId,
+		  request: AdRequest(),
+		  rewardedAdLoadCallback: RewardedAdLoadCallback(
+			onAdLoaded: (ad) {
+			  _rewardedAd = ad;
+
+			  ad.fullScreenContentCallback = FullScreenContentCallback(
+				onAdDismissedFullScreenContent: (ad) {
+
+				  setState(() {
+					_isRewardedAdReady = false;
+				  });
+				 // _loadRewardedAd();
+				},
+			  );
+
+			  setState(() {
+				_isRewardedAdReady = true;
+
+			  });
+			},
+			onAdFailedToLoad: (err) {
+			  print('Failed to load a rewarded ad: ${err.message}');
+			  setState(() {
+				_isRewardedAdReady = false;
+			  });
+			},
+		  ),
+		);
+	  }
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1941,6 +1979,7 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
  @override
   void initState() {
     super.initState();
+	_loadRewardedAd();
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
@@ -2934,6 +2973,12 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
 	 
 	 
 void _sendMessage()async{
+	 if(_isRewardedAdReady){
+   
+     _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+       // Reward the user for watching an ad.
+     });
+     }
     String? sendPath = Env.value!.baseUrl! + '/user/my_projects/show_thread_new_reply/${widget.id!}/buat-artikel-1-saja';
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
     var postShowThreadResult;
@@ -3987,6 +4032,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_thread!.listingShowThread!.dispose();
+	_rewardedAd?.dispose();
     super.dispose();
   }
 
@@ -4321,6 +4367,8 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -4879,6 +4927,41 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
       var data;
       List<Map> listAccount = [];
 	
+	    late RewardedAd _rewardedAd;
+	  // TODO: Add _isRewardedAdReady
+	  bool _isRewardedAdReady = false;
+		void _loadRewardedAd() {
+		RewardedAd.load(
+		  adUnitId: AdHelper.rewardedAdUnitId,
+		  request: AdRequest(),
+		  rewardedAdLoadCallback: RewardedAdLoadCallback(
+			onAdLoaded: (ad) {
+			  _rewardedAd = ad;
+
+			  ad.fullScreenContentCallback = FullScreenContentCallback(
+				onAdDismissedFullScreenContent: (ad) {
+
+				  setState(() {
+					_isRewardedAdReady = false;
+				  });
+				 // _loadRewardedAd();
+				},
+			  );
+
+			  setState(() {
+				_isRewardedAdReady = true;
+
+			  });
+			},
+			onAdFailedToLoad: (err) {
+			  print('Failed to load a rewarded ad: ${err.message}');
+			  setState(() {
+				_isRewardedAdReady = false;
+			  });
+			},
+		  ),
+		);
+	  }
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4906,6 +4989,7 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
  @override
   void initState() {
     super.initState();
+	_loadRewardedAd();
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
@@ -5897,6 +5981,12 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
   
   
 void _sendMessage()async{
+    if(_isRewardedAdReady){
+   
+     _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+       // Reward the user for watching an ad.
+     });
+     }
     String? sendPath = Env.value!.baseUrl! + '/user/my_projects/show_conversation_new_reply/${widget.id!}/buat-artikel-1-saja/${tempheader!.split('*')[0]}/annncncncncnc';
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
     var postShowThreadResult;
@@ -6952,6 +7042,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_conversation!.listingShowConversation!.dispose();
+	_rewardedAd?.dispose();
     super.dispose();
   }
 
@@ -7284,7 +7375,6 @@ class CreateProjectMyProjectsState extends State<CreateProjectMyProjects> with R
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Create Project';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -7923,7 +8013,6 @@ class EditDraftMyProjectsState extends State<EditDraftMyProjects> with Restorati
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Draft';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -8562,7 +8651,6 @@ class PublishProjectMyProjectsState extends State<PublishProjectMyProjects> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Publish Project';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -9200,7 +9288,6 @@ class CancelProjectMyProjectsState extends State<CancelProjectMyProjects> with R
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Cancel Project';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -9838,7 +9925,6 @@ class AcceptOrRejectWorkMyProjectsState extends State<AcceptOrRejectWorkMyProjec
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Accept or Reject Work';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -10473,7 +10559,6 @@ class RateWorkerMyProjectsState extends State<RateWorkerMyProjects> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Rate Worker';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -11114,7 +11199,6 @@ class ReportProgressMyProjectsState extends State<ReportProgressMyProjects> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Report Progress';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -11751,7 +11835,6 @@ class WeeklyReportMyProjectsState extends State<WeeklyReportMyProjects> with Res
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Weekly Report';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -12386,7 +12469,6 @@ class ReportDoneMyProjectsState extends State<ReportDoneMyProjects> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Report Done';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -13021,7 +13103,6 @@ class RateOwnerMyProjectsState extends State<RateOwnerMyProjects> with Restorati
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Rate Owner';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -13662,7 +13743,6 @@ class FileArbitrationMyProjectsState extends State<FileArbitrationMyProjects> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'File Arbitration';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -14302,7 +14382,6 @@ class NewOfferMyProjectsState extends State<NewOfferMyProjects> with Restoration
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'New Offer';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -14940,7 +15019,6 @@ class AcceptOfferMyProjectsState extends State<AcceptOfferMyProjects> with Resto
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Accept Offer';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -15579,7 +15657,6 @@ class RespondArbitrationMyProjectsState extends State<RespondArbitrationMyProjec
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Respond Arbitration';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -16224,7 +16301,6 @@ class CancelArbitrationMyProjectsState extends State<CancelArbitrationMyProjects
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Cancel Arbitration';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

@@ -1827,11 +1827,13 @@ class BuyInstructionSentTransfState extends State< BuyInstructionSentTransf>  wi
 
 
                         if(url.contains(new RegExp(r'[0-9]'))){
+
                           if(url.contains('show_conversation')){
                             AppProvider.getRouter(context)!.navigateTo(
                                 context,
                                 urlToRoute(url+ '/' ));
                           }else{
+
                             AppProvider.getRouter(context)!.navigateTo(
                                 context,
                                 urlToRoute(url )).catchError((onError){
@@ -1858,7 +1860,7 @@ class BuyInstructionSentTransfState extends State< BuyInstructionSentTransf>  wi
 
 
                       }
-
+                     https://projects.co.id/user/my_orders/view/24c614/24c614
                       throw 'Could not launch';
                     },
 

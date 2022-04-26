@@ -230,6 +230,16 @@ Map<String, dynamic> _$MyOrdersSuperBaseToJson(MyOrdersSuperBase instance) =>
       'model': instance.model,
     };
 
+
+OrderItem1 _$OrderItem1FromJson(Map<String, dynamic> json) => OrderItem1(
+  json['no'] as int?,
+  json['title'] as String?,
+  json['price_str'] as String?,
+  1,
+  json['total_str'] as String?,
+);
+
+
 ViewModelMyOrders _$ViewModelMyOrdersFromJson(Map<String, dynamic> json) =>
     ViewModelMyOrders(
       json['id'] as String?,
@@ -306,6 +316,10 @@ MyOrdersViewSuperBase _$MyOrdersViewSuperBaseFromJson(
       json['model'] == null
           ? null
           : ViewModelMyOrders.fromJson(json['model'] as Map<String, dynamic>),
+          (json['items'] as List<dynamic>?)
+              ?.map((e) =>
+          e == null ? null : OrderItem1.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$MyOrdersViewSuperBaseToJson(

@@ -15,7 +15,7 @@ class ThemeManager with ChangeNotifier {
 
   set themeMode(ThemeMode? themeMode)  {
     _themeMode = themeMode!;
-    _saveThemeModeInSharedPrefs(themeMode!);
+    _saveThemeModeInSharedPrefs(themeMode);
     notifyListeners();
   }
 

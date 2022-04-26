@@ -1,7 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-
-import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 import 'package:projectscoid/ProjectscoidApplication.dart';
 import 'package:projectscoid/models/model.dart';
@@ -40,7 +37,7 @@ AuthenticationState? get initialState => AuthenticationInitial();
     // if (currentState is AuthenticationUninitialized) {
     //bool hasToken;
   //  print('here');
-    final bool hasToken = await application!.projectsAPIRepository!.getHash()?? false;
+    final bool hasToken = await application!.projectsAPIRepository!.getHash();
     // Future.delayed(const Duration(milliseconds: 100), () {
     //  future.then((value){hasToken = value;});
     // });
@@ -95,67 +92,4 @@ AuthenticationState? get initialState => AuthenticationInitial();
 
 
 //@override
-  _authenticationEvent(AuthenticationEvent event, Emitter<AuthenticationState> emit)
-//Stream<AuthenticationState> mapEventToState(
- //   AuthenticationEvent event,
-  //  )
-async* {
-  print('here1123');
-	final currentState = state;
-  if (event is AppStarted) {
-   // final bool hasToken = await userRepository.hasToken();
-   // if (currentState is AuthenticationUninitialized) {
-      //bool hasToken;
-      print('here');
-      final bool hasToken = await application!.projectsAPIRepository!.getHash()?? false;
-     // Future.delayed(const Duration(milliseconds: 100), () {
-       //  future.then((value){hasToken = value;});
-     // });
- 
-      if (hasToken) {
-        var res = await application!.projectsAPIRepository!.loadAccount();
-        var res1 = await application!.projectsAPIRepository!.authenticate(res.asMap()[0]['user_name'],res.asMap()[0]['password'] ) ;
-       // print('res1 ===$res1');
-
-       //  LoginResult loginResult = LoginResult.fromJson(jsonDecode(res1));
-
-        if( res1 == 'OK'){
-          yield AuthenticationAuthenticated();
-
-        }else{
-          await application!.projectsAPIRepository!.deleteHash();
-          await setUsernamePref('');
-          await setPasswordPref('');
-
-          yield AuthenticationUnauthenticated();
-
-        }
-      } else {
-        yield AuthenticationUnauthenticated();
-      }
-  //  }
-    print('here1');
-  }
-
-  if (event is LoggedIn) {
-    print('here1');
-    yield AuthenticationLoading();
-    await application!.projectsAPIRepository!.loadAndSaveToken(event.token!);
-    yield AuthenticationWait();
-
-    yield AuthenticationAuthenticated();
-  }
-
-  if (event is LoggedOut) {
-    print('here1');
-
-    yield AuthenticationLoading();
-    //await userRepository.deleteToken();
-    await application!.projectsAPIRepository!.deleteHash();
-
-    yield AuthenticationUnauthenticated();
-  }
-
-
-}
 }

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:projectscoid/views/Chat/models/chat_model.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
 import 'package:projectscoid/views/Chat/blocs/blocs.dart';
 import 'package:logging/logging.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'package:projectscoid/views/Chat/widgets/commons/empty_warning_widget.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/core/components/helpers/string_helpers.dart';
 import 'package:projectscoid/views/Chat/widgets/chat/thread-item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:projectscoid/core/components/utility/tool/speed_dial_varian.dart';
 import 'package:projectscoid/core/components/utility/tool/speed_dial_child.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +28,6 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
   final scrollThreshold = 200.0;
   final Logger log = new Logger('ChatBloc');
   int _currentIndex = 0;
-  List<Widget> _children = [];
   ScrollController? _scrollController;
   double initscroll = 0.0;
   List<dynamic>? message;
@@ -83,7 +78,7 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
     final ftr = _getChatSharedPrefs();
     ftr.then((value){
       //print('ini dari chat deep link 124567 ====  $value   ');
-      if(value!.contains!('chat')){
+      if(value!.contains('chat')){
 
 
         int idx = value.indexOf('chat');
@@ -151,6 +146,7 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('chat_link', '');
   }
+  // ignore: unused_element
   void _scrollDown() {
     Timer(const Duration(microseconds: 100), () {
       if (_scrollController!.hasClients &&
@@ -369,10 +365,10 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
     prefs.then((val){
       initscroll = val.getDouble("position")!;
       if(initscroll != 0.0 || initscroll != null ){
-        _scrollController = ScrollController(initialScrollOffset: initscroll ?? 0.0, keepScrollOffset: false );
+        _scrollController = ScrollController(initialScrollOffset: initscroll, keepScrollOffset: false );
         _scrollController?.addListener(_onScroll);
       } else {
-        _scrollController = ScrollController(initialScrollOffset: initscroll ?? 0.0, keepScrollOffset: false );
+        _scrollController = ScrollController(initialScrollOffset: initscroll , keepScrollOffset: false );
         _scrollController?.addListener(_onScroll);
       }
     });

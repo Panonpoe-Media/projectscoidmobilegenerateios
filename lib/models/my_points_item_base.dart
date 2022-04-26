@@ -17,7 +17,7 @@ import 'selection.dart';
 import 'photo.dart';
 import 'paging.dart';
 part 'my_points_item_base.g.dart';
-
+//
 
 
 class ItemMyPointsBase {

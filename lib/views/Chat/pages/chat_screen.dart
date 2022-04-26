@@ -138,7 +138,7 @@ class _SearchThreadItmState extends State<SearchThreadItm>  with RestorationMixi
       }
     }
 
-    return timeAgo!;
+    return timeAgo;
 
     /*
     if (diff.inSeconds <= 0 || diff.inSeconds > 0 && diff.inMinutes == 0 || diff.inMinutes > 0 && diff.inHours == 0 || diff.inHours > 0 && diff.inDays == 0) {
@@ -1339,10 +1339,10 @@ class EditChatPicState extends State<EditChatPic>{
         );
 
          */
-                if(dioResultFile!.status == '1'){
+                if(dioResultFile.status == '1'){
 
-                  filename = dioResultFile!.temp!;
-                  var  filethumbname = dioResultFile!.temp!.replaceAll('.', '-thumb.');
+                  filename = dioResultFile.temp!;
+                  var  filethumbname = dioResultFile.temp!.replaceAll('.', '-thumb.');
                   //var res await getUploadFolder(filename, 'usr${widget.userID}' );
                   String? res ;
 
@@ -1380,9 +1380,9 @@ class EditChatPicState extends State<EditChatPic>{
                     setState(() {
                       progresscircular = false;
                     });
-                    AppProvider.getRouter(context!)!.pop(context!);
-                    AppProvider.getRouter(context!)!.pop(context!);
-                    AppProvider.getRouter(context!)!.pop(context!);
+                    AppProvider.getRouter(context!)!.pop(context);
+                    AppProvider.getRouter(context)!.pop(context);
+                    AppProvider.getRouter(context)!.pop(context);
 
                   }
 
@@ -1499,7 +1499,7 @@ class ShowSentImageState extends State<ShowSentImage> {
 
           GestureDetector(
             onTap: (){
-              bool blank = _textEditingController.text?.trim()?.isEmpty ?? true;
+              bool blank = _textEditingController.text.trim().isEmpty ?? true;
               // print('hereeee');
               if (_textEditingController.text.isNotEmpty && !blank) {
                 // print('hereeee');
@@ -1695,7 +1695,7 @@ class ShowSentImageState extends State<ShowSentImage> {
 
   void _sendMessage(BuildContext context) {
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
-    bool blank = _textEditingController.text?.trim()?.isEmpty ?? true;
+    bool blank = _textEditingController.text.trim().isEmpty ?? true;
     // print('hereeee');
     if (_textEditingController.text.isNotEmpty && !blank) {
       // print('hereeee');
@@ -2019,7 +2019,7 @@ class ShowSentFileState extends State<ShowSentFile> {
             GestureDetector(
               onTap: (){
 
-                bool blank = _textEditingController.text?.trim()?.isEmpty ?? true;
+                bool blank = _textEditingController.text.trim().isEmpty ?? true;
                 // print('hereeee');
                 if (_textEditingController.text.isNotEmpty && !blank) {
                   // print('hereeee');
@@ -2214,7 +2214,7 @@ class ShowSentFileState extends State<ShowSentFile> {
 
   void _sendMessage(BuildContext context) {
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
-    bool blank = _textEditingController.text?.trim()?.isEmpty ?? true;
+    bool blank = _textEditingController.text.trim().isEmpty ?? true;
     // print('hereeee');
     if (_textEditingController.text.isNotEmpty && !blank) {
       // print('hereeee');
@@ -2744,7 +2744,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
   @override
   void initState() {
     checkPermissionAudio();
-    if(widget.trans!!){
+    if(widget.trans!){
       super.initState();
      // if(widget.chatBloc != null){
         widget.chatBloc!.deleteMsg();
@@ -2877,7 +2877,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
          });
           return false;
         }
-      if(widget.trans!!){
+      if(widget.trans!){
         widget.chatBloc!.getIndexSpecial(1);
         widget.chatBloc!.setCurrentThread();
         Navigator.pop(context, false);
@@ -2895,7 +2895,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
         isLoading?
         Scaffold(
           // resizeToAvoidBottomPadding: false,
-          backgroundColor: darkMode!? Colors.grey: Colors.white,
+          backgroundColor: darkMode? Colors.grey: Colors.white,
           // resizeToAvoidBottomInset: true,
           appBar:
               isSelect?
@@ -4161,7 +4161,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
             :
         Scaffold(
         // resizeToAvoidBottomPadding: false,
-        backgroundColor: darkMode!? Colors.grey: Colors.white,
+        backgroundColor: darkMode? Colors.grey: Colors.white,
         // resizeToAvoidBottomInset: true,
         appBar:   isSelect?
                  AppBar(
@@ -5765,7 +5765,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
   void _sendMessage1(String msg) async{
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
-    bool blank = msg?.trim()?.isEmpty ?? true;
+    bool blank = msg.trim().isEmpty ?? true;
     progressCount = 0;
     // print('hereeee');
     if (msg.isNotEmpty && !blank) {
@@ -5834,7 +5834,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
   void _sendMessage() async{
    // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
-    bool blank = _textEditingController.text?.trim()?.isEmpty ?? true;
+    bool blank = _textEditingController.text.trim().isEmpty ?? true;
 
     progressCount = 0;
     // print('hereeee');
@@ -5965,7 +5965,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
         FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
-         files = result!.paths!;
+         files = result!.paths;
       } else
         {
         files = null;
@@ -5998,7 +5998,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     ),
                 );
                 if(!res){
-                AppProvider.getRouter(context!)!.pop(context!);
+                AppProvider.getRouter(context)!.pop(context);
 
                  }else{
                        // print('my path ============ $_path');
@@ -6006,7 +6006,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                       if(dioResultFile!.status == '1'){
 
-                        filename = dioResultFile!.temp;
+                        filename = dioResultFile.temp;
                         //var res await getUploadFolder(filename, 'usr${widget.userID}' );
                         String? res ;
 
@@ -6018,7 +6018,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                           failed = true;
                        //   setState(() {
                          // Navigator.of(context).pop();
-                            AppProvider.getRouter(context!)!.pop(context!);
+                            AppProvider.getRouter(context)!.pop(context);
 
                         }
                         if(res!  != ''){
@@ -6062,7 +6062,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
 
 
-                          AppProvider.getRouter(context!)!.pop(context!);
+                          AppProvider.getRouter(context)!.pop(context);
 
                          // Navigator.of(context).pop();
 
@@ -6219,7 +6219,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
        if (dioResultFile!.status == '1') {
          print('boss4');
-         filename = dioResultFile!.temp;
+         filename = dioResultFile.temp;
          //var res await getUploadFolder(filename, 'usr${widget.userID}' );
          String? res;
 
@@ -6232,7 +6232,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
            failed = true;
            //   setState(() {
            // Navigator.of(context).pop();
-           AppProvider.getRouter(context!)!.pop(context!);
+           AppProvider.getRouter(context)!.pop(context);
          }
          if (res!  != '') {
            print('ini adalah $res');
@@ -6296,7 +6296,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
          _loadingPath = false;
          _fileName = _path != null
              ? _path!.split('/').last
-             : files! != null ? files!.toString() : '...';
+             : files! != null ? files.toString() : '...';
        });
 
 
@@ -6516,7 +6516,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
           if (dioResultFile!.status == '1') {
             print('boss4');
-            filename = dioResultFile!.temp;
+            filename = dioResultFile.temp;
             //var res await getUploadFolder(filename, 'usr${widget.userID}' );
             String? res;
 
@@ -6529,7 +6529,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
               failed = true;
               //   setState(() {
               // Navigator.of(context).pop();
-              AppProvider.getRouter(context!)!.pop(context!);
+              AppProvider.getRouter(context)!.pop(context);
             }
             if (res!  != '') {
               print('ini adalah $res');
@@ -6854,7 +6854,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
         );
         if(!result){
         // print('messageku ${msg[0]}');
-          AppProvider.getRouter(context!)!.pop(context!);
+          AppProvider.getRouter(context)!.pop(context);
 
 
         }else{
@@ -6879,9 +6879,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
          */
           if(dioResultFile!.status == '1'){
 
-            var  filename = dioResultFile!.temp;
-            var  filethumbname = dioResultFile!.temp!.replaceAll('.', '-thumb.');
-            print('mythumb ${dioResultFile!.temp}    ${dioResultFile!.thumb}');
+            var  filename = dioResultFile.temp;
+            var  filethumbname = dioResultFile.temp!.replaceAll('.', '-thumb.');
+            print('mythumb ${dioResultFile.temp}    ${dioResultFile.thumb}');
             //var res await getUploadFolder(filename, 'usr${widget.userID}' );
             String? res ;
 
@@ -6891,7 +6891,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
               });
             }catch(e) {
               failed = true;
-              AppProvider.getRouter(context!)!.pop(context!);
+              AppProvider.getRouter(context)!.pop(context);
 
               //  Navigator.of(context).pop();
 
@@ -6903,7 +6903,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
               });
             }catch(e) {
               failed = true;
-              AppProvider.getRouter(context!)!.pop(context!);
+              AppProvider.getRouter(context)!.pop(context);
 
               //  Navigator.of(context).pop();
 
@@ -6943,7 +6943,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
               widget.chatBloc!.sendMsg(message);
 
 
-              AppProvider.getRouter(context!)!.pop(context!);
+              AppProvider.getRouter(context)!.pop(context);
 
               //Navigator.of(context).pop();
 

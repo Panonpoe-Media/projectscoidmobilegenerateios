@@ -1323,7 +1323,29 @@ class MyOrdersSuperBase {
 }
 
 
+@JsonSerializable()
+class OrderItem1{
+  int?    no;
+  String? title ;
+  String? price_str;
+  int?   quantity;
+  String? total_str;
 
+
+
+  OrderItem1(
+      this.no ,
+      this.title,
+      this.price_str,
+      this.quantity,
+      this.total_str
+      );
+
+  factory OrderItem1.fromJson(Map<String, dynamic> json) => _$OrderItem1FromJson(json);
+
+
+
+}
 
 
 
@@ -1781,11 +1803,13 @@ class MyOrdersViewSuperBase {
   Meta? meta;
   List<Button?>? buttons;
   ViewModelMyOrders? model;
+  List<OrderItem1?>? items;
   MyOrdersViewSuperBase(
       this.id,
       this.buttons,
       this.meta,
       this.model,
+      this.items
       );
   	
 

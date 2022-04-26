@@ -1,151 +1,146 @@
 import 'package:flutter/material.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
+
 class WebsiteWidget extends StatefulWidget {
-   WebsiteWidget({
+  WebsiteWidget({
     Key? key,
-   this.value, 
-   this.caption, 
-   this.hint, 
-   this.required,
-   this.getValue,
-   }) 
-   {
+    this.value,
+    this.caption,
+    this.hint,
+    this.required,
+    this.getValue,
+  }) {
     //contr!.text = value!;
-   if(required!){
+    if (required!) {
       caption = caption! + '*';
     }
-   } 
- // TextEditingController? contr = TextEditingController();
+  }
+  // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
   String? caption;
   final ValueChanged<String>? getValue;
 
- // String
+  // String
 
   @override
   State<StatefulWidget> createState() {
     return new _WebsiteWidget();
-  }  
+  }
 }
 
 class _WebsiteWidget extends State<WebsiteWidget> {
   bool validation = true;
   bool isvalid = true;
-  String?  errormessage = '';
-  TextEditingController? contr;
+  String? errormessage = '';
+  TextEditingController? contr = TextEditingController();
   // _EmailWidget({this.contr});
   @override
-  initState(){
-    contr?.text = widget.value!;
+  initState() {
+    contr?.text = widget.value ?? '';
     super.initState();
   }
-  String? validateWebsite(String? _value,bool?_require) {
+
+  String? validateWebsite(String? _value, bool? _require) {
     String value = _value!;
-    bool   require = _require!;
+    bool require = _require!;
     String? pattern =
-         r'(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)';
-    String? result = '' ;
+        r'(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)';
+    String? result = '';
     isvalid = true;
-    if(require){
-      if (value.isEmpty){
+    if (require) {
+      if (value.isEmpty) {
         result = 'This field is required';
-        isvalid= false;
-      }else{
+        isvalid = false;
+      } else {
         final RegExp? nameExp = RegExp(pattern);
-        if (!nameExp!.hasMatch(value)){
-          result = 'This field must be in a valid URL format http://www.website.com.';
+        if (!nameExp!.hasMatch(value)) {
+          result =
+              'This field must be in a valid URL format http://www.website.com.';
           isvalid = false;
         }
       }
-
-
-    } else{
-      if (value.isEmpty){
+    } else {
+      if (value.isEmpty) {
         result = null;
         isvalid = true;
-      }      
+      }
     }
 
     return result;
   }
 
- void  _getvalue(String val){
-      widget.getValue!(val);
+  void _getvalue(String val) {
+    widget.getValue!(val);
   }
 
   @override
-  Widget build (BuildContext context){
-    return
-      ItemListWidget(
-          tooltip: 'Send message',
-          onPressed: (){
-          },
-          lines:
-          widget.caption,
-          lines1:
-          errormessage?? '',
-          isdivided: false,
-          wgt:
-          Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
-              child:// <Widget>[
+  Widget build(BuildContext context) {
+    return ItemListWidget(
+        tooltip: 'Send message',
+        onPressed: () {},
+        lines: widget.caption,
+        lines1: errormessage ?? '',
+        isdivided: false,
+        wgt: Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
+            child: // <Widget>[
 
-              Container(
-                // padding: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                alignment: Alignment.center,
-                height: 45.0,
+                Container(
+              // padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+              alignment: Alignment.center,
+              height: 45.0,
 
-                child: TextFormField(
-
-                  style: TextStyle(color: validation ? CurrentTheme.NormalTextColor : CurrentTheme.BackgroundColor, fontSize: 14),
-
-                  decoration: InputDecoration(
-                    hintText: widget.hint,
-                    // hintStyle: TextStyle(color: Colors.grey[500]),
-                    hintStyle: TextStyle(color: validation ? CurrentTheme.ShadeColor : CurrentTheme.BackgroundColor),
-                    //  errorStyle:
-                    errorBorder: const UnderlineInputBorder(),
-                    filled: true,
-                    fillColor: validation ? CurrentTheme.BackgroundColor : CurrentTheme.ErrorColor,
-                    // focusedErrorBorder: errorBorder,
-                    border: const OutlineInputBorder(),
-                  ),
-
-                  controller: contr!,
-                  validator: (value) {
-                    // widget.value = value;
-                    errormessage = validateWebsite(value!, widget.required!);
-                    if (isvalid) {
-                      setState(() {
-                        validation = true;
-                        // widget.value = value;
-                        _getvalue(value);
-                      });
-                      return null;
-                    } else {
-                      setState(() {
-                        validation = false;
-                        // widget.value = value;
-                        _getvalue(value);
-                      });
-                      return null;
-                    }
-                  },
-
+              child: TextFormField(
+                style: TextStyle(
+                    color: validation
+                        ? CurrentTheme.NormalTextColor
+                        : CurrentTheme.BackgroundColor,
+                    fontSize: 14),
+                decoration: InputDecoration(
+                  hintText: widget.hint,
+                  // hintStyle: TextStyle(color: Colors.grey[500]),
+                  hintStyle: TextStyle(
+                      color: validation
+                          ? CurrentTheme.ShadeColor
+                          : CurrentTheme.BackgroundColor),
+                  //  errorStyle:
+                  errorBorder: const UnderlineInputBorder(),
+                  filled: true,
+                  fillColor: validation
+                      ? CurrentTheme.BackgroundColor
+                      : CurrentTheme.ErrorColor,
+                  // focusedErrorBorder: errorBorder,
+                  border: const OutlineInputBorder(),
                 ),
-
-
-              )
+                controller: contr,
+                validator: (value) {
+                  // widget.value = value;
+                  errormessage = validateWebsite(value!, widget.required!);
+                  if (isvalid) {
+                    setState(() {
+                      validation = true;
+                      // widget.value = value;
+                      _getvalue(value);
+                    });
+                    return null;
+                  } else {
+                    setState(() {
+                      validation = false;
+                      // widget.value = value;
+                      _getvalue(value);
+                    });
+                    return null;
+                  }
+                },
+              ),
+            )
 
             // ]
-          )
-
-
-      );
+            ));
     /*
       new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,6 +219,4 @@ class _WebsiteWidget extends State<WebsiteWidget> {
 
      */
   }
-
 }
-

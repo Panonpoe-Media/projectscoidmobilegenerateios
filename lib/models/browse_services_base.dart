@@ -2523,6 +2523,7 @@ class BrowseServicesListingBase{
 	   totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	totalHeight = totalHeight + 8 ;
 	totalHeight = totalHeight + 8 ;
@@ -2550,6 +2551,7 @@ class BrowseServicesListingBase{
 	   totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	totalHeight = totalHeight + 8 ;
 	totalHeight = totalHeight + 8 ;
@@ -2574,6 +2576,7 @@ class BrowseServicesListingBase{
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
@@ -2615,6 +2618,7 @@ Widget viewItem1 (ItemBrowseServicesModel item,ItemBrowseServicesModel item1, St
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
+	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	    totalHeight = totalHeight + 2 ;
 	   totalHeight = totalHeight + 2 ;
@@ -2807,6 +2811,7 @@ class ItemBrowseServicesContent extends StatelessWidget {
 	   children!.add(destination!.viewFinishDays(context)); 
 	   children!.add(destination!.viewSeller(context)); 
 	   children!.add(destination!.viewSellerRating(context));
+	   children!.add(destination!.viewSellerRanking(context));
 	   children!.add(destination!.viewProductSold(context));
 	   children!.add(destination!.viewShortDescription(context)); 
 	   children!.add(destination!.viewTags(context)); 

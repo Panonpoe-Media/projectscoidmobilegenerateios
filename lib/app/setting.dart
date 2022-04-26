@@ -203,7 +203,7 @@ class SettingState extends State<Setting>{
                                                   Radio(
                                                     onChanged: (val) => setState(() {
                                                       _groupValue = val as ThemeMode?;
-                                                      _updateTheme!(val);
+                                                      _updateTheme(val);
                                                     }),
                                                     value: ThemeMode.light,
                                                     groupValue: _groupValue,

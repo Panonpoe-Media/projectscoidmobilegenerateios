@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 //////////////////
 
@@ -82,7 +85,44 @@ class EditProfileMyProfileState extends State<EditProfileMyProfile> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Profile';
- 
+   late RewardedAd _rewardedAd;
+
+  // TODO: Add _isRewardedAdReady
+  bool _isRewardedAdReady = false;
+
+  // TODO: Implement _loadRewardedAd()
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AdHelper.rewardedAdUnitId,
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          _rewardedAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+
+              setState(() {
+                _isRewardedAdReady = false;
+              });
+             // _loadRewardedAd();
+            },
+          );
+
+          setState(() {
+            _isRewardedAdReady = true;
+
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load a rewarded ad: ${err.message}');
+          setState(() {
+            _isRewardedAdReady = false;
+          });
+        },
+      ),
+    );
+  }
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -102,6 +142,7 @@ final RestorableInt _counter = RestorableInt(0);
     super.initState();
     controller = ScrollController();
     validation.add(true);
+	 _loadRewardedAd();
   }
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -279,6 +320,14 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit_profile, context);
+	  if(_isRewardedAdReady){
+		 setState(() {
+		   _isRewardedAdReady = false;
+		 });
+		 _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+		   // Reward the user for watching an ad.
+		 });
+	   }
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -694,6 +743,7 @@ final RestorableInt _counter = RestorableInt(0);
 
   @override
   void dispose() {
+   _rewardedAd?.dispose();
     super.dispose();
   }
   
@@ -735,6 +785,8 @@ class  PortofolioMyProfileState1 extends State<PortofolioMyProfile> with TickerP
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
+	   
+   
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1254,7 +1306,6 @@ class ChangePasswordMyProfileState extends State<ChangePasswordMyProfile> with R
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Change Password';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1546,7 +1597,6 @@ class ChangeEmailMyProfileState extends State<ChangeEmailMyProfile> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Change Email';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1838,7 +1888,6 @@ class ChangeHandphoneMyProfileState extends State<ChangeHandphoneMyProfile> with
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Change Handphone';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

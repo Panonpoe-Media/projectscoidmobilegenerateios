@@ -17,7 +17,7 @@ import 'selection.dart';
 import 'photo.dart';
 import 'paging.dart';
 part 'checkout_item_base.g.dart';
-
+//
 
 
 class ItemCheckoutBase {

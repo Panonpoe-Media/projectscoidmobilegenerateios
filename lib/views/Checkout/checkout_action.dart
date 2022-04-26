@@ -51,6 +51,9 @@ import 'package:projectscoid/models/MyProjects/show_conversation_list_item_base.
 import 'package:projectscoid/models/MyProjects/show_thread_list_item.dart';
 import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 
 class PayWithAvailableBalanceCheckout extends StatefulWidget {
 
@@ -79,7 +82,6 @@ class PayWithAvailableBalanceCheckoutState extends State<PayWithAvailableBalance
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with Available Balance';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -713,7 +715,6 @@ class PayViaBankTransferCheckoutState extends State<PayViaBankTransferCheckout> 
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay via Bank Transfer';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1349,7 +1350,6 @@ class PayWithCreditCardCheckoutState extends State<PayWithCreditCardCheckout> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with Credit Card';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -1982,7 +1982,6 @@ class PayWithCimbClicksCheckoutState extends State<PayWithCimbClicksCheckout> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with CIMB Clicks';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -2615,7 +2614,6 @@ class PayWithBcaKlikpayCheckoutState extends State<PayWithBcaKlikpayCheckout> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with BCA KlikPay';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3248,7 +3246,6 @@ class PayWithMandiriClickpayCheckoutState extends State<PayWithMandiriClickpayCh
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with Mandiri ClickPay';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -3881,7 +3878,6 @@ class PayWithQrisCheckoutState extends State<PayWithQrisCheckout> with Restorati
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with QRIS';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -4514,7 +4510,6 @@ class PayWithPaypalCheckoutState extends State<PayWithPaypalCheckout> with Resto
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Pay with PayPal';
- 
   final List<Widget> actionChildren = <Widget>[
 	];
 

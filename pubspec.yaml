@@ -41,7 +41,7 @@ dependencies:
   #camera: ^0.9.4+14
   crypto: ^3.0.1
   carousel_slider: ^4.0.0
-
+  custom_pop_up_menu: ^1.2.3+1
 
   data_tables: ^1.4.0
   dio: ^4.0.4

@@ -17,7 +17,7 @@ import 'selection.dart';
 import 'photo.dart';
 import 'paging.dart';
 part 'my_finance_item_base.g.dart';
-
+//
 
 
 class ItemMyFinanceBase {

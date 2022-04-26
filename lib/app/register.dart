@@ -117,7 +117,7 @@ class RegisterState extends State<Register>{
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 24)),
                                   onPressed: () async {
-                                    controller?.animateTo(controller!.position!.minScrollExtent!,
+                                    controller?.animateTo(controller!.position.minScrollExtent,
                                         duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                     if (formKey.currentState!.validate()) {
                                       // print('validation ==== ${validation[0]}');
