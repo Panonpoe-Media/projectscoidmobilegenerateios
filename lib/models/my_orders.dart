@@ -803,7 +803,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
       return ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: Container(
-          width: 220,
+          width: 260,
           color: const Color(0xFF4C4C4C),
           child: GridView.count(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -880,7 +880,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
                 image: const Icon(
                   Icons.circle,
                   color: Colors.white,
-                  size: 10,
+                  size: 20,
                 ),
                // textStyle: rv[index!].item.buttons[0].text == 'Confirm Payment'? TextStyle(color: Color(0xffc5c5c5), fontSize: 8.0) : TextStyle(color: Color(0xffc5c5c5), fontSize: 10.0),
             ),
@@ -897,7 +897,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
     final List<Widget> children = [];
     double avatarSize = 40;
     children.add(Container(
-        width: 50,
+        width: 60,
         height: 56,
         padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
         alignment: Alignment.centerLeft,

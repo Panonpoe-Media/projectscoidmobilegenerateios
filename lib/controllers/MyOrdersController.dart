@@ -32,38 +32,38 @@ class MyOrdersController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyOrders()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyOrders;
     editMyOrders = await apiRepProvider?.getMyOrdersEdit(url!, id!, title!);
     return editMyOrders;
   }
   
     Future viewMyOrders()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyOrders;
     viewMyOrders = await apiRepProvider?.getMyOrdersView(url!, id!, title!);
     return viewMyOrders;
   }
 
   Future postMyOrders() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyOrders;
     postMyOrders = await apiRepProvider?.sendMyOrdersPost(url!,formData);
     return postMyOrders;
   }
   
     Future postMyOrdersWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyOrders;
     postMyOrders = await apiRepProvider?.sendMyOrdersPostWithID(url!,formData, id!, title!);
     return postMyOrders;
@@ -71,27 +71,27 @@ class MyOrdersController {
 
 
   Future getTableMyOrders(int page) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     return await apiRepProvider?.getMyOrdersIndex(url!, page);
   }
   
   
     Future editConfirmPaymentMyOrders()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editConfirmPayment;
     editConfirmPayment = await apiRepProvider?.getConfirmPaymentMyOrdersEdit(url!, id!, title!);
     return editConfirmPayment;
   }
 
   Future postConfirmPaymentMyOrders() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postConfirmPayment;
     postConfirmPayment = await apiRepProvider?.sendConfirmPaymentMyOrdersPost(url!,formData);
     return postConfirmPayment;
   }
   
     Future postConfirmPaymentMyOrdersWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postConfirmPayment;
     postConfirmPayment = await apiRepProvider?.sendConfirmPaymentMyOrdersPostWithID(url!,formData, id!, title!);
     return postConfirmPayment;
@@ -99,34 +99,34 @@ class MyOrdersController {
   
       Future getConfirmPaymentMyOrders(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getConfirmPayment;
-        getConfirmPayment = await apiRepProvider?.getConfirmPaymentMyOrders(url!, id!, title!, spKey!);
+        getConfirmPayment = await apiRepProvider?.getConfirmPaymentMyOrders(url!, id!, title!, spKey);
 	    return getConfirmPayment ;
 	 }
    Future<ConfirmPaymentMyOrdersModel> loadConfirmPaymentMyOrders() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadConfirmPayment;
         loadConfirmPayment = await apiRepProvider?.loadConfirmPaymentMyOrders('');
 	    return loadConfirmPayment ;  
    }
   
    Future saveConfirmPaymentMyOrders(ConfirmPaymentMyOrdersModel? my_orders, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateConfirmPaymentMyOrders(my_orders!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllConfirmPaymentMyOrders(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllConfirmPaymentMyOrders(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

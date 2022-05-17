@@ -32,38 +32,38 @@ class BrowseServicesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editBrowseServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBrowseServices;
     editBrowseServices = await apiRepProvider?.getBrowseServicesEdit(url!, id!, title!);
     return editBrowseServices;
   }
   
     Future viewBrowseServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewBrowseServices;
     viewBrowseServices = await apiRepProvider?.getBrowseServicesView(url!, id!, title!);
     return viewBrowseServices;
   }
 
   Future postBrowseServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseServices;
     postBrowseServices = await apiRepProvider?.sendBrowseServicesPost(url!,formData);
     return postBrowseServices;
   }
   
     Future postBrowseServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseServices;
     postBrowseServices = await apiRepProvider?.sendBrowseServicesPostWithID(url!,formData, id!, title!);
     return postBrowseServices;
@@ -72,21 +72,21 @@ class BrowseServicesController {
   
   
     Future editPlaceOrderBrowseServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPlaceOrder;
     editPlaceOrder = await apiRepProvider?.getPlaceOrderBrowseServicesEdit(url!, id!, title!);
     return editPlaceOrder;
   }
 
   Future postPlaceOrderBrowseServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPlaceOrder;
     postPlaceOrder = await apiRepProvider?.sendPlaceOrderBrowseServicesPost(url!,formData);
     return postPlaceOrder;
   }
   
     Future postPlaceOrderBrowseServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPlaceOrder;
     postPlaceOrder = await apiRepProvider?.sendPlaceOrderBrowseServicesPostWithID(url!,formData, id!, title!);
     return postPlaceOrder;
@@ -94,34 +94,34 @@ class BrowseServicesController {
   
       Future getPlaceOrderBrowseServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPlaceOrder;
-        getPlaceOrder = await apiRepProvider?.getPlaceOrderBrowseServices(url!, id!, title!, spKey!);
+        getPlaceOrder = await apiRepProvider?.getPlaceOrderBrowseServices(url!, id!, title!, spKey);
 	    return getPlaceOrder ;
 	 }
    Future<PlaceOrderBrowseServicesModel> loadPlaceOrderBrowseServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPlaceOrder;
         loadPlaceOrder = await apiRepProvider?.loadPlaceOrderBrowseServices('');
 	    return loadPlaceOrder ;  
    }
   
    Future savePlaceOrderBrowseServices(PlaceOrderBrowseServicesModel? browse_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePlaceOrderBrowseServices(browse_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPlaceOrderBrowseServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPlaceOrderBrowseServices(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

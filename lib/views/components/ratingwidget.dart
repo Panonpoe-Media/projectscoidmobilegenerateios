@@ -77,7 +77,7 @@ class RatingWidget extends StatelessWidget {
                             ),
                             onRatingUpdate: (rating) {
                               final val = rating * 2;
-                              getValue!(val.round!());
+                              getValue!(val.round());
                             },
                           )
                          /*

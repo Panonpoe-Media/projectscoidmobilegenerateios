@@ -33,38 +33,38 @@ class MyProfileController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyProfile;
     editMyProfile = await apiRepProvider?.getMyProfileEdit(url!, id!, title!);
     return editMyProfile;
   }
   
     Future viewMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyProfile;
     viewMyProfile = await apiRepProvider?.getMyProfileView(url!, id!, title!);
     return viewMyProfile;
   }
 
   Future postMyProfile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyProfile;
     postMyProfile = await apiRepProvider?.sendMyProfilePost(url!,formData);
     return postMyProfile;
   }
   
     Future postMyProfileWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyProfile;
     postMyProfile = await apiRepProvider?.sendMyProfilePostWithID(url!,formData, id!, title!);
     return postMyProfile;
@@ -73,21 +73,21 @@ class MyProfileController {
   
   
     Future editEditProfileMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editEditProfile;
     editEditProfile = await apiRepProvider?.getEditProfileMyProfileEdit(url!, id!, title!);
     return editEditProfile;
   }
 
   Future postEditProfileMyProfile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditProfile;
     postEditProfile = await apiRepProvider?.sendEditProfileMyProfilePost(url!,formData);
     return postEditProfile;
   }
   
     Future postEditProfileMyProfileWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditProfile;
     postEditProfile = await apiRepProvider?.sendEditProfileMyProfilePostWithID(url!,formData, id!, title!);
     return postEditProfile;
@@ -95,27 +95,27 @@ class MyProfileController {
   
       Future getEditProfileMyProfile(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getEditProfile;
-        getEditProfile = await apiRepProvider?.getEditProfileMyProfile(url!, id!, title!, spKey!);
+        getEditProfile = await apiRepProvider?.getEditProfileMyProfile(url!, id!, title!, spKey);
 	    return getEditProfile ;
 	 }
    Future<EditProfileMyProfileModel> loadEditProfileMyProfile() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadEditProfile;
         loadEditProfile = await apiRepProvider?.loadEditProfileMyProfile('');
 	    return loadEditProfile ;  
    }
   
    Future saveEditProfileMyProfile(EditProfileMyProfileModel? my_profile, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEditProfileMyProfile(my_profile!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEditProfileMyProfile(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllEditProfileMyProfile(spKey!);   
    }
   
@@ -125,21 +125,21 @@ class MyProfileController {
   }
   
     Future editChangePasswordMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editChangePassword;
     editChangePassword = await apiRepProvider?.getChangePasswordMyProfileEdit(url!, id!, title!);
     return editChangePassword;
   }
 
   Future postChangePasswordMyProfile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangePassword;
     postChangePassword = await apiRepProvider?.sendChangePasswordMyProfilePost(url!,formData);
     return postChangePassword;
   }
   
     Future postChangePasswordMyProfileWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangePassword;
     postChangePassword = await apiRepProvider?.sendChangePasswordMyProfilePostWithID(url!,formData, id!, title!);
     return postChangePassword;
@@ -147,48 +147,48 @@ class MyProfileController {
   
       Future getChangePasswordMyProfile(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getChangePassword;
-        getChangePassword = await apiRepProvider?.getChangePasswordMyProfile(url!, id!, title!, spKey!);
+        getChangePassword = await apiRepProvider?.getChangePasswordMyProfile(url!, id!, title!, spKey);
 	    return getChangePassword ;
 	 }
    Future<ChangePasswordMyProfileModel> loadChangePasswordMyProfile() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadChangePassword;
         loadChangePassword = await apiRepProvider?.loadChangePasswordMyProfile('');
 	    return loadChangePassword ;  
    }
   
    Future saveChangePasswordMyProfile(ChangePasswordMyProfileModel? my_profile, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateChangePasswordMyProfile(my_profile!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllChangePasswordMyProfile(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllChangePasswordMyProfile(spKey!);   
    }
   
   
   
     Future editChangeEmailMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editChangeEmail;
     editChangeEmail = await apiRepProvider?.getChangeEmailMyProfileEdit(url!, id!, title!);
     return editChangeEmail;
   }
 
   Future postChangeEmailMyProfile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangeEmail;
     postChangeEmail = await apiRepProvider?.sendChangeEmailMyProfilePost(url!,formData);
     return postChangeEmail;
   }
   
     Future postChangeEmailMyProfileWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangeEmail;
     postChangeEmail = await apiRepProvider?.sendChangeEmailMyProfilePostWithID(url!,formData, id!, title!);
     return postChangeEmail;
@@ -196,48 +196,48 @@ class MyProfileController {
   
       Future getChangeEmailMyProfile(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getChangeEmail;
-        getChangeEmail = await apiRepProvider?.getChangeEmailMyProfile(url!, id!, title!, spKey!);
+        getChangeEmail = await apiRepProvider?.getChangeEmailMyProfile(url!, id!, title!, spKey);
 	    return getChangeEmail ;
 	 }
    Future<ChangeEmailMyProfileModel> loadChangeEmailMyProfile() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadChangeEmail;
         loadChangeEmail = await apiRepProvider?.loadChangeEmailMyProfile('');
 	    return loadChangeEmail ;  
    }
   
    Future saveChangeEmailMyProfile(ChangeEmailMyProfileModel? my_profile, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateChangeEmailMyProfile(my_profile!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllChangeEmailMyProfile(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllChangeEmailMyProfile(spKey!);   
    }
   
   
   
     Future editChangeHandphoneMyProfile()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editChangeHandphone;
     editChangeHandphone = await apiRepProvider?.getChangeHandphoneMyProfileEdit(url!, id!, title!);
     return editChangeHandphone;
   }
 
   Future postChangeHandphoneMyProfile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangeHandphone;
     postChangeHandphone = await apiRepProvider?.sendChangeHandphoneMyProfilePost(url!,formData);
     return postChangeHandphone;
   }
   
     Future postChangeHandphoneMyProfileWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangeHandphone;
     postChangeHandphone = await apiRepProvider?.sendChangeHandphoneMyProfilePostWithID(url!,formData, id!, title!);
     return postChangeHandphone;
@@ -245,34 +245,34 @@ class MyProfileController {
   
       Future getChangeHandphoneMyProfile(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getChangeHandphone;
-        getChangeHandphone = await apiRepProvider?.getChangeHandphoneMyProfile(url!, id!, title!, spKey!);
+        getChangeHandphone = await apiRepProvider?.getChangeHandphoneMyProfile(url!, id!, title!, spKey);
 	    return getChangeHandphone ;
 	 }
    Future<ChangeHandphoneMyProfileModel> loadChangeHandphoneMyProfile() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadChangeHandphone;
         loadChangeHandphone = await apiRepProvider?.loadChangeHandphoneMyProfile('');
 	    return loadChangeHandphone ;  
    }
   
    Future saveChangeHandphoneMyProfile(ChangeHandphoneMyProfileModel? my_profile, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateChangeHandphoneMyProfile(my_profile!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllChangeHandphoneMyProfile(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllChangeHandphoneMyProfile(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

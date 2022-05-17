@@ -35,38 +35,38 @@ class MyServicesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyServices;
     editMyServices = await apiRepProvider?.getMyServicesEdit(url!, id!, title!);
     return editMyServices;
   }
   
     Future viewMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyServices;
     viewMyServices = await apiRepProvider?.getMyServicesView(url!, id!, title!);
     return viewMyServices;
   }
 
   Future postMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyServices;
     postMyServices = await apiRepProvider?.sendMyServicesPost(url!,formData);
     return postMyServices;
   }
   
     Future postMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyServices;
     postMyServices = await apiRepProvider?.sendMyServicesPostWithID(url!,formData, id!, title!);
     return postMyServices;
@@ -81,21 +81,21 @@ class MyServicesController {
   }
   
     Future editAddNewServiceMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editAddNewService;
     editAddNewService = await apiRepProvider?.getAddNewServiceMyServicesEdit(url!, id!, title!);
     return editAddNewService;
   }
 
   Future postAddNewServiceMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddNewService;
     postAddNewService = await apiRepProvider?.sendAddNewServiceMyServicesPost(url!,formData);
     return postAddNewService;
   }
   
     Future postAddNewServiceMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddNewService;
     postAddNewService = await apiRepProvider?.sendAddNewServiceMyServicesPostWithID(url!,formData, id!, title!);
     return postAddNewService;
@@ -103,48 +103,48 @@ class MyServicesController {
   
       Future getAddNewServiceMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getAddNewService;
-        getAddNewService = await apiRepProvider?.getAddNewServiceMyServices(url!, id!, title!, spKey!);
+        getAddNewService = await apiRepProvider?.getAddNewServiceMyServices(url!, id!, title!, spKey);
 	    return getAddNewService ;
 	 }
    Future<AddNewServiceMyServicesModel> loadAddNewServiceMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadAddNewService;
         loadAddNewService = await apiRepProvider?.loadAddNewServiceMyServices('');
 	    return loadAddNewService ;  
    }
   
    Future saveAddNewServiceMyServices(AddNewServiceMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAddNewServiceMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAddNewServiceMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllAddNewServiceMyServices(spKey!);   
    }
   
   
   
     Future editPublishServiceMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPublishService;
     editPublishService = await apiRepProvider?.getPublishServiceMyServicesEdit(url!, id!, title!);
     return editPublishService;
   }
 
   Future postPublishServiceMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPublishService;
     postPublishService = await apiRepProvider?.sendPublishServiceMyServicesPost(url!,formData);
     return postPublishService;
   }
   
     Future postPublishServiceMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPublishService;
     postPublishService = await apiRepProvider?.sendPublishServiceMyServicesPostWithID(url!,formData, id!, title!);
     return postPublishService;
@@ -152,48 +152,48 @@ class MyServicesController {
   
       Future getPublishServiceMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPublishService;
-        getPublishService = await apiRepProvider?.getPublishServiceMyServices(url!, id!, title!, spKey!);
+        getPublishService = await apiRepProvider?.getPublishServiceMyServices(url!, id!, title!, spKey);
 	    return getPublishService ;
 	 }
    Future<PublishServiceMyServicesModel> loadPublishServiceMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPublishService;
         loadPublishService = await apiRepProvider?.loadPublishServiceMyServices('');
 	    return loadPublishService ;  
    }
   
    Future savePublishServiceMyServices(PublishServiceMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePublishServiceMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPublishServiceMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPublishServiceMyServices(spKey!);   
    }
   
   
   
     Future editBumpUpMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBumpUp;
     editBumpUp = await apiRepProvider?.getBumpUpMyServicesEdit(url!, id!, title!);
     return editBumpUp;
   }
 
   Future postBumpUpMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyServicesPost(url!,formData);
     return postBumpUp;
   }
   
     Future postBumpUpMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyServicesPostWithID(url!,formData, id!, title!);
     return postBumpUp;
@@ -201,48 +201,48 @@ class MyServicesController {
   
       Future getBumpUpMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getBumpUp;
-        getBumpUp = await apiRepProvider?.getBumpUpMyServices(url!, id!, title!, spKey!);
+        getBumpUp = await apiRepProvider?.getBumpUpMyServices(url!, id!, title!, spKey);
 	    return getBumpUp ;
 	 }
    Future<BumpUpMyServicesModel> loadBumpUpMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadBumpUp;
         loadBumpUp = await apiRepProvider?.loadBumpUpMyServices('');
 	    return loadBumpUp ;  
    }
   
    Future saveBumpUpMyServices(BumpUpMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateBumpUpMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllBumpUpMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllBumpUpMyServices(spKey!);   
    }
   
   
   
     Future editEditServiceMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editEditService;
     editEditService = await apiRepProvider?.getEditServiceMyServicesEdit(url!, id!, title!);
     return editEditService;
   }
 
   Future postEditServiceMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditService;
     postEditService = await apiRepProvider?.sendEditServiceMyServicesPost(url!,formData);
     return postEditService;
   }
   
     Future postEditServiceMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditService;
     postEditService = await apiRepProvider?.sendEditServiceMyServicesPostWithID(url!,formData, id!, title!);
     return postEditService;
@@ -250,27 +250,27 @@ class MyServicesController {
   
       Future getEditServiceMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getEditService;
-        getEditService = await apiRepProvider?.getEditServiceMyServices(url!, id!, title!, spKey!);
+        getEditService = await apiRepProvider?.getEditServiceMyServices(url!, id!, title!, spKey);
 	    return getEditService ;
 	 }
    Future<EditServiceMyServicesModel> loadEditServiceMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadEditService;
         loadEditService = await apiRepProvider?.loadEditServiceMyServices('');
 	    return loadEditService ;  
    }
   
    Future saveEditServiceMyServices(EditServiceMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEditServiceMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEditServiceMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllEditServiceMyServices(spKey!);   
    }
   
@@ -280,21 +280,21 @@ class MyServicesController {
   }
   
     Future editUnlistMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editUnlist;
     editUnlist = await apiRepProvider?.getUnlistMyServicesEdit(url!, id!, title!);
     return editUnlist;
   }
 
   Future postUnlistMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postUnlist;
     postUnlist = await apiRepProvider?.sendUnlistMyServicesPost(url!,formData);
     return postUnlist;
   }
   
     Future postUnlistMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postUnlist;
     postUnlist = await apiRepProvider?.sendUnlistMyServicesPostWithID(url!,formData, id!, title!);
     return postUnlist;
@@ -302,48 +302,48 @@ class MyServicesController {
   
       Future getUnlistMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getUnlist;
-        getUnlist = await apiRepProvider?.getUnlistMyServices(url!, id!, title!, spKey!);
+        getUnlist = await apiRepProvider?.getUnlistMyServices(url!, id!, title!, spKey);
 	    return getUnlist ;
 	 }
    Future<UnlistMyServicesModel> loadUnlistMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadUnlist;
         loadUnlist = await apiRepProvider?.loadUnlistMyServices('');
 	    return loadUnlist ;  
    }
   
    Future saveUnlistMyServices(UnlistMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateUnlistMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllUnlistMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllUnlistMyServices(spKey!);   
    }
   
   
   
     Future editReactivateServiceMyServices()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editReactivateService;
     editReactivateService = await apiRepProvider?.getReactivateServiceMyServicesEdit(url!, id!, title!);
     return editReactivateService;
   }
 
   Future postReactivateServiceMyServices() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postReactivateService;
     postReactivateService = await apiRepProvider?.sendReactivateServiceMyServicesPost(url!,formData);
     return postReactivateService;
   }
   
     Future postReactivateServiceMyServicesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postReactivateService;
     postReactivateService = await apiRepProvider?.sendReactivateServiceMyServicesPostWithID(url!,formData, id!, title!);
     return postReactivateService;
@@ -351,34 +351,34 @@ class MyServicesController {
   
       Future getReactivateServiceMyServices(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getReactivateService;
-        getReactivateService = await apiRepProvider?.getReactivateServiceMyServices(url!, id!, title!, spKey!);
+        getReactivateService = await apiRepProvider?.getReactivateServiceMyServices(url!, id!, title!, spKey);
 	    return getReactivateService ;
 	 }
    Future<ReactivateServiceMyServicesModel> loadReactivateServiceMyServices() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadReactivateService;
         loadReactivateService = await apiRepProvider?.loadReactivateServiceMyServices('');
 	    return loadReactivateService ;  
    }
   
    Future saveReactivateServiceMyServices(ReactivateServiceMyServicesModel? my_services, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateReactivateServiceMyServices(my_services!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllReactivateServiceMyServices(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllReactivateServiceMyServices(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

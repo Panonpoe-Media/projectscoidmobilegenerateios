@@ -32,38 +32,38 @@ class ExistingUserController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editExistingUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editExistingUser;
     editExistingUser = await apiRepProvider?.getExistingUserEdit(url!, id!, title!);
     return editExistingUser;
   }
   
     Future viewExistingUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewExistingUser;
     viewExistingUser = await apiRepProvider?.getExistingUserView(url!, id!, title!);
     return viewExistingUser;
   }
 
   Future postExistingUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postExistingUser;
     postExistingUser = await apiRepProvider?.sendExistingUserPost(url!,formData);
     return postExistingUser;
   }
   
     Future postExistingUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postExistingUser;
     postExistingUser = await apiRepProvider?.sendExistingUserPostWithID(url!,formData, id!, title!);
     return postExistingUser;
@@ -72,21 +72,21 @@ class ExistingUserController {
   
   
     Future editForgotPasswordExistingUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editForgotPassword;
     editForgotPassword = await apiRepProvider?.getForgotPasswordExistingUserEdit(url!, id!, title!);
     return editForgotPassword;
   }
 
   Future postForgotPasswordExistingUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postForgotPassword;
     postForgotPassword = await apiRepProvider?.sendForgotPasswordExistingUserPost(url!,formData);
     return postForgotPassword;
   }
   
     Future postForgotPasswordExistingUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postForgotPassword;
     postForgotPassword = await apiRepProvider?.sendForgotPasswordExistingUserPostWithID(url!,formData, id!, title!);
     return postForgotPassword;
@@ -94,48 +94,48 @@ class ExistingUserController {
   
       Future getForgotPasswordExistingUser(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getForgotPassword;
-        getForgotPassword = await apiRepProvider?.getForgotPasswordExistingUser(url!, id!, title!, spKey!);
+        getForgotPassword = await apiRepProvider?.getForgotPasswordExistingUser(url!, id!, title!, spKey);
 	    return getForgotPassword ;
 	 }
    Future<ForgotPasswordExistingUserModel> loadForgotPasswordExistingUser() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadForgotPassword;
         loadForgotPassword = await apiRepProvider?.loadForgotPasswordExistingUser('');
 	    return loadForgotPassword ;  
    }
   
    Future saveForgotPasswordExistingUser(ForgotPasswordExistingUserModel? existing_user, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateForgotPasswordExistingUser(existing_user!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllForgotPasswordExistingUser(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllForgotPasswordExistingUser(spKey!);   
    }
   
   
   
     Future editResetPasswordExistingUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editResetPassword;
     editResetPassword = await apiRepProvider?.getResetPasswordExistingUserEdit(url!, id!, title!);
     return editResetPassword;
   }
 
   Future postResetPasswordExistingUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postResetPassword;
     postResetPassword = await apiRepProvider?.sendResetPasswordExistingUserPost(url!,formData);
     return postResetPassword;
   }
   
     Future postResetPasswordExistingUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postResetPassword;
     postResetPassword = await apiRepProvider?.sendResetPasswordExistingUserPostWithID(url!,formData, id!, title!);
     return postResetPassword;
@@ -143,34 +143,34 @@ class ExistingUserController {
   
       Future getResetPasswordExistingUser(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getResetPassword;
-        getResetPassword = await apiRepProvider?.getResetPasswordExistingUser(url!, id!, title!, spKey!);
+        getResetPassword = await apiRepProvider?.getResetPasswordExistingUser(url!, id!, title!, spKey);
 	    return getResetPassword ;
 	 }
    Future<ResetPasswordExistingUserModel> loadResetPasswordExistingUser() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadResetPassword;
         loadResetPassword = await apiRepProvider?.loadResetPasswordExistingUser('');
 	    return loadResetPassword ;  
    }
   
    Future saveResetPasswordExistingUser(ResetPasswordExistingUserModel? existing_user, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateResetPasswordExistingUser(existing_user!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllResetPasswordExistingUser(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllResetPasswordExistingUser(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

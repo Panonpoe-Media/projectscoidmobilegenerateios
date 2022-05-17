@@ -35,38 +35,38 @@ class MyProductsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyProducts;
     editMyProducts = await apiRepProvider?.getMyProductsEdit(url!, id!, title!);
     return editMyProducts;
   }
   
     Future viewMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyProducts;
     viewMyProducts = await apiRepProvider?.getMyProductsView(url!, id!, title!);
     return viewMyProducts;
   }
 
   Future postMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyProducts;
     postMyProducts = await apiRepProvider?.sendMyProductsPost(url!,formData);
     return postMyProducts;
   }
   
     Future postMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyProducts;
     postMyProducts = await apiRepProvider?.sendMyProductsPostWithID(url!,formData, id!, title!);
     return postMyProducts;
@@ -81,21 +81,21 @@ class MyProductsController {
   }
   
     Future editAddNewProductMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editAddNewProduct;
     editAddNewProduct = await apiRepProvider?.getAddNewProductMyProductsEdit(url!, id!, title!);
     return editAddNewProduct;
   }
 
   Future postAddNewProductMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddNewProduct;
     postAddNewProduct = await apiRepProvider?.sendAddNewProductMyProductsPost(url!,formData);
     return postAddNewProduct;
   }
   
     Future postAddNewProductMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddNewProduct;
     postAddNewProduct = await apiRepProvider?.sendAddNewProductMyProductsPostWithID(url!,formData, id!, title!);
     return postAddNewProduct;
@@ -103,48 +103,48 @@ class MyProductsController {
   
       Future getAddNewProductMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getAddNewProduct;
-        getAddNewProduct = await apiRepProvider?.getAddNewProductMyProducts(url!, id!, title!, spKey!);
+        getAddNewProduct = await apiRepProvider?.getAddNewProductMyProducts(url!, id!, title!, spKey);
 	    return getAddNewProduct ;
 	 }
    Future<AddNewProductMyProductsModel> loadAddNewProductMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadAddNewProduct;
         loadAddNewProduct = await apiRepProvider?.loadAddNewProductMyProducts('');
 	    return loadAddNewProduct ;  
    }
   
    Future saveAddNewProductMyProducts(AddNewProductMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAddNewProductMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAddNewProductMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllAddNewProductMyProducts(spKey!);   
    }
   
   
   
     Future editPublishProductMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPublishProduct;
     editPublishProduct = await apiRepProvider?.getPublishProductMyProductsEdit(url!, id!, title!);
     return editPublishProduct;
   }
 
   Future postPublishProductMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPublishProduct;
     postPublishProduct = await apiRepProvider?.sendPublishProductMyProductsPost(url!,formData);
     return postPublishProduct;
   }
   
     Future postPublishProductMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPublishProduct;
     postPublishProduct = await apiRepProvider?.sendPublishProductMyProductsPostWithID(url!,formData, id!, title!);
     return postPublishProduct;
@@ -152,48 +152,48 @@ class MyProductsController {
   
       Future getPublishProductMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPublishProduct;
-        getPublishProduct = await apiRepProvider?.getPublishProductMyProducts(url!, id!, title!, spKey!);
+        getPublishProduct = await apiRepProvider?.getPublishProductMyProducts(url!, id!, title!, spKey);
 	    return getPublishProduct ;
 	 }
    Future<PublishProductMyProductsModel> loadPublishProductMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPublishProduct;
         loadPublishProduct = await apiRepProvider?.loadPublishProductMyProducts('');
 	    return loadPublishProduct ;  
    }
   
    Future savePublishProductMyProducts(PublishProductMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePublishProductMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPublishProductMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPublishProductMyProducts(spKey!);   
    }
   
   
   
     Future editEditProductMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editEditProduct;
     editEditProduct = await apiRepProvider?.getEditProductMyProductsEdit(url!, id!, title!);
     return editEditProduct;
   }
 
   Future postEditProductMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditProduct;
     postEditProduct = await apiRepProvider?.sendEditProductMyProductsPost(url!,formData);
     return postEditProduct;
   }
   
     Future postEditProductMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postEditProduct;
     postEditProduct = await apiRepProvider?.sendEditProductMyProductsPostWithID(url!,formData, id!, title!);
     return postEditProduct;
@@ -201,48 +201,48 @@ class MyProductsController {
   
       Future getEditProductMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getEditProduct;
-        getEditProduct = await apiRepProvider?.getEditProductMyProducts(url!, id!, title!, spKey!);
+        getEditProduct = await apiRepProvider?.getEditProductMyProducts(url!, id!, title!, spKey);
 	    return getEditProduct ;
 	 }
    Future<EditProductMyProductsModel> loadEditProductMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadEditProduct;
         loadEditProduct = await apiRepProvider?.loadEditProductMyProducts('');
 	    return loadEditProduct ;  
    }
   
    Future saveEditProductMyProducts(EditProductMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEditProductMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEditProductMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllEditProductMyProducts(spKey!);   
    }
   
   
   
     Future editBumpUpMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBumpUp;
     editBumpUp = await apiRepProvider?.getBumpUpMyProductsEdit(url!, id!, title!);
     return editBumpUp;
   }
 
   Future postBumpUpMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyProductsPost(url!,formData);
     return postBumpUp;
   }
   
     Future postBumpUpMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyProductsPostWithID(url!,formData, id!, title!);
     return postBumpUp;
@@ -250,27 +250,27 @@ class MyProductsController {
   
       Future getBumpUpMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getBumpUp;
-        getBumpUp = await apiRepProvider?.getBumpUpMyProducts(url!, id!, title!, spKey!);
+        getBumpUp = await apiRepProvider?.getBumpUpMyProducts(url!, id!, title!, spKey);
 	    return getBumpUp ;
 	 }
    Future<BumpUpMyProductsModel> loadBumpUpMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadBumpUp;
         loadBumpUp = await apiRepProvider?.loadBumpUpMyProducts('');
 	    return loadBumpUp ;  
    }
   
    Future saveBumpUpMyProducts(BumpUpMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateBumpUpMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllBumpUpMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllBumpUpMyProducts(spKey!);   
    }
   
@@ -280,21 +280,21 @@ class MyProductsController {
   }
   
     Future editUnlistMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editUnlist;
     editUnlist = await apiRepProvider?.getUnlistMyProductsEdit(url!, id!, title!);
     return editUnlist;
   }
 
   Future postUnlistMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postUnlist;
     postUnlist = await apiRepProvider?.sendUnlistMyProductsPost(url!,formData);
     return postUnlist;
   }
   
     Future postUnlistMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postUnlist;
     postUnlist = await apiRepProvider?.sendUnlistMyProductsPostWithID(url!,formData, id!, title!);
     return postUnlist;
@@ -302,48 +302,48 @@ class MyProductsController {
   
       Future getUnlistMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getUnlist;
-        getUnlist = await apiRepProvider?.getUnlistMyProducts(url!, id!, title!, spKey!);
+        getUnlist = await apiRepProvider?.getUnlistMyProducts(url!, id!, title!, spKey);
 	    return getUnlist ;
 	 }
    Future<UnlistMyProductsModel> loadUnlistMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadUnlist;
         loadUnlist = await apiRepProvider?.loadUnlistMyProducts('');
 	    return loadUnlist ;  
    }
   
    Future saveUnlistMyProducts(UnlistMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateUnlistMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllUnlistMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllUnlistMyProducts(spKey!);   
    }
   
   
   
     Future editReactivateProductMyProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editReactivateProduct;
     editReactivateProduct = await apiRepProvider?.getReactivateProductMyProductsEdit(url!, id!, title!);
     return editReactivateProduct;
   }
 
   Future postReactivateProductMyProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postReactivateProduct;
     postReactivateProduct = await apiRepProvider?.sendReactivateProductMyProductsPost(url!,formData);
     return postReactivateProduct;
   }
   
     Future postReactivateProductMyProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postReactivateProduct;
     postReactivateProduct = await apiRepProvider?.sendReactivateProductMyProductsPostWithID(url!,formData, id!, title!);
     return postReactivateProduct;
@@ -351,34 +351,34 @@ class MyProductsController {
   
       Future getReactivateProductMyProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getReactivateProduct;
-        getReactivateProduct = await apiRepProvider?.getReactivateProductMyProducts(url!, id!, title!, spKey!);
+        getReactivateProduct = await apiRepProvider?.getReactivateProductMyProducts(url!, id!, title!, spKey);
 	    return getReactivateProduct ;
 	 }
    Future<ReactivateProductMyProductsModel> loadReactivateProductMyProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadReactivateProduct;
         loadReactivateProduct = await apiRepProvider?.loadReactivateProductMyProducts('');
 	    return loadReactivateProduct ;  
    }
   
    Future saveReactivateProductMyProducts(ReactivateProductMyProductsModel? my_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateReactivateProductMyProducts(my_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllReactivateProductMyProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllReactivateProductMyProducts(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

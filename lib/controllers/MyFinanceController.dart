@@ -32,38 +32,38 @@ class MyFinanceController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyFinance()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyFinance;
     editMyFinance = await apiRepProvider?.getMyFinanceEdit(url!, id!, title!);
     return editMyFinance;
   }
   
     Future viewMyFinance()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyFinance;
     viewMyFinance = await apiRepProvider?.getMyFinanceView(url!, id!, title!);
     return viewMyFinance;
   }
 
   Future postMyFinance() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyFinance;
     postMyFinance = await apiRepProvider?.sendMyFinancePost(url!,formData);
     return postMyFinance;
   }
   
     Future postMyFinanceWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyFinance;
     postMyFinance = await apiRepProvider?.sendMyFinancePostWithID(url!,formData, id!, title!);
     return postMyFinance;
@@ -72,21 +72,21 @@ class MyFinanceController {
   
   
     Future editChangePaymentSettingsMyFinance()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editChangePaymentSettings;
     editChangePaymentSettings = await apiRepProvider?.getChangePaymentSettingsMyFinanceEdit(url!, id!, title!);
     return editChangePaymentSettings;
   }
 
   Future postChangePaymentSettingsMyFinance() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangePaymentSettings;
     postChangePaymentSettings = await apiRepProvider?.sendChangePaymentSettingsMyFinancePost(url!,formData);
     return postChangePaymentSettings;
   }
   
     Future postChangePaymentSettingsMyFinanceWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postChangePaymentSettings;
     postChangePaymentSettings = await apiRepProvider?.sendChangePaymentSettingsMyFinancePostWithID(url!,formData, id!, title!);
     return postChangePaymentSettings;
@@ -94,48 +94,48 @@ class MyFinanceController {
   
       Future getChangePaymentSettingsMyFinance(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getChangePaymentSettings;
-        getChangePaymentSettings = await apiRepProvider?.getChangePaymentSettingsMyFinance(url!, id!, title!, spKey!);
+        getChangePaymentSettings = await apiRepProvider?.getChangePaymentSettingsMyFinance(url!, id!, title!, spKey);
 	    return getChangePaymentSettings ;
 	 }
    Future<ChangePaymentSettingsMyFinanceModel> loadChangePaymentSettingsMyFinance() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadChangePaymentSettings;
         loadChangePaymentSettings = await apiRepProvider?.loadChangePaymentSettingsMyFinance('');
 	    return loadChangePaymentSettings ;  
    }
   
    Future saveChangePaymentSettingsMyFinance(ChangePaymentSettingsMyFinanceModel? my_finance, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateChangePaymentSettingsMyFinance(my_finance!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllChangePaymentSettingsMyFinance(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllChangePaymentSettingsMyFinance(spKey!);   
    }
   
   
   
     Future editWithdrawPaymentMyFinance()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editWithdrawPayment;
     editWithdrawPayment = await apiRepProvider?.getWithdrawPaymentMyFinanceEdit(url!, id!, title!);
     return editWithdrawPayment;
   }
 
   Future postWithdrawPaymentMyFinance() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postWithdrawPayment;
     postWithdrawPayment = await apiRepProvider?.sendWithdrawPaymentMyFinancePost(url!,formData);
     return postWithdrawPayment;
   }
   
     Future postWithdrawPaymentMyFinanceWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postWithdrawPayment;
     postWithdrawPayment = await apiRepProvider?.sendWithdrawPaymentMyFinancePostWithID(url!,formData, id!, title!);
     return postWithdrawPayment;
@@ -143,48 +143,48 @@ class MyFinanceController {
   
       Future getWithdrawPaymentMyFinance(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getWithdrawPayment;
-        getWithdrawPayment = await apiRepProvider?.getWithdrawPaymentMyFinance(url!, id!, title!, spKey!);
+        getWithdrawPayment = await apiRepProvider?.getWithdrawPaymentMyFinance(url!, id!, title!, spKey);
 	    return getWithdrawPayment ;
 	 }
    Future<WithdrawPaymentMyFinanceModel> loadWithdrawPaymentMyFinance() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadWithdrawPayment;
         loadWithdrawPayment = await apiRepProvider?.loadWithdrawPaymentMyFinance('');
 	    return loadWithdrawPayment ;  
    }
   
    Future saveWithdrawPaymentMyFinance(WithdrawPaymentMyFinanceModel? my_finance, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateWithdrawPaymentMyFinance(my_finance!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllWithdrawPaymentMyFinance(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllWithdrawPaymentMyFinance(spKey!);   
    }
   
   
   
     Future editDepositBalanceMyFinance()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editDepositBalance;
     editDepositBalance = await apiRepProvider?.getDepositBalanceMyFinanceEdit(url!, id!, title!);
     return editDepositBalance;
   }
 
   Future postDepositBalanceMyFinance() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postDepositBalance;
     postDepositBalance = await apiRepProvider?.sendDepositBalanceMyFinancePost(url!,formData);
     return postDepositBalance;
   }
   
     Future postDepositBalanceMyFinanceWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postDepositBalance;
     postDepositBalance = await apiRepProvider?.sendDepositBalanceMyFinancePostWithID(url!,formData, id!, title!);
     return postDepositBalance;
@@ -192,34 +192,34 @@ class MyFinanceController {
   
       Future getDepositBalanceMyFinance(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getDepositBalance;
-        getDepositBalance = await apiRepProvider?.getDepositBalanceMyFinance(url!, id!, title!, spKey!);
+        getDepositBalance = await apiRepProvider?.getDepositBalanceMyFinance(url!, id!, title!, spKey);
 	    return getDepositBalance ;
 	 }
    Future<DepositBalanceMyFinanceModel> loadDepositBalanceMyFinance() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadDepositBalance;
         loadDepositBalance = await apiRepProvider?.loadDepositBalanceMyFinance('');
 	    return loadDepositBalance ;  
    }
   
    Future saveDepositBalanceMyFinance(DepositBalanceMyFinanceModel? my_finance, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateDepositBalanceMyFinance(my_finance!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllDepositBalanceMyFinance(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllDepositBalanceMyFinance(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

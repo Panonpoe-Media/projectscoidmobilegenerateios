@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:projectscoid/views/Chat/blocs/blocs.dart';
@@ -7,10 +9,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/widgets.dart';
 //import 'package:projectscoid/views/Chat/models/models.dart';
 //import 'package:intl/intl.dart';
-import 'package:projectscoid/views/Chat/widgets/widgets.dart';
 import 'package:mime/mime.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
-import 'package:projectscoid/core/components/helpers/action_helpers.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -214,14 +214,14 @@ class _MessageItemState extends State<MessageItem> {
 
 
                         isSentMessage()?
-                        SentMessageWidget(message: widget._jsonMessage, search: widget.search!,duration: widget.duration!,
-                          position: widget.position!,
-                          audioPlayer: widget.audioPlayer!,
+                        SentMessageWidget(message: widget._jsonMessage, search: widget.search,duration: widget.duration,
+                          position: widget.position,
+                          audioPlayer: widget.audioPlayer,
                          // playerState: widget.playerState,
-                          play: widget.play!,
-                          pause: widget.pause!,
-                          idx: widget.idx!,
-                          avatar: widget.myAvatar!,
+                          play: widget.play,
+                          pause: widget.pause,
+                          idx: widget.idx,
+                          avatar: widget.myAvatar,
                           equal: equal,
 
 
@@ -456,7 +456,7 @@ class _MessageItemState extends State<MessageItem> {
                 // var data  = snapshot.data ?? [];
                 // data.add(widget._jsonMessage);
 
-                if(widget.chatBloc!.multiSelectedMessage!.length! >= 1){
+                if(widget.chatBloc!.multiSelectedMessage.isNotEmpty){
                   widget.chatBloc?.multiSelectMessageToggle(widget._jsonMessage);
                   widget.onSelect!(widget._jsonMessage);
                 }

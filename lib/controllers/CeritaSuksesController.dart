@@ -32,38 +32,38 @@ class CeritaSuksesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editCeritaSukses()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editCeritaSukses;
     editCeritaSukses = await apiRepProvider?.getCeritaSuksesEdit(url!, id!, title!);
     return editCeritaSukses;
   }
   
     Future viewCeritaSukses()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewCeritaSukses;
     viewCeritaSukses = await apiRepProvider?.getCeritaSuksesView(url!, id!, title!);
     return viewCeritaSukses;
   }
 
   Future postCeritaSukses() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCeritaSukses;
     postCeritaSukses = await apiRepProvider?.sendCeritaSuksesPost(url!,formData);
     return postCeritaSukses;
   }
   
     Future postCeritaSuksesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCeritaSukses;
     postCeritaSukses = await apiRepProvider?.sendCeritaSuksesPostWithID(url!,formData, id!, title!);
     return postCeritaSukses;
@@ -72,7 +72,7 @@ class CeritaSuksesController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

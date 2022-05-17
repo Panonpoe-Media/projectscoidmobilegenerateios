@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_import, unused_field, unused_element, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,7 +26,6 @@ import 'package:filesize/filesize.dart';
 import 'package:network_to_file_image/network_to_file_image.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
 //import 'package:audioplayer/audioplayer.dart';
 import 'package:audio_session/audio_session.dart';
@@ -75,6 +74,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
   String? localFilePath;
 
   StreamSubscription? _positionSubscription;
+  // ignore: unused_field
   StreamSubscription? _audioPlayerState1Subscription;
   Duration? duration;
   Duration? position;
@@ -837,19 +837,6 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
   );
 
 
-  Row _buildProgressView() => Row(mainAxisSize: MainAxisSize.min, children: [
-    Padding(
-        padding: const EdgeInsets.only(left:20),
-        child: Text(
-            position != null
-                ? "${transformMilliSeconds(position! .inMilliseconds).replaceAll(':','.') ?? ''}"
-                : duration != null ? transformMilliSeconds(duration!.inMilliseconds).replaceAll(':','.') : '',
-            style: const TextStyle(fontSize: 12, color:Colors.black54)
-
-        )
-    ),
-
-  ]);
 
 
   @override
@@ -867,6 +854,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
 
 
   String?readTimestamp(int? timestamp) {
+    // ignore: unused_local_variable
     var now = DateTime.now();
     var format = DateFormat('HH:mm');
     var date = DateTime.fromMillisecondsSinceEpoch(timestamp! * 1000 );

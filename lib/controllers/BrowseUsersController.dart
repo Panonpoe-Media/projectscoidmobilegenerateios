@@ -32,38 +32,38 @@ class BrowseUsersController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editBrowseUsers()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBrowseUsers;
     editBrowseUsers = await apiRepProvider?.getBrowseUsersEdit(url!, id!, title!);
     return editBrowseUsers;
   }
   
     Future viewBrowseUsers()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewBrowseUsers;
     viewBrowseUsers = await apiRepProvider?.getBrowseUsersView(url!, id!, title!);
     return viewBrowseUsers;
   }
 
   Future postBrowseUsers() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseUsers;
     postBrowseUsers = await apiRepProvider?.sendBrowseUsersPost(url!,formData);
     return postBrowseUsers;
   }
   
     Future postBrowseUsersWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseUsers;
     postBrowseUsers = await apiRepProvider?.sendBrowseUsersPostWithID(url!,formData, id!, title!);
     return postBrowseUsers;
@@ -72,21 +72,21 @@ class BrowseUsersController {
   
   
     Future editInviteToBidBrowseUsers()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editInviteToBid;
     editInviteToBid = await apiRepProvider?.getInviteToBidBrowseUsersEdit(url!, id!, title!);
     return editInviteToBid;
   }
 
   Future postInviteToBidBrowseUsers() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postInviteToBid;
     postInviteToBid = await apiRepProvider?.sendInviteToBidBrowseUsersPost(url!,formData);
     return postInviteToBid;
   }
   
     Future postInviteToBidBrowseUsersWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postInviteToBid;
     postInviteToBid = await apiRepProvider?.sendInviteToBidBrowseUsersPostWithID(url!,formData, id!, title!);
     return postInviteToBid;
@@ -94,48 +94,48 @@ class BrowseUsersController {
   
       Future getInviteToBidBrowseUsers(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getInviteToBid;
-        getInviteToBid = await apiRepProvider?.getInviteToBidBrowseUsers(url!, id!, title!, spKey!);
+        getInviteToBid = await apiRepProvider?.getInviteToBidBrowseUsers(url!, id!, title!, spKey);
 	    return getInviteToBid ;
 	 }
    Future<InviteToBidBrowseUsersModel> loadInviteToBidBrowseUsers() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadInviteToBid;
         loadInviteToBid = await apiRepProvider?.loadInviteToBidBrowseUsers('');
 	    return loadInviteToBid ;  
    }
   
    Future saveInviteToBidBrowseUsers(InviteToBidBrowseUsersModel? browse_users, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateInviteToBidBrowseUsers(browse_users!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllInviteToBidBrowseUsers(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllInviteToBidBrowseUsers(spKey!);   
    }
   
   
   
     Future editHireMeBrowseUsers()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editHireMe;
     editHireMe = await apiRepProvider?.getHireMeBrowseUsersEdit(url!, id!, title!);
     return editHireMe;
   }
 
   Future postHireMeBrowseUsers() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postHireMe;
     postHireMe = await apiRepProvider?.sendHireMeBrowseUsersPost(url!,formData);
     return postHireMe;
   }
   
     Future postHireMeBrowseUsersWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postHireMe;
     postHireMe = await apiRepProvider?.sendHireMeBrowseUsersPostWithID(url!,formData, id!, title!);
     return postHireMe;
@@ -143,34 +143,34 @@ class BrowseUsersController {
   
       Future getHireMeBrowseUsers(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getHireMe;
-        getHireMe = await apiRepProvider?.getHireMeBrowseUsers(url!, id!, title!, spKey!);
+        getHireMe = await apiRepProvider?.getHireMeBrowseUsers(url!, id!, title!, spKey);
 	    return getHireMe ;
 	 }
    Future<HireMeBrowseUsersModel> loadHireMeBrowseUsers() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadHireMe;
         loadHireMe = await apiRepProvider?.loadHireMeBrowseUsers('');
 	    return loadHireMe ;  
    }
   
    Future saveHireMeBrowseUsers(HireMeBrowseUsersModel? browse_users, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateHireMeBrowseUsers(browse_users!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllHireMeBrowseUsers(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllHireMeBrowseUsers(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;
@@ -331,7 +331,7 @@ void _BrowseUsersListingRefreshEvent(BrowseUsersListingRefresh event, Emitter<Br
 				  BrowseUsersListingModel? browse_users = await listingBrowseUsers(browse_users1?.tools.paging.total_pages);
 				  return emit (  BrowseUsersListingLoaded( browse_users: browse_users!,
                    hasReachedMax: false,
-                   page: browse_users?.tools.paging.total_pages));
+                   page: browse_users.tools.paging.total_pages));
 
 		   }
 
@@ -486,7 +486,7 @@ void _BrowseUsersListingRefreshEvent(BrowseUsersListingRefresh event, Emitter<Br
 				  BrowseUsersListingModel? browse_users = await listingBrowseUsers(browse_users1?.tools.paging.total_pages);
 				  yield BrowseUsersListingLoaded( browse_users: browse_users!,
                    hasReachedMax: false,
-                   page: browse_users?.tools.paging.total_pages);
+                   page: browse_users.tools.paging.total_pages);
 
 		   }
 

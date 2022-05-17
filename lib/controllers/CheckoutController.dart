@@ -32,38 +32,38 @@ class CheckoutController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editCheckout;
     editCheckout = await apiRepProvider?.getCheckoutEdit(url!, id!, title!);
     return editCheckout;
   }
   
     Future viewCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewCheckout;
     viewCheckout = await apiRepProvider?.getCheckoutView(url!, id!, title!);
     return viewCheckout;
   }
 
   Future postCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCheckout;
     postCheckout = await apiRepProvider?.sendCheckoutPost(url!,formData);
     return postCheckout;
   }
   
     Future postCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCheckout;
     postCheckout = await apiRepProvider?.sendCheckoutPostWithID(url!,formData, id!, title!);
     return postCheckout;
@@ -72,21 +72,21 @@ class CheckoutController {
   
   
     Future editPayWithAvailableBalanceCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithAvailableBalance;
     editPayWithAvailableBalance = await apiRepProvider?.getPayWithAvailableBalanceCheckoutEdit(url!, id!, title!);
     return editPayWithAvailableBalance;
   }
 
   Future postPayWithAvailableBalanceCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithAvailableBalance;
     postPayWithAvailableBalance = await apiRepProvider?.sendPayWithAvailableBalanceCheckoutPost(url!,formData);
     return postPayWithAvailableBalance;
   }
   
     Future postPayWithAvailableBalanceCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithAvailableBalance;
     postPayWithAvailableBalance = await apiRepProvider?.sendPayWithAvailableBalanceCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithAvailableBalance;
@@ -94,48 +94,48 @@ class CheckoutController {
   
       Future getPayWithAvailableBalanceCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithAvailableBalance;
-        getPayWithAvailableBalance = await apiRepProvider?.getPayWithAvailableBalanceCheckout(url!, id!, title!, spKey!);
+        getPayWithAvailableBalance = await apiRepProvider?.getPayWithAvailableBalanceCheckout(url!, id!, title!, spKey);
 	    return getPayWithAvailableBalance ;
 	 }
    Future<PayWithAvailableBalanceCheckoutModel> loadPayWithAvailableBalanceCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithAvailableBalance;
         loadPayWithAvailableBalance = await apiRepProvider?.loadPayWithAvailableBalanceCheckout('');
 	    return loadPayWithAvailableBalance ;  
    }
   
    Future savePayWithAvailableBalanceCheckout(PayWithAvailableBalanceCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithAvailableBalanceCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithAvailableBalanceCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithAvailableBalanceCheckout(spKey!);   
    }
   
   
   
     Future editPayViaBankTransferCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayViaBankTransfer;
     editPayViaBankTransfer = await apiRepProvider?.getPayViaBankTransferCheckoutEdit(url!, id!, title!);
     return editPayViaBankTransfer;
   }
 
   Future postPayViaBankTransferCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayViaBankTransfer;
     postPayViaBankTransfer = await apiRepProvider?.sendPayViaBankTransferCheckoutPost(url!,formData);
     return postPayViaBankTransfer;
   }
   
     Future postPayViaBankTransferCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayViaBankTransfer;
     postPayViaBankTransfer = await apiRepProvider?.sendPayViaBankTransferCheckoutPostWithID(url!,formData, id!, title!);
     return postPayViaBankTransfer;
@@ -143,48 +143,48 @@ class CheckoutController {
   
       Future getPayViaBankTransferCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayViaBankTransfer;
-        getPayViaBankTransfer = await apiRepProvider?.getPayViaBankTransferCheckout(url!, id!, title!, spKey!);
+        getPayViaBankTransfer = await apiRepProvider?.getPayViaBankTransferCheckout(url!, id!, title!, spKey);
 	    return getPayViaBankTransfer ;
 	 }
    Future<PayViaBankTransferCheckoutModel> loadPayViaBankTransferCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayViaBankTransfer;
         loadPayViaBankTransfer = await apiRepProvider?.loadPayViaBankTransferCheckout('');
 	    return loadPayViaBankTransfer ;  
    }
   
    Future savePayViaBankTransferCheckout(PayViaBankTransferCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayViaBankTransferCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayViaBankTransferCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayViaBankTransferCheckout(spKey!);   
    }
   
   
   
     Future editPayWithCreditCardCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithCreditCard;
     editPayWithCreditCard = await apiRepProvider?.getPayWithCreditCardCheckoutEdit(url!, id!, title!);
     return editPayWithCreditCard;
   }
 
   Future postPayWithCreditCardCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithCreditCard;
     postPayWithCreditCard = await apiRepProvider?.sendPayWithCreditCardCheckoutPost(url!,formData);
     return postPayWithCreditCard;
   }
   
     Future postPayWithCreditCardCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithCreditCard;
     postPayWithCreditCard = await apiRepProvider?.sendPayWithCreditCardCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithCreditCard;
@@ -192,48 +192,48 @@ class CheckoutController {
   
       Future getPayWithCreditCardCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithCreditCard;
-        getPayWithCreditCard = await apiRepProvider?.getPayWithCreditCardCheckout(url!, id!, title!, spKey!);
+        getPayWithCreditCard = await apiRepProvider?.getPayWithCreditCardCheckout(url!, id!, title!, spKey);
 	    return getPayWithCreditCard ;
 	 }
    Future<PayWithCreditCardCheckoutModel> loadPayWithCreditCardCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithCreditCard;
         loadPayWithCreditCard = await apiRepProvider?.loadPayWithCreditCardCheckout('');
 	    return loadPayWithCreditCard ;  
    }
   
    Future savePayWithCreditCardCheckout(PayWithCreditCardCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithCreditCardCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithCreditCardCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithCreditCardCheckout(spKey!);   
    }
   
   
   
     Future editPayWithCimbClicksCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithCimbClicks;
     editPayWithCimbClicks = await apiRepProvider?.getPayWithCimbClicksCheckoutEdit(url!, id!, title!);
     return editPayWithCimbClicks;
   }
 
   Future postPayWithCimbClicksCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithCimbClicks;
     postPayWithCimbClicks = await apiRepProvider?.sendPayWithCimbClicksCheckoutPost(url!,formData);
     return postPayWithCimbClicks;
   }
   
     Future postPayWithCimbClicksCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithCimbClicks;
     postPayWithCimbClicks = await apiRepProvider?.sendPayWithCimbClicksCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithCimbClicks;
@@ -241,48 +241,48 @@ class CheckoutController {
   
       Future getPayWithCimbClicksCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithCimbClicks;
-        getPayWithCimbClicks = await apiRepProvider?.getPayWithCimbClicksCheckout(url!, id!, title!, spKey!);
+        getPayWithCimbClicks = await apiRepProvider?.getPayWithCimbClicksCheckout(url!, id!, title!, spKey);
 	    return getPayWithCimbClicks ;
 	 }
    Future<PayWithCimbClicksCheckoutModel> loadPayWithCimbClicksCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithCimbClicks;
         loadPayWithCimbClicks = await apiRepProvider?.loadPayWithCimbClicksCheckout('');
 	    return loadPayWithCimbClicks ;  
    }
   
    Future savePayWithCimbClicksCheckout(PayWithCimbClicksCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithCimbClicksCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithCimbClicksCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithCimbClicksCheckout(spKey!);   
    }
   
   
   
     Future editPayWithBcaKlikpayCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithBcaKlikpay;
     editPayWithBcaKlikpay = await apiRepProvider?.getPayWithBcaKlikpayCheckoutEdit(url!, id!, title!);
     return editPayWithBcaKlikpay;
   }
 
   Future postPayWithBcaKlikpayCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithBcaKlikpay;
     postPayWithBcaKlikpay = await apiRepProvider?.sendPayWithBcaKlikpayCheckoutPost(url!,formData);
     return postPayWithBcaKlikpay;
   }
   
     Future postPayWithBcaKlikpayCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithBcaKlikpay;
     postPayWithBcaKlikpay = await apiRepProvider?.sendPayWithBcaKlikpayCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithBcaKlikpay;
@@ -290,48 +290,48 @@ class CheckoutController {
   
       Future getPayWithBcaKlikpayCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithBcaKlikpay;
-        getPayWithBcaKlikpay = await apiRepProvider?.getPayWithBcaKlikpayCheckout(url!, id!, title!, spKey!);
+        getPayWithBcaKlikpay = await apiRepProvider?.getPayWithBcaKlikpayCheckout(url!, id!, title!, spKey);
 	    return getPayWithBcaKlikpay ;
 	 }
    Future<PayWithBcaKlikpayCheckoutModel> loadPayWithBcaKlikpayCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithBcaKlikpay;
         loadPayWithBcaKlikpay = await apiRepProvider?.loadPayWithBcaKlikpayCheckout('');
 	    return loadPayWithBcaKlikpay ;  
    }
   
    Future savePayWithBcaKlikpayCheckout(PayWithBcaKlikpayCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithBcaKlikpayCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithBcaKlikpayCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithBcaKlikpayCheckout(spKey!);   
    }
   
   
   
     Future editPayWithMandiriClickpayCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithMandiriClickpay;
     editPayWithMandiriClickpay = await apiRepProvider?.getPayWithMandiriClickpayCheckoutEdit(url!, id!, title!);
     return editPayWithMandiriClickpay;
   }
 
   Future postPayWithMandiriClickpayCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithMandiriClickpay;
     postPayWithMandiriClickpay = await apiRepProvider?.sendPayWithMandiriClickpayCheckoutPost(url!,formData);
     return postPayWithMandiriClickpay;
   }
   
     Future postPayWithMandiriClickpayCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithMandiriClickpay;
     postPayWithMandiriClickpay = await apiRepProvider?.sendPayWithMandiriClickpayCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithMandiriClickpay;
@@ -339,48 +339,48 @@ class CheckoutController {
   
       Future getPayWithMandiriClickpayCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithMandiriClickpay;
-        getPayWithMandiriClickpay = await apiRepProvider?.getPayWithMandiriClickpayCheckout(url!, id!, title!, spKey!);
+        getPayWithMandiriClickpay = await apiRepProvider?.getPayWithMandiriClickpayCheckout(url!, id!, title!, spKey);
 	    return getPayWithMandiriClickpay ;
 	 }
    Future<PayWithMandiriClickpayCheckoutModel> loadPayWithMandiriClickpayCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithMandiriClickpay;
         loadPayWithMandiriClickpay = await apiRepProvider?.loadPayWithMandiriClickpayCheckout('');
 	    return loadPayWithMandiriClickpay ;  
    }
   
    Future savePayWithMandiriClickpayCheckout(PayWithMandiriClickpayCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithMandiriClickpayCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithMandiriClickpayCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithMandiriClickpayCheckout(spKey!);   
    }
   
   
   
     Future editPayWithQrisCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithQris;
     editPayWithQris = await apiRepProvider?.getPayWithQrisCheckoutEdit(url!, id!, title!);
     return editPayWithQris;
   }
 
   Future postPayWithQrisCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithQris;
     postPayWithQris = await apiRepProvider?.sendPayWithQrisCheckoutPost(url!,formData);
     return postPayWithQris;
   }
   
     Future postPayWithQrisCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithQris;
     postPayWithQris = await apiRepProvider?.sendPayWithQrisCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithQris;
@@ -388,48 +388,48 @@ class CheckoutController {
   
       Future getPayWithQrisCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithQris;
-        getPayWithQris = await apiRepProvider?.getPayWithQrisCheckout(url!, id!, title!, spKey!);
+        getPayWithQris = await apiRepProvider?.getPayWithQrisCheckout(url!, id!, title!, spKey);
 	    return getPayWithQris ;
 	 }
    Future<PayWithQrisCheckoutModel> loadPayWithQrisCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithQris;
         loadPayWithQris = await apiRepProvider?.loadPayWithQrisCheckout('');
 	    return loadPayWithQris ;  
    }
   
    Future savePayWithQrisCheckout(PayWithQrisCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithQrisCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithQrisCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithQrisCheckout(spKey!);   
    }
   
   
   
     Future editPayWithPaypalCheckout()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPayWithPaypal;
     editPayWithPaypal = await apiRepProvider?.getPayWithPaypalCheckoutEdit(url!, id!, title!);
     return editPayWithPaypal;
   }
 
   Future postPayWithPaypalCheckout() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithPaypal;
     postPayWithPaypal = await apiRepProvider?.sendPayWithPaypalCheckoutPost(url!,formData);
     return postPayWithPaypal;
   }
   
     Future postPayWithPaypalCheckoutWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPayWithPaypal;
     postPayWithPaypal = await apiRepProvider?.sendPayWithPaypalCheckoutPostWithID(url!,formData, id!, title!);
     return postPayWithPaypal;
@@ -437,34 +437,34 @@ class CheckoutController {
   
       Future getPayWithPaypalCheckout(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPayWithPaypal;
-        getPayWithPaypal = await apiRepProvider?.getPayWithPaypalCheckout(url!, id!, title!, spKey!);
+        getPayWithPaypal = await apiRepProvider?.getPayWithPaypalCheckout(url!, id!, title!, spKey);
 	    return getPayWithPaypal ;
 	 }
    Future<PayWithPaypalCheckoutModel> loadPayWithPaypalCheckout() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPayWithPaypal;
         loadPayWithPaypal = await apiRepProvider?.loadPayWithPaypalCheckout('');
 	    return loadPayWithPaypal ;  
    }
   
    Future savePayWithPaypalCheckout(PayWithPaypalCheckoutModel? checkout, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePayWithPaypalCheckout(checkout!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPayWithPaypalCheckout(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPayWithPaypalCheckout(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

@@ -32,38 +32,38 @@ class BrowseProductsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editBrowseProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBrowseProducts;
     editBrowseProducts = await apiRepProvider?.getBrowseProductsEdit(url!, id!, title!);
     return editBrowseProducts;
   }
   
     Future viewBrowseProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewBrowseProducts;
     viewBrowseProducts = await apiRepProvider?.getBrowseProductsView(url!, id!, title!);
     return viewBrowseProducts;
   }
 
   Future postBrowseProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseProducts;
     postBrowseProducts = await apiRepProvider?.sendBrowseProductsPost(url!,formData);
     return postBrowseProducts;
   }
   
     Future postBrowseProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseProducts;
     postBrowseProducts = await apiRepProvider?.sendBrowseProductsPostWithID(url!,formData, id!, title!);
     return postBrowseProducts;
@@ -72,21 +72,21 @@ class BrowseProductsController {
   
   
     Future editAddToCartBrowseProducts()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editAddToCart;
     editAddToCart = await apiRepProvider?.getAddToCartBrowseProductsEdit(url!, id!, title!);
     return editAddToCart;
   }
 
   Future postAddToCartBrowseProducts() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddToCart;
     postAddToCart = await apiRepProvider?.sendAddToCartBrowseProductsPost(url!,formData);
     return postAddToCart;
   }
   
     Future postAddToCartBrowseProductsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAddToCart;
     postAddToCart = await apiRepProvider?.sendAddToCartBrowseProductsPostWithID(url!,formData, id!, title!);
     return postAddToCart;
@@ -94,34 +94,34 @@ class BrowseProductsController {
   
       Future getAddToCartBrowseProducts(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getAddToCart;
-        getAddToCart = await apiRepProvider?.getAddToCartBrowseProducts(url!, id!, title!, spKey!);
+        getAddToCart = await apiRepProvider?.getAddToCartBrowseProducts(url!, id!, title!, spKey);
 	    return getAddToCart ;
 	 }
    Future<AddToCartBrowseProductsModel> loadAddToCartBrowseProducts() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadAddToCart;
         loadAddToCart = await apiRepProvider?.loadAddToCartBrowseProducts('');
 	    return loadAddToCart ;  
    }
   
    Future saveAddToCartBrowseProducts(AddToCartBrowseProductsModel? browse_products, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAddToCartBrowseProducts(browse_products!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAddToCartBrowseProducts(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllAddToCartBrowseProducts(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

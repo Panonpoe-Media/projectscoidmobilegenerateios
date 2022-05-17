@@ -114,7 +114,7 @@ class HomeListing extends Bloc<HomeEvent, HomeState> {
             if (deltaPage < 1){
               deltaPage = 1;
             }
-            return emit (HomeListingLoaded(home: home!,
+            return emit (HomeListingLoaded(home: home,
                 hasReachedMax: false,
                 page: deltaPage));
           }
@@ -126,9 +126,9 @@ class HomeListing extends Bloc<HomeEvent, HomeState> {
             final page = (currentState as HomeListingLoaded).page! + 1;
             HomeListingModel? home = await listingHome(page);
             if(!home!.items.items.isEmpty){
-              (currentState as HomeListingLoaded).home!.items.items.addAll(home!.items.items);
+              (currentState as HomeListingLoaded).home!.items.items.addAll(home.items.items);
             }
-            return emit ( home!.items.items.isEmpty
+            return emit ( home.items.items.isEmpty
                 ? (currentState as HomeListingLoaded).copyWith(hasReachedMax: true,
                 page: page)
                 : HomeListingLoaded(  home:  (currentState as HomeListingLoaded).home ,
@@ -212,7 +212,7 @@ class HomeListing extends Bloc<HomeEvent, HomeState> {
             if (deltaPage < 1){
               deltaPage = 1;
             }
-            yield HomeListingLoaded(home: home!,
+            yield HomeListingLoaded(home: home,
                 hasReachedMax: false,
                 page: deltaPage);
           }else{
@@ -221,7 +221,7 @@ class HomeListing extends Bloc<HomeEvent, HomeState> {
             if (deltaPage < 1){
               deltaPage = 1;
             }
-            yield HomeListingLoaded(home: home!,
+            yield HomeListingLoaded(home: home,
                 hasReachedMax: false,
                 page: deltaPage);
           }
@@ -233,9 +233,9 @@ class HomeListing extends Bloc<HomeEvent, HomeState> {
             final page = (currentState as HomeListingLoaded).page! + 1;
             HomeListingModel? home = await listingHome(page);
             if(!home!.items.items.isEmpty){
-              (currentState as HomeListingLoaded).home!.items.items.addAll(home!.items.items);
+              (currentState as HomeListingLoaded).home!.items.items.addAll(home.items.items);
             }
-            yield home!.items.items.isEmpty
+            yield home.items.items.isEmpty
                 ? (currentState as HomeListingLoaded).copyWith(hasReachedMax: true,
                 page: page)
                 : HomeListingLoaded(  home:  (currentState as HomeListingLoaded).home ,

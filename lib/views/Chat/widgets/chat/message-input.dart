@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projectscoid/views/Chat/blocs/blocs.dart';
-import 'package:projectscoid/views/Chat/models/models.dart';
-import 'dart:ui' as ui;
-import 'dart:convert';
-import 'dart:io';
 //import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
@@ -89,13 +85,13 @@ class _MessageInputState extends State<MessageInput> {
 
   @override
   void dispose() {
-    timer?.cancel();
+    timer.cancel();
     super.dispose();
     // widget.chatBloc.getQuickMenuItems();
   }
 
   startWatch() {
-    timer?.cancel();
+    timer.cancel();
     setTime();
     if (!mounted) return;
     setState(() {
@@ -106,7 +102,7 @@ class _MessageInputState extends State<MessageInput> {
   }
 
   stopWatch() {
-    timer?.cancel();
+    timer.cancel();
     setState(() {
       //startStop = true;
       watch.stop();
@@ -657,7 +653,6 @@ class _MessageInputSPState extends State<MessageInputSP> {
 
   @override
   Widget build(BuildContext context) {
-    var space = 4/7 * MediaQuery.of(context).size.width;
     final themeManager =  Provider.of<ThemeManager>(context);
     themeManager.themeMode == ThemeMode.dark? darkMode = true : darkMode = false;
 

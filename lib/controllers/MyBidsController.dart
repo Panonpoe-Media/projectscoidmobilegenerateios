@@ -33,38 +33,38 @@ class MyBidsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyBids()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyBids;
     editMyBids = await apiRepProvider?.getMyBidsEdit(url!, id!, title!);
     return editMyBids;
   }
   
     Future viewMyBids()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyBids;
     viewMyBids = await apiRepProvider?.getMyBidsView(url!, id!, title!);
     return viewMyBids;
   }
 
   Future postMyBids() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBids;
     postMyBids = await apiRepProvider?.sendMyBidsPost(url!,formData);
     return postMyBids;
   }
   
     Future postMyBidsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBids;
     postMyBids = await apiRepProvider?.sendMyBidsPostWithID(url!,formData, id!, title!);
     return postMyBids;
@@ -76,21 +76,21 @@ class MyBidsController {
   }
   
     Future editCancelBidMyBids()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editCancelBid;
     editCancelBid = await apiRepProvider?.getCancelBidMyBidsEdit(url!, id!, title!);
     return editCancelBid;
   }
 
   Future postCancelBidMyBids() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCancelBid;
     postCancelBid = await apiRepProvider?.sendCancelBidMyBidsPost(url!,formData);
     return postCancelBid;
   }
   
     Future postCancelBidMyBidsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postCancelBid;
     postCancelBid = await apiRepProvider?.sendCancelBidMyBidsPostWithID(url!,formData, id!, title!);
     return postCancelBid;
@@ -98,34 +98,34 @@ class MyBidsController {
   
       Future getCancelBidMyBids(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getCancelBid;
-        getCancelBid = await apiRepProvider?.getCancelBidMyBids(url!, id!, title!, spKey!);
+        getCancelBid = await apiRepProvider?.getCancelBidMyBids(url!, id!, title!, spKey);
 	    return getCancelBid ;
 	 }
    Future<CancelBidMyBidsModel> loadCancelBidMyBids() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadCancelBid;
         loadCancelBid = await apiRepProvider?.loadCancelBidMyBids('');
 	    return loadCancelBid ;  
    }
   
    Future saveCancelBidMyBids(CancelBidMyBidsModel? my_bids, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateCancelBidMyBids(my_bids!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllCancelBidMyBids(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllCancelBidMyBids(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

@@ -8,8 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:projectscoid/app/projectscoid.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
-import 'package:projectscoid/app/theme_manager.dart';
-import 'package:provider/provider.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Setting extends StatefulWidget {
@@ -59,9 +57,8 @@ class SettingState extends State<Setting>{
   @override
   Widget build(BuildContext context) {
     final themeManager =  Provider.of<ThemeManager>(context);
-    var darkMode;
     //_authenticationBloc = BlocProvider.of<AuthenticationController>(context);
-    themeManager.themeMode == ThemeMode.dark? darkMode = true : darkMode = false;
+;
 
     {
       introController = IntroController(AppProvider.getApplication(context),

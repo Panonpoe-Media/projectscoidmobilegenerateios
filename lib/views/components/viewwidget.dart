@@ -145,8 +145,8 @@ class StringView extends StatelessWidget{
            },
                onLinkTap: (url, _, __, ___) async{
                  if(url!.contains('projects.co.id')){
-                   if(url!.contains(RegExp(r'[0-9]'))){
-                     if(url!.contains('show_conversation')){
+                   if(url.contains(RegExp(r'[0-9]'))){
+                     if(url.contains('show_conversation')){
                        AppProvider.getRouter(context)!.navigateTo(
                            context,
                            urlToRoute(url+ '/' ));
@@ -162,7 +162,7 @@ class StringView extends StatelessWidget{
                    }else{
                      AppProvider.getRouter(context)!.navigateTo(
                          context,
-                         url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                         url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                    }
                  }else
                  {
@@ -340,8 +340,8 @@ class DisplayNameView extends StatelessWidget{
                                                                 },
               onLinkTap: (url, _, __, ___) async{
                 if(url!.contains('projects.co.id')){
-                  if(url!.contains(RegExp(r'[0-9]'))){
-                    if(url!.contains('show_conversation')){
+                  if(url.contains(RegExp(r'[0-9]'))){
+                    if(url.contains('show_conversation')){
                       AppProvider.getRouter(context)!.navigateTo(
                           context,
                           urlToRoute(url+ '/' ));
@@ -357,7 +357,7 @@ class DisplayNameView extends StatelessWidget{
                   }else{
                     AppProvider.getRouter(context)!.navigateTo(
                         context,
-                        url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                        url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                   }
                 }else
                 {
@@ -562,8 +562,8 @@ class ModelView extends StatelessWidget{
                                                                 },
               onLinkTap: (url, _, __, ___) async{
                 if(url!.contains('projects.co.id')){
-                  if(url!.contains(RegExp(r'[0-9]'))){
-                    if(url!.contains('show_conversation')){
+                  if(url.contains(RegExp(r'[0-9]'))){
+                    if(url.contains('show_conversation')){
                       AppProvider.getRouter(context)!.navigateTo(
                           context,
                           urlToRoute(url+ '/' ));
@@ -579,7 +579,7 @@ class ModelView extends StatelessWidget{
                   }else{
                     AppProvider.getRouter(context)!.navigateTo(
                         context,
-                        url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                        url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                   }
                 }else
                 {
@@ -699,8 +699,8 @@ class EnumView extends StatelessWidget{
                                                                 },
               onLinkTap: (url, _, __, ___)async{
                 if(url!.contains('projects.co.id')){
-                  if(url!.contains(RegExp(r'[0-9]'))){
-                    if(url!.contains('show_conversation')){
+                  if(url.contains(RegExp(r'[0-9]'))){
+                    if(url.contains('show_conversation')){
                       AppProvider.getRouter(context)!.navigateTo(
                           context,
                           urlToRoute(url+ '/' ));
@@ -716,7 +716,7 @@ class EnumView extends StatelessWidget{
                   }else{
                     AppProvider.getRouter(context)!.navigateTo(
                         context,
-                        url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                        url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                   }
                 }else
                 {
@@ -863,8 +863,8 @@ class MultilineView extends StatelessWidget{
                                                                 },
               onLinkTap: (url, _, __, ___)async{
                 if(url!.contains('projects.co.id')){
-                  if(url!.contains(RegExp(r'[0-9]'))){
-                    if(url!.contains('show_conversation')){
+                  if(url.contains(RegExp(r'[0-9]'))){
+                    if(url.contains('show_conversation')){
                       AppProvider.getRouter(context)!.navigateTo(
                           context,
                           urlToRoute(url+ '/' ));
@@ -880,7 +880,7 @@ class MultilineView extends StatelessWidget{
                   }else{
                     AppProvider.getRouter(context)!.navigateTo(
                         context,
-                        url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                        url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                   }
                 }else
                 {
@@ -1202,7 +1202,7 @@ class NumberView extends StatelessWidget{
           },
           lines: <String>[
             caption!,
-            value!.toString()??'',
+            value!.toString(),
           ]
       );
     /*
@@ -1294,7 +1294,7 @@ class DoubleView extends StatelessWidget{
           },
           lines: <String>[
             caption!,
-            value!.toString()??'',
+            value!.toString(),
           ]
       );
     /*
@@ -1384,7 +1384,7 @@ class PercentView extends StatelessWidget{
           },
           lines: <String>[
             caption!,
-            value!.toString()??'' + ' %',
+            value!.toString(),
           ]
       );
     /*
@@ -1493,8 +1493,8 @@ class ArticleView extends StatelessWidget{
                                                                 },
                 onLinkTap: (url, _, __, ___)async{
                   if(url!.contains('projects.co.id')){
-                    if(url!.contains(RegExp(r'[0-9]'))){
-                      if(url!.contains('show_conversation')){
+                    if(url.contains(RegExp(r'[0-9]'))){
+                      if(url.contains('show_conversation')){
                         AppProvider.getRouter(context)!.navigateTo(
                             context,
                             urlToRoute(url+ '/' ));
@@ -1510,7 +1510,7 @@ class ArticleView extends StatelessWidget{
                     }else{
                       AppProvider.getRouter(context)!.navigateTo(
                           context,
-                          url!.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
+                          url.contains('/listing')? urlToRoute(url + '/'):urlToRoute(url + '/listing/'));
                     }
                   }else
                   {
@@ -1607,7 +1607,7 @@ class _ChipsTile extends StatelessWidget {
 
     ];
     if (children!.isNotEmpty) {
-      cardChildren?.add(Wrap(
+      cardChildren.add(Wrap(
           children: children!.map<Widget>((Widget? chip) {
             return Padding(
               padding: const EdgeInsets.all(2.0),
@@ -1616,7 +1616,7 @@ class _ChipsTile extends StatelessWidget {
           }).toList()));
     } else {
       final TextStyle textStyle = Theme.of(context).textTheme.caption!.copyWith(fontStyle: FontStyle.italic);
-      cardChildren?.add(
+      cardChildren.add(
           Semantics(
             container: true,
             child: Container(
@@ -1681,7 +1681,7 @@ class InlineTagsView extends StatelessWidget{
 
   static String _capitalize(String? name) {
     assert(name != null && name.isNotEmpty);
-    return name!.substring(0, 1).toUpperCase() + name!.substring(1);
+    return name!.substring(0, 1).toUpperCase() + name.substring(1);
   }
   Widget build(BuildContext context) {
     temp!.clear();
@@ -1689,8 +1689,8 @@ class InlineTagsView extends StatelessWidget{
     chips = temp!.map<Widget>((String? name) {
       return Chip(
         key: ValueKey<String>(name!),
-        backgroundColor: _nameToColor(name!),
-        label: Text(_capitalize(name!)),
+        backgroundColor: _nameToColor(name),
+        label: Text(_capitalize(name)),
 
       );
     }).toList();
@@ -1909,7 +1909,7 @@ class _FileViewState extends State<FileView>{
 
   Future<DIOProvider?> _init()async{
     Directory? appDocDir = await getApplicationDocumentsDirectory();
-    final DIOProvider? provider = await DIOProvider(appDocDir!.path);
+    final DIOProvider? provider = await DIOProvider(appDocDir.path);
     return provider;
   }
   Widget build(BuildContext context) {
@@ -2127,7 +2127,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 16.0, vertical: 1.0),
                               child: Text(
-                                item!.name!,
+                                item.name!,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.blue,
@@ -2149,7 +2149,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                 ),
 
                               ),
-                              height:  item!.task!.status ==
+                              height:  item.task!.status ==
                                   DownloadTaskStatus.complete
                                   ? 80 : 50.0,
                               // color: Colors.white12,
@@ -2159,16 +2159,16 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                   Column(
                                     children: <Widget>[
                                       InkWell(
-                                        onTap: item!.task!.status ==
+                                        onTap: item.task!.status ==
                                             DownloadTaskStatus.complete
                                             ? () {
-                                          _openDownloadedFile(item!.task!)
+                                          _openDownloadedFile(item.task!)
                                               .then((success) {
                                             if (!success) {
                                               Scaffold.of(context)
                                                   .showSnackBar(SnackBar(
                                                   content: Text( widget.platform == TargetPlatform.android?
-                                                  'Cannot open this file. \nFilename :  ${item!.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(item!.task!.name!)}'  : 'Cannot open this file' )));
+                                                  'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(item.task!.name!)}'  : 'Cannot open this file' )));
                                             }
                                           });
                                         }
@@ -2186,7 +2186,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                                 children: <Widget>[
                                                   Expanded(
                                                     child: Text(
-                                                      item!.name!,
+                                                      item.name!,
                                                       maxLines: 1,
                                                       softWrap: true,
                                                       overflow:
@@ -2197,19 +2197,19 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                                     padding:
                                                     const EdgeInsets.only(
                                                         left: 8.0),
-                                                    child: item!.task!.status ==
+                                                    child: item.task!.status ==
                                                         DownloadTaskStatus.complete
                                                         ? _buildActionForTask1(
-                                                        item!.task!) : _buildActionForTask(
-                                                        item!.task!),
+                                                        item.task!) : _buildActionForTask(
+                                                        item.task!),
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            item!.task!.status ==
+                                            item.task!.status ==
                                                 DownloadTaskStatus
                                                     .running ||
-                                                item!.task!.status ==
+                                                item.task!.status ==
                                                     DownloadTaskStatus.paused
                                                 ? Positioned(
                                               left: 0.0,
@@ -2217,7 +2217,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                               bottom: 0.0,
                                               child:
                                               LinearProgressIndicator(
-                                                value: item!.task!.progress! /
+                                                value: item.task!.progress! /
                                                     100,
                                               ),
                                             )
@@ -2227,9 +2227,9 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                               .toList(),
                                         ),
                                       ),
-                                      item!.task!.status ==
+                                      item.task!.status ==
                                           DownloadTaskStatus.complete
-                                          ? widget.platform == TargetPlatform.android? Html(data :'Filepath: Download/${item!.task!.name}',
+                                          ? widget.platform == TargetPlatform.android? Html(data :'Filepath: Download/${item.task!.name}',
                                                                                                               style: {
                                                                                                                 "html": Style(
                                                                                                                   fontSize: FontSize.small,
@@ -2413,7 +2413,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
 
   void _requestDownload(_TaskInfo task) async {
     task.taskId = await FlutterDownloader.enqueue(
-        url: task!.link!,
+        url: task.link!,
         headers: {"auth": "test_for_sql_encoding"},
         savedDir: _localPath!,
         showNotification: true,
@@ -2424,30 +2424,30 @@ class _FileViewStateAtt extends State<FileViewAtt>{
   }
 
   void _cancelDownload(_TaskInfo task) async {
-    await FlutterDownloader.cancel(taskId: task!.taskId!);
+    await FlutterDownloader.cancel(taskId: task.taskId!);
   }
 
   void _pauseDownload(_TaskInfo task) async {
-    await FlutterDownloader.pause(taskId: task!.taskId!);
+    await FlutterDownloader.pause(taskId: task.taskId!);
   }
 
   void _resumeDownload(_TaskInfo task) async {
-    String? newTaskId = await FlutterDownloader.resume(taskId: task!.taskId!);
+    String? newTaskId = await FlutterDownloader.resume(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
 
   void _retryDownload(_TaskInfo task) async {
-    String? newTaskId = await FlutterDownloader.retry(taskId: task!.taskId!);
+    String? newTaskId = await FlutterDownloader.retry(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
 
   Future<bool> _openDownloadedFile(_TaskInfo task) {
-    return FlutterDownloader.open(taskId: task!.taskId!);
+    return FlutterDownloader.open(taskId: task.taskId!);
   }
 
   void _delete(_TaskInfo task) async {
     await FlutterDownloader.remove(
-        taskId: task!.taskId!, shouldDeleteContent: true);
+        taskId: task.taskId!, shouldDeleteContent: true);
     await _prepare();
     setState(() {});
   }
@@ -2813,7 +2813,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 1.0),
                       child: Text(
-                        item!.name! ,
+                        item.name! ,
                         style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.blue,
@@ -2835,7 +2835,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                         ),
 
                       ),
-                      height:  item!.task!.status ==
+                      height:  item.task!.status ==
                           DownloadTaskStatus.complete
                           ? 120 : 50.0,
                       // color: Colors.white12,
@@ -2845,16 +2845,16 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                       Column(
                         children: <Widget>[
                           InkWell(
-                            onTap: item!.task!.status ==
+                            onTap: item.task!.status ==
                                 DownloadTaskStatus.complete
                                 ? () {
-                              _openDownloadedFile(item!.task!)
+                              _openDownloadedFile(item.task!)
                                   .then((success) {
                                 if (!success) {
                                   Scaffold.of(context)
                                       .showSnackBar(SnackBar(
                                       content: Text( widget.platform == TargetPlatform.android?
-                                      'Cannot open this file. \nFilename :  ${item!.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(p.basename(item!.task!.link!))}'  : 'Cannot open this file' )));
+                                      'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(p.basename(item.task!.link!))}'  : 'Cannot open this file' )));
                                 }
                               });
                             }
@@ -2872,10 +2872,10 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                     children: <Widget>[
                                       Expanded(
                                         child:
-                                        item!.fz == '' ?
+                                        item.fz == '' ?
 
                                         Text(
-                                          item!.name!  ,
+                                          item.name!  ,
                                           maxLines: 1,
                                           softWrap: true,
                                           overflow:
@@ -2886,7 +2886,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                               onTap:(){
                                                 if(_tasks![0]!.status !=
                                                     DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
-                                                  _requestDownload(item!.task!);
+                                                  _requestDownload(item.task!);
                                                 print('halooooo1');
                                                 }
                                                 //print('halooooo');
@@ -2896,14 +2896,14 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    item!.name! ,
+                                                    item.name! ,
                                                     maxLines: 1,
                                                     softWrap: true,
                                                     overflow:
                                                     TextOverflow.ellipsis,
                                                   ),
                                                   Text(
-                                                    item!.fz! ,
+                                                    item.fz! ,
                                                     maxLines: 1,
                                                     softWrap: true,
                                                     overflow:
@@ -2922,16 +2922,16 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                         child: _tasks![0]!.status ==
                                             DownloadTaskStatus.complete && fileExists!
                                             ? _buildActionForTask1(
-                                            item!.task!) : _buildActionForTask(
-                                            item!.task!),
+                                            item.task!) : _buildActionForTask(
+                                            item.task!),
                                       ),
                                     ],
                                   ),
                                 ),
-                                item!.task!.status ==
+                                item.task!.status ==
                                     DownloadTaskStatus
                                         .running ||
-                                    item!.task!.status ==
+                                    item.task!.status ==
                                         DownloadTaskStatus.paused
                                     ? Positioned(
                                   left: 0.0,
@@ -2939,7 +2939,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                   bottom: 0.0,
                                   child:
                                   LinearProgressIndicator(
-                                    value: item!.task!.progress! /
+                                    value: item.task!.progress! /
                                         100,
                                   ),
                                 )
@@ -2949,9 +2949,9 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                   .toList(),
                             ),
                           ),
-                          item!.task!.status ==
+                          item.task!.status ==
                               DownloadTaskStatus.complete && fileExists!
-                              ? widget.platform == TargetPlatform.android? Html(data :'Filepath: Download/${p.basename(item!.task!.name!)}',
+                              ? widget.platform == TargetPlatform.android? Html(data :'Filepath: Download/${p.basename(item.task!.name!)}',
                             style: {
                               "html": Style(
                                 fontSize: FontSize.small,
@@ -3144,7 +3144,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
         ),
         RawMaterialButton(
           onPressed: ()async{
-            var file = File(_localPath! + Platform.pathSeparator + task!.name!);
+            var file = File(_localPath! + Platform.pathSeparator + task.name!);
             try{
               await file.delete();
               _delete(task);
@@ -3166,7 +3166,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
 
   void _requestDownload(_TaskInfo task) async {
     task.taskId = await FlutterDownloader.enqueue(
-        url: task!.link!,
+        url: task.link!,
         headers: {"auth": "test_for_sql_encoding"},
         savedDir: _localPath!,
         showNotification: true,
@@ -3181,30 +3181,30 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
   }
 
   void _cancelDownload(_TaskInfo task) async {
-    await FlutterDownloader.cancel(taskId: task!.taskId!);
+    await FlutterDownloader.cancel(taskId: task.taskId!);
   }
 
   void _pauseDownload(_TaskInfo task) async {
-    await FlutterDownloader.pause(taskId: task!.taskId!);
+    await FlutterDownloader.pause(taskId: task.taskId!);
   }
 
   void _resumeDownload(_TaskInfo task) async {
-    String? newTaskId = await FlutterDownloader.resume(taskId: task!.taskId!);
+    String? newTaskId = await FlutterDownloader.resume(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
 
   void _retryDownload(_TaskInfo task) async {
-    String? newTaskId = await FlutterDownloader.retry(taskId: task!.taskId!);
+    String? newTaskId = await FlutterDownloader.retry(taskId: task.taskId!);
     task.taskId = newTaskId;
   }
 
   Future<bool> _openDownloadedFile(_TaskInfo task) {
-    return FlutterDownloader.open(taskId: task!.taskId!);
+    return FlutterDownloader.open(taskId: task.taskId!);
   }
 
   void _delete(_TaskInfo task) async {
     await FlutterDownloader.remove(
-        taskId: task!.taskId!, shouldDeleteContent: false);
+        taskId: task.taskId!, shouldDeleteContent: false);
    await _prepare();
    // setState(() {});
   }
@@ -3650,7 +3650,7 @@ class _ChipsTile1 extends StatelessWidget {
 
     ];
     if (children!.isNotEmpty) {
-      cardChildren!.add(Wrap(
+      cardChildren.add(Wrap(
           children: children!.map<Widget>((Widget? chip) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
@@ -3659,7 +3659,7 @@ class _ChipsTile1 extends StatelessWidget {
           }).toList()));
     } else {
       final TextStyle textStyle = Theme.of(context).textTheme.caption!.copyWith(fontStyle: FontStyle.italic);
-      cardChildren!.add(
+      cardChildren.add(
           Semantics(
             container: true,
             child: Container(
@@ -4042,8 +4042,8 @@ class _ChannelNonURLRouteWidgetState extends State< ChannelNonURLRouteWidget> {
       return InputChip(
         key: ValueKey<String>(name!),
         shape: StadiumBorder(side: BorderSide(color: Colors.grey)),
-        backgroundColor: _nameToColor(name!),
-        label: Text(_capitalize(name!)),
+        backgroundColor: _nameToColor(name),
+        label: Text(_capitalize(name)),
         onPressed: () {
           setState(() {
            // _removeTemp(name);
@@ -4219,7 +4219,7 @@ class OptionView extends StatelessWidget {
                           child: Column(
 
                             children: <Widget>[
-                              ..._getOptions()!,
+                              ..._getOptions(),
                             ],
                           )
 

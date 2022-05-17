@@ -32,38 +32,38 @@ class ProgramController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editProgram()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editProgram;
     editProgram = await apiRepProvider?.getProgramEdit(url!, id!, title!);
     return editProgram;
   }
   
     Future viewProgram()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewProgram;
     viewProgram = await apiRepProvider?.getProgramView(url!, id!, title!);
     return viewProgram;
   }
 
   Future postProgram() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postProgram;
     postProgram = await apiRepProvider?.sendProgramPost(url!,formData);
     return postProgram;
   }
   
     Future postProgramWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postProgram;
     postProgram = await apiRepProvider?.sendProgramPostWithID(url!,formData, id!, title!);
     return postProgram;
@@ -72,21 +72,21 @@ class ProgramController {
   
   
     Future editPromoProgram()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPromo;
     editPromo = await apiRepProvider?.getPromoProgramEdit(url!, id!, title!);
     return editPromo;
   }
 
   Future postPromoProgram() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPromo;
     postPromo = await apiRepProvider?.sendPromoProgramPost(url!,formData);
     return postPromo;
   }
   
     Future postPromoProgramWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPromo;
     postPromo = await apiRepProvider?.sendPromoProgramPostWithID(url!,formData, id!, title!);
     return postPromo;
@@ -94,34 +94,34 @@ class ProgramController {
   
       Future getPromoProgram(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPromo;
-        getPromo = await apiRepProvider?.getPromoProgram(url!, id!, title!, spKey!);
+        getPromo = await apiRepProvider?.getPromoProgram(url!, id!, title!, spKey);
 	    return getPromo ;
 	 }
    Future<PromoProgramModel> loadPromoProgram() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPromo;
         loadPromo = await apiRepProvider?.loadPromoProgram('');
 	    return loadPromo ;  
    }
   
    Future savePromoProgram(PromoProgramModel? program, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePromoProgram(program!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPromoProgram(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPromoProgram(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

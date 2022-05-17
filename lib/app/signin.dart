@@ -1,4 +1,6 @@
 
+// ignore_for_file: unused_import, unused_element
+
 import 'package:flutter/material.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -183,6 +185,7 @@ String toPicFile(String json){
     );
   }
 
+  // ignore: unused_element
   Future<void> _showNotificationPush( String msg, String title, var data, var cb) async {
 
 
@@ -1522,6 +1525,7 @@ class _LoginFormState extends State<LoginForm> {
    // next = false;
   }
 
+  // ignore: unused_element
   _onNextButtonPressed() {
     if (formKey.currentState!.validate()) {
     //  BlocProvider.of<LoginController>(context).add(NextButtonPressed());

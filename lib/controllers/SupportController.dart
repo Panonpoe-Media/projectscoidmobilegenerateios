@@ -32,38 +32,38 @@ class SupportController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editSupport()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editSupport;
     editSupport = await apiRepProvider?.getSupportEdit(url!, id!, title!);
     return editSupport;
   }
   
     Future viewSupport()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewSupport;
     viewSupport = await apiRepProvider?.getSupportView(url!, id!, title!);
     return viewSupport;
   }
 
   Future postSupport() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postSupport;
     postSupport = await apiRepProvider?.sendSupportPost(url!,formData);
     return postSupport;
   }
   
     Future postSupportWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postSupport;
     postSupport = await apiRepProvider?.sendSupportPostWithID(url!,formData, id!, title!);
     return postSupport;
@@ -72,21 +72,21 @@ class SupportController {
   
   
     Future editContactFormSupport()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editContactForm;
     editContactForm = await apiRepProvider?.getContactFormSupportEdit(url!, id!, title!);
     return editContactForm;
   }
 
   Future postContactFormSupport() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postContactForm;
     postContactForm = await apiRepProvider?.sendContactFormSupportPost(url!,formData);
     return postContactForm;
   }
   
     Future postContactFormSupportWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postContactForm;
     postContactForm = await apiRepProvider?.sendContactFormSupportPostWithID(url!,formData, id!, title!);
     return postContactForm;
@@ -94,34 +94,34 @@ class SupportController {
   
       Future getContactFormSupport(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getContactForm;
-        getContactForm = await apiRepProvider?.getContactFormSupport(url!, id!, title!, spKey!);
+        getContactForm = await apiRepProvider?.getContactFormSupport(url!, id!, title!, spKey);
 	    return getContactForm ;
 	 }
    Future<ContactFormSupportModel> loadContactFormSupport() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadContactForm;
         loadContactForm = await apiRepProvider?.loadContactFormSupport('');
 	    return loadContactForm ;  
    }
   
    Future saveContactFormSupport(ContactFormSupportModel? support, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateContactFormSupport(support!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllContactFormSupport(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllContactFormSupport(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

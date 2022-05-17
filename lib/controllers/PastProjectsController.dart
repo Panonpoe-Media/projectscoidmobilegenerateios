@@ -32,38 +32,38 @@ class PastProjectsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editPastProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPastProjects;
     editPastProjects = await apiRepProvider?.getPastProjectsEdit(url!, id!, title!);
     return editPastProjects;
   }
   
     Future viewPastProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewPastProjects;
     viewPastProjects = await apiRepProvider?.getPastProjectsView(url!, id!, title!);
     return viewPastProjects;
   }
 
   Future postPastProjects() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPastProjects;
     postPastProjects = await apiRepProvider?.sendPastProjectsPost(url!,formData);
     return postPastProjects;
   }
   
     Future postPastProjectsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPastProjects;
     postPastProjects = await apiRepProvider?.sendPastProjectsPostWithID(url!,formData, id!, title!);
     return postPastProjects;
@@ -72,7 +72,7 @@ class PastProjectsController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

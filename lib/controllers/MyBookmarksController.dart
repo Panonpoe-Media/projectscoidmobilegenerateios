@@ -32,38 +32,38 @@ class MyBookmarksController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyBookmarks()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyBookmarks;
     editMyBookmarks = await apiRepProvider?.getMyBookmarksEdit(url!, id!, title!);
     return editMyBookmarks;
   }
   
     Future viewMyBookmarks()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyBookmarks;
     viewMyBookmarks = await apiRepProvider?.getMyBookmarksView(url!, id!, title!);
     return viewMyBookmarks;
   }
 
   Future postMyBookmarks() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBookmarks;
     postMyBookmarks = await apiRepProvider?.sendMyBookmarksPost(url!,formData);
     return postMyBookmarks;
   }
   
     Future postMyBookmarksWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBookmarks;
     postMyBookmarks = await apiRepProvider?.sendMyBookmarksPostWithID(url!,formData, id!, title!);
     return postMyBookmarks;
@@ -72,7 +72,7 @@ class MyBookmarksController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

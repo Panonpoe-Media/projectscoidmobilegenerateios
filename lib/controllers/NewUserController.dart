@@ -32,38 +32,38 @@ class NewUserController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editNewUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editNewUser;
     editNewUser = await apiRepProvider?.getNewUserEdit(url!, id!, title!);
     return editNewUser;
   }
   
     Future viewNewUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewNewUser;
     viewNewUser = await apiRepProvider?.getNewUserView(url!, id!, title!);
     return viewNewUser;
   }
 
   Future postNewUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postNewUser;
     postNewUser = await apiRepProvider?.sendNewUserPost(url!,formData);
     return postNewUser;
   }
   
     Future postNewUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postNewUser;
     postNewUser = await apiRepProvider?.sendNewUserPostWithID(url!,formData, id!, title!);
     return postNewUser;
@@ -72,21 +72,21 @@ class NewUserController {
   
   
     Future editRegisterNewUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editRegister;
     editRegister = await apiRepProvider?.getRegisterNewUserEdit(url!, id!, title!);
     return editRegister;
   }
 
   Future postRegisterNewUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRegister;
     postRegister = await apiRepProvider?.sendRegisterNewUserPost(url!,formData);
     return postRegister;
   }
   
     Future postRegisterNewUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRegister;
     postRegister = await apiRepProvider?.sendRegisterNewUserPostWithID(url!,formData, id!, title!);
     return postRegister;
@@ -94,48 +94,48 @@ class NewUserController {
   
       Future getRegisterNewUser(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getRegister;
-        getRegister = await apiRepProvider?.getRegisterNewUser(url!, id!, title!, spKey!);
+        getRegister = await apiRepProvider?.getRegisterNewUser(url!, id!, title!, spKey);
 	    return getRegister ;
 	 }
    Future<RegisterNewUserModel> loadRegisterNewUser() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadRegister;
         loadRegister = await apiRepProvider?.loadRegisterNewUser('');
 	    return loadRegister ;  
    }
   
    Future saveRegisterNewUser(RegisterNewUserModel? new_user, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRegisterNewUser(new_user!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRegisterNewUser(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllRegisterNewUser(spKey!);   
    }
   
   
   
     Future editVerifyNewUser()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editVerify;
     editVerify = await apiRepProvider?.getVerifyNewUserEdit(url!, id!, title!);
     return editVerify;
   }
 
   Future postVerifyNewUser() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postVerify;
     postVerify = await apiRepProvider?.sendVerifyNewUserPost(url!,formData);
     return postVerify;
   }
   
     Future postVerifyNewUserWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postVerify;
     postVerify = await apiRepProvider?.sendVerifyNewUserPostWithID(url!,formData, id!, title!);
     return postVerify;
@@ -143,34 +143,34 @@ class NewUserController {
   
       Future getVerifyNewUser(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getVerify;
-        getVerify = await apiRepProvider?.getVerifyNewUser(url!, id!, title!, spKey!);
+        getVerify = await apiRepProvider?.getVerifyNewUser(url!, id!, title!, spKey);
 	    return getVerify ;
 	 }
    Future<VerifyNewUserModel> loadVerifyNewUser() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadVerify;
         loadVerify = await apiRepProvider?.loadVerifyNewUser('');
 	    return loadVerify ;  
    }
   
    Future saveVerifyNewUser(VerifyNewUserModel? new_user, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateVerifyNewUser(new_user!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllVerifyNewUser(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllVerifyNewUser(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

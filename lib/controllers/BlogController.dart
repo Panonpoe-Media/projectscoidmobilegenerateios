@@ -2,6 +2,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'package:bloc/bloc.dart';
 import 'package:projectscoid/ProjectscoidApplication.dart';
+import 'package:equatable/equatable.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/core/components/helpers/action_helpers.dart';
@@ -32,8 +33,7 @@ class BlogController {
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
     APIRepository? apiRepProvider = application.projectsAPIRepository;
-    // ignore: unnecessary_non_null_assertion
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {

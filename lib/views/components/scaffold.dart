@@ -48,7 +48,7 @@ class _DemoScaffoldState extends State<DemoScaffold> {
       if (settings!.assetsPath!.isEmpty) {
         _loadFromAssets();
       } else {
-        _loadFromPath(settings!.assetsPath!);
+        _loadFromPath(settings.assetsPath!);
       }
     }
   }

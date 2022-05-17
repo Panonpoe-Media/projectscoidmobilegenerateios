@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:projectscoid/views/Chat/blocs/chat_bloc.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
-import 'my_projects_item_base.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/views/components/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/core/components/utility/widget/SearchSelectDialog.dart';
 import 'package:projectscoid/controllers/controllers.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -25,32 +23,22 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:projectscoid/app/Env.dart';
 import 'dart:convert';
-import 'image_fields.dart';
 import 'file_fields.dart';
 import 'meta.dart';
-import 'item_button.dart';
 import 'button.dart';
-import 'credit.dart';
-import 'payment.dart';
-import 'selection.dart';
 import 'my_projects_item.dart';
-import 'my_projects_item_base.dart';
 import 'package:projectscoid/models/MyProjects/shortlisted_bids_list_item_base.dart';
 import 'photo.dart';
-import 'paging.dart';
 import 'package:projectscoid/models/my_projects_base.dart';
 import 'package:projectscoid/models/MyProjects/shortlisted_bids_list_base.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:expandable/expandable.dart';
-import 'package:projectscoid/app/theme_manager.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_html/style.dart';
 import 'package:html/parser.dart' show parse;
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 import 'package:html/dom.dart' as dom;
-import 'package:projectscoid/models/MyProjects/action.dart';
 import 'package:projectscoid/views/MyProjects/my_projects_action.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:projectscoid/views/MyProjects/my_projects_listing.dart';
@@ -1084,7 +1072,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
             labelStyle: TextStyle(fontSize: 18.0),
             onTap: ()async{
               {
-                controller!.animateTo(controller!.position.minScrollExtent,
+                controller!.animateTo(controller.position.minScrollExtent,
                     duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
 
                 my_projects = MyProjectsController(AppProvider.getApplication(context),
@@ -1127,9 +1115,9 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                    // print('idddddddddddddddddddd ${encode(model!.model!.accepted_worker_id) }');
                     //print('idddddddddddddddddddd $userID');
 
-                    url = '\/user\/my_projects\/show_thread\/${model!.model!.project_id}\/${model!.model!.owner_str}*${model!.model!.owner_owner_rating.toString()}*${model!.model!.owner_photo_url!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                    url = '/user/my_projects/show_thread/${model!.model!.project_id}/${model!.model!.owner_str}*${model!.model!.owner_owner_rating.toString()}*${model!.model!.owner_photo_url!.replaceAll('https://cdn.projects.co.id/upload/', '')!.replaceAll('https://www.gravatar.com/avatar/', 'gravatar')!.replaceAll('/', 'ccc')}*r';
                   }else{
-                    url = '\/user\/my_projects\/show_thread\/${model!.model!.project_id}\/${model!.model!.accepted_worker_user_name}*${model!.model!.accepted_worker_worker_rating.toString()}*${model!.model!.accepted_worker_photo_url!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                    url = '/user/my_projects/show_thread/${model!.model!.project_id}/${model!.model!.accepted_worker_user_name}*${model!.model!.accepted_worker_worker_rating.toString()}*${model!.model!.accepted_worker_photo_url!.replaceAll('https://cdn.projects.co.id/upload/', '')!.replaceAll('https://www.gravatar.com/avatar/', 'gravatar')!.replaceAll('/', 'ccc')}*l';
                   }
                   AppProvider.getRouter(context)!.navigateTo(
                       context,
@@ -2261,6 +2249,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
     final ThemeData theme = Theme.of(context);
     final TextStyle titleStyle = theme.textTheme.headline1!.copyWith(color: CurrentTheme.NormalTextColor);
     final TextStyle? descriptionStyle = theme.textTheme.subtitle1;
+    // ignore: unused_local_variable
     final mediaQueryData = MediaQuery.of(context);
     var document = parse(this.model!.model!.project_status_str);
     //  var recentNews = document.getElementsByClassName('col-md-4 col-sm-4 recent-news');
@@ -2370,11 +2359,11 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         this.model!.model!.project_class_str ==  'Open to Suggestions'? Container(width: 0.0, height: 0.0,): Text(
                           ' . ',
-                          style: descriptionStyle!.copyWith(fontSize: 11),
+                          style: descriptionStyle.copyWith(fontSize: 11),
                         ),
                         this.model!.model!.project_class_str ==  'Open to Suggestions'? Container(width: 0.0, height: 0.0,): Text(
                           this.model!.model!.project_ending_str,
-                          style: descriptionStyle!.copyWith(fontSize: 11),
+                          style: descriptionStyle.copyWith(fontSize: 11),
                         )
 
 
@@ -2388,18 +2377,18 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                           child:
                           Text(
                             this.model!.model!.project_class_str ,
-                            style: descriptionStyle!.copyWith( fontSize: 11),
+                            style: descriptionStyle.copyWith( fontSize: 11),
                           ),
 
                         ),
 
                         this.model!.model!.project_class_str ==  'Open to Suggestions'? Container(width: 0.0, height: 0.0,): Text(
                           ' . ',
-                          style: descriptionStyle!.copyWith( fontSize: 11),
+                          style: descriptionStyle.copyWith( fontSize: 11),
                         ),
                         this.model!.model!.project_class_str ==  'Open to Suggestions'? Container(width: 0.0, height: 0.0,): Text(
                           this.model!.model!.project_class_id == 10? this.model!.model!.budget_range_str : this.model!.model!.published_budget_str,
-                          style: descriptionStyle!.copyWith( fontSize: 11),
+                          style: descriptionStyle.copyWith( fontSize: 11),
                         )
 
 
@@ -2563,7 +2552,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
   Widget viewDesc(BuildContext context){
     YoutubePlayerController _controller;
-    var document = parse(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'));
+    var document = parse(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>'));
     var videoList = document.querySelectorAll("iframe");
     List<String?>? id = [];
     for (dom.Element video in videoList) {
@@ -2627,7 +2616,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                 child:
                 Column(
                     children: <Widget>[
-                      HtmlWidget( readText(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'), 1000), isSelectable: true,),
+                      HtmlWidget( readText(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>'), 1000), isSelectable: true,),
                     ]
                 )
             ),
@@ -2642,12 +2631,12 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                       //header
                       Padding(
                           padding: const EdgeInsets.fromLTRB(20.0, 14.0, 20.0, 2.0),
-                          child : HtmlWidget(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'),
+                          child : HtmlWidget(this.model!.model!.description!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>'),
                             isSelectable: true,
                             onTapUrl: (url) async{
-                              if(url!.contains('projects.co.id')){
-                                if(url!.contains(new RegExp(r'[0-9]'))){
-                                  if(url!.contains('show_conversation')){
+                              if(url.contains('projects.co.id')){
+                                if(url.contains(new RegExp(r'[0-9]'))){
+                                  if(url.contains('show_conversation')){
                                     AppProvider.getRouter(context)!.navigateTo(
                                         context,
                                         urlToRoute(url+ '/' ));
@@ -2840,7 +2829,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
             ),
 
             this.model!.model!.finish_date == null ? Container(width: 0.0, height: 0.0,) :
-            HtmlWidget(this.model!.model!.worker_feedback!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>')),
+            HtmlWidget(this.model!.model!.worker_feedback!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>')),
 
 
           ]
@@ -3036,7 +3025,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
             // mainAxisAlignment: MainAxisAlignment.start,
             // crossAxisAlignment: CrossAxisAlignment.start,
             // children: <Widget>[
-            HtmlWidget(this.model!.model!.owner_feedback!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>')),
+            HtmlWidget(this.model!.model!.owner_feedback!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>')),
             //   ]
             // ),
 
@@ -3319,7 +3308,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
             child:
-            HtmlWidget(this.model!.model!.worker_feedback!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'))
+            HtmlWidget(this.model!.model!.worker_feedback!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>'))
 
         )
             : Container(),
@@ -3479,7 +3468,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
             child:
-            HtmlWidget(this.model!.model!.owner_feedback!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'))
+            HtmlWidget(this.model!.model!.owner_feedback!.replaceAll('<div>', '')!.replaceAll('</div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('</p>', '<br>'))
 
         )            : Container(),
 
@@ -3514,7 +3503,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           '${this.model!.model!.published_budget_str}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3528,11 +3517,11 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Finish Days: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
                         Text(
                           '${this.model!.model!.finish_days.toString()}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
 
@@ -3547,7 +3536,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Published Date: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                         /*
@@ -3566,7 +3555,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                         this.model!.model!.published_date == null ? Container():
                         Text(
                           '${dateformat.format(this.model!.model!.published_date)}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3580,7 +3569,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Start Date: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                         /*
@@ -3599,7 +3588,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                         this.model!.model!.start_date == null ? Container():
                         Text(
                           '${dateformat.format(this.model!.model!.start_date)}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3613,7 +3602,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Finish Date: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                         /*
@@ -3632,7 +3621,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                         this.model!.model!.finish_date == null ? Container():
                         Text(
                           '${dateformat.format(this.model!.model!.finish_date)}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3670,7 +3659,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           '$sts',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3684,11 +3673,11 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Accepted Worker: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
                         Text(
                           '${this.model!.model!.accepted_worker_user_name}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
 
@@ -3703,7 +3692,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Accepted Budget: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                         /*
@@ -3721,7 +3710,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                                                */
                         Text(
                           '${this.model!.model!.accepted_budget_str}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -3735,7 +3724,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
                         Text(
                           'Project Ending: ',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                         /*
@@ -3753,7 +3742,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
                                                */
                         Text(
                           '${this.model!.model!.project_ending_str}',
-                          style: descriptionStyle!.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
+                          style: descriptionStyle.copyWith(fontSize: 14, fontWeight:FontWeight.w200 ),
                         ),
 
                       ]
@@ -4230,7 +4219,7 @@ class MyBidItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HtmlWidget(this.model!.message!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>')),
+                  HtmlWidget(this.model!.message!.replaceAll('<div>', '').replaceAll('</div>','').replaceAll('<br>', ' ').replaceAll('<p>', '').replaceAll('</p>', '<br>')),
                 ]
             ),
 
@@ -4439,13 +4428,13 @@ class DescMyProjectsInfo extends StatelessWidget {
                   //header
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20.0, 14.0, 20.0, 2.0),
-                    child:  Html(data: this.info!.description!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'),
+                    child:  Html(data: this.info!.description!.replaceAll('<div>', '').replaceAll('</div>','').replaceAll('<br>', ' ').replaceAll('<p>', '').replaceAll('</p>', '<br>'),
                         onLinkTap: (url, _, __, ___) async{
                           if(url!.contains('projects.co.id')){
 
 
-                            if(url!.contains(new RegExp(r'[0-9]'))){
-                              if(url!.contains('show_conversation')){
+                            if(url.contains(new RegExp(r'[0-9]'))){
+                              if(url.contains('show_conversation')){
                                 AppProvider.getRouter(context)!.navigateTo(
                                     context,
                                     urlToRoute(url+ '/' ));
@@ -4516,7 +4505,7 @@ class MyProjectsListingModel extends MyProjectsListingBase{
     ShapeBorder? shape;
     double? height = 160;
     return Visibility (
-        visible: (search == '' || allModelWords(jsonEncode(item.item!.toJson())).contains(search!)),
+        visible: (search == '' || allModelWords(jsonEncode(item.item!.toJson())).contains(search)),
         //  child:  ItemMyProjectsCard2(destination :item, search : search, shape : shape, height : height, account : account)
         child:  ItemMyProjectsCard1(destination :item, search : search, shape : shape, height : height, account : account, username: id, cb : cb)
     );
@@ -4664,7 +4653,7 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                 child: DefaultTextStyle(
                   softWrap: false,
                   overflow: TextOverflow.ellipsis,
-                  style: descriptionStyle!,
+                  style: descriptionStyle,
                   child: Container(
                     width: 250,
                     child:
@@ -4736,9 +4725,9 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                               //$idHash/${encode(this.model!.model!.owner_id)}
                               String? thread = '';
                               if(decode(idHash) > peer! ){
-                                thread = '${encode(peer!)}/$idHash';
+                                thread = '${encode(peer)}/$idHash';
                               }else{
-                                thread = '$idHash/${encode(peer!)}';
+                                thread = '$idHash/${encode(peer)}';
                               }
                               Navigator.push(
                                   context,
@@ -4798,16 +4787,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
                               /*
@@ -4835,16 +4824,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
                               /*
@@ -4896,16 +4885,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
                               /*
@@ -4932,16 +4921,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -4975,16 +4964,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5038,16 +5027,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5075,16 +5064,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5120,16 +5109,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5163,16 +5152,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5231,16 +5220,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5267,16 +5256,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5310,16 +5299,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                               if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5346,16 +5335,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5413,16 +5402,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                                      }
 /*
@@ -5451,16 +5440,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                                     }
 /*
@@ -5494,16 +5483,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5532,16 +5521,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
                              /*
@@ -5610,16 +5599,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5653,16 +5642,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5696,16 +5685,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5726,16 +5715,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 /*
@@ -5813,16 +5802,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5851,16 +5840,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5896,16 +5885,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -5934,16 +5923,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6062,16 +6051,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6100,16 +6089,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6161,16 +6150,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6199,16 +6188,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6243,16 +6232,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6301,16 +6290,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6342,16 +6331,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6390,16 +6379,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6428,16 +6417,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6491,16 +6480,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6529,16 +6518,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6573,16 +6562,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6611,16 +6600,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6682,16 +6671,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6720,16 +6709,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6764,16 +6753,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6802,16 +6791,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6882,16 +6871,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6920,16 +6909,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -6964,16 +6953,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7002,16 +6991,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7091,16 +7080,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![0]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7129,16 +7118,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![1]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7173,16 +7162,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![2]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7211,16 +7200,16 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                             if(destination!.item!.buttons![3]!.text!.toLowerCase() =='show thread'){
                             if(destination!.item!.accepted_worker_user_name == this.username){
 
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*r', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.owner_str}*${destination!.item!.owner_owner_rating.toString()}*${destination!.item!.owner_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*r', cb: cb)),
                                 );
                               }else{
-                                url = '\/user\/my_projects\/show_thread\/${destination!.item!.project_id}\/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l';
+                                url = '/user/my_projects/show_thread/${destination!.item!.project_id}/${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l';
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0]!.replaceAll('https:\/\/cdn.projects.co.id\/upload\/', '')!.replaceAll('https:\/\/www.gravatar.com\/avatar\/', 'gravatar')!.replaceAll('\/', 'ccc')}*l', cb: cb)),
+                                  MaterialPageRoute(builder: (context) => ShowThreadMyProjects(id : '${destination!.item!.project_id}', title : '${destination!.item!.accepted_worker_user_name}*${destination!.item!.accepted_worker_worker_rating.toString()}*${destination!.item!.accepted_worker_photo_url!.split('?')[0].replaceAll('https://cdn.projects.co.id/upload/', '').replaceAll('https://www.gravatar.com/avatar/', 'gravatar').replaceAll('/', 'ccc')}*l', cb: cb)),
                                 );
                               }
 
@@ -7374,7 +7363,7 @@ class ItemMyProjectsContent2 extends StatelessWidget {
             },
             child:
             Ink(
-                child: Html(data: readText(destination!.item!.short_description!.replaceAll('<div>', '')!.replaceAll('<\/div>','')!.replaceAll('<br>', ' ')!.replaceAll('<p>', '')!.replaceAll('<\/p>', '<br>'),400) ,
+                child: Html(data: readText(destination!.item!.short_description!.replaceAll('<div>', '').replaceAll('</div>','').replaceAll('<br>', ' ').replaceAll('<p>', '').replaceAll('</p>', '<br>'),400) ,
                  // useRichText: true, defaultTextStyle : descriptionStyle!.copyWith(fontSize: 12 ),
                   style: {
                     "html": Style(
@@ -7456,9 +7445,9 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                     //$idHash/${encode(this.model!.model!.owner_id)}
                     String? thread = '';
                     if(decode(idHash) > peer! ){
-                      thread = '${encode(peer!)}/$idHash';
+                      thread = '${encode(peer)}/$idHash';
                     }else{
-                      thread = '$idHash/${encode(peer!)}';
+                      thread = '$idHash/${encode(peer)}';
                     }
 
                    if(cb != null){
@@ -7536,30 +7525,30 @@ class ItemMyProjectsContent2 extends StatelessWidget {
         child: DefaultTextStyle(
           softWrap: false,
           overflow: TextOverflow.ellipsis,
-          style: descriptionStyle!,
+          style: descriptionStyle,
           child: Row(
 
             children: <Widget>[
               // three line description
             destination!.item!.published_date == null? Container(height: 0.0, width: 0.0, color: Colors.white ,) :  Text(
                 'Published ',
-                style: descriptionStyle!.copyWith( fontSize: 13),
+                style: descriptionStyle.copyWith( fontSize: 13),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 2.0),
                 child:destination!.item!.published_date == null?  Container(height: 0.0, width: 0.0, color: Colors.white ,): Text(timeago.format(destination!.item!.published_date!)
                   ,
-                  style: descriptionStyle!.copyWith( fontSize: 13),
+                  style: descriptionStyle.copyWith( fontSize: 13),
                 ),
               ),
               destination!.item!.published_date == null? Container(height: 0.0, width: 0.0, color: Colors.white ,):Text(
                 ' ',
-                style: descriptionStyle!.copyWith( fontSize: 13),
+                style: descriptionStyle.copyWith( fontSize: 13),
               ),
                 destination!.item!.published_date == null? Container(height: 0.0, width: 0.0, color: Colors.white ,): destination!.item!.project_class_str == 'Open to Suggestions'? Text(
-                  'Open to Suggestions', style: descriptionStyle!.copyWith( fontSize: 13)): Text(
+                  'Open to Suggestions', style: descriptionStyle.copyWith( fontSize: 13)): Text(
                 destination!.item!.published_budget_str!,
-                style: descriptionStyle!.copyWith( fontSize: 13),
+                style: descriptionStyle.copyWith( fontSize: 13),
               ),
 
               /*

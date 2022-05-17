@@ -69,13 +69,13 @@ class SendMsgModel {
       });
 
   SendMsgModel.fromJson(Map<String, dynamic> json) {
-    type = json['msgtype'] as int;
+    type = json['msgtype'] as int?;
     thread = json['thread'];
     message = json['message'];
     sender = json['sender'];
     userid = json['userid'];
-    time = json['time'] as int;
-    status = json['rcvstatus'] as int;
+    time = json['time'] as int?;
+    status = json['rcvstatus'] as int?;
 
 
 

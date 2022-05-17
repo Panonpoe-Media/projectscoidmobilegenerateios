@@ -109,9 +109,14 @@ class RegisterState extends State<Register>{
                           children: <Widget>[
                             Container(
                                 padding: const EdgeInsets.all(10),
-                                child: RaisedButton(
-                                  padding: const EdgeInsets.all(20),
-                                  color: CurrentTheme.MainAccentColor,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                  //  textStyle: MaterialStateProperty.all<TextStyle>( const TextStyle(color: Colors.white,)),
+                                    overlayColor : MaterialStateProperty.all<Color>(CurrentTheme.ShadeColor),
+                                    foregroundColor : MaterialStateProperty.all<Color>(CurrentTheme.MainAccentColor),
+                                  ),
+                               //   padding: const EdgeInsets.all(20),
+                                //  color: CurrentTheme.MainAccentColor,
                                   child: const Text('    Save    ',
                                       semanticsLabel: 'FLAT BUTTON 1',
                                       style: TextStyle(

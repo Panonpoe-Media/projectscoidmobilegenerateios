@@ -6,7 +6,9 @@ import 'package:projectscoid/core/components/utility/secure/secure.dart';
 import 'package:projectscoid/app/projectscoid.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+// ignore: unused_import
 import 'dart:io';
+// ignore: unused_import
 import 'package:path_provider/path_provider.dart';
 
 
@@ -121,11 +123,14 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text('Rescan'),
-                textColor: Colors.white,
-                splashColor : CurrentTheme.ShadeColor,
-                color : Color(0xFF037f51),
+
+                style: ButtonStyle(
+                  textStyle: MaterialStateProperty.all<TextStyle>( const TextStyle(color: Colors.white,)),
+                  overlayColor : MaterialStateProperty.all<Color>(CurrentTheme.ShadeColor),
+                  foregroundColor : MaterialStateProperty.all<Color>(const Color(0xFF037f51)),
+                ),
                 onPressed: () async {
                    await _scanqr();
                 }

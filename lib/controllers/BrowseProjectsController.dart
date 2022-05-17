@@ -32,38 +32,38 @@ class BrowseProjectsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editBrowseProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editBrowseProjects;
     editBrowseProjects = await apiRepProvider?.getBrowseProjectsEdit(url!, id!, title!);
     return editBrowseProjects;
   }
   
     Future viewBrowseProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewBrowseProjects;
     viewBrowseProjects = await apiRepProvider?.getBrowseProjectsView(url!, id!, title!);
     return viewBrowseProjects;
   }
 
   Future postBrowseProjects() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseProjects;
     postBrowseProjects = await apiRepProvider?.sendBrowseProjectsPost(url!,formData);
     return postBrowseProjects;
   }
   
     Future postBrowseProjectsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postBrowseProjects;
     postBrowseProjects = await apiRepProvider?.sendBrowseProjectsPostWithID(url!,formData, id!, title!);
     return postBrowseProjects;
@@ -72,21 +72,21 @@ class BrowseProjectsController {
   
   
     Future editPlaceNewBidBrowseProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editPlaceNewBid;
     editPlaceNewBid = await apiRepProvider?.getPlaceNewBidBrowseProjectsEdit(url!, id!, title!);
     return editPlaceNewBid;
   }
 
   Future postPlaceNewBidBrowseProjects() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPlaceNewBid;
     postPlaceNewBid = await apiRepProvider?.sendPlaceNewBidBrowseProjectsPost(url!,formData);
     return postPlaceNewBid;
   }
   
     Future postPlaceNewBidBrowseProjectsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postPlaceNewBid;
     postPlaceNewBid = await apiRepProvider?.sendPlaceNewBidBrowseProjectsPostWithID(url!,formData, id!, title!);
     return postPlaceNewBid;
@@ -94,48 +94,48 @@ class BrowseProjectsController {
   
       Future getPlaceNewBidBrowseProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getPlaceNewBid;
-        getPlaceNewBid = await apiRepProvider?.getPlaceNewBidBrowseProjects(url!, id!, title!, spKey!);
+        getPlaceNewBid = await apiRepProvider?.getPlaceNewBidBrowseProjects(url!, id!, title!, spKey);
 	    return getPlaceNewBid ;
 	 }
    Future<PlaceNewBidBrowseProjectsModel> loadPlaceNewBidBrowseProjects() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadPlaceNewBid;
         loadPlaceNewBid = await apiRepProvider?.loadPlaceNewBidBrowseProjects('');
 	    return loadPlaceNewBid ;  
    }
   
    Future savePlaceNewBidBrowseProjects(PlaceNewBidBrowseProjectsModel? browse_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePlaceNewBidBrowseProjects(browse_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPlaceNewBidBrowseProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllPlaceNewBidBrowseProjects(spKey!);   
    }
   
   
   
     Future editAskOwnerBrowseProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editAskOwner;
     editAskOwner = await apiRepProvider?.getAskOwnerBrowseProjectsEdit(url!, id!, title!);
     return editAskOwner;
   }
 
   Future postAskOwnerBrowseProjects() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAskOwner;
     postAskOwner = await apiRepProvider?.sendAskOwnerBrowseProjectsPost(url!,formData);
     return postAskOwner;
   }
   
     Future postAskOwnerBrowseProjectsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postAskOwner;
     postAskOwner = await apiRepProvider?.sendAskOwnerBrowseProjectsPostWithID(url!,formData, id!, title!);
     return postAskOwner;
@@ -143,48 +143,48 @@ class BrowseProjectsController {
   
       Future getAskOwnerBrowseProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getAskOwner;
-        getAskOwner = await apiRepProvider?.getAskOwnerBrowseProjects(url!, id!, title!, spKey!);
+        getAskOwner = await apiRepProvider?.getAskOwnerBrowseProjects(url!, id!, title!, spKey);
 	    return getAskOwner ;
 	 }
    Future<AskOwnerBrowseProjectsModel> loadAskOwnerBrowseProjects() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadAskOwner;
         loadAskOwner = await apiRepProvider?.loadAskOwnerBrowseProjects('');
 	    return loadAskOwner ;  
    }
   
    Future saveAskOwnerBrowseProjects(AskOwnerBrowseProjectsModel? browse_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAskOwnerBrowseProjects(browse_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAskOwnerBrowseProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllAskOwnerBrowseProjects(spKey!);   
    }
   
   
   
     Future editGuestCreateProjectBrowseProjects()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editGuestCreateProject;
     editGuestCreateProject = await apiRepProvider?.getGuestCreateProjectBrowseProjectsEdit(url!, id!, title!);
     return editGuestCreateProject;
   }
 
   Future postGuestCreateProjectBrowseProjects() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postGuestCreateProject;
     postGuestCreateProject = await apiRepProvider?.sendGuestCreateProjectBrowseProjectsPost(url!,formData);
     return postGuestCreateProject;
   }
   
     Future postGuestCreateProjectBrowseProjectsWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postGuestCreateProject;
     postGuestCreateProject = await apiRepProvider?.sendGuestCreateProjectBrowseProjectsPostWithID(url!,formData, id!, title!);
     return postGuestCreateProject;
@@ -192,34 +192,34 @@ class BrowseProjectsController {
   
       Future getGuestCreateProjectBrowseProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getGuestCreateProject;
-        getGuestCreateProject = await apiRepProvider?.getGuestCreateProjectBrowseProjects(url!, id!, title!, spKey!);
+        getGuestCreateProject = await apiRepProvider?.getGuestCreateProjectBrowseProjects(url!, id!, title!, spKey);
 	    return getGuestCreateProject ;
 	 }
    Future<GuestCreateProjectBrowseProjectsModel> loadGuestCreateProjectBrowseProjects() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadGuestCreateProject;
         loadGuestCreateProject = await apiRepProvider?.loadGuestCreateProjectBrowseProjects('');
 	    return loadGuestCreateProject ;  
    }
   
    Future saveGuestCreateProjectBrowseProjects(GuestCreateProjectBrowseProjectsModel? browse_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateGuestCreateProjectBrowseProjects(browse_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllGuestCreateProjectBrowseProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllGuestCreateProjectBrowseProjects(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

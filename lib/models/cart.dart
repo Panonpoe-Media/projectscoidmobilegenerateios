@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
@@ -536,24 +538,11 @@ class CartViewModel  extends CartViewBase{
 
 
   Widget _buildInvoice(BuildContext context, CartViewModel mdl) {
-    final mediaQueryData = MediaQuery.of(context);
-    TextStyle _statLabelTextStyle = TextStyle(
+    TextStyle _statLabelTextStyle = const TextStyle(
       fontFamily: 'Roboto',
     //  color: Colors.black87,
       fontSize: 18.0,
       fontWeight: FontWeight.w600,
-    );
-    TextStyle _totalStyle = TextStyle(
-      fontFamily: 'Roboto',
-      color: Colors.white,
-      fontSize: 21.0,
-      fontWeight: FontWeight.w700,
-    );
-    TextStyle _totalSadeStyle = TextStyle(
-      fontFamily: 'Roboto',
-      color: CurrentTheme.ShadeColor,
-      fontSize: 18.0,
-      fontWeight: FontWeight.w900,
     );
     return
       Column(
@@ -682,11 +671,14 @@ class CartViewModel  extends CartViewBase{
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: mdl.model.model.total_tagihan ==  0.0 &&   mdl.model.model.payable_with_balance > 0.0 ? Text('Pay with balance ' +  mdl.model.model.payable_with_balance_str)  :   Text('Pay ' +  mdl.model.model.total_tagihan_str),
-                textColor: Colors.white,
-                splashColor : CurrentTheme.ShadeColor,
-                color : Color(0xFF037f51),
+                style: ButtonStyle(
+                            textStyle: MaterialStateProperty.all<TextStyle>( const TextStyle(color: Colors.white,)),
+                            overlayColor : MaterialStateProperty.all<Color>(CurrentTheme.ShadeColor),
+                            foregroundColor : MaterialStateProperty.all<Color>(const Color(0xFF037f51)),
+                ),
+
                 onPressed: ()async {
                   if(mdl.model.model.total_tagihan ==  0.0 &&   mdl.model.model.payable_with_balance > 0.0 ){
                     SubModelController paytransfer;
@@ -792,10 +784,11 @@ class CartViewModel  extends CartViewBase{
                                                 increment();
                                                 del.getData();
 
-                                                Scaffold.of(context!)
+                                                // ignore: unnecessary_non_null_assertion
+                                                ScaffoldMessenger.of(context!)
                                                     .showSnackBar(const SnackBar(content: Text('cartDeleted'),duration: Duration(seconds: 2),backgroundColor: Colors.redAccent,));
                                                 },
-                                              backgroundColor: Color(0xFFFE4A49),
+                                              backgroundColor: const Color(0xFFFE4A49),
                                               foregroundColor: Colors.white,
                                               icon: Icons.delete,
                                               label: 'Delete',
@@ -1497,7 +1490,7 @@ class CartPaymentState extends State< CartPayment>  with RestorationMixin{
 
             return   ListTile(
               leading: Icon(Icons.account_balance),
-              title: index == 2 ? Text('Pay with QRIS'): widget.pay_method!.model.buttons[index!].text == 'Pay with PayPal'? Text('Pay with QRIS') : Text(widget.pay_method!.model.buttons[index!].text),
+              title: index == 2 ? Text('Pay with QRIS'): widget.pay_method!.model.buttons[index!].text == 'Pay with PayPal'? Text('Pay with QRIS') : Text(widget.pay_method!.model.buttons[index].text),
               trailing: Icon(Icons.keyboard_arrow_right),
               onTap: ()async {
                 if (widget.pay_method!.model.buttons[index!].text ==
@@ -1519,14 +1512,14 @@ class CartPaymentState extends State< CartPayment>  with RestorationMixin{
                             userid: widget.pay_method!.model.model.user_id)),
                   );
                 }
-                else if (widget.pay_method!.model.buttons[index!].text ==
+                else if (widget.pay_method!.model.buttons[index].text ==
                     'Pay with Credit Card' ) {
-                  print('https://projects.co.id${widget.pay_method!.model.buttons[index!].url}');
+                  print('https://projects.co.id${widget.pay_method!.model.buttons[index].url}');
 
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) =>
-                        CreditCartPayment(urlCC: 'https://projects.co.id${widget.pay_method!.model.buttons[index!].url}', paymethod : widget.pay_method, cartCookies: widget.cartCookies, index: index, header: 'Credit Card Payment')),
+                        CreditCartPayment(urlCC: 'https://projects.co.id${widget.pay_method!.model.buttons[index].url}', paymethod : widget.pay_method, cartCookies: widget.cartCookies, index: index, header: 'Credit Card Payment')),
                   );
 
                //https://projects.co.id/user/checkout/pay_with_qris/
@@ -1860,8 +1853,7 @@ class BuyInstructionSentTransfState extends State< BuyInstructionSentTransf>  wi
 
 
                       }
-                     https://projects.co.id/user/my_orders/view/24c614/24c614
-                      throw 'Could not launch';
+                     throw 'Could not launch';
                     },
 
 
@@ -2054,7 +2046,6 @@ class QRISPaymentState extends State< QRISPayment>  with RestorationMixin{
   var isLoading = true;
   var isError = false;
   //int _counter = 0;
-  Uint8List? _imageFile;
   GlobalKey _globalKey = GlobalKey();
   PermissionStatus _permissionStatus = PermissionStatus.denied;
 
@@ -2198,21 +2189,21 @@ class QRISPaymentState extends State< QRISPayment>  with RestorationMixin{
         height: 56,
         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
         alignment: Alignment.centerLeft,
-        child: Text(rv[index!]['quantity'].toString())
+        child: Text(rv[index]['quantity'].toString())
     ));
     children.add(Container(
         width: 80,
         height: 56,
         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
         alignment: Alignment.centerLeft,
-        child: Text(rv[index!]['price_str'], style: TextStyle(fontSize: 11))
+        child: Text(rv[index]['price_str'], style: TextStyle(fontSize: 11))
     ));
     children.add(Container(
         width: 80,
         height: 56,
         padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
         alignment: Alignment.centerLeft,
-        child: Text(rv[index!]['total_str'], style: TextStyle(fontSize: 11))
+        child: Text(rv[index]['total_str'], style: TextStyle(fontSize: 11))
     ));
 
 
@@ -2279,7 +2270,6 @@ class QRISPaymentState extends State< QRISPayment>  with RestorationMixin{
 
   @override
   Widget build(BuildContext context) {
-    APIRepository? apiRepProvider = AppProvider.getApplication(context).projectsAPIRepository;
     final themeManager =  Provider.of<ThemeManager>(context);
 
     QRIS = SubModelController(AppProvider.getApplication(context),
@@ -2391,7 +2381,7 @@ class QRISPaymentState extends State< QRISPayment>  with RestorationMixin{
                          RenderRepaintBoundary boundary =
                          _globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
                          ui.Image image = await boundary.toImage();
-                         ByteData byteData = await (image.toByteData(format: ui.ImageByteFormat.png) as FutureOr<ByteData>);
+                         ByteData? byteData = await (image.toByteData(format: ui.ImageByteFormat.png) as FutureOr<ByteData?>);
                          if (byteData != null) {
                            final result =
                            await ImageGallerySaver.saveImage(byteData.buffer.asUint8List());
@@ -2499,13 +2489,12 @@ class CreditCartPaymentState extends State< CreditCartPayment>  with Restoration
 
   final Completer<wv.WebViewController> _controller =
   Completer<wv.WebViewController>();
-  wv.WebViewController? _webViewController;
  // InAppWebViewController _webViewController1;
   JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
     return JavascriptChannel(
         name: 'Toaster',
         onMessageReceived: (JavascriptMessage message) {
-          Scaffold.of(context).showSnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message.message)),
           );
         });
@@ -2539,7 +2528,6 @@ class CreditCartPaymentState extends State< CreditCartPayment>  with Restoration
 
   @override
   Widget build(BuildContext context) {
-    APIRepository? apiRepProvider = AppProvider.getApplication(context).projectsAPIRepository;
     /*
     _controller.future.then((controller) {
       _webViewController = controller;
@@ -2764,12 +2752,14 @@ class BalanceSentState extends State< BalanceSent>  with RestorationMixin{
                               widget.buyinstruction!['model']['available_balance_str'],
                               ]
                           ),
-                          RaisedButton(
+                          ElevatedButton(
                               child:  Text('Pay with Available Balance'),
-                              textColor: Colors.white,
-                              splashColor : CurrentTheme.ShadeColor,
-                              color : Color(0xFF037f51),
-                              onPressed:  ()async{
+                              style: ButtonStyle(
+                                textStyle: MaterialStateProperty.all<TextStyle>( const TextStyle(color: Colors.white,)),
+                                overlayColor : MaterialStateProperty.all<Color>(CurrentTheme.ShadeColor),
+                                foregroundColor : MaterialStateProperty.all<Color>(const Color(0xFF037f51)),
+                              ),
+                            onPressed:  ()async{
                                 SubModelController paytransfer;
                                 String? delPath = Env.value!.baseUrl! + '/user/checkout/pay_with_available_balance/${widget.buyinstruction!['model']['user_id']}/123' ;
                                 paytransfer = SubModelController(AppProvider.getApplication(context),

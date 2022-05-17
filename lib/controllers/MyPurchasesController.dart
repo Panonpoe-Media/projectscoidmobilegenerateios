@@ -32,38 +32,38 @@ class MyPurchasesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyPurchases()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyPurchases;
     editMyPurchases = await apiRepProvider?.getMyPurchasesEdit(url!, id!, title!);
     return editMyPurchases;
   }
   
     Future viewMyPurchases()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyPurchases;
     viewMyPurchases = await apiRepProvider?.getMyPurchasesView(url!, id!, title!);
     return viewMyPurchases;
   }
 
   Future postMyPurchases() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyPurchases;
     postMyPurchases = await apiRepProvider?.sendMyPurchasesPost(url!,formData);
     return postMyPurchases;
   }
   
     Future postMyPurchasesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyPurchases;
     postMyPurchases = await apiRepProvider?.sendMyPurchasesPostWithID(url!,formData, id!, title!);
     return postMyPurchases;
@@ -71,27 +71,27 @@ class MyPurchasesController {
 
 
   Future getTableMyPurchases(int page) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     return await apiRepProvider?.getMyPurchasesIndex(url!, page);
   }
   
   
     Future editDownloadMyPurchases()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editDownload;
     editDownload = await apiRepProvider?.getDownloadMyPurchasesEdit(url!, id!, title!);
     return editDownload;
   }
 
   Future postDownloadMyPurchases() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postDownload;
     postDownload = await apiRepProvider?.sendDownloadMyPurchasesPost(url!,formData);
     return postDownload;
   }
   
     Future postDownloadMyPurchasesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postDownload;
     postDownload = await apiRepProvider?.sendDownloadMyPurchasesPostWithID(url!,formData, id!, title!);
     return postDownload;
@@ -99,48 +99,48 @@ class MyPurchasesController {
   
       Future getDownloadMyPurchases(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getDownload;
-        getDownload = await apiRepProvider?.getDownloadMyPurchases(url!, id!, title!, spKey!);
+        getDownload = await apiRepProvider?.getDownloadMyPurchases(url!, id!, title!, spKey);
 	    return getDownload ;
 	 }
    Future<DownloadMyPurchasesModel> loadDownloadMyPurchases() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadDownload;
         loadDownload = await apiRepProvider?.loadDownloadMyPurchases('');
 	    return loadDownload ;  
    }
   
    Future saveDownloadMyPurchases(DownloadMyPurchasesModel? my_purchases, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateDownloadMyPurchases(my_purchases!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllDownloadMyPurchases(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllDownloadMyPurchases(spKey!);   
    }
   
   
   
     Future editRateProductMyPurchases()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editRateProduct;
     editRateProduct = await apiRepProvider?.getRateProductMyPurchasesEdit(url!, id!, title!);
     return editRateProduct;
   }
 
   Future postRateProductMyPurchases() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRateProduct;
     postRateProduct = await apiRepProvider?.sendRateProductMyPurchasesPost(url!,formData);
     return postRateProduct;
   }
   
     Future postRateProductMyPurchasesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRateProduct;
     postRateProduct = await apiRepProvider?.sendRateProductMyPurchasesPostWithID(url!,formData, id!, title!);
     return postRateProduct;
@@ -148,34 +148,34 @@ class MyPurchasesController {
   
       Future getRateProductMyPurchases(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getRateProduct;
-        getRateProduct = await apiRepProvider?.getRateProductMyPurchases(url!, id!, title!, spKey!);
+        getRateProduct = await apiRepProvider?.getRateProductMyPurchases(url!, id!, title!, spKey);
 	    return getRateProduct ;
 	 }
    Future<RateProductMyPurchasesModel> loadRateProductMyPurchases() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadRateProduct;
         loadRateProduct = await apiRepProvider?.loadRateProductMyPurchases('');
 	    return loadRateProduct ;  
    }
   
    Future saveRateProductMyPurchases(RateProductMyPurchasesModel? my_purchases, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRateProductMyPurchases(my_purchases!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRateProductMyPurchases(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllRateProductMyPurchases(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

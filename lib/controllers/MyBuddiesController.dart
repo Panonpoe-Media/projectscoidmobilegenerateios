@@ -32,38 +32,38 @@ class MyBuddiesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyBuddies()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editMyBuddies;
     editMyBuddies = await apiRepProvider?.getMyBuddiesEdit(url!, id!, title!);
     return editMyBuddies;
   }
   
     Future viewMyBuddies()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var viewMyBuddies;
     viewMyBuddies = await apiRepProvider?.getMyBuddiesView(url!, id!, title!);
     return viewMyBuddies;
   }
 
   Future postMyBuddies() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBuddies;
     postMyBuddies = await apiRepProvider?.sendMyBuddiesPost(url!,formData);
     return postMyBuddies;
   }
   
     Future postMyBuddiesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postMyBuddies;
     postMyBuddies = await apiRepProvider?.sendMyBuddiesPostWithID(url!,formData, id!, title!);
     return postMyBuddies;
@@ -72,21 +72,21 @@ class MyBuddiesController {
   
   
     Future editRemoveMyBuddies()async{
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var editRemove;
     editRemove = await apiRepProvider?.getRemoveMyBuddiesEdit(url!, id!, title!);
     return editRemove;
   }
 
   Future postRemoveMyBuddies() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRemove;
     postRemove = await apiRepProvider?.sendRemoveMyBuddiesPost(url!,formData);
     return postRemove;
   }
   
     Future postRemoveMyBuddiesWithID() async {
-    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    APIRepository? apiRepProvider = application.projectsAPIRepository;
     var postRemove;
     postRemove = await apiRepProvider?.sendRemoveMyBuddiesPostWithID(url!,formData, id!, title!);
     return postRemove;
@@ -94,34 +94,34 @@ class MyBuddiesController {
   
       Future getRemoveMyBuddies(String spKey)async{
   
-        APIRepository? apiRepProvider = application?.projectsAPIRepository;
+        APIRepository? apiRepProvider = application.projectsAPIRepository;
         var getRemove;
-        getRemove = await apiRepProvider?.getRemoveMyBuddies(url!, id!, title!, spKey!);
+        getRemove = await apiRepProvider?.getRemoveMyBuddies(url!, id!, title!, spKey);
 	    return getRemove ;
 	 }
    Future<RemoveMyBuddiesModel> loadRemoveMyBuddies() async{
-   APIRepository? apiRepProvider = application?.projectsAPIRepository;
+   APIRepository? apiRepProvider = application.projectsAPIRepository;
         var loadRemove;
         loadRemove = await apiRepProvider?.loadRemoveMyBuddies('');
 	    return loadRemove ;  
    }
   
    Future saveRemoveMyBuddies(RemoveMyBuddiesModel? my_buddies, String? spKey) async{  
-       APIRepository? apiRepProvider = application?.projectsAPIRepository;
+       APIRepository? apiRepProvider = application.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRemoveMyBuddies(my_buddies!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRemoveMyBuddies(String? spKey) async{
-	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application.projectsAPIRepository;
        await apiRepProvider?.deleteAllRemoveMyBuddies(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application?.projectsAPIRepository;
+	APIRepository? apiRepProvider = application.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;
