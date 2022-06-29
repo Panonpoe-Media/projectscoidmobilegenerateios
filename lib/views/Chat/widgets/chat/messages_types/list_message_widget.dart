@@ -46,7 +46,7 @@ class _ListMessageWidgetState extends State<ListMessageWidget> {
           width: double.infinity,
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: OutlineButton(
+              child: OutlinedButton(
                 child: Text(button.title!),
                 onPressed: () {
                   widget.onPayloadPress!(button);

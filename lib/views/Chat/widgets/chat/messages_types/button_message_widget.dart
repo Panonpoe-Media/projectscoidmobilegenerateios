@@ -42,7 +42,7 @@ class _ButtonMessageWidgetState extends State<ButtonMessageWidget> {
     _buttonMessageModel.attachment?.payload?.buttons
         ?.forEach((button) => btnsList.add(SizedBox(
             width: double.infinity,
-            child: OutlineButton(
+            child: OutlinedButton(
               child: Text(button.title!),
               onPressed: () {
                 switch (button.type) {

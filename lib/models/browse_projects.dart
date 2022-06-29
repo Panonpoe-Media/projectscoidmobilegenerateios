@@ -1815,7 +1815,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
   }
 
   Widget viewButton1(BuildContext context, bool account, State state,
-      String? idHash, ChatBloc cb) {
+      String? idHash, ChatBloc? cb) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
 
@@ -2255,7 +2255,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
     );
   }
 
-  Widget viewChannels1(BuildContext context, ChatBloc cb) {
+  Widget viewChannels1(BuildContext context, ChatBloc? cb) {
     if (this.model!.model!.channels_url != null) {
       return (ChannelRouteTagsWidget(
         value: this.model!.model!.channels_id,
@@ -2300,7 +2300,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
 
     viewChildren.add(Padding(
         padding: EdgeInsets.only(left: 10.0, top: 0.0),
-        child: viewChannels1(context, cb!)));
+        child: viewChannels1(context, cb)));
     viewChildren.add(SizedBox(
       height: 15,
     ));
@@ -2314,7 +2314,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
     viewChildren.add(viewOwner(context));
 
     viewChildren.add(viewButton(context, account));
-    viewChildren.add(viewButton1(context, account, state, idHash, cb!));
+    viewChildren.add(viewButton1(context, account, state, idHash, cb));
 
     // viewChildren.add(viewHeader(context));
 

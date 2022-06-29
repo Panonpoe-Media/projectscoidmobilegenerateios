@@ -3551,8 +3551,20 @@ class _FileViewStateRev extends State<FileViewRev>{
                 ),
                 child: ButtonBar(
                     alignment: MainAxisAlignment.center,
-                    children: <Widget>[ OutlineButton(
+                    children: <Widget>[ OutlinedButton(
                         child: Text(readText(widget.value!,40)),
+                        style: OutlinedButton.styleFrom(
+                          shape: StadiumBorder(),
+                         // textColor: Colors.green,
+                          //splashColor : CurrentTheme.ShadeColor,
+                         // color : Colors.white,
+                          side: BorderSide(
+                            color: Colors.grey, //Color of the border
+                            style: BorderStyle.solid, //Style of the border
+                            width: 0.4,
+                          ),
+                        ),
+                        /*
                         textColor: Colors.green,
                         splashColor : CurrentTheme.ShadeColor,
                         color : Colors.white,
@@ -3561,6 +3573,10 @@ class _FileViewStateRev extends State<FileViewRev>{
                           style: BorderStyle.solid, //Style of the border
                           width: 0.4, //width of the border
                         ),
+
+                         */
+
+
                         onPressed: () async{
 
                           await  _downloadFile('${'/storage/emulated/0/Download'}/${widget.value}', widget.value1, showProgress);

@@ -32,38 +32,38 @@ class MySalesController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMySales()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editMySales;
     editMySales = await apiRepProvider?.getMySalesEdit(url!, id!, title!);
     return editMySales;
   }
   
     Future viewMySales()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewMySales;
     viewMySales = await apiRepProvider?.getMySalesView(url!, id!, title!);
     return viewMySales;
   }
 
   Future postMySales() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMySales;
     postMySales = await apiRepProvider?.sendMySalesPost(url!,formData);
     return postMySales;
   }
   
     Future postMySalesWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMySales;
     postMySales = await apiRepProvider?.sendMySalesPostWithID(url!,formData, id!, title!);
     return postMySales;
@@ -71,13 +71,13 @@ class MySalesController {
 
 
   Future getTableMySales(int page) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     return await apiRepProvider?.getMySalesIndex(url!, page);
   }
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

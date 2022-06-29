@@ -53,7 +53,9 @@ import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+import 'package:rxdart/rxdart.dart';
+import 'package:rxdart/subjects.dart';
+/** AUTOGENERATE OFF **/
 
 class InviteToBidBrowseUsers extends StatefulWidget {
 
@@ -84,6 +86,10 @@ class InviteToBidBrowseUsersState extends State<InviteToBidBrowseUsers> with Res
   var errmsg= 'Unauthorized  :'+'Invite to Bid';
   final List<Widget> actionChildren = <Widget>[
 	];
+
+  List<dynamic> multiSelectedOption = [];
+  final _selectedOptionsController = BehaviorSubject();
+  Stream get selectedOptionsToggleStream => _selectedOptionsController.stream;
 
 final RestorableInt _counter = RestorableInt(0);
 
@@ -262,6 +268,137 @@ final RestorableInt _counter = RestorableInt(0);
 		) ??
 				false;
 	}
+
+
+
+  void multiSelectOption(dynamic option) {
+    // print(message);
+    // if (multiSelectedMessage != null) {
+    // selectedMessage =
+    // message['time'] == selectedMessage['time'] ? null : message;
+
+    if (multiSelectedOption.length == 0) {
+      multiSelectedOption.add(option);
+      setState(() {
+       // this.model!.model!.price = this.model!.model!.price + option['price'];
+      });
+    } else {
+      var msm = multiSelectedOption;
+      bool? isSelect = true;
+      int count = 0;
+      for (var item in msm) {
+        if (item['title'] == option['title']) {
+          multiSelectedOption.removeAt(count);
+          setState(() {
+          //  this.model!.model!.price =
+             //   this.model!.model!.price - option['price'];
+          });
+          isSelect = false;
+          break;
+        }
+        count++;
+      }
+      if (isSelect!) {
+        multiSelectedOption.add(option);
+        setState(() {
+         // this.model!.model!.price = this.model!.model!.price + option['price'];
+        });
+      }
+    }
+
+    // } else {
+    //   multiSelectedMessage = [];
+
+    //   multiSelectedMessage.add(message);
+    // }
+
+    _selectedOptionsController.add(multiSelectedOption);
+  }
+
+  IconData getIconData(List<dynamic>? multiSelectedOption, dynamic option) {
+    //  print('heloooooooooo');
+    if (multiSelectedOption != null) {
+      if (multiSelectedOption.length == 1) {
+        if (option['title'] == multiSelectedOption[0]['title']) {
+          return Icons.check_box_outline_blank_sharp;
+        } else {
+          return Icons.check_box_outlined;
+        }
+      } else {
+        var msm = multiSelectedOption;
+        bool? isSelect = false;
+        int count = 0;
+        for (var item in msm) {
+          if (item['title'] == option['title']) {
+            isSelect = true;
+          }
+          count++;
+        }
+        if (isSelect!) {
+          return Icons.check_box_outline_blank_sharp;
+        } else {
+          return Icons.check_box_outlined;
+        }
+      }
+    } else {
+      return Icons.check_box_outlined;
+    }
+  }
+
+  List<Widget> getOptions() {
+   // var maskOptions = MaskOptions()..reverse = true;
+   // var formatter = StringMask('#,##0', options: maskOptions);
+    List<Widget> OptionsTextFields = [];
+
+    for (int? i = 0; i! < this.model!.model!.model!.projects.length; i++) {
+      if (this.model!.model!.model!.projects[i]!.title != '') {
+
+        OptionsTextFields.add(Padding(
+            padding:
+            const EdgeInsets.symmetric(vertical: 3.0, horizontal: 18.0),
+            child: StreamBuilder(
+                stream: selectedOptionsToggleStream,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return (GestureDetector(
+                    child: Row(
+                      //  crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              getIconData(snapshot.data,
+                                  this.model!.model.model!.projects[i].toJson()),
+                              //Icons.check_box_outline_blank_sharp,
+                              color: Colors.amber,
+                            ),
+                            Text(
+                              '  ${this.model!.model!.model!.projects[i]!.title} ',
+                              maxLines: 2,
+                            ),
+                          ],
+                        ),
+
+                        // Text(' Rp. ${formatter.apply(val)},-'),
+
+                        //  Expanded(child: OptionViewFields(i, this.optiondata)),
+                        //  SizedBox(width: 16,),
+                        // we need add button at last Options row
+                      ],
+                    ),
+                    onTap: () async {
+                      multiSelectOption(
+                          this.model!.model!.model!.projects[i]!.toJson());
+                    },
+                  ));
+                })));
+      }
+    }
+
+    return OptionsTextFields;
+  }
+
+
   @override
   Widget build(BuildContext context) {
    bool darkMode = false;
@@ -601,7 +738,8 @@ final RestorableInt _counter = RestorableInt(0);
                               this.model.viewWorkerRating(context),
                               this.model.viewProjectsCompleted(context),
                               this.model.viewCurrentProjects(context),
-                              this.model.editInvitationMessage(this), 							  
+                              this.model.editInvitationMessage(this),
+                              ...getOptions(),
                               
                             this.model.model.meta.after_content == null ? Container(width: 0.0, height: 0.0) :
                               Padding(

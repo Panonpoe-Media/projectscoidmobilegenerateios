@@ -41,7 +41,7 @@ class _QuickReplyMessageWidgetState extends State<QuickReplyMessageWidget> {
         width: double.infinity,
         child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: OutlineButton(
+            child: OutlinedButton(
               child: Text(quickReply.title!),
               onPressed: () {
                 widget.onPayloadPress!(quickReply);

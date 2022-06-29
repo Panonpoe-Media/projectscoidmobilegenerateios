@@ -139,7 +139,7 @@ final RestorableDouble cs = RestorableDouble(0);
   // @override
   Widget buildListingBar() {
     return BlocBuilder<HomeListing, HomeState>(
-     // cubit:   home!.listing,
+      bloc:   home!.listing,
       builder: (BuildContext context, HomeState state){
         if (state is HomeListingUninitialized) {
           // return Center(

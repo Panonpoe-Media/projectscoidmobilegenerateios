@@ -32,38 +32,38 @@ class TipsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editTips()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editTips;
     editTips = await apiRepProvider?.getTipsEdit(url!, id!, title!);
     return editTips;
   }
   
     Future viewTips()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewTips;
     viewTips = await apiRepProvider?.getTipsView(url!, id!, title!);
     return viewTips;
   }
 
   Future postTips() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postTips;
     postTips = await apiRepProvider?.sendTipsPost(url!,formData);
     return postTips;
   }
   
     Future postTipsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postTips;
     postTips = await apiRepProvider?.sendTipsPostWithID(url!,formData, id!, title!);
     return postTips;
@@ -72,7 +72,7 @@ class TipsController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

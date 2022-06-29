@@ -1114,7 +1114,7 @@ class  PortofolioMyProfileState1 extends State<PortofolioMyProfile> with TickerP
    Widget buildListingBar(){  
   
     return BlocBuilder<PortofolioMyProfileListing, PortofolioMyProfileState>(
-      //cubit: portofolio!.listingPortofolio,
+      bloc: portofolio!.listingPortofolio,
 
       builder: (BuildContext context, state) {
         if (state is PortofolioMyProfileListingUninitialized) {

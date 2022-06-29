@@ -32,38 +32,38 @@ class CartController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editCart()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editCart;
     editCart = await apiRepProvider?.getCartEdit(url!, id!, title!);
     return editCart;
   }
   
     Future viewCart()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewCart;
     viewCart = await apiRepProvider?.getCartView(url!, id!, title!);
     return viewCart;
   }
 
   Future postCart() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCart;
     postCart = await apiRepProvider?.sendCartPost(url!,formData);
     return postCart;
   }
   
     Future postCartWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCart;
     postCart = await apiRepProvider?.sendCartPostWithID(url!,formData, id!, title!);
     return postCart;
@@ -72,21 +72,21 @@ class CartController {
   
   
     Future editEmptyCartCart()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editEmptyCart;
     editEmptyCart = await apiRepProvider?.getEmptyCartCartEdit(url!, id!, title!);
     return editEmptyCart;
   }
 
   Future postEmptyCartCart() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEmptyCart;
     postEmptyCart = await apiRepProvider?.sendEmptyCartCartPost(url!,formData);
     return postEmptyCart;
   }
   
     Future postEmptyCartCartWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEmptyCart;
     postEmptyCart = await apiRepProvider?.sendEmptyCartCartPostWithID(url!,formData, id!, title!);
     return postEmptyCart;
@@ -94,48 +94,48 @@ class CartController {
   
       Future getEmptyCartCart(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getEmptyCart;
-        getEmptyCart = await apiRepProvider?.getEmptyCartCart(url!, id!, title!, spKey);
+        getEmptyCart = await apiRepProvider?.getEmptyCartCart(url!, id!, title!, spKey!);
 	    return getEmptyCart ;
 	 }
    Future<EmptyCartCartModel> loadEmptyCartCart() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadEmptyCart;
         loadEmptyCart = await apiRepProvider?.loadEmptyCartCart('');
 	    return loadEmptyCart ;  
    }
   
    Future saveEmptyCartCart(EmptyCartCartModel? cart, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEmptyCartCart(cart!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEmptyCartCart(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllEmptyCartCart(spKey!);   
    }
   
   
   
     Future editApplyCouponCart()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editApplyCoupon;
     editApplyCoupon = await apiRepProvider?.getApplyCouponCartEdit(url!, id!, title!);
     return editApplyCoupon;
   }
 
   Future postApplyCouponCart() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postApplyCoupon;
     postApplyCoupon = await apiRepProvider?.sendApplyCouponCartPost(url!,formData);
     return postApplyCoupon;
   }
   
     Future postApplyCouponCartWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postApplyCoupon;
     postApplyCoupon = await apiRepProvider?.sendApplyCouponCartPostWithID(url!,formData, id!, title!);
     return postApplyCoupon;
@@ -143,34 +143,34 @@ class CartController {
   
       Future getApplyCouponCart(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getApplyCoupon;
-        getApplyCoupon = await apiRepProvider?.getApplyCouponCart(url!, id!, title!, spKey);
+        getApplyCoupon = await apiRepProvider?.getApplyCouponCart(url!, id!, title!, spKey!);
 	    return getApplyCoupon ;
 	 }
    Future<ApplyCouponCartModel> loadApplyCouponCart() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadApplyCoupon;
         loadApplyCoupon = await apiRepProvider?.loadApplyCouponCart('');
 	    return loadApplyCoupon ;  
    }
   
    Future saveApplyCouponCart(ApplyCouponCartModel? cart, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateApplyCouponCart(cart!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllApplyCouponCart(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllApplyCouponCart(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

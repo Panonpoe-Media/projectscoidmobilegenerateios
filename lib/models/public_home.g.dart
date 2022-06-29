@@ -341,9 +341,7 @@ PublicHomeModel _$PublicHomeModelFromJson(Map<String, dynamic> json) =>
       json['tips'] == null
           ? null
           : Tip.fromJson(json['tips'] as Map<String, dynamic>),
-      json['sukses'] == null
-          ? null
-          : SuccessModel.fromJson(json['sukses'] as Map<String, dynamic>),
+
     )..age = json['age'] as int?;
 
 Map<String, dynamic> _$PublicHomeModelToJson(PublicHomeModel instance) =>
@@ -361,5 +359,5 @@ Map<String, dynamic> _$PublicHomeModelToJson(PublicHomeModel instance) =>
       'testimonials': instance.testimonials,
       'blogs': instance.blogs,
       'tips': instance.tips,
-      'sukses': instance.sukses,
+
     };

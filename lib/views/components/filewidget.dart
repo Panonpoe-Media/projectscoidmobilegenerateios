@@ -15,6 +15,7 @@ import 'package:projectscoid/core/AppProvider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class FileContent extends StatelessWidget {
   const FileContent({ Key? key, this.link, this.fz})
@@ -187,14 +188,96 @@ class _FileStateWidget extends State<FileWidget>{
   double progressCount = 0;
   bool failed = false;
   int fl = 0;
+  bool _permissionReady = false;
+  bool _permissionReady1 = false;
+  PermissionStatus _permissionStatus = PermissionStatus.denied;
  // String link = '';
  // _FileStateWidget({this.link});
+
+  Future<bool> _checkPermission() async {
+    /*
+    if (widget.platform == TargetPlatform.android) {
+      PermissionStatus permission = await PermissionHandler()
+          .checkPermissionStatus(PermissionGroup.storage);
+      if (permission != PermissionStatus.granted) {
+        Map<PermissionGroup, PermissionStatus> permissions =
+        await PermissionHandler()
+            .requestPermissions([PermissionGroup.storage]);
+        if (permissions[PermissionGroup.storage] == PermissionStatus.granted) {
+          return true;
+        }
+      } else {
+        return true;
+      }
+    } else {
+      return true;
+    }
+    return false;
+
+     */
+
+    var prm = Permission.values
+        .where((permission) {
+      if (Platform.isIOS) {
+        return permission != Permission.unknown &&
+            permission != Permission.sms &&
+            permission != Permission.storage &&
+            permission != Permission.ignoreBatteryOptimizations &&
+            permission != Permission.microphone &&
+            permission != Permission.accessMediaLocation &&
+            permission != Permission.activityRecognition &&
+            permission != Permission.manageExternalStorage &&
+            permission != Permission.systemAlertWindow &&
+            permission != Permission.requestInstallPackages &&
+            permission != Permission.accessNotificationPolicy &&
+            permission != Permission.bluetoothScan &&
+            permission != Permission.bluetoothAdvertise &&
+            permission != Permission.bluetoothConnect;
+      } else {
+
+        return permission == Permission.storage  || permission == Permission.microphone ;
+        //||
+        // permission == Permission.manageExternalStorage;
+      }
+    }).toList();//.map((permission)async{ await _requestPermission(permission);});
+    // prm.forEach((element)async{ return await _requestPermission(element);
+
+    // });
+
+    return await _requestPermission(prm);
+
+
+
+  }
+
+  Future<bool> _requestPermission(List<Permission> permission) async {
+
+    //final status = await permission.request();
+    var status;
+    for(var obj in permission){
+      status = await obj.request();
+    }
+    //  print('haloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo');
+    // setState(() {
+    // print(status);
+    _permissionStatus = status;
+    // print(_permissionStatus);
+    if(_permissionStatus.isGranted){return true;}else{
+      return false;
+    }
+    // });
+
+  }
 
 
   @override
   initState() {
     super.initState();
-
+    _checkPermission().then((hasGranted) {
+      setState(() {
+        _permissionReady = hasGranted;
+      });
+    });
     if ((widget.value !=  null) && (widget.filename != '')) {
       //link = widget.filename;
     }else {
@@ -205,6 +288,7 @@ class _FileStateWidget extends State<FileWidget>{
       });
     }
   }
+
   String validateFile(_value, _require) {
     String value = _value;
     bool   require =  _require;
@@ -226,16 +310,224 @@ class _FileStateWidget extends State<FileWidget>{
   }
 
 
-
-
   Future<DIOProvider> _init()async{
 
     Directory appDocDir = await getApplicationDocumentsDirectory();
     final DIOProvider provider = await DIOProvider(appDocDir.path);
     return provider;
   }
+/*
+  Future<FileField?> _uploadFile1(BuildContext context) async {
+    String? filepath;
+    // String filename;
+    FileField dioResultFile;
+    File file;
+    DateTime lastmd;
+    int filelength;
+    int filedate;
 
-  Future<FileField?> _uploadFile(BuildContext context) async {
+
+
+    Future<void> _showNotification( String msg, int id, String title) async {
+      var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+          'your channel id', 'your channel name',
+          importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+      var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          android:androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+      /* await AppProvider..flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item x'); */
+      await AppProvider.getApplication(context).flutterLocalNotificationsPlugin?.show(
+          id, title, msg, platformChannelSpecifics,
+          payload: title);
+    }
+
+    void showProgress(received, total) {
+      if (total != -1) {
+        setState(() {
+          //  _showNotification(failed? 'failed' : "Upload " + (received / total * 100).toStringAsFixed(0) + "%", 2,
+          //     widget.filename);
+          progressCount = received / total ;
+
+        });
+
+        print((received / total * 100).toStringAsFixed(0) + "%");
+      }
+    }
+
+    Future<FileField>loadFileFile(String filename, String filepath, ProgressULCallback progress)async{
+
+      FormData  formdata = FormData.fromMap({
+        "Filename":"filename",
+        "Filedata": await MultipartFile.fromFile(filepath, filename: filename),
+
+      });
+      FileField? res ;
+
+      try {
+        res =  await provider?.uploadFile1(formdata, progress).then(( response) {
+          return response;
+        });
+      }catch(e) {
+        failed = true;
+      }
+
+
+      return res!;
+    }
+
+    provider = await _init();
+    FilePickerResult? result ;
+    try{
+      result = await FilePicker.platform.pickFiles();
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Errornya, ${e.toString()}!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      result = null;
+    }
+
+
+
+/*
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Errornya, Sudah lewat!'),
+        backgroundColor: Colors.red,
+      ),
+    );
+
+ */
+    //link = _BASE_URL1+ _UPLOAD_URL1   +  dioResultFile.temp;
+
+    // print('file===== ${dioResultFile.name}');
+    // this.contr1.text = dioResultFile.temp;
+    // print('filepath ===' +filepath);
+
+  }
+
+  Future<FileField?> _uploadFile2(BuildContext context) async {
+    String? filepath;
+    // String filename;
+    FileField dioResultFile;
+    File file;
+    DateTime lastmd;
+    int filelength;
+    int filedate;
+
+
+
+    Future<void> _showNotification( String msg, int id, String title) async {
+      var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+          'your channel id', 'your channel name',
+          importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+      var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          android:androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+      /* await AppProvider..flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item x'); */
+      await AppProvider.getApplication(context).flutterLocalNotificationsPlugin?.show(
+          id, title, msg, platformChannelSpecifics,
+          payload: title);
+    }
+
+    void showProgress(received, total) {
+      if (total != -1) {
+        setState(() {
+          //  _showNotification(failed? 'failed' : "Upload " + (received / total * 100).toStringAsFixed(0) + "%", 2,
+          //     widget.filename);
+          progressCount = received / total ;
+
+        });
+
+        print((received / total * 100).toStringAsFixed(0) + "%");
+      }
+    }
+
+    Future<FileField>loadFileFile(String filename, String filepath, ProgressULCallback progress)async{
+
+      FormData  formdata = FormData.fromMap({
+        "Filename":"filename",
+        "Filedata": await MultipartFile.fromFile(filepath, filename: filename),
+
+      });
+      FileField? res ;
+
+      try {
+        res =  await provider?.uploadFile1(formdata, progress).then(( response) {
+          return response;
+        });
+      }catch(e) {
+        failed = true;
+      }
+
+
+      return res!;
+    }
+
+    provider = await _init();
+    FilePickerResult? result ;
+
+    // filepath = await FilePicker.getFilePath(type: FileType.any);
+    filepath = '';
+    try{
+      /*
+      widget.filename = p.basename(filepath!);
+      file = File(filepath);
+      lastmd = file.lastModifiedSync();
+      filelength = file.lengthSync();
+      fl = filelength;
+      filedate = lastmd.toUtc().millisecondsSinceEpoch;
+
+       */
+
+      dioResultFile = await loadFileFile('haloo', '', showProgress);
+
+
+
+     // FileField val = new FileField(dioResultFile.status, dioResultFile.name,filelength,0,0, dioResultFile.temp, '', '',filedate.toString(), );
+      // fileproperty.add(val);
+
+      // this.contr.text  = dioResultFile.name;
+      widget.link = dioResultFile.name;
+      if(dioResultFile != null) {
+       // fileproperty.add(val);
+        // setState(() {
+        uploadfile(fileproperty);
+        //);
+      };
+
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Errornya 1, ${e.toString()}!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+/*
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Errornya, Sudah lewat!'),
+        backgroundColor: Colors.red,
+      ),
+    );
+
+ */
+    //link = _BASE_URL1+ _UPLOAD_URL1   +  dioResultFile.temp;
+
+    // print('file===== ${dioResultFile.name}');
+    // this.contr1.text = dioResultFile.temp;
+    // print('filepath ===' +filepath);
+
+  }
+
+  Future<FileField?> _uploadFile3(BuildContext context) async {
     String? filepath;
     // String filename;
     FileField dioResultFile;
@@ -296,30 +588,139 @@ class _FileStateWidget extends State<FileWidget>{
     }
 
     provider = await _init();
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+  }
+
+ */
+
+  Future<FileField?> _uploadFile(BuildContext context) async {
+    String? filepath;
+    // String filename;
+    FileField dioResultFile;
+    File file;
+    DateTime lastmd;
+    int filelength;
+    int filedate;
+
+
+
+    Future<void> _showNotification( String msg, int id, String title) async {
+      var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+          'your channel id', 'your channel name',
+          importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+      var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+      var platformChannelSpecifics = NotificationDetails(
+          android:androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+      /* await AppProvider..flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item x'); */
+      await AppProvider.getApplication(context).flutterLocalNotificationsPlugin?.show(
+          id, title, msg, platformChannelSpecifics,
+          payload: title);
+    }
+
+    void showProgress(received, total) {
+      if (total != -1) {
+        setState(() {
+          //  _showNotification(failed? 'failed' : "Upload " + (received / total * 100).toStringAsFixed(0) + "%", 2,
+          //     widget.filename);
+          progressCount = received / total ;
+
+        });
+
+        print((received / total * 100).toStringAsFixed(0) + "%");
+      }
+    }
+
+    Future<FileField>loadFileFile(String filename, String filepath, ProgressULCallback progress)async{
+
+      FormData  formdata = FormData.fromMap({
+        "Filename":"filename",
+        "Filedata": await MultipartFile.fromFile(filepath, filename: filename),
+
+      });
+      FileField? res ;
+
+      try {
+        res =  await provider?.uploadFile1(formdata, progress).then(( response) {
+          return response;
+        });
+      }catch(e) {
+        failed = true;
+      }
+
+
+      return res!;
+    }
+
+    provider = await _init();
+    FilePickerResult? result ;
+    try{
+      result = await FilePicker.platform.pickFiles();
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Errornya, ${e.toString()}!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      result = null;
+    }
+
+
 
     if(result != null) {
       filepath = result.files.single.path;
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('result null!'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
-   // filepath = await FilePicker.getFilePath(type: FileType.any);
-    widget.filename = p.basename(filepath!);
-    file = File(filepath);
-    lastmd = file.lastModifiedSync();
-    filelength = file.lengthSync();
-    fl = filelength;
-    filedate = lastmd.toUtc().millisecondsSinceEpoch;
-    dioResultFile = await loadFileFile(widget.filename!, filepath, showProgress);
-    FileField val = new FileField(dioResultFile.status, dioResultFile.name,filelength,0,0, dioResultFile.temp, '', '',filedate.toString(), );
-    // fileproperty.add(val);
+    // filepath = await FilePicker.getFilePath(type: FileType.any);
+    try{
+      widget.filename = p.basename(filepath!);
+      file = File(filepath);
+      lastmd = file.lastModifiedSync();
+      filelength = file.lengthSync();
+      fl = filelength;
+      filedate = lastmd.toUtc().millisecondsSinceEpoch;
 
-    // this.contr.text  = dioResultFile.name;
-    widget.link = dioResultFile.name;
-    if(dioResultFile != null) {
-      fileproperty.add(val);
-      // setState(() {
-      uploadfile(fileproperty);
-      //);
-    };
+      dioResultFile = await loadFileFile(widget.filename!, filepath, showProgress);
+
+
+
+      FileField val = new FileField(dioResultFile.status, dioResultFile.name,filelength,0,0, dioResultFile.temp, '', '',filedate.toString(), );
+      // fileproperty.add(val);
+
+      // this.contr.text  = dioResultFile.name;
+      widget.link = dioResultFile.name;
+      if(dioResultFile != null) {
+        fileproperty.add(val);
+        // setState(() {
+        uploadfile(fileproperty);
+        //);
+      };
+
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Errornya 1, ${e.toString()}!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+/*
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Errornya, Sudah lewat!'),
+        backgroundColor: Colors.red,
+      ),
+    );
+
+ */
     //link = _BASE_URL1+ _UPLOAD_URL1   +  dioResultFile.temp;
 
     // print('file===== ${dioResultFile.name}');
@@ -327,6 +728,8 @@ class _FileStateWidget extends State<FileWidget>{
     // print('filepath ===' +filepath);
 
   }
+
+
 
 
 
@@ -444,6 +847,27 @@ class _FileStateWidget extends State<FileWidget>{
                                       child: ButtonBar(
                                         alignment : MainAxisAlignment.end,
                                         children: <Widget>[
+                                          /*
+                                          RaisedButton(
+                                            textTheme: ButtonTextTheme.normal,
+                                            color: Colors.grey,
+                                            child: const Text('test 1 ', style: TextStyle(color: Colors.white)),
+                                            onPressed:   ()async { await _uploadFile1(context); },
+                                          ),
+                                          RaisedButton(
+                                            textTheme: ButtonTextTheme.normal,
+                                            color: Colors.grey,
+                                            child: const Text('test 2 ', style: TextStyle(color: Colors.white)),
+                                            onPressed:   ()async { await _uploadFile2(context); },
+                                          ),
+                                          RaisedButton(
+                                            textTheme: ButtonTextTheme.normal,
+                                            color: Colors.grey,
+                                            child: const Text('test 3 ', style: TextStyle(color: Colors.white)),
+                                            onPressed:   ()async { await _uploadFile3(context); },
+                                          ),
+
+                                           */
                                           RaisedButton(
                                             textTheme: ButtonTextTheme.normal,
                                             color: Colors.grey,

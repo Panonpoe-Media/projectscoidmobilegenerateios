@@ -32,38 +32,38 @@ class MyPortofolioController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyPortofolio()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editMyPortofolio;
     editMyPortofolio = await apiRepProvider?.getMyPortofolioEdit(url!, id!, title!);
     return editMyPortofolio;
   }
   
     Future viewMyPortofolio()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewMyPortofolio;
     viewMyPortofolio = await apiRepProvider?.getMyPortofolioView(url!, id!, title!);
     return viewMyPortofolio;
   }
 
   Future postMyPortofolio() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMyPortofolio;
     postMyPortofolio = await apiRepProvider?.sendMyPortofolioPost(url!,formData);
     return postMyPortofolio;
   }
   
     Future postMyPortofolioWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMyPortofolio;
     postMyPortofolio = await apiRepProvider?.sendMyPortofolioPostWithID(url!,formData, id!, title!);
     return postMyPortofolio;
@@ -72,21 +72,21 @@ class MyPortofolioController {
   
   
     Future editAddPortofolioMyPortofolio()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editAddPortofolio;
     editAddPortofolio = await apiRepProvider?.getAddPortofolioMyPortofolioEdit(url!, id!, title!);
     return editAddPortofolio;
   }
 
   Future postAddPortofolioMyPortofolio() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAddPortofolio;
     postAddPortofolio = await apiRepProvider?.sendAddPortofolioMyPortofolioPost(url!,formData);
     return postAddPortofolio;
   }
   
     Future postAddPortofolioMyPortofolioWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAddPortofolio;
     postAddPortofolio = await apiRepProvider?.sendAddPortofolioMyPortofolioPostWithID(url!,formData, id!, title!);
     return postAddPortofolio;
@@ -94,48 +94,48 @@ class MyPortofolioController {
   
       Future getAddPortofolioMyPortofolio(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getAddPortofolio;
-        getAddPortofolio = await apiRepProvider?.getAddPortofolioMyPortofolio(url!, id!, title!, spKey);
+        getAddPortofolio = await apiRepProvider?.getAddPortofolioMyPortofolio(url!, id!, title!, spKey!);
 	    return getAddPortofolio ;
 	 }
    Future<AddPortofolioMyPortofolioModel> loadAddPortofolioMyPortofolio() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadAddPortofolio;
         loadAddPortofolio = await apiRepProvider?.loadAddPortofolioMyPortofolio('');
 	    return loadAddPortofolio ;  
    }
   
    Future saveAddPortofolioMyPortofolio(AddPortofolioMyPortofolioModel? my_portofolio, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAddPortofolioMyPortofolio(my_portofolio!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAddPortofolioMyPortofolio(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllAddPortofolioMyPortofolio(spKey!);   
    }
   
   
   
     Future editEditMyPortofolio()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editEdit;
     editEdit = await apiRepProvider?.getEditMyPortofolioEdit(url!, id!, title!);
     return editEdit;
   }
 
   Future postEditMyPortofolio() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEdit;
     postEdit = await apiRepProvider?.sendEditMyPortofolioPost(url!,formData);
     return postEdit;
   }
   
     Future postEditMyPortofolioWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEdit;
     postEdit = await apiRepProvider?.sendEditMyPortofolioPostWithID(url!,formData, id!, title!);
     return postEdit;
@@ -143,34 +143,34 @@ class MyPortofolioController {
   
       Future getEditMyPortofolio(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getEdit;
-        getEdit = await apiRepProvider?.getEditMyPortofolio(url!, id!, title!, spKey);
+        getEdit = await apiRepProvider?.getEditMyPortofolio(url!, id!, title!, spKey!);
 	    return getEdit ;
 	 }
    Future<EditMyPortofolioModel> loadEditMyPortofolio() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadEdit;
         loadEdit = await apiRepProvider?.loadEditMyPortofolio('');
 	    return loadEdit ;  
    }
   
    Future saveEditMyPortofolio(EditMyPortofolioModel? my_portofolio, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEditMyPortofolio(my_portofolio!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEditMyPortofolio(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllEditMyPortofolio(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

@@ -257,7 +257,7 @@ class MyServicesViewRevSuperBase {
       this.id,
       this.buttons,
       this.meta,
-      model,
+      this.model,
       );
 
 
@@ -299,7 +299,7 @@ class MyServicesViewModel  extends MyServicesViewBase{
     final size =MediaQuery.of(context).size;
     final width =size.width;
     // String? sts = destination!.item.project_project_status_str.split('>')[1].split('<')[0];
-    String? sts1 = model!.model!.status_str.split('>')[1].split('<')[0];
+    String? sts1 =  this.model.model.status_str.split('>')[1].split('<')[0];
 
 
 
@@ -729,7 +729,7 @@ class MyServicesViewModel  extends MyServicesViewBase{
       ..reverse = true;
     var formatter = new StringMask('#,##0', options: maskOptions);
     List<Widget> OptionsTextFields = [];
-
+  if(model!.model!.options != null){
     for(int i=0; i< model!.model!.options.length; i++){
 
       if(model!.model!.options[i].description != ''){
@@ -773,6 +773,8 @@ class MyServicesViewModel  extends MyServicesViewBase{
       }
 
     }
+  }
+
     return OptionsTextFields;
   }
 

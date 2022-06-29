@@ -32,38 +32,38 @@ class TestimonialController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editTestimonial()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editTestimonial;
     editTestimonial = await apiRepProvider?.getTestimonialEdit(url!, id!, title!);
     return editTestimonial;
   }
   
     Future viewTestimonial()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewTestimonial;
     viewTestimonial = await apiRepProvider?.getTestimonialView(url!, id!, title!);
     return viewTestimonial;
   }
 
   Future postTestimonial() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postTestimonial;
     postTestimonial = await apiRepProvider?.sendTestimonialPost(url!,formData);
     return postTestimonial;
   }
   
     Future postTestimonialWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postTestimonial;
     postTestimonial = await apiRepProvider?.sendTestimonialPostWithID(url!,formData, id!, title!);
     return postTestimonial;
@@ -72,7 +72,7 @@ class TestimonialController {
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

@@ -60,7 +60,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
       Expanded(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: OutlineButton(
+          child: OutlinedButton(
             onPressed: () => slider.previousPage(
                 duration: const Duration(milliseconds: 300), curve: Curves.linear),
             child: const Text('prev item'),
@@ -70,7 +70,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
       Expanded(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: OutlineButton(
+          child: OutlinedButton(
             onPressed: () => slider.nextPage(
                 duration: const Duration(milliseconds: 300), curve: Curves.linear),
             child: const Text('next item'),

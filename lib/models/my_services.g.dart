@@ -129,7 +129,11 @@ MyServicesViewRevSuperBase _$MyServicesViewRevSuperBaseFromJson(
       json['meta'] == null
           ? null
           : Meta.fromJson(json['meta'] as Map<String, dynamic>),
-      json['model'],
+          json['model'] == null
+              ? null
+              : ViewModelMyServicesRev.fromJson(
+              json['model'] as Map<String, dynamic>),
+      //json['model'],
     );
 
 Map<String, dynamic> _$MyServicesViewRevSuperBaseToJson(

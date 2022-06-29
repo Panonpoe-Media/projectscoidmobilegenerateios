@@ -363,7 +363,7 @@ class PublicHomeModel {
   Testimonial? testimonials;
   Blog? blogs;
   Tip? tips;
-  SuccessModel? sukses;
+//  SuccessModel? sukses;
  	  PublicHomeModel(
 	  this.status,
 	  this.meta,
@@ -376,8 +376,9 @@ class PublicHomeModel {
 	  this.products,
 	  this.testimonials,
 	  this.blogs,
-	  this.tips,
-	  this.sukses
+	  this.tips
+    //    ,
+	 // this.sukses
   );
 	
   factory PublicHomeModel.fromJson(Map<String, dynamic> json) => _$PublicHomeModelFromJson(json);

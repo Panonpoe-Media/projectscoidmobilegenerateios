@@ -56,12 +56,173 @@ import 'package:projectscoid/api/api.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'project.dart';
 part 'browse_users.g.dart';
+
 /** AUTOGENERATE OFF **/
+
+
+
+
+ModelActionInviteToBidBrowseUsersRev _$ModelActionInviteToBidBrowseUsersRevFromJson(
+    Map<String, dynamic> json) =>
+    ModelActionInviteToBidBrowseUsersRev(
+      json['id'] as String?,
+      json['user_id'] as String?,
+      json['user_name'] as String?,
+      json['display_name'] as String?,
+      json['last_seen'] == null
+          ? null
+          : DateTime.parse(json['last_seen'] as String),
+      json['worker_rating'] as int?,
+      json['projects_completed'] as int?,
+      json['projects_completed_str'] as String?,
+      json['current_projects'] as int?,
+      json['current_projects_str'] as String?,
+      json['invitation_message'] as String?,
+      (json['projects'] as List<dynamic>?)
+          ?.map((e) => e == null
+          ? null
+          : Project.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    //  (json['projects'] as List<dynamic>?)
+     //       ?.map((e) => e as Project?)
+     //       .toList(),
+
+    )
+      ..age = json['age'] as int?
+      ..cnt = json['cnt'] as int?
+      ..page = json['page'] as int?
+      ..ttl = json['ttl'] as String?
+      ..pht = json['pht'] as String?
+      ..sbttl = json['sbttl'] as String?;
+
+Map<String, dynamic> _$ModelActionInviteToBidBrowseUsersRevToJson(
+    ModelActionInviteToBidBrowseUsersRev instance) =>
+    <String, dynamic>{
+      'age': instance.age,
+      'cnt': instance.cnt,
+      'page': instance.page,
+      'id': instance.id,
+      'ttl': instance.ttl,
+      'pht': instance.pht,
+      'sbttl': instance.sbttl,
+      'user_id': instance.user_id,
+      'user_name': instance.user_name,
+      'display_name': instance.display_name,
+      'last_seen': instance.last_seen?.toIso8601String(),
+      'worker_rating': instance.worker_rating,
+      'projects_completed': instance.projects_completed,
+      'projects_completed_str': instance.projects_completed_str,
+      'current_projects': instance.current_projects,
+      'current_projects_str': instance.current_projects_str,
+      'invitation_message': instance.invitation_message,
+      'projects': instance.projects,
+    };
+
+
+class ModelActionInviteToBidBrowseUsersRev {
+  int?    age;
+  int?    cnt;
+  int?    page;
+  String? id;
+  String? ttl;
+  String? pht;
+  String? sbttl;
+
+  String? user_id;
+  String? user_name;
+  String? display_name;
+  DateTime? last_seen;
+  int? worker_rating;
+  int? projects_completed;
+  String? projects_completed_str;
+  int? current_projects;
+  String? current_projects_str;
+  String? invitation_message;
+  List<Project?>? projects;
+
+
+  ModelActionInviteToBidBrowseUsersRev(
+      this.id,
+      this.user_id,
+      this.user_name,
+      this.display_name,
+      this.last_seen,
+      this.worker_rating,
+      this.projects_completed,
+      this.projects_completed_str,
+      this.current_projects,
+      this.current_projects_str,
+      this.invitation_message,
+      this.projects
+
+      );
+  factory ModelActionInviteToBidBrowseUsersRev.fromJson(Map<String, dynamic> json) => _$ModelActionInviteToBidBrowseUsersRevFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ModelActionInviteToBidBrowseUsersRevToJson(this);
+
+}
+
+
+
+
+InviteToBidBrowseUsersSuperBaseRev _$InviteToBidBrowseUsersSuperBaseRevFromJson(
+    Map<String, dynamic> json) =>
+    InviteToBidBrowseUsersSuperBaseRev(
+      json['id'] as String?,
+      (json['buttons'] as List<dynamic>?)
+          ?.map((e) =>
+      e == null ? null : Button.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['meta'] == null
+          ? null
+          : Meta.fromJson(json['meta'] as Map<String, dynamic>),
+      json['model'] == null
+          ? null
+          : ModelActionInviteToBidBrowseUsersRev.fromJson(
+          json['model'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$InviteToBidBrowseUsersSuperBaseRevToJson(
+    InviteToBidBrowseUsersSuperBaseRev instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'meta': instance.meta,
+      'buttons': instance.buttons,
+      'model': instance.model,
+    };
+
+
+class InviteToBidBrowseUsersSuperBaseRev {
+
+  String? id;
+  Meta? meta;
+  List<Button?>? buttons;
+  ModelActionInviteToBidBrowseUsersRev? model;
+  InviteToBidBrowseUsersSuperBaseRev(
+      this.id,
+      this.buttons,
+      this.meta,
+      this.model,
+      );
+
+
+  factory InviteToBidBrowseUsersSuperBaseRev.fromJson(Map<String, dynamic> json) => _$InviteToBidBrowseUsersSuperBaseRevFromJson(json);
+
+  Map<String, dynamic> toJson() => _$InviteToBidBrowseUsersSuperBaseRevToJson(this);
+
+
+}
+
+
 
 class InviteToBidBrowseUsersModel extends InviteToBidBrowseUsersBase {
   Map<String, dynamic> json;
-  InviteToBidBrowseUsersModel(Map<String, dynamic> this.json) : super(json);
+ // InviteToBidBrowseUsersModel(Map<String, dynamic> this.json) : super(json);
+  InviteToBidBrowseUsersModel(Map<String, dynamic> this.json) : super(json) {
+    model = InviteToBidBrowseUsersSuperBaseRev.fromJson(this.json);
+  }
 }
 
 class HireMeBrowseUsersModel extends HireMeBrowseUsersBase {
@@ -1348,13 +1509,13 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
     TextStyle _statLabelTextStyle = TextStyle(
       fontFamily: 'Roboto',
       color: Colors.black45,
-      fontSize: 15.0,
+      fontSize: 12.0,
       fontWeight: FontWeight.bold,
     );
 
     TextStyle _statCountTextStyle = TextStyle(
       color: Colors.black45,
-      fontSize: 16.0,
+      fontSize:13.0,
       fontWeight: FontWeight.bold,
     );
 
@@ -1378,8 +1539,9 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                         ? 0.0
                         : this.model!.model!.arbitration_rate / 100,
                     animation: true,
-                    radius: 100.0,
-                    lineWidth: 15.0,
+                   // arcType: ArcType.HALF,
+                    radius: 40.0,
+                    lineWidth: 5.0,
                     circularStrokeCap: CircularStrokeCap.round,
                     center: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -1413,8 +1575,9 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                                 ? 0.0
                                 : cnt! / cnt1,
                         animation: true,
-                        radius: 100.0,
-                        lineWidth: 15.0,
+                        radius: 40.0,
+                       // arcType: ArcType.HALF,
+                        lineWidth: 5.0,
                         circularStrokeCap: CircularStrokeCap.round,
                         center: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -1441,8 +1604,9 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                             ? 0.0
                             : this.model!.model!.completion_rate / 100,
                         animation: true,
-                        radius: 100.0,
-                        lineWidth: 15.0,
+                        radius: 40.0,
+                        //arcType: ArcType.HALF,
+                        lineWidth: 5.0,
                         circularStrokeCap: CircularStrokeCap.round,
                         center: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -1473,11 +1637,13 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
             : _buildStatItem1(((cnt!/cnt1)*100).toString(), label  ),
 
  */
-
+        SizedBox(height: 20,),
         Text(
           type,
           style: _statCountTextStyle,
         ),
+
+
       ],
     );
   }
@@ -1487,13 +1653,14 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
   ) {
     return Container(
       height: 150.0,
-      margin: EdgeInsets.only(top: 2.0),
+      margin: EdgeInsets.only(top: 5.0),
       color: Colors.white,
       // decoration: BoxDecoration(
       //   color: Colors.white,
       // ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
         children: <Widget>[
           _buildProcentageIndicator(
               "Arbitrated",
@@ -1512,6 +1679,7 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                   ? 1
                   : this.model!.model!.projects_won,
               context),
+
           _buildProcentageIndicator(
               "Noaction",
               "%",
@@ -1520,6 +1688,8 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                   ? 1
                   : this.model!.model!.projects_owned,
               context),
+
+
         ],
       ),
     );

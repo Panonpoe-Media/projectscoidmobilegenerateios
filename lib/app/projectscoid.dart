@@ -161,7 +161,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
   }
 
   void _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
     });
     // next = false;
@@ -2440,7 +2440,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                         ),
                                   ],
                                 )),
-
+/*
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10.0),
                                 ),
@@ -2518,6 +2518,9 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10.0),
                                 ),
+
+ */
+
                                 Container(
                                     /*  decoration:    BoxDecoration(
                                 color: CurrentTheme.BackgroundColor,
@@ -3405,7 +3408,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                           data: //'''<div class="col-md-9 col-sm-9 padding-top-10">''' +
                                               '''<a href="https://projects.co.id/public/pages/kebijakan_privasi">Privacy Policy</a> | <a href="https://projects.co.id/public/pages/syarat_layanan">Terms of Service</a> | <a href="https://projects.co.id/public/pages/status">Servers Status</a> <br>''' +
                                                   '''Projects.co.id adalah website untuk mencari jasa freelancer dan transaksi produk digital dengan sistem kerja remote. Kami dapat membantu mulai dari jasa pembuatan website, pembuatan aplikasi mobile, SEO, desain logo dan lainnya. Cepat, mudah dan aman.''',
-                                          // '''Copyright Ãƒâ€šÃ‚Â© 2013-2020, PT Panonpoe Media. All rights reserved.<br> ''' +
+                                          // '''Copyright ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 2013-2020, PT Panonpoe Media. All rights reserved.<br> ''' +
                                           // '''</div> ''' ,
                                           style: {
                                             "html": Style(
@@ -3431,7 +3434,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                           data:
                                               // '''<a href="https://projects.co.id/public/pages/kebijakan_privasi">Privacy Policy</a> | <a href="https://projects.co.id/public/pages/syarat_layanan">Terms of Service</a> | <a href="https://projects.co.id/public/pages/status">Servers Status</a> <br>''' +
                                               // '''Projects.co.id adalah website untuk mencari jasa freelancer dan transaksi produk digital dengan sistem kerja remote. Kami dapat membantu mulai dari jasa pembuatan website, pembuatan aplikasi mobile, SEO, desain logo dan lainnya. Cepat, mudah dan aman. <br>''' +
-                                              '''Copyright Ãƒâ€šÃ‚Â© 2013-$formattedDate, PT Panonpoe Media. All rights reserved.<br> ''',
+                                              '''Copyright © 2013-$formattedDate, PT Panonpoe Media. All rights reserved.<br> ''',
                                           //  '''</div> ''' ,
                                           style: {
                                             "html": Style(
@@ -5840,7 +5843,7 @@ class TestimonialItem1 extends StatelessWidget {
                                 )
                               ])
                           /*
-                           Text( '0${this.index.toString()}  ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â¢  04' ,
+                           Text( '0${this.index.toString()}  ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¢  04' ,
                              style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500 ),
                            ),
 
@@ -10444,6 +10447,7 @@ class PublicBrowseProjectsActViewState
         });
         // this.model1 = value;
       }).catchError((Error) {
+
         _onWidgetDidBuild(() {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -11415,6 +11419,7 @@ class _ProjectscoidState extends State<Projectscoid>
 
     if (widget.id != '') {
       messaging.subscribeToTopic(widget.id!);
+      //print('halooooo 123 ${widget.id}');
     }
     // if(widget.id != ''){
     //         initMsg(context);
@@ -11528,9 +11533,9 @@ class _ProjectscoidState extends State<Projectscoid>
 
   String toPicFile(String json) {
     if (json.contains('chat-file') || json.contains('chat-file')) {
-      return 'ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã…Â½ Attachment';
+      return 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â½ Attachment';
     } else if (json.contains('chat-image') || json.contains('chat-image')) {
-      return 'ÃƒÂ°Ã…Â¸Ã¢â‚¬Å“Ã‚Â· Image';
+      return 'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â°ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Image';
     } else {
       return json;
     }
@@ -12350,16 +12355,27 @@ class _ProjectscoidState extends State<Projectscoid>
         actions: <Widget>[
           FlatButton(
             onPressed: () async {
+
+              //await messaging.unsubscribeFromTopic(widget.id!);
               AppProvider.getApplication(context).chat!.deleteThread();
               AppProvider.getApplication(context).chat!.dispose();
-              await messaging.unsubscribeFromTopic(widget.id!);
+            //  print('halooooo ${widget.id}');
+             // await messaging.unsubscribeFromTopic(widget.id!);
               _timer!.cancel();
 
               await logout!.getData();
+
+
+
+
+              messaging.unsubscribeFromTopic(widget.id!);
               SC.SchedulerBinding.instance!.addPostFrameCallback((_) {
                 BlocProvider.of<AuthenticationController>(context)
                     .add(LoggedOut());
               });
+
+
+
 
               Navigator.pushAndRemoveUntil(
                 context,
@@ -13660,7 +13676,7 @@ class _ProjectscoidState extends State<Projectscoid>
                                                                         size:
                                                                             18.0,
                                                                         color: _tabController!.index==
-                                                                                null
+                                                                                 null
                                                                             ? null
                                                                             : _tabController!.index== choices.indexOf(choice)
                                                                                 ? darkMode

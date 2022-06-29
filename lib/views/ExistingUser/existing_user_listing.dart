@@ -729,10 +729,13 @@ class  PublicExistingUserBottomLoader extends StatelessWidget {
    }
    fetchData(NewUserController?     _user, BuildContext context)async {
      if (this.model == null) {
+       /*
        final hash =     _user!.getHash();
        hash.then((value) {
          this.idHash = value;
        });
+
+        */
        final future =     _user!.viewNewUser();
        future.then((value) {
          setState(() {

@@ -108,7 +108,7 @@ class _SlideButtonState extends State<SlideButton> {
   @override
   void dispose() {
     timer?.cancel();
-    super.dispose();
+   // super.dispose();
     audioPlayer!.stop();
     super.dispose();
     // widget.chatBloc.getQuickMenuItems();

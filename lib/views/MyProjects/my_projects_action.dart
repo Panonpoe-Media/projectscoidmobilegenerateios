@@ -1625,7 +1625,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
 								       state.show_bids!.tools.paging.total_pages == state.show_bids!.tools.paging.current_page?
                                         Container(height: 0.0, width: 0.0,):
 									    UserShowBidsMyProjectsBottomLoader()
-										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb!);
+										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb);
 								},
 								itemCount: state.hasReachedMax!
 									? state.show_bids!.items.items.length
@@ -1655,7 +1655,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
 								       state.show_bids!.tools.paging.total_pages == state.show_bids!.tools.paging.current_page?
                                         Container(height: 0.0, width: 0.0,):
 									    UserShowBidsMyProjectsBottomLoader()
-										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb!);
+										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb);
 								},
 								itemCount: state.hasReachedMax!
 									? state.show_bids!.items.items.length
@@ -1687,7 +1687,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
    Widget buildListingBar(){  
   
     return BlocBuilder<ShowBidsMyProjectsListing, ShowBidsMyProjectsState>(
-      //cubit: show_bids!.listingShowBids,
+      bloc: show_bids!.listingShowBids,
 
       builder: (BuildContext context, state) {
         if (state is ShowBidsMyProjectsListingUninitialized) {
@@ -1749,7 +1749,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
                                       Container(height: 0.0, width: 0.0,):
 									  
 									  UserShowBidsMyProjectsBottomLoader()
-										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb!);
+										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb);
 								},
 								itemCount: state.hasReachedMax!
 									? state.show_bids!.items.items.length
@@ -1775,7 +1775,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
 								       state.show_bids!.tools.paging.total_pages == state.show_bids!.tools.paging.current_page?
                                         Container(height: 0.0, width: 0.0,):
 									    UserShowBidsMyProjectsBottomLoader()
-										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb!);
+										: state.show_bids!.viewItemcb (state.show_bids!.items.items[index] , searchText! , account, listAccount[0]['user_hash'], widget.cb);
 								},
 								itemCount: state.hasReachedMax!
 									? state.show_bids!.items.items.length
@@ -2326,7 +2326,7 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
 																			color: Colors.white,
 																			fontWeight: FontWeight.w700),
 																):
-                                double.tryParse(tempheader!.split('*')[1 + titleindex])! == null?
+                                double.tryParse(tempheader!.split('*')[1 + titleindex]) == null?
 																Container(height: 0.0, width: 0.0,)		:
 																GFRating(
 																value: double.tryParse(tempheader!.split('*')[1 + titleindex])!/2 -0.01,
@@ -3328,7 +3328,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                              /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -3369,6 +3369,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -3440,7 +3441,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+/*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -3481,6 +3482,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+*/																				
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -3601,7 +3603,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -3642,6 +3644,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -3747,7 +3750,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -3788,6 +3791,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -3826,7 +3830,7 @@ void _sendMessage()async{
     }
   
     return BlocBuilder<ShowThreadMyProjectsListing, ShowThreadMyProjectsState>(
-      //cubit: show_thread!.listingShowThread,
+      bloc: show_thread!.listingShowThread,
 
       builder: (BuildContext context, state) {
         if (state is ShowThreadMyProjectsListingUninitialized) {
@@ -3959,7 +3963,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                             /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -4000,6 +4004,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -4696,7 +4701,7 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
    Widget buildListingBar(){  
   
     return BlocBuilder<ShowFilesMyProjectsListing, ShowFilesMyProjectsState>(
-      //cubit: show_files!.listingShowFiles,
+      bloc: show_files!.listingShowFiles,
 
       builder: (BuildContext context, state) {
         if (state is ShowFilesMyProjectsListingUninitialized) {
@@ -5336,7 +5341,7 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
 																			color: Colors.white,
 																			fontWeight: FontWeight.w700),
 																):
-                                double.tryParse(tempheader!.split('*')[1 + titleindex])! == null?
+                                double.tryParse(tempheader!.split('*')[1 + titleindex]) == null?
 																Container(height: 0.0, width: 0.0,)		:
 																GFRating(
 																value: double.tryParse(tempheader!.split('*')[1 + titleindex])!/2 -0.01,
@@ -6338,7 +6343,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                              /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -6379,6 +6384,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -6450,7 +6456,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+/*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -6491,6 +6497,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+*/																				
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -6611,7 +6618,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -6652,6 +6659,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -6757,7 +6765,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -6798,6 +6806,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -6836,7 +6845,7 @@ void _sendMessage()async{
     }
   
     return BlocBuilder<ShowConversationMyProjectsListing, ShowConversationMyProjectsState>(
-      //cubit: show_conversation!.listingShowConversation,
+      bloc: show_conversation!.listingShowConversation,
 
       builder: (BuildContext context, state) {
         if (state is ShowConversationMyProjectsListingUninitialized) {
@@ -6969,7 +6978,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                             /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -7010,6 +7019,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,

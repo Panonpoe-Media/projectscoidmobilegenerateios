@@ -34,7 +34,7 @@ import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
-import 'package:projectscoid/core/components/utility/tool/popup_menu.dart';
+import 'package:projectscoid/core/components/utility/tool/popup_menu.dart' as mn;
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
 /** AUTOGENERATE OFF **/
@@ -374,7 +374,7 @@ class MySalesIndexModel extends MySalesIndexBase{
       print('menu is ${isShow ? 'showing' : 'closed'}');
     }
 
-    void onClickMenu(MenuItemProvider item) {
+    void onClickMenu(mn.MenuItemProvider item) {
       if(item.menuTitle == items.items[index].item.buttons[0].text){
         AppProvider.getRouter(context)!.navigateTo(
             context,
@@ -388,13 +388,13 @@ class MySalesIndexModel extends MySalesIndexBase{
     }
 
     void maxColumn() {
-      PopupMenu menu = PopupMenu(
+      mn.PopupMenu menu = mn.PopupMenu(
         // backgroundColor: Colors.teal,
         // lineColor: Colors.tealAccent,
           maxColumn: 1,
           items: [
 
-            MenuItem(
+            mn.MenuItem(
                 title: items.items[index].item.buttons[0].text,
                 image: Icon(
                   Icons.remove_red_eye_outlined,
@@ -570,7 +570,7 @@ class MySalesIndexModel extends MySalesIndexBase{
   Widget viewTable (BuildContext context) {
     final themeManager =  Provider.of<ThemeManager>(context);
 
-    PopupMenu.context = context;
+    mn.PopupMenu.context = context;
     return(
         Container(
           child: HorizontalDataTable(

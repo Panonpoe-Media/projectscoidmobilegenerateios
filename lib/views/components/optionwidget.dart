@@ -101,21 +101,24 @@ class _OptionStateWidget extends State<OptionWidget>{
 
   List<Widget> _getOptions(){
     List<Widget> OptionsTextFields = [];
-    for(int i=0; i< widget.optiondata!.length; i++){
-      OptionsTextFields.add(
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Row(
-              children: [
-                Expanded(child: OptionValFields(i, widget.optiondata!)),
-                SizedBox(width: 16,),
-                // we need add button at last Options row
-                _addRemoveButton(i == widget.optiondata!.length-1, i),
-              ],
-            ),
-          )
-      );
+    if(widget.optiondata != null){
+      for(int i=0; i< widget.optiondata!.length; i++){
+        OptionsTextFields.add(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                children: [
+                  Expanded(child: OptionValFields(i, widget.optiondata!)),
+                  SizedBox(width: 16,),
+                  // we need add button at last Options row
+                  _addRemoveButton(i == widget.optiondata!.length-1, i),
+                ],
+              ),
+            )
+        );
+      }
     }
+
     return OptionsTextFields;
   }
   void  _getvalue(var val){
@@ -268,7 +271,7 @@ class _OptionValFieldsState extends State<OptionValFields> {
     v = widget.optionproperty![widget.index!];
     if(v != null){
 
-      value1 = double.tryParse(widget.optionproperty![widget.index!]!.price!)!;
+      value1 = double.tryParse(widget.optionproperty![widget.index!]!.price! == ''? '0.0' : widget.optionproperty![widget.index!]!.price!)!;
       value = widget.optionproperty![widget.index!]!.description!;
     //  print('value == $value and ${widget.index.toString()}');
     }else{

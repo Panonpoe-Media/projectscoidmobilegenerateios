@@ -530,7 +530,7 @@ class  ShowConversationMyBidsState1 extends State<ShowConversationMyBids> with T
 																			color: Colors.white,
 																			fontWeight: FontWeight.w700),
 																):
-                                double.tryParse(tempheader!.split('*')[1 + titleindex])! == null?
+                                double.tryParse(tempheader!.split('*')[1 + titleindex]) == null?
 																Container(height: 0.0, width: 0.0,)		:
 																GFRating(
 																value: double.tryParse(tempheader!.split('*')[1 + titleindex])!/2 -0.01,
@@ -1532,7 +1532,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                              /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -1573,6 +1573,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -1644,7 +1645,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+/*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -1685,6 +1686,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+*/																				
 																			]
 																		),
 																		onRefresh: _onRefresh,
@@ -1805,7 +1807,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -1846,6 +1848,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -1951,7 +1954,7 @@ void _sendMessage()async{
                     //	)
 
                   ),
-
+/*
                   ValueListenableBuilder(
                     builder: (BuildContext context, int value, Widget? child) {
                       return
@@ -1992,6 +1995,7 @@ void _sendMessage()async{
                     },
                     valueListenable: firstSelectIndex,
                   ),
+				  */
                 ]
             ),
             onRefresh: _onRefresh,
@@ -2030,7 +2034,7 @@ void _sendMessage()async{
     }
   
     return BlocBuilder<ShowConversationMyBidsListing, ShowConversationMyBidsState>(
-      //cubit: show_conversation!.listingShowConversation,
+      bloc: show_conversation!.listingShowConversation,
 
       builder: (BuildContext context, state) {
         if (state is ShowConversationMyBidsListingUninitialized) {
@@ -2163,7 +2167,7 @@ void _sendMessage()async{
 																											//	)
 
 																										),
-
+                                                                             /*
 																				ValueListenableBuilder(
 																					builder: (BuildContext context, int value, Widget? child) {
                                                                                         return
@@ -2204,6 +2208,7 @@ void _sendMessage()async{
 																					},
 																					valueListenable: firstSelectIndex,
 																				),
+																				*/
 																			]
 																		),
 																		onRefresh: _onRefresh,

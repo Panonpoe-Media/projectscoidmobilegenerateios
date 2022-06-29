@@ -2589,6 +2589,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
         .toList();
 
     ScrollController? controller;
+    controller = ScrollController();
     return Column(
       children: [
         ExpandablePanel(

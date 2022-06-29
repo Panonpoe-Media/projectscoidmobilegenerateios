@@ -34,7 +34,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:projectscoid/core/components/utility/tool/popup_menu.dart';
+import 'package:projectscoid/core/components/utility/tool/popup_menu.dart' as mn;
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
 part 'my_orders.g.dart';
@@ -323,7 +323,7 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
       child: Text(model.items[index!].no.toString()),
       width: 30,
       height: 52,
-      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
       alignment: Alignment.centerLeft,
     );
   }
@@ -425,7 +425,7 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
       child: Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
       width: width,
       height: 56,
-      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
       alignment: Alignment.centerLeft,
     );
   }
@@ -436,37 +436,92 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
     final themeManager =  Provider.of<ThemeManager>(context);
 
     return(
-        Container(
-          child: HorizontalDataTable(
-            leftHandSideColumnWidth: 50,
-            rightHandSideColumnWidth: 1200,
-            isFixedHeader: true,
-            headerWidgets: _getTitleWidget(),
-            leftSideItemBuilder: _generateFirstColumnRow,
-            rightSideItemBuilder: _generateRightHandSideColumnRow,
-            itemCount: model.items.length,
-
-            rowSeparatorWidget:
-            themeManager.themeMode == ThemeMode.dark?
-            const Divider(
-              color: Colors.white,
-              height: 1.0,
-              thickness: 0.0,
-            ) :
-            const Divider(
-              color: Colors.black,
-              height: 1.0,
-              thickness: 0.0,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+            padding: EdgeInsets.only(left: 5.0),
+              child: Text('ITEMS' , style: TextStyle(fontSize: 12, color: CurrentTheme.DisableTextColor)),
             ),
-            leftHandSideColBackgroundColor:  themeManager.themeMode == ThemeMode.dark? Colors.black : Color(0xFFFFFFFF),
-            rightHandSideColBackgroundColor: themeManager.themeMode == ThemeMode.dark? Colors.black :Color(0xFFFFFFFF),
+
+            Container(
+              child: HorizontalDataTable(
+                leftHandSideColumnWidth: 50,
+                rightHandSideColumnWidth: 1200,
+                isFixedHeader: true,
+                headerWidgets: _getTitleWidget(),
+                leftSideItemBuilder: _generateFirstColumnRow,
+                rightSideItemBuilder: _generateRightHandSideColumnRow,
+                itemCount: model.items.length,
+
+                rowSeparatorWidget:
+                themeManager.themeMode == ThemeMode.dark?
+                const Divider(
+                  color: Colors.white,
+                  height: 1.0,
+                  thickness: 0.0,
+                ) :
+                const Divider(
+                  color: Colors.black,
+                  height: 1.0,
+                  thickness: 0.0,
+                ),
+                leftHandSideColBackgroundColor:  themeManager.themeMode == ThemeMode.dark? Colors.black : Color(0xFFFFFFFF),
+                rightHandSideColBackgroundColor: themeManager.themeMode == ThemeMode.dark? Colors.black :Color(0xFFFFFFFF),
 
 
-          ),
-          height: 80 + double.parse(model.items.length.toString()) * 80 ,
+              ),
+              height: 80 + double.parse(model.items.length.toString()) * 80 ,
+            )
+          ],
         )
+
     );
   }
+
+
+
+  Widget viewTrackCode1 (BuildContext context) {
+    return(
+
+        Column(
+          children: [
+            const SizedBox(height: 20,),
+            WebsiteView(
+              value: model.model.track_code,
+              caption: 'Track Code',
+            )
+          ],
+        )
+       );}
+
+
+  String Filter(String str){
+
+    const start = ">";
+    const end = "</";
+
+    final startIndex = str.indexOf(start);
+    final endIndex = str.indexOf(end, startIndex + start.length);
+    return str.substring(startIndex + start.length, endIndex);
+  }
+  Widget viewStatus1 (BuildContext context) {
+    return(
+
+            WebsiteView(
+              value: Filter(model.model.status_str),
+              caption: 'Status',
+            )
+
+
+       );
+  }
+  Widget viewPaymentMethod1 (BuildContext context) {
+    return(
+        WebsiteView(
+          value: model.model.payment_method_str,
+          caption: 'Payment Method',
+        ));}
 
   @override
   Widget view (BuildContext context, ScrollController controller, bool?account) {
@@ -476,10 +531,10 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
 
 
 
-    viewChildren.add(viewTrackCode(context));
+    viewChildren.add(viewTrackCode1(context));
     viewChildren.add(viewDate(context));
-    viewChildren.add(viewStatus(context));
-    viewChildren.add(viewPaymentMethod(context));
+    viewChildren.add(viewStatus1(context));
+    viewChildren.add(viewPaymentMethod1(context));
     viewChildren.add(viewTotalPrice(context));
     viewChildren.add(viewUsedBalance(context));
     viewChildren.add(viewTotalSum(context));
@@ -854,7 +909,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
       print('menu is ${isShow! ? 'showing' : 'closed'}');
     }
 
-    void onClickMenu(MenuItemProvider item) {
+    void onClickMenu(mn.MenuItemProvider item) {
       if(item.menuTitle == rv[index!].item.buttons[0].text){
         AppProvider.getRouter(context)!.navigateTo(
             context,
@@ -868,14 +923,14 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
     }
 
     void maxColumn() {
-      PopupMenu menu = PopupMenu(
+      mn.PopupMenu menu = mn.PopupMenu(
         // backgroundColor: Colors.teal,
         // lineColor: Colors.tealAccent,
 
           maxColumn: 1,
           items: [
 
-            MenuItem(
+            mn.MenuItem(
                 title: rv[index!].item.buttons[0].text ,
                 image: const Icon(
                   Icons.circle,
@@ -1027,7 +1082,7 @@ class MyOrdersIndexModel extends MyOrdersIndexBase{
   Widget viewTable (BuildContext context) {
     final themeManager =  Provider.of<ThemeManager>(context);
 
-    PopupMenu.context = context;
+    mn.PopupMenu.context = context;
     return(
         Container(
           child: HorizontalDataTable(

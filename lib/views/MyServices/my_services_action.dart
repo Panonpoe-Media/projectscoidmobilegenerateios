@@ -416,7 +416,7 @@ class  SalesMyServicesState1 extends State<SalesMyServices> with TickerProviderS
    Widget buildListingBar(){  
   
     return BlocBuilder<SalesMyServicesListing, SalesMyServicesState>(
-      //cubit: sales!.listingSales,
+      bloc: sales!.listingSales,
 
       builder: (BuildContext context, state) {
         if (state is SalesMyServicesListingUninitialized) {
@@ -939,7 +939,7 @@ class  CommentsMyServicesState1 extends State<CommentsMyServices> with TickerPro
    Widget buildListingBar(){  
   
     return BlocBuilder<CommentsMyServicesListing, CommentsMyServicesState>(
-      //cubit: comments!.listingComments,
+      bloc: comments!.listingComments,
 
       builder: (BuildContext context, state) {
         if (state is CommentsMyServicesListingUninitialized) {
@@ -4016,7 +4016,7 @@ class  ScreenshotsMyServicesState1 extends State<ScreenshotsMyServices> with Tic
    Widget buildListingBar(){  
   
     return BlocBuilder<ScreenshotsMyServicesListing, ScreenshotsMyServicesState>(
-      //cubit: screenshots!.listingScreenshots,
+      bloc: screenshots!.listingScreenshots,
 
       builder: (BuildContext context, state) {
         if (state is ScreenshotsMyServicesListingUninitialized) {

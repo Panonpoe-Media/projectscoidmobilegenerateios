@@ -59,7 +59,7 @@ class ShowBidsListingModel extends ShowBidsListingBase{
     );
   }
 
-  Widget viewItemcb(ItemShowBidsModel item,String search, bool account, String id, ChatBloc cb) {
+  Widget viewItemcb(ItemShowBidsModel item,String search, bool account, String id, ChatBloc? cb) {
     ShapeBorder? shape;
     double? height = 160;
     return Visibility (
@@ -985,33 +985,67 @@ class ItemShowBidsContent2 extends StatelessWidget {
                     }else{
                       thread = '$idHash/${encode(peer)}';
                     }
+
+
+                  if(cb != null) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => ChatScreen(
-                            user: {
+                          builder: (_) =>
+                              ChatScreen(
+                                user: {
 
-                              "thread":"$thread",
-                              "username":"${peerUsername}",
-                              "userid":"${encode(peer)}",
-                              "display":"${peerUsername}",
-                              "avatar":"${peerLink}",
-                              "lastmesssage":"",
-                              "lastseen":1606880840,
-                              "lasttime":1234567890
-
-                            },
-                            userID : idHash,
-                            chatBloc : cb,
-                            trans : true,
-                            ctx: context,
-                          ),
+                                  "thread": "$thread",
+                                  "username": "${peerUsername}",
+                                  "userid": "${encode(peer)}",
+                                  "display": "${peerUsername}",
+                                  "avatar": "${peerLink}",
+                                  "lastmesssage": "",
+                                  "lastseen": 1606880840,
+                                  "lasttime": 1234567890
+                                },
+                                userID: idHash,
+                                chatBloc: cb,
+                                trans: true,
+                                ctx: context,
+                              ),
                         )
-                    ).then((value)async{
+                    ).then((value) async {
                       // _chatBloc.dispose();
                       SharedPreferences prefs = await SharedPreferences.getInstance();
-                      prefs.setBool('chatlink', true );
+                      prefs.setBool('chatlink', true);
                     });
+                  }else{
+                    var cb1 =  AppProvider.getApplication(context).chat;
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ChatScreen(
+                                user: {
+
+                                  "thread": "$thread",
+                                  "username": "${peerUsername}",
+                                  "userid": "${encode(peer)}",
+                                  "display": "${peerUsername}",
+                                  "avatar": "${peerLink}",
+                                  "lastmesssage": "",
+                                  "lastseen": 1606880840,
+                                  "lasttime": 1234567890
+                                },
+                                userID: idHash,
+                                chatBloc: cb1,
+                                trans: true,
+                                ctx: context,
+                              ),
+                        )
+                    ).then((value) async {
+                      // _chatBloc.dispose();
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      prefs.setBool('chatlink', true);
+                    });
+                  }
+
 
 
 

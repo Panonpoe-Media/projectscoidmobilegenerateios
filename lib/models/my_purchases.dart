@@ -16,6 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:projectscoid/app/Env.dart';
 import 'dart:convert';
+import '../core/components/utility/tool/popup_menu.dart';
 import 'image_fields.dart';
 import 'file_fields.dart';
 import 'meta.dart';
@@ -36,7 +37,7 @@ import 'package:path/path.dart' as p;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
-import 'package:projectscoid/core/components/utility/tool/popup_menu.dart';
+import 'package:projectscoid/core/components/utility/tool/popup_menu.dart' as mn;
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
@@ -951,7 +952,7 @@ class MyPurchasesIndexModel extends MyPurchasesIndexBase{
       }
     }
 
-    void onClickMenu(MenuItemProvider item) {
+    void onClickMenu(mn.MenuItemProvider item) {
      if (items.items[index].item.buttons.length == 1){
        if(item.menuTitle == items.items[index].item.buttons[0].text){
          AppProvider.getRouter(context)!.navigateTo(
@@ -1081,7 +1082,7 @@ class MyPurchasesIndexModel extends MyPurchasesIndexBase{
         // lineColor: Colors.tealAccent,
           maxColumn: 1,
           items: [
-            MenuItem(
+            mn.MenuItem(
                 title: items.items[index].item.buttons[0].text,
                 image: Icon(
                   Icons.remove_red_eye_outlined,
@@ -1099,13 +1100,13 @@ class MyPurchasesIndexModel extends MyPurchasesIndexBase{
               maxColumn: 2,
               items: [
 
-                MenuItem(
+                mn.MenuItem(
                     title: items.items[index].item.buttons[0].text,
                     image: Icon(
                       Icons.cloud_download_outlined ,
                       color: Colors.white,
                     )),
-                MenuItem(
+                mn.MenuItem(
                     title: items.items[index].item.buttons[1].text,
                     image: Icon(
                       Icons.remove_red_eye_outlined,
@@ -1122,19 +1123,19 @@ class MyPurchasesIndexModel extends MyPurchasesIndexBase{
             // lineColor: Colors.tealAccent,
               maxColumn: 3,
               items: [
-                MenuItem(
+                mn.MenuItem(
                     title: items.items[index].item.buttons[0].text,
                     image: Icon(
                       Icons.cloud_download_outlined ,
                       color: Colors.white,
                     )),
-                MenuItem(
+                mn.MenuItem(
                     title: items.items[index].item.buttons[1].text,
                     image: Icon(
                       Icons.star_border,
                       color: Colors.white,
                     )),
-                   MenuItem(
+                   mn.MenuItem(
                     title: items.items[index].item.buttons[2].text,
                     image: Icon(
                       Icons.remove_red_eye_outlined,

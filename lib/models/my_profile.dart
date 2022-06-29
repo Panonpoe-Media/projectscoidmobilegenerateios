@@ -777,7 +777,7 @@ class _ContactPhoto extends StatelessWidget {
   const _ContactPhoto(
       {Key? key,
       this.icon,
-      this.lines,
+    //  this.lines,
       this.tooltip,
       this.photo,
       this.onPressed,
@@ -785,7 +785,7 @@ class _ContactPhoto extends StatelessWidget {
       : super(key: key);
 
   final IconData? icon;
-  final List<String?>? lines;
+ // final List<String?>? lines;
   final String? tooltip;
   final String? photo;
   final VoidCallback? onPressed;
@@ -818,15 +818,15 @@ class _ContactPhoto extends StatelessWidget {
   Widget _buildProfileImage(BuildContext context, String? photo) {
     return Center(
         child: Container(
-            width: 80.0,
-            height: 80.0,
+            width: 90.0,
+            height: 90.0,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
                 color: Colors.white,
                 width: 5.0,
               ),
-              borderRadius: BorderRadius.circular(80),
+              borderRadius: BorderRadius.circular(100),
             ),
             child: InkWell(
                 onTap: onPressed,
@@ -838,11 +838,11 @@ class _ContactPhoto extends StatelessWidget {
                     Image.network(
                       photo!,
                       fit: BoxFit.contain,
-                      height: 70.0,
-                      width: 70.0,
+                      height:85.0,
+                      width: 85.0,
                     ),
                     Positioned.fill(
-                      top: 47,
+                      top: 57,
                       left: 0.0,
                       right: 0.0,
                       child: _buildBottomNavigationBar(),
@@ -859,8 +859,9 @@ class _ContactPhoto extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         child: Column(children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              /*
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -879,6 +880,8 @@ class _ContactPhoto extends StatelessWidget {
                   ],
                 ),
               ),
+
+               */
               icon != null
                   ? _buildProfileImage(context, this.photo)
                   : Container(
@@ -898,7 +901,7 @@ class _ContactPhoto extends StatelessWidget {
                      */
             ],
           ),
-          Divider(color: Colors.black)
+         // Divider(color: Colors.black)
         ]),
       ),
     );
@@ -1205,7 +1208,9 @@ class MyProfileViewModel extends MyProfileViewBase {
                   account!
                       ? Container(
                           padding: const EdgeInsets.all(3.0),
-                          child: CircleAvatar(
+                          child:
+
+                          CircleAvatar(
                               backgroundColor: Colors.white,
                               child: InkWell(
                                   onTap: () {
@@ -1220,7 +1225,8 @@ class MyProfileViewModel extends MyProfileViewBase {
                                       height: 34,
                                       width: 32,
                                     ),
-                                  ))))
+                                  )))
+                    )
                       : Container(
                           width: 0.0,
                           height: 0.0,
@@ -1230,19 +1236,9 @@ class MyProfileViewModel extends MyProfileViewBase {
                 flexibleSpace: account!
                     ? null
                     : ExpandSpaceBar(
-                        title: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        rt.PublicBrowseUsersView(
-                                            id: model!.model!.user_id!,
-                                            title: '123',
-                                            cb: null)),
-                              );
-                            },
-                            child: Column(
+                        title:
+
+                            Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
                                   Text(model!.model!.display_name,
@@ -1272,7 +1268,8 @@ class MyProfileViewModel extends MyProfileViewBase {
                                                   : Colors.black87))
                                     ],
                                   ))
-                                ])),
+                                ]),
+
                         titlePadding: EdgeInsets.only(bottom: 65),
                         collapseMode: CollapseBarMode.parallax,
                         centerTitle: true,
@@ -1280,9 +1277,34 @@ class MyProfileViewModel extends MyProfileViewBase {
                           // fit: StackFit.passthrough,
                           children: <Widget>[
                             Center(
-                              heightFactor: 2.4,
-                              child: ShowAvatar(
+                              heightFactor: 2.6,
+                              child:
+                              _ContactPhoto(
+                                icon: Icons.arrow_forward_ios,
+                                isDark: darkMode,
+                                tooltip: 'Send message',
+                                photo: model!.model!.photo_url,
+                                onPressed: () async {
+                                  _createProfilePhoto(
+                                      context, model!.model!.user_id);
+
+                                  // CameraExampleHome();
+                                },
+                                /*
+                                lines: const <String>[
+                                  'PHOTO',
+                                  'Photo membantu personalisasi akun Anda ',
+                                ],
+
+                                 */
+                              ),
+                               /*
+                              ShowAvatar(
                                   avatar: this.model!.model!.photo_url),
+
+                                */
+
+
                               /*
                               Container(
                                   width: 80.0,
@@ -1369,8 +1391,10 @@ class MyProfileViewModel extends MyProfileViewBase {
                         title: 'Profile',
                         isDark: darkMode,
                         subtitle:
-                            'Sebagian informasi dalam profile ini dapat diketahui oleh user lain pengguna Projects.co.id.',
+                             '',
+                           // 'Sebagian informasi dalam profile ini dapat diketahui oleh user lain pengguna Projects.co.id.',
                         children: <Widget>[
+                       /*
                           _ContactPhoto(
                             icon: Icons.arrow_forward_ios,
                             isDark: darkMode,
@@ -1386,6 +1410,44 @@ class MyProfileViewModel extends MyProfileViewBase {
                               'PHOTO',
                               'Photo membantu personalisasi akun Anda ',
                             ],
+                          ),
+
+                        */
+
+
+                          _SkillItem(
+                            // icon: Icons.arrow_forward_ios,
+                            isDark: darkMode,
+                            tooltip: 'Send message',
+                            /*
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => EditIntro(model : model!.model )),
+                                      );
+                                    },
+
+                                     */
+                            lines: '',
+
+                            wgt: Html(
+                                data: readText(model!.model!.self_introduction
+                                    .replaceAll('<div>', '')
+                                    .replaceAll('<\/div>', '')
+                                    .replaceAll('<br>', '​<br>')
+                                    .replaceAll('<p>', '')
+                                    .replaceAll('<\/p>', '​<br>'),200),
+                                style: {
+                                  "html": Style(
+                                      color: darkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                      fontSize: FontSize.medium,
+                                      fontWeight: FontWeight.w800),
+                                }
+
+                              // textStyle: TextStyle(color: darkMode? Colors.white: Colors.black)),
+                            ),
                           ),
                           ItemListString(
                             // icon: Icons.arrow_forward_ios,

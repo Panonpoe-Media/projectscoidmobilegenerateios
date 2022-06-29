@@ -36,38 +36,38 @@ class MyProjectsController {
 
 
  Future<String?> downloadFile1( ProgressDlCallback showProgress) async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
-    return await apiRepProvider?.downloadFile1(url!, title!, showProgress);
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
+    return await apiRepProvider?.downloadFile1(url!, title!, showProgress!);
   }
   
   Future downloadFile() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     await apiRepProvider?.downloadFile(url!, title!);
   }
 
   Future editMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editMyProjects;
     editMyProjects = await apiRepProvider?.getMyProjectsEdit(url!, id!, title!);
     return editMyProjects;
   }
   
     Future viewMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var viewMyProjects;
     viewMyProjects = await apiRepProvider?.getMyProjectsView(url!, id!, title!);
     return viewMyProjects;
   }
 
   Future postMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMyProjects;
     postMyProjects = await apiRepProvider?.sendMyProjectsPost(url!,formData);
     return postMyProjects;
   }
   
     Future postMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postMyProjects;
     postMyProjects = await apiRepProvider?.sendMyProjectsPostWithID(url!,formData, id!, title!);
     return postMyProjects;
@@ -76,21 +76,21 @@ class MyProjectsController {
   
   
     Future editBumpUpMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editBumpUp;
     editBumpUp = await apiRepProvider?.getBumpUpMyProjectsEdit(url!, id!, title!);
     return editBumpUp;
   }
 
   Future postBumpUpMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyProjectsPost(url!,formData);
     return postBumpUp;
   }
   
     Future postBumpUpMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postBumpUp;
     postBumpUp = await apiRepProvider?.sendBumpUpMyProjectsPostWithID(url!,formData, id!, title!);
     return postBumpUp;
@@ -98,48 +98,48 @@ class MyProjectsController {
   
       Future getBumpUpMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getBumpUp;
-        getBumpUp = await apiRepProvider?.getBumpUpMyProjects(url!, id!, title!, spKey);
+        getBumpUp = await apiRepProvider?.getBumpUpMyProjects(url!, id!, title!, spKey!);
 	    return getBumpUp ;
 	 }
    Future<BumpUpMyProjectsModel> loadBumpUpMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadBumpUp;
         loadBumpUp = await apiRepProvider?.loadBumpUpMyProjects('');
 	    return loadBumpUp ;  
    }
   
    Future saveBumpUpMyProjects(BumpUpMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateBumpUpMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllBumpUpMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllBumpUpMyProjects(spKey!);   
    }
   
   
   
     Future editBroadcastMessageMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editBroadcastMessage;
     editBroadcastMessage = await apiRepProvider?.getBroadcastMessageMyProjectsEdit(url!, id!, title!);
     return editBroadcastMessage;
   }
 
   Future postBroadcastMessageMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postBroadcastMessage;
     postBroadcastMessage = await apiRepProvider?.sendBroadcastMessageMyProjectsPost(url!,formData);
     return postBroadcastMessage;
   }
   
     Future postBroadcastMessageMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postBroadcastMessage;
     postBroadcastMessage = await apiRepProvider?.sendBroadcastMessageMyProjectsPostWithID(url!,formData, id!, title!);
     return postBroadcastMessage;
@@ -147,27 +147,27 @@ class MyProjectsController {
   
       Future getBroadcastMessageMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getBroadcastMessage;
-        getBroadcastMessage = await apiRepProvider?.getBroadcastMessageMyProjects(url!, id!, title!, spKey);
+        getBroadcastMessage = await apiRepProvider?.getBroadcastMessageMyProjects(url!, id!, title!, spKey!);
 	    return getBroadcastMessage ;
 	 }
    Future<BroadcastMessageMyProjectsModel> loadBroadcastMessageMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadBroadcastMessage;
         loadBroadcastMessage = await apiRepProvider?.loadBroadcastMessageMyProjects('');
 	    return loadBroadcastMessage ;  
    }
   
    Future saveBroadcastMessageMyProjects(BroadcastMessageMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateBroadcastMessageMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllBroadcastMessageMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllBroadcastMessageMyProjects(spKey!);   
    }
   
@@ -186,21 +186,21 @@ class MyProjectsController {
   }
   
     Future editCreateProjectMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editCreateProject;
     editCreateProject = await apiRepProvider?.getCreateProjectMyProjectsEdit(url!, id!, title!);
     return editCreateProject;
   }
 
   Future postCreateProjectMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCreateProject;
     postCreateProject = await apiRepProvider?.sendCreateProjectMyProjectsPost(url!,formData);
     return postCreateProject;
   }
   
     Future postCreateProjectMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCreateProject;
     postCreateProject = await apiRepProvider?.sendCreateProjectMyProjectsPostWithID(url!,formData, id!, title!);
     return postCreateProject;
@@ -208,48 +208,48 @@ class MyProjectsController {
   
       Future getCreateProjectMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getCreateProject;
-        getCreateProject = await apiRepProvider?.getCreateProjectMyProjects(url!, id!, title!, spKey);
+        getCreateProject = await apiRepProvider?.getCreateProjectMyProjects(url!, id!, title!, spKey!);
 	    return getCreateProject ;
 	 }
    Future<CreateProjectMyProjectsModel> loadCreateProjectMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadCreateProject;
         loadCreateProject = await apiRepProvider?.loadCreateProjectMyProjects('');
 	    return loadCreateProject ;  
    }
   
    Future saveCreateProjectMyProjects(CreateProjectMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateCreateProjectMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllCreateProjectMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllCreateProjectMyProjects(spKey!);   
    }
   
   
   
     Future editEditDraftMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editEditDraft;
     editEditDraft = await apiRepProvider?.getEditDraftMyProjectsEdit(url!, id!, title!);
     return editEditDraft;
   }
 
   Future postEditDraftMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEditDraft;
     postEditDraft = await apiRepProvider?.sendEditDraftMyProjectsPost(url!,formData);
     return postEditDraft;
   }
   
     Future postEditDraftMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postEditDraft;
     postEditDraft = await apiRepProvider?.sendEditDraftMyProjectsPostWithID(url!,formData, id!, title!);
     return postEditDraft;
@@ -257,48 +257,48 @@ class MyProjectsController {
   
       Future getEditDraftMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getEditDraft;
-        getEditDraft = await apiRepProvider?.getEditDraftMyProjects(url!, id!, title!, spKey);
+        getEditDraft = await apiRepProvider?.getEditDraftMyProjects(url!, id!, title!, spKey!);
 	    return getEditDraft ;
 	 }
    Future<EditDraftMyProjectsModel> loadEditDraftMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadEditDraft;
         loadEditDraft = await apiRepProvider?.loadEditDraftMyProjects('');
 	    return loadEditDraft ;  
    }
   
    Future saveEditDraftMyProjects(EditDraftMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateEditDraftMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllEditDraftMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllEditDraftMyProjects(spKey!);   
    }
   
   
   
     Future editPublishProjectMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editPublishProject;
     editPublishProject = await apiRepProvider?.getPublishProjectMyProjectsEdit(url!, id!, title!);
     return editPublishProject;
   }
 
   Future postPublishProjectMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postPublishProject;
     postPublishProject = await apiRepProvider?.sendPublishProjectMyProjectsPost(url!,formData);
     return postPublishProject;
   }
   
     Future postPublishProjectMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postPublishProject;
     postPublishProject = await apiRepProvider?.sendPublishProjectMyProjectsPostWithID(url!,formData, id!, title!);
     return postPublishProject;
@@ -306,48 +306,48 @@ class MyProjectsController {
   
       Future getPublishProjectMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getPublishProject;
-        getPublishProject = await apiRepProvider?.getPublishProjectMyProjects(url!, id!, title!, spKey);
+        getPublishProject = await apiRepProvider?.getPublishProjectMyProjects(url!, id!, title!, spKey!);
 	    return getPublishProject ;
 	 }
    Future<PublishProjectMyProjectsModel> loadPublishProjectMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadPublishProject;
         loadPublishProject = await apiRepProvider?.loadPublishProjectMyProjects('');
 	    return loadPublishProject ;  
    }
   
    Future savePublishProjectMyProjects(PublishProjectMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdatePublishProjectMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllPublishProjectMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllPublishProjectMyProjects(spKey!);   
    }
   
   
   
     Future editCancelProjectMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editCancelProject;
     editCancelProject = await apiRepProvider?.getCancelProjectMyProjectsEdit(url!, id!, title!);
     return editCancelProject;
   }
 
   Future postCancelProjectMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCancelProject;
     postCancelProject = await apiRepProvider?.sendCancelProjectMyProjectsPost(url!,formData);
     return postCancelProject;
   }
   
     Future postCancelProjectMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCancelProject;
     postCancelProject = await apiRepProvider?.sendCancelProjectMyProjectsPostWithID(url!,formData, id!, title!);
     return postCancelProject;
@@ -355,48 +355,48 @@ class MyProjectsController {
   
       Future getCancelProjectMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getCancelProject;
-        getCancelProject = await apiRepProvider?.getCancelProjectMyProjects(url!, id!, title!, spKey);
+        getCancelProject = await apiRepProvider?.getCancelProjectMyProjects(url!, id!, title!, spKey!);
 	    return getCancelProject ;
 	 }
    Future<CancelProjectMyProjectsModel> loadCancelProjectMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadCancelProject;
         loadCancelProject = await apiRepProvider?.loadCancelProjectMyProjects('');
 	    return loadCancelProject ;  
    }
   
    Future saveCancelProjectMyProjects(CancelProjectMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateCancelProjectMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllCancelProjectMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllCancelProjectMyProjects(spKey!);   
    }
   
   
   
     Future editAcceptOrRejectWorkMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editAcceptOrRejectWork;
     editAcceptOrRejectWork = await apiRepProvider?.getAcceptOrRejectWorkMyProjectsEdit(url!, id!, title!);
     return editAcceptOrRejectWork;
   }
 
   Future postAcceptOrRejectWorkMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAcceptOrRejectWork;
     postAcceptOrRejectWork = await apiRepProvider?.sendAcceptOrRejectWorkMyProjectsPost(url!,formData);
     return postAcceptOrRejectWork;
   }
   
     Future postAcceptOrRejectWorkMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAcceptOrRejectWork;
     postAcceptOrRejectWork = await apiRepProvider?.sendAcceptOrRejectWorkMyProjectsPostWithID(url!,formData, id!, title!);
     return postAcceptOrRejectWork;
@@ -404,48 +404,48 @@ class MyProjectsController {
   
       Future getAcceptOrRejectWorkMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getAcceptOrRejectWork;
-        getAcceptOrRejectWork = await apiRepProvider?.getAcceptOrRejectWorkMyProjects(url!, id!, title!, spKey);
+        getAcceptOrRejectWork = await apiRepProvider?.getAcceptOrRejectWorkMyProjects(url!, id!, title!, spKey!);
 	    return getAcceptOrRejectWork ;
 	 }
    Future<AcceptOrRejectWorkMyProjectsModel> loadAcceptOrRejectWorkMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadAcceptOrRejectWork;
         loadAcceptOrRejectWork = await apiRepProvider?.loadAcceptOrRejectWorkMyProjects('');
 	    return loadAcceptOrRejectWork ;  
    }
   
    Future saveAcceptOrRejectWorkMyProjects(AcceptOrRejectWorkMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAcceptOrRejectWorkMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAcceptOrRejectWorkMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllAcceptOrRejectWorkMyProjects(spKey!);   
    }
   
   
   
     Future editRateWorkerMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editRateWorker;
     editRateWorker = await apiRepProvider?.getRateWorkerMyProjectsEdit(url!, id!, title!);
     return editRateWorker;
   }
 
   Future postRateWorkerMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRateWorker;
     postRateWorker = await apiRepProvider?.sendRateWorkerMyProjectsPost(url!,formData);
     return postRateWorker;
   }
   
     Future postRateWorkerMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRateWorker;
     postRateWorker = await apiRepProvider?.sendRateWorkerMyProjectsPostWithID(url!,formData, id!, title!);
     return postRateWorker;
@@ -453,48 +453,48 @@ class MyProjectsController {
   
       Future getRateWorkerMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getRateWorker;
-        getRateWorker = await apiRepProvider?.getRateWorkerMyProjects(url!, id!, title!, spKey);
+        getRateWorker = await apiRepProvider?.getRateWorkerMyProjects(url!, id!, title!, spKey!);
 	    return getRateWorker ;
 	 }
    Future<RateWorkerMyProjectsModel> loadRateWorkerMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadRateWorker;
         loadRateWorker = await apiRepProvider?.loadRateWorkerMyProjects('');
 	    return loadRateWorker ;  
    }
   
    Future saveRateWorkerMyProjects(RateWorkerMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRateWorkerMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRateWorkerMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllRateWorkerMyProjects(spKey!);   
    }
   
   
   
     Future editReportProgressMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editReportProgress;
     editReportProgress = await apiRepProvider?.getReportProgressMyProjectsEdit(url!, id!, title!);
     return editReportProgress;
   }
 
   Future postReportProgressMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postReportProgress;
     postReportProgress = await apiRepProvider?.sendReportProgressMyProjectsPost(url!,formData);
     return postReportProgress;
   }
   
     Future postReportProgressMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postReportProgress;
     postReportProgress = await apiRepProvider?.sendReportProgressMyProjectsPostWithID(url!,formData, id!, title!);
     return postReportProgress;
@@ -502,48 +502,48 @@ class MyProjectsController {
   
       Future getReportProgressMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getReportProgress;
-        getReportProgress = await apiRepProvider?.getReportProgressMyProjects(url!, id!, title!, spKey);
+        getReportProgress = await apiRepProvider?.getReportProgressMyProjects(url!, id!, title!, spKey!);
 	    return getReportProgress ;
 	 }
    Future<ReportProgressMyProjectsModel> loadReportProgressMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadReportProgress;
         loadReportProgress = await apiRepProvider?.loadReportProgressMyProjects('');
 	    return loadReportProgress ;  
    }
   
    Future saveReportProgressMyProjects(ReportProgressMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateReportProgressMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllReportProgressMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllReportProgressMyProjects(spKey!);   
    }
   
   
   
     Future editWeeklyReportMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editWeeklyReport;
     editWeeklyReport = await apiRepProvider?.getWeeklyReportMyProjectsEdit(url!, id!, title!);
     return editWeeklyReport;
   }
 
   Future postWeeklyReportMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postWeeklyReport;
     postWeeklyReport = await apiRepProvider?.sendWeeklyReportMyProjectsPost(url!,formData);
     return postWeeklyReport;
   }
   
     Future postWeeklyReportMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postWeeklyReport;
     postWeeklyReport = await apiRepProvider?.sendWeeklyReportMyProjectsPostWithID(url!,formData, id!, title!);
     return postWeeklyReport;
@@ -551,48 +551,48 @@ class MyProjectsController {
   
       Future getWeeklyReportMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getWeeklyReport;
-        getWeeklyReport = await apiRepProvider?.getWeeklyReportMyProjects(url!, id!, title!, spKey);
+        getWeeklyReport = await apiRepProvider?.getWeeklyReportMyProjects(url!, id!, title!, spKey!);
 	    return getWeeklyReport ;
 	 }
    Future<WeeklyReportMyProjectsModel> loadWeeklyReportMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadWeeklyReport;
         loadWeeklyReport = await apiRepProvider?.loadWeeklyReportMyProjects('');
 	    return loadWeeklyReport ;  
    }
   
    Future saveWeeklyReportMyProjects(WeeklyReportMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateWeeklyReportMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllWeeklyReportMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllWeeklyReportMyProjects(spKey!);   
    }
   
   
   
     Future editReportDoneMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editReportDone;
     editReportDone = await apiRepProvider?.getReportDoneMyProjectsEdit(url!, id!, title!);
     return editReportDone;
   }
 
   Future postReportDoneMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postReportDone;
     postReportDone = await apiRepProvider?.sendReportDoneMyProjectsPost(url!,formData);
     return postReportDone;
   }
   
     Future postReportDoneMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postReportDone;
     postReportDone = await apiRepProvider?.sendReportDoneMyProjectsPostWithID(url!,formData, id!, title!);
     return postReportDone;
@@ -600,48 +600,48 @@ class MyProjectsController {
   
       Future getReportDoneMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getReportDone;
-        getReportDone = await apiRepProvider?.getReportDoneMyProjects(url!, id!, title!, spKey);
+        getReportDone = await apiRepProvider?.getReportDoneMyProjects(url!, id!, title!, spKey!);
 	    return getReportDone ;
 	 }
    Future<ReportDoneMyProjectsModel> loadReportDoneMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadReportDone;
         loadReportDone = await apiRepProvider?.loadReportDoneMyProjects('');
 	    return loadReportDone ;  
    }
   
    Future saveReportDoneMyProjects(ReportDoneMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateReportDoneMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllReportDoneMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllReportDoneMyProjects(spKey!);   
    }
   
   
   
     Future editRateOwnerMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editRateOwner;
     editRateOwner = await apiRepProvider?.getRateOwnerMyProjectsEdit(url!, id!, title!);
     return editRateOwner;
   }
 
   Future postRateOwnerMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRateOwner;
     postRateOwner = await apiRepProvider?.sendRateOwnerMyProjectsPost(url!,formData);
     return postRateOwner;
   }
   
     Future postRateOwnerMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRateOwner;
     postRateOwner = await apiRepProvider?.sendRateOwnerMyProjectsPostWithID(url!,formData, id!, title!);
     return postRateOwner;
@@ -649,48 +649,48 @@ class MyProjectsController {
   
       Future getRateOwnerMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getRateOwner;
-        getRateOwner = await apiRepProvider?.getRateOwnerMyProjects(url!, id!, title!, spKey);
+        getRateOwner = await apiRepProvider?.getRateOwnerMyProjects(url!, id!, title!, spKey!);
 	    return getRateOwner ;
 	 }
    Future<RateOwnerMyProjectsModel> loadRateOwnerMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadRateOwner;
         loadRateOwner = await apiRepProvider?.loadRateOwnerMyProjects('');
 	    return loadRateOwner ;  
    }
   
    Future saveRateOwnerMyProjects(RateOwnerMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRateOwnerMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRateOwnerMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllRateOwnerMyProjects(spKey!);   
    }
   
   
   
     Future editFileArbitrationMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editFileArbitration;
     editFileArbitration = await apiRepProvider?.getFileArbitrationMyProjectsEdit(url!, id!, title!);
     return editFileArbitration;
   }
 
   Future postFileArbitrationMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postFileArbitration;
     postFileArbitration = await apiRepProvider?.sendFileArbitrationMyProjectsPost(url!,formData);
     return postFileArbitration;
   }
   
     Future postFileArbitrationMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postFileArbitration;
     postFileArbitration = await apiRepProvider?.sendFileArbitrationMyProjectsPostWithID(url!,formData, id!, title!);
     return postFileArbitration;
@@ -698,48 +698,48 @@ class MyProjectsController {
   
       Future getFileArbitrationMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getFileArbitration;
-        getFileArbitration = await apiRepProvider?.getFileArbitrationMyProjects(url!, id!, title!, spKey);
+        getFileArbitration = await apiRepProvider?.getFileArbitrationMyProjects(url!, id!, title!, spKey!);
 	    return getFileArbitration ;
 	 }
    Future<FileArbitrationMyProjectsModel> loadFileArbitrationMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadFileArbitration;
         loadFileArbitration = await apiRepProvider?.loadFileArbitrationMyProjects('');
 	    return loadFileArbitration ;  
    }
   
    Future saveFileArbitrationMyProjects(FileArbitrationMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateFileArbitrationMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllFileArbitrationMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllFileArbitrationMyProjects(spKey!);   
    }
   
   
   
     Future editNewOfferMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editNewOffer;
     editNewOffer = await apiRepProvider?.getNewOfferMyProjectsEdit(url!, id!, title!);
     return editNewOffer;
   }
 
   Future postNewOfferMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postNewOffer;
     postNewOffer = await apiRepProvider?.sendNewOfferMyProjectsPost(url!,formData);
     return postNewOffer;
   }
   
     Future postNewOfferMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postNewOffer;
     postNewOffer = await apiRepProvider?.sendNewOfferMyProjectsPostWithID(url!,formData, id!, title!);
     return postNewOffer;
@@ -747,48 +747,48 @@ class MyProjectsController {
   
       Future getNewOfferMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getNewOffer;
-        getNewOffer = await apiRepProvider?.getNewOfferMyProjects(url!, id!, title!, spKey);
+        getNewOffer = await apiRepProvider?.getNewOfferMyProjects(url!, id!, title!, spKey!);
 	    return getNewOffer ;
 	 }
    Future<NewOfferMyProjectsModel> loadNewOfferMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadNewOffer;
         loadNewOffer = await apiRepProvider?.loadNewOfferMyProjects('');
 	    return loadNewOffer ;  
    }
   
    Future saveNewOfferMyProjects(NewOfferMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateNewOfferMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllNewOfferMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllNewOfferMyProjects(spKey!);   
    }
   
   
   
     Future editAcceptOfferMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editAcceptOffer;
     editAcceptOffer = await apiRepProvider?.getAcceptOfferMyProjectsEdit(url!, id!, title!);
     return editAcceptOffer;
   }
 
   Future postAcceptOfferMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAcceptOffer;
     postAcceptOffer = await apiRepProvider?.sendAcceptOfferMyProjectsPost(url!,formData);
     return postAcceptOffer;
   }
   
     Future postAcceptOfferMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postAcceptOffer;
     postAcceptOffer = await apiRepProvider?.sendAcceptOfferMyProjectsPostWithID(url!,formData, id!, title!);
     return postAcceptOffer;
@@ -796,48 +796,48 @@ class MyProjectsController {
   
       Future getAcceptOfferMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getAcceptOffer;
-        getAcceptOffer = await apiRepProvider?.getAcceptOfferMyProjects(url!, id!, title!, spKey);
+        getAcceptOffer = await apiRepProvider?.getAcceptOfferMyProjects(url!, id!, title!, spKey!);
 	    return getAcceptOffer ;
 	 }
    Future<AcceptOfferMyProjectsModel> loadAcceptOfferMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadAcceptOffer;
         loadAcceptOffer = await apiRepProvider?.loadAcceptOfferMyProjects('');
 	    return loadAcceptOffer ;  
    }
   
    Future saveAcceptOfferMyProjects(AcceptOfferMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateAcceptOfferMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllAcceptOfferMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllAcceptOfferMyProjects(spKey!);   
    }
   
   
   
     Future editRespondArbitrationMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editRespondArbitration;
     editRespondArbitration = await apiRepProvider?.getRespondArbitrationMyProjectsEdit(url!, id!, title!);
     return editRespondArbitration;
   }
 
   Future postRespondArbitrationMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRespondArbitration;
     postRespondArbitration = await apiRepProvider?.sendRespondArbitrationMyProjectsPost(url!,formData);
     return postRespondArbitration;
   }
   
     Future postRespondArbitrationMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postRespondArbitration;
     postRespondArbitration = await apiRepProvider?.sendRespondArbitrationMyProjectsPostWithID(url!,formData, id!, title!);
     return postRespondArbitration;
@@ -845,48 +845,48 @@ class MyProjectsController {
   
       Future getRespondArbitrationMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getRespondArbitration;
-        getRespondArbitration = await apiRepProvider?.getRespondArbitrationMyProjects(url!, id!, title!, spKey);
+        getRespondArbitration = await apiRepProvider?.getRespondArbitrationMyProjects(url!, id!, title!, spKey!);
 	    return getRespondArbitration ;
 	 }
    Future<RespondArbitrationMyProjectsModel> loadRespondArbitrationMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadRespondArbitration;
         loadRespondArbitration = await apiRepProvider?.loadRespondArbitrationMyProjects('');
 	    return loadRespondArbitration ;  
    }
   
    Future saveRespondArbitrationMyProjects(RespondArbitrationMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateRespondArbitrationMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllRespondArbitrationMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllRespondArbitrationMyProjects(spKey!);   
    }
   
   
   
     Future editCancelArbitrationMyProjects()async{
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var editCancelArbitration;
     editCancelArbitration = await apiRepProvider?.getCancelArbitrationMyProjectsEdit(url!, id!, title!);
     return editCancelArbitration;
   }
 
   Future postCancelArbitrationMyProjects() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCancelArbitration;
     postCancelArbitration = await apiRepProvider?.sendCancelArbitrationMyProjectsPost(url!,formData);
     return postCancelArbitration;
   }
   
     Future postCancelArbitrationMyProjectsWithID() async {
-    APIRepository? apiRepProvider = application.projectsAPIRepository;
+    APIRepository? apiRepProvider = application?.projectsAPIRepository;
     var postCancelArbitration;
     postCancelArbitration = await apiRepProvider?.sendCancelArbitrationMyProjectsPostWithID(url!,formData, id!, title!);
     return postCancelArbitration;
@@ -894,34 +894,34 @@ class MyProjectsController {
   
       Future getCancelArbitrationMyProjects(String spKey)async{
   
-        APIRepository? apiRepProvider = application.projectsAPIRepository;
+        APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var getCancelArbitration;
-        getCancelArbitration = await apiRepProvider?.getCancelArbitrationMyProjects(url!, id!, title!, spKey);
+        getCancelArbitration = await apiRepProvider?.getCancelArbitrationMyProjects(url!, id!, title!, spKey!);
 	    return getCancelArbitration ;
 	 }
    Future<CancelArbitrationMyProjectsModel> loadCancelArbitrationMyProjects() async{
-   APIRepository? apiRepProvider = application.projectsAPIRepository;
+   APIRepository? apiRepProvider = application?.projectsAPIRepository;
         var loadCancelArbitration;
         loadCancelArbitration = await apiRepProvider?.loadCancelArbitrationMyProjects('');
 	    return loadCancelArbitration ;  
    }
   
    Future saveCancelArbitrationMyProjects(CancelArbitrationMyProjectsModel? my_projects, String? spKey) async{  
-       APIRepository? apiRepProvider = application.projectsAPIRepository;
+       APIRepository? apiRepProvider = application?.projectsAPIRepository;
       
        await apiRepProvider?.saveOrUpdateCancelArbitrationMyProjects(my_projects!, spKey!, 1);
        
   }	
   
     Future<void> deleteAllCancelArbitrationMyProjects(String? spKey) async{
-	 APIRepository? apiRepProvider = application.projectsAPIRepository;
+	 APIRepository? apiRepProvider = application?.projectsAPIRepository;
        await apiRepProvider?.deleteAllCancelArbitrationMyProjects(spKey!);   
    }
   
   
 
 	Future <String> getHash()async{
-	APIRepository? apiRepProvider = application.projectsAPIRepository;
+	APIRepository? apiRepProvider = application?.projectsAPIRepository;
 	var hash;
 	hash = await  apiRepProvider?.getUserHash();  
 	return hash;

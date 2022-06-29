@@ -85,7 +85,8 @@ class _MessageInputState extends State<MessageInput> {
 
   @override
   void dispose() {
-    timer.cancel();
+
+  //  timer.cancel();
     super.dispose();
     // widget.chatBloc.getQuickMenuItems();
   }
@@ -168,6 +169,7 @@ class _MessageInputState extends State<MessageInput> {
     var space = 4/4.7 * MediaQuery.of(context).size.width;
     final themeManager =  Provider.of<ThemeManager>(context);
     themeManager.themeMode == ThemeMode.dark? darkMode = true : darkMode = false;
+
 
     return
 

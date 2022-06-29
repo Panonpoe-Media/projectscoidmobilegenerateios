@@ -41,7 +41,7 @@ class CardWidget extends StatelessWidget {
     for (var button in buttons) {
       outlinedButtons.add(SizedBox(
         width: double.infinity,
-        child: OutlineButton(
+        child: OutlinedButton(
           child: Text(button.title!),
           onPressed: () {
             onPayloadPress!(button);

@@ -717,7 +717,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
           });
         }catch(e){
-          if (!mounted) return;
+         // if (!mounted) return;
          // if(){
          //   isError = true;
         //  }
