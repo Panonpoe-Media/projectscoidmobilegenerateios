@@ -320,6 +320,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(place_new_bid, context);
+   /*
 	  if(_isRewardedAdReady){
 		 setState(() {
 		   _isRewardedAdReady = false;
@@ -327,7 +328,11 @@ final RestorableInt _counter = RestorableInt(0);
 		 _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
 		   // Reward the user for watching an ad.
 		 });
+
+
 	   }
+
+    */
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -709,7 +714,7 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,place_new_bid, postPlaceNewBidResult, this, sendPath, widget.id!, widget.title!),
+                            isLoading!? [] : isError? null: this.model.RButtons(_rewardedAd, _isRewardedAdReady, context, _dialVisible, formKey, controller,place_new_bid, postPlaceNewBidResult, this, sendPath, widget.id!, widget.title!),
                       
                         Container(
                           height: 60,

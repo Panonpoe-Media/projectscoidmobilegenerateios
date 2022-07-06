@@ -35,30 +35,6 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
 
- // print("Handling a background message: ${message.messageId}");
-  /*
-
-  RemoteNotification notification = message.notification;
-  var data = message.data['message'];
-
-  AndroidNotification android = message.notification?.android;
-  final document = parse(data);
-  final recentNews = document.getElementsByTagName('a');
-  String peer = recentNews[0].text;
-  final hrefs = document
-      .getElementsByTagName('a')
-      .where((e) => e.attributes.containsKey('href'))
-      .map((e) => e.attributes['href'])
-      .toList();
-
-  await _setNotif(hrefs.last);
-
-   */
-
-
-
-
-
 }
 
 class Env {
@@ -76,9 +52,7 @@ class Env {
   String? VALIDATE_EMPTY_VALUE;
   String? VALIDATE_INVALID_FORMAT;
   String? VALIDATE_UE;
-
   String? ConfigUrl;
-
   String? URL_getToken;
   String? URL_CHECK3dStatus;
   String? URL_prePayment;
@@ -88,7 +62,6 @@ class Env {
   Env() {
     value = this;
     WidgetsFlutterBinding.ensureInitialized();
-
     _init();
   }
 
@@ -110,18 +83,7 @@ class Env {
     await _initGoogleMobileAds();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     await Firebase.initializeApp(
-      options: DefaultFirebaseConfig.platformOptions,
-      /*
-             options:  const FirebaseOptions(
-             apiKey: 'AIzaSyDC6NSEYBNQXwTmxrKtW4zSFfMyW6eD3FI',
-             appId: '1:206955057202:android:bec4a2a4b8a188a3b42c2b',
-             messagingSenderId: '206955057202',
-             projectId: 'projectscoid-125dd',
-
-
-           )
-
-       */
+             options: DefaultFirebaseConfig.platformOptions,
            );
 
     BlocOverrides.runZoned(
@@ -130,8 +92,6 @@ class Env {
       },
       blocObserver: ProjectscoidBlocDelegate(),
     );
-
-
     configLoading();
   }
 }

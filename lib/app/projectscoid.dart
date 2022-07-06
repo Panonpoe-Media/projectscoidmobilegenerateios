@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_slidable/flutter_slidable.dart';
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:projectscoid/views/route.dart';
@@ -60,7 +59,6 @@ import 'package:html/parser.dart' show parse;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
 import 'package:flutter/scheduler.dart' as SC;
-
 import 'package:package_info_plus/package_info_plus.dart';
 //import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:koukicons_jw/addApp.dart';
@@ -135,8 +133,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
  // List<String> _cuaString = [];
   final List<String> _cuatString = [];
   String oldCua = '';
-  // SharedPreferences prefs;
-  //Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   List<String?>? dataActivities = [];
   List<String?>? ListActivities = [];
   final List<ProjectItemModel?>? _cp = [];
@@ -195,14 +191,14 @@ class homeViewState extends State<homeView> with RestorationMixin {
 
     // }
     if (viewHome == null) {
-      print('disini saja $getPath');
+      //print('disini saja $getPath');
       final future = Home!.getDataHome();
       future.then((value) {
         if (!mounted) {
-          print('disini saja hebat');
+        //  print('disini saja hebat');
           viewHome = null;
         } else {
-          print('disini saja');
+       //   print('disini saja');
           viewHome = value;
           setState(() {
             isLoading = false;
@@ -1039,18 +1035,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
     var formatter = DateFormat('yyyy');
     String formattedDate = formatter.format(now);
 
-    /*
-    Home =     SubModelController(AppProvider.getApplication(context),
-        getPath,
-        null);
-
-    fetchData(Home);
-    const fiveSec = const Duration(seconds: 5);
-       Timer.periodic(fiveSec, (Timer t) {
-      fetchData(Home);
-    });
-
-    */
     if (_cua.isEmpty && !isLoading) {
       _cuat.clear();
       _cuatString.clear();
@@ -1125,21 +1109,9 @@ class homeViewState extends State<homeView> with RestorationMixin {
                         stream: widget.notif!.onMessage,
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
-                          //  dataActivities = List.from(GetList());
-                          //  snapshot!.hasData ? fetchData(Home) : null;
-                          //  snapshot!.hasData ? setState((){}) : null;
-                          //  print('ini === ${snapshot!.data.toJson().toString()}');
                           if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                             if ((jsonDecode(snapshot.data!)['type'] ==
                                 'activity')) {
-                              /* _cua.add(
-                               Divider(thickness: 1.0,
-                                       color: Colors.white,
-                               )
-                             );
-
-                             */
-                              // dataActivities = List.from(snapshot!.data);
                               if (_cua.isEmpty) {
                                 tempCua = jsonDecode(snapshot.data)['message']
                                     .replaceAll('\"', '"');
@@ -1151,10 +1123,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                         .replaceAll('\"', '"')) {
                                   _cuat.removeAt(0);
                                 } else {
-                                  //  _cuat.removeAt(0);
-
-                                  //joined as a user
-
                                   var document =
                                       parse(viewHome!.activities.items[0]);
                                   var userLink =
@@ -1208,155 +1176,8 @@ class homeViewState extends State<homeView> with RestorationMixin {
 
                                   // _cuaString.insert(0,snapshot!.data);
                                 } else {
-                                  // _cua.insert(0,ActivitiesFix1Item(
-                                  //   model: snapshot!.data, cb: widget.notif));
-                                  // _cuaString.insert(0,snapshot!.data);
                                 }
                               }
-                              /*
-                             if (dataActivities.isNotEmpty) {
-                               _cua.clear();
-                               _cuaString.clear();
-
-                               // print('kereeeeeeeeeee${_cua.length.toString()}eeeeeeeeeeeeeeeeeen ${dataActivities.length.toString()}');
-                               // print('dataActivities ke 1  ${dataActivities[0]}');
-                             //  print(sportsList.any((e) => e.contains('cricket'))); // true
-                             // print(descList.reversed.toList()); // [1,2,3,4,5,6]
-                             /*
-                               List<String> temp = [];
-                               temp.addAll(dataActivities);
-                               for (int i = 0; i >= dataActivities.length - 1; i++) {
-                                 //for (int j = 0; i >= _cuat.length - 1; i++) {
-                                 _cuatString.forEach((cs){
-                                   if(cs.contains(jsonDecode(dataActivities[i])['message'])){
-                                     temp[i] = '';
-                                     print('hereeeeeeeeeeeboy');
-                                   }
-                                   // to check all items
-                                 });
-                                      //  if(_cuatString.any((e) => e.contains(jsonDecode(dataActivities[i])['date']))){
-                                         // if(dataActivities[i] == _cuat[j]){
-                                       //      temp[i] = '';
-                                       //      print('hereeeeeeeeeeeboy');
-                                       //   }
-                                // }
-                               }
-                               for (int i = 0; i >= dataActivities.length - 1; i++) {
-                                 for (int j = 0; i >= temp.length - 1; i++) {
-                                   if(i != j){
-                                     if(dataActivities[i] == temp[j]){
-                                       temp[i] = '';
-                                     }
-                                   }
-
-                                 }
-                               }
-
-                              */
-
-
-
-                               int nx = 1;
-                               for (int i = dataActivities.length - 1; i >
-                                   -1; i--) {
-
-                                 //  print('dataActivities ke ${i.toString()}  ${dataActivities[i]}');
-                                 //i == dataActivities.length - 1 ? _cua.add(ActivitiesFix1Item(model: snapshot!.data)):
-                             //   if(temp[i] != ''){
-                               //   print('temp[i] ${i.toString()}');
-                                  _cua.add(ActivitiesFix1Item(
-                                      model: dataActivities[i]));
-                                  _cuaString.add(dataActivities[i]);
-
-                                //  if(dataActivities.length < 10){
-                                //    _cuat.removeAt(10 - nx);
-                                //    _cuatString.removeAt(10 - nx);
-                                //    print('nx  ${nx.toString()}');
-                                //  }
-                                  nx ++;
-                              //  }
-
-                               //  _cuat.removeAt(i);
-
-                               }
-
-
-
-
-                               // prefs.remove('activities');
-                               dataActivities.clear();
-                               if(_cua.length < 10){
-                                 if(_cua.length == 1){
-                                   _cuat.removeAt(_cuat.length - 1);
-                                 }else{
-                                   for(int i = 0; i <= _cua.length -2; i++){
-                                     _cuat.removeAt(0);
-                                     _cuatString.removeAt(0);
-                                   }
-                                   _cuat.removeAt(_cuat.length - 1);
-                                 }
-                                 _cua.addAll(_cuat);
-                                 _cuaString.addAll(_cuatString);
-                            //     print('cua length1 ${_cua.length.toString()}');
-                                 _cuat.clear();
-                                 _cuatString.clear();
-                                 _cuat.addAll(_cua);
-                                 _cuatString.addAll(_cuaString);
-
-                               }
-                             } else {
-                            //    print('tidak kereeeeeeeeeeeeeeeeeeeeeeeeeeeeen');
-                              // _cua.add(ActivitiesFix1Item(model: snapshot
-                              //     .data));
-
-                              // _cuat.removeAt(9);
-                             }
-
-                             */
-
-                              //  print('cua length2 ${_cua.length.toString()}');
-                              //  _cua.addAll(_cuat);
-                              //   print('cua length ${_cua.length.toString()}');
-                              //   _cuat.clear();
-                              //  _cuat.addAll(_cua);
-
-                              //
-
-                              /*
-                           if(oldCua != jsonDecode(snapshot!.data)['message']) {
-                             _cua.clear();
-
-
-
-                             if( dataActivities.isNotEmpty){
-                                 print('kereeeeeeeeeeeeeeeeeeeeeeeeeeeeen');
-                                // print('dataActivities ke 1  ${dataActivities[0]}');
-
-                                for (int i = dataActivities.length - 1; i > -1; i--) {
-                                  print('dataActivities ke ${i.toString()}  ${dataActivities[i]}');
-                                  i == dataActivities.length - 1 ? _cua.add(ActivitiesFix1Item(model: snapshot!.data)):
-                                  _cua.add(ActivitiesFix1Item(model: dataActivities[i]));
-                                  _cuat.removeAt(i);
-                                }
-                               // prefs.remove('activities');
-                                 dataActivities = [];
-                              }  else{
-                               print('tidak kereeeeeeeeeeeeeeeeeeeeeeeeeeeeen');
-                                _cua.add(ActivitiesFix1Item(model: snapshot!.data));
-                                _cuat.removeAt(9);
-
-                              }
-
-                            //
-
-
-                             _cua.addAll(_cuat);
-                             _cuat.clear();
-                             _cuat.addAll(_cua);
-                             oldCua = jsonDecode(snapshot!.data)['message'];
-                           }
-
-                            */
                             }
 
                             if ((jsonDecode(snapshot.data)['type'] ==
@@ -1468,12 +1289,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
                             }
                           }
 
-                          //  _cua.add(ActivitiesFixItem(model: this.viewHome!.activities.items[0] ));
-                          //  snapshot!.hasData ?// print(jsonDecode(snapshot!.data)['message'])
-                          //  _cua.add(ActivitiesFix1Item(model: snapshot!.data))
-                          //     : null;
-                          // return Text('haloo');
-
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
@@ -1486,10 +1301,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                           bottom: 0.0,
                                           left: 0.0,
                                           right: 0.0,
-                                          // In order to have the ink splash appear above the image, you
-                                          // must use Ink.image!. This allows the image to be painted as part
-                                          // of the Material and display ink effects above it. Using a
-                                          // standard Image will obscure the ink splash.
                                           child: Image.network(
                                             viewHome!.banner_background,
                                             fit: BoxFit.cover,
@@ -1507,10 +1318,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                         left: 0.0,
                                         right: 0.0,
                                         top: 0.0,
-                                        // In order to have the ink splash appear above the image, you
-                                        // must use Ink.image!. This allows the image to be painted as part
-                                        // of the Material and display ink effects above it. Using a
-                                        // standard Image will obscure the ink splash.
                                         child: viewHome!.banner.indexOf(
                                                     'banner-telegram.png') !=
                                                 -1
@@ -1558,8 +1365,8 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .spaceBetween,
-                                                      children: <Widget>[
-                                                        const Text(
+                                                      children: const <Widget>[
+                                                        Text(
                                                           'Projects',
                                                           style: TextStyle(
                                                               fontSize: 17,
@@ -1584,12 +1391,6 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                                         id: '12',
                                                         cb: widget.notif)),
                                           );
-
-                                          /*
-                                          AppProvider.getRouter(context)! .navigateTo(
-                                              context, urlToRoute(this.viewHome!.projects.url + '/listing/12'));
-
-                                           */
                                         },
                                         child: Row(
                                             mainAxisAlignment:

@@ -6461,7 +6461,7 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
 
   Widget buildListingBar() {
     return BlocBuilder<BrowseUsersListing, BrowseUsersState>(
-      // cubit: browse_users!.listing,
+       bloc: browse_users!.listing,
 
       builder: (BuildContext context, BrowseUsersState state) {
         final mediaQueryData = MediaQuery.of(context);
@@ -6551,10 +6551,14 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
                                     width: 0.0,
                                   )
                                 : SearchBrowseUsersBottomLoader()
-                        : state.browse_users!.viewItem(
-                            state.browse_users!.items.items[index],
+                        : state.browse_users!.viewItemcb (state.browse_users!.items.items[index] , searchText, index,  account , widget.cb);
+                     /*
+                          viewItem(
+                            state.browse_users?.items.items[index],
                             searchText,
                             account);
+
+                      */
                   },
                   itemCount: state.hasReachedMax!
                       ? state.browse_users!.items.items.length

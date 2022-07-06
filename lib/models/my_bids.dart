@@ -4,6 +4,7 @@ import 'my_bids_item.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:projectscoid/models/my_bids_base.dart';
+import 'package:projectscoid/models/MyBids/cancel_bid.dart';
 import 'package:projectscoid/core/components/helpers/string_helpers.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/views/components/index.dart';
@@ -29,6 +30,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:projectscoid/api/api.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/views/route.dart' as rt;
 
 /** AUTOGENERATE OFF **/
 
@@ -277,7 +279,8 @@ class CancelBidMyBidsModel extends CancelBidMyBidsBase{
                                     if (formKey.currentState.validate()) {
                                       //Map<String, dynamic> res = model.toJson();
                                       //print('json result == $res');
-                                      var formData = await convertFormDataAction(model, 'Cancel Bid' );
+                                      var formData = await convertFormDataCancelBid( 'Cancel Bid' ,model, attachmentslast );
+                                      print('sendPath $sendPath');
                                       my_bids =  MyBidsController(AppProvider.getApplication(context),
                                           sendPath,
                                           AppAction.post,
@@ -285,12 +288,18 @@ class CancelBidMyBidsModel extends CancelBidMyBidsBase{
                                           title,
                                           formData,
                                           false);
-                                      final future = my_bids.postMyBids();
+
+                                      final future = my_bids.postCancelBidMyBidsWithID();
                                       future.then((value) {
                                         state.setState(() {
                                           postCancelBidResult = value;
                                         });
                                       }).catchError((Error){
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => rt.UserMyBidsListing(id :  id!)),
+                                              (Route<dynamic> route) => false,
+                                        );
                                         //AppProvider.getRouter(context)!.pop(context);
                                       });
 
@@ -339,7 +348,7 @@ class MyBidsListingModel extends MyBidsListingBase{
     return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item.item.toJson())).contains(search!)),
         //  child:  ItemMyProjectsCard2(destination :item, search : search, shape : shape, height : height, account : account)
-        child:  ItemMyBidsCard1(destination :item, search : search, shape : shape, height : height, account : account, username: id, cb: cb!)
+        child:  ItemMyBidsCard1(destination :item, search : search, shape : shape, height : height, account : account, username: id, cb: cb)
     );
   }
 
@@ -426,7 +435,7 @@ class ItemMyBidsCard1 extends StatelessWidget {
           ),
           //  shadowColor: CurrentTheme.ListColor,
 
-          child: ItemMyBidsContent1(destination: destination, account: account, username : username, cb: cb!) ,
+          child: ItemMyBidsContent1(destination: destination, account: account, username : username, cb: cb) ,
 
         ),
 
@@ -887,34 +896,71 @@ class ItemMyBidsContent1 extends StatelessWidget {
                           } else {
                             thread = '$idHash/${encode(peer)}';
                           }
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) =>
-                                    ChatScreen(
-                                      user: {
+                      if(cb != null) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ChatScreen(
+                                    user: {
 
-                                        "thread": "$thread",
-                                        "username": "${peername}",
-                                        "userid": "${encode(peer)}",
-                                        "display": "${peername}",
-                                        "avatar": "${avatar}",
-                                        "lastmesssage": "",
-                                        "lastseen": (dt.millisecondsSinceEpoch/1000).round(),
-                                        "lasttime": (dt.millisecondsSinceEpoch/1000).round()
-                                      },
-                                      userID: idHash,
-                                      chatBloc: cb,
-                                      trans: false,
-                                      ctx: context,
-                                    ),
-                              )
-                          ).then((value) async {
-                            // _chatBloc.dispose();
-                            SharedPreferences prefs = await SharedPreferences
-                                .getInstance();
-                            prefs.setBool('chatlink', true);
-                          });
+                                      "thread": "$thread",
+                                      "username": "${peername}",
+                                      "userid": "${encode(peer)}",
+                                      "display": "${peername}",
+                                      "avatar": "${avatar}",
+                                      "lastmesssage": "",
+                                      "lastseen": (dt.millisecondsSinceEpoch /
+                                          1000).round(),
+                                      "lasttime": (dt.millisecondsSinceEpoch /
+                                          1000).round()
+                                    },
+                                    userID: idHash,
+                                    chatBloc: cb,
+                                    trans: false,
+                                    ctx: context,
+                                  ),
+                            )
+                        ).then((value) async {
+                          // _chatBloc.dispose();
+                          SharedPreferences prefs = await SharedPreferences
+                              .getInstance();
+                          prefs.setBool('chatlink', true);
+                        });
+                      }else{
+                        var cb1 =  AppProvider.getApplication(context).chat;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  ChatScreen(
+                                    user: {
+
+                                      "thread": "$thread",
+                                      "username": "${peername}",
+                                      "userid": "${encode(peer)}",
+                                      "display": "${peername}",
+                                      "avatar": "${avatar}",
+                                      "lastmesssage": "",
+                                      "lastseen": (dt.millisecondsSinceEpoch /
+                                          1000).round(),
+                                      "lasttime": (dt.millisecondsSinceEpoch /
+                                          1000).round()
+                                    },
+                                    userID: idHash,
+                                    chatBloc: cb1,
+                                    trans: false,
+                                    ctx: context,
+                                  ),
+                            )
+                        ).then((value) async {
+                          // _chatBloc.dispose();
+                          SharedPreferences prefs = await SharedPreferences
+                              .getInstance();
+                          prefs.setBool('chatlink', true);
+                        });
+                      }
+
                         } catch (e) {
                           final ftr = projectsAPIProvider.getData(
                               '${Env.value!.baseUrl!}${urlToRoute(destination!.item

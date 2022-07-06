@@ -153,7 +153,7 @@ class SearchSelectDialogState extends State<SearchSelectDialog> {
             builder: (BuildContext context, Orientation orientation) {
               assert(orientation != null);
               final Widget header = _TagsPickerHeader(
-                tagcaption: _tagscaption!,
+                tagcaption: _tagscaption,
                 orientation: orientation,
               );
               switch (orientation) {
@@ -281,8 +281,8 @@ class _TagsPickerHeader extends StatelessWidget {
     );
 
     return Container(
-      width: width!,
-      height: height!,
+      width: width,
+      height: height,
       padding: padding!,
       color: backgroundColor,
       child: Column(

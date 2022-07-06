@@ -35,19 +35,6 @@ class AppState extends State<App> {
   AppState(this._application);
   var platform = const MethodChannel('crossingthestreams.io/resourceResolver');
  // final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  /*@override
-  initState() {
-    super.initState();
-    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
-    var initializationSettingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification: null);
-    var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
-  } */
 
   @override
   void dispose()async{
@@ -62,10 +49,6 @@ class AppState extends State<App> {
       debugPrint('notification payload: ' + payload);
     }
 
-  /*  await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SecondScreen(payload)),
-    ); */
   }
 
 
@@ -77,43 +60,6 @@ class AppState extends State<App> {
     final app = MaterialAppWithTheme(
                   application: _application,
                    );
-    /*new MaterialApp(
-      title: Env.value.appName,
-
-      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-        ProjectscoidLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const <Locale>[
-        Locale('en', 'EN'),
-        Locale('id', 'ID'),
-
-      ],
-     // supportedLocales: S.delegate.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Amazon Ember',
-        primaryColor: CurrentTheme.MainAccentColor,
-        scaffoldBackgroundColor: Colors.white,
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor : CurrentTheme.SecondaryColor,
-        ),
-      ),
-      darkTheme: ThemeData.dark(),
-    //  themeMode: themeManager.themeMode,
-      onGenerateRoute: _application.router.generator,
-
-    );
-    */
-
-   // print('initial core.route = ${app.initialRoute}');
-
-   // final cn = ChangeNotifierProvider<ThemeManager>(
-
-   //     create: (context){ return ThemeManager();},
-   //     child: app,
-   // );
 
     final appProvider = AppProvider(child:
 
@@ -133,31 +79,6 @@ class AppState extends State<App> {
 
                                    application: _application);
     return appProvider;
-      /*
-      FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          print('akuuuuuuuuuuuuu di splashhhhhhhhhhh 1235');
-         // return Container(color:Colors.white);
-          return appProvider;
-        }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          return appProvider;
-        }
-        print('akuuuuuuuuuuuuu di splashhhhhhhhhhh 12356');
-        // Otherwise, show something whilst waiting for initialization to complete
-        return Container(color:Colors.white);
-      },
-    );
-
-       */
-
-
 
   }
 

@@ -35,6 +35,8 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/BrowseProjects/action.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'browse_projects_base.g.dart';
 
 /** AUTOGENERATE OFF **/
@@ -100,7 +102,7 @@ class PlaceNewBidBrowseProjectsBase{
 
 
 
-Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+Widget RButtonActionBrowseProjectsWidget(RewardedAd _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
  var postBrowseProjectsResult, State state, String?sendPath, String?id,  String?title){
   var cl;
   var ic;
@@ -265,7 +267,14 @@ Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var
                                   }).catchError((Error) {
                         // AppProvider.getRouter(context)!.pop(context);
 
-
+                    if(_isRewardedAdReady!){
+                      state.setState(() {
+                        _isRewardedAdReady = false;
+                      });
+                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                      });
+                    }
                         print('haloooooooooooo1');
                         if (Error.toString().contains('302')) {
 
@@ -555,14 +564,14 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
     return( formData);
   } 	
 	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+  List<Widget> RlistButton(RewardedAd _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title){
     final List<Widget> buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren.add(RButtonActionBrowseProjectsWidget(model.buttons[i], context,formKey, controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title));
+      buttonChildren.add(RButtonActionBrowseProjectsWidget(_rewardedAd, _isRewardedAdReady, model.buttons[i], context,formKey, controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title));
       }
     }
        return(
@@ -593,7 +602,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+    Widget	 RButtons(RewardedAd _rewardedAd,bool? _isRewardedAdReady,BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -608,7 +617,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title )
+           RlistButton(_rewardedAd, _isRewardedAdReady, context, formKey,controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title )
 	    
             )
         )
@@ -1311,7 +1320,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+    Widget	 RButtons(  BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postAskOwnerResult, State state, String?sendPath, String?id,  String?title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;

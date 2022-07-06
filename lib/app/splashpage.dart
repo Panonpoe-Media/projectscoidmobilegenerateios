@@ -8,27 +8,11 @@ import 'package:projectscoid/controllers/controllers.dart';
 import 'package:projectscoid/app/signin.dart';
 import 'dart:core';
 import 'dart:async';
-import 'package:projectscoid/controllers/controllers.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
-import 'package:flutter/material.dart';
-import 'package:projectscoid/core/AppProvider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:projectscoid/app/projectscoid.dart';
-import 'package:projectscoid/views/components/index.dart';
-import 'package:projectscoid/core/components/helpers/color_helpers.dart';
-import 'package:projectscoid/app/intro.dart';
-import 'package:projectscoid/core/components/helpers/action_helpers.dart';
-import 'dart:math';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
-import 'package:projectscoid/app/splashpage.dart';
-import 'package:projectscoid/views/NewUser/new_user_action.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'dart:io';
-import 'package:html/parser.dart' show parse;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
@@ -78,69 +62,26 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     switch (state) {
       case AppLifecycleState.inactive:
         {
-
-
-          print("Inactive");
+        //  print("Inactive");
           isBackground = true;
 
         }
         break;
       case AppLifecycleState.paused:
-        print("Paused");
-
+       // print("Paused");
         isBackground = true;
-
-
-
-
-
         break;
       case AppLifecycleState.resumed:
         {
-          print("Resumed");
-
+        //  print("Resumed");
           isBackground = false;
-
-
-          /*
-          getApplicationDocumentsDirectory().then((value){
-            APIProvider projectsAPIProvider = APIProvider(value.path);
-            final future = projectsAPIProvider.getData(
-                'https://api.projects.co.id/user/program/ping');
-            future.then((value) {
-
-              try {
-                jsonDecode(value);
-
-                  projectsAPIProvider.userLogin(username,forlgn  ) ;
-              } catch (e) {
-                if(value.length > 0){
-                    projectsAPIProvider.userLogin(username,forlgn  ) ;
-                  // print('saya disini$value v');
-                }else{
-                  // print('saya disini cccc');
-                }
-
-              }
-
-
-            });
-
-
-
-          });
-
-           */
-
 
         }
         break;
       case AppLifecycleState.detached:
         {
           isBackground = false;
-
-          print("Suspending");
-
+         // print("Suspending");
         }
         break;
       default :
@@ -148,7 +89,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         break;
     }
   }
-
 
 
   Future<int?> _getCountSharedPrefs() async {
@@ -164,7 +104,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('np_count', i);
   }
-
 
 
   Future<List<String>?> _getListSharedPrefs() async {
@@ -193,14 +132,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-
-
-    // _chatBloc =  AppProvider.getApplication(widget.application).chat;
-
-
     widget.application?.chat!.onMessage.listen((pusher) async {
-
-
       String title = jsonDecode(pusher)['type'];
       //final SharedPreferences prefs = await _prefs;
       String msg;
@@ -223,71 +155,22 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
           }
           msg = jsonDecode(pusher)['message'];
           if (this.mounted) {
-            // setState(() {
-            //   notifunread = notifunread + 1;
-            // print('ini ${notifunread.toString()} msg $msg');
-            //});
           }
-
-          /*
-          var document = parse(msg);
-          String temp = '';
-          for( var i = 0; i < document.children[0].children.length ; i++){
-            temp = temp + document.children[0].children[i].text + ' ';
-            //print('${document.children[0].children[i].text} ');
-          }
-
-          // final document = parse(data);
-          final recentNews = document.getElementsByTagName('a');
-          String peer = recentNews[0].text;
-          final hrefs = document
-              .getElementsByTagName('a')
-              .where((e) => e.attributes.containsKey('href'))
-              .map((e) => e.attributes['href'])
-              .toList();
-
-          if(hrefs.last.contains('show_conversation')){
-            if(hrefs.last.contains('my_projects')){
-              //_showNotificationPush(  temp, title, hrefs.last + '*' + peer );
-            }else{
-              //_showNotificationPush(  temp, title, hrefs.last + '' + peer );
-
-            }
-
-          }else {
-            if (hrefs.last.contains('show_thread')) {
-              // _showNotificationPush(temp, title, hrefs.last.substring(
-              //   0, hrefs.last.indexOf(hrefs.last.split('/')[7])) + peer);
-            } else {
-              // _showNotificationPush(temp, title, hrefs.last);
-            }
-          }
-          */
-
-
 
         }
         break;
         case 'testimony':{
-          // futureNotif = Future.value(3);
           msg = jsonDecode(pusher)['ptitle'] + ' feedback = ${jsonDecode(pusher)['feedback']}';
-
-
-
         }
         break;
         case 'kick':{
-
-          //msg = jsonDecode(pusher)['userid']
           msg = 'kick $username with id $userID';
-
           _showNotificationPush(  msg, title, '', widget.application?.chat);
 
         }
         break;
         case 'pong':{
-
-          if (this.mounted) {
+          if (mounted) {
             setState(() {});
           }
 
@@ -296,7 +179,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
 
         case 'project':{
           if(isBackground){
-           //listData.add(snapshot.data);
             var dt = await _getCountSharedPrefs();
             var data = await _getListSharedPrefs();
             if(dt == 0){
@@ -311,43 +193,23 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               data.add(pusher);
               _setListSharedPrefs(data);
             }
-
-
           }
-
         }
         break;
         case 'message':{
           //print('ajaib');
           if(isBackground){
-          //  print('ajaib1');
-
             if(jsonDecode(pusher)['sender']!= userID){
-             // print('ajaib2');
-             // var dsp = jsonDecode(pusher)['display']??'';
               msgpusher = pusher;
-
-              //msg = '${jsonDecode(pusher)['sendername']}' +' : '+ toPicFile(jsonDecode(pusher)['message']);
-
               msg = toPicFile(jsonDecode(pusher)['message']);
               _showNotificationPush(  msg, 'Message from ${jsonDecode(pusher)['sendername']}', 'chat', widget.application?.chat);
-
-
             }
 
           }else{
-           // print('ajaib3');
-            // print('ajob');
             if(jsonDecode(pusher)['sender']!= userID) {
-            //  var dsp = jsonDecode(pusher)['display']??'';
               msg = '${jsonDecode(pusher)['sendername']}'   +' : '+ toPicFile(jsonDecode(pusher)['message']);
               msgpusher = pusher;
-              //_showNotificationPush(  msg, title, 'chat', widget.application.chat);
-              // print('ajob1');
-
             }
-
-
           }
           if(jsonDecode(pusher)['sender']!= userID) {
             widget.application?.chat?.getFirstIndex(1);
@@ -356,50 +218,15 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
               setState(() {});
             }
           }
-
-
-
-
         }
         break;
         case 'index':{
-         // print('ajaib');
-          /*
-          unread = 0;
-
-          for(var obj in jsonDecode(pusher)['list']){
-
-            //lastmesssage
-                if(obj['blocked'] != 1){
-                  unread = unread + obj['unread'];
-                }
-            }
-
-           */
-
-
-
-
-          // if (this.mounted) {
-          /*
-            if (unread > 0) {
-              setState(() {
-
-              });
-            }
-
-             */
-          // }
-
-
         }
         break;
         default :{
 
-         // print('ajaib');
         }
         break;
-
       }
 
       if(title == 'kick'){
@@ -407,20 +234,14 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
       }
       //  });
 
-
-
     }
     );
-
-
-
-
 
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -432,43 +253,20 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     }else{
       return json;
     }
-
   }
 
   Future<void>  loggedOut() async{
-    // AppProvider.getApplication(widget.application).chat.dispose();
-    // messaging.unsubscribeFromTopic(widget.id);
-    //  _timer.cancel();
-
     await logout?.getData();
-
-    //  Navigator.pop(context);
-
     BlocProvider.of<AuthenticationController>(context).add(LoggedOut());
-    // AppProvider.getRouter(context)!.navigateTo(
-    //     context,
-    //      "/login/0");
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => Login(application: context,isLogin: false,)),
           (Route<dynamic> route) => false,
     );
-
-
-    // _authenticationBloc.add(LoggedOut());
-    /*  AppProvider.getRouter(context)!.navigateTo(
-        context,
-        "/"); */
-
-    //  Login();
-    //Navigator.pop(context); // Dismiss the drawer.
-    /* _scaffoldKey.currentState.showSnackBar(const SnackBar(
-        content: Text("The drawer's items don't do anything")
-    )); */
   }
+
   _setNotif(String ntf)async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     await prefs.setString('notification', ntf);
   }
 
@@ -500,8 +298,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
   }
 
   Future<void> _showNotificationPush( String msg, String title, var data, var cb) async {
-
-
     final List<String> lines = <String>[msg];
     var inboxStyleInformation = InboxStyleInformation(
         lines,
@@ -520,27 +316,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         onSelectNotification: (String? payload) async {
 
           if (payload != null && payload != '') {
-            debugPrint('notification payload123: $payload');
-
-
-
-
+           // debugPrint('notification payload123: $payload');
             if (payload.contains('show_conversation')) {
               payload = '$payload***l';
-
-
               await _setNotif(payload);
-
-              //  print('haloooooooooooo');
-
-              /*
-
-              AppProvider.getRouter(context)!.navigateTo(
-                  context,
-                  urlToRoute(payload));
-
-               */
-
               if (payload.contains('my_projects')) {
                 Navigator.push(
                   context,
@@ -590,40 +369,10 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setBool('chatlink', true );
               });
-              /*
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ChatScreen(
-                      user: {
-
-                        "thread":"${jsonDecode(msgpusher)['thread']}",
-                        "username":"${jsonDecode(msgpusher)['display']}",
-                        "userid":"${jsonDecode(msgpusher)['sender']}",
-                        "display":"${jsonDecode(msgpusher)['display']}",
-                        "avatar":"",
-                        "lastmessage":"",
-                        "lastseen":jsonDecode(msgpusher)['time'].toString(),
-                        "lasttime":jsonDecode(msgpusher)['time'].toString()
-
-                      },
-                      userID : userID,
-                      chatBloc :cb,
-                      trans : true,
-                      ctx: context,
-                    ),
-                  )
-              );
-
-               */
             }
-
             else if (payload.contains('show_thread')) {
               payload = '$payload*20**l';
-
-
               await _setNotif(payload);
-
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>
@@ -631,15 +380,6 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
                         title: '${payload?.split('/')[7]}*20**l',
                         cb: cb)),
               );
-
-
-              //  print('haloooooooooooo');
-              /*
-              AppProvider.getRouter(context)!.navigateTo(
-                  context,
-                  urlToRoute(payload));
-
-               */
             }
             else {
               await _setNotif(payload);
@@ -648,13 +388,8 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
             }
           }
           selectNotificationSubject.add(payload!);
-
-
-
         });
-    /* await AppProvider..flutterLocalNotificationsPlugin.show(
-        0, 'plain title', 'plain body', platformChannelSpecifics,
-        payload: 'item x'); */
+
     int id;
     switch(title) {
       case 'activity':{
@@ -693,54 +428,33 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         payload: data);
   }
   fetchData()async {
-
-
     getApplicationDocumentsDirectory().then((value) {
       APIProvider projectsAPIProvider = APIProvider(value.path);
       var future = projectsAPIProvider.getDataRC(
           Env.value!.baseUrl! + '/public/program/mobile_init');
-
       future.then((value) {
         try{
-
           if (!mounted) return;
-          // print('hanya satu kali 1');
-        //  value = 450;
           if((value > 399) && (value < 500)){
             isError = true;
             //print('nilai code ===  ${value.toString()}');
           }
-
-
           setState(() {
             isLoading = false;
-
           });
         }catch(e){
-         // if (!mounted) return;
-         // if(){
-         //   isError = true;
-        //  }
-
           setState(() {
-
            isLoading = false;
           });
         }
 
       });
-
-
     });
-
-
 
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return isLoading ? Container()
       : isError? Container (
         child:
@@ -795,7 +509,6 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
   var listAccount ;
   String  val1 = '';
   AccountController? accountController;
-
   String userID = '';
   bool chat = false;
   int intro = 0;
@@ -815,69 +528,24 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
     switch (state) {
       case AppLifecycleState.inactive:
         {
-
-
-          print("Inactive");
+         // print("Inactive");
           isBackground = false;
-
         }
         break;
       case AppLifecycleState.paused:
-        print("Paused");
-
+       // print("Paused");
         isBackground = true;
-
-
-
-
-
         break;
       case AppLifecycleState.resumed:
         {
-          print("Resumed");
-
+        //  print("Resumed");
           isBackground = false;
-
-
-          /*
-          getApplicationDocumentsDirectory().then((value){
-            APIProvider projectsAPIProvider = APIProvider(value.path);
-            final future = projectsAPIProvider.getData(
-                'https://api.projects.co.id/user/program/ping');
-            future.then((value) {
-
-              try {
-                jsonDecode(value);
-
-                  projectsAPIProvider.userLogin(username,forlgn  ) ;
-              } catch (e) {
-                if(value.length > 0){
-                    projectsAPIProvider.userLogin(username,forlgn  ) ;
-                  // print('saya disini$value v');
-                }else{
-                  // print('saya disini cccc');
-                }
-
-              }
-
-
-            });
-
-
-
-          });
-
-           */
-
-
         }
         break;
       case AppLifecycleState.detached:
         {
           isBackground = false;
-
-          print("Suspending");
-
+         // print("Suspending");
         }
         break;
       default :
@@ -894,54 +562,12 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
 
   fetchData( AccountController accountController, BuildContext context)async {
-
-
-
-
-    // hasher = md5 ;
-    //  var vlll = generateMd5('12345678910');
-    //  print('MD5 === $vlll');
-    /*
-    if(this.listAccount == null) {
-      // this.listAccount = [];
-      final future = accountController.getAccount();
-      future.then((val){
-        print('val===='+ val.toString());
-        val1 = val.toString();
-        //}
-       // if(this.mounted)
-       // {
-          setState(() {
-            isLoading = false;
-          });
-       // }
-
-        this.listAccount.add(val);
-
-      }).catchError((Error){
-
-      });
-
-      //if(this.mounted)
-      // {
-
-    } else{
-
-      print('val====');
-
-      setState(() {
-        isLoading = false;
-      });
-    };
-
-     */
-
 
     if(listAccount == null) {
       listAccount = [];
@@ -955,7 +581,6 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
           });
         }
 
-
         listAccount.addAll(val);
 
         var ntf = 0;
@@ -967,46 +592,22 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
         }
         //  notifunread = ntf;
         AppProvider.getApplication(context).chat!.setUsername(username);
-
-
-
-
-
       }).catchError((Error){
-        /*
-        _onWidgetDidBuild(() {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        });
-
-         */
 
       });
     } else{
 
       for(var map in listAccount) {
         username        = map['user_name'];
-
         userID      = map['user_hash'];
         // ntf = int.parse(map['notif_count']);
       }
-
-
-
       if(firstimeConnect){
         if(AppProvider.getApplication(context).chat!.socket == null){
-
-          //  AppProvider.getApplication(context).chat!.socket.connect();
           if(userID  != '' ){
             AppProvider.getApplication(context).chat!.lg(userID);
             firstimeConnect = false;
-
           }
-
         }else{
           if(userID  != '' ){
             AppProvider.getApplication(context).chat!.lg(userID );
@@ -1017,29 +618,6 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
         }
       }
 
-
-
-
-
-      /*
-      AppProvider.getApplication(context).chat!.socket.connect();
-      if(AppProvider.getApplication(context).chat!.socket == null){
-        AppProvider.getApplication(context).chat!.socket.connect();
-        if(id != '' ){
-          AppProvider.getApplication(context).chat!.lg(userID);
-
-        }
-
-      }else{
-        if(id != '' ){
-          AppProvider.getApplication(context).chat!.lg(userID);
-
-        }
-      }
-
-
-
-       */
       setState(() {
         isLoading = false;
       });
@@ -1051,15 +629,10 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
   Widget build(BuildContext context) {
     accountController = AccountController(AppProvider.getApplication(context),
         AppAction.view   );
-
-   // fetchData( accountController, context);
     introController = IntroController(AppProvider.getApplication(context),
         false,
         AppAction.listing
     );
-
-
-
 
     if(value == null) {
       final future = introController?.getIntroSetting();
@@ -1071,45 +644,11 @@ class AfterSplashState  extends State<AfterSplash> with WidgetsBindingObserver  
       return const SizedBox(width: 0.0, height: 0.0);
     }else {
       if (value!){
-         //return Login(application: context);
-
-
-       /*
-        accountController = new AccountController(AppProvider.getApplication(context),
-            AppAction.view   );
-        List listAccount = [];
-        final future = accountController.getAccount();
-        future.then((val){
-
-          listAccount.addAll(val);
-
-
-        });
-
-        */
-        //return isLoading? Scaffold(
-          //  body: new Center(
-          //  child:CircularProgressIndicator(
-          //  valueColor: new AlwaysStoppedAnimation<Color>(
-          //          Colors.green),
-          //  )
-          //  )) :
-          //    val1 == '[]' ?
-          //  return Navigator.pushReplacementNamed(context, "/login/0");
-
            return Login(application: context, isLogin: false);
-          // return Login(application: context, isLogin: true);
-
-          //  return Navigator.pushReplacementNamed(context, "/login/1");
-         // : Login(application: context, isLogin: true);
-        //  await accountController.getAccount();
-
-       // return Login(application: context);
       }else{
         return IntroScreen();
       }
     }
-
   }
 }
 
@@ -1146,7 +685,6 @@ class SplashScreen extends StatefulWidget {
         this.gradientBackground
       }
       );
-
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -1202,24 +740,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                     /* new CircleAvatar(
-
-                        backgroundColor: Colors.transparent,
-                        child: new Container(
-                            child: widget.image
-                        ),
-                        radius: widget.photoSize,
-                      ), */
                       ClipRRect(
                         borderRadius: BorderRadius.circular(0.0),
 
                         child:  this.widget.image
                       ),
-                    /*  new Container(
-                          height: 40.0 ,
-
-                          child: widget.image,
-                      ), */
                       const Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
@@ -1233,26 +758,6 @@ class _SplashScreenState extends State<SplashScreen> {
                         valueColor: AlwaysStoppedAnimation<Color>(widget.loaderColor!),
                       ),
                 ),
-               /* Expanded(
-                  flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-
-                      CircularProgressIndicator(
-                        valueColor: new AlwaysStoppedAnimation<Color>(widget.loaderColor),
-                      ),
-                    /*  Padding(
-                        padding: const EdgeInsets.only(top: 20.0),
-                      ),
-                      widget.loadingText
-
-                     */
-                    ],
-                  ),
-                ),
-
-                */
               ],
             ),
           ],

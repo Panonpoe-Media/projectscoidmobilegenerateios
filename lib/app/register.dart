@@ -9,7 +9,7 @@ import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 
 class Register extends StatefulWidget {
   static const String PATH = '/register';
-  Register({Key? key}) : super(key: key);
+  const Register({Key? key}) : super(key: key);
   @override
   RegisterState createState() => RegisterState();
 }
@@ -29,13 +29,10 @@ class RegisterState extends State<Register>{
     super.initState();
     controller = ScrollController();
     register!.add('');
-   // this.register!.add('');
-   // this.register!.add('');
   }
 
   @override
   Widget build(BuildContext context) {
-
    {
 
       return Scaffold(
@@ -162,28 +159,19 @@ class RegisterState extends State<Register>{
 
   }
 
-
   @override
   void dispose() {
     super.dispose();
   }
 
-
-
-
   void convertToFormData(var data){
-
-
-
     var formData = {
       "register[_trigger_]":"",
       "register[user_name]":"${data[0]}",
       "register[email]":"${data[1]}",
       "register[captcha]":"${data[2]}"
     };
-
     this.formData = formData;
-
 
   }
 

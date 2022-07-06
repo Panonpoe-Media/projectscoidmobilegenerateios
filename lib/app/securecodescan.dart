@@ -11,8 +11,6 @@ import 'dart:io';
 // ignore: unused_import
 import 'package:path_provider/path_provider.dart';
 
-
-
 class SecureCodeScan extends StatefulWidget {
   final String? userID;
   final String? username;
@@ -37,7 +35,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'Cancel', true, ScanMode.QR);
-      print(barcodeScanRes);
+      //print(barcodeScanRes);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -107,6 +105,8 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
       });
     }
   }
+
+  @override
   void initState() {
     super.initState();
   }
@@ -124,7 +124,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
             ElevatedButton(
-                child: Text('Rescan'),
+                child: const Text('Rescan'),
 
                 style: ButtonStyle(
                   textStyle: MaterialStateProperty.all<TextStyle>( const TextStyle(color: Colors.white,)),
@@ -171,7 +171,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
         color: Colors.white, //change your color here
       ),
       leading: IconButton(
-        icon: Icon(Icons.close, color: Colors.white,),
+        icon: const Icon(Icons.close, color: Colors.white,),
         onPressed: (){
 
           Navigator.pushAndRemoveUntil(
@@ -179,8 +179,6 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
             MaterialPageRoute(builder: (context) => Projectscoid(id : widget.userID!)),
                 (Route<dynamic> route) => false,
           );
-
-
         },
       ),
       )
@@ -198,8 +196,6 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // color: Colors.blue,
-
                 ),
                 Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -217,11 +213,11 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                       ),
                       Center(
                         child:Padding(
-                          padding: EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.only(top: 30),
                           child :
                           Text(
                             widget.username!,
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(fontSize: 20, color: Colors.white),
                           ),
 
                         ),
@@ -232,7 +228,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
               ]),
 
                 string!.length== 5 &&  minuteBetween! <= 10 && string![1] != widget.userID ?
-                Container(
+                SizedBox(
                   height: 0.50 * height,
                   child : Column(
                            children: <Widget>[
@@ -245,11 +241,11 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                                ),
                             ),
                              Padding(
-                               padding: EdgeInsets.only(top: 5),
+                               padding: const EdgeInsets.only(top: 5),
                                child :
                                Text(
                                  string![2]!,
-                                 style: TextStyle(fontSize: 45),
+                                 style: const TextStyle(fontSize: 45),
                                ),
 
                              ),
@@ -279,7 +275,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                                          style: _statCountTextStyle,
                                        ),
                                        Padding(
-                                         padding: EdgeInsets.only(top: 10),
+                                         padding: const EdgeInsets.only(top: 10),
                                          child: Text(
                                            'Menit',
                                            style: _statLabelTextStyle,
@@ -295,7 +291,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                   )
 
                 )
-                :string![1] != widget.userID? Padding(
+                :string![1] != widget.userID? const Padding(
                                                 padding: EdgeInsets.only(top: 10, bottom: 30.0),
                                                 child :
                                                         Text(
@@ -303,7 +299,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                                                          style: TextStyle(fontSize: 20),
                                                          ),
                                                 )
-                :minuteBetween! > 10 ? Padding(
+                :minuteBetween! > 10 ? const Padding(
                                               padding: EdgeInsets.only(top: 10,  bottom: 30.0),
                                               child :
                                               Text(
@@ -311,7 +307,7 @@ class _SecureCodeScanState extends State<SecureCodeScan> {
                                                 style: TextStyle(fontSize: 20),
                                               ),
                                             )
-                :Padding(
+                :const Padding(
                   padding: EdgeInsets.only(top: 10,  bottom: 30.0),
                   child :
                   Text(

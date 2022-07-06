@@ -56,9 +56,7 @@ class SettingState extends State<Setting>{
 
   @override
   Widget build(BuildContext context) {
-    final themeManager =  Provider.of<ThemeManager>(context);
     //_authenticationBloc = BlocProvider.of<AuthenticationController>(context);
-;
 
     {
       introController = IntroController(AppProvider.getApplication(context),
@@ -94,7 +92,7 @@ class SettingState extends State<Setting>{
                 },
               ),
 
-            title: Text('Setting', style: const TextStyle(color: Colors.white)),
+            title: const Text('Setting', style: TextStyle(color: Colors.white)),
           ),
           body:
           Form(
@@ -254,7 +252,7 @@ class SettingState extends State<Setting>{
                         Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child:
-                          Text('Version ${_packageInfo.version}+${_packageInfo.buildNumber}', style: TextStyle(color: Colors.grey, fontSize: 15),),
+                          Text('Version ${_packageInfo.version}+${_packageInfo.buildNumber}', style: const TextStyle(color: Colors.grey, fontSize: 15),),
 
                         )
 

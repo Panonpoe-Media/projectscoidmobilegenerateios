@@ -55,76 +55,30 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
   final BehaviorSubject<String> selectNotificationSubject =
   BehaviorSubject<String>();
 
-
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.inactive:
         {
-
-
-          print("Inactive");
+        //  print("Inactive");
           isBackground = false;
-
         }
         break;
       case AppLifecycleState.paused:
-        print("Paused");
-
+       // print("Paused");
         isBackground = true;
-
-
-
-
-
         break;
       case AppLifecycleState.resumed:
         {
-          print("Resumed");
-
+         // print("Resumed");
           isBackground = false;
-
-
-          /*
-          getApplicationDocumentsDirectory().then((value){
-            APIProvider projectsAPIProvider = APIProvider(value.path);
-            final future = projectsAPIProvider.getData(
-                'https://api.projects.co.id/user/program/ping');
-            future.then((value) {
-
-              try {
-                jsonDecode(value);
-
-                  projectsAPIProvider.userLogin(username,forlgn  ) ;
-              } catch (e) {
-                if(value.length > 0){
-                    projectsAPIProvider.userLogin(username,forlgn  ) ;
-                  // print('saya disini$value v');
-                }else{
-                  // print('saya disini cccc');
-                }
-
-              }
-
-
-            });
-
-
-
-          });
-
-           */
-
 
         }
         break;
       case AppLifecycleState.detached:
         {
           isBackground = false;
-
-          print("Suspending");
-
+        //  print("Suspending");
         }
         break;
       default :
@@ -136,18 +90,15 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
   @override
   void initState() {
     super.initState();
-    
-
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
-
-String toPicFile(String json){
+  String toPicFile(String json){
   if(json.contains('class=\"download\"') || json.contains('class="download"') ){
     return '📎 Attachment';
   }else if(json.contains('class=\"thumbnail\"') || json.contains('class="thumbnail"') ){
@@ -155,7 +106,6 @@ String toPicFile(String json){
   }else{
     return json;
   }
-
 }
 
   Future<void> onDidReceiveLocalNotification(
@@ -188,7 +138,6 @@ String toPicFile(String json){
   // ignore: unused_element
   Future<void> _showNotificationPush( String msg, String title, var data, var cb) async {
 
-
     final List<String> lines = <String>[msg];
     var inboxStyleInformation = InboxStyleInformation(
         lines,
@@ -207,44 +156,28 @@ String toPicFile(String json){
         onSelectNotification: (String? payload) async {
 
           if (payload != null && payload != '') {
-            debugPrint('notification payload123: $payload');
-
-
-
+           // debugPrint('notification payload123: $payload');
 
             if (payload.contains('show_conversation')) {
               payload = '$payload***l';
-
-
               await _setNotif(payload);
-
-              //  print('haloooooooooooo');
-
-              /*
-
-              AppProvider.getRouter(context)!.navigateTo(
-                  context,
-                  urlToRoute(payload));
-
-               */
-
               if (payload.contains('my_projects')) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>
                       ShowConversationMyProjects(
-                          id: '${payload!.split('/')[6]}',
-                          title: '${payload.split('/')[7]}',
-                          id1: '${payload.split('/')[8]}',
+                          id: payload!.split('/')[6],
+                          title: payload.split('/')[7],
+                          id1: payload.split('/')[8],
                           cb: cb)),
                 );
               } else {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>
-                      ShowConversationMyBids(id: '${payload!.split('/')[6]}',
-                          title: '${payload.split('/')[7]}',
-                          id1: '${payload.split('/')[8]}',
+                      ShowConversationMyBids(id: payload!.split('/')[6],
+                          title: payload.split('/')[7],
+                          id1: payload.split('/')[8],
                           cb: cb)),
                 );
               }
@@ -254,7 +187,6 @@ String toPicFile(String json){
                   MaterialPageRoute(
                     builder: (_) => ChatScreen(
                       user: {
-
                         "thread":"${jsonDecode(msgpusher)['thread']}",
                         "username":"${jsonDecode(msgpusher)['display']}",
                         "userid":"${jsonDecode(msgpusher)['sender']}",
@@ -276,26 +208,14 @@ String toPicFile(String json){
 
             else if (payload.contains('show_thread')) {
               payload = '$payload*20**l';
-
-
               await _setNotif(payload);
-
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) =>
-                    ShowThreadMyProjects(id: '${payload!.split('/')[6]}',
+                    ShowThreadMyProjects(id: payload!.split('/')[6],
                         title: '${payload.split('/')[7]}*20**l',
                         cb: cb)),
               );
-
-
-              //  print('haloooooooooooo');
-              /*
-              AppProvider.getRouter(context)!.navigateTo(
-                  context,
-                  urlToRoute(payload));
-
-               */
             }
             else {
               await _setNotif(payload);
@@ -305,12 +225,8 @@ String toPicFile(String json){
           }
           selectNotificationSubject.add(payload!);
 
-
-
         });
-    /* await AppProvider..flutterLocalNotificationsPlugin.show(
-        0, 'plain title', 'plain body', platformChannelSpecifics,
-        payload: 'item x'); */
+
     int id;
     switch(title) {
       case 'activity':{
@@ -350,35 +266,13 @@ String toPicFile(String json){
   }
 
   Future<void>  loggedOut() async{
-   // AppProvider.getApplication(widget.application).chat.dispose();
-   // messaging.unsubscribeFromTopic(widget.id);
-  //  _timer.cancel();
-
     await logout?.getData();
-
-    //  Navigator.pop(context);
-
     BlocProvider.of<AuthenticationController>(context).add(LoggedOut());
-    // AppProvider.getRouter(context)!.navigateTo(
-    //     context,
-    //      "/login/0");
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => Login(application: context,isLogin: false,)),
           (Route<dynamic> route) => false,
     );
-
-
-    // _authenticationBloc.add(LoggedOut());
-    /*  AppProvider.getRouter(context)!.navigateTo(
-        context,
-        "/"); */
-
-    //  Login();
-    //Navigator.pop(context); // Dismiss the drawer.
-    /* _scaffoldKey.currentState.showSnackBar(const SnackBar(
-        content: Text("The drawer's items don't do anything")
-    )); */
   }
 
   Future<String?> _getChatSharedPrefs() async {
@@ -386,29 +280,22 @@ String toPicFile(String json){
     if(prefs.containsKey('chat_link')){
       return prefs.getString('chat_link');
     }else{return '';}
-
-
-
   }
+
   void _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
     });
     // next = false;
   }
 
-
-
   _setNotif(String ntf)async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     await prefs.setString('notification', ntf);
   }
 
   @override
   Widget build(BuildContext context) {
-   //  _authenticationBloc = AuthenticationController(application : AppProvider.getApplication(context));
-   //  _authenticationBloc.add(AppStarted());
     accountController = AccountController(AppProvider.getApplication(context), AppAction.listing);
     logout = SubModelController(AppProvider.getApplication(context),
         Env.value!.baseUrl! +  '/public/home/logout',
@@ -416,233 +303,141 @@ String toPicFile(String json){
     final future = accountController?.getAccount();
     future?.then((val){
       for(var map in val) {
-
           userID      = map['user_hash'];
           username      = map['username'];
-
       }});
-
-
-  //  if(userID != '') AppProvider.getApplication(context).chat.lg(userID);
-
-
-      // print('userID ==='+ userID);
-
 
     return
       BlocBuilder<AuthenticationController,AuthenticationState>(
-
         builder: (context, state) {
-
-
           if (state is AuthenticationUninitialized) {
-
             final futureIntro = accountController?.getIntro();
             futureIntro?.then((val){
               intro = val;
               if(intro == 1){
-                print('aku di intro');
+               // print('aku di intro');
                 return Projectscoid(id : userID,  ctx: context);
-               // return new Container(width: 0.0, height: 0.0);
               }else{
-                return IntroScreen();
-                //  return new Container(width: 0.0, height: 0.0);
+                return const IntroScreen();
               }
             });
-            // return SplashPage();
             return Container(width: 0.0, height: 0.0, color:  Colors.white,);
-           // return Projectscoid(id : userID);
-            //
           }
           if(state is AuthenticationWait){
-
             final future = accountController?.getAccount();
             future?.then((val){
               for(var map in val) {
-
                 userID      = map['user_hash'];
                 username      = map['username'];
-
               }
-             // AppProvider.getApplication(context).chat.socket.connect();
-             // AppProvider.getApplication(context).chat.lg(userID);
-             // AppProvider.getApplication(context).chat.getFirstIndex(1);
               return userID;
             });
           }
           if (state is AuthenticationAuthenticated ) {
-
-            // return new Container(width: 0.0, height: 0.0, color:  Colors.white);
-           /*
-            final future = accountController.getAccount();
-            future.then((val){
-              if(val != null){
-                for(var map in val) {
-                  if(map['user_hash'] != '' || map['user_hash'] != null){
-                   return Projectscoid(id : map['user_hash']);
-                  }
-               //   userID      = map['user_hash'];
-                }
-              } else{
-
-                return new Container(width: 0.0, height: 0.0, color:  Colors.white,);
-              }
-
-
-
-              // print('userID ==='+ userID);
-
-            });
-
-            */
-
-
-          //return Projectscoid(id : userID);
-          //return new Container(width: 0.0, height: 0.0, color:  Colors.white,);
-           // AppProvider.getApplication(context).chat.socket.connect();
-           // AppProvider.getApplication(context).chat.lg(userID);
-           // AppProvider.getApplication(context).chat.getFirstIndex(1);
              return  FutureBuilder<dynamic>(
                      future: accountController?.getAccount(),
                      builder: (context, snapshot) {
                        if (snapshot.hasData) {
-
                         if(snapshot.data.isEmpty){
                             return Container(width: 0.0, height: 0.0, color:  Colors.white);
-
                         }
-
-
-                       //  AppProvider.getApplication(context).chat.lg(snapshot.data.asMap()[0]['user_hash']);
-                        // AppProvider.getApplication(context).chat.getFirstIndex(1);
-                       //  print('data      ===     ${snapshot.data.asMap()[0]['user_hash']}');
                         return   FutureBuilder<String?>(
                             future: _getChatSharedPrefs(),
                             builder: (context, snapshot1) {
-                                  if (snapshot1.hasData) {
+                                      if (snapshot1.hasData) {
+                                        if(snapshot1.data == 'chat'){
+                                         // print('chat ada');
+                                          return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], isChat: true, ctx: context);
+                                        }else{
+                                         // print('chat tidak ada');
+                                          return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], ctx: context);
+                                        }
+                                      }
+                                   //  print('chat null');
+                                    return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], ctx: context);
 
-                                    if(snapshot1.data == 'chat'){
-                                     // print('chat ada');
-                                      return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], isChat: true, ctx: context);
-                                    }else{
-                                     // print('chat tidak ada');
-                                      return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], ctx: context);
-                                    }
-
-
-                                  }
-                                //  print('chat null');
-                                  return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], ctx: context);
-                                                          }
+                            }
 
                         );
 
-
                        } else if (snapshot.hasError) {
+                             _onWidgetDidBuild(() {
+                             ScaffoldMessenger.of(context).showSnackBar(
+                             const SnackBar(
+                             content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
+                             backgroundColor: Colors.red,
+                             ),
+                             );
+                             });
 
-                       _onWidgetDidBuild(() {
-                       ScaffoldMessenger.of(context).showSnackBar(
-                       const SnackBar(
-                       content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
-                       backgroundColor: Colors.red,
-                       ),
-                       );
-                       });
-
-                         return Text("${snapshot.error}",style: Theme.of(context).textTheme.headline1);
+                               return Text("${snapshot.error}",style: Theme.of(context).textTheme.headline1);
                        } else {
                          return Container(width: 0.0, height: 0.0, color:  Colors.white);
                        }
                      });
           }
           if (state is AuthenticationUnauthenticated) {
-            // return Projectscoid(id : userID);
-            // return IntroScreen();
-            // return LoginPage();
-            print('aku disini');
-           // if(widget.isLogin) AppProvider.getApplication(context).chat.lg(userID);
 
-           // if(widget.isLogin)AppProvider.getApplication(context).chat.getFirstIndex(1);
+                return  FutureBuilder<dynamic>(
+                    future: accountController?.getAccount(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
 
-            return  FutureBuilder<dynamic>(
-                future: accountController?.getAccount(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-
-                    if(snapshot.data.isEmpty){
-                      AppProvider.getApplication(context).chat?.socketCloseSP();
-                      return  widget.isLogin! ?LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : '',  ctx: context);
-                     // return LoginPage();
-                    }
-                   // AppProvider.getApplication(context).chat.socket.connect();
-                  //  AppProvider.getApplication(context).chat.lg(snapshot.data.asMap()[0]['user_hash']);
-                  //  AppProvider.getApplication(context).chat.getFirstIndex(1);
-                      print('data      ===     ${snapshot.data.asMap()[0]['user_hash']}');
-                    return widget.isLogin! ? LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : snapshot.data.asMap()[0]['user_hash'],  ctx: context);
+                        if(snapshot.data.isEmpty){
+                          AppProvider.getApplication(context).chat?.socketCloseSP();
+                          return  widget.isLogin! ?LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : '',  ctx: context);
+                         // return LoginPage();
+                        }
+                       // AppProvider.getApplication(context).chat.socket.connect();
+                      //  AppProvider.getApplication(context).chat.lg(snapshot.data.asMap()[0]['user_hash']);
+                      //  AppProvider.getApplication(context).chat.getFirstIndex(1);
+                          print('data      ===     ${snapshot.data.asMap()[0]['user_hash']}');
+                        return widget.isLogin! ? LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : snapshot.data.asMap()[0]['user_hash'],  ctx: context);
 
 
-                  } else if (snapshot.hasError) {
+                      } else if (snapshot.hasError) {
 
-                    _onWidgetDidBuild(() {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
+                        _onWidgetDidBuild(() {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        });
+
+                        return Text("${snapshot.error}",style: Theme.of(context).textTheme.headline1);
+                      } else {
+                        return Container(width: 0.0, height: 0.0, color:  Colors.white);
+                      }
                     });
 
-                    return Text("${snapshot.error}",style: Theme.of(context).textTheme.headline1);
-                  } else {
-                    return Container(width: 0.0, height: 0.0, color:  Colors.white);
-                  }
-                });
-
-
-           // return widget.isLogin?  Projectscoid(id : userID,  ctx: context) :LoginPage() ;
           }
           if (state is AuthenticationLoading) {
             final future = accountController!.getAccount();
             future.then((val){
               for(var map in val) {
-
                 userID      = map['user_hash'];
                 username      = map['username'];
-
               }
-             // AppProvider.getApplication(context).chat.socket.connect();
-            //  AppProvider.getApplication(context).chat.lg(userID);
-            //  AppProvider.getApplication(context).chat.getFirstIndex(1);
             });
 
             return Scaffold(
                 body: Center(
                     child: Container(width: 0.0, height: 0.0, color:  Colors.white)
-                    /*
-                    CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Colors.green),
-                    )
-
-                     */
                 ));
           }
          // return Projectscoid(id : userID);
           return Container(width: 0.0, height: 0.0, color:  Colors.white);
         },
       );
-
-
-
-
-
   }
 
 }
 
 class LoadingIndicator extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) => const Center(
     child: CircularProgressIndicator(),
   );
 }
@@ -662,12 +457,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     _authenticationBloc = BlocProvider.of<AuthenticationController>(context);
-   // _authenticationBloc = _authenticationBloc(AppProvider.getApplication(context), AuthenticationUninitialized());
-
     _loginBloc = LoginController(
       application : widget.application!,
       authenticationBloc: _authenticationBloc!..initialState,
-      initialState: LoginInitial(username: '',password: ''),
+      initialState: const LoginInitial(username: '',password: ''),
     );
 
     return Scaffold(
@@ -678,21 +471,15 @@ class _LoginPageState extends State<LoginPage> {
          create: (context) => LoginController(
             authenticationBloc: _authenticationBloc!..initialState,
              application : widget.application!,
-           initialState: LoginInitial(username: '',password: ''),
+           initialState: const LoginInitial(username: '',password: ''),
            ),
-
          child: LoginForm(
-         //  authenticationBloc: _authenticationBloc,
             loginBloc: _loginBloc!,
          ),
        ),
-     /*  body: LoginForm(
-            //authenticationBloc: _authenticationBloc,
-           // loginBloc: _loginBloc,
-      ), */
-
     );
   }
+
   @override
   void dispose() {
    super.dispose();
@@ -702,12 +489,9 @@ class _LoginPageState extends State<LoginPage> {
 
 class LoginForm extends StatefulWidget {
   final LoginController? loginBloc;
- // final AuthenticationController authenticationBloc;
-
   LoginForm({
     Key? key,
     @required this.loginBloc,
-   // @required this.authenticationBloc,
   }) : super(key: key);
 
   @override
@@ -729,7 +513,6 @@ class _LoginFormState extends State<LoginForm> {
     _password = '';
     super.initState();
   }
-
 
   Widget _buildCoverImage(Size screenSize) {
     List<String> image = [
@@ -756,27 +539,13 @@ class _LoginFormState extends State<LoginForm> {
           padding: const EdgeInsets.only(left: 0.2 ),
           child:SizedBox(
             width: 3/6 *screenSize.width,
-
             height: 80.0,
-            /*
-            decoration : BoxDecoration(
-              color: Colors.white, //Color(0xFF404A5C),
-              border: Border.all(  color: Colors.white,
-                width: 3.0,),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            */
-
             child: Image.asset(
               'assets/img/logoprojects.png',
               fit: BoxFit.contain,
-
             ),
-
           )
         ) ;
-
-
   }
 
   Widget listBeauty(BuildContext context, Size screenSize) {
@@ -790,34 +559,36 @@ class _LoginFormState extends State<LoginForm> {
             width: 0.5,),
           borderRadius: BorderRadius.circular(50),
         ),
-
-
       );
-
   }
 
   Widget loginButton (BuildContext context,LoginState state){
     final size =MediaQuery.of(context).size;
     final width =size.width;
-
     return  ButtonBarTheme(
       data: ButtonBarThemeData(
         alignment: MainAxisAlignment.center,
         buttonMinWidth: 0.93 * width,
-
       ),
       child: ButtonBar(
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.93 * width,
           buttonHeight: 45.0,
           children: <Widget>[
-            RaisedButton(
-                child: Text('Masuk '),
-                textColor: CurrentTheme.ShadeColor,
-                splashColor : CurrentTheme.ShadeColor,
-                color :  Color(0xFF404A5C),
+            ElevatedButton(
+                child: const Text('Masuk ', style: TextStyle(color: Colors.white70),),
+                style: ButtonStyle(
+                  textStyle:
+                  MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(color: Colors.white70)),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(
+                      const Color(0xFF404A5C)),
+                ),
+                //backgroundColor : Color(0xFF037f51),),
+
                 onPressed: (state is ! LoginLoading)  ? _onLoginButtonPressed : null,
-            )
+            ),
           ]
       ),
     );
@@ -840,17 +611,6 @@ class _LoginFormState extends State<LoginForm> {
             InkWell(
               onTap:()async{
                 await AppProvider.getRouter(context)!.navigateTo(context, '/public/existing_user/forgot_password/123/Register');
-
-               /*
-                if (await canLaunch('https://projects.co.id/public/existing_user/forgot_password')) {
-                await launch('https://projects.co.id/public/existing_user/forgot_password');
-                } else {
-                throw 'Could not launch https://projects.co.id/public/existing_user/forgot_password';
-                }
-
-                */
-
-
               } ,
               child: Text('Lupa Password?',
                   textAlign: TextAlign.start,
@@ -884,9 +644,7 @@ class _LoginFormState extends State<LoginForm> {
                       padding: const EdgeInsets.only(right: 5.0),
                       decoration : const BoxDecoration(
                         color: CurrentTheme.ShadeColor,
-
                       ),
-
                     ),
                     Text(
                       'atau',
@@ -921,26 +679,21 @@ class _LoginFormState extends State<LoginForm> {
           buttonMinWidth: 0.73 * width,
           buttonHeight: 40.0,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
               child: const Text('Buat Akun '),
-              textColor: Colors.white,
-              splashColor : CurrentTheme.ShadeColor,
-              color :  Colors.green,
-              onPressed: ()async{
-                await AppProvider.getRouter(context)!.navigateTo(context, '/public/new_user/register/123/Register');
-             //   RegisterNewUser(id:'',title:'');
-                /*
-                if (await canLaunch('https://projects.co.id/public/new_user/register')) {
-                  await launch('https://projects.co.id/public/new_user/register');
-                } else {
-                  throw 'Could not launch https://projects.co.id/public/new_user/register';
+              style: ButtonStyle(
+                textStyle:
+                MaterialStateProperty.all<TextStyle>(
+                    const TextStyle(color: Colors.white)),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(
+                    Colors.green),
+              ),
+                onPressed: ()async{
+                  await AppProvider.getRouter(context)!.navigateTo(context, '/public/new_user/register/123/Register');
                 }
+            ),
 
-                 */
-
-
-              }
-            )
           ]
       ),
     );
@@ -959,17 +712,11 @@ class _LoginFormState extends State<LoginForm> {
             LoginState state,
             ) {
           if (state is LoginFailure) {
-           // print('ini error == ${state.error}');
-
-
-           // _loginBloc.add(ResetError());
-
-
             _onWidgetDidBuild(() {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: state.error!.contains('429') ? const Text('Request anda kena pembatasan limit. Silakan coba beberapa saat lagi.')
-                      : Text('Wrong username and password combination.'),
+                      : const Text('Wrong username and password combination.'),
                   backgroundColor: Colors.red,
                 ),
               );
@@ -1060,48 +807,6 @@ class _LoginFormState extends State<LoginForm> {
                                       orLogo(context, mediaQueryData.size),
                                       SizedBox(height: mediaQueryData.size.height  / 35),
                                       registerButton (context, state),
-                                      /*
-                                        new Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: <Widget>[
-                                              Container(
-                                                width: 100,
-                                                height: 30,
-                                                margin:EdgeInsets.all(10),
-                                                alignment: Alignment.topRight,
-                                                child: Text(''),
-                                              ),
-                                              Container(
-                                                width: 150,
-                                                height: 50,
-                                                margin: EdgeInsets.all(2),
-                                                alignment: Alignment.bottomCenter,
-                                                child: FlatButton(
-                                                  onPressed:_onSignUpButtonPressed ,
-                                                  // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                                  highlightColor: Colors.yellow,
-                                                  splashColor: Colors.yellow ,
-                                                  child: Text('SIGN UP',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 80,
-                                                height: 40,
-                                                margin: EdgeInsets.all(2),
-                                                alignment: Alignment.bottomCenter,
-                                                child: FlatButton(
-                                                  onPressed:
-                                                  state is ! LoginLoading ? _onLoginButtonPressed : null,
-                                                  // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                                  highlightColor: Colors.yellow,
-                                                  splashColor: Colors.yellow ,
-                                                  child: Text('LOGIN',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                                ),
-                                              ),
-                                            ]
-                                        ),
-
-                                       */
                                       Container(
 
                                         child:
@@ -1112,19 +817,6 @@ class _LoginFormState extends State<LoginForm> {
                                 )
                             ),
                           ),
-                          /*
-                              SafeArea(
-                                child:
-                                Column(
-                                  children: [
-                                  SizedBox(height: mediaQueryData.size.height * 3/5),
-
-                                  loginButton (context, state),
-                                  ]
-                                )
-                              ),
-
-                              */
 
                         ]
                     )
@@ -1212,48 +904,6 @@ class _LoginFormState extends State<LoginForm> {
                                         orLogo(context, mediaQueryData.size),
                                         SizedBox(height: mediaQueryData.size.height  / 35),
                                         registerButton (context, state),
-                                      /*
-                                        new Row(
-                                            mainAxisAlignment: MainAxisAlignment.end,
-                                            children: <Widget>[
-                                              Container(
-                                                width: 100,
-                                                height: 30,
-                                                margin:EdgeInsets.all(10),
-                                                alignment: Alignment.topRight,
-                                                child: Text(''),
-                                              ),
-                                              Container(
-                                                width: 150,
-                                                height: 50,
-                                                margin: EdgeInsets.all(2),
-                                                alignment: Alignment.bottomCenter,
-                                                child: FlatButton(
-                                                  onPressed:_onSignUpButtonPressed ,
-                                                  // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                                  highlightColor: Colors.yellow,
-                                                  splashColor: Colors.yellow ,
-                                                  child: Text('SIGN UP',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                                ),
-                                              ),
-                                              Container(
-                                                width: 80,
-                                                height: 40,
-                                                margin: EdgeInsets.all(2),
-                                                alignment: Alignment.bottomCenter,
-                                                child: FlatButton(
-                                                  onPressed:
-                                                  state is ! LoginLoading ? _onLoginButtonPressed : null,
-                                                  // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                                  highlightColor: Colors.yellow,
-                                                  splashColor: Colors.yellow ,
-                                                  child: Text('LOGIN',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                                ),
-                                              ),
-                                            ]
-                                        ),
-
-                                       */
                                         Container(
 
                                           child:
@@ -1263,263 +913,17 @@ class _LoginFormState extends State<LoginForm> {
                                     ),
                                   )
                               ),
-                            ),
-                             /*
-                              SafeArea(
-                                child:
-                                Column(
-                                  children: [
-                                  SizedBox(height: mediaQueryData.size.height * 3/5),
-
-                                  loginButton (context, state),
-                                  ]
-                                )
-                              ),
-
-                              */
-
+                             ),
                             ]
                           )
               )
-
-
             );
-         /* } else {
-
-            return Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    UsernameWidget(
-                        value: this._username,
-                        caption: 'Username',
-                        hint: 'Isi dengan Username Anda',
-                        required: true,
-                        getValue: (String val) {
-                          setState(() {
-                            this._username = val;
-                          });
-                        }
-                    ),
-
-
-                    new Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Container(
-                            width: 100,
-                            height: 30,
-                            margin: EdgeInsets.only(left: 0.1),
-                            alignment: Alignment.topRight,
-                            child: FlatButton(
-                              onPressed:_onSearchButtonPressed ,
-                              // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                              highlightColor: Colors.yellow,
-                              splashColor: Colors.yellow ,
-                              child: Text('SEARCH',style: TextStyle(fontSize: 16,  color: Colors.deepOrange),),
-                            ),
-                          ),
-                          Container(
-                            width: 150,
-                            height: 50,
-                            margin: EdgeInsets.all(10),
-                            alignment: Alignment.bottomCenter,
-                            child: FlatButton(
-                              onPressed:_onSignUpButtonPressed ,
-                              // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                              highlightColor: Colors.yellow,
-                              splashColor: Colors.yellow ,
-                              child: Text('SIGN UP',style: TextStyle(fontSize: 18,  color: Colors.deepOrange),),
-                            ),
-                          ),
-                          Container(
-                            width: 100,
-                            height: 50,
-                            margin: EdgeInsets.all(10),
-                            alignment: Alignment.bottomCenter,
-                            child: FlatButton(
-                              onPressed:
-                              state is! LoginLoading ? _onNextButtonPressed : null,
-                              child: Text('NEXT',style: TextStyle(fontSize: 18, color: Colors.deepOrange)),
-                            ),
-                          ),
-                        ]
-                    )
-
-
-                  ],
-                )
-            );
-          } */
-         }
+          }
         );
-
-
-
-     /*
-    return BlocListener<LoginController, LoginState>(
-      listener: (context, state) {
-        if (state is LoginFailure) {
-          Scaffold.of(context).showSnackBar(
-            SnackBar(
-              content: Text('${state.error}'),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
-      },
-      child: BlocBuilder<LoginController, LoginState>(
-        builder: (context, state) {
-          return Form(
-              key: formKey,
-              child:
-              Stack(
-                  children: <Widget>[
-
-                    _buildCoverImage(mediaQueryData.size),
-                    SafeArea(
-                        child:
-                        SingleChildScrollView(
-                            child:
-                            Padding(
-                              padding: EdgeInsets.only(top: mediaQueryData.size.height / 4.6, right : mediaQueryData.size.width / 3.5),
-                              child:listBeauty(context, mediaQueryData.size),
-                            )
-                        )
-                    ),
-                    SafeArea(
-                        child:
-                        SingleChildScrollView(
-                            child:
-                            Padding(
-                              padding: EdgeInsets.only(left : 30.0, top: mediaQueryData.size.height / 5.4),
-                              child: _buildLogoImage(context, mediaQueryData.size),
-                            )
-                        )
-                    ),
-                    SafeArea(
-                      child:
-                      SingleChildScrollView(
-                          child:
-                          Padding(
-                            padding:
-                            EdgeInsets.only(left: 22.0, right: 22.0 ),
-                            child:
-                            Column(
-                              children: [
-                                SizedBox(height: mediaQueryData.size.height / 3.2),
-
-                                UsernameWidget(
-                                    value: this._username,
-                                    caption: 'User Name or Email',
-                                    hint: 'Isi dengan Username Anda',
-                                    required: false,
-                                    getValue: (String val) {
-                                      setState(() {
-                                        this._username = val;
-                                      });
-                                    }
-                                ),
-                                LoginPasswordWidget(
-                                    value: this._password,
-                                    caption: 'Password',
-                                    hint: 'Isi dengan Password Anda',
-                                    required: false,
-                                    getValue: (String val) {
-                                      setState(() {
-                                        this._password = val;
-                                      });
-                                    }
-                                ),
-                                SizedBox(height: mediaQueryData.size.height  / 35),
-
-                                loginButton (context, state),
-                                forgetPassword(context),
-                                SizedBox(height: mediaQueryData.size.height  / 35),
-                                orLogo(context, mediaQueryData.size),
-                                SizedBox(height: mediaQueryData.size.height  / 35),
-                                registerButton (context, state),
-                                /*
-                              new Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 100,
-                                      height: 30,
-                                      margin:EdgeInsets.all(10),
-                                      alignment: Alignment.topRight,
-                                      child: Text(''),
-                                    ),
-                                    Container(
-                                      width: 150,
-                                      height: 50,
-                                      margin: EdgeInsets.all(2),
-                                      alignment: Alignment.bottomCenter,
-                                      child: FlatButton(
-                                        onPressed:_onSignUpButtonPressed ,
-                                        // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                        highlightColor: Colors.yellow,
-                                        splashColor: Colors.yellow ,
-                                        child: Text('SIGN UP',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 80,
-                                      height: 40,
-                                      margin: EdgeInsets.all(2),
-                                      alignment: Alignment.bottomCenter,
-                                      child: FlatButton(
-                                        onPressed:
-                                        state is ! LoginLoading ? _onLoginButtonPressed : null,
-                                        // shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                                        highlightColor: Colors.yellow,
-                                        splashColor: Colors.yellow ,
-                                        child: Text('LOGIN',style: TextStyle(fontSize: 15,  color: CurrentTheme.MainAccentColor),),
-                                      ),
-                                    ),
-                                  ]
-                              ),
-
-                             */
-                                Container(
-
-                                  child:
-                                  state is LoginLoading ? CircularProgressIndicator() : Container(width: 0, height: 0,),
-                                ),
-                              ],
-                            ),
-                          )
-                      ),
-                    ),
-                    /*
-                  SafeArea(
-                    child:
-                    Column(
-                      children: [
-                      SizedBox(height: mediaQueryData.size.height * 3/5),
-
-                      loginButton (context, state),
-                      ]
-                    )
-                  ),
-
-                  */
-
-                  ]
-              )
-
-
-          );
-        },
-      ),
-    );
-
-      */
-
   }
 
   void _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
     });
    // next = false;
@@ -1530,43 +934,29 @@ class _LoginFormState extends State<LoginForm> {
     if (formKey.currentState!.validate()) {
     //  BlocProvider.of<LoginController>(context).add(NextButtonPressed());
       _loginBloc!.add(NextButtonPressed());
-     // next = true;
 
     }
   }
 
   _onSignUpButtonPressed() {
-
      // next = false;
       AppProvider.getRouter(context)!.navigateTo(context, '/register');
-
   }
 
   _onSearchButtonPressed() {
-
    // next = false;
     AppProvider.getRouter(context)!.navigateTo(context, '/search');
 
   }
 
   _onLoginButtonPressed() {
-  //  FocusScope.of(context).requestFocus(new FocusNode());
-   // _loginBloc.add(ResetError());
     if (formKey.currentState!.validate()) {
-     // BlocProvider.of<LoginController>(context).add(LoginButtonPressed(
-
       _loginBloc!.add(LoginButtonPressed(
         username: _username,
         password: _password,
       ));
-
-
-
-     // next = false;
     }
-
   }
-
 
 }
 
@@ -1602,8 +992,6 @@ class _UsernameLoginWidget extends State<UsernameLoginWidget> {
   bool validation = true;
   bool isvalid = true;
   String  errormessage = '';
-  //TextEditingController contr;
-  //_UsernameLoginWidget({this.contr});
   @override
   initState(){
     super.initState();
@@ -1639,10 +1027,6 @@ class _UsernameLoginWidget extends State<UsernameLoginWidget> {
       isvalid = true;
       //}
     }
-
-    // if(!RegExp(r'/\.\./.').hasMatch(value)|| !RegExp(r'/\-\-/').hasMatch(value)|| !RegExp(r'/\_\_/').hasMatch(value))
-    //    return 'Please use a readable username.';
-
     return result;
   }
 
@@ -1710,95 +1094,10 @@ class _UsernameLoginWidget extends State<UsernameLoginWidget> {
                       return null;
                     }
                   },
-
                 ),
-
-
               )
-
-            // ]
           )
-
-
       );
-
-       /*
-      new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 14.0, 8.0, 2.0),
-                child:
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text(widget.caption, style: TextStyle(color: CurrentTheme.DisableTextColor, fontSize: 18),),
-                    new Text(errormessage, style: TextStyle(color: CurrentTheme.ErrorColor, fontSize: 14), textAlign: TextAlign.right),
-
-
-                  ],)
-
-            ),
-            new Padding(
-                padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 4.0),
-                child:// <Widget>[
-
-                new Container(
-                  // padding: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 0.0),
-                  alignment: Alignment.center,
-                  height: 44.0,
-
-                  child: new TextFormField(
-                    autofocus: true,
-                    style: TextStyle(color: CurrentTheme.NormalTextColor, fontSize: 20),
-                    decoration: new InputDecoration(
-                      hintText: widget.hint,
-                      // hintStyle: TextStyle(color: Colors.grey[500]),
-                      hintStyle: TextStyle(color: CurrentTheme.BackgroundColor),
-                      //  errorStyle:
-                      //  errorBorder: UnderlineInputBorder(),
-                      border: InputBorder.none,
-                    ),
-
-                    controller: contr,
-                    validator: (value) {
-                      // widget.value = value;
-                      errormessage = validateUserName(value, widget.required);
-                      if (isvalid) {
-                        setState(() {
-                          validation = true;
-                          // widget.value = value;
-                          _getvalue(value);
-                        });
-                        return null;
-                      } else {
-                        setState(() {
-                          validation = false;
-                          // widget.value = value;
-                          _getvalue(value);
-                        });
-                        return null;
-                      }
-                    },
-
-                  ),
-
-                  decoration: new BoxDecoration(
-                    //color: Colors.lightBlue[100],
-                    color: validation ? CurrentTheme.ShadeColor : CurrentTheme.ErrorColor,
-                  ),
-
-                )
-
-              // ]
-            )
-          ]
-
-      );
-
-        */
   }
-
 
 }

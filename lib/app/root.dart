@@ -25,7 +25,6 @@ class RootState extends State<Root> {
 
   @override
   void dispose() {
-    //  _authenticationBloc.dispose();
     super.dispose();
   }
 

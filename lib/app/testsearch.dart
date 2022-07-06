@@ -23,17 +23,6 @@ class _SearchDemoState extends State<SearchDemo> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-       /* leading: IconButton(
-          tooltip: 'Navigation menu',
-          icon: AnimatedIcon(
-            icon: AnimatedIcons.menu_arrow,
-            color: Colors.white,
-            progress: _delegate.transitionAnimation,
-          ),
-          onPressed: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-        ), */
         title: const Text('Numbers'),
         actions: <Widget>[
           IconButton(
@@ -51,16 +40,6 @@ class _SearchDemoState extends State<SearchDemo> {
               }
             },
           ),
-          //MaterialDemoDocumentationButton(SearchDemo.routeName),
-        /*  IconButton(
-            tooltip: 'More (not implemented)',
-            icon: Icon(
-              Theme.of(context).platform == TargetPlatform.iOS
-                  ? Icons.more_horiz
-                  : Icons.more_vert,
-            ),
-            onPressed: () { },
-          ), */
         ],
       ),
       body: Center(
@@ -94,40 +73,6 @@ class _SearchDemoState extends State<SearchDemo> {
           ],
         ),
       ),
-     /* floatingActionButton: FloatingActionButton.extended(
-        tooltip: 'Back', // Tests depend on this label to exit the demo.
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        label: const Text('Close demo'),
-        icon: const Icon(Icons.close),
-      ), */
-    /*  drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            const UserAccountsDrawerHeader(
-              accountName: Text('Peter Widget'),
-              accountEmail: Text('peter.widget@example.com'),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(
-                  'people/square/peter.png',
-                  package: 'flutter_gallery_assets',
-                ),
-              ),
-              margin: EdgeInsets.zero,
-            ),
-            MediaQuery.removePadding(
-              context: context,
-              // DrawerHeader consumes top MediaQuery padding.
-              removeTop: true,
-              child: const ListTile(
-                leading: Icon(Icons.payment),
-                title: Text('Placeholder'),
-              ),
-            ),
-          ],
-        ),
-      ), */
     );
   }
 }
