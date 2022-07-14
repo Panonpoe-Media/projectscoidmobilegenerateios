@@ -533,8 +533,8 @@ SpeedDialChild  ButtonActionMyBidsWidget(Button button, BuildContext context,var
       "bid[_trigger_]":"$tgr",
   "bid[captcha]": "${model.model.captcha }",
 	  
-  };
-   print('ini dia123 $tgr === ${model.model.captcha }');
+  };  
+
 
     return( formData);
   } 	

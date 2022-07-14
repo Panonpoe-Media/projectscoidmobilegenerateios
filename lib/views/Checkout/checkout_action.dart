@@ -652,7 +652,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_available_balance, postPayWithAvailableBalanceResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_available_balance, postPayWithAvailableBalanceResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -1287,7 +1289,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_via_bank_transfer, postPayViaBankTransferResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_via_bank_transfer, postPayViaBankTransferResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -1919,7 +1923,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_credit_card, postPayWithCreditCardResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_credit_card, postPayWithCreditCardResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -2551,7 +2557,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_cimb_clicks, postPayWithCimbClicksResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_cimb_clicks, postPayWithCimbClicksResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -3183,7 +3191,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_bca_klikpay, postPayWithBcaKlikpayResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_bca_klikpay, postPayWithBcaKlikpayResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -3815,7 +3825,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_mandiri_clickpay, postPayWithMandiriClickpayResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_mandiri_clickpay, postPayWithMandiriClickpayResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -4447,7 +4459,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_qris, postPayWithQrisResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_qris, postPayWithQrisResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -5079,7 +5093,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_paypal, postPayWithPaypalResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,pay_with_paypal, postPayWithPaypalResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,

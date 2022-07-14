@@ -655,7 +655,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,add_portofolio, postAddPortofolioResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,add_portofolio, postAddPortofolioResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -1291,7 +1293,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,edit, postEditResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,edit, postEditResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,

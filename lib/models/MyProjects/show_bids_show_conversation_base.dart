@@ -401,6 +401,8 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
   formData.addAll({"bid[message]": "${model.model.message }"});
   formData.addAll({"bid[attachments]": '$attachments'});
   formData.addAll({"bid[attachments_lastval]": '$attachments_last'});
+  formData.addAll({"bid[read_by_owner]": "${model.model.read_by_owner ? 1 : 0}"});
+  formData.addAll({"bid[shortlisted]": "${model.model.shortlisted ? 1 : 0}"});
   formData.addAll({"bid[captcha]": "${model.model.captcha }"});
   formData.addAll({"bid[project_title]": "${model.model.project_title }"});
   formData.addAll({"bid[project_owner]": "${model.model.project_owner }"});
@@ -661,6 +663,32 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 			model.model.attachments = val;
 		  });
 		},
+	));} 
+	  	    Widget editReadByOwner (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.read_by_owner,
+	  caption: 'Read By Owner',
+	  hint: 'Isi dengan boolean Anda',
+	   required: false,
+	  getValue: (bool? val) {
+		state.setState(() {
+		  model.model.read_by_owner = val;
+		});
+	  },
+	));} 
+	  	    Widget editShortlisted (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.shortlisted,
+	  caption: 'Shortlisted',
+	  hint: 'Isi dengan boolean Anda',
+	   required: false,
+	  getValue: (bool? val) {
+		state.setState(() {
+		  model.model.shortlisted = val;
+		});
+	  },
 	));} 
 	  	    Widget editCaptcha (State state) {
 		if(model.model.captcha == null){

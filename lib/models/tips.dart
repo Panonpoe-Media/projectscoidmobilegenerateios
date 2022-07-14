@@ -379,8 +379,8 @@ class TipsListingModel extends TipsListingBase {
         child: ItemTipsCard2(
             destination: item,
             search: search,
-            shape: shape!,
-            height: height!,
+            shape: shape,
+            height: height,
             index: index!,
             account: account));
   }
@@ -397,7 +397,7 @@ class TipsListingModel extends TipsListingBase {
             destination: item,
             search: search!,
             shape: shape!,
-            height: height!,
+            height: height,
             account: account!));
   }
 }

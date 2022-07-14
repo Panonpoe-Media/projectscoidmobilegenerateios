@@ -45,6 +45,35 @@ class ConfirmPaymentMyOrdersModel extends ConfirmPaymentMyOrdersBase{
   Map<String, dynamic> json;
   ConfirmPaymentMyOrdersModel(Map<String, dynamic> this.json):super(json);
 
+  @override
+  Widget editAccountNo (State state) {
+    return(
+        DisplayNameWidget(
+          value: model.model.account_no,
+          caption: 'Account No',
+          hint: 'Masukan No. Rekening Anda ',
+          required: true,
+          getValue: (String? val) {
+            state.setState(() {
+              model.model.account_no = val;
+            });
+          },
+        ));}
+
+  @override
+  Widget editAccountName (State state) {
+    return(
+        DisplayNameWidget(
+          value: model.model.account_name,
+          caption: 'Account Name',
+          hint: 'Masukan Nama Pemilik Rekening',
+          required: true,
+          getValue: (String? val) {
+            state.setState(() {
+              model.model.account_name = val;
+            });
+          },
+        ));}
 
 	  
 }

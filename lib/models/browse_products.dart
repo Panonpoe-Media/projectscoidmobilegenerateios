@@ -4055,9 +4055,9 @@ class _ItemBrowseProductsCard3State extends State<ItemBrowseProductsCard3> {
             child: Column(
               children: [
                 Card(
-                  elevation: 2.0,
+                  elevation: 6.0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(4),
                   ),
                   child: _isBannerAdReady
                       ? ItemBrowseProductsContent3(

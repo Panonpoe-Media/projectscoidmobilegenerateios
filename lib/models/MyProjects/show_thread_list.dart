@@ -1760,7 +1760,7 @@ class ShowThreadListingModel extends ShowThreadListingBase{
   }
 
 
-  Widget	 ButtonsX1(BuildContext context, bool visible, String id, bool isShowEG, ChatBloc cb){
+  Widget	 ButtonsX1(BuildContext context, bool visible, String id, bool isShowEG, ChatBloc? cb){
     final mediaQueryData = MediaQuery.of(context);
 
 
@@ -1843,7 +1843,7 @@ class ShowThreadListingModel extends ShowThreadListingBase{
   }
 
  // @override
-  List<SpeedDialChild>	 listButton12(BuildContext context, String id,ChatBloc cb){
+  List<SpeedDialChild>	 listButton12(BuildContext context, String id,ChatBloc? cb){
     final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
     ];
     for(var i = 0; i < tools.buttons.length; i++)
@@ -1859,7 +1859,7 @@ class ShowThreadListingModel extends ShowThreadListingBase{
   }
 
 
-  SpeedDialChild ListButtonShowThreadWidget1(Button button, BuildContext context,ChatBloc cb ){
+  SpeedDialChild ListButtonShowThreadWidget1(Button button, BuildContext context,ChatBloc? cb ){
 
     if(button.type == 'custom_filter'){
       return (

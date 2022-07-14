@@ -549,6 +549,11 @@ SpeedDialChild ButtonActionShortlistedBidsWidget(Button button, BuildContext con
 			));
 			}
 		} 
+				Widget viewShortlisted (BuildContext context) {  
+		return(  BooleanView(
+			value: model.model.shortlisted,
+			caption: 'Shortlisted',
+		));} 
 				Widget viewPublishedBudget (BuildContext context) { 
 		return(  DisplayNameView(
 			value: model.model.published_budget,

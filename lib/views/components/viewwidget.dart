@@ -2884,6 +2884,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                         :
                                                GestureDetector(
                                               onTap:(){
+                                                print('halooooo123');
                                                 if(_tasks![0]!.status !=
                                                     DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
                                                   _requestDownload(item.task!);
@@ -2981,9 +2982,9 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
+                      const Padding(
                         padding:
-                        const EdgeInsets.symmetric(horizontal: 24.0),
+                        EdgeInsets.symmetric(horizontal: 24.0),
                         child: Text(
                           'Please grant accessing storage permission to continue -_-',
                           textAlign: TextAlign.center,
@@ -2991,7 +2992,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                               color: Colors.blueGrey, fontSize: 18.0),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 32.0,
                       ),
                       FlatButton(
@@ -3002,7 +3003,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                               });
                             });
                           },
-                          child: Text(
+                          child: const Text(
                             'Retry',
                             style: TextStyle(
                                 color: Colors.blue,
@@ -3170,6 +3171,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
         headers: {"auth": "test_for_sql_encoding"},
         savedDir: _localPath!,
         showNotification: true,
+        saveInPublicStorage:true,
         openFileFromNotification: true);
         setState(() {
           fileExists = true;

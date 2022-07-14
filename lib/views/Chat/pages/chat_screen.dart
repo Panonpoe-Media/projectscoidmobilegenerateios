@@ -3502,82 +3502,56 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
             automaticallyImplyLeading: false,
 
 
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: ()async{
-                    //  widget.chatBloc!.nextTread(0);
-
-                    if(widget.trans!){
-                      widget.chatBloc!.getIndexSpecial(1);
-                      widget.chatBloc!.setCurrentThread();
-                      setState(() {
-
-                      });
-                     // widget.chatBloc!.getFirstThread(widget._jsonMessage['thread']);
-                      Navigator.pop(context, false);
-                      setState(() {
-
-                      });
-
-                    }else{
-
-                      widget.chatBloc!.getIndexSpecial(1);
-                      widget.chatBloc!.setCurrentThread();
-                      setState(() {
-
-                      });
-                      Navigator.pop(context, false);
-                      setState(() {
-
-                      });
-
-                    }
-
-                  },
-
-                  child:
-                  Padding(padding: const EdgeInsets.only(right: 10.0),
-                    child: const Icon(Icons.arrow_back,),
-                  ),
-                ),
-               // isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,):
-
-                GestureDetector(
-                  child:    MyCircleAvatar(
-                    imgUrl: "${widget._jsonMessage['avatar']?? widget.avatar ?? widget._jsonMessage['index']['avatar']?? 'https://cdn.projects.co.id/upload/usr561611/20141107545caba002e77-thumb.jpg'}",
-                   // imgUrl: "${this.viewUserStatus.photo_url}",
-                    //json['photo_url'] as String,
-                    //       json['display_name'] as String,
-
-                  ),
-                  onTap: ()async{
-                    FocusScope.of(context).unfocus();
-                    setState(() {
-                      SystemChannels.textInput.invokeMethod('TextInput.hide');
-                    });
-                    AppProvider.getRouter(context)!.navigateTo(
-                        context,
-                        urlToRoute('public/browse_users/view/${widget._jsonMessage['userid']}/zzz'));
-
-                  },
-                ),
-
-                const SizedBox(width: 5),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                title: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                   // isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,):
                     GestureDetector(
-                      child: Text(
+                      onTap: ()async{
+                        //  widget.chatBloc!.nextTread(0);
 
-                        "${widget._jsonMessage['username'] ?? widget.display ?? widget._jsonMessage['index']['username'] ??  widget._jsonMessage['userid']}",
-                       // "${this.viewUserStatus.display_name}",
-                        style: Theme.of(context).textTheme.subtitle2,
-                        overflow: TextOverflow.clip,
+                        if(widget.trans!){
+                          widget.chatBloc!.getIndexSpecial(1);
+                          widget.chatBloc!.setCurrentThread();
+                          setState(() {
+
+                          });
+                         // widget.chatBloc!.getFirstThread(widget._jsonMessage['thread']);
+                          Navigator.pop(context, false);
+                          setState(() {
+
+                          });
+
+                        }else{
+
+                          widget.chatBloc!.getIndexSpecial(1);
+                          widget.chatBloc!.setCurrentThread();
+                          setState(() {
+
+                          });
+                          Navigator.pop(context, false);
+                          setState(() {
+
+                          });
+
+                        }
+
+                      },
+
+                      child:
+                      Padding(padding: const EdgeInsets.only(right: 10.0),
+                        child: const Icon(Icons.arrow_back,),
+                      ),
+                    ),
+                   // isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,):
+
+                    GestureDetector(
+                      child:    MyCircleAvatar(
+                        imgUrl: "${widget._jsonMessage['avatar']?? widget.avatar ?? widget._jsonMessage['index']['avatar']?? 'https://cdn.projects.co.id/upload/usr561611/20141107545caba002e77-thumb.jpg'}",
+                       // imgUrl: "${this.viewUserStatus.photo_url}",
+                        //json['photo_url'] as String,
+                        //       json['display_name'] as String,
+
                       ),
                       onTap: ()async{
                         FocusScope.of(context).unfocus();
@@ -3591,234 +3565,260 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                       },
                     ),
 
+                    const SizedBox(width: 5),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                       // isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,):
+                        GestureDetector(
+                          child: Text(
 
-                    StreamBuilder(
-                        stream: widget.chatBloc!.onMessage,
-                        // stream: widget.chatBloc!.getThreads(Duration(seconds:1)),
-                        initialData: [],
-                        builder: (BuildContext context, AsyncSnapshot snapshot) {
-
-                          if (snapshot.hasError) {
-
-                            _onWidgetDidBuild(() {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
+                            "${widget._jsonMessage['username'] ?? widget.display ?? widget._jsonMessage['index']['username'] ??  widget._jsonMessage['userid']}",
+                           // "${this.viewUserStatus.display_name}",
+                            style: Theme.of(context).textTheme.subtitle2,
+                            overflow: TextOverflow.clip,
+                          ),
+                          onTap: ()async{
+                            FocusScope.of(context).unfocus();
+                            setState(() {
+                              SystemChannels.textInput.invokeMethod('TextInput.hide');
                             });
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute('public/browse_users/view/${widget._jsonMessage['userid']}/zzz'));
+
+                          },
+                        ),
 
 
-                            return Text(snapshot.error.toString());
-                          }
-                          if (snapshot.data == null ) {
+                        StreamBuilder(
+                            stream: widget.chatBloc!.onMessage,
+                            // stream: widget.chatBloc!.getThreads(Duration(seconds:1)),
+                            initialData: [],
+                            builder: (BuildContext context, AsyncSnapshot snapshot) {
 
-                          }
-                          if (snapshot.hasData) {
-                            // print('snap == ${snapshot.data}');
-                            if(snapshot.data.isNotEmpty){
+                              if (snapshot.hasError) {
 
-                              String title = jsonDecode(snapshot.data)['type'];
-                              if(title == 'typing' && jsonDecode(snapshot.data)['thread'] == widget._jsonMessage['thread'] ){
-                                return
-                                  Text( "typing..." , style: Theme.of(context).textTheme.subtitle2!.apply(
-                               //     color: myGreen,
-                                  ),
+                                _onWidgetDidBuild(() {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
+                                      backgroundColor: Colors.red,
+                                    ),
                                   );
+                                });
+
+
+                                return Text(snapshot.error.toString());
                               }
+                              if (snapshot.data == null ) {
+
+                              }
+                              if (snapshot.hasData) {
+                                // print('snap == ${snapshot.data}');
+                                if(snapshot.data.isNotEmpty){
+
+                                  String title = jsonDecode(snapshot.data)['type'];
+                                  if(title == 'typing' && jsonDecode(snapshot.data)['thread'] == widget._jsonMessage['thread'] ){
+                                    return
+                                      Text( "typing..." , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                   //     color: myGreen,
+                                      ),
+                                      );
+                                  }
+                                }
+
+
+
+
+
+                              }
+
+                              return
+
+                                widget.trans!?
+                                isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,)
+
+
+
+                                : isOnlineDate(this.viewUserStatus.last_seen)! ?
+                                Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                  color: myGreen,
+                                ),
+                                )
+                                    :
+                                Text( "Last seen ${readDate(this.viewUserStatus.last_seen)}" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                 // color: myGreen,
+                                ),
+                                )
+                                    : widget._jsonMessage['online'].toString() != '0'  ? Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                  // color: myGreen,
+                                ),)
+                                :widget._jsonMessage['online'].toString() == '0' && widget._jsonMessage['username'].toLowerCase().contains('admin') ? Text( "Currently Offline" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                  // color: myGreen,
+                                ),)
+
+                                :isOnline(widget._jsonMessage['lastseen']?? widget._jsonMessage['index']['lastseen'])!?
+                                Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                 // color: myGreen,
+                                ),
+                                )
+                                    :
+                                Text( "Last seen ${readTimestamp(widget._jsonMessage['lastseen']?? widget._jsonMessage['index']['lastseen'])}" , style: Theme.of(context).textTheme.subtitle2!.apply(
+                                 // color: myGreen,
+                                ),
+                                );
+
                             }
+                        ),
 
-
-
-
-
-                          }
-
-                          return
-
-                            widget.trans!?
-                            isLoading? Container(width: 0.0, height: 0.0, color: Colors.white,)
-
-
-
-                            : isOnlineDate(this.viewUserStatus.last_seen)! ?
-                            Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                              color: myGreen,
-                            ),
-                            )
-                                :
-                            Text( "Last seen ${readDate(this.viewUserStatus.last_seen)}" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                             // color: myGreen,
-                            ),
-                            )
-                                : widget._jsonMessage['online'].toString() != '0'  ? Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                              // color: myGreen,
-                            ),)
-                            :widget._jsonMessage['online'].toString() == '0' && widget._jsonMessage['username'].toLowerCase().contains('admin') ? Text( "Currently Offline" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                              // color: myGreen,
-                            ),)
-
-                            :isOnline(widget._jsonMessage['lastseen']?? widget._jsonMessage['index']['lastseen'])!?
-                            Text( "Currently Online" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                             // color: myGreen,
-                            ),
-                            )
-                                :
-                            Text( "Last seen ${readTimestamp(widget._jsonMessage['lastseen']?? widget._jsonMessage['index']['lastseen'])}" , style: Theme.of(context).textTheme.subtitle2!.apply(
-                             // color: myGreen,
-                            ),
-                            );
-
-                        }
+                      ],
                     ),
+
 
                   ],
+
+
                 ),
+                    actions: [
+
+                      PopupMenuButton<int>(
+                        padding :const EdgeInsets.all(0.0),
+                        //padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 12.0),
+                        icon: const Icon(Icons.search),
+                        onSelected: (int value) {
+
+                          if(value == 1) {
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => SearchThread(
+                                    user: widget.userID,
+                                    chatBloc : widget.chatBloc,
+                                    thread: widget._jsonMessage['thread'],
+                                    display: widget._jsonMessage['username'],
+                                    userInfo: widget._jsonMessage,
+                                    avatar: widget._jsonMessage['avatar']
+                                ),
+                              ),
+                            );
+                          }
+                          if(value == 2) {
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SearchBrowseProjectsListing(id : '', title : '', cb: widget.chatBloc!)),
+                            );
+                          }
+                          if(value == 3) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SearchBrowseServicesListing1(id : '', title : '', cb: widget.chatBloc!)),
+                            );
+
+                          }
+                          if(value == 4) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SearchBrowseProductsListing(id : '', title : '', cb: widget.chatBloc!)),
+                            );
+                          }
+                          if(value == 5) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SearchBrowseUsersListing1(id : '', title : '', cb: widget.chatBloc!)),
+                            );
+                          }
+
+                          if(value == 6) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SearchPastProjectsListing(id : '', title : '')),
+                            );
+                          }
+
+                          if(value == 7) {
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute("/public/test/listing/123"));
+                          }
 
 
-              ],
 
 
-            ),
-                actions: [
-
-                  PopupMenuButton<int>(
-                    padding :const EdgeInsets.all(0.0),
-                    //padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 12.0),
-                    icon: const Icon(Icons.search),
-                    onSelected: (int value) {
-
-                      if(value == 1) {
-
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SearchThread(
-                                user: widget.userID,
-                                chatBloc : widget.chatBloc,
-                                thread: widget._jsonMessage['thread'],
-                                display: widget._jsonMessage['username'],
-                                userInfo: widget._jsonMessage,
-                                avatar: widget._jsonMessage['avatar']
-                            ),
+                        },
+                        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                          const PopupMenuItem<int>(
+                            value: 1,
+                            child: Text('Search This Chat'),
                           ),
-                        );
-                      }
-                      if(value == 2) {
+                          const PopupMenuItem<int>(
+                            value: 2,
+                            child: Text('Search Projects'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 3,
+                            child: Text('Search Services'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 4,
+                            child: Text('Search Products'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 5,
+                            child: Text('Search Users'),
+                          ),
+                          const PopupMenuItem<int>(
+                            value: 6,
+                            child: Text('Search Past Projects'),
+                          ),
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchBrowseProjectsListing(id : '', title : '', cb: widget.chatBloc!)),
-                        );
-                      }
-                      if(value == 3) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchBrowseServicesListing1(id : '', title : '', cb: widget.chatBloc!)),
-                        );
+                          /*
+                        const PopupMenuItem<int>(
+                          value: 7,
+                          child: Text('test field'),
+                        ),
 
-                      }
-                      if(value == 4) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchBrowseProductsListing(id : '', title : '', cb: widget.chatBloc!)),
-                        );
-                      }
-                      if(value == 5) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchBrowseUsersListing1(id : '', title : '', cb: widget.chatBloc!)),
-                        );
-                      }
+                        */
 
-                      if(value == 6) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SearchPastProjectsListing(id : '', title : '')),
-                        );
-                      }
-
-                      if(value == 7) {
-                        AppProvider.getRouter(context)!.navigateTo(
-                            context,
-                            urlToRoute("/public/test/listing/123"));
-                      }
-
-
-
-
-                    },
-                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                      const PopupMenuItem<int>(
-                        value: 1,
-                        child: Text('Search This Chat'),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 2,
-                        child: Text('Search Projects'),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 3,
-                        child: Text('Search Services'),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 4,
-                        child: Text('Search Products'),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 5,
-                        child: Text('Search Users'),
-                      ),
-                      const PopupMenuItem<int>(
-                        value: 6,
-                        child: Text('Search Past Projects'),
+                        ],
                       ),
 
-                      /*
-                    const PopupMenuItem<int>(
-                      value: 7,
-                      child: Text('test field'),
-                    ),
+                      PopupMenuButton<int> (
+                        padding :const EdgeInsets.all(0.0),
+                        onSelected: (int value) {
 
-                    */
+                          if(value == 1) {
+                            widget.chatBloc!.blacklist(widget._jsonMessage['thread']);
 
+                            widget.chatBloc!.getIndexSpecial(1);
+                            // widget.chatBloc!.getBlacklist(widget.userID, context);
+
+                            widget.chatBloc!.setCurrentThread();
+                            //widget.chatBloc!.getIndexSpecial(1);
+                            // widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
+                            setState(() {
+
+                            });
+                            Navigator.pop(context, false);
+                            setState(() {
+
+                            });
+                          }
+
+
+                        },
+                        itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
+                          const PopupMenuItem<int>(
+                            value: 1,
+                            child: Text('Blacklist User'),
+                          ),
+
+                        ],
+                      ),
                     ],
-                  ),
-
-                  PopupMenuButton<int> (
-                    padding :const EdgeInsets.all(0.0),
-                    onSelected: (int value) {
-
-                      if(value == 1) {
-                        widget.chatBloc!.blacklist(widget._jsonMessage['thread']);
-
-                        widget.chatBloc!.getIndexSpecial(1);
-                        // widget.chatBloc!.getBlacklist(widget.userID, context);
-
-                        widget.chatBloc!.setCurrentThread();
-                        //widget.chatBloc!.getIndexSpecial(1);
-                        // widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
-                        setState(() {
-
-                        });
-                        Navigator.pop(context, false);
-                        setState(() {
-
-                        });
-                      }
-
-
-                    },
-                    itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
-                      const PopupMenuItem<int>(
-                        value: 1,
-                        child: Text('Blacklist User'),
-                      ),
-
-                    ],
-                  ),
-                ],
 
           ),
           body:
@@ -4793,8 +4793,8 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
         )
         : AppBar(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black54),
+         // backgroundColor: Colors.white,
+         // iconTheme: IconThemeData(color: Colors.black54),
           automaticallyImplyLeading: false,
 
 
@@ -4895,7 +4895,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     child: Text(
                       "${widget._jsonMessage['username'] ?? widget.display ?? widget._jsonMessage['index']['username'] }",
                       //"${this.viewUserStatus.display_name}",
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.subtitle2,
                       overflow: TextOverflow.clip,
                     ),
                     onTap: ()async{

@@ -29,6 +29,7 @@ import 'package:projectscoid/ProjectscoidApplication.dart';
 import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/app/projectscoid.dart';
 import 'package:flutter_html/style.dart';
+import 'package:html/parser.dart' show parse;
 //import 'package:flutter_credit_card/credit_card_form.dart';
 //import 'package:flutter_credit_card/credit_card_model.dart';
 //import 'package:flutter_credit_card/flutter_credit_card.dart';
@@ -1752,7 +1753,11 @@ class BuyInstructionSentTransfState extends State< BuyInstructionSentTransf>  wi
 
   @override
   Widget build(BuildContext context) {
-
+    var document = parse(widget.buyinstruction!['content']);
+    var recentNews = document.getElementsByClassName('btn green');
+    var recentNews1 = document.getElementsByClassName('btn green')[0].remove();
+    //print(recentNews1.);
+    String? hr  = recentNews.elementAt(0).attributes['href']?.replaceAll('view', 'confirm_payment');
     return Scaffold(
         appBar: AppBar(
             backgroundColor: CurrentTheme.MainAccentColor,
@@ -1812,61 +1817,88 @@ class BuyInstructionSentTransfState extends State< BuyInstructionSentTransf>  wi
               child:
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-                child:HtmlWidget(
-                    widget.buyinstruction!['content'],
+                child:
+                Column(
+                  children: [
+                    HtmlWidget(
+                     //   widget.buyinstruction!['content'],
+                    document.outerHtml,
+                        onTapUrl: (url) async{
+                          if(url.contains('projects.co.id')){
 
-                    onTapUrl: (url) async{
-                      if(url.contains('projects.co.id')){
+
+                            if(url.contains(new RegExp(r'[0-9]'))){
+
+                              if(url.contains('show_conversation')){
+                                AppProvider.getRouter(context)!.navigateTo(
+                                    context,
+                                    urlToRoute(url+ '/' ));
+                              }else{
+
+                                AppProvider.getRouter(context)!.navigateTo(
+                                    context,
+                                    urlToRoute(url )).catchError((onError){
+
+                                  AppProvider.getRouter(context)!.pop(context);
+                                });
+                              }
+
+                            }else{
+                              AppProvider.getRouter(context)!.navigateTo(
+                                  context,
+                                  urlToRoute(url + '/listing/'));
+                            }
 
 
-                        if(url.contains(new RegExp(r'[0-9]'))){
+                          }else
+                          {
 
-                          if(url.contains('show_conversation')){
-                            AppProvider.getRouter(context)!.navigateTo(
-                                context,
-                                urlToRoute(url+ '/' ));
-                          }else{
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
 
-                            AppProvider.getRouter(context)!.navigateTo(
-                                context,
-                                urlToRoute(url )).catchError((onError){
+
+                          }
+                          throw 'Could not launch';
+                        },
+
+
+                        onTapImage:(src) =>
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ShowItemScreenshots(image:'$src')),
+                            )
+
+
+
+
+                    ),
+                    ElevatedButton(
+                      child: const Text('Confirm payment', style: TextStyle(color: Colors.white70),),
+                      style: ButtonStyle(
+                        textStyle:
+                        MaterialStateProperty.all<TextStyle>(
+                            const TextStyle(color: Colors.white70)),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(
+                             Colors.green),
+                      ),
+                      //backgroundColor : Color(0xFF037f51),),
+
+                      onPressed: (){
+                              AppProvider.getRouter(context)!.navigateTo(
+                              context,
+                              urlToRoute(hr! )).catchError((onError){
 
                               AppProvider.getRouter(context)!.pop(context);
-                            });
-                          }
+                              });
+                        },
+                    ),
+                  ],
+                )
 
-                        }else{
-                          AppProvider.getRouter(context)!.navigateTo(
-                              context,
-                              urlToRoute(url + '/listing/'));
-                        }
-
-
-                      }else
-                      {
-
-                        if (await canLaunch(url)) {
-                          await launch(url);
-                        } else {
-                          throw 'Could not launch $url';
-                        }
-
-
-                      }
-                     throw 'Could not launch';
-                    },
-
-
-                    onTapImage:(src) =>
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ShowItemScreenshots(image:'$src')),
-                        )
-
-
-
-
-                ),
               )
 
             )

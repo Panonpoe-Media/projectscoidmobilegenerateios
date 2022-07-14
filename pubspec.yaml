@@ -162,7 +162,7 @@ dependencies:
   firebase_messaging: ^11.4.1
   file_picker: ^4.6.1
   flutter_local_notifications: ^9.3.2
-  flutter_downloader: ^1.7.2
+  flutter_downloader: ^1.8.0+1
 
   image_picker: ^0.8.4+9
   image_gallery_saver: ^1.7.1

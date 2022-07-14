@@ -1709,7 +1709,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,add_new_product, postAddNewProductResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,add_new_product, postAddNewProductResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -2347,7 +2349,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,publish_product, postPublishProductResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,publish_product, postPublishProductResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -2988,7 +2992,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,edit_product, postEditProductResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,edit_product, postEditProductResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -3626,7 +3632,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,bump_up, postBumpUpResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,bump_up, postBumpUpResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -4787,7 +4795,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,unlist, postUnlistResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,unlist, postUnlistResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,
@@ -5425,7 +5435,9 @@ final RestorableInt _counter = RestorableInt(0);
                         	Container(
                               height: 30,
                             ),
-                            isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,reactivate_product, postReactivateProductResult, this, sendPath, widget.id!, widget.title!),
+							
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,reactivate_product, postReactivateProductResult, this, sendPath, widget.id!, widget.title!),
+          
                       
                         Container(
                           height: 60,

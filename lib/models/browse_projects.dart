@@ -3369,9 +3369,10 @@ class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1> {
           padding: const EdgeInsets.fromLTRB(0.0, 0.5, 0.0, 0.5),
           child: Column(children: [
             Card(
-                elevation: 2.0,
+                elevation: 6.0,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
+
+                  borderRadius: BorderRadius.circular(4),
                 ),
                 //  shadowColor: CurrentTheme.ListColor,
                 child:
@@ -4682,34 +4683,56 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                   ])
                 : Container(),
       ),
+
       Container(
         height: 0.3,
-        color: Colors.grey,
+        color: Colors.white,
       ),
 
       //  if(index! % 10 == 0 )
 
       Padding(
-        padding: EdgeInsets.only(bottom: 0),
+        padding: const EdgeInsets.only(bottom: 15.0, top: 10.0),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(right: 4),
                         child: Icon(
-                          Icons.attach_money_rounded,
+                          Icons.money_sharp,
                           size: 20.0,
                           color: Colors.black87,
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 3.0, right: 10, bottom: 6),
+                        child: destination!.item.project_class_str ==
+                            'Open to Suggestions'
+                            ? Text('Open to Suggestions',
+                            style: descriptionStyle.copyWith(
+                                fontSize: 11))
+                            : Text(
+                          destination!.item.project_class_str ==
+                              "Specific Range"
+                              ? destination!
+                              .item.published_budget_str ??
+                              '-'
+                              : destination!
+                              .item.published_budget_str,
+                          style: descriptionStyle.copyWith(
+                              fontSize: 12),
+                        ),
+                      )
+                      /*
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -4742,15 +4765,20 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                                     ),
                             )
                           ]),
+
+                       */
                     ],
                   ),
                 ),
               ),
+              /*
               Container(
                 width: 0.3,
                 height: 52,
                 color: Colors.grey,
               ),
+
+               */
               Padding(
                 padding: EdgeInsets.only(left: 10, right: 10),
                 child: Row(
@@ -4765,6 +4793,17 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                         color: Colors.black87,
                       ),
                     ),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            top: 3.0, right: 10, bottom: 6),
+                        child: Text(
+                             destination!.item.finish_days > 1 ?
+                            '${destination!.item.finish_days.toString()} days'
+                            :
+                             '${destination!.item.finish_days.toString()} day' ,
+                            style:
+                            descriptionStyle.copyWith(fontSize: 12))),
+                    /*
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -4784,14 +4823,20 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                                   style:
                                       descriptionStyle.copyWith(fontSize: 11)))
                         ]),
+
+                     */
                   ],
                 ),
               ),
+              /*
               Container(
                 width: 0.3,
                 height: 52,
                 color: Colors.grey,
               ),
+
+               */
+
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10),
@@ -4807,6 +4852,18 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                           color: Colors.black87,
                         ),
                       ),
+                      Padding(
+                          padding: EdgeInsets.only(
+                              top: 3.0, right: 10, bottom: 6),
+                          child: Text(
+                               destination!.item.bid_count > 1?
+                              '${destination!.item.bid_count.toString()} bids'
+                              :
+                               '${destination!.item.bid_count.toString()} bid'
+                              ,
+                              style: descriptionStyle.copyWith(
+                                  fontSize: 12)))
+                      /*
                       Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -4826,6 +4883,8 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                                     style: descriptionStyle.copyWith(
                                         fontSize: 11)))
                           ]),
+
+                       */
                     ],
                   ),
                 ),

@@ -373,6 +373,8 @@ SpeedDialChild ButtonActionShowThreadWidget(Button button, BuildContext context,
   formData.addAll({"post[message]": "${model.model.message }"});
   formData.addAll({"post[attachments]": '$attachments'});
   formData.addAll({"post[attachments_lastval]": '$attachments_last'});
+  formData.addAll({"post[read_by_owner]": "${model.model.read_by_owner ? 1 : 0}"});
+  formData.addAll({"post[read_by_worker]": "${model.model.read_by_worker ? 1 : 0}"});
 	  
 		  
 		 
@@ -598,6 +600,32 @@ SpeedDialChild ButtonActionShowThreadWidget(Button button, BuildContext context,
 			model.model.attachments = val;
 		  });
 		},
+	));} 
+	  	    Widget editReadByOwner (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.read_by_owner,
+	  caption: 'Read By Owner',
+	  hint: 'Isi dengan boolean Anda',
+	   required: false,
+	  getValue: (bool? val) {
+		state.setState(() {
+		  model.model.read_by_owner = val;
+		});
+	  },
+	));} 
+	  	    Widget editReadByWorker (State state) {
+      return(
+	BooleanWidget(
+	  value: model.model.read_by_worker,
+	  caption: 'Read By Worker',
+	  hint: 'Isi dengan boolean Anda',
+	   required: false,
+	  getValue: (bool? val) {
+		state.setState(() {
+		  model.model.read_by_worker = val;
+		});
+	  },
 	));} 
 
 }

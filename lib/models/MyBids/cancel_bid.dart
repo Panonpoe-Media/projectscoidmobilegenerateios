@@ -22,7 +22,7 @@
       String tgr = triger.toLowerCase().replaceAll(' ', '_');
       var formData = {"bid[_trigger_]":"$tgr"};
   formData.addAll({"bid[captcha]": "${model.model.captcha }"});
-  print('ini dia $tgr === ${model.model.captcha }');
+ 
 
 
     return( formData);
