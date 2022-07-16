@@ -105,7 +105,7 @@ String filterShortcodes(String input,
     });
 	
 	 return BlocBuilder<UserArbitrationsListing, UserArbitrationsState>(
-    //  cubit: listing,
+      bloc: listing,
 
       builder: (BuildContext context, state) {
 	  final mediaQueryData = MediaQuery.of(context);
@@ -1136,8 +1136,13 @@ class UserArbitrationsListing extends Bloc<UserArbitrationsEvent, UserArbitratio
   final ProjectscoidApplication application;
   final String url;
   final bool isSearch;
-  UserArbitrationsListing(this.application, this.url, this.isSearch, UserArbitrationsState initialState):super(initialState);
-  @override
+  UserArbitrationsListing(this.application, this.url, this.isSearch, UserArbitrationsState initialState):
+	super(initialState){
+	on<UserArbitrationsList>(_UserArbitrationsListEvent);
+	on<UserArbitrationsListingRefresh>(_UserArbitrationsListingRefreshEvent);
+	}
+
+	@override
   void dispose() {
    // super.dispose();
   }
@@ -1166,8 +1171,8 @@ class UserArbitrationsListing extends Bloc<UserArbitrationsEvent, UserArbitratio
   @override
   get initialState => UserArbitrationsListingUninitialized();
 
-  @override
 
+  @override
   Stream<UserArbitrationsState> mapEventToState(UserArbitrationsEvent event) async* {
     final currentState = state;
     if (event is UserArbitrationsList && !hasReachedMax(currentState)) {
@@ -1317,6 +1322,159 @@ class UserArbitrationsListing extends Bloc<UserArbitrationsEvent, UserArbitratio
     }
   }
 
+
+
+	void  _UserArbitrationsListEvent(UserArbitrationsList event, Emitter<UserArbitrationsState> emit)async{
+		final currentState = state;
+		print('haloooooo pintar');
+		if (!hasReachedMax(currentState)) {
+			try {
+				if (currentState is UserArbitrationsListingUninitialized){
+					if(isSearch){
+						UserArbitrationsListingModel? user_arbitrations = await listingSearchUserArbitrations(1);
+						int deltaPage = user_arbitrations!.items.items.length ~/(user_arbitrations!.tools.paging.total_rows/user_arbitrations!.tools.paging.total_pages).round();
+						if (deltaPage < 1){
+							deltaPage = 1;
+						} else{
+							deltaPage = 1;
+						}
+						return emit (user_arbitrations!.items.items.isEmpty ? (currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+								page: deltaPage)
+								:UserArbitrationsListingLoaded(user_arbitrations: user_arbitrations,
+								hasReachedMax: false,
+								page: deltaPage));
+					}else{
+						print('haloooooo pintar 1');
+						UserArbitrationsListingModel? user_arbitrations = await listingUserArbitrations(1);
+						int deltaPage;
+						if(user_arbitrations!.tools.paging.total_pages != 0){
+							deltaPage = user_arbitrations!.items.items.length ~/(user_arbitrations!.tools.paging.total_rows/user_arbitrations!.tools.paging.total_pages).round();
+							if (deltaPage < 1){
+								deltaPage = 1;
+							} else{
+								deltaPage = 1;
+							}
+							return emit ( user_arbitrations!.items.items.isEmpty ? (currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+									page: deltaPage)
+									:UserArbitrationsListingLoaded(user_arbitrations: user_arbitrations,
+									hasReachedMax: false,
+									page: deltaPage));
+
+						}else{
+							deltaPage = 0;
+							return emit ( UserArbitrationsListingLoaded(user_arbitrations: user_arbitrations,
+									hasReachedMax: false,
+									page: deltaPage));
+						}
+
+
+					}
+				}
+
+				if (currentState is UserArbitrationsListingLoaded) {
+					//page++;
+					final oldpage = (currentState as UserArbitrationsListingLoaded).page;
+					if(isSearch){
+						final page = (currentState as UserArbitrationsListingLoaded).page! + 1;
+						UserArbitrationsListingModel? user_arbitrations = await listingSearchUserArbitrations(page);
+						if ((currentState as UserArbitrationsListingLoaded).user_arbitrations!.tools.paging.total_pages == oldpage) {
+							return emit ( (currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+									page: page));
+						}	else{
+							if(!user_arbitrations!.items.items.isEmpty){
+								(currentState as UserArbitrationsListingLoaded).user_arbitrations!.items.items.addAll(user_arbitrations!.items.items);
+							}
+							return emit ( user_arbitrations!.items.items.isEmpty
+									? (currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+									page: page)
+									: UserArbitrationsListingLoaded(  user_arbitrations:  (currentState as UserArbitrationsListingLoaded).user_arbitrations ,
+								hasReachedMax: false,
+								page: page,));
+						};
+					}else{
+						final page = (currentState as UserArbitrationsListingLoaded).page! + 1;
+						if ((currentState as UserArbitrationsListingLoaded).user_arbitrations!.tools.paging.total_pages == oldpage) {
+							return emit ((currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+									page: page));
+						}	else{
+							UserArbitrationsListingModel? user_arbitrations = await listingUserArbitrations(page);
+							return emit ( user_arbitrations!.items.items.isEmpty
+									? (currentState as UserArbitrationsListingLoaded).copyWith(hasReachedMax: true,
+									page: page)
+									: UserArbitrationsListingLoaded(  user_arbitrations:  user_arbitrations ,
+								hasReachedMax: false,
+								page: page,));
+						}
+
+
+
+					}
+				}
+			} catch (_) {
+				return emit ( UserArbitrationsListingError());
+			}
+
+		}
+	}
+
+
+	void _UserArbitrationsListingRefreshEvent(UserArbitrationsListingRefresh event, Emitter<UserArbitrationsState> emit)async{
+		final currentState = state;
+
+			try {
+				if (currentState is UserArbitrationsListingUninitialized) {
+					if(isSearch){
+						UserArbitrationsListingModel? user_arbitrations = await listingSearchUserArbitrations(1);
+						return emit ( UserArbitrationsListingLoaded( user_arbitrations: user_arbitrations,
+								hasReachedMax: false,
+								page: 1 ));
+					}else{
+
+
+						UserArbitrationsListingModel? user_arbitrations = await listingUserArbitrations(1);
+						return emit ( UserArbitrationsListingLoaded( user_arbitrations: user_arbitrations,
+								hasReachedMax: false,
+								page: 1 ));
+
+					}
+
+				}
+
+				if (currentState is UserArbitrationsListingLoaded) {
+					if(isSearch){
+						UserArbitrationsListingModel? user_arbitrations = await listingSearchRefreshUserArbitrations();
+						return emit ( user_arbitrations!.items.items.isEmpty
+								? (currentState as UserArbitrationsListingLoaded).copyWith( hasReachedMax: false,
+								page: 1)
+								: UserArbitrationsListingLoaded(  user_arbitrations: user_arbitrations ,
+								hasReachedMax: false,
+								page: 1 ));
+					}else{
+
+						UserArbitrationsListingModel? user_arbitrations = await listingRefreshUserArbitrations();
+						int deltaPage = user_arbitrations!.items.items.length ~/ (user_arbitrations!.tools.paging.total_rows/user_arbitrations!.tools.paging.total_pages).round();
+						if (deltaPage < 1){
+							deltaPage = 1;
+						}else{
+							deltaPage = 1;
+						}
+
+						return emit ( user_arbitrations!.items.items.isEmpty
+								? (currentState as UserArbitrationsListingLoaded).copyWith( hasReachedMax: false,
+								page: 1)
+								: UserArbitrationsListingLoaded(  user_arbitrations: user_arbitrations ,
+								hasReachedMax: false,
+								page: 1 ));
+					}
+
+				}
+			} catch (_) {
+				return emit ( UserArbitrationsListingError());
+			}
+
+
+
+	}
 
 
   bool hasReachedMax(UserArbitrationsState state) =>

@@ -2886,10 +2886,22 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                               onTap:(){
                                                 print('halooooo123');
                                                 if(_tasks![0]!.status !=
+                                                  //  DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
                                                     DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
                                                   _requestDownload(item.task!);
                                                 print('halooooo1');
-                                                }
+                                                }else if(item.task!.status ==
+                                                    DownloadTaskStatus.complete )
+                                                    {  _openDownloadedFile(item.task!)
+                                                        .then((success) {
+                                                      if (!success) {
+                                                        Scaffold.of(context)
+                                                            .showSnackBar(SnackBar(
+                                                            content: Text( widget.platform == TargetPlatform.android?
+                                                            'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(p.basename(item.task!.link!))}'  : 'Cannot open this file' )));
+                                                      }
+                                                    });
+                                                    }
                                                 //print('halooooo');
                                               },
                                               child:  Column(

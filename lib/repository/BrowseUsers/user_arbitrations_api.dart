@@ -24,8 +24,9 @@ part of 'package:projectscoid/repository/APIRepository.dart';
 
    Future<UserArbitrationsListingModel?> getUserArbitrationsList(String url, int page, APIProvider _apiProvider, DBRepository _dbRepository)async{
   UserArbitrationsListingModel? user_arbitrations ;
-
+  print('haloooooo pintar2');
    if(page == 1){
+     print('haloooooo pintar3');
 			//await _dbRepository.deleteAllUserArbitrationsList1();
             user_arbitrations = await _apiProvider.getListUserArbitrations(url, page)
                   .then((responseUserArbitrationsList) {

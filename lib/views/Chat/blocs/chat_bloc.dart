@@ -381,7 +381,8 @@ class ChatBloc  implements YaWebsocketDelegate{
  */
 
   void deleteThread(){
-    if(thread.isNotEmpty) thread.clear();
+  //  if(thread.isNotEmpty) thread.clear();
+    thread.clear();
   }
 
   void nextTread(int next){

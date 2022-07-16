@@ -1134,7 +1134,7 @@ class _TextMessageWidgetState extends State<TextMessageWidget> {
 
     if(isFile(textModel.message!)){
       var document = parse(textModel.message);
-
+      print('akuuuuuuu  2 ${textModel.message}');
       var dat = document.getElementsByClassName('chat-file-link');
       if((dat != null) && (dat.isNotEmpty)){
         var dt = document.getElementsByClassName('more');
@@ -2025,7 +2025,7 @@ Expanded(
                         ),
                       onTap: (){
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ShowFile1(file: fileName,fz:fileSize == null? '' :filesize(fileSize), basename: basename,)));
+                  MaterialPageRoute(builder: (context) =>  ShowFile1(file: fileName,fz:fileSize == null? fileInfo == ''? '': fileInfo  :filesize(fileSize), basename: basename,)));
 
                   },
                   )

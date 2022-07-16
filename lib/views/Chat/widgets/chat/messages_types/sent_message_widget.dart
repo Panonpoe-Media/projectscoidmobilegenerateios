@@ -1161,7 +1161,7 @@ class _SentMessageWidgetState extends State<SentMessageWidget> {
 
     if(isFile(textModel.message)){
       var document = parse(textModel.message);
-
+      print('akuuuuuuu sent  1 ${textModel.message}');
       var dat = document.getElementsByClassName('chat-file-link');
       if((dat != null) && (dat.isNotEmpty)){
         var dt = document.getElementsByClassName('more');

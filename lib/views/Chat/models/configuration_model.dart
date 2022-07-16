@@ -7,7 +7,7 @@ class ConfigurationModel {
   static ConfigurationModel? _instance;
 
   factory ConfigurationModel(
-      {String urlApi = 'https://develop.carespace.ai/api/admin',
+      {String urlApi = 'https://projects.co.id',
       String token = '',
       String avatarImage = 'assets/images/profile-amanda.jpg',
         //wss://push.projects.co.id/

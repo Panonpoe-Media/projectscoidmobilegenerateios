@@ -8,8 +8,9 @@ part of 'package:projectscoid/api/APIProvider.dart';
 	//
   // final future = UserArbitrationsListingAPI();
    UserArbitrationsListingModel user_arbitrations;
+   print('ini data 123 saya : $url');
     Response response = await dio.get(sprintf(url, [page]));
-
+    print('ini data saya : ${response.data}');
 	final data = UserArbitrationsListingModel(response.data);
 	return data;
 
