@@ -1,3 +1,6 @@
+
+
+
 import 'my_orders_item_base.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +19,8 @@ import 'package:projectscoid/core/components/utility/widget/widget_function.dart
 import 'package:flutter_html/flutter_html.dart';
 import 'package:projectscoid/app/Env.dart';
 import 'dart:convert';
+import 'dart:async';
+import 'dart:io';
 import 'image_fields.dart';
 import 'file_fields.dart';
 import 'meta.dart';
@@ -36,6 +41,19 @@ import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:projectscoid/core/components/utility/tool/popup_menu.dart' as mn;
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/models/MyOrders/action.dart';
+import 'package:projectscoid/app/projectscoid.dart';
+import 'package:intl/intl.dart'as intl1;
+import 'package:string_mask/string_mask.dart';
+import 'package:string_mask/src/mask_pattern.dart';
+import 'package:flutter/services.dart';
+import 'package:printing/printing.dart';
+import 'dart:typed_data';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'my_orders.g.dart';
 /** AUTOGENERATE OFF **/
@@ -75,7 +93,491 @@ class ConfirmPaymentMyOrdersModel extends ConfirmPaymentMyOrdersBase{
           },
         ));}
 
-	  
+
+  Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyOrdersController my_orders,
+      var postMyOrdersResult, State state, String? sendPath, String? id,  String? title){
+    var cl;
+    var ic;
+    // final size =MediaQuery.of(context).size;
+    double? width = 400;
+    if (button.color == 'green'){
+      cl = Colors.green;
+    }
+    if (button.color == 'yellow'){
+      cl = Colors.yellow;
+    }
+    if (button.color == 'blue'){
+      cl = Colors.blue;
+    }
+    if (button.color == 'red'){
+      cl = Colors.red;
+    }
+    if (button.color == 'orange'){
+      cl = Colors.orange;
+    }
+    if (button.color == 'grey'){
+      cl = Colors.grey;
+    }
+    if (button.color == 'black'){
+      cl = Colors.black;
+    }
+    if (button.color == 'brown'){
+      cl = Colors.brown;
+    }
+    if (button.icon == 'fa fa-briefcase'){
+      ic = Icons.work;
+    }
+    if (button.icon == 'fa fa-plus'){
+      ic = Icons.add;
+    }
+    if (button.icon == 'fa fa-list-alt'){
+      ic = Icons.list;
+    }
+
+    if (button.icon == 'fa fa-credit-card'){
+      ic = Icons.credit_card;
+    }
+    if (button.icon == 'fa fa-paypal'){
+      ic = Icons.account_balance_wallet;
+    }
+    if (button.icon == 'fa fa-bank'){
+      ic = Icons.account_balance;
+    }
+    if (button.icon == 'fa fa-dollar'){
+      ic = Icons.attach_money;
+    }
+    if (button.icon == 'fa fa-user'){
+      ic = Icons.person;
+    }
+    if (button.icon == 'fa fa-edit'){
+      ic = Icons.edit;
+    }
+    if (button.icon == 'fa fa-picture-o'){
+      ic = Icons.picture_in_picture;
+    }
+    if (button.icon == 'fa fa-asterisk'){
+      ic = Icons.ac_unit;
+    }
+    if (button.icon == 'fa fa-envelope-o'){
+      ic = Icons.local_post_office;
+    }
+    if (button.icon == 'fa fa-mobile'){
+      ic = Icons.phone_iphone;
+    }
+    if (button.icon == 'fa fa-bullhorn'){
+      ic = Icons.wifi_tethering;
+    }
+
+    if (button.icon == 'fa fa-arrow-circle-down'){
+      ic = Icons.arrow_downward;
+    }
+    if (button.icon == 'fa fa-comment'){
+      ic = Icons.comment;
+    }
+    if (button.icon == 'fa fa-send'){
+      ic = Icons.send;
+    }
+    if (button.icon == 'fa fa-comments'){
+      ic = Icons.comment_bank;
+    }
+    if (button.icon == 'fa fa-files-o'){
+      ic = Icons.file_copy_outlined;
+    }
+
+    if(button.type == 'custom_filter'){
+      return (
+          RaisedButton(
+              child: button.text == 'Order by ...' ?  Text(button!.text!) : Text('Order : ' + button!.text!),
+              textColor: Colors.white,
+              splashColor : CurrentTheme.ShadeColor,
+              color : Color(0xFF037f51),
+              onPressed: () {
+                showSearchSelectDialog(context: context,
+                    caption:button!.text!,
+                    initialitems: button.selections,
+                    initvalue: button!.selections![0]);
+              }
+          )
+      );
+    }else{
+      return(
+          ButtonBar(
+              alignment: MainAxisAlignment.center,
+              buttonMinWidth: 0.43 * width,
+              children: <Widget>[
+                RaisedButton(
+                    child:   Row(
+                      children: [
+                        Icon(ic, size: 20),
+                        SizedBox(width: 5,),
+                        Text(button!.text!)
+                      ],
+                    ),
+                    textColor: button.color == 'green'? Colors.white : Colors.black,
+                    color: button.color == 'green'? Color(0xFF037f51) : Colors.white,
+                    splashColor :  CurrentTheme.ShadeColor,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: button.color == 'green'? Color(0xFF037f51) : Colors.black, width: 1)
+                    ),
+
+
+                    // color : Color(0xFF037f51),
+                    onPressed: () async{
+                      controller.animateTo(controller.position.minScrollExtent,
+                          duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                      if (formKey.currentState.validate()) {
+
+                        //Map<String, dynamic> res = model.toJson();
+                        //print('json result == $res');
+                        var formData = await convertFormDataConfirmPayment(button!.text!, model
+                            , attachmentlast
+                        );
+                        my_orders = new MyOrdersController(AppProvider.getApplication(context),
+                            sendPath,
+                            AppAction.post,
+                            id,
+                            title,
+                            formData,
+                            false);
+                        if([ 'PlaceNewBid'].contains('ConfirmPayment')){
+                          my_orders.deleteAllConfirmPaymentMyOrders(this.model.model.project_title);
+                        }else if(['AskOwner'].contains('ConfirmPayment')){
+                          my_orders.deleteAllConfirmPaymentMyOrders(this.model.model.project_id.toString());
+                        }else if(['HireMe'].contains('ConfirmPayment')){
+                          my_orders.deleteAllConfirmPaymentMyOrders(this.model.model.private_worker_id.toString());
+                        }else if(['InviteToBid'].contains('ConfirmPayment')){
+                          my_orders.deleteAllConfirmPaymentMyOrders(this.model.model.user_id);
+                        }else{
+                          my_orders.deleteAllConfirmPaymentMyOrders('');
+                        }
+                        if(sendPath!.contains('%s')){
+                          final future = my_orders.postConfirmPaymentMyOrdersWithID();
+                          future.then((value) {
+                            state.setState(() {
+                              postMyOrdersResult = value;
+                            });
+                          }).catchError((Error){
+                            AppProvider.getRouter(context)!.pop(context);
+                            // AppProvider.getRouter(context)!.pop(context);
+
+                            /*
+                            	   model.model.transfer_date,
+			                           model.model.amount,
+                             */
+
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  DashBoardScreen(account:title, id : id, date: model.model.transfer_date,amount : model.model.amount )),
+                                //  (Route<dynamic> route) => false,
+                            );
+
+                          /*
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => rt.UserMyOrdersIndex(id :  id!)),
+                                  (Route<dynamic> route) => false,
+                            );
+
+                           */
+                          });
+                        }else{
+                          final future = my_orders.postConfirmPaymentMyOrders();
+                          future.then((value) {
+                            state.setState(() {
+                              postMyOrdersResult = value;
+                            });
+                          }).catchError((Error){
+                            AppProvider.getRouter(context)!.pop(context);
+                            // AppProvider.getRouter(context)!.pop(context);
+
+                            if(Error.toString().contains('302')){
+
+                             /*
+
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => rt.UserMyOrdersIndex(id :  id!)),
+                                    (Route<dynamic> route) => false,
+                              );
+
+
+
+
+                              */
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  DashBoardScreen(account:title,  id: id, date: model.model.transfer_date,amount : model.model.amount )),
+                                  //  (Route<dynamic> route) => false,
+                              );
+
+
+                            }else if(Error.toString().contains('429')){
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Anda Terkena Pembatasan Limit',)),
+                                    (Route<dynamic> route) => false,
+                              );
+                            }else{
+
+
+                            }
+
+
+                          });
+                        }
+
+
+                      } else {}
+                    }
+
+
+                )
+              ]
+          )
+      );
+    }
+
+  }
+
+
+}
+
+
+class DashBoardScreen extends StatelessWidget {
+  final String? account;
+  final String? id;
+  final DateTime? date ;
+  final double? amount ;
+  const DashBoardScreen({Key? key,this.account, this.id,  this.date, this.amount}) : super(key: key);
+
+  SizedBox addVerticalSpace(double value) {
+    return SizedBox(
+      height: value,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    //print('yang ditunggu $id');
+    return SafeArea(
+      child: WillPopScope(
+      onWillPop: () async{
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Projectscoid(id : account,isChat: true, ctx : null)),
+              (Route<dynamic> route) => false,
+        );
+
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading:IconButton(
+              icon:const Icon(Icons.arrow_back, color: Colors.white,),
+              onPressed: ()async{
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => Projectscoid(id : account,isChat: true, ctx : null)),
+                      (Route<dynamic> route) => false,
+                );
+
+
+              }
+          ),
+          //iconTheme: IconThemeData(
+          //  color: Colors.white, //change your color here
+          // ),
+
+          title: const Text('Bank Transfer' , style : TextStyle( color: Colors.white, ))  ,
+          // title: selected? buildSearchBar(title) : Text(title , style : TextStyle( color: Colors.white, ))  ,
+        ),
+        backgroundColor: Colors.white60,
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+
+              addVerticalSpace(20.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                Text(
+                  'Silahkan lakukan transfer pembayaran untuk order $id sebesar:',
+                  maxLines: 2,
+                  style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+
+              addVerticalSpace(10.0),
+              BalanceCard(
+                  date: date!,amount: amount!
+              ),
+              addVerticalSpace(10.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                Text(
+                  'Tranfer ke salah satu rekening Projects.co.id a.n. Panonpoe Media PT:',
+                  maxLines: 2,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                SelectableText(
+                  '- BCA                  : 4373037667',
+
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                SelectableText(
+                  '- BNI                   : 13100115570639',
+
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                SelectableText(
+                  '- Mandiri            : 13100115570639',
+
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                SelectableText(
+                  '- CIMB Niaga     : 0260109113009',
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child:
+                SelectableText(
+                  '- BRI                   : 035401001596306',
+
+                  maxLines: 1,
+                  style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black87),
+                ),
+              ),
+
+           ]
+          )
+
+        ),
+       ),
+      )
+    );
+  }
+}
+
+
+class BalanceCard extends StatelessWidget {
+
+  final DateTime? date ;
+  final double? amount ;
+  const BalanceCard( {Key? key,this.date, this.amount}) : super(key: key);
+
+  SizedBox addVerticalSpace(double value) {
+    return SizedBox(
+      height: value,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var dateformat = intl1.DateFormat('dd/MM/yyyy  hh:mm:ss');
+    var maskOptions = MaskOptions()
+      ..reverse = true;
+    var formatter = StringMask('#.##0', options: maskOptions);
+    return InkWell(
+
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.black26,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: 25.0, vertical: 40.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                dateformat.format(date!),
+                style: const TextStyle(color: Colors.white60),
+              ),
+              addVerticalSpace(30.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Rp ${formatter.apply(amount!.toInt().toString())},00',
+                      style: const TextStyle(
+                          fontSize: 35.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white60),
+                    ),
+                  ),
+
+
+            ],
+          ),
+              Row(
+                children:[
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white54),),
+                      onPressed: (){
+                        Clipboard.setData(ClipboardData(text: amount!.toInt().toString()));
+                      },
+                      child: const Text("Copy", style: TextStyle(color: Colors.white),)
+                  ),
+
+                ],
+              ),
+        ],
+
+        ),
+       ),
+      )
+    );
+  }
 }
 
 
@@ -534,6 +1036,8 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
     final endIndex = str.indexOf(end, startIndex + start.length);
     return str.substring(startIndex + start.length, endIndex);
   }
+
+
   Widget viewStatus1 (BuildContext context) {
     return(
 
@@ -545,12 +1049,55 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
 
        );
   }
+
   Widget viewPaymentMethod1 (BuildContext context) {
     return(
         WebsiteView(
           value: model.model.payment_method_str,
           caption: 'Payment Method',
         ));}
+
+  Widget printButton(BuildContext context){
+    return(
+            Row(
+              children: [
+                const Expanded( child : Padding(
+                       padding: EdgeInsets.fromLTRB(8.0, 2.0, 0.0, 6.0),
+                       child:null,
+                    ),
+                ),
+                Padding(
+
+                  padding: const EdgeInsets.fromLTRB(1.0, 1.0, 1.0, 1.0),
+                  child:
+                  ButtonTheme(
+
+                    child: ButtonBar(
+                      alignment : MainAxisAlignment.end,
+                      children: <Widget>[
+                        RaisedButton(
+                          textTheme: ButtonTextTheme.normal,
+                          color: Colors.green,
+                          child: const Text('Print', style: TextStyle(color: CurrentTheme.BackgroundColor)),
+                          onPressed:   ()async {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => PdfPreviewPage(invoice: model),
+                              ),
+                            );
+
+                          },
+
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )
+
+    );
+  }
 
   @override
   Widget view (BuildContext context, ScrollController controller, bool?account) {
@@ -559,7 +1106,7 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
     viewChildren.clear();
 
 
-
+    viewChildren.add(printButton(context));
     viewChildren.add(viewTrackCode1(context));
     viewChildren.add(viewDate(context));
     viewChildren.add(viewStatus1(context));
@@ -586,6 +1133,468 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
 
 
 }
+
+
+class PdfPreviewPage extends StatelessWidget {
+  final MyOrdersSuperBaseRev invoice;
+
+   PdfPreviewPage({Key? key, required this.invoice}) : super(key: key);
+  String? _logo;
+  String? _bgShape;
+  static const _darkColor = PdfColors.blueGrey800;
+  static const _lightColor = PdfColors.white;
+  void _showPrintedToast(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Document printed successfully'),
+      ),
+    );
+  }
+
+  void _showSharedToast(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Document shared successfully'),
+      ),
+    );
+  }
+
+
+
+  Future<void> _saveAsFile(
+      BuildContext context,
+      LayoutCallback build,
+      PdfPageFormat pageFormat,
+      ) async {
+    final bytes = await build(pageFormat);
+
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final appDocPath = appDocDir.path;
+    final file = File(appDocPath + '/' + 'document.pdf');
+    print('Save as file ${file.path} ...');
+    await file.writeAsBytes(bytes);
+    await OpenFile.open(file.path);
+  }
+
+
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    final actions = <PdfPreviewAction>[
+
+      PdfPreviewAction(
+        icon: const Icon(Icons.save),
+        onPressed: _saveAsFile,
+      )
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('View Order'),
+      ),
+      body: PdfPreview(
+
+        maxPageWidth: 700,
+        build: (format) => buildPdf(invoice, format),
+         actions: actions,
+         onPrinted: _showPrintedToast,
+         onShared: _showSharedToast,
+      ),
+    );
+  }
+
+  Future<Uint8List> buildPdf(MyOrdersSuperBaseRev invoice,
+      PdfPageFormat pageFormat) async {
+    // Create a PDF document.
+
+    final doc = pw.Document();
+
+    _logo = await rootBundle.loadString('assets/img/projectscoid.svg');
+    _bgShape = await rootBundle.loadString('assets/img/invoice.svg');
+
+    // Add page to the PDF
+    doc.addPage(
+      pw.MultiPage(
+        pageTheme: _buildTheme(
+          pageFormat,
+          await PdfGoogleFonts.robotoRegular(),
+          await PdfGoogleFonts.robotoBold(),
+          await PdfGoogleFonts.robotoItalic(),
+        ),
+        header: _buildHeader,
+        footer: _buildFooter,
+        build: (context) =>
+        [
+          _contentHeader(context),
+          _contentTable(context),
+          pw.SizedBox(height: 20),
+          _contentFooter(context),
+          pw.SizedBox(height: 20),
+        //_termsAndConditions(context),
+        ],
+      ),
+    );
+
+
+    // Return the PDF file content
+    return doc.save();
+  }
+
+  pw.PageTheme _buildTheme(PdfPageFormat pageFormat, pw.Font base, pw.Font bold, pw.Font italic) {
+    return pw.PageTheme(
+      pageFormat: pageFormat,
+      theme: pw.ThemeData.withFont(
+        base: base,
+        bold: bold,
+        italic: italic,
+      ),
+      buildBackground: (context) => pw.FullPage(
+        ignoreMargins: true,
+        child: pw.SvgImage(svg: _bgShape!),
+      ),
+    );
+  }
+
+  pw.Widget _buildHeader(pw.Context context) {
+    return pw.Column(
+      children: [
+        pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.Expanded(
+              child: pw.Column(
+                children: [
+                  pw.Container(
+                    height: 50,
+                    padding: const pw.EdgeInsets.only(left: 20),
+                    alignment: pw.Alignment.centerLeft,
+                    child: pw.Text(
+                      'VIEW ORDER',
+                      style: pw.TextStyle(
+                        color: PdfColors.grey700,
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  pw.Container(
+                    decoration: pw.BoxDecoration(
+                      borderRadius:
+                      const pw.BorderRadius.all(pw.Radius.circular(2)),
+                      color: PdfColors.grey700,
+                    ),
+                    padding: const pw.EdgeInsets.only(
+                        left: 40, top: 10, bottom: 10, right: 10),
+                    alignment: pw.Alignment.centerLeft,
+                    height: 60,
+                    child: pw.DefaultTextStyle(
+                      style: pw.TextStyle(
+                        color: PdfColors.white,
+                        fontSize: 10,
+                      ),
+                      child: pw.GridView(
+                        crossAxisCount: 2,
+                        children: [
+                          pw.Text('Track Code #'),
+                          pw.Text(invoice!.model!.track_code!),
+                          pw.Text('Date:'),
+                          pw.Text(_formatDate(invoice!.model!.date!)),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            pw.Expanded(
+              child: pw.Column(
+                mainAxisSize: pw.MainAxisSize.min,
+                children: [
+                  pw.Container(
+                    alignment: pw.Alignment.topRight,
+                    padding: const pw.EdgeInsets.only(bottom: 8, left: 30),
+                    height: 72,
+                    child:
+                    _logo != null ? pw.SvgImage(svg: _logo!) : pw.PdfLogo(),
+                  ),
+                  // pw.Container(
+                  //   color: baseColor,
+                  //   padding: pw.EdgeInsets.only(top: 3),
+                  // ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        if (context.pageNumber > 1) pw.SizedBox(height: 20)
+      ],
+    );
+  }
+
+  pw.Widget _buildFooter(pw.Context context) {
+    return pw.Row(
+      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: pw.CrossAxisAlignment.end,
+      children: [
+        pw.Container(
+          height: 20,
+          width: 100,
+          child: pw.BarcodeWidget(
+            barcode: pw.Barcode.pdf417(),
+            data: 'Order ID# ${invoice!.model!.order_id!}',
+            drawText: false,
+          ),
+        ),
+        pw.Text(
+          'Page ${context.pageNumber}/${context.pagesCount}',
+          style: const pw.TextStyle(
+            fontSize: 12,
+            color: PdfColors.white,
+          ),
+        ),
+      ],
+    );
+  }
+
+  pw.Widget _contentHeader(pw.Context context) {
+    return pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Expanded(
+          child: pw.Container(
+            margin: const pw.EdgeInsets.symmetric(horizontal: 20),
+            height: 70,
+            child: pw.FittedBox(
+              child: pw.Text(
+                'Status: ${invoice.model!.status_str!.split('>')[1].split('<')[0]}',
+
+                style: pw.TextStyle(
+                  color: PdfColors.grey700,
+                  fontStyle: pw.FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ),
+        pw.Expanded(
+          child: pw.Container(
+            margin: const pw.EdgeInsets.symmetric(horizontal: 20),
+            height: 70,
+            child: pw.FittedBox(
+              child: pw.Text(
+                'Total Sum: ${invoice.model!.total_sum_str}',
+                style: pw.TextStyle(
+                  color: PdfColors.grey700,
+                  fontStyle: pw.FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ),
+
+
+        pw.Expanded(
+          child: pw.Container(
+            margin: const pw.EdgeInsets.symmetric(horizontal: 20),
+            height: 70,
+            child: pw.FittedBox(
+              child: pw.Text(
+                'Total Price: ${invoice.model!.total_price_str}',
+                style: pw.TextStyle(
+                  color: PdfColors.grey700,
+                  fontStyle: pw.FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ),
+        pw.Expanded(
+          child: pw.Container(
+            margin: const pw.EdgeInsets.symmetric(horizontal: 20),
+            height: 70,
+            child: pw.FittedBox(
+              child: pw.Text(
+                'User Balance: ${invoice.model!.used_balance_str}',
+                style: pw.TextStyle(
+                  color: PdfColors.grey700,
+                  fontStyle: pw.FontStyle.italic,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  pw.Widget _contentTable(pw.Context context) {
+    const tableHeaders = [
+      'No',
+      'Item Description',
+      'Price',
+      'Quantity',
+      'Total'
+    ];
+
+    return pw.Table.fromTextArray(
+      border: null,
+      cellAlignment: pw.Alignment.center,
+      headerAlignment: pw.Alignment.center,
+      headerDecoration: const pw.BoxDecoration(
+        borderRadius: pw.BorderRadius.all(pw.Radius.circular(2)),
+        color:PdfColors.grey400,
+      ),
+      headerHeight: 25,
+      cellHeight: 40,
+      cellAlignments: {
+        0: pw.Alignment.centerLeft,
+        1: pw.Alignment.centerLeft,
+        2: pw.Alignment.centerRight,
+        3: pw.Alignment.centerLeft,
+        4: pw.Alignment.centerRight,
+      },
+      headerStyle: pw.TextStyle(
+        color: PdfColors.blueGrey800,
+        fontSize: 10,
+        fontWeight: pw.FontWeight.bold,
+      ),
+      cellStyle: const pw.TextStyle(
+        color: _darkColor,
+        fontSize: 8,
+      ),
+      rowDecoration: const pw.BoxDecoration(
+        border: pw.Border(
+          bottom: pw.BorderSide(
+            color: PdfColors.blueGrey900,
+            width: .5,
+          ),
+        ),
+      ),
+      headers: List<String>.generate(
+        tableHeaders.length,
+            (col) => tableHeaders[col],
+      ),
+      data: List<List<String>>.generate(
+        invoice.items!.length,
+            (row) => List<String>.generate(
+          tableHeaders.length,
+              (col) {
+
+                  switch (col) {
+                    case 0:
+                      return invoice.items![row]!.no.toString()+ '        ';
+                    case 1:
+                      return Bidi.stripHtmlIfNeeded(invoice.items![row]!.title!);
+                    case 2:
+                      return invoice.items![row]!.price_str!;
+                    case 3:
+                      return '       ' + invoice.items![row]!.quantity.toString()! +  '               ';
+                    case 4:
+                      return invoice.items![row]!.total_str!;
+                  }
+                  return '';
+
+              },
+        ),
+      ),
+    );
+  }
+
+pw.Widget _contentFooter(pw.Context context) {
+    return pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Expanded(
+          flex: 2,
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              pw.Text(
+                'Thank you for your business',
+                style: pw.TextStyle(
+                  color: _darkColor,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+
+              pw.Container(
+                margin: const pw.EdgeInsets.only(top: 20, bottom: 8),
+                child:    pw.Text(
+                  'Payment Method',
+                  style: const pw.TextStyle(
+                    fontSize: 8,
+
+                    color: _darkColor,
+                  ),
+                ),
+              ),
+              pw.Text(
+                invoice.model!.payment_method_str! ,
+                style: pw.TextStyle(
+                  color: PdfColors.grey700,
+                  lineSpacing: 5,
+                  fontWeight: pw.FontWeight.bold,
+                ),
+              ),
+
+            ],
+          ),
+        ),
+        pw.Expanded(
+          flex: 1,
+          child: pw.DefaultTextStyle(
+            style: const pw.TextStyle(
+              fontSize: 10,
+              color: _darkColor,
+            ),
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                  children: [
+                    pw.Text('Total Price:'),
+                    pw.Text(invoice.model!.total_price_str!),
+                  ],
+                ),
+                pw.SizedBox(height: 5),
+                pw.Divider(color: PdfColors.blueGrey900),
+                pw.DefaultTextStyle(
+                  style: pw.TextStyle(
+                    color: PdfColors.grey700,
+                    fontSize: 14,
+                    fontWeight: pw.FontWeight.bold,
+                  ),
+                  child: pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Text('Total Sum:'),
+                      pw.Text(invoice.model!.total_sum_str!),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatCurrency(double amount) {
+    return 'Rp ${amount.toStringAsFixed(2)}';
+  }
+
+  String _formatDate(DateTime date) {
+   // var dateformat =
+    final format = intl1.DateFormat('dd/MM/yyyy  hh:mm:ss');
+    return format.format(date);
+  }
+
+}
+
 
 
 ///////////////////////////////////////////////////

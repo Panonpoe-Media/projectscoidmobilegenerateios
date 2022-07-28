@@ -468,7 +468,7 @@ class ViewModelBrowseUsersRev {
       this.worker_professionalism,
       this.clarity,
       this.friendliness,
-      this.owner_communication,
+        this.owner_communication,
       this.owner_professionalism,
       this.projects_won,
       this.projects_won_str,
@@ -502,13 +502,27 @@ class ViewModelBrowseUsersRev {
       this.post_count_str,
       this.completion_rate,
       this.arbitration_rate,
+
+
       this.services,
       this.products,
+
       this.portofolio,
+
+
       this.as_project_worker,
+
       this.as_project_owner,
+
+
       this.user_arbitrations,
-      this.user_id);
+
+
+      this.user_id
+
+
+      );
+
 
   factory ViewModelBrowseUsersRev.fromJson(Map<String, dynamic> json) =>
       _$ViewModelBrowseUsersRevFromJson(json);
@@ -2811,6 +2825,7 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                                     16.0, 5.0, 0.0, 0.0),
                                 child: GestureDetector(
                                   onTap: () {
+
                                     AppProvider.getRouter(context)!.navigateTo(
                                         context,
                                         urlToRoute(this
@@ -6341,6 +6356,7 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
   bool? selected = false;
   AccountController? accountController;
   bool? account = true;
+  bool isopen = false;
   String? searchText = '';
   double? initscroll = 0.0;
 
@@ -6458,7 +6474,11 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
           ),
         ));
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildListingBar() {
     return BlocBuilder<BrowseUsersListing, BrowseUsersState>(
        bloc: browse_users!.listing,
@@ -6493,7 +6513,7 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.browse_users!
-                      .Buttons(context, _dialVisible, account)
+                      .Buttons(context, _dialVisible, account, open)
                   //floatingActionButton: isLoading? null :  state.browse_users!.Buttons(context, _dialVisible, controller!,browse_users,  this, Env.value!.baseUrl!, '', title)
                   );
             }
@@ -6568,7 +6588,7 @@ class SearchBrowseUsersListingState extends State<SearchBrowseUsersListing> {
                 onRefresh: _onRefresh,
               ),
               floatingActionButton:
-                  state.browse_users!.Buttons(context, _dialVisible, account)
+                  state.browse_users!.Buttons(context, _dialVisible, account, open)
               //floatingActionButton: isLoading? null :  state.browse_users!.Buttons(context, _dialVisible, controller!,browse_users,  this, Env.value!.baseUrl!, '', title!, account)
 
               );
@@ -6739,6 +6759,7 @@ class SearchBrowseUsersListing1State extends State<SearchBrowseUsersListing1> {
   bool? selected = false;
   AccountController? accountController;
   bool? account = true;
+  bool isopen = false;
   String? searchText = '';
   double? initscroll = 0.0;
 
@@ -6856,7 +6877,11 @@ class SearchBrowseUsersListing1State extends State<SearchBrowseUsersListing1> {
           ),
         ));
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildListingBar() {
     return BlocBuilder<BrowseUsersListing, BrowseUsersState>(
       bloc: browse_users!.listing,
@@ -6890,7 +6915,7 @@ class SearchBrowseUsersListing1State extends State<SearchBrowseUsersListing1> {
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.browse_users!
-                      .Buttons(context, _dialVisible, account)
+                      .Buttons(context, _dialVisible, account, open)
                   //floatingActionButton: isLoading? null :  state.browse_users!.Buttons(context, _dialVisible, controller!,browse_users,  this, Env.value!.baseUrl!, '', title)
                   );
             }
@@ -6965,7 +6990,7 @@ class SearchBrowseUsersListing1State extends State<SearchBrowseUsersListing1> {
                 onRefresh: _onRefresh,
               ),
               floatingActionButton:
-                  state.browse_users!.Buttons(context, _dialVisible, account)
+                  state.browse_users!.Buttons(context, _dialVisible, account, open)
               //floatingActionButton: isLoading? null :  state.browse_users!.Buttons(context, _dialVisible, controller!,browse_users,  this, Env.value!.baseUrl!, '', title!, account)
 
               );
@@ -8513,6 +8538,7 @@ class SearchPastProjectsListing11State
   PastProjectsController? past_projects;
   TextEditingController searchBoxController = TextEditingController();
   final scrollThreshold = 200.0;
+  bool isopen = false;
   bool? selected = false;
   String? searchText = '';
 
@@ -8552,7 +8578,11 @@ class SearchPastProjectsListing11State
         ),
         body: buildListingBar());
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   // @override
   Widget buildListingBar() {
     return BlocBuilder<PastProjectsListing, PastProjectsState>(
@@ -8587,7 +8617,7 @@ class SearchPastProjectsListing11State
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton:
-                      state.past_projects!.Buttons(context, _dialVisible, false)
+                      state.past_projects!.Buttons(context, _dialVisible, false, open)
                   //floatingActionButton: isLoading? null :  state.past_projects!.Buttons(context, _dialVisible, controller!,past_projects,  this, Env.value!.baseUrl!, '', title)
                   );
             }

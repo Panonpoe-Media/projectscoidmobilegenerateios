@@ -277,6 +277,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(download, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -927,6 +928,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(rate_product, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

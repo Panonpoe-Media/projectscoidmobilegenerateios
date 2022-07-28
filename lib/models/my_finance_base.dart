@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyFinance/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'my_finance_base.g.dart';
 
 
@@ -118,8 +120,7 @@ class ChangePaymentSettingsMyFinanceBase{
 	}
 
 
-
-Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -281,6 +282,14 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+					 if(_isRewardedAdReady!){
+                      state.setState(() {
+                        _isRewardedAdReady = false;
+                      });
+                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                      });
+                    }
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
@@ -295,6 +304,14 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+					 if(_isRewardedAdReady!){
+                      state.setState(() {
+                        _isRewardedAdReady = false;
+                      });
+                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                      });
+                    }
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 
@@ -520,16 +537,16 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
-  var postChangePaymentSettingsResult, State state, String? sendPath, String? id,  String? title){
+  List<Widget> RlistButton(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+ var postChangePaymentSettingsResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyFinanceWidget(model.buttons[i], context,formKey, controller,my_finance, postChangePaymentSettingsResult, state, sendPath, id,  title));
-      }
+      buttonChildren!.add(RButtonActionMyFinanceWidget( _rewardedAd, _isRewardedAdReady, model.buttons[i], context,formKey, controller,my_finance, postChangePaymentSettingsResult, state, sendPath, id,  title));
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -559,7 +576,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
+    Widget	 RButtons(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
   var postChangePaymentSettingsResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -574,8 +591,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_finance, postChangePaymentSettingsResult, state, sendPath, id,  title )
-	    
+           RlistButton( _rewardedAd, _isRewardedAdReady, context, formKey,controller,my_finance, postChangePaymentSettingsResult, state, sendPath, id,  title )
             )
         )
     );
@@ -842,8 +858,7 @@ class WithdrawPaymentMyFinanceBase{
 	}
 
 
-
-Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -1005,6 +1020,14 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+					 if(_isRewardedAdReady!){
+                      state.setState(() {
+                        _isRewardedAdReady = false;
+                      });
+                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                      });
+                    }
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
@@ -1019,6 +1042,14 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+					 if(_isRewardedAdReady!){
+                      state.setState(() {
+                        _isRewardedAdReady = false;
+                      });
+                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                      });
+                    }
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 
@@ -1234,16 +1265,16 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
-  var postWithdrawPaymentResult, State state, String? sendPath, String? id,  String? title){
+  List<Widget> RlistButton(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+ var postWithdrawPaymentResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyFinanceWidget(model.buttons[i], context,formKey, controller,my_finance, postWithdrawPaymentResult, state, sendPath, id,  title));
-      }
+      buttonChildren!.add(RButtonActionMyFinanceWidget( _rewardedAd, _isRewardedAdReady, model.buttons[i], context,formKey, controller,my_finance, postWithdrawPaymentResult, state, sendPath, id,  title));
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -1273,7 +1304,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
+    Widget	 RButtons(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
   var postWithdrawPaymentResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -1288,8 +1319,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_finance, postWithdrawPaymentResult, state, sendPath, id,  title )
-	    
+           RlistButton( _rewardedAd, _isRewardedAdReady, context, formKey,controller,my_finance, postWithdrawPaymentResult, state, sendPath, id,  title )
             )
         )
     );
@@ -1445,8 +1475,8 @@ class DepositBalanceMyFinanceBase{
 	}
 
 
-
 Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -1837,16 +1867,18 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
-  var postDepositBalanceResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+
+ var postDepositBalanceResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyFinanceWidget(model.buttons[i], context,formKey, controller,my_finance, postDepositBalanceResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyFinanceWidget(model.buttons[i], context,formKey, controller,my_finance, postDepositBalanceResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -1876,7 +1908,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyFinanceController my_finance,
   var postDepositBalanceResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -1891,8 +1923,7 @@ SpeedDialChild  ButtonActionMyFinanceWidget(Button button, BuildContext context,
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_finance, postDepositBalanceResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_finance, postDepositBalanceResult, state, sendPath, id,  title )
             )
         )
     );
@@ -6950,8 +6981,7 @@ Widget viewItem1 (ItemMyFinanceModel item,ItemMyFinanceModel item1, String? sear
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -6968,8 +6998,8 @@ Widget viewItem1 (ItemMyFinanceModel item,ItemMyFinanceModel item1, String? sear
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

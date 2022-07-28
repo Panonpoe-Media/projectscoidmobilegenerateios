@@ -434,7 +434,7 @@ SpeedDialChild ButtonActionPortofolioWidget(Button button, BuildContext context,
 	NumberWidget(
 	  value: model.model.year,
 	  caption: 'Year',
-	  hint: 'Isi dengan Number Anda',
+	  hint: 'Isi dengan Year Anda',
 	   required: true,
 	  min:'10',
 	  max:'2000000',
@@ -449,7 +449,7 @@ SpeedDialChild ButtonActionPortofolioWidget(Button button, BuildContext context,
 	MultilineWidget(
 	  value: model.model.description,
 	  caption: 'Description',
-	  hint: 'Isi dengan Multiline Anda',
+	  hint: 'Isi dengan Description Anda',
 	   required: true,
 	  getValue: (String? val) {
 		state.setState(() {
@@ -462,7 +462,7 @@ SpeedDialChild ButtonActionPortofolioWidget(Button button, BuildContext context,
 	 WebsiteWidget(
 		value: model.model.link,
 		caption: 'Link',
-		hint: 'Isi dengan Website Anda',
+		hint: 'Isi dengan Link Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {

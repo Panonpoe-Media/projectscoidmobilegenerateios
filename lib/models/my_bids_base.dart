@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyBids/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'my_bids_base.g.dart';
 
 
@@ -106,8 +108,8 @@ class CancelBidMyBidsBase{
 	}
 
 
-
 Widget RButtonActionMyBidsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyBidsController my_bids,
+
  var postMyBidsResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -538,16 +540,18 @@ SpeedDialChild  ButtonActionMyBidsWidget(Button button, BuildContext context,var
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyBidsController my_bids,
-  var postCancelBidResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyBidsController my_bids,
+
+ var postCancelBidResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyBidsWidget(model.buttons[i], context,formKey, controller,my_bids, postCancelBidResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyBidsWidget(model.buttons[i], context,formKey, controller,my_bids, postCancelBidResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -577,7 +581,7 @@ SpeedDialChild  ButtonActionMyBidsWidget(Button button, BuildContext context,var
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyBidsController my_bids,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyBidsController my_bids,
   var postCancelBidResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -592,8 +596,7 @@ SpeedDialChild  ButtonActionMyBidsWidget(Button button, BuildContext context,var
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_bids, postCancelBidResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_bids, postCancelBidResult, state, sendPath, id,  title )
             )
         )
     );
@@ -1445,8 +1448,7 @@ Widget viewItem1 (ItemMyBidsModel item,ItemMyBidsModel item1, String? search, Bu
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -1463,8 +1465,8 @@ Widget viewItem1 (ItemMyBidsModel item,ItemMyBidsModel item1, String? search, Bu
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

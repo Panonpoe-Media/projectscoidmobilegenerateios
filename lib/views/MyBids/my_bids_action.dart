@@ -121,41 +121,7 @@ class  ShowConversationMyBidsState1 extends State<ShowConversationMyBids> with T
       var data;
       List<Map> listAccount = [];
 	
-	    late RewardedAd _rewardedAd;
-	  // TODO: Add _isRewardedAdReady
-	  bool _isRewardedAdReady = false;
-		void _loadRewardedAd() {
-		RewardedAd.load(
-		  adUnitId: AdHelper.rewardedAdUnitId,
-		  request: AdRequest(),
-		  rewardedAdLoadCallback: RewardedAdLoadCallback(
-			onAdLoaded: (ad) {
-			  _rewardedAd = ad;
-
-			  ad.fullScreenContentCallback = FullScreenContentCallback(
-				onAdDismissedFullScreenContent: (ad) {
-
-				  setState(() {
-					_isRewardedAdReady = false;
-				  });
-				 // _loadRewardedAd();
-				},
-			  );
-
-			  setState(() {
-				_isRewardedAdReady = true;
-
-			  });
-			},
-			onAdFailedToLoad: (err) {
-			  print('Failed to load a rewarded ad: ${err.message}');
-			  setState(() {
-				_isRewardedAdReady = false;
-			  });
-			},
-		  ),
-		);
-	  }
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -183,7 +149,7 @@ class  ShowConversationMyBidsState1 extends State<ShowConversationMyBids> with T
  @override
   void initState() {
     super.initState();
-	_loadRewardedAd();
+
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
@@ -1175,12 +1141,7 @@ class  ShowConversationMyBidsState1 extends State<ShowConversationMyBids> with T
   
   
 void _sendMessage()async{
-    if(_isRewardedAdReady){
    
-     _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-       // Reward the user for watching an ad.
-     });
-     }
     String? sendPath = Env.value!.baseUrl! + '/user/my_bids/show_conversation_new_reply/${widget.id!}/buat-artikel-1-saja/${tempheader!.split('*')[0]}/annncncncncnc';
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
     var postShowThreadResult;
@@ -2241,7 +2202,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_conversation!.listingShowConversation!.dispose();
-	_rewardedAd?.dispose();
+	
     super.dispose();
   }
 
@@ -2772,6 +2733,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(cancel_bid, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

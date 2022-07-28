@@ -53,8 +53,8 @@ import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-
+import 'package:projectscoid/controllers/controllers.dart';
+/** AUTOGENERATE OFF **/
 class ConfirmPaymentMyOrders extends StatefulWidget {
 
   final String? id ;
@@ -81,6 +81,9 @@ class ConfirmPaymentMyOrdersState extends State<ConfirmPaymentMyOrders> with Res
   var postConfirmPaymentResult;
   var isLoading = true;
   var isError = false;
+  AccountController? accountController;
+  bool account = false;
+  String accountVal = '';
   var errmsg= 'Unauthorized  :'+'Confirm Payment';
   final List<Widget> actionChildren = <Widget>[
 	];
@@ -278,6 +281,30 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(confirm_payment, context);
+   accountController =AccountController(AppProvider.getApplication(context),
+       AppAction.view   );
+   List<Map> listAccount = [];
+   final future = accountController!.getAccount();
+   future.then((val){
+
+     listAccount.addAll(val);
+     if(account == false){
+       if(listAccount.isEmpty ){
+         account = false;
+       }else{
+         print('Bismillaah ${widget.id}');
+         account = true;
+         setState(() {
+           accountVal = listAccount[0]['user_hash'];
+
+         });
+
+       }
+     }
+
+
+   });
+
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -660,7 +687,8 @@ final RestorableInt _counter = RestorableInt(0);
                               height: 30,
                             ),
 							
-							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,confirm_payment, postConfirmPaymentResult, this, sendPath, widget.id!, widget.title!),
+							   isLoading!? [] : isError? null:  account ? this.model.RButtons(context, _dialVisible, formKey, controller,confirm_payment, postConfirmPaymentResult, this, sendPath, widget.id!,  accountVal ):
+                 this.model.RButtons(context, _dialVisible, formKey, controller,confirm_payment, postConfirmPaymentResult, this, sendPath, widget.id!,  '' ),
           
                       
                         Container(

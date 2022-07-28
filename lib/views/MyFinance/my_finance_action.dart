@@ -81,7 +81,7 @@ class ChangePaymentSettingsMyFinanceState
   var isLoading = true;
   var isError = false;
   var errmsg = 'Unauthorized  :' + 'Change Payment Settings';
-  late RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
 
   // TODO: Add _isRewardedAdReady
   bool _isRewardedAdReady = false;
@@ -361,6 +361,7 @@ class ChangePaymentSettingsMyFinanceState
         false);
 
     fetchData(change_payment_settings, context);
+    /*
     if (_isRewardedAdReady) {
       setState(() {
         _isRewardedAdReady = false;
@@ -370,6 +371,8 @@ class ChangePaymentSettingsMyFinanceState
         // Reward the user for watching an ad.
       });
     }
+
+     */
     return WillPopScope(
         onWillPop: _onWillPop,
         child: Scaffold(
@@ -896,6 +899,7 @@ class ChangePaymentSettingsMyFinanceState
                                           : isError
                                               ? null
                                               : this.model.RButtons(
+                                                  _rewardedAd,_isRewardedAdReady,
                                                   context,
                                                   _dialVisible,
                                                   formKey,
@@ -953,7 +957,42 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
   var isLoading = true;
   var isError = false;
   var errmsg = 'Unauthorized  :' + 'Withdraw Payment';
+  RewardedAd? _rewardedAd;
 
+  // TODO: Add _isRewardedAdReady
+  bool _isRewardedAdReady = false;
+
+  // TODO: Implement _loadRewardedAd()
+  void _loadRewardedAd() {
+    RewardedAd.load(
+      adUnitId: AdHelper.rewardedAdUnitId,
+      request: AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        onAdLoaded: (ad) {
+          _rewardedAd = ad;
+
+          ad.fullScreenContentCallback = FullScreenContentCallback(
+            onAdDismissedFullScreenContent: (ad) {
+              setState(() {
+                _isRewardedAdReady = false;
+              });
+              // _loadRewardedAd();
+            },
+          );
+
+          setState(() {
+            _isRewardedAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (err) {
+          print('Failed to load a rewarded ad: ${err.message}');
+          setState(() {
+            _isRewardedAdReady = false;
+          });
+        },
+      ),
+    );
+  }
   final List<Widget> actionChildren = <Widget>[];
 
   final RestorableInt _counter = RestorableInt(0);
@@ -971,6 +1010,7 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
     super.initState();
     controller = ScrollController();
     validation.add(true);
+    _loadRewardedAd();
   }
 
   void _onWidgetDidBuild(Function callback) {
@@ -1693,6 +1733,7 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
                                   8.0, 14.0, 8.0, 2.0),
                                 child: Html(data: this.model.model.meta.after_after),
                                 ), */
+
                                       Container(
                                         height: 30,
                                       ),
@@ -1701,6 +1742,7 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
                                           : isError
                                               ? null
                                               : this.model.RButtons(
+                                          _rewardedAd,_isRewardedAdReady,
                                                   context,
                                                   _dialVisible,
                                                   formKey,
@@ -1722,6 +1764,7 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
 
   @override
   void dispose() {
+    _rewardedAd?.dispose();
     super.dispose();
   }
 }

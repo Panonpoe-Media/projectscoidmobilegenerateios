@@ -37,6 +37,7 @@ class  UserMyBookmarksListingState extends State< UserMyBookmarksListing> with R
   AccountController? accountController;
   bool account = true;
   String searchText = '';
+   bool isopen = false;
    double initscroll = 0.0;
    UserMyBookmarksListingState() {
    // scrollController!.addListener(_onScroll);
@@ -107,11 +108,13 @@ final RestorableDouble cs = RestorableDouble(0);
 		 if(search){
 		 Navigator.pop(context);
 		 }else{
+		 if(!isopen) {
 		  Navigator.pushAndRemoveUntil(
 								context,
 								MaterialPageRoute(builder: (context) => Projectscoid(id : account ? listAccount[0]['user_hash'] : '')),
 									(Route<dynamic> route) => false,
 							  );
+		  }
 		 }
           //Navigator.pop(context);
 		    
@@ -225,6 +228,12 @@ final RestorableDouble cs = RestorableDouble(0);
     });
     // next = false;
   }
+  
+  void open(bool val){
+   // setState(() {
+      isopen = val;
+    //});
+  }
    // @override
   Widget buildListingBar(){
     return BlocBuilder<MyBookmarksListing, MyBookmarksState>(
@@ -272,7 +281,7 @@ final RestorableDouble cs = RestorableDouble(0);
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.my_bookmarks!.Buttons(context, _dialVisible, controller,my_bookmarks,  this, Env.value!.baseUrl!, '', title)
               );
 			  }
@@ -322,7 +331,7 @@ final RestorableDouble cs = RestorableDouble(0);
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.my_bookmarks!.Buttons(context, _dialVisible, controller,my_bookmarks,  this, Env.value!.baseUrl!, '', title, account)		
                    
 			 );
@@ -394,6 +403,7 @@ class  SearchMyBookmarksListingState extends State< SearchMyBookmarksListing>  w
   bool account = true;
   String userid = '' ;
   String searchText = '';
+   bool isopen = false;
    double initscroll = 0.0;
    SearchMyBookmarksListingState() {
    // scrollController!.addListener(_onScroll);
@@ -515,7 +525,11 @@ final RestorableDouble cs = RestorableDouble(0);
       searchText = value;
     });
   }
-
+  void open(bool val){
+   // setState(() {
+      isopen = val;
+    //});
+  }
 
   Widget buildSearchBar(String tiltle){
     return Container(
@@ -608,7 +622,7 @@ final RestorableDouble cs = RestorableDouble(0);
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.my_bookmarks!.Buttons(context, _dialVisible, controller,my_bookmarks,  this, Env.value!.baseUrl!, '', title)
               );
 			  }
@@ -658,7 +672,7 @@ final RestorableDouble cs = RestorableDouble(0);
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.my_bookmarks!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.my_bookmarks!.Buttons(context, _dialVisible, controller,my_bookmarks,  this, Env.value!.baseUrl!, '', title, account)		
                    
 			 );

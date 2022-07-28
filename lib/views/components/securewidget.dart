@@ -57,21 +57,23 @@ class _SecureWidget extends State<SecureWidget> {
   String  errormessage = '';
   final String linkEmail = '/fw9423';
   final String linkSMS = '/tw6901';
-  TextEditingController contr1 = new TextEditingController();
+  TextEditingController contr1 = TextEditingController();
 //  _SecureWidget(){
     //
  // }
   @override
   initState() {
-    super.initState();
+
+   // contr1!.text = widget.value!;
     widget.hideButton = false;
+    super.initState();
   }
 
   String? validateSecure(_value, _require, _Secure) {
     String value = _value;
     bool   require = _require;
-    String Secure = _Secure;
-    String? result = 'Refresh your Secure' ;
+    String? Secure = _Secure;
+    String? result = '' ;
     isvalid = false;
     if(require){
       if (value.isEmpty){
@@ -193,13 +195,13 @@ class _SecureWidget extends State<SecureWidget> {
                             if (isvalid) {
                               setState(() {
                                 validation = true;
-                                refreshSecure (value);
+                                refreshSecure (value!);
                               });
                               return null;
                             } else {
                               setState(() {
                                 validation = false;
-                                refreshSecure (value);
+                                refreshSecure (value!);
                               });
                               return null;
                             }
@@ -236,7 +238,7 @@ class _SecureWidget extends State<SecureWidget> {
                             children: <Widget>[
                               RaisedButton(
                                 textTheme: ButtonTextTheme.normal,
-                                color: Colors.grey,
+                                color: Colors.green,
                                 child: Text('Verifikasi', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                                 onPressed:   ()async {
                                   hint = await _refreshSecure();

@@ -511,7 +511,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	  ModelWidget(
 	  value: model.model.worker_id,
 	  caption: 'Worker',
-	  hint: 'pilih Model',
+	  hint: 'pilih Worker',
 	   required: false,
 	  idenum: model.model.worker_list,
 	  nameenum: model.model.worker_list_str,
@@ -526,7 +526,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	  ModelWidget(
 	  value: model.model.project_id,
 	  caption: 'Project',
-	  hint: 'pilih Model',
+	  hint: 'pilih Project',
 	   required: false,
 	  idenum: model.model.project_list,
 	  nameenum: model.model.project_list_str,
@@ -541,7 +541,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	  EnumWidget(
 	  value: model.model.status_id,
 	  caption: 'Status',
-	  hint: 'pilih Enum',
+	  hint: 'pilih Status',
 	   required: false,
 	  idenum: model.model.status_list,
 	  nameenum: model.model.status_list_str,
@@ -556,7 +556,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	new DateTimeWidget(
 	  value: model.model.date,
 	  caption: 'Date',
-	  hint: 'isi dengan DateTime? diatas.',
+	  hint: 'isi dengan Date diatas.',
 	   required: false,
 	  getValue:(DateTime? val) {
 		state.setState(() {
@@ -569,7 +569,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	  ModelWidget(
 	  value: model.model.location_id,
 	  caption: 'Location',
-	  hint: 'pilih Model',
+	  hint: 'pilih Location',
 	   required: false,
 	  idenum: model.model.location_list,
 	  nameenum: model.model.location_list_str,
@@ -597,7 +597,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	PercentWidget(
 	  value: model.model.matching_skills,
 	  caption: 'Matching Skills',
-	  hint: 'Isi dengan double? Anda',
+	  hint: 'Isi dengan Matching Skills Anda',
 	   required: false,
 	  min:'0.0',
 	  max:'100.0',
@@ -612,7 +612,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	MoneyWidget(
 	  value: model.model.amount,
 	  caption: 'Amount',
-	  hint: 'Isi dengan Money Anda',
+	  hint: 'Isi dengan Amount Anda',
 	   required: true,
 	  min:'10',
 	  max:'2000000',
@@ -628,7 +628,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 			new ArticleWidget(
 			  value: '',
 			  caption: 'Message',
-			  hint: 'isi dengan Article Anda',
+			  hint: 'isi dengan Message Anda',
 			   required: true,
 			  getValue:(String? val) {
 				state.setState(() {
@@ -641,7 +641,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 		  new ArticleWidget(
 		  value: model.model.message,
 		  caption: 'Message',
-		  hint: 'isi dengan Article Anda',
+		  hint: 'isi dengan Message Anda',
 		   required: true,
 		  getValue:(String? val) {
 			state.setState(() {
@@ -656,7 +656,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	FileWidget(
 		value: model.model.attachments,
 		caption: 'Attachments',
-		hint: 'Isi dengan File Anda',
+		hint: 'Isi dengan Attachments Anda',
 		 required: false,
 		getValue: (var val) {
 		  state.setState(() {
@@ -669,7 +669,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	BooleanWidget(
 	  value: model.model.read_by_owner,
 	  caption: 'Read By Owner',
-	  hint: 'Isi dengan boolean Anda',
+	  hint: 'Isi dengan Read By Owner Anda',
 	   required: false,
 	  getValue: (bool? val) {
 		state.setState(() {
@@ -682,7 +682,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	BooleanWidget(
 	  value: model.model.shortlisted,
 	  caption: 'Shortlisted',
-	  hint: 'Isi dengan boolean Anda',
+	  hint: 'Isi dengan Shortlisted Anda',
 	   required: false,
 	  getValue: (bool? val) {
 		state.setState(() {
@@ -724,7 +724,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	TitleWidget(
 		value: model.model.project_title,
 		caption: 'Project Title',
-		hint: 'Isi dengan Title Anda',
+		hint: 'Isi dengan Project Title Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {
@@ -737,7 +737,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	DisplayNameWidget(
 		value: model.model.project_owner,
 		caption: 'Project Owner',
-		hint: 'Isi dengan Website Anda',
+		hint: 'Isi dengan Project Owner Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {
@@ -750,7 +750,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	DisplayNameWidget(
 		value: model.model.description,
 		caption: 'Description',
-		hint: 'Isi dengan Website Anda',
+		hint: 'Isi dengan Description Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {
@@ -763,7 +763,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	DisplayNameWidget(
 		value: model.model.published_budget,
 		caption: 'Published Budget',
-		hint: 'Isi dengan Website Anda',
+		hint: 'Isi dengan Published Budget Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {

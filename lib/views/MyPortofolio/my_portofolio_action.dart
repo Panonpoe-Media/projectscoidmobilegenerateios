@@ -278,6 +278,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(add_portofolio, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -916,6 +917,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

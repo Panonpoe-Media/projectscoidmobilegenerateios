@@ -4789,40 +4789,42 @@ class CartListingBase{
        return(
 	        buttonChildren 
 	   );
-   } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool? visible, bool? account){
-     return(
-	 SpeedDial(
-	childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-				animatedIcon: AnimatedIcons.menu_close,
-				animatedIconTheme: IconThemeData(size: 22.0),
-				// this is ignored if animatedIcon is non null
-				// child: Icon(Icons.add),
-				visible: visible!,
-				// If true user is forced to close dial manually
-				// by tapping main button and overlay is not rendered.
-				closeManually: false,
-				curve: Curves.bounceIn,
-				overlayColor: Colors.black,
-				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
-				tooltip: 'Speed Dial',
-				heroTag: 'speed-dial-hero-tag',
-				backgroundColor: CurrentTheme.MainAccentColor,
-				foregroundColor: Colors.white,
-				elevation: 8.0,
-				shape: CircleBorder(),
-				children:listButton(context)
-	    )
-	 );
-   } 
-   
-   
-   
-   
-   
+   }
+
+  SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
+    return(
+        SpeedDial(
+          //marginRight: 18,
+          //marginBottom: 20,
+            childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+            animatedIcon: AnimatedIcons.menu_close,
+            animatedIconTheme: IconThemeData(size: 22.0),
+            // this is ignored if animatedIcon is non null
+            // child: Icon(Icons.add),
+            visible: visible!,
+            // If true user is forced to close dial manually
+            // by tapping main button and overlay is not rendered.
+            closeManually: false,
+            curve: Curves.bounceIn,
+            overlayColor: CurrentTheme.MainAccentColor,
+            overlayOpacity: 0.5,
+            onOpen: (){open(true);},
+            onClose: (){open(false);},
+            tooltip: 'Speed Dial',
+            heroTag: 'speed-dial-hero-tag',
+            backgroundColor: CurrentTheme.SecondaryColor,
+            foregroundColor: Colors.white,
+            elevation: 8.0,
+            shape: CircleBorder(),
+            children:listButton(context)
+        )
+    );
+  }
+
+
+
+
+
 }
 
 

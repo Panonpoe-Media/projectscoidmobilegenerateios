@@ -38,6 +38,7 @@ import 'package:projectscoid/views/route.dart' as rt;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/models/login.dart';
 import 'package:projectscoid/repository/repository.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_profile_base.g.dart';
 
@@ -172,7 +173,7 @@ class EditProfileMyProfileBase{
 
 
 
-Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProfileController my_profile,
+Widget RButtonActionMyProfileWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, MyProfileController my_profile,
  var postMyProfileResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
   var ic;
@@ -336,7 +337,14 @@ Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var form
                                   });
                                   }).catchError((Error){
                        // AppProvider.getRouter(context)!.pop(context);	
-
+                                    if(_isRewardedAdReady!){
+                                      state.setState(() {
+                                        _isRewardedAdReady = false;
+                                      });
+                                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                                        // Reward the user for watching an ad.
+                                      });
+                                    }
 
                                     if (Error.toString().contains('302')) {
 
@@ -363,6 +371,14 @@ Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var form
                                   postMyProfileResult = value;
                                   });
                                   }).catchError((Error){
+                                    if(_isRewardedAdReady!){
+                                      state.setState(() {
+                                        _isRewardedAdReady = false;
+                                      });
+                                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                                        // Reward the user for watching an ad.
+                                      });
+                                    }
                        // AppProvider.getRouter(context)!.pop(context);	
 							 Navigator.pushAndRemoveUntil(
 								context,
@@ -546,7 +562,8 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
                                   state.setState(() {
                                   postMyProfileResult = value;
                                   });
-                                  }).catchError((Error){   
+                                  }).catchError((Error){
+
                         //AppProvider.getRouter(context)!.pop(context);	
 							 Navigator.pushAndRemoveUntil(
 								context,
@@ -561,7 +578,8 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
                                   state.setState(() {
                                   postMyProfileResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                  }).catchError((Error){
+
                          // AppProvider.getRouter(context)!.pop(context);
 									 Navigator.pushAndRemoveUntil(
 										context,
@@ -630,14 +648,14 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
     return( formData);
   } 	
 	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProfileController my_profile,
+  List<Widget> RlistButton(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, MyProfileController my_profile,
   var postEditProfileResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren.add(RButtonActionMyProfileWidget(model.buttons[i], context,formKey, controller,my_profile, postEditProfileResult, state, sendPath, id,  title));
+      buttonChildren.add(RButtonActionMyProfileWidget( _rewardedAd, _isRewardedAdReady,model.buttons[i], context,formKey, controller,my_profile, postEditProfileResult, state, sendPath, id,  title));
       }
     }
        return(
@@ -668,7 +686,7 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProfileController my_profile,
+    Widget	 RButtons(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, BuildContext context, bool? visible, var formKey, ScrollController controller, MyProfileController my_profile,
   var postEditProfileResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
     double?   width = 400;
@@ -683,7 +701,7 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_profile, postEditProfileResult, state, sendPath, id,  title )
+           RlistButton( _rewardedAd, _isRewardedAdReady,context, formKey,controller,my_profile, postEditProfileResult, state, sendPath, id,  title )
 	    
             )
         )
@@ -736,7 +754,7 @@ SpeedDialChild  ButtonActionMyProfileWidget(Button button, BuildContext context,
 									caption: 'Email',
 								));}
 								Widget editPhoto (State state) {
-								if(model.model.photo_url== '' || model.model.photo == null ){
+               if(model.model.photo_url== '' || model.model.photo == null ){
 									model.model.photo = Photo('','0','', '','', '');
 									}
 								  return(
@@ -8001,7 +8019,7 @@ Widget viewItem1 (ItemMyProfileModel? item,ItemMyProfileModel? item1, String?   
 	   );
    } 
    
-    SpeedDial	 Buttons(BuildContext context, bool? visible, bool? account){
+    SpeedDial	 Buttons(BuildContext context, bool? visible, bool? account, Function open){
      return(
 	 SpeedDial(
 	childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
@@ -8016,8 +8034,8 @@ Widget viewItem1 (ItemMyProfileModel? item,ItemMyProfileModel? item1, String?   
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+        onOpen: (){open(true);},
+        onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

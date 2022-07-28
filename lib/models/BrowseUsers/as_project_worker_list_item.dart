@@ -179,7 +179,8 @@ class ItemAsProjectWorkerRev{
 
 ItemAsProjectWorkerRev _$ItemAsProjectWorkerRevFromJson(Map<String, dynamic> json) {
 
-  var dt = (json['finish_date'] as String?) ?? '';
+  //var dt = (json['finish_date'] as String?) ?? '';
+  var dt = (json['finish_date'] ?? '') ;
  if(dt.contains('\/')){
    dt =  dt.replaceAll(' WIB', '').replaceAll('WIB', '');
    var dtsp =  dt.split(' ');

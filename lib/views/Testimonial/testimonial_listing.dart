@@ -35,6 +35,7 @@ class  PublicTestimonialListingState extends State< PublicTestimonialListing>{
   bool selected = false;
   AccountController? accountController;
   bool account = true;
+  bool isopen = false;
   String searchText = '';
    double initscroll = 0.0;
    PublicTestimonialListingState() {
@@ -254,7 +255,11 @@ class  PublicTestimonialListingState extends State< PublicTestimonialListing>{
     );
   }
 
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
    // @override
   Widget buildListingBar(){
     return BlocBuilder<TestimonialListing, TestimonialState>(
@@ -294,7 +299,7 @@ class  PublicTestimonialListingState extends State< PublicTestimonialListing>{
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.testimonial!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.testimonial!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.testimonial!.Buttons(context, _dialVisible, controller,testimonial,  this, Env.value!.baseUrl!, '', title)
               );
 			  }

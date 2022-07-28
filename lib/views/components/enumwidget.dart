@@ -119,8 +119,8 @@ class _TagsPickerHeader extends StatelessWidget {
     );
 
     return Container(
-      width: width!,
-      height: height!,
+      width: width,
+      height: height,
       padding: padding!,
       color: backgroundColor,
       child: Column(

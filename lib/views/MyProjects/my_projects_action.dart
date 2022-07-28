@@ -277,6 +277,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(bump_up, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -917,6 +918,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(broadcast_message, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1365,6 +1367,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
 	   
    
 	
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1806,6 +1809,7 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
   @override
   void dispose() {
     show_bids!.listingShowBids!.dispose();
+	
     super.dispose();
   }
 
@@ -1921,41 +1925,7 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
       var data;
       List<Map> listAccount = [];
 	
-	    late RewardedAd _rewardedAd;
-	  // TODO: Add _isRewardedAdReady
-	  bool _isRewardedAdReady = false;
-		void _loadRewardedAd() {
-		RewardedAd.load(
-		  adUnitId: AdHelper.rewardedAdUnitId,
-		  request: AdRequest(),
-		  rewardedAdLoadCallback: RewardedAdLoadCallback(
-			onAdLoaded: (ad) {
-			  _rewardedAd = ad;
-
-			  ad.fullScreenContentCallback = FullScreenContentCallback(
-				onAdDismissedFullScreenContent: (ad) {
-
-				  setState(() {
-					_isRewardedAdReady = false;
-				  });
-				 // _loadRewardedAd();
-				},
-			  );
-
-			  setState(() {
-				_isRewardedAdReady = true;
-
-			  });
-			},
-			onAdFailedToLoad: (err) {
-			  print('Failed to load a rewarded ad: ${err.message}');
-			  setState(() {
-				_isRewardedAdReady = false;
-			  });
-			},
-		  ),
-		);
-	  }
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1983,7 +1953,7 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
  @override
   void initState() {
     super.initState();
-	_loadRewardedAd();
+
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
@@ -2977,12 +2947,7 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
 	 
 	 
 void _sendMessage()async{
-	 if(_isRewardedAdReady){
-   
-     _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-       // Reward the user for watching an ad.
-     });
-     }
+	
     String? sendPath = Env.value!.baseUrl! + '/user/my_projects/show_thread_new_reply/${widget.id!}/buat-artikel-1-saja';
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
     var postShowThreadResult;
@@ -4014,7 +3979,7 @@ void _sendMessage()async{
 																		onRefresh: _onRefresh,
 																	),
 					     		),
-					 floatingActionButton: state.show_thread!.ButtonsX1(context, _dialVisible, widget.id!,isShowEG, widget.cb!)
+					 floatingActionButton: state.show_thread!.ButtonsX1(context, _dialVisible, widget.id!,isShowEG, widget.cb)
                     
 							
                    
@@ -4041,7 +4006,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_thread!.listingShowThread!.dispose();
-	_rewardedAd?.dispose();
+	
     super.dispose();
   }
 
@@ -4378,6 +4343,7 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
 	   List<Map> listAccount = [];
 	   
    
+	
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -4820,6 +4786,7 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
   @override
   void dispose() {
     show_files!.listingShowFiles!.dispose();
+	
     super.dispose();
   }
 
@@ -4936,41 +4903,7 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
       var data;
       List<Map> listAccount = [];
 	
-	    late RewardedAd _rewardedAd;
-	  // TODO: Add _isRewardedAdReady
-	  bool _isRewardedAdReady = false;
-		void _loadRewardedAd() {
-		RewardedAd.load(
-		  adUnitId: AdHelper.rewardedAdUnitId,
-		  request: AdRequest(),
-		  rewardedAdLoadCallback: RewardedAdLoadCallback(
-			onAdLoaded: (ad) {
-			  _rewardedAd = ad;
-
-			  ad.fullScreenContentCallback = FullScreenContentCallback(
-				onAdDismissedFullScreenContent: (ad) {
-
-				  setState(() {
-					_isRewardedAdReady = false;
-				  });
-				 // _loadRewardedAd();
-				},
-			  );
-
-			  setState(() {
-				_isRewardedAdReady = true;
-
-			  });
-			},
-			onAdFailedToLoad: (err) {
-			  print('Failed to load a rewarded ad: ${err.message}');
-			  setState(() {
-				_isRewardedAdReady = false;
-			  });
-			},
-		  ),
-		);
-	  }
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4998,7 +4931,7 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
  @override
   void initState() {
     super.initState();
-	_loadRewardedAd();
+
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
@@ -5990,12 +5923,7 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
   
   
 void _sendMessage()async{
-    if(_isRewardedAdReady){
    
-     _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-       // Reward the user for watching an ad.
-     });
-     }
     String? sendPath = Env.value!.baseUrl! + '/user/my_projects/show_conversation_new_reply/${widget.id!}/buat-artikel-1-saja/${tempheader!.split('*')[0]}/annncncncncnc';
     // final blank = _textEditingController.text == null || _textEditingController.text.trim() == '';
     var postShowThreadResult;
@@ -7056,7 +6984,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_conversation!.listingShowConversation!.dispose();
-	_rewardedAd?.dispose();
+	
     super.dispose();
   }
 
@@ -7585,6 +7513,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(create_project, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -8225,6 +8154,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit_draft, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -8864,6 +8794,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(publish_project, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -9503,6 +9434,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(cancel_project, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -10143,6 +10075,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(accept_or_reject_work, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -10778,6 +10711,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(rate_worker, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -11420,6 +11354,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(report_progress, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -12059,6 +11994,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(weekly_report, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -12695,6 +12631,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(report_done, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -13330,6 +13267,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(rate_owner, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -13972,6 +13910,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(file_arbitration, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -14613,6 +14552,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(new_offer, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -15252,6 +15192,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(accept_offer, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -15892,6 +15833,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(respond_arbitration, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -16538,6 +16480,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(cancel_arbitration, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

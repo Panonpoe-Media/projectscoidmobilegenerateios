@@ -465,7 +465,7 @@ SpeedDialChild ButtonActionScreenshotsWidget(Button button, BuildContext context
 	MultilineWidget(
 	  value: model.model.description,
 	  caption: 'Description',
-	  hint: 'Isi dengan Multiline Anda',
+	  hint: 'Isi dengan Description Anda',
 	   required: true,
 	  getValue: (String? val) {
 		state.setState(() {

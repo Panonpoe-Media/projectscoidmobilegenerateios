@@ -283,6 +283,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(place_order, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

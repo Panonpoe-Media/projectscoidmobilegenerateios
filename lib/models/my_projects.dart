@@ -6109,7 +6109,7 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                 ),
                 //settingsRow,
               )
-                  :new Expanded(
+                  :Expanded(
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -7597,6 +7597,41 @@ class ItemMyProjectsContent2 extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             buttonMinWidth: 0.9 * width,
             children: <Widget>[
+              destination!.item!.project_status_str!.toUpperCase().contains('CODER SELECTED')?
+              RaisedButton(
+                  child: Text('My Orders'),
+                  textColor: Colors.black,
+                  splashColor : CurrentTheme.ShadeColor,
+                  color : Colors.white,
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.black, width: 1)
+                  ),
+
+                  onPressed: () {
+                    String? idHash = '';
+
+
+
+
+                    if(this.username == destination!.item!.owner_str){
+                      idHash = encode(destination!.item!.owner_id!);
+
+                    }else{
+                      idHash = encode(destination!.item!.accepted_worker_id!);
+
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => rt.UserMyOrdersIndex(id :  idHash!)),
+                    );
+
+
+
+
+
+                  }
+              ):
+              Container(),
               RaisedButton(
                   child: Text('Chat'),
                   textColor: Colors.black,

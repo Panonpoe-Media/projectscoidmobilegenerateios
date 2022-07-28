@@ -3468,6 +3468,7 @@ class SearchBrowseProductsListingState
   AccountController? accountController;
   final scrollThreshold = 200.0;
   bool? selected = false;
+  bool isopen = false;
   String? searchText = '';
   double? initscroll = 0.0;
   String? userid;
@@ -3634,7 +3635,11 @@ class SearchBrowseProductsListingState
           ),
         ));
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildListingBar() {
     return BlocBuilder<BrowseProductsListing, BrowseProductsState>(
       bloc: browse_products!.listing,
@@ -3668,7 +3673,7 @@ class SearchBrowseProductsListingState
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.browse_products!
-                      .Buttons(context, _dialVisible, account)
+                      .Buttons(context, _dialVisible, account, open)
                   //floatingActionButton: isLoading? null :  state.browse_products!.Buttons(context, _dialVisible, controller!,browse_products,  this, Env.value!.baseUrl!, '', title!)
                   );
             }
@@ -3730,7 +3735,7 @@ class SearchBrowseProductsListingState
                 onRefresh: _onRefresh,
               ),
               floatingActionButton:
-                  state.browse_products!.Buttons(context, _dialVisible, account)
+                  state.browse_products!.Buttons(context, _dialVisible, account, open)
               //floatingActionButton: isLoading? null :  state.browse_products!.Buttons(context, _dialVisible, controller!,browse_products,  this, Env.value!.baseUrl!, '', title!, account)
 
               );

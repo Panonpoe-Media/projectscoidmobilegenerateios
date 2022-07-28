@@ -184,14 +184,14 @@ class ItemAsProjectOwnerRev{
 
 ItemAsProjectOwnerRev _$ItemAsProjectOwnerRevFromJson(Map<String, dynamic> json) {
 
-  var dt = (json['finish_date'] as String) ?? '';
+  var dt = (json['finish_date'] ?? '') ;
   if(dt.contains('\/')){
     dt =  dt.replaceAll(' WIB', '').replaceAll('WIB', '');
     var dtsp =  dt.split(' ');
     var dtsp2 = dtsp[0].split('\/');
     dt = '${dtsp2[2]}-${dtsp2[1]}-${dtsp2[0]} ${dtsp[1]}';
 
-  };
+  }
  return ItemAsProjectOwnerRev(
 /*
      (json['buttons'] as List)

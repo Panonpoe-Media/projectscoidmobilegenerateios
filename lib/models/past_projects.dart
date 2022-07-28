@@ -204,7 +204,7 @@ class ViewModelPastProjectsRev {
     this.worker_rating_num,
     this.worker_rating_num_str,
     this.worker_feedback,
-    this.accepted_worker_photo_url,
+         this.accepted_worker_photo_url,
     this.accepted_worker_user_name,
     this.accepted_worker_kabupaten_str,
     this.accepted_worker_worker_rating,
@@ -214,18 +214,20 @@ class ViewModelPastProjectsRev {
     this.accepted_worker_worker_point_str,
     this.accepted_worker_worker_ranking,
     this.accepted_worker_worker_ranking_str,
-    this.owner_feedback,
+       this.owner_feedback,
     this.owner_rating_num,
     this.owner_rating_num_str,
     this.arbitration_id,
     this.arbitration_str,
     this.arbitration_url,
-    this.attachments_url,
+     this.attachments_url,
     this.attachments,
     this.attachments_name,
-    this.arbitration_list,
+        this.arbitration_list,
     this.arbitration_list_str,
     this.user_bids,
+
+
   );
 
   factory ViewModelPastProjectsRev.fromJson(Map<String, dynamic> json) =>
@@ -744,7 +746,7 @@ class PastProjectsViewModel extends PastProjectsViewBase {
         )
         .toList();
 
-    ScrollController? controller;
+    ScrollController? controller =  ScrollController();
     return Column(
       children: [
         ExpandablePanel(
@@ -3420,6 +3422,7 @@ class SearchPastProjectsListingState extends State<SearchPastProjectsListing>
   TextEditingController searchBoxController = TextEditingController();
   final scrollThreshold = 200.0;
   bool selected = false;
+  bool isopen  = false;
   String? searchText = '';
 
   final RestorableDouble cs = RestorableDouble(0);
@@ -3494,6 +3497,11 @@ class SearchPastProjectsListingState extends State<SearchPastProjectsListing>
     });
   }
 
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildSearchBar(String tiltle) {
     return Container(
         // padding: const EdgeInsets.all(8.0),
@@ -3560,7 +3568,7 @@ class SearchPastProjectsListingState extends State<SearchPastProjectsListing>
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.past_projects!
-                      .Buttons(context, _dialVisible, widget.account)
+                      .Buttons(context, _dialVisible, widget.account, open)
                   //floatingActionButton: isLoading? null :  state.past_projects!.Buttons(context, _dialVisible, controller,past_projects,  this, Env.value!.baseUrl!, '', title!)
                   );
             }
@@ -3668,6 +3676,7 @@ class SearchPastProjectsListing1State extends State<SearchPastProjectsListing1>
   PastProjectsController? past_projects;
   TextEditingController searchBoxController = TextEditingController();
   final scrollThreshold = 200.0;
+  bool isopen = false;
   bool selected = false;
   String? searchText = '';
 
@@ -3742,7 +3751,11 @@ class SearchPastProjectsListing1State extends State<SearchPastProjectsListing1>
       searchText = value;
     });
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildSearchBar(String tiltle) {
     return Container(
         // padding: const EdgeInsets.all(8.0),
@@ -3810,7 +3823,7 @@ class SearchPastProjectsListing1State extends State<SearchPastProjectsListing1>
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.past_projects!
-                      .Buttons(context, _dialVisible, widget.account)
+                      .Buttons(context, _dialVisible, widget.account, open)
                   //floatingActionButton: isLoading? null :  state.past_projects!.Buttons(context, _dialVisible, controller,past_projects,  this, Env.value!.baseUrl!, '', title!)
                   );
             }

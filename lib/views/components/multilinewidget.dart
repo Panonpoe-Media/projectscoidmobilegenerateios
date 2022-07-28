@@ -10,12 +10,12 @@ class MultilineWidget extends StatefulWidget {
    this.getValue,
    }) : super(key: key)
    {
-    contr!.text = value!;
+   // contr!.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = TextEditingController();
+ // TextEditingController? contr = TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -34,10 +34,13 @@ class _MultilineWidget extends State<MultilineWidget> {
   bool validation = true;
   bool isvalid = true;
   String?  errormessage = '';
+  TextEditingController? contr = TextEditingController();
  // TextEditingController contr;
  // _MultilineWidget({this.contr});
   @override
   initState(){
+    contr?.text = widget.value!;
+    super.initState();
   //contr.text = 'ok';
   }
 
@@ -107,7 +110,7 @@ class _MultilineWidget extends State<MultilineWidget> {
                     border: const OutlineInputBorder(),
                   ),
 
-                  controller: widget.contr,
+                  controller: contr,
                   validator: (value) {
                     // widget.value = value;
                     errormessage = validateMultiline(value, widget.required);

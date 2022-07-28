@@ -85,7 +85,7 @@ class PlaceNewBidBrowseProjectsState extends State<PlaceNewBidBrowseProjects> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Place New Bid';
-   late RewardedAd _rewardedAd;
+   RewardedAd? _rewardedAd;
 
   // TODO: Add _isRewardedAdReady
   bool _isRewardedAdReady = false;
@@ -320,6 +320,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(place_new_bid, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -963,6 +964,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(ask_owner, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1604,6 +1606,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(guest_create_project, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

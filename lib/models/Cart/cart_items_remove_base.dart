@@ -487,7 +487,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.user_id,
 	  caption: 'User',
-	  hint: 'pilih Model',
+	  hint: 'pilih User',
 	   required: false,
 	  idenum: model.model.user_list,
 	  nameenum: model.model.user_list_str,
@@ -502,7 +502,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  EnumWidget(
 	  value: model.model.type_id,
 	  caption: 'Type',
-	  hint: 'pilih Enum',
+	  hint: 'pilih Type',
 	   required: false,
 	  idenum: model.model.type_list,
 	  nameenum: model.model.type_list_str,
@@ -517,7 +517,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	DisplayNameWidget(
 		value: model.model.title,
 		caption: 'Title',
-		hint: 'Isi dengan Website Anda',
+		hint: 'Isi dengan Title Anda',
 		 required: false,
 		getValue: (String? val) {
 		  state.setState(() {
@@ -530,7 +530,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.product_id,
 	  caption: 'Product',
-	  hint: 'pilih Model',
+	  hint: 'pilih Product',
 	   required: false,
 	  idenum: model.model.product_list,
 	  nameenum: model.model.product_list_str,
@@ -545,7 +545,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.project_id,
 	  caption: 'Project',
-	  hint: 'pilih Model',
+	  hint: 'pilih Project',
 	   required: false,
 	  idenum: model.model.project_list,
 	  nameenum: model.model.project_list_str,
@@ -560,7 +560,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.service_id,
 	  caption: 'Service',
-	  hint: 'pilih Model',
+	  hint: 'pilih Service',
 	   required: false,
 	  idenum: model.model.service_list,
 	  nameenum: model.model.service_list_str,
@@ -575,7 +575,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.bid_id,
 	  caption: 'Bid',
-	  hint: 'pilih Model',
+	  hint: 'pilih Bid',
 	   required: false,
 	  idenum: model.model.bid_list,
 	  nameenum: model.model.bid_list_str,
@@ -590,7 +590,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.iklan_id,
 	  caption: 'Iklan',
-	  hint: 'pilih Model',
+	  hint: 'pilih Iklan',
 	   required: false,
 	  idenum: model.model.iklan_list,
 	  nameenum: model.model.iklan_list_str,
@@ -605,7 +605,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	  ModelWidget(
 	  value: model.model.seller_id,
 	  caption: 'Seller',
-	  hint: 'pilih Model',
+	  hint: 'pilih Seller',
 	   required: false,
 	  idenum: model.model.seller_list,
 	  nameenum: model.model.seller_list_str,
@@ -620,7 +620,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	MoneyWidget(
 	  value: model.model.item_price,
 	  caption: 'Item Price',
-	  hint: 'Isi dengan Money Anda',
+	  hint: 'Isi dengan Item Price Anda',
 	   required: false,
 	  min:'10',
 	  max:'2000000',
@@ -635,7 +635,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	NumberWidget(
 	  value: model.model.quantity,
 	  caption: 'Quantity',
-	  hint: 'Isi dengan Number Anda',
+	  hint: 'Isi dengan Quantity Anda',
 	   required: false,
 	  min:'10',
 	  max:'2000000',
@@ -650,7 +650,7 @@ SpeedDialChild ButtonActionCartItemsWidget(Button button, BuildContext context,v
 	MoneyWidget(
 	  value: model.model.total_price,
 	  caption: 'Total Price',
-	  hint: 'Isi dengan Money Anda',
+	  hint: 'Isi dengan Total Price Anda',
 	   required: false,
 	  min:'10',
 	  max:'2000000',

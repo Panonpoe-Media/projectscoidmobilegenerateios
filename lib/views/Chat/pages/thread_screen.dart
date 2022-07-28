@@ -76,7 +76,7 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
 
   Future<void> fetchData()async {
     final ftr = _getChatSharedPrefs();
-    ftr.then((value){
+    ftr.then((value) async {
       //print('ini dari chat deep link 124567 ====  $value   ');
       if(value!.contains('chat')){
 
@@ -92,7 +92,8 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
         }else{
           thread = '${widget.user}/$id';
         }
-        Navigator.push(
+         print('ini dari chat deep link ====  $value   ');
+        bool result = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (_) => ChatScreen(
@@ -115,6 +116,12 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
               ),
             )
         );
+        if(!result) {
+          widget.chatBloc!.getx();
+          setState(() {
+          //  widget.chatBloc!.getx();
+          });
+        }
 
 
 
@@ -201,6 +208,7 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
             thread = '${widget.user}/${button['userid']}';
           }
           button.addAll({"thread":thread});
+          print('ini dari chat deep link ====  ghghghg   ');
           bool result = await Navigator.push(
             context,
             MaterialPageRoute(
@@ -212,8 +220,9 @@ class _ThreadScreenState extends State<ThreadScreen>   with RestorationMixin{
             ),
           );
           if(!result){
+            widget.chatBloc!.getx();
             setState(() {
-
+             // widget.chatBloc!.getx();
             });
           }
         }

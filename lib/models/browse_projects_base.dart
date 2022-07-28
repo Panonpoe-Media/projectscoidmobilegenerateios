@@ -102,7 +102,7 @@ class PlaceNewBidBrowseProjectsBase{
 
 
 
-Widget RButtonActionBrowseProjectsWidget(RewardedAd _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
  var postBrowseProjectsResult, State state, String?sendPath, String?id,  String?title){
   var cl;
   var ic;
@@ -564,7 +564,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
     return( formData);
   } 	
 	
-  List<Widget> RlistButton(RewardedAd _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+  List<Widget> RlistButton(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title){
     final List<Widget> buttonChildren = <Widget>[
     ];
@@ -602,7 +602,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
 	 );
   }
    
-    Widget	 RButtons(RewardedAd _rewardedAd,bool? _isRewardedAdReady,BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+    Widget	 RButtons(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;

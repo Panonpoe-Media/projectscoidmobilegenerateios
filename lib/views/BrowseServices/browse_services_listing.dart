@@ -40,6 +40,7 @@ class  PublicBrowseServicesListingState extends State< PublicBrowseServicesListi
    AccountController? accountController;
   bool account = true;
   String? userid;
+  bool isopen = false;
   String searchText = '';
    double initscroll = 0.0;
    PublicBrowseServicesListingState() {
@@ -112,11 +113,14 @@ final RestorableDouble cs = RestorableDouble(0);
 		 if(search){
 		 Navigator.pop(context);
 		 }else{
-		  Navigator.pushAndRemoveUntil(
-								context,
-								MaterialPageRoute(builder: (context) => Projectscoid(id : account ? listAccount[0]['user_hash'] : '')),
-									(Route<dynamic> route) => false,
-							  );
+       if(!isopen) {
+         Navigator.pushAndRemoveUntil(
+           context,
+           MaterialPageRoute(builder: (context) =>
+               Projectscoid(id: account ? listAccount[0]['user_hash'] : '')),
+               (Route<dynamic> route) => false,
+         );
+       }
 		 }
           //Navigator.pop(context);
 		    
@@ -230,6 +234,11 @@ final RestorableDouble cs = RestorableDouble(0);
     });
     // next = false;
   }
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
    // @override
   Widget buildListingBar(){
     return BlocBuilder<BrowseServicesListing, BrowseServicesState>(
@@ -277,7 +286,7 @@ final RestorableDouble cs = RestorableDouble(0);
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value.baseUrl, '', title)
               );
 			  }
@@ -330,7 +339,7 @@ final RestorableDouble cs = RestorableDouble(0);
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value.baseUrl, '', title, account)		
                    
 			 );
@@ -398,6 +407,7 @@ class  SearchBrowseServicesListingState extends State< SearchBrowseServicesListi
   bool selected = false;
    AccountController? accountController;
   bool account = true;
+  bool isopen = false;
   String userid = '' ;
   String searchText = '';
    double initscroll = 0.0;
@@ -513,7 +523,11 @@ final RestorableDouble cs = RestorableDouble(0);
       searchText = value;
     });
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
 
   Widget buildSearchBar(String tiltle){
     return Container(
@@ -606,7 +620,7 @@ final RestorableDouble cs = RestorableDouble(0);
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value.baseUrl, '', title)
               );
 			  }
@@ -656,7 +670,7 @@ final RestorableDouble cs = RestorableDouble(0);
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.browse_services!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value.baseUrl, '', title, account)		
                    
 			 );

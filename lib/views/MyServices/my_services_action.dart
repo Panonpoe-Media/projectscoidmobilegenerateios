@@ -90,6 +90,7 @@ class  SalesMyServicesState1 extends State<SalesMyServices> with TickerProviderS
 	   
    
 	
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -531,6 +532,7 @@ class  SalesMyServicesState1 extends State<SalesMyServices> with TickerProviderS
   @override
   void dispose() {
     sales!.listingSales!.dispose();
+	
     super.dispose();
   }
 
@@ -612,6 +614,7 @@ class  CommentsMyServicesState1 extends State<CommentsMyServices> with TickerPro
 	   List<Map> listAccount = [];
 	   
    
+	
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1054,6 +1057,7 @@ class  CommentsMyServicesState1 extends State<CommentsMyServices> with TickerPro
   @override
   void dispose() {
     comments!.listingComments!.dispose();
+	
     super.dispose();
   }
 
@@ -1327,6 +1331,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(add_new_service, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1967,6 +1972,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(publish_service, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -2607,6 +2613,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(bump_up, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -3248,6 +3255,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit_service, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -3698,6 +3706,7 @@ class  ScreenshotsMyServicesState1 extends State<ScreenshotsMyServices> with Tic
 	   
    
 	
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4139,6 +4148,7 @@ class  ScreenshotsMyServicesState1 extends State<ScreenshotsMyServices> with Tic
   @override
   void dispose() {
     screenshots!.listingScreenshots!.dispose();
+	
     super.dispose();
   }
 
@@ -4411,6 +4421,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(unlist, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -5051,6 +5062,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(reactivate_service, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

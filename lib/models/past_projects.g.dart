@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 part of 'past_projects.dart';
-
+/** AUTOGENERATE OFF **/
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -101,19 +101,20 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
       json['accepted_worker_worker_point_str'] as String?,
       json['accepted_worker_worker_ranking'] as int?,
       json['accepted_worker_worker_ranking_str'] as String?,
-      json['owner_feedback'] as String?,
+             json['owner_feedback'] as String?,
       (json['owner_rating_num'] as num?)?.toDouble(),
       json['owner_rating_num_str'] as String?,
       json['arbitration_id'] as int?,
       json['arbitration_str'] as String?,
       json['arbitration_url'] as String?,
-      json['attachments_url'] as String?,
-      (json['attachments'] as List<dynamic>?)
+          json['attachments_url'] as String?,
+        (json['attachments'] as String?) == ''? null :
+          (json['attachments'] as List<dynamic>?)
           ?.map((e) =>
-              e == null ? null : FileField.fromJson(e as Map<String, dynamic>))
+              e == null  ? null : FileField.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['attachments_name'] as String?,
-      (json['arbitration_list'] as List<dynamic>?)
+          (json['arbitration_list'] as List<dynamic>?)
           ?.map((e) => e as int?)
           .toList(),
       (json['arbitration_list_str'] as List<dynamic>?)
@@ -123,6 +124,8 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
           ? null
           : UserBidsListingToolsRev.fromJson(
               json['user_bids'] as Map<String, dynamic>),
+
+
     )
       ..age = json['age'] as int?
       ..cnt = json['cnt'] as int?
@@ -196,7 +199,7 @@ Map<String, dynamic> _$ViewModelPastProjectsRevToJson(
       'worker_rating_num': instance.worker_rating_num,
       'worker_rating_num_str': instance.worker_rating_num_str,
       'worker_feedback': instance.worker_feedback,
-      'accepted_worker_photo_url': instance.accepted_worker_photo_url,
+           'accepted_worker_photo_url': instance.accepted_worker_photo_url,
       'accepted_worker_user_name': instance.accepted_worker_user_name,
       'accepted_worker_kabupaten_str': instance.accepted_worker_kabupaten_str,
       'accepted_worker_worker_rating': instance.accepted_worker_worker_rating,
@@ -210,18 +213,21 @@ Map<String, dynamic> _$ViewModelPastProjectsRevToJson(
       'accepted_worker_worker_ranking': instance.accepted_worker_worker_ranking,
       'accepted_worker_worker_ranking_str':
           instance.accepted_worker_worker_ranking_str,
-      'owner_feedback': instance.owner_feedback,
+            'owner_feedback': instance.owner_feedback,
       'owner_rating_num': instance.owner_rating_num,
       'owner_rating_num_str': instance.owner_rating_num_str,
       'arbitration_id': instance.arbitration_id,
       'arbitration_str': instance.arbitration_str,
       'arbitration_url': instance.arbitration_url,
-      'attachments_name': instance.attachments_name,
+
       'attachments_url': instance.attachments_url,
       'attachments': instance.attachments,
-      'arbitration_list': instance.arbitration_list,
+      'attachments_name': instance.attachments_name,
+           'arbitration_list': instance.arbitration_list,
       'arbitration_list_str': instance.arbitration_list_str,
       'user_bids': instance.user_bids,
+
+
     };
 
 PastProjectsViewSuperBaseRev _$PastProjectsViewSuperBaseRevFromJson(

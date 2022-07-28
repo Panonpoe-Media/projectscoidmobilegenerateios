@@ -277,6 +277,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_available_balance, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -912,6 +913,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_via_bank_transfer, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1549,6 +1551,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_credit_card, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -2183,6 +2186,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_cimb_clicks, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -2817,6 +2821,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_bca_klikpay, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -3451,6 +3456,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_mandiri_clickpay, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -4085,6 +4091,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_qris, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -4719,6 +4726,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(pay_with_paypal, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

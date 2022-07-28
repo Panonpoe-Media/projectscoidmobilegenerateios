@@ -12,12 +12,12 @@ class HandphoneWidget extends StatefulWidget {
    this.getValue,
    }) : super(key: key)
    {
-    contr!.text = value!;
+    //contr!.text = value!;
    if(required!){
       caption = caption! + '*';
     }
    } 
-  TextEditingController? contr = new TextEditingController();
+  //TextEditingController? contr = new TextEditingController();
   String? value;
   String? hint;
   final bool? required;
@@ -36,13 +36,15 @@ class _HandphoneWidget extends State<HandphoneWidget> {
   bool validation = true;
   bool isvalid = true;
   String?  errormessage = '';
+  TextEditingController? contr = TextEditingController();
  // TextEditingController contr;
  // _HandphoneWidget({this.contr});
- // @override
-//  initState(){
-
+  @override
+  initState(){
+    contr?.text = widget.value!;
+    super.initState();
   //contr.text = 'ok';
-//  }
+  }
 
   String? validateHandphone(String? _value,bool? _require) {
     String value = _value!;
@@ -117,7 +119,7 @@ class _HandphoneWidget extends State<HandphoneWidget> {
                     border: const OutlineInputBorder(),
                   ),
 
-                  controller: widget.contr,
+                  controller: contr,
                   validator: (value) {
                     // widget.value = value;
                     errormessage = validateHandphone(value, widget.required);

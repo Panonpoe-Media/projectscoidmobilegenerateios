@@ -68,7 +68,9 @@ class Env {
   FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
   Future<InitializationStatus> _initGoogleMobileAds() {
     // TODO: Initialize Google Mobile Ads SDK
+
     return MobileAds.instance.initialize();
+
   }
   void _init() async{
    // await Firebase.initializeApp();
@@ -80,12 +82,12 @@ class Env {
     var application = ProjectscoidApplication();
     await application.onCreate();
     await FlutterDownloader.initialize(debug: debug);
-    await _initGoogleMobileAds();
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     await Firebase.initializeApp(
-             options: DefaultFirebaseConfig.platformOptions,
-           );
+      options: DefaultFirebaseConfig.platformOptions,
+    );
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+    await _initGoogleMobileAds();
     BlocOverrides.runZoned(
           () {
             runApp(App(application));

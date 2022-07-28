@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyPurchases/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'my_purchases_base.g.dart';
 
 
@@ -180,8 +182,8 @@ class DownloadMyPurchasesBase{
 	}
 
 
-
 Widget RButtonActionMyPurchasesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
+
  var postMyPurchasesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -614,16 +616,18 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
-  var postDownloadResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
+
+ var postDownloadResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyPurchasesWidget(model.buttons[i], context,formKey, controller,my_purchases, postDownloadResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyPurchasesWidget(model.buttons[i], context,formKey, controller,my_purchases, postDownloadResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -653,7 +657,7 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyPurchasesController my_purchases,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyPurchasesController my_purchases,
   var postDownloadResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -668,8 +672,7 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_purchases, postDownloadResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_purchases, postDownloadResult, state, sendPath, id,  title )
             )
         )
     );
@@ -1051,8 +1054,8 @@ class RateProductMyPurchasesBase{
 	}
 
 
-
 Widget RButtonActionMyPurchasesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
+
  var postMyPurchasesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -1470,16 +1473,18 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
-  var postRateProductResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyPurchasesController my_purchases,
+
+ var postRateProductResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyPurchasesWidget(model.buttons[i], context,formKey, controller,my_purchases, postRateProductResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyPurchasesWidget(model.buttons[i], context,formKey, controller,my_purchases, postRateProductResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -1509,7 +1514,7 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyPurchasesController my_purchases,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyPurchasesController my_purchases,
   var postRateProductResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -1524,8 +1529,7 @@ SpeedDialChild  ButtonActionMyPurchasesWidget(Button button, BuildContext contex
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_purchases, postRateProductResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_purchases, postRateProductResult, state, sendPath, id,  title )
             )
         )
     );
@@ -3097,8 +3101,7 @@ Widget viewItem1 (ItemMyPurchasesModel item,ItemMyPurchasesModel item1, String? 
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -3115,8 +3118,8 @@ Widget viewItem1 (ItemMyPurchasesModel item,ItemMyPurchasesModel item1, String? 
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,
@@ -3896,7 +3899,7 @@ Widget _getTitleItemWidget(String? label, double? width) {
 	   );
    } 
    
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -3913,8 +3916,8 @@ Widget _getTitleItemWidget(String? label, double? width) {
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

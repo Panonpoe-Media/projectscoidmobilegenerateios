@@ -39,6 +39,7 @@ class  PublicBrowseProductsListingState extends State< PublicBrowseProductsListi
   bool selected = false;
   AccountController? accountController;
   bool account = true;
+  bool isopen = false;
   String searchText = '';
    double initscroll = 0.0;
    String? userid;
@@ -102,11 +103,14 @@ class  PublicBrowseProductsListingState extends State< PublicBrowseProductsListi
           if(search){
             Navigator.pop(context);
           }else{
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => Projectscoid(id : account ? listAccount[0]['user_hash'] : '')),
-                  (Route<dynamic> route) => false,
-            );
+            if(!isopen) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) =>
+                    Projectscoid(id: account ? listAccount[0]['user_hash'] : '')),
+                    (Route<dynamic> route) => false,
+              );
+            }
           }
 
           return false;
@@ -222,7 +226,11 @@ class  PublicBrowseProductsListingState extends State< PublicBrowseProductsListi
     });
     // next = false;
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
    // @override
   Widget buildListingBar(){
     return BlocBuilder<BrowseProductsListing, BrowseProductsState>(
@@ -274,7 +282,7 @@ class  PublicBrowseProductsListingState extends State< PublicBrowseProductsListi
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.browse_products!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.browse_products!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.browse_products!.Buttons(context, _dialVisible, controller,browse_products,  this, Env.value!.baseUrl!, '', title)
               );
 			  }
@@ -378,7 +386,7 @@ class  PublicBrowseProductsListingState extends State< PublicBrowseProductsListi
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.browse_products!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.browse_products!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.browse_products!.Buttons(context, _dialVisible, controller,browse_products,  this, Env.value!.baseUrl!, '', title, account)		
                    
 			 );

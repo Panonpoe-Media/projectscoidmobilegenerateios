@@ -277,6 +277,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(contact_form, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

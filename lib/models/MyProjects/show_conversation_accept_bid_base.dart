@@ -476,7 +476,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	  ModelWidget(
 	  value: model.model.user_id,
 	  caption: 'User',
-	  hint: 'pilih Model',
+	  hint: 'pilih User',
 	   required: false,
 	  idenum: model.model.user_list,
 	  nameenum: model.model.user_list_str,
@@ -491,7 +491,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	  ModelWidget(
 	  value: model.model.project_id,
 	  caption: 'Project',
-	  hint: 'pilih Model',
+	  hint: 'pilih Project',
 	   required: false,
 	  idenum: model.model.project_list,
 	  nameenum: model.model.project_list_str,
@@ -506,7 +506,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	  ModelWidget(
 	  value: model.model.thread_id,
 	  caption: 'Thread',
-	  hint: 'pilih Model',
+	  hint: 'pilih Thread',
 	   required: false,
 	  idenum: model.model.thread_list,
 	  nameenum: model.model.thread_list_str,
@@ -521,7 +521,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	  EnumWidget(
 	  value: model.model.post_type_id,
 	  caption: 'Post Type',
-	  hint: 'pilih Enum',
+	  hint: 'pilih Post Type',
 	   required: false,
 	  idenum: model.model.post_type_list,
 	  nameenum: model.model.post_type_list_str,
@@ -536,7 +536,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	new DateTimeWidget(
 	  value: model.model.post_date,
 	  caption: 'Post Date',
-	  hint: 'isi dengan DateTime? diatas.',
+	  hint: 'isi dengan Post Date diatas.',
 	   required: false,
 	  getValue:(DateTime? val) {
 		state.setState(() {
@@ -549,7 +549,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	MoneyWidget(
 	  value: model.model.bid_amount,
 	  caption: 'Bid Amount',
-	  hint: 'Isi dengan Money Anda',
+	  hint: 'Isi dengan Bid Amount Anda',
 	   required: false,
 	  min:'10',
 	  max:'2000000',
@@ -565,7 +565,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 			new ArticleWidget(
 			  value: '',
 			  caption: 'Message',
-			  hint: 'isi dengan Article Anda',
+			  hint: 'isi dengan Message Anda',
 			   required: false,
 			  getValue:(String? val) {
 				state.setState(() {
@@ -578,7 +578,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 		  new ArticleWidget(
 		  value: model.model.message,
 		  caption: 'Message',
-		  hint: 'isi dengan Article Anda',
+		  hint: 'isi dengan Message Anda',
 		   required: false,
 		  getValue:(String? val) {
 			state.setState(() {
@@ -593,7 +593,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	FileWidget(
 		value: model.model.attachments,
 		caption: 'Attachments',
-		hint: 'Isi dengan File Anda',
+		hint: 'Isi dengan Attachments Anda',
 		 required: false,
 		getValue: (var val) {
 		  state.setState(() {
@@ -606,7 +606,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	BooleanWidget(
 	  value: model.model.read_by_owner,
 	  caption: 'Read By Owner',
-	  hint: 'Isi dengan boolean Anda',
+	  hint: 'Isi dengan Read By Owner Anda',
 	   required: false,
 	  getValue: (bool? val) {
 		state.setState(() {
@@ -619,7 +619,7 @@ SpeedDialChild ButtonActionShowConversationWidget(Button button, BuildContext co
 	BooleanWidget(
 	  value: model.model.read_by_worker,
 	  caption: 'Read By Worker',
-	  hint: 'Isi dengan boolean Anda',
+	  hint: 'Isi dengan Read By Worker Anda',
 	   required: false,
 	  getValue: (bool? val) {
 		state.setState(() {

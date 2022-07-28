@@ -10,6 +10,7 @@ import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/core/components/helpers/action_helpers.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 import 'package:projectscoid/app/Env.dart';
+import '../repository/APIRepository.dart';
 import 'meta.dart';
 import 'button.dart';
 import 'credit.dart';
@@ -23,6 +24,9 @@ import 'package:projectscoid/app/projectscoid.dart';
 import 'package:projectscoid/app/theme_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/utility/widget/SearchSelectDialog.dart';
+import 'package:projectscoid/models/MyFinance/action.dart';
+import 'package:projectscoid/models/model.dart';
 
 part 'my_finance.g.dart';
 /** AUTOGENERATE OFF **/
@@ -31,6 +35,7 @@ class ChangePaymentSettingsMyFinanceModel extends ChangePaymentSettingsMyFinance
   String? verData = '';
   Map<String, dynamic> json;
   ChangePaymentSettingsMyFinanceModel(Map<String, dynamic> this.json):super(json);
+  @override
   Widget editBank (State state) {
     return(
         ModelWidget(
@@ -57,6 +62,7 @@ class ChangePaymentSettingsMyFinanceModel extends ChangePaymentSettingsMyFinance
           isEmail: true,
           verified: verData,
           getValue: (String? val) {
+            print('aku disini ya $val');
             state.setState(() {
               model.model.secure_code = val;
             });
@@ -191,6 +197,254 @@ class DepositBalanceMyFinanceModel extends DepositBalanceMyFinanceBase{
             });
           },
         ));}
+
+
+  fetchData1(SubModelController cart, BuildContext context)async {
+
+
+
+  }
+
+  @override
+  Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
+      var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
+    var cl;
+    var ic;
+    // final size =MediaQuery.of(context).size;
+    double? width = 400;
+    APIRepository? apiRepProvider = AppProvider.getApplication(context).projectsAPIRepository;
+    if (button.color == 'green'){
+      cl = Colors.green;
+    }
+    if (button.color == 'yellow'){
+      cl = Colors.yellow;
+    }
+    if (button.color == 'blue'){
+      cl = Colors.blue;
+    }
+    if (button.color == 'red'){
+      cl = Colors.red;
+    }
+    if (button.color == 'orange'){
+      cl = Colors.orange;
+    }
+    if (button.color == 'grey'){
+      cl = Colors.grey;
+    }
+    if (button.color == 'black'){
+      cl = Colors.black;
+    }
+    if (button.color == 'brown'){
+      cl = Colors.brown;
+    }
+    if (button.icon == 'fa fa-briefcase'){
+      ic = Icons.work;
+    }
+    if (button.icon == 'fa fa-plus'){
+      ic = Icons.add;
+    }
+    if (button.icon == 'fa fa-list-alt'){
+      ic = Icons.list;
+    }
+
+    if (button.icon == 'fa fa-credit-card'){
+      ic = Icons.credit_card;
+    }
+    if (button.icon == 'fa fa-paypal'){
+      ic = Icons.account_balance_wallet;
+    }
+    if (button.icon == 'fa fa-bank'){
+      ic = Icons.account_balance;
+    }
+    if (button.icon == 'fa fa-dollar'){
+      ic = Icons.attach_money;
+    }
+    if (button.icon == 'fa fa-user'){
+      ic = Icons.person;
+    }
+    if (button.icon == 'fa fa-edit'){
+      ic = Icons.edit;
+    }
+    if (button.icon == 'fa fa-picture-o'){
+      ic = Icons.picture_in_picture;
+    }
+    if (button.icon == 'fa fa-asterisk'){
+      ic = Icons.ac_unit;
+    }
+    if (button.icon == 'fa fa-envelope-o'){
+      ic = Icons.local_post_office;
+    }
+    if (button.icon == 'fa fa-mobile'){
+      ic = Icons.phone_iphone;
+    }
+    if (button.icon == 'fa fa-bullhorn'){
+      ic = Icons.wifi_tethering;
+    }
+
+    if (button.icon == 'fa fa-arrow-circle-down'){
+      ic = Icons.arrow_downward;
+    }
+    if (button.icon == 'fa fa-comment'){
+      ic = Icons.comment;
+    }
+    if (button.icon == 'fa fa-send'){
+      ic = Icons.send;
+    }
+    if (button.icon == 'fa fa-comments'){
+      ic = Icons.comment_bank;
+    }
+    if (button.icon == 'fa fa-files-o'){
+      ic = Icons.file_copy_outlined;
+    }
+
+    if(button.type == 'custom_filter'){
+      return (
+          RaisedButton(
+              child: button.text == 'Order by ...' ?  Text(button!.text!) : Text('Order : ' + button!.text!),
+              textColor: Colors.white,
+              splashColor : CurrentTheme.ShadeColor,
+              color : Color(0xFF037f51),
+              onPressed: () {
+                showSearchSelectDialog(context: context,
+                    caption:button!.text!,
+                    initialitems: button.selections,
+                    initvalue: button!.selections![0]);
+              }
+          )
+      );
+    }else{
+      return(
+          ButtonBar(
+              alignment: MainAxisAlignment.center,
+              buttonMinWidth: 0.43 * width,
+              children: <Widget>[
+                RaisedButton(
+                    child:   Row(
+                      children: [
+                        Icon(ic, size: 20),
+                        SizedBox(width: 5,),
+                        Text(button!.text!)
+                      ],
+                    ),
+                    textColor: button.color == 'green'? Colors.white : Colors.black,
+                    color: button.color == 'green'? Color(0xFF037f51) : Colors.white,
+                    splashColor :  CurrentTheme.ShadeColor,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: button.color == 'green'? Color(0xFF037f51) : Colors.black, width: 1)
+                    ),
+
+
+                    // color : Color(0xFF037f51),
+                    onPressed: () async{
+                      controller.animateTo(controller.position.minScrollExtent,
+                          duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+                      if (formKey.currentState.validate()) {
+
+                        //Map<String, dynamic> res = model.toJson();
+                        //print('json result == $res');
+                        var formData = await convertFormDataDepositBalance(button!.text!, model
+                        );
+                        my_finance = new MyFinanceController(AppProvider.getApplication(context),
+                            sendPath,
+                            AppAction.post,
+                            id,
+                            title,
+                            formData,
+                            false);
+                        if([ 'PlaceNewBid'].contains('DepositBalance')){
+                          my_finance.deleteAllDepositBalanceMyFinance(this.model.model.project_title);
+                        }else if(['AskOwner'].contains('DepositBalance')){
+                          my_finance.deleteAllDepositBalanceMyFinance(this.model.model.project_id.toString());
+                        }else if(['HireMe'].contains('DepositBalance')){
+                          my_finance.deleteAllDepositBalanceMyFinance(this.model.model.private_worker_id.toString());
+                        }else if(['InviteToBid'].contains('DepositBalance')){
+                          my_finance.deleteAllDepositBalanceMyFinance(this.model.model.user_id);
+                        }else{
+                          my_finance.deleteAllDepositBalanceMyFinance('');
+                        }
+                        var res = await apiRepProvider!.getCookies( Env.value!.baseUrl! + '/public/program/mobile_init');//'/user/cart/view');
+
+                        if(sendPath!.contains('%s')){
+
+
+
+                          final future = my_finance.postDepositBalanceMyFinanceWithID();
+                          future.then((value) {
+                            state.setState(() {
+                              postMyFinanceResult = value;
+                            });
+                          }).catchError((Error){
+                           // AppProvider.getRouter(context)!.pop(context);
+                            // AppProvider.getRouter(context)!.pop(context);
+                            SubModelController _cart;
+                            String cartPath = Env.value!.baseUrl! + '/user/cart/view' ;
+                            _cart =      SubModelController(AppProvider.getApplication(context),
+                                cartPath,
+                                null);
+                            var vl;
+                            final c = _cart.getData();
+                            c.then((value) {
+                            //  vl = value;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => CartPayment(pay_method : CartViewModel(value), cartCookies: res)),
+                              );
+                              //this.idHash = value;
+                            });
+                            //fetchData1(_cart, context);
+
+
+                            //var res;
+
+
+
+                          });
+                        }else{
+                          final future = my_finance.postDepositBalanceMyFinance();
+                          future.then((value) {
+                            state.setState(() {
+                              postMyFinanceResult = value;
+                            });
+                          }).catchError((Error){
+                           // AppProvider.getRouter(context)!.pop(context);
+                            // AppProvider.getRouter(context)!.pop(context);
+                            SubModelController _cart;
+                            String cartPath = Env.value!.baseUrl! + '/user/cart/view' ;
+                            _cart =      SubModelController(AppProvider.getApplication(context),
+                                cartPath,
+                                null);
+                            var vl;
+                            final c = _cart.getData();
+                            c.then((value) {
+                             // vl = value;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => CartPayment(pay_method : CartViewModel(value), cartCookies: res)),
+                              );
+                              //this.idHash = value;
+                            });
+                            //fetchData1(_cart, context);
+
+
+                            //var res;
+
+
+                          });
+                        }
+
+
+                      } else {}
+                    }
+
+
+                )
+              ]
+          )
+      );
+    }
+
+  }
+
 	  
 }
 

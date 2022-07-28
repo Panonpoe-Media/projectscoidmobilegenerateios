@@ -90,6 +90,7 @@ class  SalesMyProductsState1 extends State<SalesMyProducts> with TickerProviderS
 	   
    
 	
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -531,6 +532,7 @@ class  SalesMyProductsState1 extends State<SalesMyProducts> with TickerProviderS
   @override
   void dispose() {
     sales!.listingSales!.dispose();
+	
     super.dispose();
   }
 
@@ -612,6 +614,7 @@ class  CommentsMyProductsState1 extends State<CommentsMyProducts> with TickerPro
 	   List<Map> listAccount = [];
 	   
    
+	
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1054,6 +1057,7 @@ class  CommentsMyProductsState1 extends State<CommentsMyProducts> with TickerPro
   @override
   void dispose() {
     comments!.listingComments!.dispose();
+	
     super.dispose();
   }
 
@@ -1329,6 +1333,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(add_new_product, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1969,6 +1974,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(publish_product, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -2612,6 +2618,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit_product, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -3252,6 +3259,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(bump_up, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -3702,6 +3710,7 @@ class  ScreenshotsMyProductsState1 extends State<ScreenshotsMyProducts> with Tic
 	   
    
 	
+	
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4143,6 +4152,7 @@ class  ScreenshotsMyProductsState1 extends State<ScreenshotsMyProducts> with Tic
   @override
   void dispose() {
     screenshots!.listingScreenshots!.dispose();
+	
     super.dispose();
   }
 
@@ -4415,6 +4425,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(unlist, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -5055,6 +5066,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(reactivate_product, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

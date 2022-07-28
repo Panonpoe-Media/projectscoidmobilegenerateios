@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/BrowseUsers/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'browse_users_base.g.dart';
 
 
@@ -92,8 +94,8 @@ class InviteToBidBrowseUsersBase{
 	}
 
 
-
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
+
  var postBrowseUsersResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -510,16 +512,18 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
-  var postInviteToBidResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
+
+ var postInviteToBidResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionBrowseUsersWidget(model.buttons[i], context,formKey, controller,browse_users, postInviteToBidResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionBrowseUsersWidget(model.buttons[i], context,formKey, controller,browse_users, postInviteToBidResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -549,7 +553,7 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseUsersController browse_users,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseUsersController browse_users,
   var postInviteToBidResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -564,8 +568,7 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,browse_users, postInviteToBidResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,browse_users, postInviteToBidResult, state, sendPath, id,  title )
             )
         )
     );
@@ -770,8 +773,8 @@ class HireMeBrowseUsersBase{
 	}
 
 
-
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
+
  var postBrowseUsersResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -1213,16 +1216,18 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
-  var postHireMeResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
+
+ var postHireMeResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionBrowseUsersWidget(model.buttons[i], context,formKey, controller,browse_users, postHireMeResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionBrowseUsersWidget(model.buttons[i], context,formKey, controller,browse_users, postHireMeResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -1252,7 +1257,7 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseUsersController browse_users,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseUsersController browse_users,
   var postHireMeResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -1267,8 +1272,7 @@ SpeedDialChild  ButtonActionBrowseUsersWidget(Button button, BuildContext contex
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,browse_users, postHireMeResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,browse_users, postHireMeResult, state, sendPath, id,  title )
             )
         )
     );
@@ -6701,8 +6705,7 @@ Widget viewItem1 (ItemBrowseUsersModel item,ItemBrowseUsersModel item1, String? 
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -6719,8 +6722,8 @@ Widget viewItem1 (ItemBrowseUsersModel item,ItemBrowseUsersModel item1, String? 
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

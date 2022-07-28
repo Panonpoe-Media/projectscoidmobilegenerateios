@@ -53,7 +53,7 @@ import 'package:projectscoid/models/MyProjects/show_thread_list_item_base.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+/** AUTOGENERATE OFF **/
 
 //////////////////
 
@@ -85,7 +85,7 @@ class EditProfileMyProfileState extends State<EditProfileMyProfile> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Profile';
-   late RewardedAd _rewardedAd;
+   RewardedAd? _rewardedAd;
 
   // TODO: Add _isRewardedAdReady
   bool _isRewardedAdReady = false;
@@ -102,23 +102,23 @@ class EditProfileMyProfileState extends State<EditProfileMyProfile> with Restora
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
 
-              setState(() {
+            //  setState(() {
                 _isRewardedAdReady = false;
-              });
+            //  });
              // _loadRewardedAd();
             },
           );
 
-          setState(() {
+        //  setState(() {
             _isRewardedAdReady = true;
 
-          });
+        //  });
         },
         onAdFailedToLoad: (err) {
           print('Failed to load a rewarded ad: ${err.message}');
-          setState(() {
+        //  setState(() {
             _isRewardedAdReady = false;
-          });
+       //   });
         },
       ),
     );
@@ -320,14 +320,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(edit_profile, context);
-	  if(_isRewardedAdReady){
-		 setState(() {
-		   _isRewardedAdReady = false;
-		 });
-		 _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-		   // Reward the user for watching an ad.
-		 });
-	   }
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -720,7 +713,7 @@ final RestorableInt _counter = RestorableInt(0);
                               height: 30,
                             ),
 							
-							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,edit_profile, postEditProfileResult, this, sendPath, widget.id!, widget.title!),
+							   isLoading!? [] : isError? null: this.model.RButtons(_rewardedAd,_isRewardedAdReady, context, _dialVisible, formKey, controller,edit_profile, postEditProfileResult, this, sendPath, widget.id!, widget.title!),
           
                       
                         Container(
@@ -789,6 +782,7 @@ class  PortofolioMyProfileState1 extends State<PortofolioMyProfile> with TickerP
 	   List<Map> listAccount = [];
 	   
    
+	
 	
 	int firstIndex = 0;
 	var _keys = {};
@@ -1231,6 +1225,7 @@ class  PortofolioMyProfileState1 extends State<PortofolioMyProfile> with TickerP
   @override
   void dispose() {
     portofolio!.listingPortofolio!.dispose();
+	
     super.dispose();
   }
 
@@ -1503,6 +1498,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(change_password, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -1794,6 +1790,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(change_email, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,
@@ -2085,6 +2082,7 @@ final RestorableInt _counter = RestorableInt(0);
 		false);
 		
 	 fetchData(change_handphone, context);
+	
       return 
      	WillPopScope(
 			 onWillPop: _onWillPop,

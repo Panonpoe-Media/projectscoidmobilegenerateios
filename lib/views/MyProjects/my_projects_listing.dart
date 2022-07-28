@@ -39,6 +39,7 @@ class  UserMyProjectsListingState extends State< UserMyProjectsListing>{
   bool selected = false;
   AccountController? accountController;
   bool account = true;
+  bool isopen = false;
   String searchText = '';
    double initscroll = 0.0;
    UserMyProjectsListingState() {
@@ -98,7 +99,14 @@ class  UserMyProjectsListingState extends State< UserMyProjectsListing>{
 		 if(search){
 		 Navigator.pop(context);
 		 }else{
-       Navigator.pop(context);
+       if(!isopen) {
+         Navigator.pushAndRemoveUntil(
+           context,
+           MaterialPageRoute(builder: (context) =>
+               Projectscoid(id: account ? listAccount[0]['user_hash'] : '')),
+               (Route<dynamic> route) => false,
+         );
+       }
 		 }
           //Navigator.pop(context);
 		    

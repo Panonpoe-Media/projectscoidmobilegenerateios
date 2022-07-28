@@ -3565,6 +3565,7 @@ class SearchBrowseServicesListing1State
   AccountController? accountController;
   bool? account = true;
   bool? selected = false;
+  bool isopen = false;
   String? searchText = '';
   double? initscroll = 0.0;
   String? userid;
@@ -3724,7 +3725,11 @@ class SearchBrowseServicesListing1State
           ),
         ));
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildListingBar() {
     return BlocBuilder<BrowseServicesListing, BrowseServicesState>(
       bloc: browse_services!.listing,
@@ -3758,7 +3763,7 @@ class SearchBrowseServicesListing1State
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.browse_services!
-                      .Buttons(context, _dialVisible, account)
+                      .Buttons(context, _dialVisible, account, open)
                   //floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value!.baseUrl!, '', title)
                   );
             }
@@ -3822,7 +3827,7 @@ class SearchBrowseServicesListing1State
                 onRefresh: _onRefresh,
               ),
               floatingActionButton:
-                  state.browse_services!.Buttons(context, _dialVisible, account)
+                  state.browse_services!.Buttons(context, _dialVisible, account, open)
               //floatingActionButton: isLoading? null :  state.browse_services!.Buttons(context, _dialVisible, controller,browse_services,  this, Env.value!.baseUrl!, '', title!, account)
 
               );

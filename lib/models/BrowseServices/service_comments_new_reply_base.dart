@@ -410,7 +410,7 @@ SpeedDialChild ButtonActionServiceCommentsWidget(Button button, BuildContext con
 			new ArticleWidget(
 			  value: '',
 			  caption: 'Message',
-			  hint: 'isi dengan Article Anda',
+			  hint: 'isi dengan Message Anda',
 			   required: true,
 			  getValue:(String? val) {
 				state.setState(() {
@@ -423,7 +423,7 @@ SpeedDialChild ButtonActionServiceCommentsWidget(Button button, BuildContext con
 		  new ArticleWidget(
 		  value: model.model.message,
 		  caption: 'Message',
-		  hint: 'isi dengan Article Anda',
+		  hint: 'isi dengan Message Anda',
 		   required: true,
 		  getValue:(String? val) {
 			state.setState(() {

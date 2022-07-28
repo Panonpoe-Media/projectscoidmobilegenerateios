@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyPoints/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'my_points_base.g.dart';
 
 
@@ -4885,8 +4887,7 @@ Widget viewItem1 (ItemMyPointsModel item,ItemMyPointsModel item1, String? search
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -4903,8 +4904,8 @@ Widget viewItem1 (ItemMyPointsModel item,ItemMyPointsModel item1, String? search
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

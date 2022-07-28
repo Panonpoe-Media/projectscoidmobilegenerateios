@@ -648,7 +648,7 @@ class _SearchThreadState extends State<SearchThread>  with RestorationMixin {
                 icon: const Icon(Icons.arrow_back, color: Colors.white,),
                 onPressed: ()async{
 
-                  Navigator.pop(context);
+                  Navigator.pop(context, false);
                 }
             ),
             // iconTheme: IconThemeData(
@@ -1195,7 +1195,7 @@ class EditChatPicState extends State<EditChatPic>{
                 color: Colors.grey,
               ),
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context, false);
               },
             ),
           ),
@@ -4325,9 +4325,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     widget.chatBloc!.getIndexSpecial(1);
                     widget.chatBloc!.setCurrentThread();
                     //  widget.chatBloc!.getIndexSpecial(1);
-                    setState(() {
+                   // setState(() {
 
-                    });
+                  //  });
                     // widget.chatBloc!.getFirstThread(widget._jsonMessage['thread']);
                     Navigator.pop(context, false);
                     setState(() {
@@ -4348,9 +4348,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     widget.chatBloc!.getIndexSpecial(1);
                     widget.chatBloc!.setCurrentThread();
                     //   widget.chatBloc!.getIndexSpecial(1);
-                    setState(() {
+                  //  setState(() {
 
-                    });
+                  //  });
                     //  widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
                     Navigator.pop(context, false);
                     setState(() {
@@ -4770,9 +4770,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                  widget.chatBloc!.setCurrentThread();
                  //widget.chatBloc!.getIndexSpecial(1);
                  // widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
-                 setState(() {
+                // setState(() {
 
-                 });
+                // });
                  Navigator.pop(context, false);
                  setState(() {
 
@@ -4814,9 +4814,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     widget.chatBloc!.getIndexSpecial(1);
                     widget.chatBloc!.setCurrentThread();
                    //  widget.chatBloc!.getIndexSpecial(1);
-                    setState(() {
+                  //  setState(() {
 
-                    });
+                  //  });
                    // widget.chatBloc!.getFirstThread3(widget._jsonMessage['thread']);
                     Navigator.pop(context, false);
                      setState(() {
@@ -4836,9 +4836,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     widget.chatBloc!.getIndexSpecial(1);
                     widget.chatBloc!.setCurrentThread();
                   //   widget.chatBloc!.getIndexSpecial(1);
-                     setState(() {
+                   //  setState(() {
 
-                     });
+                   //  });
                   //  widget.chatBloc!.getFirstThread3(widget._jsonMessage['thread']);
                     Navigator.pop(context, false);
                      setState(() {
@@ -5099,9 +5099,9 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                   widget.chatBloc!.setCurrentThread();
                   // widget.chatBloc!.getIndexSpecial(1);
                   // widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
-                  setState(() {
+                //  setState(() {
 
-                  });
+                //  });
                   Navigator.pop(context, false);
                   setState(() {
 

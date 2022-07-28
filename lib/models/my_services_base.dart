@@ -34,7 +34,9 @@ import 'package:horizontal_data_table/horizontal_data_table.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyServices/action.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+
 part 'my_services_base.g.dart';
 
 
@@ -105,8 +107,8 @@ class AddNewServiceMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -571,16 +573,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postAddNewServiceResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postAddNewServiceResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postAddNewServiceResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postAddNewServiceResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -610,7 +614,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postAddNewServiceResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -625,8 +629,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postAddNewServiceResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postAddNewServiceResult, state, sendPath, id,  title )
             )
         )
     );
@@ -877,8 +880,8 @@ class PublishServiceMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -1336,16 +1339,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postPublishServiceResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postPublishServiceResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postPublishServiceResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postPublishServiceResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -1375,7 +1380,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postPublishServiceResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -1390,8 +1395,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postPublishServiceResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postPublishServiceResult, state, sendPath, id,  title )
             )
         )
     );
@@ -1578,8 +1582,8 @@ class BumpUpMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -2037,16 +2041,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postBumpUpResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postBumpUpResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postBumpUpResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postBumpUpResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -2076,7 +2082,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postBumpUpResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -2091,8 +2097,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postBumpUpResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postBumpUpResult, state, sendPath, id,  title )
             )
         )
     );
@@ -2280,8 +2285,8 @@ class EditServiceMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -2746,16 +2751,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postEditServiceResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postEditServiceResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postEditServiceResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postEditServiceResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -2785,7 +2792,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postEditServiceResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -2800,8 +2807,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postEditServiceResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postEditServiceResult, state, sendPath, id,  title )
             )
         )
     );
@@ -3053,8 +3059,8 @@ class UnlistMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -3512,16 +3518,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postUnlistResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postUnlistResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postUnlistResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postUnlistResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -3551,7 +3559,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postUnlistResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -3566,8 +3574,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postUnlistResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postUnlistResult, state, sendPath, id,  title )
             )
         )
     );
@@ -3754,8 +3761,8 @@ class ReactivateServiceMyServicesBase{
 	}
 
 
-
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
   var cl;
   var ic;
@@ -4213,16 +4220,18 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 
     return( formData);
   } 	
-	
-  List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
-  var postReactivateServiceResult, State state, String? sendPath, String? id,  String? title){
+   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
+
+ var postReactivateServiceResult, State state, String? sendPath, String? id,  String? title){
     final List<Widget>buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postReactivateServiceResult, state, sendPath, id,  title));
-      }
+	         buttonChildren!.add(RButtonActionMyServicesWidget(model.buttons[i], context,formKey, controller,my_services, postReactivateServiceResult, state, sendPath, id,  title));
+
+	   
+	  }
     }
        return(
 	        buttonChildren 
@@ -4252,7 +4261,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
 	 );
   }
    
-    Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
+	Widget	 RButtons(BuildContext context, bool?visible, var formKey, ScrollController controller, MyServicesController my_services,
   var postReactivateServiceResult, State state, String? sendPath, String? id,  String? title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -4267,8 +4276,7 @@ SpeedDialChild  ButtonActionMyServicesWidget(Button button, BuildContext context
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(context, formKey,controller,my_services, postReactivateServiceResult, state, sendPath, id,  title )
-	    
+		   RlistButton(context, formKey,controller,my_services, postReactivateServiceResult, state, sendPath, id,  title )
             )
         )
     );
@@ -6256,8 +6264,7 @@ Widget viewItem1 (ItemMyServicesModel item,ItemMyServicesModel item1, String? se
 	        buttonChildren 
 	   );
    } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
+     SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
      return(
 	 SpeedDial(
 				//marginRight: 18,
@@ -6274,8 +6281,8 @@ Widget viewItem1 (ItemMyServicesModel item,ItemMyServicesModel item1, String? se
 				curve: Curves.bounceIn,
 				overlayColor: CurrentTheme.MainAccentColor,
 				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
+				onOpen: (){open(true);},
+				onClose: (){open(false);},
 				tooltip: 'Speed Dial',
 				heroTag: 'speed-dial-hero-tag',
 				backgroundColor: CurrentTheme.SecondaryColor,

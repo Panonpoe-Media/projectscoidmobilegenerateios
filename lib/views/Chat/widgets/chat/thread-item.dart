@@ -286,9 +286,10 @@ class _ThreadItemItemState extends State<ThreadItem> {
                // print('aku mulai 123');
                 widget.chatBloc?.getFirstThread1(widget._jsonMessage['thread']);
               //  widget.chatBloc.getIndexSpecial(1);
-              //  setState(() {
+                widget.chatBloc!.getx();
+                setState(() {
 
-               // });
+                });
               }
               },
               /*
@@ -1013,6 +1014,7 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                     ),
                   );
                   if(!result){
+                    widget.chatBloc!.getx();
                     setState(() {
 
                     });
@@ -1330,6 +1332,7 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                                 ),
                               );
                               if(!result){
+                                widget.chatBloc!.getx();
                                 setState(() {
 
                                 });
@@ -1663,6 +1666,7 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                       ),
                     );
                     if(!result){
+                      widget.chatBloc!.getx();
                       setState(() {
 
                       });

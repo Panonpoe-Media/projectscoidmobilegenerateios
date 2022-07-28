@@ -4,6 +4,7 @@ import 'dart:convert';
 //import '../models/messages/list_message_model.dart';
 import '../models/models.dart';
 import '../repositories/repositories.dart';
+import 'package:quiver/async.dart';
 import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
@@ -88,6 +89,7 @@ class ChatBloc  implements YaWebsocketDelegate{
   bool isTyping = false;
   bool saveBlank = false;
   bool isHeader = false;
+  bool alreadyLogin = false;
   var lastMessage = DateTime.now();
   String oldMessage1 = '';
   String oldNotify1 = '';
@@ -188,6 +190,36 @@ class ChatBloc  implements YaWebsocketDelegate{
 
   get cancelBlacklist => null;
 
+
+
+
+  void startTimer() {
+    int _start = 2;
+    int _current = 2;
+    CountdownTimer countDownTimer = CountdownTimer(
+      Duration(seconds: _start),
+      new Duration(seconds: 1),
+    );
+   // print('mantap sekali lhhhooooooo');
+    var sub = countDownTimer.listen(null);
+    sub.onData((duration) {
+       _current = _start - duration.elapsed.inSeconds;
+       if(_current == 1){
+         if(!alreadyLogin){
+         //  print('mantap sekali maaaaaaaangggggggggggggggggggg');
+           lg(id);
+         }
+       }
+    });
+
+    sub.onDone(() {
+     // print("Done");
+      sub.cancel();
+    });
+  }
+
+
+
   Future<int> _getIdxInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('chatidx') ?? 0;
@@ -200,8 +232,6 @@ class ChatBloc  implements YaWebsocketDelegate{
     await prefs.setInt('chatidx', ntf);
   }
 
-
-
   Future<String> _getIdx() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('chatlistidx') ?? '';
@@ -212,7 +242,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
     await prefs.setString('chatlistidx', idx);
   }
-
 
   Future<String> _getChatList(String thread) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -250,7 +279,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
   }
 
-
   _initializeList()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('chatlist',[] );
@@ -261,9 +289,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
     await prefs.setString('chatlistidx', '');
   }
-
-
-
 
   void blacklist(String thread){
     final jsonMessage = jsonEncode({
@@ -280,6 +305,7 @@ class ChatBloc  implements YaWebsocketDelegate{
     }
 
   }
+
 /*
   Future<void> cancelBlacklist(String userID,  BuildContext context)async{
   //  APIRepository apiRepProvider = AppProvider.getApplication(context).projectsAPIRepository;
@@ -354,9 +380,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
  */
 
-
-
-
   Future<String> _getThreadInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('thread') ?? '';
@@ -399,6 +422,7 @@ class ChatBloc  implements YaWebsocketDelegate{
     }
     return false;
   }
+
   void socketClose()async{
    // closeSocket = true;
     id = '';
@@ -406,8 +430,8 @@ class ChatBloc  implements YaWebsocketDelegate{
     deleteMsg();
     deleteThread();
     await socket.close();
-
   }
+
   void socketCloseSP(){
    // socket.close();
 
@@ -417,6 +441,7 @@ class ChatBloc  implements YaWebsocketDelegate{
    // socket.connect();
     //wsSetHandlers();
   }
+
   /*
   void getHistory(UserModel user) async {
     try {
@@ -433,6 +458,7 @@ class ChatBloc  implements YaWebsocketDelegate{
   }
 
    */
+
 /*
   void lgn(token){
    // const Sec30 = const Duration(seconds: 10);
@@ -462,7 +488,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
  */
 
-
   void setUsername(String username){
     myname = username;
 
@@ -471,7 +496,6 @@ class ChatBloc  implements YaWebsocketDelegate{
   String getUsername(){
     return myname;
   }
-
 
   void lg(token){
     // const Sec30 = const Duration(seconds: 10);
@@ -506,7 +530,6 @@ class ChatBloc  implements YaWebsocketDelegate{
       }
     }); */
   }
-
 
   void lg1(token){
     // const Sec30 = const Duration(seconds: 10);
@@ -597,6 +620,7 @@ class ChatBloc  implements YaWebsocketDelegate{
       throw e;
     }
   }
+
 /*
   void subscribeUnsubscribe(ProgramModel program, UserModel user) async {
     try {
@@ -806,7 +830,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
   }
 
-
   Future<int> getIdx(List<dynamic> data,String key)async{
     int idx = 0;
     int count = 0 ;
@@ -932,7 +955,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
 
   }
-
 
   void refreshOldMessage(List<dynamic> message, String userid) {
     List<dynamic> temp = [];
@@ -1389,6 +1411,7 @@ class ChatBloc  implements YaWebsocketDelegate{
 
 
   }
+
 /*
   List<dynamic> _historyMessagesHandler(ChatHistortModel chatHistortModel) {
     List<dynamic> listHistoryMessages = new List<dynamic>();
@@ -1475,7 +1498,7 @@ class ChatBloc  implements YaWebsocketDelegate{
     getIndexSpecial(1);
     if (!isPostback) socket.send(jsonMessage);
 
-    addMessage(jsonDecode(jsonMessage));
+   // addMessage(jsonDecode(jsonMessage));
   }
 
   void sendMsg(SendMsgModel1 message, {bool isPostback = false}) {
@@ -1487,6 +1510,7 @@ class ChatBloc  implements YaWebsocketDelegate{
       "message":"${message.message} "
     })}'); */
     if(tempMsg != ''){
+      /*
       addMessage1(
           {
 
@@ -1496,8 +1520,11 @@ class ChatBloc  implements YaWebsocketDelegate{
             "rcvstatus": 0
           }
       );
+
+       */
       messages.clear();
     }else{
+      /*
       addMessage1(
           {
 
@@ -1507,6 +1534,8 @@ class ChatBloc  implements YaWebsocketDelegate{
             "rcvstatus": 0
           }
       );
+
+       */
 
     }
 
@@ -1539,7 +1568,7 @@ class ChatBloc  implements YaWebsocketDelegate{
 
       "message":"${message.message} "
     })}'); */
-
+  /*
     addMessage3(
         {
 
@@ -1550,6 +1579,8 @@ class ChatBloc  implements YaWebsocketDelegate{
         }
     );
 
+   */
+
     isHeader = true;
     tempMsg = message.message!;
 
@@ -1559,6 +1590,20 @@ class ChatBloc  implements YaWebsocketDelegate{
    // socket.send(jsonMessage);
 
 
+
+  }
+
+  void readSignal(String thread) {
+    //deleteMsg();
+    final jsonMessage = jsonEncode({
+      "cmd":"read",
+      "thread":"$thread"
+    });
+    socket.send(jsonMessage);
+    log.fine('sending message:1234 ini $thread');
+    // socket.send(jsonMessage);
+    //if (!isPostback) socket.send(jsonMessage);
+    // addMessage(jsonDecode(jsonMessage));
 
   }
 
@@ -1598,10 +1643,14 @@ class ChatBloc  implements YaWebsocketDelegate{
       "thread":"$thread"
     });
 
+
   //  print('request == $jsonMessage');
    if(socket != null){
      socket.send(jsonMessage);
-    // print('send socket $thread');
+     alreadyLogin = false;
+     startTimer();
+
+     // print('send socket $thread');
    }else{
 
      /*Timer.periodic(Duration(milliseconds: 200), (timer) {
@@ -1668,7 +1717,10 @@ class ChatBloc  implements YaWebsocketDelegate{
 
     if(socket != null){
       socket.send(jsonMessage);
-     // print('send socket $thread');
+      alreadyLogin = false;
+      startTimer();
+
+      // print('send socket $thread');
     }else{
 
       /*Timer.periodic(Duration(milliseconds: 200), (timer) {
@@ -1701,20 +1753,6 @@ class ChatBloc  implements YaWebsocketDelegate{
 
   }
 
-  void readSignal(String thread) {
-    //deleteMsg();
-    final jsonMessage = jsonEncode({
-      "cmd":"read",
-      "thread":"$thread"
-    });
-    socket.send(jsonMessage);
-      log.fine('sending message:1234 ini $thread');
-    // socket.send(jsonMessage);
-    //if (!isPostback) socket.send(jsonMessage);
-    // addMessage(jsonDecode(jsonMessage));
-
-  }
-
   void getFirstThread1(String thread) {
     outThread = true;
      deleteMsg();
@@ -1723,7 +1761,10 @@ class ChatBloc  implements YaWebsocketDelegate{
       "thread":"$thread"
     });
     socket.send(jsonMessage);
-     currentThread = '';
+    alreadyLogin = false;
+    startTimer();
+
+    currentThread = '';
     /*  log.fine('sending message:${jsonEncode({
       "cmd":"message",
       "thread":"${message.thread}",
@@ -1735,6 +1776,7 @@ class ChatBloc  implements YaWebsocketDelegate{
     // addMessage(jsonDecode(jsonMessage));
 
   }
+
   void getFirstThread2(String thread) {
     outThread = true;
     //deleteMsg();
@@ -1743,6 +1785,9 @@ class ChatBloc  implements YaWebsocketDelegate{
       "thread":"$thread"
     });
     socket.send(jsonMessage);
+    alreadyLogin = false;
+    startTimer();
+
     currentThread = '';
     /*  log.fine('sending message:${jsonEncode({
       "cmd":"message",
@@ -1765,6 +1810,9 @@ class ChatBloc  implements YaWebsocketDelegate{
       "thread":"$thread"
     });
     socket.send(jsonMessage);
+    alreadyLogin = false;
+    startTimer();
+
     isGetFT3 = true;
     currentThread = '';
     /*  log.fine('sending message:${jsonEncode({
@@ -1788,6 +1836,9 @@ class ChatBloc  implements YaWebsocketDelegate{
       "thread":"$thread"
     });
     socket.send(jsonMessage);
+    alreadyLogin = false;
+    startTimer();
+
     isGetFT4 = true;
     currentThread = '';
     /*  log.fine('sending message:${jsonEncode({
@@ -1831,6 +1882,9 @@ if(page.contains(nx)){
       "page": nx.toString()
     });
     socket.send(jsonMessage);
+    alreadyLogin = false;
+    startTimer();
+
   }
 }
 
@@ -1846,7 +1900,6 @@ if(page.contains(nx)){
     // addMessage(jsonDecode(jsonMessage));
 
   }
-
 
   void getChatThreadSP( int nx, String thread, String keyword) {
     searchItem = keyword;
@@ -1864,6 +1917,9 @@ if(page.contains(nx)){
         "page": nx.toString()
       });
       socket.send(jsonMessage);
+      alreadyLogin = false;
+      startTimer();
+
     }
     /*  log.fine('sending message:${jsonEncode({
       "cmd":"message",
@@ -1882,6 +1938,7 @@ if(page.contains(nx)){
     var ms = (new DateTime.now()).millisecondsSinceEpoch;
     return (ms / 1000).round();
   }
+
   void sendTyp(SendTypingModel message, {bool isPostback = false}) {
     final jsonMessage = jsonEncode(
         {
@@ -1904,6 +1961,7 @@ if(page.contains(nx)){
  */
 
   }
+
   void sendTyp1(SendTypingModel message, {bool isPostback = false}) {
 
   //  log.fine('sending1 message:${message.cmd}');
@@ -1952,6 +2010,7 @@ if(page.contains(nx)){
 
      */
   }
+
   void onPostBack(SendMessageModel message, title, payload) {
     sendMessage(message, isPostback: true);
     socket.send(jsonEncode({
@@ -1962,6 +2021,7 @@ if(page.contains(nx)){
       'text': payload
     }));
   }
+
   void onPostBack1(SendMsgModel1 message, title, payload) {
     sendMsg(message, isPostback: true);
     socket.send(jsonEncode({
@@ -1971,12 +2031,11 @@ if(page.contains(nx)){
       'attachment': message.attachment
     }));
   }
+
   void closeConnection() {
     socket.close();
     closeSocket = true;
   }
-
-
 
   Future<void> wsSetHandlerssp(bool csc)async{
     closeSocket = csc;
@@ -2136,7 +2195,6 @@ if(page.contains(nx)){
 
  */
 
-
   void deleteMsg(){
     //print('delete message...');
     if(page == null){
@@ -2149,32 +2207,7 @@ if(page.contains(nx)){
       page.clear();
     }
 
-
-
   }
-
-
-  void getIndex(int idx){
-    if(idx == 1) {
-      thread.clear();
-
-      //  print('hereeeeee');
-      socket.send(jsonEncode({
-        'cmd': 'index',
-        'page': idx.toString()
-      }));
-    } else{
-      if(this.maxIndexCount > idx){
-        socket.send(jsonEncode({
-          'cmd': 'index',
-          'page': idx.toString()
-        }));
-
-      }
-    }
-
-  }
-
 
   void searchIndex(String kw){
 
@@ -2184,8 +2217,6 @@ if(page.contains(nx)){
         }));
 
   }
-
-
 
   void searchInThread(String th, String kw){
 
@@ -2197,23 +2228,39 @@ if(page.contains(nx)){
 
   }
 
+  void getIndex(int idx){
+    if(idx == 1) {
+      thread.clear();
+
+      //  print('hereeeeee');
+      socket.send(jsonEncode({
+        'cmd': 'index',
+        'page': idx.toString()
+      }));
+
+    } else{
+      if(this.maxIndexCount > idx){
+        socket.send(jsonEncode({
+          'cmd': 'index',
+          'page': idx.toString()
+        }));
+
+
+      }
+    }
+
+  }
 
   void getx(){
 
       thread.clear();
 
-      //  print('hereeeeee');
+       // print('hereeeeee');
       socket.send(jsonEncode({
         'cmd': 'index'
       }));
 
 
-  }
-
-  void setCurrentThread(){
-    currentThread = '';
-    outThread = true;
-    deleteMsg();
   }
 
   void getIndexSpecial(int idx)async{
@@ -2227,8 +2274,8 @@ if(page.contains(nx)){
         addThread(val);
       }
 
-      if(socket == null){
-       // socket.connect();
+      if(socket == null || alreadyLogin != true){
+        // socket.connect();
         //wsSetHandlers();
         lg1(id);
       }
@@ -2237,12 +2284,14 @@ if(page.contains(nx)){
         'cmd': 'index',
         'page': idx.toString()
       }));
+
     } else{
       if(this.maxIndexCount > idx){
         socket.send(jsonEncode({
           'cmd': 'index',
           'page': idx.toString()
         }));
+
 
       }
     }
@@ -2251,13 +2300,21 @@ if(page.contains(nx)){
 
   void getFirstIndex(int idx){
     if(idx == 1){
-        thread.clear();
+      thread.clear();
     }
     socket.send(jsonEncode({
       'cmd': 'index',
       'page': idx.toString()
     }));
+
   }
+
+  void setCurrentThread(){
+    currentThread = '';
+    outThread = true;
+    deleteMsg();
+  }
+
 
   void getFX(int idx){
 
@@ -2394,7 +2451,7 @@ if(page.contains(nx)){
               if ((jsonDecode(wsMessage)['sender'] == id && !isHeader)) {
 
                 if(messages.isNotEmpty){
-                  messages.removeAt(0);
+                //  messages.removeAt(0);
 
                 }
                 // print('halo bandung jaya');
@@ -2562,7 +2619,7 @@ if(page.contains(nx)){
                       jsonDecode(wsMessage.toString())['admins']);
                 }
                 if (jsonDecode(wsMessage.toString())['type'] == 'login') {
-
+                  alreadyLogin = true;
                   getIndexSpecial(1);
 
 
@@ -2590,6 +2647,7 @@ if(page.contains(nx)){
                 }
 
                 if (jsonDecode(wsMessage.toString())['type'] == 'index') {
+                  alreadyLogin = true;
                   this.maxIndexCount =
                   jsonDecode(wsMessage.toString())['lastpage'];
                   addThread(wsMessage.toString());
@@ -2620,6 +2678,7 @@ if(page.contains(nx)){
                 }
 
                 if (jsonDecode(wsMessage)['type'] == 'thread') {
+                  alreadyLogin = true;
                   _setIdxInfo(0);
                   this.maxChatList = jsonDecode(wsMessage.toString())['lastpage'];
                   nextThread = jsonDecode(wsMessage)['currpage'];
@@ -2814,7 +2873,7 @@ if(page.contains(nx)){
               if ((jsonDecode(wsMessage)['sender'] == id && !isHeader)) {
 
                 if(messages.length > 0){
-                  messages.removeAt(0);
+                //  messages.removeAt(0);
 
                 }
                 // print('halo bandung jaya');
@@ -2982,7 +3041,7 @@ if(page.contains(nx)){
                       jsonDecode(wsMessage.toString())['admins']);
                 }
                 if (jsonDecode(wsMessage.toString())['type'] == 'login') {
-
+                  alreadyLogin = true;
                   getIndexSpecial(1);
 
 
@@ -3010,6 +3069,7 @@ if(page.contains(nx)){
                 }
 
                 if (jsonDecode(wsMessage.toString())['type'] == 'index') {
+                  alreadyLogin = true;
                   this.maxIndexCount =
                   jsonDecode(wsMessage.toString())['lastpage'];
                   addThread(wsMessage.toString());
@@ -3040,6 +3100,7 @@ if(page.contains(nx)){
                 }
 
                 if (jsonDecode(wsMessage)['type'] == 'thread') {
+                  alreadyLogin = true;
                   _setIdxInfo(0);
                   this.maxChatList = jsonDecode(wsMessage.toString())['lastpage'];
                   nextThread = jsonDecode(wsMessage)['currpage'];
@@ -3243,7 +3304,7 @@ if(page.contains(nx)){
             if ((jsonDecode(wsMessage)['sender'] == id && !isHeader)) {
 
               if(messages.isNotEmpty){
-                messages.removeAt(0);
+              //  messages.removeAt(0);
 
               }
               print('halo bandung jaya');
@@ -3411,7 +3472,7 @@ if(page.contains(nx)){
                     jsonDecode(wsMessage.toString())['admins']);
               }
               if (jsonDecode(wsMessage.toString())['type'] == 'login') {
-
+                alreadyLogin = true;
                 getIndexSpecial(1);
 
 
@@ -3439,6 +3500,7 @@ if(page.contains(nx)){
               }
 
               if (jsonDecode(wsMessage.toString())['type'] == 'index') {
+                alreadyLogin = true;
                 this.maxIndexCount =
                 jsonDecode(wsMessage.toString())['lastpage'];
                 addThread(wsMessage.toString());
@@ -3469,6 +3531,7 @@ if(page.contains(nx)){
               }
 
               if (jsonDecode(wsMessage)['type'] == 'thread') {
+                alreadyLogin = true;
                 _setIdxInfo(0);
                 this.maxChatList = jsonDecode(wsMessage.toString())['lastpage'];
                 nextThread = jsonDecode(wsMessage)['currpage'];

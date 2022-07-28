@@ -71,7 +71,7 @@ ViewModelBrowseUsersRev _$ViewModelBrowseUsersRevFromJson(
       json['owner_point_str'] as String?,
       json['owner_ranking'] as int?,
       json['owner_ranking_str'] as String?,
-      json['projects_owned'] as int?,
+     json['projects_owned'] as int?,
       json['projects_owned_str'] as String?,
       json['seller_rating'] as int?,
       (json['seller_rating_num'] as num?)?.toDouble(),
@@ -97,6 +97,8 @@ ViewModelBrowseUsersRev _$ViewModelBrowseUsersRevFromJson(
       json['worker_professionalism'] as int?,
       json['clarity'] as int?,
       json['friendliness'] as int?,
+
+
       json['owner_communication'] as int?,
       json['owner_professionalism'] as int?,
       json['projects_won'] as int?,
@@ -131,6 +133,10 @@ ViewModelBrowseUsersRev _$ViewModelBrowseUsersRevFromJson(
       json['post_count_str'] as String?,
       (json['completion_rate'] as num?)?.toDouble(),
       (json['arbitration_rate'] as num?)?.toDouble(),
+
+
+
+
       json['services'] == null
           ? null
           : ServicesListingTools.fromJson(
@@ -139,10 +145,14 @@ ViewModelBrowseUsersRev _$ViewModelBrowseUsersRevFromJson(
           ? null
           : ProductsListingTools.fromJson(
               json['products'] as Map<String, dynamic>),
+
+
       json['portofolio'] == null
           ? null
           : PortofolioListingTools.fromJson(
               json['portofolio'] as Map<String, dynamic>),
+
+
 
       json['as_project_worker'] == null
           ? null
@@ -168,7 +178,10 @@ ViewModelBrowseUsersRev _$ViewModelBrowseUsersRevFromJson(
 
 
 
-      json['user_id'] as String?,
+      json['user_id'] as String?
+
+
+
 
 
     )
@@ -260,6 +273,7 @@ Map<String, dynamic> _$ViewModelBrowseUsersRevToJson(
       'worker_professionalism': instance.worker_professionalism,
       'clarity': instance.clarity,
       'friendliness': instance.friendliness,
+
       'owner_communication': instance.owner_communication,
       'owner_professionalism': instance.owner_professionalism,
       'projects_won': instance.projects_won,
@@ -294,13 +308,26 @@ Map<String, dynamic> _$ViewModelBrowseUsersRevToJson(
       'post_count_str': instance.post_count_str,
       'completion_rate': instance.completion_rate,
       'arbitration_rate': instance.arbitration_rate,
+
+
       'services': instance.services,
       'products': instance.products,
+
+
       'portofolio': instance.portofolio,
+
+
       'as_project_worker': instance.as_project_worker,
+
       'as_project_owner': instance.as_project_owner,
+
+
       'user_arbitrations': instance.user_arbitrations,
+
+
       'user_id': instance.user_id,
+
+
     };
 
 BrowseUsersViewSuperBaseRev _$BrowseUsersViewSuperBaseRevFromJson(
