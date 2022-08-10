@@ -5445,40 +5445,41 @@ Widget viewItem1 (ItemBrowseProjectsModel item,ItemBrowseProjectsModel item1, St
        return(
 	        buttonChildren 
 	   );
-   } 
-   
-    SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account){
-     return(
-	 SpeedDial(
-			childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
-				animatedIcon: AnimatedIcons.menu_close,
-				animatedIconTheme: IconThemeData(size: 22.0),
-				// this is ignored if animatedIcon is non null
-				// child: Icon(Icons.add),
-				visible: visible!,
-				// If true user is forced to close dial manually
-				// by tapping main button and overlay is not rendered.
-				closeManually: false,
-				curve: Curves.bounceIn,
-				overlayColor: CurrentTheme.MainAccentColor,
-				overlayOpacity: 0.5,
-				onOpen: () => print('OPENING DIAL'),
-				onClose: () => print('DIAL CLOSED'),
-				tooltip: 'Speed Dial',
-				heroTag: 'speed-dial-hero-tag',
-				backgroundColor: CurrentTheme.SecondaryColor,
-				foregroundColor: Colors.white,
-				elevation: 8.0,
-				shape: CircleBorder(),
-				children:listButton(context, account)
-	    )
-	 );
-   } 
-   
-   
-   
-   
-   
+   }
+
+  SpeedDial	 Buttons(BuildContext context, bool?visible, bool?account, Function open){
+    return(
+        SpeedDial(
+          //marginRight: 18,
+          //marginBottom: 20,
+            childMargin: const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
+            animatedIcon: AnimatedIcons.menu_close,
+            animatedIconTheme: IconThemeData(size: 22.0),
+            // this is ignored if animatedIcon is non null
+            // child: Icon(Icons.add),
+            visible: visible!,
+            // If true user is forced to close dial manually
+            // by tapping main button and overlay is not rendered.
+            closeManually: false,
+            curve: Curves.bounceIn,
+            overlayColor: CurrentTheme.MainAccentColor,
+            overlayOpacity: 0.5,
+            onOpen: (){open(true);},
+            onClose: (){open(false);},
+            tooltip: 'Speed Dial',
+            heroTag: 'speed-dial-hero-tag',
+            backgroundColor: CurrentTheme.SecondaryColor,
+            foregroundColor: Colors.white,
+            elevation: 8.0,
+            shape: CircleBorder(),
+            children:listButton(context, account)
+        )
+    );
+  }
+
+
+
+
 }
 
 
@@ -5587,6 +5588,8 @@ class ItemBrowseProjectsContent extends StatelessWidget {
 		{
 		  buttonChildren.add(itemBrowseProjectsButton(destination,i , context));
 		}
+
+
     }
 	
     final List<Widget> children = [
@@ -5959,7 +5962,130 @@ SpeedDialChild ListButtonBrowseProjectsWidget(Button button, BuildContext contex
                         backgroundColor: Colors.green,
                         label: button.text == 'Order by ...' ?  button.text :'Order : ' + button!.text!,
                         labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
-                        onTap: (){ showSearchSelectDialog(context: context,
+                        onTap: (){
+
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '28_3d-modeling-and-animation',
+                            '3D Modeling & Animation',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '24_accounting-and-consultancy',
+                            'Accounting & Consultancy',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '16_audio-video-and-photography',
+                            'Audio Video & Photography',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '29_data-entry-and-data-mining',
+                            'Data Entry & Data Mining',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '2_desktop-programming',
+                            'Desktop Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '31_electronis-and-robotics',
+                            'Electronis & Robotics',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '8_game-programming',
+                            'Game Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '18_internet-marketing-and-social-media',
+                            'Internet marketing & Social Media',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '10_layout-logo-and-graphic-design',
+                            'Layout Logo & Graphic Design',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '4_mobile-programming',
+                            'Mobile Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '26_network-and-system-administration',
+                            'Network & System Administration',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '14_seo-and-website-maintenance',
+                            'SEO & Website Maintenance',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '6_website-development',
+                            'Website Development',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '12_writing-and-translation',
+                            'Writing & Translation',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai1',
+                            '22_others',
+                            'Others',
+                            false,
+
+                          ));
+
+                        showSearchSelectDialog(context: context,
                         caption:button!.text!,
                         initialitems: button.selections,
                         initvalue: button.selections![0]);

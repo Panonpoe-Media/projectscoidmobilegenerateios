@@ -769,7 +769,7 @@ Map<String, dynamic> _$MyPointsSuperBaseToJson(MyPointsSuperBase instance) =>
 
 ViewModelMyPoints _$ViewModelMyPointsFromJson(Map<String, dynamic> json) =>
     ViewModelMyPoints(
-      json['id'] as String?,
+      json['user_id'] as String?,
     )
       ..age = json['age'] as int?
       ..cnt = json['cnt'] as int?
@@ -780,6 +780,7 @@ ViewModelMyPoints _$ViewModelMyPointsFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$ViewModelMyPointsToJson(ViewModelMyPoints instance) =>
     <String, dynamic>{
+      'user_id': instance.user_id,
       'age': instance.age,
       'cnt': instance.cnt,
       'page': instance.page,

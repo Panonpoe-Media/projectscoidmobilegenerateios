@@ -41,7 +41,7 @@ part 'my_points_base.g.dart';
 
 
 
-
+/** AUTOGENERATE OFF **/
 
 
 
@@ -3803,10 +3803,10 @@ class ViewModelMyPoints {
    //PointsSeller points_seller;
    //PointsBuyer points_buyer;
    //PointsAffiliate points_affiliate;
-
+    String? user_id;
 	//
 	  ViewModelMyPoints(
-            this.id,
+            this.user_id,
 
   );
 
@@ -5540,7 +5540,9 @@ SpeedDialChild ListButtonMyPointsWidget(Button button, BuildContext context, boo
                         backgroundColor: Colors.green,
                         label: button.text == 'Order by ...' ?  button.text :'Order : ' + button!.text!,
                         labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
-                        onTap: (){ showSearchSelectDialog(context: context,
+                        onTap: (){
+                        
+						showSearchSelectDialog(context: context,
                         caption:button!.text!,
                         initialitems: button.selections,
                         initvalue: button!.selections![0]);

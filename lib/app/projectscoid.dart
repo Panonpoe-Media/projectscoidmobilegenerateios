@@ -5606,8 +5606,8 @@ class TestimonialItem1 extends StatelessWidget {
                                           model!.user_name!,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: Colors.black,
+                                          style: TextStyle(
+                                            color: isDark! ? Colors.white : Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w700,
                                           ),
@@ -5630,8 +5630,8 @@ class TestimonialItem1 extends StatelessWidget {
                                           model!.project_title!,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: Colors.black,
+                                          style: TextStyle(
+                                            color: isDark! ? Colors.white : Colors.black,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                           ),
@@ -6346,6 +6346,7 @@ class projectsViewState extends State<projectsView> {
   ShapeBorder? shape;
   String searchText = '';
   double lastScroll = 0;
+  bool isopen = false;
   final _scrollThreshold = 200.0;
   BrowseProjectsController? _browseProjectsController;
 
@@ -6380,7 +6381,11 @@ class projectsViewState extends State<projectsView> {
       _browseProjectsController!.listing!.add(BrowseProjectsList());
     }
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   @override
   Widget build(BuildContext context) {
     _browseProjectsController = BrowseProjectsController(
@@ -6438,7 +6443,7 @@ class projectsViewState extends State<projectsView> {
                 onRefresh: _onRefresh,
               ),
               floatingActionButton: state.browse_projects!
-                  .Buttons(context, _dialVisible, widget.account!));
+                  .Buttons(context, _dialVisible, widget.account!, open));
         }
         return const Center(
             child: CircularProgressIndicator(

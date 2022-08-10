@@ -2486,7 +2486,7 @@ if(page.contains(nx)){
                       print('objectds1 ${obj['sendername']}');
                       if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                         //print('objectds2 ${obj['sendername']}');
-                        tempid = obj['sendername'];
+                        tempid = obj['sendername']??'';
                       }
                     }
                     if (tempid == '') {
@@ -2520,7 +2520,7 @@ if(page.contains(nx)){
                       //  print('objectds1 ${obj['sendername']}');
                       if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                         // print('objectds2 ${obj['sendername']}');
-                        tempid = obj['sendername'];
+                        tempid = obj['sendername']??'';
                       }
                     }
                     if (tempid == '') {
@@ -2543,7 +2543,7 @@ if(page.contains(nx)){
                   for (var obj in thread) {
                     //   print('objectds3 ${obj['sendername']}');
                     if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
-                      //   tempid = obj['sendername'];
+                      //   tempid = obj['sendername']??'';
                       print('objectds4 ${obj['sendername']}');
                     }
                   }
@@ -2908,7 +2908,7 @@ if(page.contains(nx)){
                       print('objectds1 ${obj['sendername']}');
                       if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                         print('objectds2 ${obj['sendername']}');
-                        tempid = obj['sendername'];
+                        tempid = obj['sendername']??'';
                       }
                     }
                     if (tempid == '') {
@@ -2942,7 +2942,7 @@ if(page.contains(nx)){
                       //  print('objectds1 ${obj['sendername']}');
                       if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                         // print('objectds2 ${obj['sendername']}');
-                        tempid = obj['sendername'];
+                        tempid = obj['sendername']??'';
                       }
                     }
                     if (tempid == '') {
@@ -2965,7 +2965,7 @@ if(page.contains(nx)){
                   for (var obj in thread) {
                     //   print('objectds3 ${obj['sendername']}');
                     if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
-                      //   tempid = obj['sendername'];
+                      //   tempid = obj['sendername']??'';
                       print('objectds4 ${obj['sendername']}');
                     }
                   }
@@ -3339,7 +3339,7 @@ if(page.contains(nx)){
                     print('objectds1 ${obj['sendername']}');
                     if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                       print('objectds2 ${obj['sendername']}');
-                      tempid = obj['sendername'];
+                      tempid = obj['sendername']??'';
                     }
                   }
                   if (tempid == '') {
@@ -3373,7 +3373,7 @@ if(page.contains(nx)){
                     //  print('objectds1 ${obj['sendername']}');
                     if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
                       // print('objectds2 ${obj['sendername']}');
-                      tempid = obj['sendername'];
+                      tempid = obj['sendername']??'';
                     }
                   }
                   if (tempid == '') {
@@ -3396,7 +3396,7 @@ if(page.contains(nx)){
                 for (var obj in thread) {
                   //   print('objectds3 ${obj['sendername']}');
                   if (obj['userid'] != jsonDecode(wsMessage)['sender']) {
-                    //   tempid = obj['sendername'];
+                    //   tempid = obj['sendername']??'';
                     print('objectds4 ${obj['sendername']}');
                   }
                 }

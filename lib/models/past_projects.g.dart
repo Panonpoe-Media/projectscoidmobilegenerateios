@@ -66,7 +66,7 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
       (json['project_ending_list_str'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
-      json['finish_date'] == null
+     json['finish_date'] == null
           ? null
           : DateTime.parse(json['finish_date'] as String),
       json['owner_id'] as int?,
@@ -88,7 +88,7 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
       json['owner_owner_point_str'] as String?,
       json['owner_owner_ranking'] as int?,
       json['owner_owner_ranking_str'] as String?,
-      (json['worker_rating_num'] as num?)?.toDouble(),
+           (json['worker_rating_num'] as num?)?.toDouble(),
       json['worker_rating_num_str'] as String?,
       json['worker_feedback'] as String?,
       json['accepted_worker_photo_url'] as String?,
@@ -104,17 +104,17 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
              json['owner_feedback'] as String?,
       (json['owner_rating_num'] as num?)?.toDouble(),
       json['owner_rating_num_str'] as String?,
-      json['arbitration_id'] as int?,
+       json['arbitration_id'] as int?,
       json['arbitration_str'] as String?,
       json['arbitration_url'] as String?,
           json['attachments_url'] as String?,
-        (json['attachments'] as String?) == ''? null :
+          json['attachments']  == ''? null :
           (json['attachments'] as List<dynamic>?)
           ?.map((e) =>
               e == null  ? null : FileField.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['attachments_name'] as String?,
-          (json['arbitration_list'] as List<dynamic>?)
+           (json['arbitration_list'] as List<dynamic>?)
           ?.map((e) => e as int?)
           .toList(),
       (json['arbitration_list_str'] as List<dynamic>?)
@@ -124,6 +124,8 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
           ? null
           : UserBidsListingToolsRev.fromJson(
               json['user_bids'] as Map<String, dynamic>),
+
+
 
 
     )

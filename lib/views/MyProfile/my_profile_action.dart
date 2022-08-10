@@ -62,8 +62,9 @@ class EditProfileMyProfile extends StatefulWidget {
 
   final String? id ;
   final String? title;
+  final bool? appbar;
   static const String PATH = '/user/my_profile/edit_profile/:id/:title';
-  EditProfileMyProfile({Key? key, this.id, this.title}) : super(key: key);
+  EditProfileMyProfile({Key? key, this.id, this.title, this.appbar}) : super(key: key);
 
   @override
   EditProfileMyProfileState createState() => EditProfileMyProfileState();
@@ -327,7 +328,8 @@ final RestorableInt _counter = RestorableInt(0);
 			 child: 
       Scaffold(
                 backgroundColor: darkMode? Colors.black : Colors.white,
-                appBar: 
+
+                appBar: widget.appbar == null?
                   AppBar(
                             automaticallyImplyLeading: false,
                             title:
@@ -348,7 +350,9 @@ final RestorableInt _counter = RestorableInt(0);
                               ]
                             ),
 
-                        ),
+                        ): null,
+
+
 
 
                       body:isLoading? 

@@ -86,7 +86,7 @@ class MyPointsViewModel  extends MyPointsViewBase{
                       onPressed: (){
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => Projectscoid(id :  model.model.id)),
+                          MaterialPageRoute(builder: (context) => Projectscoid(id :  model.model.user_id)),
                               (Route<dynamic> route) => false,
                         );
                       },
@@ -215,7 +215,7 @@ class MyPointsViewModel  extends MyPointsViewBase{
                                       onPressed: (){
                                         Navigator.push(
                                           context,
-                                          MaterialPageRoute(builder: (context) => PublicBrowseUsersView(id : model.model.id, title: 'zzz', )),
+                                          MaterialPageRoute(builder: (context) => PublicBrowseUsersView(id : model.model.user_id, title: 'zzz', )),
                                         );
                                       },
                                       lines: <String>[
@@ -234,12 +234,12 @@ class MyPointsViewModel  extends MyPointsViewBase{
                   ),
 
 
-                  PointsPestaList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_pesta_index/'+ model.model.id +'/' + 'points_pesta' + '?'),
-                  PointsWorkerList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_worker_index/'+ model.model.id +'/' + 'points_worker' + '?'),
-                  PointsOwnerList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_owner_index/'+ model.model.id +'/' + 'points_owner' + '?'),
-                  PointsSellerList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_seller_index/'+ model.model.id +'/' + 'points_seller' + '?'),
-                  PointsBuyerList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_buyer_index/'+ model.model.id +'/' + 'points_buyer' + '?'),
-                  PointsAffiliateList(id: model.model.id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_affiliate_index/'+ model.model.id +'/' + 'points_affiliate' + '?'),
+                  PointsPestaList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_pesta_index/'+ model.model!.user_id! +'/' + 'points_pesta' + '?'),
+                  PointsWorkerList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_worker_index/'+ model.model!.user_id! +'/' + 'points_worker' + '?'),
+                  PointsOwnerList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_owner_index/'+ model.model!.user_id! +'/' + 'points_owner' + '?'),
+                  PointsSellerList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_seller_index/'+ model.model!.user_id! +'/' + 'points_seller' + '?'),
+                  PointsBuyerList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_buyer_index/'+ model.model!.user_id! +'/' + 'points_buyer' + '?'),
+                  PointsAffiliateList(id: model.model.user_id, title:'', url: Env.value!.baseUrl! + '/user/my_points/points_affiliate_index/'+ model.model!.user_id! +'/' + 'points_affiliate' + '?'),
                 ],
 
               ),

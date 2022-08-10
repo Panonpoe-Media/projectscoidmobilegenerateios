@@ -3,6 +3,7 @@ import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/core/components/helpers/string_helpers.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/models/selection.dart';
+import 'package:projectscoid/models/model.dart';
 
 
 
@@ -94,7 +95,42 @@ class SearchSelectDialogState extends State<SearchSelectDialog> {
     }
 
     }else{
-      AppProvider.getRouter(context)?.navigateTo(context, urlToRoute(_listtags![_value!]!.url!));
+      if(_listtags![_value!]!.url!.contains('tadlhxonphile')){
+        if(_listtags![_value!]!.key!.contains('navsai1')){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchBrowseProjectsListing(
+                    id: _listtags![_value!]!.value,
+                    title: _listtags![_value!]!.text,
+                    cb: null)),
+          );
+        }
+        if(_listtags![_value!]!.key!.contains('navsai2')){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchBrowseServicesListing1(
+                    id: _listtags![_value!]!.value,
+                    title: _listtags![_value!]!.text,
+                    cb: null)),
+          );
+        }
+        if(_listtags![_value!]!.key!.contains('navsai3')){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => SearchBrowseProductsListing(
+                    id: _listtags![_value!]!.value,
+                    title: _listtags![_value!]!.text,
+                    cb: null)),
+          );
+        }
+
+      }else{
+        AppProvider.getRouter(context)?.navigateTo(context, urlToRoute(_listtags![_value!]!.url!));
+      }
+
     }
 
 

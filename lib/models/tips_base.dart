@@ -1510,7 +1510,9 @@ SpeedDialChild ListButtonTipsWidget(Button button, BuildContext context, bool?ac
                         backgroundColor: Colors.green,
                         label: button.text == 'Order by ...' ?  button.text :'Order : ' + button!.text!,
                         labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
-                        onTap: (){ showSearchSelectDialog(context: context,
+                        onTap: (){
+                        
+						showSearchSelectDialog(context: context,
                         caption:button!.text!,
                         initialitems: button.selections,
                         initvalue: button!.selections![0]);

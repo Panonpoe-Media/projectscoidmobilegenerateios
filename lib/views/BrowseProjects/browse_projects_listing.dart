@@ -38,6 +38,7 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
   TextEditingController searchBoxController = TextEditingController();
   final scrollThreshold = 200.0;
   bool selected = false;
+  bool isopen = false;
   AccountController? accountController;
   bool account = true;
   String searchText = '';
@@ -110,11 +111,14 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
           if(search){
             Navigator.pop(context);
           }else{
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => Projectscoid(id : account ? listAccount[0]['user_hash'] : '')),
-                  (Route<dynamic> route) => false,
-            );
+            if(!isopen) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) =>
+                    Projectscoid(id: account ? listAccount[0]['user_hash'] : '')),
+                    (Route<dynamic> route) => false,
+              );
+            }
           }
           return false;
         },
@@ -229,6 +233,11 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
     });
     // next = false;
   }
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
    // @override
   Widget buildListingBar(){
     return BlocBuilder<BrowseProjectsListing,  BrowseProjectsState>(
@@ -276,7 +285,7 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
                   Center(
                     child: Text('no ' + title),
                   ),
-                 floatingActionButton: state.browse_projects!.Buttons(context, _dialVisible, account)
+                 floatingActionButton: state.browse_projects!.Buttons(context, _dialVisible, account, open)
 				//floatingActionButton: isLoading? null :  state.browse_projects!.Buttons(context, _dialVisible, controller,browse_projects,  this, Env.value!.baseUrl!, '', title)
               );
 			  }
@@ -327,7 +336,7 @@ class  PublicBrowseProjectsListingState extends State< PublicBrowseProjectsListi
 							  onRefresh: _onRefresh,
 							),
 							
-					floatingActionButton: state.browse_projects!.Buttons(context, _dialVisible, account)
+					floatingActionButton: state.browse_projects!.Buttons(context, _dialVisible, account, open)
 					//floatingActionButton: isLoading? null :  state.browse_projects!.Buttons(context, _dialVisible, controller,browse_projects,  this, Env.value!.baseUrl!, '', title, account)		
                    
 			 );

@@ -3158,7 +3158,129 @@ SpeedDialChild ListButtonBrowseServicesWidget(Button button, BuildContext contex
                         backgroundColor: Colors.green,
                         label: button.text == 'Order by ...' ?  button.text :'Order : ' + button!.text!,
                         labelStyle: TextStyle(fontSize: 18.0, color: Colors.black),
-                        onTap: (){ showSearchSelectDialog(context: context,
+                        onTap: (){
+                        
+						        button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '28_3d-modeling-and-animation',
+                            '3D Modeling & Animation',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '24_accounting-and-consultancy',
+                            'Accounting & Consultancy',
+                            false,
+
+                          ));
+						   button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '16_audio-video-and-photography',
+                            'Audio Video & Photography',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '29_data-entry-and-data-mining',
+                            'Data Entry & Data Mining',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '2_desktop-programming',
+                            'Desktop Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '31_electronis-and-robotics',
+                            'Electronis & Robotics',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '8_game-programming',
+                            'Game Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '18_internet-marketing-and-social-media',
+                            'Internet marketing & Social Media',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '10_layout-logo-and-graphic-design',
+                            'Layout Logo & Graphic Design',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '4_mobile-programming',
+                            'Mobile Programming',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '26_network-and-system-administration',
+                            'Network & System Administration',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '14_seo-and-website-maintenance',
+                            'SEO & Website Maintenance',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '6_website-development',
+                            'Website Development',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '12_writing-and-translation',
+                            'Writing & Translation',
+                            false,
+
+                          ));
+                          button.selections?.add(Selection(
+                            'tadlhxonphile',
+                            'navsai2',
+                            '22_others',
+                            'Others',
+                            false,
+
+                          ));
+						showSearchSelectDialog(context: context,
                         caption:button!.text!,
                         initialitems: button.selections,
                         initvalue: button!.selections![0]);

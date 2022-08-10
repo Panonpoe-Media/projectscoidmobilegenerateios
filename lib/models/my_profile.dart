@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/views/components/index.dart';
+import 'package:projectscoid/views/route.dart';
 import 'package:projectscoid/controllers/controllers.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:projectscoid/core/components/helpers/string_helpers.dart';
@@ -1166,7 +1167,7 @@ class MyProfileViewModel extends MyProfileViewBase {
     final size = MediaQuery.of(context).size;
     final width = size.width;
     return (DefaultTabController(
-        length: 5,
+        length: 6,
         child: NestedScrollView(
           controller: controller,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -1363,6 +1364,7 @@ class MyProfileViewModel extends MyProfileViewBase {
                     Tab(
                       text: "Personal Info",
                     ),
+                    Tab(text: "Edit Profil"),
                     Tab(text: "Portofolio"),
                     Tab(text: "Phone"),
                     Tab(text: "Email"),
@@ -2030,6 +2032,7 @@ class MyProfileViewModel extends MyProfileViewBase {
                   ]),
                 ),
               ),
+              EditProfileMyProfile(id: model!.model!.user_id!, title: this.model!.model!.user_name, appbar: true),
               Portofolio(id: model!.model!.user_id!, title: ''),
               rt.ChangeHandphoneMyProfile(
                   id: model!.model!.user_id!, title: ''),

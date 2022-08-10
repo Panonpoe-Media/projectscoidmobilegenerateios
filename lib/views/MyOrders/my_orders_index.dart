@@ -38,6 +38,7 @@ class  UserMyOrdersIndexState extends State< UserMyOrdersIndex> with Restoration
 
   bool selected = false;
   int page = 1;
+   bool isopen = false;
   AccountController? accountController;
   bool account = true;
   String searchText = '';
@@ -98,11 +99,14 @@ final RestorableDouble cs = RestorableDouble(0);
     return WillPopScope(
          onWillPop:()async{
           //Navigator.pop(context);
-		     Navigator.pushAndRemoveUntil(
+		   if(!isopen) {
+		  Navigator.pushAndRemoveUntil(
 								context,
 								MaterialPageRoute(builder: (context) => Projectscoid(id : account ? listAccount[0]['user_hash'] : '')),
 									(Route<dynamic> route) => false,
 							  );
+		  }
+		     
           return false;
         },
         child:
@@ -210,6 +214,10 @@ Future _getTable(BuildContext context)async{
       
     }
     return pagesList;
+  }  void open(bool val){
+   // setState(() {
+      isopen = val;
+    //});
   }
 
    // @override
@@ -250,7 +258,7 @@ Future _getTable(BuildContext context)async{
                                         
                                     
                                     
-                                    floatingActionButton: snapshot.data.Buttons(context, _dialVisible, account)
+                                    floatingActionButton: snapshot.data.Buttons(context, _dialVisible, account, open)
 
                               );
 

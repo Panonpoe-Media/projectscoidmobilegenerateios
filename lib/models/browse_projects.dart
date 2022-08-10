@@ -2871,6 +2871,7 @@ class SearchBrowseProjectsListingState
   bool selected = false;
   AccountController? accountController;
   bool account = true;
+  bool isopen = false;
   String? searchText = '';
   double? initscroll = 0.0;
   String? userid;
@@ -3005,7 +3006,11 @@ class SearchBrowseProjectsListingState
       searchText = value;
     });
   }
-
+  void open(bool val){
+    // setState(() {
+    isopen = val;
+    //});
+  }
   Widget buildSearchBar(String? title) {
     return Container(
         // padding: const EdgeInsets.all(8.0),
@@ -3071,7 +3076,7 @@ class SearchBrowseProjectsListingState
                     child: Text('no ' + title!),
                   ),
                   floatingActionButton: state.browse_projects!
-                      .Buttons(context, _dialVisible, account)
+                      .Buttons(context, _dialVisible, account, open)
                   //floatingActionButton: isLoading? null :  state.browse_projects!.Buttons(context, _dialVisible, controller,browse_projects,  this, Env.value!.baseUrl!, '', title!)
                   );
             }
@@ -3134,7 +3139,7 @@ class SearchBrowseProjectsListingState
                 onRefresh: _onRefresh,
               ),
               floatingActionButton:
-                  state.browse_projects!.Buttons(context, _dialVisible, account)
+                  state.browse_projects!.Buttons(context, _dialVisible, account, open)
               //floatingActionButton: isLoading? null :  state.browse_projects!.Buttons(context, _dialVisible, controller,browse_projects,  this, Env.value!.baseUrl!, '', title, account)
 
               );

@@ -201,7 +201,7 @@ class ViewModelPastProjectsRev {
     this.owner_owner_point_str,
     this.owner_owner_ranking,
     this.owner_owner_ranking_str,
-    this.worker_rating_num,
+       this.worker_rating_num,
     this.worker_rating_num_str,
     this.worker_feedback,
          this.accepted_worker_photo_url,
@@ -212,20 +212,22 @@ class ViewModelPastProjectsRev {
     this.accepted_worker_worker_rating_num_str,
     this.accepted_worker_worker_point,
     this.accepted_worker_worker_point_str,
-    this.accepted_worker_worker_ranking,
+       this.accepted_worker_worker_ranking,
     this.accepted_worker_worker_ranking_str,
        this.owner_feedback,
     this.owner_rating_num,
     this.owner_rating_num_str,
-    this.arbitration_id,
+       this.arbitration_id,
     this.arbitration_str,
     this.arbitration_url,
      this.attachments_url,
     this.attachments,
     this.attachments_name,
-        this.arbitration_list,
+          this.arbitration_list,
     this.arbitration_list_str,
     this.user_bids,
+
+
 
 
   );
@@ -1701,7 +1703,7 @@ class PastProjectsViewModel extends PastProjectsViewBase {
                           style: descriptionStyle!.copyWith(
                               fontSize: 14, fontWeight: FontWeight.w200),
                         ),
-                        (this.model.model.budget_range_str ?? '') != ''
+                        (this.model.model.budget_range_str ?? '') != '' && this.model.model.budget_range_min_str != null
                             ? Text(
                                 'Rp ${this.model.model.budget_range_min_str} - Rp ${this.model.model.budget_range_max_str}',
                                 style: descriptionStyle!.copyWith(

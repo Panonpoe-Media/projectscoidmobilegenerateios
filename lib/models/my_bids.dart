@@ -453,6 +453,28 @@ class ItemMyBidsContent1 extends StatelessWidget {
   final String? username;
   ChatBloc? cb;
 
+   void GetCb(BuildContext context)async{
+     getApplicationDocumentsDirectory().then((value) {
+       APIProvider projectsAPIProvider = APIProvider(value.path);
+
+         try {
+
+           if (cb != null) {
+
+           } else {
+             cb = AppProvider
+                 .getApplication(context)
+                 .chat;
+           }
+         }catch(e){
+           cb = null;
+         }
+
+     });
+
+
+   }
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -465,6 +487,8 @@ class ItemMyBidsContent1 extends StatelessWidget {
 
     String sts = destination!.item.project_project_status_str.split('>')[1].split('<')[0];
     String sts1 = destination!.item.status_str.split('>')[1].split('<')[0];
+
+    GetCb(context);
 
     final List<Widget> children = <Widget>[
 
