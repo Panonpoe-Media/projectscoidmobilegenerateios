@@ -95,13 +95,15 @@ class LoginController extends Bloc<LoginEvent, LoginState> {
 
        return emit(LoginInitial(username: '',password: ''));
       }else{
-        // print('ada disini boss');
+        // print('ada disini boss 1 $token');
+
+         return emit( LoginFailure(error: token));
         return emit( LoginFailure(error: 'Wrong username or password.'));
       }
       //final token = '123';
 
     } catch (error) {
-      print('ada disini boss');
+      print('ada disini boss ${error.toString()}');
       return emit( LoginFailure(error: error.toString()));
       // yield LoginInitial(username:event.username , password: event.password);
 

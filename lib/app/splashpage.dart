@@ -23,6 +23,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:projectscoid/api/api.dart';
 import 'package:projectscoid/app/Env.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:upgrader/upgrader.dart';
 
 IntroController? introController ;
 

@@ -307,7 +307,7 @@ Future<DIOProvider> _init()async{
 
       }catch(e) {
         failed = true;
-
+        print('ini adalah gagal');
       }
       print('ini adalah thumb = ${res?.thumb}');
       return res;

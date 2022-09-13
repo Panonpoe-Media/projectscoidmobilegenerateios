@@ -79,13 +79,19 @@ class _TitleWidget extends State<TitleWidget> {
             padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
             child: // <Widget>[
 
-                Container(
+            /*    Container(
               // padding: const EdgeInsets.all(8.0),
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
               alignment: Alignment.center,
-              height: 45.0,
+              height: 100.0,
 
-              child: TextFormField(
+              child:
+
+             */
+              TextFormField(
+                maxLines : 3,
+               // expands : true,
+                minLines: 1,
                 style: TextStyle(
                     color: validation
                         ? CurrentTheme.NormalTextColor
@@ -128,7 +134,7 @@ class _TitleWidget extends State<TitleWidget> {
                   }
                 },
               ),
-            )
+           // )
 
             // ]
             ));

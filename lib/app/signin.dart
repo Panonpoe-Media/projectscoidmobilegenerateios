@@ -704,6 +704,7 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
+    String ErrorText = 'Masih ada perbaikan di server kami, Silakan coba beberapa saat lagi.';
 
       return BlocBuilder<LoginController, LoginState>(
         bloc: _loginBloc,
@@ -713,10 +714,30 @@ class _LoginFormState extends State<LoginForm> {
             ) {
           if (state is LoginFailure) {
             _onWidgetDidBuild(() {
+              print('Ini state error ${state.error}');
+              if(state.error!.contains('timed')){
+                ErrorText = 'Koneksi internet Anda tidak ada. Silakan coba beberapa saat lagi.';
+              }
+              if(state.error!.contains('429')){
+                ErrorText = 'Request anda kena pembatasan limit. Silakan coba beberapa saat lagi.';
+              }
+              if(state.error!.contains('ERR')){
+                ErrorText = 'Wrong username and password combination.';
+              }
+              if(state.error!.contains('lookup')){
+                ErrorText = 'Koneksi internet Anda tidak ada. Silakan coba beberapa saat lagi.';
+              }
+            //  Failed host lookup
+            //  I/flutter ( 4401): ada disini boss DioError [DioErrorType.other]: SocketException: Failed host lookup: 'projects.co.id' (OS Error: No address associated with hostname, errno = 7)
+
+             // 'Connecting timed out'
+              //Wrong username or password
+              // Server
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: state.error!.contains('429') ? const Text('Request anda kena pembatasan limit. Silakan coba beberapa saat lagi.')
-                      : const Text('Wrong username and password combination.'),
+                  content: Text(ErrorText),
+                  //state.error!.contains('429') ? const Text('Request anda kena pembatasan limit. Silakan coba beberapa saat lagi.')
+                  //    : const Text('Wrong username and password combination.'),
                   backgroundColor: Colors.red,
                 ),
               );

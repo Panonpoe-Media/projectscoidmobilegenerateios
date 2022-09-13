@@ -81,6 +81,7 @@ import 'package:koukicons_jw/photoReel.dart';
 import 'package:koukicons_jw/news.dart';
 import 'package:koukicons_jw/briefcase.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:upgrader/upgrader.dart';
 
 /////////////////////////////
 //        ____         ___ //
@@ -10877,6 +10878,7 @@ class _ProjectscoidState extends State<Projectscoid>
 
             } else {
               if (initialMessage.data['type'] == 'message') {
+
                 AppProvider.getApplication(context).chat!.lg(widget.id);
                 //  print('haloooooo boy1');
                 Navigator.push(
@@ -11274,6 +11276,7 @@ class _ProjectscoidState extends State<Projectscoid>
         }
       });
     });
+
     // }
     if (widget.id != '') {
       getApplicationDocumentsDirectory().then((value) {
@@ -12819,11 +12822,16 @@ class _ProjectscoidState extends State<Projectscoid>
     // SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     return isLoading
-        ? const Scaffold(
-            body: Center(
-                child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-          )))
+        ?  Scaffold(
+            body:
+            UpgradeAlert(
+                child:
+                    Center(
+                        child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                  ))
+            )
+          )
         : topBarNav(context, size, widget.isChat,
             AppProvider.getApplication(context).chat);
     /*
@@ -13448,358 +13456,258 @@ class _ProjectscoidState extends State<Projectscoid>
                           chatBloc: AppProvider.getApplication(context).chat,
                           forlgn: forlgn,
                           username: username),
-              body: Stack(
-                children: [
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        height: appBarHide ? 80.0 : 50.0,
-                        padding: EdgeInsets.only(top: appBarHide ? 30.0 : 0.0),
-                        constraints:
-                            BoxConstraints(maxHeight: appBarHide ? 80.0 : 50.0),
-                        child: Material(
-                          color: darkMode
-                              ? Colors.black38
-                              : CurrentTheme.PrimaryColor,
-                          child: TabBar(
-                            isScrollable: false,
-                            controller: _tabController,
-                            indicatorColor: darkMode
-                                ? CurrentTheme.PrimaryColor
-                                : CurrentTheme.NormalTextColor,
-                            labelColor: darkMode
-                                ? CurrentTheme.PrimaryColor
-                                : CurrentTheme.BackgroundColor,
-                            labelPadding: const EdgeInsets.only(top: 0.0),
-                            unselectedLabelColor: CurrentTheme.NormalTextColor,
-                            tabs: choices.map<Widget>((Choice choice) {
-                              return StreamBuilder(
-                                  //
-                                  stream: cb!.onMessage,
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot snapshot) {
-                                    if (snapshot.hasData) {
-                                      if (jsonDecode(snapshot.data).isEmpty) {
-                                        return Tab(
+              body:
+              UpgradeAlert(
+                  child:
+                          Stack(
+                            children: [
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: appBarHide ? 80.0 : 50.0,
+                                    padding: EdgeInsets.only(top: appBarHide ? 30.0 : 0.0),
+                                    constraints:
+                                        BoxConstraints(maxHeight: appBarHide ? 80.0 : 50.0),
+                                    child: Material(
+                                      color: darkMode
+                                          ? Colors.black38
+                                          : CurrentTheme.PrimaryColor,
+                                      child: TabBar(
+                                        isScrollable: false,
+                                        controller: _tabController,
+                                        indicatorColor: darkMode
+                                            ? CurrentTheme.PrimaryColor
+                                            : CurrentTheme.NormalTextColor,
+                                        labelColor: darkMode
+                                            ? CurrentTheme.PrimaryColor
+                                            : CurrentTheme.BackgroundColor,
+                                        labelPadding: const EdgeInsets.only(top: 0.0),
+                                        unselectedLabelColor: CurrentTheme.NormalTextColor,
+                                        tabs: choices.map<Widget>((Choice choice) {
+                                          return StreamBuilder(
+                                              //
+                                              stream: cb!.onMessage,
+                                              builder: (BuildContext context,
+                                                  AsyncSnapshot snapshot) {
+                                                if (snapshot.hasData) {
+                                                  if (jsonDecode(snapshot.data).isEmpty) {
+                                                    return Tab(
 
-                                            // text: choice!.title!,
-                                            //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                            child: Container(
-                                                height: 50,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    choice.title! == 'Cart' &&
-                                                            cartcount > 0
-                                                        ? Container(
-                                                            width: 38,
-                                                            height: 18,
-                                                            child: Stack(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Positioned
-                                                                      .fill(
-                                                                    child: Icon(
-                                                                        choice.icon,
-                                                                        size:
-                                                                            18.0,
-                                                                        color: _tabController!.index==
-                                                                                 null
-                                                                            ? null
-                                                                            : _tabController!.index== choices.indexOf(choice)
-                                                                                ? darkMode
-                                                                                    ? CurrentTheme.PrimaryColor
-                                                                                    : CurrentTheme.BackgroundColor
-                                                                                : CurrentTheme.NormalTextColor),
-                                                                  ),
-                                                                  Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topRight,
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            15,
-                                                                        width:
-                                                                            15,
-                                                                        decoration:
-                                                                            const BoxDecoration(
-                                                                          color:
-                                                                              Colors.red,
-                                                                          shape:
-                                                                              BoxShape.circle,
-                                                                        ),
-                                                                        child:
-                                                                            Text(
-                                                                          cartcount.toString(),
-                                                                          style: const TextStyle(
-                                                                              fontSize: 8,
-                                                                              color: Colors.white),
-                                                                        ),
-                                                                      ))
-                                                                ]))
-                                                        : choice.title! ==
-                                                                    'Chat' &&
-                                                                unread > 0
-                                                            ? Container(
-                                                                width: 38,
-                                                                height: 18,
-                                                                child: Stack(
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Positioned
-                                                                          .fill(
-                                                                        child: Icon(
-                                                                            choice.icon,
-                                                                            size:
-                                                                                18.0,
-                                                                            color: _tabController!.index== null
-                                                                                ? null
-                                                                                : _tabController!.index== choices.indexOf(choice)
-                                                                                    ? darkMode
-                                                                                        ? CurrentTheme.PrimaryColor
-                                                                                        : CurrentTheme.BackgroundColor
-                                                                                    : CurrentTheme.NormalTextColor),
-                                                                      ),
-                                                                      Align(
-                                                                          alignment: Alignment
-                                                                              .topRight,
-                                                                          child:
-                                                                              Container(
-                                                                            alignment:
-                                                                                Alignment.center,
-                                                                            height:
-                                                                                15,
-                                                                            width:
-                                                                                15,
-                                                                            decoration:
-                                                                                const BoxDecoration(
-                                                                              color: Colors.red,
-                                                                              shape: BoxShape.circle,
-                                                                            ),
-                                                                            child:
-                                                                                Text(
-                                                                              unread.toString(),
-                                                                              style: const TextStyle(fontSize: 8, color: Colors.white),
-                                                                            ),
-                                                                          ))
-                                                                    ]))
+                                                        // text: choice!.title!,
+                                                        //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                        child: Container(
+                                                            height: 50,
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment.center,
+                                                              children: <Widget>[
+                                                                choice.title! == 'Cart' &&
+                                                                        cartcount > 0
+                                                                    ? Container(
+                                                                        width: 38,
+                                                                        height: 18,
+                                                                        child: Stack(
+                                                                            children: <
+                                                                                Widget>[
+                                                                              Positioned
+                                                                                  .fill(
+                                                                                child: Icon(
+                                                                                    choice.icon,
+                                                                                    size:
+                                                                                        18.0,
+                                                                                    color: _tabController!.index==
+                                                                                             null
+                                                                                        ? null
+                                                                                        : _tabController!.index== choices.indexOf(choice)
+                                                                                            ? darkMode
+                                                                                                ? CurrentTheme.PrimaryColor
+                                                                                                : CurrentTheme.BackgroundColor
+                                                                                            : CurrentTheme.NormalTextColor),
+                                                                              ),
+                                                                              Align(
+                                                                                  alignment:
+                                                                                      Alignment
+                                                                                          .topRight,
+                                                                                  child:
+                                                                                      Container(
+                                                                                    alignment:
+                                                                                        Alignment.center,
+                                                                                    height:
+                                                                                        15,
+                                                                                    width:
+                                                                                        15,
+                                                                                    decoration:
+                                                                                        const BoxDecoration(
+                                                                                      color:
+                                                                                          Colors.red,
+                                                                                      shape:
+                                                                                          BoxShape.circle,
+                                                                                    ),
+                                                                                    child:
+                                                                                        Text(
+                                                                                      cartcount.toString(),
+                                                                                      style: const TextStyle(
+                                                                                          fontSize: 8,
+                                                                                          color: Colors.white),
+                                                                                    ),
+                                                                                  ))
+                                                                            ]))
+                                                                    : choice.title! ==
+                                                                                'Chat' &&
+                                                                            unread > 0
+                                                                        ? Container(
+                                                                            width: 38,
+                                                                            height: 18,
+                                                                            child: Stack(
+                                                                                children: <
+                                                                                    Widget>[
+                                                                                  Positioned
+                                                                                      .fill(
+                                                                                    child: Icon(
+                                                                                        choice.icon,
+                                                                                        size:
+                                                                                            18.0,
+                                                                                        color: _tabController!.index== null
+                                                                                            ? null
+                                                                                            : _tabController!.index== choices.indexOf(choice)
+                                                                                                ? darkMode
+                                                                                                    ? CurrentTheme.PrimaryColor
+                                                                                                    : CurrentTheme.BackgroundColor
+                                                                                                : CurrentTheme.NormalTextColor),
+                                                                                  ),
+                                                                                  Align(
+                                                                                      alignment: Alignment
+                                                                                          .topRight,
+                                                                                      child:
+                                                                                          Container(
+                                                                                        alignment:
+                                                                                            Alignment.center,
+                                                                                        height:
+                                                                                            15,
+                                                                                        width:
+                                                                                            15,
+                                                                                        decoration:
+                                                                                            const BoxDecoration(
+                                                                                          color: Colors.red,
+                                                                                          shape: BoxShape.circle,
+                                                                                        ),
+                                                                                        child:
+                                                                                            Text(
+                                                                                          unread.toString(),
+                                                                                          style: const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                        ),
+                                                                                      ))
+                                                                                ]))
 
-                                                            //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                            : choice.title! ==
-                                                                        'Notif' &&
-                                                                    notifunread >
-                                                                        0
-                                                                ? Container(
-                                                                    width: 38,
-                                                                    height: 18,
-                                                                    child: Stack(
-                                                                        children: <
-                                                                            Widget>[
-                                                                          Positioned
-                                                                              .fill(
-                                                                            child: Icon(choice.icon,
-                                                                                size: 18.0,
-                                                                                color: _tabController!.index== null
+                                                                        //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                                        : choice.title! ==
+                                                                                    'Notif' &&
+                                                                                notifunread >
+                                                                                    0
+                                                                            ? Container(
+                                                                                width: 38,
+                                                                                height: 18,
+                                                                                child: Stack(
+                                                                                    children: <
+                                                                                        Widget>[
+                                                                                      Positioned
+                                                                                          .fill(
+                                                                                        child: Icon(choice.icon,
+                                                                                            size: 18.0,
+                                                                                            color: _tabController!.index== null
+                                                                                                ? null
+                                                                                                : _tabController!.index== choices.indexOf(choice)
+                                                                                                    ? darkMode
+                                                                                                        ? CurrentTheme.PrimaryColor
+                                                                                                        : CurrentTheme.BackgroundColor
+                                                                                                    : CurrentTheme.NormalTextColor),
+                                                                                      ),
+                                                                                      Align(
+                                                                                          alignment: Alignment.topRight,
+                                                                                          child: Container(
+                                                                                            alignment: Alignment.center,
+                                                                                            height: 15,
+                                                                                            width: 15,
+                                                                                            decoration: const BoxDecoration(
+                                                                                              color: Colors.red,
+                                                                                              shape: BoxShape.circle,
+                                                                                            ),
+                                                                                            child: Text(
+                                                                                              notifunread.toString(),
+                                                                                              style: const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                            ),
+                                                                                          ))
+                                                                                    ]))
+                                                                            : Icon(
+                                                                                choice.icon,
+                                                                                size: 21.0,
+                                                                                color: _tabController!.index==
+                                                                                        null
                                                                                     ? null
-                                                                                    : _tabController!.index== choices.indexOf(choice)
+                                                                                    : _tabController!.index==
+                                                                                            choices.indexOf(choice)
                                                                                         ? darkMode
                                                                                             ? CurrentTheme.PrimaryColor
                                                                                             : CurrentTheme.BackgroundColor
                                                                                         : CurrentTheme.NormalTextColor),
-                                                                          ),
-                                                                          Align(
-                                                                              alignment: Alignment.topRight,
-                                                                              child: Container(
-                                                                                alignment: Alignment.center,
-                                                                                height: 15,
-                                                                                width: 15,
-                                                                                decoration: const BoxDecoration(
-                                                                                  color: Colors.red,
-                                                                                  shape: BoxShape.circle,
-                                                                                ),
-                                                                                child: Text(
-                                                                                  notifunread.toString(),
-                                                                                  style: const TextStyle(fontSize: 8, color: Colors.white),
-                                                                                ),
-                                                                              ))
-                                                                        ]))
-                                                                : Icon(
-                                                                    choice.icon,
-                                                                    size: 21.0,
-                                                                    color: _tabController!.index==
-                                                                            null
-                                                                        ? null
-                                                                        : _tabController!.index==
-                                                                                choices.indexOf(choice)
-                                                                            ? darkMode
-                                                                                ? CurrentTheme.PrimaryColor
-                                                                                : CurrentTheme.BackgroundColor
-                                                                            : CurrentTheme.NormalTextColor),
-                                                    Text(
-                                                      choice.title!,
-                                                      style: const TextStyle(
-                                                          fontSize: 10),
-                                                    ),
-                                                  ],
-                                                )));
-                                      }
+                                                                Text(
+                                                                  choice.title!,
+                                                                  style: const TextStyle(
+                                                                      fontSize: 10),
+                                                                ),
+                                                              ],
+                                                            )));
+                                                  }
 
-                                      if (jsonDecode(snapshot.data)['type'] ==
-                                              'index' &&
-                                          widget.id != '') {
-                                        unread = 0;
+                                                  if (jsonDecode(snapshot.data)['type'] ==
+                                                          'index' &&
+                                                      widget.id != '') {
+                                                    unread = 0;
 
-                                        for (var obj in jsonDecode(
-                                            snapshot.data)['list']) {
-                                          //lastmesssage
-                                          // if(obj['blocked'] != 1){
-                                          // print('aku disini saja man');
-                                          unread = ((unread+ obj['unread'])
-                                              as int?)!;
-                                          //  }
-                                        }
-                                      }
+                                                    for (var obj in jsonDecode(
+                                                        snapshot.data)['list']) {
+                                                      //lastmesssage
+                                                      // if(obj['blocked'] != 1){
+                                                      // print('aku disini saja man');
+                                                      unread = ((unread+ obj['unread'])
+                                                          as int?)!;
+                                                      //  }
+                                                    }
+                                                  }
 
-                                      if (jsonDecode(snapshot.data)['type'] ==
-                                          'notify') {
-                                        //  print('hanya satu kali');
-                                        //  notifunread = notifunread + 1;
-                                      }
-                                      return Tab(
+                                                  if (jsonDecode(snapshot.data)['type'] ==
+                                                      'notify') {
+                                                    //  print('hanya satu kali');
+                                                    //  notifunread = notifunread + 1;
+                                                  }
+                                                  return Tab(
 
-                                          // text: choice!.title!,
-                                          //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                          child: Container(
-                                              height: 50,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  choice.title! == 'Cart' &&
-                                                          cartcount > 0
-                                                      ? Container(
-                                                          width: 38,
-                                                          height: 18,
-                                                          child:
-                                                              Stack(children: <
-                                                                  Widget>[
-                                                            Positioned.fill(
-                                                              child: Icon(
-                                                                  choice.icon,
-                                                                  size: 18.0,
-                                                                  color: _tabController!
-                                                                              .index==
-                                                                          null
-                                                                      ? null
-                                                                      : _tabController!.index==
-                                                                              choices.indexOf(choice)
-                                                                          ? darkMode
-                                                                              ? CurrentTheme.PrimaryColor
-                                                                              : CurrentTheme.BackgroundColor
-                                                                          : CurrentTheme.NormalTextColor),
-                                                            ),
-                                                            Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topRight,
-                                                                child:
-                                                                    Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  decoration:
-                                                                      const BoxDecoration(
-                                                                    color: Colors
-                                                                        .red,
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                  ),
-                                                                  child: Text(
-                                                                    cartcount.toString(),
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            8,
-                                                                        color: Colors
-                                                                            .white),
-                                                                  ),
-                                                                ))
-                                                          ]))
-                                                      : choice.title! ==
-                                                                  'Chat' &&
-                                                              unread > 0
-                                                          ? Container(
-                                                              width: 38,
-                                                              height: 18,
-                                                              child: Stack(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Positioned
-                                                                        .fill(
-                                                                      child: Icon(
-                                                                          choice.icon,
-                                                                          size:
-                                                                              18.0,
-                                                                          color: _tabController!.index== null
-                                                                              ? null
-                                                                              : _tabController!.index== choices.indexOf(choice)
-                                                                                  ? darkMode
-                                                                                      ? CurrentTheme.PrimaryColor
-                                                                                      : CurrentTheme.BackgroundColor
-                                                                                  : CurrentTheme.NormalTextColor),
-                                                                    ),
-                                                                    Align(
-                                                                        alignment:
-                                                                            Alignment
-                                                                                .topRight,
-                                                                        child:
-                                                                            Container(
-                                                                          alignment:
-                                                                              Alignment.center,
-                                                                          height:
-                                                                              15,
-                                                                          width:
-                                                                              15,
-                                                                          decoration:
-                                                                              const BoxDecoration(
-                                                                            color:
-                                                                                Colors.red,
-                                                                            shape:
-                                                                                BoxShape.circle,
-                                                                          ),
-                                                                          child:
-                                                                              Text(
-                                                                            unread.toString(),
-                                                                            style:
-                                                                                const TextStyle(fontSize: 8, color: Colors.white),
-                                                                          ),
-                                                                        ))
-                                                                  ]))
-
-                                                          //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                          : choice.title! ==
-                                                                      'Notif' &&
-                                                                  notifunread >
-                                                                      0
-                                                              ? Container(
-                                                                  width: 38,
-                                                                  height: 18,
-                                                                  child: Stack(
-                                                                      children: <
-                                                                          Widget>[
-                                                                        Positioned
-                                                                            .fill(
+                                                      // text: choice!.title!,
+                                                      //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                      child: Container(
+                                                          height: 50,
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment.center,
+                                                            children: <Widget>[
+                                                              choice.title! == 'Cart' &&
+                                                                      cartcount > 0
+                                                                  ? Container(
+                                                                      width: 38,
+                                                                      height: 18,
+                                                                      child:
+                                                                          Stack(children: <
+                                                                              Widget>[
+                                                                        Positioned.fill(
                                                                           child: Icon(
                                                                               choice.icon,
                                                                               size: 18.0,
-                                                                              color: _tabController!.index== null
+                                                                              color: _tabController!
+                                                                                          .index==
+                                                                                      null
                                                                                   ? null
-                                                                                  : _tabController!.index== choices.indexOf(choice)
+                                                                                  : _tabController!.index==
+                                                                                          choices.indexOf(choice)
                                                                                       ? darkMode
                                                                                           ? CurrentTheme.PrimaryColor
                                                                                           : CurrentTheme.BackgroundColor
@@ -13807,240 +13715,345 @@ class _ProjectscoidState extends State<Projectscoid>
                                                                         ),
                                                                         Align(
                                                                             alignment:
-                                                                                Alignment.topRight,
-                                                                            child: Container(
-                                                                              alignment: Alignment.center,
+                                                                                Alignment
+                                                                                    .topRight,
+                                                                            child:
+                                                                                Container(
+                                                                              alignment:
+                                                                                  Alignment
+                                                                                      .center,
                                                                               height: 15,
                                                                               width: 15,
-                                                                              decoration: const BoxDecoration(
-                                                                                color: Colors.red,
-                                                                                shape: BoxShape.circle,
+                                                                              decoration:
+                                                                                  const BoxDecoration(
+                                                                                color: Colors
+                                                                                    .red,
+                                                                                shape: BoxShape
+                                                                                    .circle,
                                                                               ),
                                                                               child: Text(
-                                                                                notifunread.toString(),
-                                                                                style: const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                cartcount.toString(),
+                                                                                style: const TextStyle(
+                                                                                    fontSize:
+                                                                                        8,
+                                                                                    color: Colors
+                                                                                        .white),
                                                                               ),
                                                                             ))
                                                                       ]))
-                                                              : Icon(
-                                                                  choice.icon,
-                                                                  size: 21.0,
-                                                                  color: _tabController!
-                                                                              .index==
-                                                                          null
-                                                                      ? null
-                                                                      : _tabController!.index==
-                                                                              choices.indexOf(choice)
-                                                                          ? darkMode
-                                                                              ? CurrentTheme.PrimaryColor
-                                                                              : CurrentTheme.BackgroundColor
-                                                                          : CurrentTheme.NormalTextColor),
-                                                  Text(
-                                                    choice.title!,
-                                                    style:
-                                                        const TextStyle(fontSize: 10),
-                                                  ),
-                                                ],
-                                              )));
-                                    }
-                                    return Tab(
+                                                                  : choice.title! ==
+                                                                              'Chat' &&
+                                                                          unread > 0
+                                                                      ? Container(
+                                                                          width: 38,
+                                                                          height: 18,
+                                                                          child: Stack(
+                                                                              children: <
+                                                                                  Widget>[
+                                                                                Positioned
+                                                                                    .fill(
+                                                                                  child: Icon(
+                                                                                      choice.icon,
+                                                                                      size:
+                                                                                          18.0,
+                                                                                      color: _tabController!.index== null
+                                                                                          ? null
+                                                                                          : _tabController!.index== choices.indexOf(choice)
+                                                                                              ? darkMode
+                                                                                                  ? CurrentTheme.PrimaryColor
+                                                                                                  : CurrentTheme.BackgroundColor
+                                                                                              : CurrentTheme.NormalTextColor),
+                                                                                ),
+                                                                                Align(
+                                                                                    alignment:
+                                                                                        Alignment
+                                                                                            .topRight,
+                                                                                    child:
+                                                                                        Container(
+                                                                                      alignment:
+                                                                                          Alignment.center,
+                                                                                      height:
+                                                                                          15,
+                                                                                      width:
+                                                                                          15,
+                                                                                      decoration:
+                                                                                          const BoxDecoration(
+                                                                                        color:
+                                                                                            Colors.red,
+                                                                                        shape:
+                                                                                            BoxShape.circle,
+                                                                                      ),
+                                                                                      child:
+                                                                                          Text(
+                                                                                        unread.toString(),
+                                                                                        style:
+                                                                                            const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                      ),
+                                                                                    ))
+                                                                              ]))
 
-                                        // text: choice!.title!,
-                                        //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
-                                        child: Container(
-                                            height: 50,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: <Widget>[
-                                                choice.title! == 'Cart' &&
-                                                        cartcount > 0
-                                                    ? Container(
-                                                        width: 38,
-                                                        height: 18,
-                                                        child: Stack(
-                                                            children: <Widget>[
-                                                              Positioned.fill(
-                                                                child: Icon(
-                                                                    choice.icon,
-                                                                    size: 18.0,
-                                                                    color: _tabController!.index==
-                                                                            null
-                                                                        ? null
-                                                                        : _tabController!.index==
-                                                                                choices.indexOf(choice)
-                                                                            ? darkMode
-                                                                                ? CurrentTheme.PrimaryColor
-                                                                                : CurrentTheme.BackgroundColor
-                                                                            : CurrentTheme.NormalTextColor),
+                                                                      //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                                      : choice.title! ==
+                                                                                  'Notif' &&
+                                                                              notifunread >
+                                                                                  0
+                                                                          ? Container(
+                                                                              width: 38,
+                                                                              height: 18,
+                                                                              child: Stack(
+                                                                                  children: <
+                                                                                      Widget>[
+                                                                                    Positioned
+                                                                                        .fill(
+                                                                                      child: Icon(
+                                                                                          choice.icon,
+                                                                                          size: 18.0,
+                                                                                          color: _tabController!.index== null
+                                                                                              ? null
+                                                                                              : _tabController!.index== choices.indexOf(choice)
+                                                                                                  ? darkMode
+                                                                                                      ? CurrentTheme.PrimaryColor
+                                                                                                      : CurrentTheme.BackgroundColor
+                                                                                                  : CurrentTheme.NormalTextColor),
+                                                                                    ),
+                                                                                    Align(
+                                                                                        alignment:
+                                                                                            Alignment.topRight,
+                                                                                        child: Container(
+                                                                                          alignment: Alignment.center,
+                                                                                          height: 15,
+                                                                                          width: 15,
+                                                                                          decoration: const BoxDecoration(
+                                                                                            color: Colors.red,
+                                                                                            shape: BoxShape.circle,
+                                                                                          ),
+                                                                                          child: Text(
+                                                                                            notifunread.toString(),
+                                                                                            style: const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                          ),
+                                                                                        ))
+                                                                                  ]))
+                                                                          : Icon(
+                                                                              choice.icon,
+                                                                              size: 21.0,
+                                                                              color: _tabController!
+                                                                                          .index==
+                                                                                      null
+                                                                                  ? null
+                                                                                  : _tabController!.index==
+                                                                                          choices.indexOf(choice)
+                                                                                      ? darkMode
+                                                                                          ? CurrentTheme.PrimaryColor
+                                                                                          : CurrentTheme.BackgroundColor
+                                                                                      : CurrentTheme.NormalTextColor),
+                                                              Text(
+                                                                choice.title!,
+                                                                style:
+                                                                    const TextStyle(fontSize: 10),
                                                               ),
-                                                              Align(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .topRight,
-                                                                  child:
-                                                                      Container(
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .center,
-                                                                    height: 15,
-                                                                    width: 15,
-                                                                    decoration:
-                                                                        const BoxDecoration(
-                                                                      color: Colors
-                                                                          .red,
-                                                                      shape: BoxShape
-                                                                          .circle,
-                                                                    ),
-                                                                    child: Text(
-                                                                      cartcount.toString(),
-                                                                      style: const TextStyle(
-                                                                          fontSize:
-                                                                              8,
-                                                                          color:
-                                                                              Colors.white),
-                                                                    ),
-                                                                  ))
-                                                            ]))
-                                                    : choice.title! ==
-                                                                'Chat' &&
-                                                            unread > 0
-                                                        ? Container(
-                                                            width: 38,
-                                                            height: 18,
-                                                            child: Stack(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Positioned
-                                                                      .fill(
-                                                                    child: Icon(
-                                                                        choice.icon,
-                                                                        size:
-                                                                            18.0,
-                                                                        color: _tabController!.index==
-                                                                                null
-                                                                            ? null
-                                                                            : _tabController!.index== choices.indexOf(choice)
-                                                                                ? darkMode
-                                                                                    ? CurrentTheme.PrimaryColor
-                                                                                    : CurrentTheme.BackgroundColor
-                                                                                : CurrentTheme.NormalTextColor),
-                                                                  ),
-                                                                  Align(
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .topRight,
-                                                                      child:
-                                                                          Container(
-                                                                        alignment:
-                                                                            Alignment.center,
-                                                                        height:
-                                                                            15,
-                                                                        width:
-                                                                            15,
-                                                                        decoration:
-                                                                            const BoxDecoration(
-                                                                          color:
-                                                                              Colors.red,
-                                                                          shape:
-                                                                              BoxShape.circle,
-                                                                        ),
-                                                                        child:
-                                                                            Text(
-                                                                          unread.toString(),
-                                                                          style: const TextStyle(
-                                                                              fontSize: 8,
-                                                                              color: Colors.white),
-                                                                        ),
-                                                                      ))
-                                                                ]))
+                                                            ],
+                                                          )));
+                                                }
+                                                return Tab(
 
-                                                        //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
-                                                        : choice.title! ==
-                                                                    'Notif' &&
-                                                                notifunread > 0
-                                                            ? Container(
-                                                                width: 38,
-                                                                height: 18,
-                                                                child: Stack(
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Positioned
-                                                                          .fill(
-                                                                        child: Icon(
-                                                                            choice.icon,
-                                                                            size:
-                                                                                18.0,
-                                                                            color: _tabController!.index== null
+                                                    // text: choice!.title!,
+                                                    //  icon: Icon(choice!.icon, size: 17.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor ),
+                                                    child: Container(
+                                                        height: 50,
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment.center,
+                                                          children: <Widget>[
+                                                            choice.title! == 'Cart' &&
+                                                                    cartcount > 0
+                                                                ? Container(
+                                                                    width: 38,
+                                                                    height: 18,
+                                                                    child: Stack(
+                                                                        children: <Widget>[
+                                                                          Positioned.fill(
+                                                                            child: Icon(
+                                                                                choice.icon,
+                                                                                size: 18.0,
+                                                                                color: _tabController!.index==
+                                                                                        null
+                                                                                    ? null
+                                                                                    : _tabController!.index==
+                                                                                            choices.indexOf(choice)
+                                                                                        ? darkMode
+                                                                                            ? CurrentTheme.PrimaryColor
+                                                                                            : CurrentTheme.BackgroundColor
+                                                                                        : CurrentTheme.NormalTextColor),
+                                                                          ),
+                                                                          Align(
+                                                                              alignment:
+                                                                                  Alignment
+                                                                                      .topRight,
+                                                                              child:
+                                                                                  Container(
+                                                                                alignment:
+                                                                                    Alignment
+                                                                                        .center,
+                                                                                height: 15,
+                                                                                width: 15,
+                                                                                decoration:
+                                                                                    const BoxDecoration(
+                                                                                  color: Colors
+                                                                                      .red,
+                                                                                  shape: BoxShape
+                                                                                      .circle,
+                                                                                ),
+                                                                                child: Text(
+                                                                                  cartcount.toString(),
+                                                                                  style: const TextStyle(
+                                                                                      fontSize:
+                                                                                          8,
+                                                                                      color:
+                                                                                          Colors.white),
+                                                                                ),
+                                                                              ))
+                                                                        ]))
+                                                                : choice.title! ==
+                                                                            'Chat' &&
+                                                                        unread > 0
+                                                                    ? Container(
+                                                                        width: 38,
+                                                                        height: 18,
+                                                                        child: Stack(
+                                                                            children: <
+                                                                                Widget>[
+                                                                              Positioned
+                                                                                  .fill(
+                                                                                child: Icon(
+                                                                                    choice.icon,
+                                                                                    size:
+                                                                                        18.0,
+                                                                                    color: _tabController!.index==
+                                                                                            null
+                                                                                        ? null
+                                                                                        : _tabController!.index== choices.indexOf(choice)
+                                                                                            ? darkMode
+                                                                                                ? CurrentTheme.PrimaryColor
+                                                                                                : CurrentTheme.BackgroundColor
+                                                                                            : CurrentTheme.NormalTextColor),
+                                                                              ),
+                                                                              Align(
+                                                                                  alignment:
+                                                                                      Alignment
+                                                                                          .topRight,
+                                                                                  child:
+                                                                                      Container(
+                                                                                    alignment:
+                                                                                        Alignment.center,
+                                                                                    height:
+                                                                                        15,
+                                                                                    width:
+                                                                                        15,
+                                                                                    decoration:
+                                                                                        const BoxDecoration(
+                                                                                      color:
+                                                                                          Colors.red,
+                                                                                      shape:
+                                                                                          BoxShape.circle,
+                                                                                    ),
+                                                                                    child:
+                                                                                        Text(
+                                                                                      unread.toString(),
+                                                                                      style: const TextStyle(
+                                                                                          fontSize: 8,
+                                                                                          color: Colors.white),
+                                                                                    ),
+                                                                                  ))
+                                                                            ]))
+
+                                                                    //  : Icon(choice!.icon, size: 18.0, color: _tabController!.index! == null? null :  _tabController!.index! == choices.indexOf(choice)? darkMode? CurrentTheme.PrimaryColor :CurrentTheme.BackgroundColor : CurrentTheme.NormalTextColor )
+                                                                    : choice.title! ==
+                                                                                'Notif' &&
+                                                                            notifunread > 0
+                                                                        ? Container(
+                                                                            width: 38,
+                                                                            height: 18,
+                                                                            child: Stack(
+                                                                                children: <
+                                                                                    Widget>[
+                                                                                  Positioned
+                                                                                      .fill(
+                                                                                    child: Icon(
+                                                                                        choice.icon,
+                                                                                        size:
+                                                                                            18.0,
+                                                                                        color: _tabController!.index== null
+                                                                                            ? null
+                                                                                            : _tabController!.index== choices.indexOf(choice)
+                                                                                                ? darkMode
+                                                                                                    ? CurrentTheme.PrimaryColor
+                                                                                                    : CurrentTheme.BackgroundColor
+                                                                                                : CurrentTheme.NormalTextColor),
+                                                                                  ),
+                                                                                  Align(
+                                                                                      alignment: Alignment
+                                                                                          .topRight,
+                                                                                      child:
+                                                                                          Container(
+                                                                                        alignment:
+                                                                                            Alignment.center,
+                                                                                        height:
+                                                                                            15,
+                                                                                        width:
+                                                                                            15,
+                                                                                        decoration:
+                                                                                            const BoxDecoration(
+                                                                                          color: Colors.red,
+                                                                                          shape: BoxShape.circle,
+                                                                                        ),
+                                                                                        child:
+                                                                                            Text(
+                                                                                          notifunread.toString(),
+                                                                                          style: const TextStyle(fontSize: 8, color: Colors.white),
+                                                                                        ),
+                                                                                      ))
+                                                                                ]))
+                                                                        : Icon(choice.icon,
+                                                                            size: 21.0,
+                                                                            color: _tabController!
+                                                                                        .index==
+                                                                                    null
                                                                                 ? null
-                                                                                : _tabController!.index== choices.indexOf(choice)
+                                                                                : _tabController!.index==
+                                                                                        choices.indexOf(
+                                                                                            choice)
                                                                                     ? darkMode
-                                                                                        ? CurrentTheme.PrimaryColor
-                                                                                        : CurrentTheme.BackgroundColor
-                                                                                    : CurrentTheme.NormalTextColor),
-                                                                      ),
-                                                                      Align(
-                                                                          alignment: Alignment
-                                                                              .topRight,
-                                                                          child:
-                                                                              Container(
-                                                                            alignment:
-                                                                                Alignment.center,
-                                                                            height:
-                                                                                15,
-                                                                            width:
-                                                                                15,
-                                                                            decoration:
-                                                                                const BoxDecoration(
-                                                                              color: Colors.red,
-                                                                              shape: BoxShape.circle,
-                                                                            ),
-                                                                            child:
-                                                                                Text(
-                                                                              notifunread.toString(),
-                                                                              style: const TextStyle(fontSize: 8, color: Colors.white),
-                                                                            ),
-                                                                          ))
-                                                                    ]))
-                                                            : Icon(choice.icon,
-                                                                size: 21.0,
-                                                                color: _tabController!
-                                                                            .index==
-                                                                        null
-                                                                    ? null
-                                                                    : _tabController!.index==
-                                                                            choices.indexOf(
-                                                                                choice)
-                                                                        ? darkMode
-                                                                            ? CurrentTheme
-                                                                                .PrimaryColor
-                                                                            : CurrentTheme
-                                                                                .BackgroundColor
-                                                                        : CurrentTheme
-                                                                            .NormalTextColor),
-                                                Text(
-                                                  choice.title!,
-                                                  style:
-                                                      const TextStyle(fontSize: 10),
-                                                ),
-                                              ],
-                                            )));
-                                  });
-                            }).toList(),
-                          ),
-                        ),
-                      ),
+                                                                                        ? CurrentTheme
+                                                                                            .PrimaryColor
+                                                                                        : CurrentTheme
+                                                                                            .BackgroundColor
+                                                                                    : CurrentTheme
+                                                                                        .NormalTextColor),
+                                                            Text(
+                                                              choice.title!,
+                                                              style:
+                                                                  const TextStyle(fontSize: 10),
+                                                            ),
+                                                          ],
+                                                        )));
+                                              });
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
 
-                      Expanded(
-                        child: TabBarView(
-                            controller: _tabController, children: _children),
-                      ),
+                                  Expanded(
+                                    child: TabBarView(
+                                        controller: _tabController, children: _children),
+                                  ),
 
-                      // )
-                    ],
-                  ),
-                ],
-              )),
+                                  // )
+                                ],
+                              ),
+                            ],
+                          )
+                 ),
+          ),
         ));
   }
 }

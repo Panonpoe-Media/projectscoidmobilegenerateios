@@ -340,6 +340,7 @@ class APIProvider {
     throwIfNoSuccess(response);
     return response.data;
   }
+
   
    Future getDataRC(String url) async {
     dio!.options.connectTimeout = 15000;
@@ -8021,7 +8022,9 @@ dio!.options.headers = {
     };
    // dio!.options.contentType = ContentType.parse('application/x-www-form-urlencoded');
     Response response = await dio!.post(url, data :'LoginActivity[_trigger_]=1&LoginActivity[user_name]=' + username +  '&LoginActivity[password]='+  pwd +'&LoginActivity[remember]=1');
+    print('res ==' + response.data.toString() );
     throwIfNoSuccess(response);
+
     return response.data;
   }
 
@@ -8054,6 +8057,7 @@ dio!.options.headers = {
 
   void throwIfNoSuccess(Response response) {
     if(response.statusCode! < 200 || response.statusCode! > 299) {
+      print('response ==  ' + response.data.toString());
       throw new HttpException(response);
     }
   }

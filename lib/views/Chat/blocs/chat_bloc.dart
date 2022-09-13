@@ -131,7 +131,11 @@ class ChatBloc  implements YaWebsocketDelegate{
         // socket.send(jsonMessage);
        //  timer.cancel();
        }else{
-        // socket.connect();
+         socket = YaWebsocket();
+         socket.connect(_webSocketURI);
+          if(id != ''){
+             lg(id);
+           }
         // wsSetHandlers();
        //  print('no socket');
 
@@ -2401,7 +2405,7 @@ if(page.contains(nx)){
   @override
   yaWebsocketDelegateOnConnecting(String? tag) {
     // TODO: implement yaWebsocketDelegateOnConnecting
-    print('haloooo');
+   // print('haloooo');
    // setState(() {
    //   _data.add([false, "正在连接 $tag ($_webSocketURI) ，请不要进行其他操作。"]);
   //  });
@@ -2409,9 +2413,13 @@ if(page.contains(nx)){
   }
 
   @override
-  yaWebsocketDelegateOnError(String localizedMessage, String? message, String? tag) {
+  yaWebsocketDelegateOnError(String localizedMessage, String? message, String? tag)async {
     // TODO: implement yaWebsocketDelegateOnError
-    throw UnimplementedError();
+    await socket.close();
+   // if(!closeSocket) {
+   //   await socket.connect(_webSocketURI);
+   // }
+   // throw UnimplementedError();
   }
 
   @override
@@ -3601,7 +3609,7 @@ if(page.contains(nx)){
   @override
   yaWebsocketDelegateOnOpen(String httpStatus, String httpStatusMessage, String? tag) {
     // TODO: implement yaWebsocketDelegateOnOpen
-    print('haloooo');
+   // print('haloooo');
    // throw UnimplementedError();
   }
 }
