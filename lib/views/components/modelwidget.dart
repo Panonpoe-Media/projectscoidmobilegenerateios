@@ -216,11 +216,11 @@ class _ModelDialogState extends State<_ModelDialog> {
       ),
       child: ButtonBar(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text('Cancel'),
             onPressed: _handleCancel,
           ),
-          FlatButton(
+          TextButton(
             child: Text('OK'),
             onPressed: _handleOk,
           ),

@@ -650,7 +650,7 @@ class EditThreadPicState extends State<EditThreadPic>{
     );
   }
 
-
+/*
   void _showToast(BuildContext context, String info) {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(
@@ -661,6 +661,8 @@ class EditThreadPicState extends State<EditThreadPic>{
       ),
     );
   }
+
+ */
 
 
 

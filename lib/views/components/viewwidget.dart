@@ -2165,8 +2165,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                                           _openDownloadedFile(item.task!)
                                               .then((success) {
                                             if (!success) {
-                                              Scaffold.of(context)
-                                                  .showSnackBar(SnackBar(
+                                              ScaffoldMessenger.of(context!).showSnackBar( SnackBar(
                                                   content: Text( widget.platform == TargetPlatform.android?
                                                   'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(item.task!.name!)}'  : 'Cannot open this file' )));
                                             }
@@ -2272,7 +2271,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
                         SizedBox(
                           height: 32.0,
                         ),
-                        FlatButton(
+                        TextButton(
                             onPressed: () {
                               _checkPermission().then((hasGranted) {
                                 setState(() {
@@ -2851,8 +2850,8 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                               _openDownloadedFile(item.task!)
                                   .then((success) {
                                 if (!success) {
-                                  Scaffold.of(context)
-                                      .showSnackBar(SnackBar(
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
                                       content: Text( widget.platform == TargetPlatform.android?
                                       'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(p.basename(item.task!.link!))}'  : 'Cannot open this file' )));
                                 }
@@ -2895,8 +2894,8 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                                     {  _openDownloadedFile(item.task!)
                                                         .then((success) {
                                                       if (!success) {
-                                                        Scaffold.of(context)
-                                                            .showSnackBar(SnackBar(
+                                                        ScaffoldMessenger.of(context).showSnackBar(
+                                                             SnackBar(
                                                             content: Text( widget.platform == TargetPlatform.android?
                                                             'Cannot open this file. \nFilename :  ${item.task!.name}. \nFile folder : Download' + Platform.pathSeparator + ' \nSuggestion : ${appSugestion(p.basename(item.task!.link!))}'  : 'Cannot open this file' )));
                                                       }
@@ -3007,7 +3006,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                       const SizedBox(
                         height: 32.0,
                       ),
-                      FlatButton(
+                      TextButton(
                           onPressed: () {
                             _checkPermission().then((hasGranted) {
                               setState(() {

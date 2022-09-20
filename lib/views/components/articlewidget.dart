@@ -283,11 +283,11 @@ class EditorDialogState extends State<EditorDialog> {
       ),
       child: ButtonBar(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text('Cancel'),
             onPressed: _handleCancel,
           ),
-          FlatButton(
+          TextButton(
             child: Text('OK'),
             onPressed: _handleOk,
           ),
@@ -489,7 +489,7 @@ class EditorDialogState extends State<EditorDialog> {
                  ),
 
                  actions: <Widget>[
-                   new FlatButton(
+                   new TextButton(
                      child: new Text("Save", style: TextStyle(color: Colors.white),),
                      onPressed: _handleOk,
                      color: CurrentTheme.PrimaryColor,
@@ -961,9 +961,15 @@ class _ArticleWidget extends State<ArticleWidget> {
                                                   child: ButtonBar(
                                                     alignment : MainAxisAlignment.end,
                                                     children: <Widget>[
-                                                      RaisedButton(
-                                                        textTheme: ButtonTextTheme.normal,
-                                                        color: Colors.grey,
+                                                      ElevatedButton(
+                                                        //  textTheme: ButtonTextTheme.normal,
+                                                        //  color: Colors.green,
+                                                        style: ButtonStyle(
+                                                          shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                                          backgroundColor:
+                                                          MaterialStateProperty.all<Color>( Colors.grey),
+                                                          overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                                        ),
                                                         child: const Text('Edit ', style: TextStyle(color: Colors.white)),
                                                         onPressed:   ()async {
                                                            _editValue(context);

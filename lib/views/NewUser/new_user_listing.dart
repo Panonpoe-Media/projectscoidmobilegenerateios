@@ -827,11 +827,16 @@ class  PublicNewUserBottomLoader extends StatelessWidget {
                                  alignment: MainAxisAlignment.center,
                                  buttonMinWidth: 0.9 * width,
                                  children: <Widget>[
-                                   RaisedButton(
+                                   ElevatedButton(
                                        child: Text('Register '),
-                                       textColor: Colors.white,
-                                       splashColor : CurrentTheme.ShadeColor,
-                                       color : Color(0xFF037f51),
+                                       style: ButtonStyle(
+                                         textStyle:
+                                         MaterialStateProperty.all<TextStyle>(
+                                             const TextStyle(color: Colors.white)),
+                                         backgroundColor:
+                                         MaterialStateProperty.all<Color>(
+                                             const Color(0xFF037f51)),
+                                       ),
                                        onPressed: ()async{
                                          await AppProvider.getRouter(context)!.navigateTo(context, '/public/_user/register/123/Register');
 
@@ -843,11 +848,16 @@ class  PublicNewUserBottomLoader extends StatelessWidget {
                                  alignment: MainAxisAlignment.center,
                                  buttonMinWidth: 0.9 * width,
                                  children: <Widget>[
-                                   RaisedButton(
+                                   ElevatedButton(
                                        child: Text('Login '),
-                                       textColor: Colors.white,
-                                       splashColor : CurrentTheme.ShadeColor,
-                                       color : Color(0xFF037f51),
+                                       style: ButtonStyle(
+                                         textStyle:
+                                         MaterialStateProperty.all<TextStyle>(
+                                             const TextStyle(color: Colors.white)),
+                                         backgroundColor:
+                                         MaterialStateProperty.all<Color>(
+                                             const Color(0xFF037f51)),
+                                       ),
                                        onPressed: () {
                                          Navigator.pushAndRemoveUntil(
                                          context,

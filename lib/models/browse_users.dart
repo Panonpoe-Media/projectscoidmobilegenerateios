@@ -1911,11 +1911,16 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text('Buy ' + this.model!.model!.price_str),
-                textColor: Colors.white,
-                splashColor: CurrentTheme.ShadeColor,
-                color: Color(0xFF037f51),
+                style: ButtonStyle(
+                  textStyle:
+                  MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(color: Colors.white)),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(
+                      const Color(0xFF037f51)),
+                ),
                 onPressed: () {
                   AppProvider.getRouter(context)!.navigateTo(
                       context,

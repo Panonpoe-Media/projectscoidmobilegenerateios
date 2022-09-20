@@ -402,8 +402,7 @@ class AddToCartBrowseProductsState extends State<AddToCartBrowseProducts>{
                                                           ///
                                                           /// SnackBar show if cart delete
                                                           ///
-                                                          Scaffold.of(context!)
-                                                              .showSnackBar(SnackBar(content: Text('cartDeleted'),duration: Duration(seconds: 2),backgroundColor: Colors.redAccent,));
+                                                          ScaffoldMessenger.of(context!).showSnackBar(const SnackBar(content: Text('cartDeleted'),duration: Duration(seconds: 2),backgroundColor: Colors.redAccent,));
 
                                                         },
                                                         backgroundColor: Color(0xFFFE4A49),
@@ -948,11 +947,16 @@ class AddToCartBrowseProductsState extends State<AddToCartBrowseProducts>{
                                                 alignment: MainAxisAlignment.center,
                                                 buttonMinWidth: 0.9 * width,
                                                 children: <Widget>[
-                                                  RaisedButton(
-                                                      child: snapshot.data['model']['total_tagihan'] ==  0.0 &&   snapshot.data['model']['payable_with_balance'] > 0.0 ? Text('Pay with balance ' +  snapshot.data['model']['payable_with_balance_str'])  :   Text('Pay ' +  snapshot.data['model']['total_tagihan_str']),
-                                                      textColor: Colors.white,
-                                                      splashColor : CurrentTheme.ShadeColor,
-                                                      color : Color(0xFF037f51),
+                                                  ElevatedButton(
+                                                  child: snapshot.data['model']['total_tagihan'] ==  0.0 &&   snapshot.data['model']['payable_with_balance'] > 0.0 ? Text('Pay with balance ' +  snapshot.data['model']['payable_with_balance_str'])  :   Text('Pay ' +  snapshot.data['model']['total_tagihan_str']),
+                                                      style: ButtonStyle(
+                                                        textStyle:
+                                                        MaterialStateProperty.all<TextStyle>(
+                                                            const TextStyle(color: Colors.white)),
+                                                        backgroundColor:
+                                                        MaterialStateProperty.all<Color>(
+                                                          const Color(0xFF037f51),),
+                                                      ),
                                                       onPressed: ()async {
                                                         if(snapshot.data['model']['total_tagihan'] ==  0.0 &&    snapshot.data['model']['payable_with_balance'] > 0.0 ){
                                                           SubModelController paytransfer;

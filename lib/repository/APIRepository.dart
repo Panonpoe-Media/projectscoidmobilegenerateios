@@ -349,7 +349,6 @@ class APIRepository{
     testPost = await _apiProvider.sendData(url, formdata);
     return testPost;
   }
-
     Future getPageView(String url, String id, String title)async{
     var testPost;
     testPost = await _apiProvider.getData(url);

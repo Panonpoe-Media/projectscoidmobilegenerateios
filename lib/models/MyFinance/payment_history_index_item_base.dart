@@ -35,11 +35,17 @@ class ItemIndexPaymentHistoryBase {
 
 	Widget itemButton( int? index, BuildContext context){
 		return(
-				FlatButton(
+				TextButton(
 					child: Text(item!.buttons![index!]!.text!, semanticsLabel: 'Share ${item!.ttl}'),
-					textColor: CurrentTheme.MainAccentColor,
-					splashColor : CurrentTheme.ShadeColor,
-					color : CurrentTheme.SecondaryAccentColor,
+					style: ButtonStyle(
+                                                textStyle:
+                                                MaterialStateProperty.all<TextStyle>(
+                                                    const TextStyle(color: CurrentTheme.MainAccentColor)),
+                                                backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                  CurrentTheme.SecondaryAccentColor),
+                                              ),
+		
 					onPressed: () {
 						AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(item!.buttons![index!]!.url!));
 					},

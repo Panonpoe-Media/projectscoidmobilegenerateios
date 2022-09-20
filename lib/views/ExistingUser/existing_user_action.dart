@@ -124,11 +124,11 @@ class ForgotPasswordExistingUserState extends State<ForgotPasswordExistingUser>{
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () {Navigator.pop(context); Navigator.pop(context);},
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),
@@ -601,11 +601,11 @@ class ResetPasswordExistingUserState extends State<ResetPasswordExistingUser>{
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () {Navigator.pop(context); Navigator.pop(context);},
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),

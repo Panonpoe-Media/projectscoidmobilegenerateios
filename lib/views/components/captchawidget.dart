@@ -400,9 +400,15 @@ class _CaptchaWidget extends State<CaptchaWidget> {
                       child: ButtonBar(
                         alignment : MainAxisAlignment.end,
                         children: <Widget>[
-                          RaisedButton(
-                            textTheme: ButtonTextTheme.normal,
-                            color: Colors.grey,
+                          ElevatedButton(
+                            //  textTheme: ButtonTextTheme.normal,
+                            //  color: Colors.green,
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>( Colors.grey),
+                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                            ),
                             child: Text('Refresh ${widget.oldcaption}', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                             onPressed:   ()async {
                               hint = (await _refreshCaptcha())!;

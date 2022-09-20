@@ -1072,7 +1072,7 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
                       alignment: MainAxisAlignment.center,
                       buttonMinWidth: 0.43 * width,
                       children: <Widget>[
-                        RaisedButton(
+                        ElevatedButton(
                             //  child: Text('Buy ' +   'Rp 100.000.000,-'),
                             child: Row(
                               children: [
@@ -1084,9 +1084,14 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
                                     'Rp ${formatter.apply(this.model!.model!.price.toString().replaceAll('.0', ''))},-'),
                               ],
                             ),
-                            textColor: Colors.white,
-                            splashColor: CurrentTheme.ShadeColor,
-                            color: Color(0xFF037f51),
+                            style: ButtonStyle(
+                              textStyle:
+                              MaterialStateProperty.all<TextStyle>(
+                                  const TextStyle(color: Colors.white)),
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(
+                                  const Color(0xFF037f51)),
+                            ),
                             onPressed: () {
                               if (account!) {
                                 AppProvider.getRouter(context)!.navigateTo(
@@ -1098,7 +1103,7 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
                                     .navigateTo(context, '/login/1');
                               }
                             }),
-                        RaisedButton(
+                        ElevatedButton(
                             child: Row(
                               children: [
                                 Icon(Icons.chat_bubble, size: 18),
@@ -1108,9 +1113,14 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
                                 Text('Chat & Nego '),
                               ],
                             ),
-                            textColor: Colors.white,
-                            splashColor: CurrentTheme.ShadeColor,
-                            color: Color(0xFF037f51),
+                            style: ButtonStyle(
+                              textStyle:
+                              MaterialStateProperty.all<TextStyle>(
+                                  const TextStyle(color: Colors.white)),
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>(
+                                  const Color(0xFF037f51)),
+                            ),
                             onPressed: () {
                               if (account!) {
                                 // cb = ChatBloc();
@@ -1236,11 +1246,16 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
               alignment: MainAxisAlignment.center,
               buttonMinWidth: 0.9 * width,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                     child: Text('Sewa Freelancer Ini'),
-                    textColor: Colors.white,
-                    splashColor: CurrentTheme.ShadeColor,
-                    color: Color(0xFF037f51),
+                    style: ButtonStyle(
+                      textStyle:
+                      MaterialStateProperty.all<TextStyle>(
+                          const TextStyle(color: Colors.white)),
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(
+                          const Color(0xFF037f51)),
+                    ),
                     onPressed: () {
                       if (account!) {
                         AppProvider.getRouter(context)!.navigateTo(
@@ -1476,11 +1491,16 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: Text('Chat & Nego'),
-                textColor: Colors.white,
-                splashColor: CurrentTheme.ShadeColor,
-                color: Color(0xFF037f51),
+                style: ButtonStyle(
+                  textStyle:
+                  MaterialStateProperty.all<TextStyle>(
+                      const TextStyle(color: Colors.white)),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(
+                      const Color(0xFF037f51)),
+                ),
                 onPressed: () {
                   if (idHash!.isNotEmpty) {
                     //  cb = ChatBloc();
@@ -3031,15 +3051,16 @@ class BrowseServicesViewModel extends BrowseServicesViewBase {
           alignment: MainAxisAlignment.center,
           buttonMinWidth: 0.9 * width,
           children: <Widget>[
-            RaisedButton(
+            ElevatedButton(
                 child: userid == this.model!.model!.seller_id
                     ? Text('Jawab Pertanyaan ')
                     : Text('Tanya Seller '),
-                textColor: Colors.black,
-                splashColor: CurrentTheme.ShadeColor,
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.black, width: 1)),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                  backgroundColor:
+                  MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                  overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                ),
                 onPressed: () {
                   if (account!) {
                     AppProvider.getRouter(context)!.navigateTo(

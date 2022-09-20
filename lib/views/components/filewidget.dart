@@ -868,15 +868,27 @@ class _FileStateWidget extends State<FileWidget>{
                                           ),
 
                                            */
-                                          RaisedButton(
-                                            textTheme: ButtonTextTheme.normal,
-                                            color: Colors.grey,
+                                          ElevatedButton(
+                                            //  textTheme: ButtonTextTheme.normal,
+                                            //  color: Colors.green,
+                                            style: ButtonStyle(
+                                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                              backgroundColor:
+                                              MaterialStateProperty.all<Color>( Colors.grey),
+                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                            ),
                                             child: const Text('Upload ', style: TextStyle(color: Colors.white)),
                                             onPressed:   ()async { await _uploadFile(context); },
                                           ),
-                                          RaisedButton(
-                                            textTheme: ButtonTextTheme.normal,
-                                            color: Colors.grey,
+                                          ElevatedButton(
+                                            //  textTheme: ButtonTextTheme.normal,
+                                            //  color: Colors.green,
+                                            style: ButtonStyle(
+                                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                              backgroundColor:
+                                              MaterialStateProperty.all<Color>( Colors.grey),
+                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                            ),
                                             child: const Text('Remove', style: TextStyle(color: Colors.white)),
                                             onPressed:   () {_clearFile(); },
                                           ),

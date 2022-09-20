@@ -568,25 +568,29 @@ class IntroSliderState extends State<IntroSlider>
     if (tabController?.index  == slides!.length! - 1) {
       return Container(width: MediaQuery.of(context).size.width / 4);
     } else {
-      return FlatButton(
+      return TextButton(
         onPressed: onSkipPress,
         child: renderSkipBtn!,
-        color: colorSkipBtn,
-        highlightColor: highlightColorSkipBtn,
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(borderRadiusSkipBtn!)),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+            backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+            overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+          )
       );
     }
   }
 
   Widget buildDoneButton() {
-    return FlatButton(
+    return TextButton(
       onPressed: onDonePress,
       child: renderDoneBtn!,
-      color: colorDoneBtn,
-      highlightColor: highlightColorDoneBtn,
-      shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(borderRadiusDoneBtn!)),
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+        backgroundColor:
+        MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+        overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+      )
     );
   }
 
@@ -594,29 +598,33 @@ class IntroSliderState extends State<IntroSlider>
     if (tabController!.index == 0) {
       return Container(width: MediaQuery.of(context).size.width / 4);
     } else {
-      return FlatButton(
+      return TextButton(
         onPressed: () {
           tabController!.animateTo(tabController!.index - 1);
         },
         child: renderPrevBtn!,
-        color: colorPrevBtn,
-        highlightColor: highlightColorPrevBtn,
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(borderRadiusPrevBtn!)),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+            backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+            overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+          )
       );
     }
   }
 
   Widget buildNextButton() {
-    return FlatButton(
+    return TextButton(
       onPressed: () {
         tabController!.animateTo(tabController!.index + 1);
       },
       child: renderNextBtn!,
-      color: colorDoneBtn,
-      highlightColor: highlightColorDoneBtn,
-      shape: new RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(borderRadiusDoneBtn!)),
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+          backgroundColor:
+          MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+          overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+        )
     );
   }
 

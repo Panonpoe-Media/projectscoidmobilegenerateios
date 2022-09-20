@@ -2089,13 +2089,13 @@ class MyProfileViewModel extends MyProfileViewBase {
             ),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text('Buat Photo Profile'),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -2847,17 +2847,18 @@ class EditProfilePhotoState extends State<EditProfilePhoto>
       ),
     );
   }
-
+/*
   void _showToast(BuildContext context, String? info) {
     final scaffold = Scaffold.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
+    ScaffoldMessenger.of(context!).showSnackBar( SnackBar(
         content: Text(info!),
         action: SnackBarAction(
-            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+            label: 'UNDO', onPressed: ScaffoldMessenger.hideCurrentSnackBar),
       ),
     );
   }
+
+ */
 
   void onProgress(received, total) {
     if (total != -1) {

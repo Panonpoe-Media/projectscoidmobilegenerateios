@@ -538,9 +538,15 @@ Future<DIOProvider> _init()async{
                                       child: ButtonBar(
                                         alignment : MainAxisAlignment.start,
                                         children: <Widget>[
-                                          RaisedButton(
-                                            textTheme: ButtonTextTheme.normal,
-                                            color: Colors.grey,
+                                          ElevatedButton(
+                                            //  textTheme: ButtonTextTheme.normal,
+                                            //  color: Colors.green,
+                                            style: ButtonStyle(
+                                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                              backgroundColor:
+                                              MaterialStateProperty.all<Color>( Colors.grey),
+                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                            ),
                                             child: Text('Upload ${widget.oldcaption}', style: TextStyle(color: Colors.white)),
                                             onPressed:  ()async {
                                              // FocusScope.of(context).unfocus();
@@ -572,9 +578,15 @@ Future<DIOProvider> _init()async{
                                       child: ButtonBar(
                                         alignment : MainAxisAlignment.start,
                                         children: <Widget>[
-                                          RaisedButton(
-                                            textTheme: ButtonTextTheme.normal,
-                                            color: Colors.grey,
+                                          ElevatedButton(
+                                            //  textTheme: ButtonTextTheme.normal,
+                                            //  color: Colors.green,
+                                            style: ButtonStyle(
+                                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                              backgroundColor:
+                                              MaterialStateProperty.all<Color>( Colors.grey),
+                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                            ),
                                             child: Text('Clear', style: TextStyle(color: Colors.white)),
                                             onPressed:   () {
                                              // FocusScope.of(context).unfocus();

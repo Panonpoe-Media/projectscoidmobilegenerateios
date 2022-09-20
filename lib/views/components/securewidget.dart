@@ -236,9 +236,15 @@ class _SecureWidget extends State<SecureWidget> {
                           child: ButtonBar(
                             alignment : MainAxisAlignment.end,
                             children: <Widget>[
-                              RaisedButton(
-                                textTheme: ButtonTextTheme.normal,
-                                color: Colors.green,
+                              ElevatedButton(
+                              //  textTheme: ButtonTextTheme.normal,
+                              //  color: Colors.green,
+                                style: ButtonStyle(
+                                shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                                backgroundColor:
+                                MaterialStateProperty.all<Color>( Colors.green),
+                                overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                ),
                                 child: Text('Verifikasi', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                                 onPressed:   ()async {
                                   hint = await _refreshSecure();
@@ -359,7 +365,7 @@ class _SecureWidget extends State<SecureWidget> {
                   child: ButtonBar(
                     alignment : MainAxisAlignment.end,
                     children: <Widget>[
-                      RaisedButton(
+                      ElevatedButton(
                         textTheme: ButtonTextTheme.normal,
                         color: CurrentTheme.ShadeColor,
                         child: Text('Verifikasi', style: TextStyle(color: CurrentTheme.BackgroundColor)),

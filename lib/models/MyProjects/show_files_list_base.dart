@@ -479,11 +479,17 @@ class ItemShowFilesContent extends StatelessWidget {
 Widget itemShowFilesButton(ItemShowFilesModel destination, int? index, BuildContext context){
 
   return(
-    FlatButton(
+    TextButton(
       child: Text(destination!.item!.buttons![index!]!.text, semanticsLabel: 'Share ${destination!.item!.ttl}'),
-      textColor: CurrentTheme.MainAccentColor,
-      splashColor : CurrentTheme.ShadeColor,
-      color : CurrentTheme.SecondaryAccentColor,
+       style: ButtonStyle(
+                                                textStyle:
+                                                MaterialStateProperty.all<TextStyle>(
+                                                    const TextStyle(color:  CurrentTheme.MainAccentColor)),
+                                                backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                  CurrentTheme.SecondaryAccentColor),
+                                              ),
+
       onPressed: () {
         print('${destination!.item!.buttons![index!]!.url}');
         AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(destination!.item!.buttons![index!]!.url));

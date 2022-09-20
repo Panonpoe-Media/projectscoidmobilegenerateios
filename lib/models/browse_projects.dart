@@ -826,11 +826,16 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.6 * width,
                 children: <Widget>[
-                  RaisedButton(
+                  ElevatedButton(
                       child: Text('Bid This Project'),
-                      textColor: Colors.white,
-                      splashColor: CurrentTheme.ShadeColor,
-                      color: Color(0xFF037f51),
+                      style: ButtonStyle(
+                        textStyle:
+                        MaterialStateProperty.all<TextStyle>(
+                            const TextStyle(color: Colors.white)),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(
+                            const Color(0xFF037f51)),
+                      ),
                       onPressed: () {
                         //print('helooooooooooo');
                         if (account!) {
@@ -1839,7 +1844,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                             alignment: MainAxisAlignment.center,
                             buttonMinWidth: 0.43 * width,
                             children: <Widget>[
-                              RaisedButton(
+                              ElevatedButton(
                                   //  child: Text('Buy ' +   'Rp 100.000.000,-'),
                                   child: Row(
                                     children: [
@@ -1850,9 +1855,14 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                                       Text('Ask Owner'),
                                     ],
                                   ),
-                                  textColor: Colors.white,
-                                  splashColor: CurrentTheme.ShadeColor,
-                                  color: Color(0xFF037f51),
+                                  style: ButtonStyle(
+                                    textStyle:
+                                    MaterialStateProperty.all<TextStyle>(
+                                        const TextStyle(color: Colors.white)),
+                                    backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        const Color(0xFF037f51)),
+                                  ),
                                   onPressed: () {
                                     if (account!) {
                                       AppProvider.getRouter(context)!.navigateTo(
@@ -1864,7 +1874,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                                           .navigateTo(context, '/login/1');
                                     }
                                   }),
-                              RaisedButton(
+                              ElevatedButton(
                                   child: Row(
                                     children: [
                                       Icon(Icons.chat_bubble, size: 18),
@@ -1874,9 +1884,14 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                                       Text('Chat With Owner '),
                                     ],
                                   ),
-                                  textColor: Colors.white,
-                                  splashColor: CurrentTheme.ShadeColor,
-                                  color: Color(0xFF037f51),
+                                  style: ButtonStyle(
+                                    textStyle:
+                                    MaterialStateProperty.all<TextStyle>(
+                                        const TextStyle(color: Colors.white)),
+                                    backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        const Color(0xFF037f51)),
+                                  ),
                                   onPressed: () {
                                     if (account!) {
                                       // _chatBloc =   ChatBloc();

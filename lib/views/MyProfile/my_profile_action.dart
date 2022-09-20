@@ -233,7 +233,7 @@ final RestorableInt _counter = RestorableInt(0);
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () {
 								if(this.model != null){
 								    if([ 'PlaceNewBid'].contains('EditProfile')){
@@ -253,12 +253,12 @@ final RestorableInt _counter = RestorableInt(0);
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
 						
-							 FlatButton(
+							 TextButton(
 								onPressed: () {
 								if(this.model != null){
 								
@@ -1415,7 +1415,7 @@ final RestorableInt _counter = RestorableInt(0);
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () {
 								if(this.model != null){
 								    if([ 'PlaceNewBid'].contains('ChangePassword')){
@@ -1435,12 +1435,12 @@ final RestorableInt _counter = RestorableInt(0);
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
 						
-							 FlatButton(
+							 TextButton(
 								onPressed: () {
 								if(this.model != null){
 								
@@ -1707,7 +1707,7 @@ final RestorableInt _counter = RestorableInt(0);
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () {
 								if(this.model != null){
 								    if([ 'PlaceNewBid'].contains('ChangeEmail')){
@@ -1727,12 +1727,12 @@ final RestorableInt _counter = RestorableInt(0);
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
 						
-							 FlatButton(
+							 TextButton(
 								onPressed: () {
 								if(this.model != null){
 								
@@ -1999,7 +1999,7 @@ final RestorableInt _counter = RestorableInt(0);
 							style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
 						content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
 						actions: <Widget>[
-							FlatButton(
+							TextButton(
 								onPressed: () {
 								if(this.model != null){
 								    if([ 'PlaceNewBid'].contains('ChangeHandphone')){
@@ -2019,12 +2019,12 @@ final RestorableInt _counter = RestorableInt(0);
 								/*Navigator.of(context).pop(true)*/
 								child: Text('Ya'),
 							),
-							FlatButton(
+							TextButton(
 								onPressed: () => Navigator.of(context).pop(false),
 								child: Text('Tidak'),
 							),
 						
-							 FlatButton(
+							 TextButton(
 								onPressed: () {
 								if(this.model != null){
 								

@@ -251,11 +251,19 @@ Widget RButtonActionShowBidsWidget(Button button, BuildContext context,var formK
 	  
   if(button.type == 'custom_filter'){
     return (
-	       RaisedButton(
+	       ElevatedButton(
               child: button.text == 'Order by ...' ?  Text(button.text!) : Text('Order : ' + button.text!),
-              textColor: Colors.white,
-              splashColor : CurrentTheme.ShadeColor,
-              color : Color(0xFF037f51),
+               style: ButtonStyle(
+					  textStyle:
+					  MaterialStateProperty.all<TextStyle>(
+						  const TextStyle(color: Colors.white)),
+					  backgroundColor:
+					  MaterialStateProperty.all<Color>(
+						const Color(0xFF037f51)),
+					),
+			 // textColor: Colors.white,
+             // splashColor : CurrentTheme.ShadeColor,
+             // color : Color(0xFF037f51),
               onPressed: () {
                 showSearchSelectDialog(context: context,
                     caption:button.text,
@@ -270,7 +278,7 @@ Widget RButtonActionShowBidsWidget(Button button, BuildContext context,var formK
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
 		 children: <Widget>[
-             RaisedButton(
+             ElevatedButton(
               child:   Row(
                              children: [
                                Icon(ic, size: 20),
@@ -278,12 +286,18 @@ Widget RButtonActionShowBidsWidget(Button button, BuildContext context,var formK
 							   Text(button.text!),
                              ],
                             ),
-              textColor: button.color == 'green'? Colors.white : Colors.black,
-              color: button.color == 'green'? Color(0xFF037f51) : Colors.white,
-              splashColor :  CurrentTheme.ShadeColor,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(color: button.color == 'green'? Color(0xFF037f51) : Colors.black, width: 1)
-                  ),
+			   style: ButtonStyle(
+					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+					backgroundColor:
+					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+				  ),				
+            // textColor: button.color == 'green'? Colors.white : Colors.black,
+            //  color: button.color == 'green'? Color(0xFF037f51) : Colors.white,
+            //  splashColor :  CurrentTheme.ShadeColor,
+            //  shape: RoundedRectangleBorder(
+             //     side: BorderSide(color: button.color == 'green'? Color(0xFF037f51) : Colors.black, width: 1)
+             //     ),
                 
 
              // color : Color(0xFF037f51),

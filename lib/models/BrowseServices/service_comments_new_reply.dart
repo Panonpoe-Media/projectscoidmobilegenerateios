@@ -149,11 +149,14 @@ class NewReplyServiceCommentsModel extends NewReplyServiceCommentsBase{
 
     if(button.type == 'custom_filter'){
       return (
-          RaisedButton(
+          ElevatedButton(
               child: button.text == 'Order by ...' ?  Text(button.text!) : Text('Order : ' + button.text!),
-              textColor: Colors.white,
-              splashColor : CurrentTheme.ShadeColor,
-              color : Color(0xFF037f51),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                backgroundColor:
+                MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
                     caption:button.text,
@@ -168,7 +171,7 @@ class NewReplyServiceCommentsModel extends NewReplyServiceCommentsBase{
               alignment: MainAxisAlignment.center,
               buttonMinWidth: 0.43 * width,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                     child:   Row(
                       children: [
                         Icon(ic, size: 20),
@@ -176,11 +179,11 @@ class NewReplyServiceCommentsModel extends NewReplyServiceCommentsBase{
                         Text('Tanya Seller'),
                       ],
                     ),
-                    textColor: button.color == 'green'? Colors.white : Colors.black,
-                    color: button.color == 'green'? Color(0xFF037f51) : Colors.white,
-                    splashColor :  CurrentTheme.ShadeColor,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: button.color == 'green'? Color(0xFF037f51) : Colors.black, width: 1)
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                      overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                     ),
 
 
@@ -231,7 +234,7 @@ class NewReplyServiceCommentsModel extends NewReplyServiceCommentsBase{
             alignment: MainAxisAlignment.center,
             buttonMinWidth: 0.43 * width,
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                   child:   Row(
                     children: [
                       Icon(Icons.question_answer, size: 20),
@@ -239,11 +242,11 @@ class NewReplyServiceCommentsModel extends NewReplyServiceCommentsBase{
                       Text('Kirim Pertanyaan'),
                     ],
                   ),
-                  textColor: Colors.white ,
-                  color:  Color(0xFF037f51) ,
-                  splashColor :  CurrentTheme.ShadeColor,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Color(0xFF037f51) , width: 1)
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                   ),
 
 

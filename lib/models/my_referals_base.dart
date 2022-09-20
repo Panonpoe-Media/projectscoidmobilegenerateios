@@ -5422,11 +5422,16 @@ Widget itemMyReferalsButton(ItemMyReferalsModel? destination, int? index, BuildC
   MyReferalsController my_referals; 
   
    if(destination!.item.buttons[index].url.contains('user/my_purchases/download/')){
-		return(	FlatButton(
+		return(	TextButton(
 			  child: Text(destination!.item.buttons[index].text, semanticsLabel: 'Share ${destination!.item.ttl}'),
-			  textColor: CurrentTheme.MainAccentColor,
-			  splashColor : CurrentTheme.ShadeColor,
-			  color : CurrentTheme.SecondaryAccentColor,
+			  style: ButtonStyle(
+                                                textStyle:
+                                                MaterialStateProperty.all<TextStyle>(
+                                                    const TextStyle(color:  CurrentTheme.MainAccentColor)),
+                                                backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                  CurrentTheme.SecondaryAccentColor),
+                                              ),
 			  onPressed: () {
 		  {
                        // controller.animateTo(controller.position.minScrollExtent,
@@ -5455,11 +5460,16 @@ Widget itemMyReferalsButton(ItemMyReferalsModel? destination, int? index, BuildC
 	  ));
 	  }else{
 			  return(
-				FlatButton(
+				TextButton(
 				  child: Text(destination!.item.buttons[index].text, semanticsLabel: 'Share ${destination!.item.ttl}'),
-				  textColor: CurrentTheme.MainAccentColor,
-				  splashColor : CurrentTheme.ShadeColor,
-				  color : CurrentTheme.SecondaryAccentColor,
+	               style: ButtonStyle(
+                                                textStyle:
+                                                MaterialStateProperty.all<TextStyle>(
+                                                    const TextStyle(color:  CurrentTheme.MainAccentColor)),
+                                                backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                  CurrentTheme.SecondaryAccentColor),
+                                              ),
 				  onPressed: () {
 					print('${destination!.item.buttons[index].url}');
 					if(destination!.item.buttons[index].url.contains('show_conversation')){

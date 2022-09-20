@@ -586,12 +586,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                         title: Text('${destination!.item.buttons[2].text}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                         content: Text('Apakah Anda yakin akan ${destination!.item.buttons[2].text}?'),
                                         actions: <Widget>[
-                                          FlatButton(
+                                          TextButton(
                                             onPressed: () => Navigator.of(context).pop(false),
                                             /*Navigator.of(context).pop(true)*/
                                             child: Text('Tidak'),
                                           ),
-                                          FlatButton(
+                                          TextButton(
                                             onPressed: ()async{
                                               SubModelController del;
                                               String delPath = Env.value!.baseUrl! + destination!.item.buttons[2].url ;
@@ -684,12 +684,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                       title: Text('Add to Short listed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                       content: Text('Apakah Anda yakin akan menambahkan bid ini ke short listed?'),
                                       actions: <Widget>[
-                                        FlatButton(
+                                        TextButton(
                                           onPressed: () => Navigator.of(context).pop(false),
                                           /*Navigator.of(context).pop(true)*/
                                           child: Text('Tidak'),
                                         ),
-                                        FlatButton(
+                                        TextButton(
                                           onPressed: ()async{
                                             SubModelController del;
                                             String delPath = Env.value!.baseUrl! + destination!.item.buttons[2].url ;
@@ -721,12 +721,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                 title: Text('Accept Bid', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                 content: Text('Apakah Anda yakin akan menerima bid worker ${destination!.item.worker_user_name}?'),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () => Navigator.of(context).pop(false),
                                     /*Navigator.of(context).pop(true)*/
                                     child: Text('Tidak'),
                                   ),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: ()async{
                                       SubModelController del;
                                       String delPath = Env.value!.baseUrl! + destination!.item.buttons[3].url ;
@@ -737,7 +737,7 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                     },
                                     child: Text('Ya'),
                                   ),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () => Navigator.of(context).pop(false),
                                     /*Navigator.of(context).pop(true)*/
                                     child: Text('Tidak'),
@@ -812,12 +812,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                   title: Text('Add to Short listed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   content: Text('Apakah Anda yakin akan menambahkan bid ini ke short listed?'),
                   actions: <Widget>[
-                    FlatButton(
+                    TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
                       /*Navigator.of(context).pop(true)*/
                       child: Text('Tidak'),
                     ),
-                    FlatButton(
+                    TextButton(
                       onPressed: ()async{
                         SubModelController del;
                         String delPath = Env.value!.baseUrl! + destination!.item.buttons[2].url ;
@@ -1313,12 +1313,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                   title: Text('${destination!.item.buttons[2].text}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                   content: Text('Apakah Anda yakin akan ${destination!.item.buttons[2].text}?'),
                                   actions: <Widget>[
-                                    FlatButton(
+                                    TextButton(
                                       onPressed: () => Navigator.of(context).pop(false),
                                       /*Navigator.of(context).pop(true)*/
                                       child: Text('Tidak'),
                                     ),
-                                    FlatButton(
+                                    TextButton(
                                       onPressed: ()async{
                                         SubModelController del;
                                         String delPath = Env.value!.baseUrl! + destination!.item.buttons[2].url ;
@@ -1413,12 +1413,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                 title: Text('Add to Short listed', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                 content: Text('Apakah Anda yakin akan menambahkan bid ini ke short listed?'),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () => Navigator.of(context).pop(false),
                                     /*Navigator.of(context).pop(true)*/
                                     child: Text('Tidak'),
                                   ),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: ()async{
                                       SubModelController del;
                                       String delPath = Env.value!.baseUrl! + destination!.item.buttons[2].url ;
@@ -1450,12 +1450,12 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                 title: Text('Accept Bid', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                                 content: Text('Apakah Anda yakin akan menerima bid worker ${destination!.item.worker_user_name}?'),
                                 actions: <Widget>[
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () => Navigator.of(context).pop(false),
                                     /*Navigator.of(context).pop(true)*/
                                     child: Text('Tidak'),
                                   ),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: ()async{
                                       SubModelController del;
                                       String delPath = Env.value!.baseUrl! + destination!.item.buttons[3].url ;
@@ -1466,7 +1466,7 @@ class ItemShowBidsContent2 extends StatelessWidget {
                                     },
                                     child: Text('Ya'),
                                   ),
-                                  FlatButton(
+                                  TextButton(
                                     onPressed: () => Navigator.of(context).pop(false),
                                     /*Navigator.of(context).pop(true)*/
                                     child: Text('Tidak'),

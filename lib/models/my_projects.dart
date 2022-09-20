@@ -7598,13 +7598,13 @@ class ItemMyProjectsContent2 extends StatelessWidget {
             buttonMinWidth: 0.9 * width,
             children: <Widget>[
               destination!.item!.project_status_str!.toUpperCase().contains('CODER SELECTED')?
-              RaisedButton(
+              ElevatedButton(
                   child: Text('My Orders'),
-                  textColor: Colors.black,
-                  splashColor : CurrentTheme.ShadeColor,
-                  color : Colors.white,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black, width: 1)
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                   ),
 
                   onPressed: () {
@@ -7632,13 +7632,13 @@ class ItemMyProjectsContent2 extends StatelessWidget {
                   }
               ):
               Container(),
-              RaisedButton(
+              ElevatedButton(
                   child: Text('Chat'),
-                  textColor: Colors.black,
-                  splashColor : CurrentTheme.ShadeColor,
-                  color : Colors.white,
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.black, width: 1)
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                   ),
 
                   onPressed: () {

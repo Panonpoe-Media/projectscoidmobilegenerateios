@@ -229,7 +229,7 @@ class ChangePaymentSettingsMyFinanceState
             ),
             content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (['PlaceNewBid'].contains('ChangePaymentSettings')) {
@@ -264,11 +264,11 @@ class ChangePaymentSettingsMyFinanceState
                 /*Navigator.of(context).pop(true)*/
                 child: Text('Ya'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text('Tidak'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (formKey.currentState!.validate()) {
@@ -1102,7 +1102,7 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
             ),
             content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (['PlaceNewBid'].contains('WithdrawPayment')) {
@@ -1127,11 +1127,11 @@ class WithdrawPaymentMyFinanceState extends State<WithdrawPaymentMyFinance>
                 /*Navigator.of(context).pop(true)*/
                 child: Text('Ya'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text('Tidak'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (formKey.currentState!.validate()) {
@@ -1909,7 +1909,7 @@ class DepositBalanceMyFinanceState extends State<DepositBalanceMyFinance>
             ),
             content: Text('Apakah Anda ingin meninggalkan halaman ini?'),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (['PlaceNewBid'].contains('DepositBalance')) {
@@ -1934,11 +1934,11 @@ class DepositBalanceMyFinanceState extends State<DepositBalanceMyFinance>
                 /*Navigator.of(context).pop(true)*/
                 child: Text('Ya'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: Text('Tidak'),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   if (this.model != null) {
                     if (formKey.currentState!.validate()) {

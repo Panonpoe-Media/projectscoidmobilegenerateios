@@ -228,8 +228,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
               switch (widget.buttonMode) {
                 case ButtonMode.MATERIAL:
                   return Center(
-                      child: FlatButton(
-                    padding: EdgeInsets.all(0),
+                      child: TextButton(
+                   //padding: EdgeInsets.all(0),
                     child: Center(
                       child: Text(
                         recommendedEmojis[index].emoji!,
@@ -439,7 +439,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                 switch (widget.buttonMode) {
                   case ButtonMode.MATERIAL:
                     return Center(
-                        child: FlatButton(
+                        child: TextButton(
                       padding: EdgeInsets.all(0),
                       child: Center(
                         child: Text(
@@ -542,8 +542,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+                 // padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiTxt,
@@ -606,8 +606,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+                 // padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.animals.values.toList()[index],
@@ -671,8 +671,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+               //   padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.foods.values.toList()[index],
@@ -736,8 +736,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+                 // padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.travel.values.toList()[index],
@@ -803,8 +803,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+               //   padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.activities.values.toList()[index],
@@ -868,8 +868,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+              //    padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.objects.values.toList()[index],
@@ -933,8 +933,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+               //   padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.symbols.values.toList()[index],
@@ -998,8 +998,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
             switch (widget.buttonMode) {
               case ButtonMode.MATERIAL:
                 return Center(
-                    child: FlatButton(
-                  padding: EdgeInsets.all(0),
+                    child: TextButton(
+               //   padding: EdgeInsets.all(0),
                   child: Center(
                     child: Text(
                       emojiList.flags.values.toList()[index],
@@ -1081,8 +1081,8 @@ class _EmojiPickerState extends State<EmojiPicker> {
                 switch (widget.buttonMode) {
                   case ButtonMode.MATERIAL:
                     return Center(
-                        child: FlatButton(
-                      padding: EdgeInsets.all(0),
+                        child: TextButton(
+                   //   padding: EdgeInsets.all(0),
                       child: Center(
                         child: Text(
                           allEmojis[allNames.indexOf(recentEmojis[index])],
@@ -1232,13 +1232,19 @@ class _EmojiPickerState extends State<EmojiPicker> {
           height: MediaQuery.of(context).size.width /
               (recommendKeywords == null ? 9 : 10),
           child: widget.buttonMode == ButtonMode.MATERIAL
-              ? FlatButton(
-                  padding: const EdgeInsets.all(0),
-                  color: Colors.transparent,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(0))),
+              ? TextButton(
+            style: ButtonStyle(
+              textStyle:
+              MaterialStateProperty.all<TextStyle>(
+                  const TextStyle(color: Colors.transparent)),
+
+            ),
+               //   padding: const EdgeInsets.all(0),
+                //  color: Colors.transparent,
+                 // shape: const RoundedRectangleBorder(
+                     // borderRadius: BorderRadius.all(Radius.circular(0))),
                   child: Container(
-                    padding: const EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(1),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -1246,13 +1252,13 @@ class _EmojiPickerState extends State<EmojiPicker> {
                         Icon(
                           categoryIconByIndex(categoryValue).icon,
                           //widget.categoryIcons.recentIcon.icon,
-                          size: 22,
+                          size: 17,
                           color: selectedCategory ==
                                   categoryValue //Category.RECENT
                               ? widget.indicatorColor
                               : widget.categoryIcons?.recentIcon.color,
                         ),
-                        const SizedBox(height: 6),
+                        const SizedBox(height: 2),
                         Container(
                           color: selectedCategory == categoryValue
                               ? widget.indicatorColor

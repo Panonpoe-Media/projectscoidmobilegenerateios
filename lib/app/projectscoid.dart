@@ -7208,7 +7208,26 @@ class CartViewState extends State<CartView> with RestorationMixin {
                                                   /// SnackBar show if cart delete
                                                   ///
                                                   Scaffold.of(context)
-                                                      .showSnackBar(const SnackBar(
+                                                      .showBottomSheet<void>(
+                                                      (BuildContext context)
+                                                        {
+                                                          return Container(
+                                                            height: 150,
+                                                            color: Colors.redAccent,
+                                                            child: Center(
+                                                              child: Column(
+                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                mainAxisSize: MainAxisSize.min,
+                                                                children: const <Widget>[
+                                                                  Text('cartDeleted'),
+
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        });
+                                                      /*
+                                                        (const SnackBar(
                                                     content:
                                                         Text('cartDeleted'),
                                                     duration:
@@ -7216,6 +7235,8 @@ class CartViewState extends State<CartView> with RestorationMixin {
                                                     backgroundColor:
                                                         Colors.redAccent,
                                                   ));
+
+                                                       */
                                                 },
                                                 backgroundColor:
                                                     const Color(0xFFFE4A49),
@@ -7856,7 +7877,7 @@ class CartViewState extends State<CartView> with RestorationMixin {
                                         alignment: MainAxisAlignment.center,
                                         buttonMinWidth: 0.9 * width,
                                         children: <Widget>[
-                                          RaisedButton(
+                                          ElevatedButton(
                                               child: snapshot.data['model'][
                                                               'total_tagihan'] ==
                                                           0.0 &&
@@ -7869,9 +7890,15 @@ class CartViewState extends State<CartView> with RestorationMixin {
                                                   : Text('Pay ' +
                                                       snapshot.data['model'][
                                                           'total_tagihan_str']),
-                                              textColor: Colors.white,
-                                              splashColor: CurrentTheme.ShadeColor,
-                                              color: const Color(0xFF037f51),
+                                              style: ButtonStyle(
+                                                textStyle:
+                                                MaterialStateProperty.all<TextStyle>(
+                                                    const TextStyle(color: Colors.white)),
+                                                backgroundColor:
+                                                MaterialStateProperty.all<Color>(
+                                                  const Color(0xFF037f51),),
+                                              ),
+
                                               onPressed: () async {
                                                 if (snapshot.data['model']
                                                             ['total_tagihan'] ==
@@ -11757,13 +11784,13 @@ class _ProjectscoidState extends State<Projectscoid>
     return AlertDialog(
       content: Text("Message body: ${item.itemId}"),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           child: const Text('CLOSE'),
           onPressed: () {
             Navigator.pop(context, false);
           },
         ),
-        FlatButton(
+        TextButton(
           child: const Text('SHOW'),
           onPressed: () {
             Navigator.pop(context, true);
@@ -12185,7 +12212,7 @@ class _ProjectscoidState extends State<Projectscoid>
         ),
         content: const Text('Ingin Log Out?'),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () async {
 
               //await messaging.unsubscribeFromTopic(widget.id!);
@@ -12223,7 +12250,7 @@ class _ProjectscoidState extends State<Projectscoid>
             /*Navigator.of(context).pop(true)*/
             child: const Text('Ya'),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () => Navigator.of(context).pop(false),
             child: const Text('Tidak'),
           ),
@@ -12849,7 +12876,26 @@ class _ProjectscoidState extends State<Projectscoid>
   }
 
   void showInSnackBar(String value, BuildContext context) {
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(value)));
+    Scaffold.of(context) .showBottomSheet<void>(
+            (BuildContext context)
+        {
+          return Container(
+            height: 150,
+            color: Colors.redAccent,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children:  <Widget>[
+                  Text(value),
+
+                ],
+              ),
+            ),
+          );
+        });
+
+    //showSnackBar(SnackBar(content: Text(value)));
   }
 
   void showConnectivity() {
@@ -12872,11 +12918,11 @@ class _ProjectscoidState extends State<Projectscoid>
               ),
               content: const Text('Are you sure you want to close this application?'),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                   onPressed: () => Navigator.of(context).pop(false),
                   child: const Text('No'),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () => exit(0),
                   /*Navigator.of(context).pop(true)*/
                   child: const Text('Yes'),

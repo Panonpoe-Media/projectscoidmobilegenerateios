@@ -337,12 +337,12 @@ class _TagsDialogState extends State<_TagsDialog> {
     final Widget actions = ButtonTheme(
       child: ButtonBar(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             child: Text('Cancel'),
             onPressed: _handleCancel,
           ),
 
-          FlatButton(
+          TextButton(
             child: Text('OK'),
             onPressed: _handleOk,
           ),
@@ -1089,9 +1089,15 @@ class _InlineTagsWidgetState extends State<InlineTagsWidget> {
                       child: ButtonBar(
                         alignment : MainAxisAlignment.end,
                         children: <Widget>[
-                          RaisedButton(
-                            textTheme: ButtonTextTheme.normal,
-                            color: Colors.grey,
+                          ElevatedButton(
+                            //  textTheme: ButtonTextTheme.normal,
+                            //  color: Colors.green,
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                              backgroundColor:
+                              MaterialStateProperty.all<Color>( Colors.grey),
+                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                            ),
                             child: Text('Pilih ${widget.oldcaption}', style: TextStyle(color: Colors.white)),
                             onPressed:   () { _selectTags(context); },
                           ),

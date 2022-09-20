@@ -212,11 +212,11 @@ class _EnumDialogState extends State<_EnumDialog> {
       ),
       child: ButtonBar(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             child: const Text('Cancel'),
             onPressed: _handleCancel,
           ),
-          FlatButton(
+          TextButton(
             child: const Text('OK'),
             onPressed: _handleOk,
           ),

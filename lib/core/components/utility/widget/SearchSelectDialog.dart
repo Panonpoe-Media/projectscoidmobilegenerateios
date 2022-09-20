@@ -173,11 +173,11 @@ class SearchSelectDialogState extends State<SearchSelectDialog> {
     final Widget actions = ButtonTheme(
       child: ButtonBar(
         children: <Widget>[
-          FlatButton(
+          TextButton(
             child: const Text('Cancel'),
             onPressed: _handleCancel,
           ),
-          FlatButton(
+          TextButton(
             child: const Text('OK'),
             onPressed: _handleOk,
           ),

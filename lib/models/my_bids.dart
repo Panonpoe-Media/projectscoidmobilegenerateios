@@ -883,7 +883,7 @@ class ItemMyBidsContent1 extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             buttonMinWidth: 0.43 * width,
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                   child: Row(
                     children: [
                       Icon(Icons.messenger_outline, size: 20, color:Colors.white),
@@ -891,11 +891,11 @@ class ItemMyBidsContent1 extends StatelessWidget {
                       Text('Chat With Owner')
                     ],
                   ),
-                  textColor: Colors.white,
-                  splashColor : CurrentTheme.ShadeColor,
-                  color : Color(0xFF037f51),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Color(0xFF037f51), width: 1)
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                   ),
 
                   onPressed: () async{
