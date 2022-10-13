@@ -85,7 +85,12 @@ class NewReplyServiceCommentsBase{
 	}
 
 
-
+ void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 
 Widget RButtonActionServiceCommentsWidget(Button button, BuildContext context,var formKey, ScrollController controller,  SubModelController service_comments,
  var postServiceCommentsResult, State state, String? sendPath, String? id,  String? title){
@@ -241,16 +246,44 @@ Widget RButtonActionServiceCommentsWidget(Button button, BuildContext context,va
 									formData);
 									final future = service_comments.sendData();
 									future.then((value) {
+									 _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
 									state.setState(() {
 									postServiceCommentsResult = value;
 									});
                                   }).catchError((Error){
+								       if(!Error.toString().contains('302')){
+					                  _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					                    }else{
 										  AppProvider.getRouter(context)!.pop(context);
+										   }
                       });
                       
                                 
 
-                                  } else {}
+                                  } else {
+								 _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

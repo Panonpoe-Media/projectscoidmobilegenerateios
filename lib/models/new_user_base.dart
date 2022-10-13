@@ -16,6 +16,8 @@ import 'package:projectscoid/core/components/helpers/action_helpers.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:projectscoid/app/Env.dart';
+import 'package:projectscoid/app/projectscoid.dart';
+import 'package:projectscoid/app/signin.dart';
 import 'dart:convert';
 import 'image_fields.dart';
 import 'file_fields.dart';
@@ -243,7 +245,7 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
                                     if(Error.toString().contains('302')){
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Periksa Email Anda', content: 'Setelah Anda verifikasi Account melalui email, Anda sudah bisa login ke Projects.co.id')),
+                                        MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Periksa Email dan Klik Link Aktifasi', content: 'Setelah Anda verifikasi Account melalui email, dengan cara mengklik link aktifasi yang ada di email aktifasi yang Anda terima,  Anda sudah bisa login ke Projects.co.id')),
                                             (Route<dynamic> route) => false,
                                       );
                                     }else if(Error.toString().contains('429')){
@@ -288,7 +290,7 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
                if(Error.toString().contains('302')){
                  Navigator.pushAndRemoveUntil(
                    context,
-                   MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Periksa Email Anda', content: 'Setelah Anda verifikasi Account melalui email, Anda sudah bisa login ke Projects.co.id')),
+                   MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Periksa Email dan Klik Link Aktifasi', content: 'Setelah Anda verifikasi Account melalui email, dengan cara mengklik link aktifasi yang ada di email aktifasi yang Anda terima,  Anda sudah bisa login ke Projects.co.id')),
                        (Route<dynamic> route) => false,
                  );
                }else if(Error.toString().contains('429')){
@@ -842,7 +844,10 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
 
                                         Navigator.pushAndRemoveUntil(
                                           context,
-                                          MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
+                                          MaterialPageRoute(builder: (context) => Login(
+                                              application: context, isLogin: true,)),
+
+                                          //  MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
                                               (Route<dynamic> route) => false,
                                         );
 
@@ -888,12 +893,21 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
                                   state.setState(() {
                                   postNewUserResult = value;
                                   });
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Projectscoid(id : id, ctx: context)),
+                                    //  MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
+                                    // MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
+                                        (Route<dynamic> route) => false,
+                                  );
                                   }).catchError((Error){
                        // AppProvider.getRouter(context)!.pop(context);	
                                     if (Error.toString().contains('302')) {
                                       Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
+                                        MaterialPageRoute(builder: (context) => Projectscoid(id : id, ctx: context)),
+                                      //  MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
+                                       // MaterialPageRoute(builder: (context) => rt.LoginLinkView(id :  id!, title: 'Selamat datang di Projects.co.id!', content: 'Mari kita bangun iklim kerja yang nyaman dan saling menguntungkan. Silakan luangkan waktu sebentar untuk mengisi profile Anda. Profil adalah kunci untuk membangun kepercayaan dan reputasi di mata pengguna lainnya. Isilah selengkap dan sejujur mungkin, Anda sudah bisa login ke Projects.co.id')),
                                             (Route<dynamic> route) => false,
                                       );
                                      /*
@@ -1089,7 +1103,10 @@ SpeedDialChild  ButtonActionNewUserWidget(Button button, BuildContext context,va
                          // AppProvider.getRouter(context)!.pop(context);
 									Navigator.pushAndRemoveUntil(
 										context,
-										MaterialPageRoute(builder: (context) => rt.PublicNewUserListing(id :  id!)),
+                     // return Projectscoid(id : snapshot.data.asMap()[0]['user_hash'], ctx: context)
+                      //              MaterialPageRoute(builder: (context) => Projectscoid(id :  id!, ctx: context)
+										MaterialPageRoute(builder: (context) => rt.PublicNewUserListing(id :  id!)
+                    ),
 											(Route<dynamic> route) => false,
 									  );
 					 

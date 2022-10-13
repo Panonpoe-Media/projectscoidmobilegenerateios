@@ -94,6 +94,13 @@ class AddToCartBrowseProductsBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseProductsController browse_products,
 
  var postBrowseProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -264,10 +271,28 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                       if(sendPath!.contains('%s')){
                       final future = browse_products.postAddToCartBrowseProductsWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseProductsResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -278,14 +303,33 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
 										MaterialPageRoute(builder: (context) => rt.PublicBrowseProductsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = browse_products.postAddToCartBrowseProducts();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseProductsResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -307,7 +351,14 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -315,7 +366,16 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

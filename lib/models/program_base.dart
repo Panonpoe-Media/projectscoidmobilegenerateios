@@ -78,6 +78,13 @@ class PromoProgramBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKey, ScrollController controller, ProgramController program,
 
  var postProgramResult, State state, String? sendPath, String? id,  String? title){
@@ -248,10 +255,28 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                       if(sendPath!.contains('%s')){
                       final future = program.postPromoProgramWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postProgramResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -262,14 +287,33 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
 										MaterialPageRoute(builder: (context) => rt.PublicProgramListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = program.postPromoProgram();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postProgramResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -291,7 +335,14 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -299,7 +350,16 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

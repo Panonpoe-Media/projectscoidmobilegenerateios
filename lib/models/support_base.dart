@@ -84,6 +84,13 @@ class ContactFormSupportBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionSupportWidget(Button button, BuildContext context,var formKey, ScrollController controller, SupportController support,
 
  var postSupportResult, State state, String? sendPath, String? id,  String? title){
@@ -254,10 +261,28 @@ Widget RButtonActionSupportWidget(Button button, BuildContext context,var formKe
                       if(sendPath!.contains('%s')){
                       final future = support.postContactFormSupportWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postSupportResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -268,14 +293,33 @@ Widget RButtonActionSupportWidget(Button button, BuildContext context,var formKe
 										MaterialPageRoute(builder: (context) => rt.PublicSupportListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = support.postContactFormSupport();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postSupportResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -297,7 +341,14 @@ Widget RButtonActionSupportWidget(Button button, BuildContext context,var formKe
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -305,7 +356,16 @@ Widget RButtonActionSupportWidget(Button button, BuildContext context,var formKe
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

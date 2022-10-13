@@ -92,10 +92,10 @@ class LoginController extends Bloc<LoginEvent, LoginState> {
         await setUsernamePref(event.username!);
         await setPasswordPref(event.password!);
         authenticationBloc?.add(LoggedIn(token: token));
-
+        print('ada disini boss 1 $token');
        return emit(LoginInitial(username: '',password: ''));
       }else{
-        // print('ada disini boss 1 $token');
+        print('ada disini boss 11 $token');
 
          return emit( LoginFailure(error: token));
         return emit( LoginFailure(error: 'Wrong username or password.'));

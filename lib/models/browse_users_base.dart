@@ -94,6 +94,13 @@ class InviteToBidBrowseUsersBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
 
  var postBrowseUsersResult, State state, String? sendPath, String? id,  String? title){
@@ -264,10 +271,28 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                       if(sendPath!.contains('%s')){
                       final future = browse_users.postInviteToBidBrowseUsersWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -278,14 +303,33 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
 										MaterialPageRoute(builder: (context) => rt.PublicBrowseUsersListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = browse_users.postInviteToBidBrowseUsers();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -307,7 +351,14 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -315,7 +366,16 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -784,6 +844,13 @@ class HireMeBrowseUsersBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
 
  var postBrowseUsersResult, State state, String? sendPath, String? id,  String? title){
@@ -955,10 +1022,28 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                       if(sendPath!.contains('%s')){
                       final future = browse_users.postHireMeBrowseUsersWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -969,14 +1054,33 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
 										MaterialPageRoute(builder: (context) => rt.PublicBrowseUsersListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = browse_users.postHireMeBrowseUsers();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -998,7 +1102,14 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -1006,7 +1117,16 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

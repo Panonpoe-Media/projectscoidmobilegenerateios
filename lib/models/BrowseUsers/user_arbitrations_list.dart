@@ -304,7 +304,7 @@ class ItemArbitrateReviewsContent1 extends StatelessWidget {
         ),
       ),
       SizedBox(height: 15,),
-
+ /*
       Padding(padding: EdgeInsets.symmetric(horizontal: 25),
         child:
 
@@ -330,11 +330,20 @@ class ItemArbitrateReviewsContent1 extends StatelessWidget {
                   ),
       ),
     ),
+
+  */
+
+      // Text(
+      //                                         ' Defendant by ${info!.item.defendant_str} ',
+      //                                         style: descriptionStyle!.copyWith(color: Colors.blue, fontSize: 16, fontWeight:FontWeight.w200 ),
+      //                                       ),
+
+
       SizedBox(height: 10,),
 
       Padding(
           padding: EdgeInsets.only(left: 25),
-          child:           Text('Komplain oleh:', style: descriptionStyle!.copyWith(fontSize: 17, fontWeight: FontWeight.w600),)
+        child:           Text('Penggugat:', style: descriptionStyle!.copyWith(fontSize: 17, fontWeight: FontWeight.w600),)
 
       ),
       //SizedBox(height: 5,),
@@ -505,7 +514,268 @@ class ItemArbitrateReviewsContent1 extends StatelessWidget {
 
 
       ),
-      SizedBox(height: 25,),
+      SizedBox(height: 10,),
+      Padding(
+          padding: EdgeInsets.only(left: 25),
+          child:           Text('Tergugat:', style: descriptionStyle!.copyWith(fontSize: 17, fontWeight: FontWeight.w600),)
+
+      ),
+      //SizedBox(height: 5,),
+      ListTile(
+        isThreeLine: false,
+        contentPadding: EdgeInsets.symmetric(horizontal: 2 , vertical: 2),
+        //enabled: false,
+        onLongPress: () {},
+        //onTap: () => Navigator.of(context).pushNamed('chat'),
+        onTap: () {
+
+        },
+
+
+
+        leading: Container(
+          width: 80,
+          height: 80,
+          /* decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 1,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(.3),
+                        offset: Offset(0, 5),
+                        blurRadius: 10)
+                  ],
+                ), */
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                top: 13,
+                //left: 30,
+                left: 10,
+                child:
+
+
+                GestureDetector(
+                  onTap: (){
+                    AppProvider.getRouter(context)!.navigateTo(
+                        context,
+                        urlToRoute(destination!.item.defendant_url));
+                  },
+                  child :
+                  CircleAvatar(
+                    // radius: 100,
+                    // minRadius: 70,
+                    // maxRadius: 70,
+                    // backgroundImage: AssetImage(widget._jsonMessage['avatar']),
+                    backgroundImage: new NetworkImage(destination!.item.defendant_avatar ?? 'https://www.gravatar.com/avatar/${md5str }' ),
+                  ),
+                ),
+              ),
+
+
+
+            ],
+          ),
+        ),
+
+        /*
+              title: Text(
+                '${widget._jsonMessage['display']}',
+                maxLines: 2,
+                textAlign: TextAlign.justify,
+                overflow: TextOverflow.ellipsis,
+                textHeightBehavior: TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: true),
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+              ),
+
+               */
+        subtitle:
+        Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                //crossAxisAlignment: CrossAxisAlignment.s,
+                children: <Widget>[
+                  Expanded(
+                    child:
+                    GestureDetector(
+                      onTap: (){
+                        AppProvider.getRouter(context)!.navigateTo(
+                            context,
+                            urlToRoute(destination!.item.defendant_url));
+                      },
+                      child:
+                      Padding(
+                        padding: EdgeInsets.only(top: 17, right: 5),
+                        child:Text(destination!.item.defendant_str, overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: descriptionStyle!.copyWith(fontSize: 17,  letterSpacing: 1, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                  ),
+                  //FractionallySizedBox(heightFactor: 0.05),
+
+                  /*
+                  Padding(
+                    padding: EdgeInsets.only(top: 20, right: 5),
+                    child:   Text(timeago.format(destination!.item.date), softWrap: true, overflow: TextOverflow.ellipsis, textAlign: TextAlign.end,
+                      style: TextStyle(fontSize: 12, color: Colors.black, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+
+                  */
+
+
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only( top: 4),
+                child:
+
+                Text(
+                  destination!.item.defendant_response_date  != null ? dateformat.format(destination!.item.defendant_response_date ) + ' ' + 'WIB' : ''
+                  ,
+                  style: descriptionStyle!.copyWith(fontSize: 12 ),
+                ),
+
+              )
+
+
+              /*
+              Html(
+
+
+                  data :"${destination!.item.feedback.replaceAll('<div>', '').replaceAll('<\/div>','').replaceAll('<br>', ' ').replaceAll('<p>', '').replaceAll('<\/p>', '<br>')}",
+                  shrinkWrap: false,
+                  style: {
+                    "html": s.Style(
+                        fontSize: s.FontSize.medium,
+                        textAlign: TextAlign.left,
+                        alignment: Alignment.topLeft,
+                        padding: const EdgeInsets.only(left: 0.0, bottom: 0.0, top: 0),
+                        fontWeight: FontWeight.w100,
+                        lineHeight: 0.0,
+                    ),
+                  }
+
+              ),
+
+               */
+
+              /*
+
+              Container(
+                width: 260,
+                child:HtmlWidget( destination!.item.feedback.replaceAll('<div>', '').replaceAll('<\/div>','').replaceAll('<br>', ' ').replaceAll('<p>', '').replaceAll('<\/p>', '<br>'),
+                    tableCellPadding : EdgeInsets.only(left : 0.0,top: 0.0,bottom: 0.0, right: 5),
+                    bodyPadding : EdgeInsets.only(left : 0.0,top: 0.0,bottom: 0.0, right: 5)),
+              )
+
+               */
+
+            ]
+        ),
+
+
+
+
+
+      ),
+
+      SizedBox(height: 15,),
+       destination!.item.status_id == 7?
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          child :
+          Html(
+            data : 'Tim Arbitrator sudah memberikan keputusan berdasarkan fakta-fakta yang tercatat di sistem kami. ' ,  style: {
+            "html": Style(
+              fontSize: FontSize.large,
+              fontWeight: FontWeight.w800,
+              color: CurrentTheme.DarkAccentColor,
+            ),
+          },
+          ),
+        )
+            :
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              10.0, 10.0, 10.0, 2.0),
+          child: Html( data : 'Kedua belah pihak mencapai kesepakatan bersama penyelesaian arbitrase di mana Worker menerima ${destination!.item.worker_amount_str} (${destination!.item.worker_percentage.toString()}%) dan Owner menerima ${destination!.item.owner_amount_str} (${destination!.item.owner_percentage.toString()}%). Dengan ini arbitrase dinyatakan selesai.<p>Bandung, ${dateformat.format(destination!.item.decided_date)}</p> ' ,
+
+            style: {
+              "html": Style(
+                  color: CurrentTheme.NormalTextColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: FontSize.large,
+                  padding: const EdgeInsets.fromLTRB(
+                      10.0, 10.0, 10.0, 2.0),
+                  backgroundColor: CurrentTheme.PrimaryLightColor
+              ),
+            },
+          ),
+        ),
+        destination!.item.status_id == 7? destination!.item.type_id == 1?
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              10.0, 10.0, 10.0, 2.0),
+          child: Html( data : 'Worker  ${destination!.item.defendant_str} menerima ${destination!.item.worker_amount_str} (${destination!.item.worker_percentage.toString()}%) dan Owner ${destination!.item.plaintiff_str} menerima ${destination!.item.owner_amount_str} (${destination!.item.owner_percentage.toString()}%).<p> Worker ${destination!.item.defendant_str} rating ${destination!.item.worker_rating.toString()}/10 dan point  ${destination!.item.worker_point.toString()} sedangkan Owner ${destination!.item.plaintiff_str} rating ${destination!.item.owner_rating.toString()}/10 dan point  ${destination!.item.owner_point.toString()}. </p>',
+            style: {
+              "html": Style(
+                  color: CurrentTheme.NormalTextColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: FontSize.large,
+                  padding: const EdgeInsets.fromLTRB(
+                      10.0, 10.0, 10.0, 2.0),
+                  backgroundColor: CurrentTheme.PrimaryLightColor
+              ),
+            },
+          ),
+        )
+            :
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              10.0, 10.0, 10.0, 2.0),
+          child: Html( data : 'Worker ${destination!.item.plaintiff_str} menerima ${destination!.item.worker_amount_str} (${destination!.item.worker_percentage.toString()}%) dan Owner ${destination!.item.defendant_str} menerima ${destination!.item.owner_amount_str} (${destination!.item.owner_percentage.toString()}%).<p> Worker ${destination!.item.plaintiff_str}  rating ${destination!.item.worker_rating.toString()}/10 dan point  ${destination!.item.worker_point.toString()} sedangkan Owner ${destination!.item.defendant_str} rating ${destination!.item.owner_rating.toString()}/10 dan point  ${destination!.item.owner_point.toString()}. </p>',
+            style: {
+              "html": Style(
+                  color: CurrentTheme.NormalTextColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: FontSize.large,
+                  padding: const EdgeInsets.fromLTRB(
+                      10.0, 10.0, 10.0, 2.0),
+                  backgroundColor: CurrentTheme.PrimaryLightColor
+              ),
+            },),
+        )
+            : Container(width: 0.0, height: 0.0, color: Colors.white,),
+        destination!.item.status_id == 7?  Padding(
+          padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+          child :
+          Html(
+            data : 'Keputusan ini bersifat final dan tidak dapat diganggu gugat. Dengan demikian project kami nyatakan ditutup.<p>Bandung, ${dateformat.format(destination!.item.decided_date)}</p>'  ,
+            style: {
+              "html": Style(
+                fontSize: FontSize.large,
+                fontWeight: FontWeight.w800,
+                color: CurrentTheme.DarkAccentColor,
+              ),
+            },
+          ),
+        ): Container(width: 0.0, height: 0.0, color: Colors.white,),
+
+
+
+
+
+      SizedBox(height: 20,),
 
     ];
 

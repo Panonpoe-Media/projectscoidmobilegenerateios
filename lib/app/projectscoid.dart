@@ -82,6 +82,7 @@ import 'package:koukicons_jw/news.dart';
 import 'package:koukicons_jw/briefcase.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
+import 'package:flutter/services.dart';
 
 /////////////////////////////
 //        ____         ___ //
@@ -10501,6 +10502,9 @@ class Projectscoid extends StatefulWidget {
   _ProjectscoidState createState() => _ProjectscoidState();
 }
 
+
+
+
 class _ProjectscoidState extends State<Projectscoid>
     with TickerProviderStateMixin, WidgetsBindingObserver, RestorationMixin {
   //final ProjectscoidApplication application;
@@ -12407,7 +12411,7 @@ class _ProjectscoidState extends State<Projectscoid>
       } else {
         if (value != "") {
           print('link aku $value');
-          if (value.contains('/public/  _user/verify/')) {
+          if (value.contains('/public/new_user/verify/')) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -12549,7 +12553,11 @@ class _ProjectscoidState extends State<Projectscoid>
         isLoading = false;
       });
     }
-    ;
+
+    if(id != ''){
+      userID = id!;
+    }
+
     if (userPhoto != '') {
       await setAvaPref(userPhoto);
     }
@@ -12652,6 +12660,49 @@ class _ProjectscoidState extends State<Projectscoid>
     });
   }
 
+  Future<String?> _getDeepLinkPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('deep_link')) {
+      var test = prefs.getString('deep_link');
+      print('aku adalah deep link $test');
+      return test;
+    } else {
+      return '';
+    }
+  }
+
+  _setDeepLinkPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('deep_link')) {
+      print('aku adalah deep link delete');
+      await prefs.setString('deep_link', '');
+      // print('aku adalah deep link $test');
+
+    }
+  }
+
+  Future<String?> _getStringValue(String key, String file) async {
+    final MethodChannel methodChannel = MethodChannel('mypackage.com/shared_pref_migration');
+    return methodChannel.invokeMethod('getStringValue', <String, dynamic>{
+      'key': key,
+      'file': file,
+    });
+  }
+
+  Future<String?> _getDL() async {
+    try {
+      String? rsl = await _getStringValue('deep_link1', 'projects_co');
+      if (kDebugMode) {
+        print('aku ini susah sekali 123 $rsl');
+      }
+      return rsl;
+    } on PlatformException catch (exception) {
+      print(exception);
+      return null;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -12663,6 +12714,24 @@ class _ProjectscoidState extends State<Projectscoid>
     //  onSelectNotification: onSelectNotification);
     logout = SubModelController(AppProvider.getApplication(context),
         Env.value!.baseUrl! + '/public/home/logout', null);
+/*
+    final future1 = _getDL();
+    _getDL();
+    future1?.then((val){
+      if(val != ''){
+        final uri =  Uri.parse(val!);
+        List<String>   ls = uri.pathSegments;
+        if(ls[0] == 'public' && ls[1] == 'new_user'){
+
+        }
+       // _setDeepLinkPrefs();
+      }
+
+
+
+    });
+
+ */
     // AppProvider.getApplication(context).chat =  AppProvider.getApplication(context).chat;
 
 /*

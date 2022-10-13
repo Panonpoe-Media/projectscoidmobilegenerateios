@@ -107,6 +107,13 @@ class AddNewServiceMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -278,10 +285,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postAddNewServiceMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -292,14 +317,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postAddNewServiceMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -321,7 +365,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -329,7 +380,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -891,6 +951,13 @@ class PublishServiceMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -1062,10 +1129,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postPublishServiceMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -1076,14 +1161,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postPublishServiceMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -1105,7 +1209,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -1113,7 +1224,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -1604,6 +1724,13 @@ class BumpUpMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -1775,10 +1902,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postBumpUpMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -1789,14 +1934,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postBumpUpMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -1818,7 +1982,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -1826,7 +1997,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -2318,6 +2498,13 @@ class EditServiceMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -2489,10 +2676,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postEditServiceMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -2503,14 +2708,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postEditServiceMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -2532,7 +2756,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -2540,7 +2771,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -3103,6 +3343,13 @@ class UnlistMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -3274,10 +3521,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postUnlistMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -3288,14 +3553,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postUnlistMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -3317,7 +3601,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -3325,7 +3616,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -3816,6 +4116,13 @@ class ReactivateServiceMyServicesBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyServicesController my_services,
 
  var postMyServicesResult, State state, String? sendPath, String? id,  String? title){
@@ -3987,10 +4294,28 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postReactivateServiceMyServicesWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -4001,14 +4326,33 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyServicesListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_services.postReactivateServiceMyServices();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -4030,7 +4374,14 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -4038,7 +4389,16 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

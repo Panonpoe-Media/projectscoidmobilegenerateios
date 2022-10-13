@@ -131,7 +131,12 @@ class RateWorkerShowThreadBase{
 	}
 
 
-
+ void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 
 Widget RButtonActionShowThreadWidget(Button button, BuildContext context,var formKey, ScrollController controller,  SubModelController show_thread,
  var postShowThreadResult, State state, String? sendPath, String? id,  String? title){
@@ -287,16 +292,44 @@ Widget RButtonActionShowThreadWidget(Button button, BuildContext context,var for
 									formData);
 									final future = show_thread.sendData();
 									future.then((value) {
+									 _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
 									state.setState(() {
 									postShowThreadResult = value;
 									});
                                   }).catchError((Error){
+								       if(!Error.toString().contains('302')){
+					                  _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					                    }else{
 										  AppProvider.getRouter(context)!.pop(context);
+										   }
                       });
                       
                                 
 
-                                  } else {}
+                                  } else {
+								 _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

@@ -174,11 +174,12 @@ final RestorableInt _counter = RestorableInt(0);
                       crossAxisAlignment: CrossAxisAlignment.start,
 					  children: isLoading? [] : [
 					  
-								 Padding(
-									padding: const EdgeInsets.fromLTRB(
-										8.0, 14.0, 8.0, 2.0),
-									child: Html(data: "<h3>Header</h3>"),
-								  ),
+								// Padding(
+								//	padding: const EdgeInsets.fromLTRB(
+								//		8.0, 14.0, 8.0, 2.0),
+								//	child: Html(data: "<h3>Header</h3>"),
+								//  ),
+								SizedBox(height:15),
 								  this.model.editUser(this), 
 								  this.model.editProject(this), 
 								  this.model.editThread(this), 
@@ -189,11 +190,11 @@ final RestorableInt _counter = RestorableInt(0);
 								  this.model.editAttachments(this), 
 								  this.model.editReadByOwner(this), 
 								  this.model.editReadByWorker(this), 
-								 Padding(
-										padding: const EdgeInsets.fromLTRB(
-											8.0, 14.0, 8.0, 2.0),
-										child: Html(data: "<h3>footer</h3>"),
-									   ),
+								// Padding(
+								//		padding: const EdgeInsets.fromLTRB(
+								//			8.0, 14.0, 8.0, 2.0),
+								//		child: Html(data: "<h3>footer</h3>"),
+								//	   ),
 					  Container(
                               height: 30,
                             ),

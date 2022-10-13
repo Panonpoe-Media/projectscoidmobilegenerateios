@@ -120,6 +120,13 @@ class ChangePaymentSettingsMyFinanceBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
@@ -289,10 +296,29 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postChangePaymentSettingsMyFinanceWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
+                     				  
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -307,14 +333,33 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
 						  
 						  
 						   
+					  	  
                       });
                       }else{
                       final future = my_finance.postChangePaymentSettingsMyFinance();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -330,7 +375,16 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -869,6 +923,13 @@ class WithdrawPaymentMyFinanceBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
@@ -1038,10 +1099,29 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postWithdrawPaymentMyFinanceWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
+                     				  
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -1056,14 +1136,33 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
 						  
 						  
 						   
+					  	  
                       });
                       }else{
                       final future = my_finance.postWithdrawPaymentMyFinance();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -1079,7 +1178,16 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              
@@ -1497,6 +1605,13 @@ class DepositBalanceMyFinanceBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
 
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
@@ -1667,24 +1782,61 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postDepositBalanceMyFinanceWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
 						  
 						   
+					  	  
                       });
                       }else{
                       final future = my_finance.postDepositBalanceMyFinance();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 
@@ -1692,7 +1844,16 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

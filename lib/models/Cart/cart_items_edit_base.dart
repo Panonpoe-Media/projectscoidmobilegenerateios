@@ -23,7 +23,12 @@ import '../image_fields.dart';
 import '../file_fields.dart';
 part 'cart_items_edit_base.g.dart';
 
-
+ void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionCartItemsWidget(Button button, BuildContext context,var formKey, ScrollController controller,  SubModelController cart_items,
  var postCartItemsResult, State state, String? sendPath, String? id,  String? title,  var formData){
   var cl;
@@ -184,9 +189,30 @@ Widget RButtonActionCartItemsWidget(Button button, BuildContext context,var form
                         state.setState(() {
                         postCartItemsResult = value;
                         });
-                        });
+                        }).catchError((Error){
+								       if(!Error.toString().contains('302')){
+					                  _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					                    }
+                      });
+						;
 
-                        } else {}
+                        } else {
+						        _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+						}
                   }
                 
              

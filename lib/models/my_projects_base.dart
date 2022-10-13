@@ -113,6 +113,12 @@ class BumpUpMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -276,11 +282,27 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBumpUpMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -295,11 +317,27 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       });
                       }else{
                       final future = my_projects.postBumpUpMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                        // AppProvider.getRouter(context)!.pop(context);	
 							
 
@@ -313,13 +351,22 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -414,7 +461,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -427,9 +474,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -442,7 +489,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataBumpUp(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -457,7 +504,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllBumpUpMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('BumpUp')){
 										my_projects.deleteAllBumpUpMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('BumpUp')){
 										my_projects.deleteAllBumpUpMyProjects(this.model.model.user_id);
 										}else{
@@ -465,42 +512,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBumpUpMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postBumpUpMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -509,11 +597,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'BumpUp';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -523,14 +611,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"project[channels][selection][$count]": "$tag"});
@@ -539,8 +627,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBumpUpResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -552,9 +640,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBumpUpResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -567,18 +655,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBumpUpResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBumpUpResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -595,12 +683,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postBumpUpResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBumpUpResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -629,30 +717,30 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postBumpUpResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewDescription (BuildContext context) {  
+										Widget viewDescription (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.description,
 									caption: 'Description',
 								));}
-										Widget viewAttachments (BuildContext context) {  
+										Widget viewAttachments (BuildContext context) {
 									if(model.model.attachments == null){
 										  return(  StringView(
 										value: '',
 										caption: 'Attachments',
 									));
-									}			
+									}
 									if(model.model.attachments_name != ''){
 									  return(  FileView(
 										value: model.model.attachments_name,
@@ -665,19 +753,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										caption: 'Attachments',
 									));
 									}
-								} 
-										Widget viewFinishDays (BuildContext context) { 
+								}
+										Widget viewFinishDays (BuildContext context) {
 								return(  NumberView(
 									value: model.model.finish_days,
 									caption: 'Finish Days',
 								));}
-										Widget viewBudgetRange (BuildContext context) {  
+										Widget viewBudgetRange (BuildContext context) {
 								return(  StringView(
 									value: model.model.budget_range_str,
 									caption: 'Budget Range'
 								));}
 
-							Widget viewChannels (BuildContext context) {  
+							Widget viewChannels (BuildContext context) {
 							return( 	ChannelRouteTagsWidget(
 										value: model.model.channels_id,
 										caption: '',
@@ -690,8 +778,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										//  Navigator.pushReplacementNamed(context, "/projectscoid");
 										  AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(val!));
 										},
-									  ));} 
- 	
+									  ));}
+
 
 }
 
@@ -709,13 +797,13 @@ class BumpUpMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory BumpUpMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$BumpUpMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BumpUpMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -738,7 +826,7 @@ String?   project_id;
   List<FileField?>? attach_file;
   bool? automatic_send_to_new_bidder;
 
-	
+
 	  ModelActionBroadcastMessageMyProjects(
             this.id,
 			this.project_id,
@@ -762,17 +850,23 @@ String?   project_id;
 class BroadcastMessageMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attach_filelast ;   
+            var attach_filelast ;
 	BroadcastMessageMyProjectsBase(this.json){
 		model = BroadcastMessageMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attach_file!= null) {
-            attach_filelast  = FileField(model.model.attach_file[0].status, model.model.attach_file[0].name, model.model.attach_file[0].size, model.model.attach_file[0].created, 
+            attach_filelast  = FileField(model.model.attach_file[0].status, model.model.attach_file[0].name, model.model.attach_file[0].size, model.model.attach_file[0].created,
             model.model.attach_file[0].modified, model.model.attach_file[0].temp, model.model.attach_file[0].remote, model.model.attach_file[0].dir, model.model.attach_file[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -862,7 +956,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -882,9 +976,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -903,18 +997,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataBroadcastMessage(button.text!, model
-											,  attach_filelast   
+											,  attach_filelast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -936,50 +1030,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBroadcastMessageMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postBroadcastMessageMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -1074,7 +1209,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -1087,9 +1222,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -1102,7 +1237,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataBroadcastMessage(button.text!, model
-											,  attach_filelast   
+											,  attach_filelast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -1117,7 +1252,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllBroadcastMessageMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('BroadcastMessage')){
 										my_projects.deleteAllBroadcastMessageMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('BroadcastMessage')){
 										my_projects.deleteAllBroadcastMessageMyProjects(this.model.model.user_id);
 										}else{
@@ -1125,42 +1260,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBroadcastMessageMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postBroadcastMessageMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -1169,11 +1345,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'BroadcastMessage';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attach_file = '';
   String?   attach_file_last = '';
    if(isEdit && attach_filelast != null){
@@ -1183,7 +1359,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attach_file!= null) {
 		if (model.model.attach_file[0].temp != '') {
 			attach_file = '[{"name":"${model.model.attach_file[0].name}","size":${model.model.attach_file[0].size},"created":${model.model.attach_file[0].date},"modified":${model.model.attach_file[0].date},"temp":"${model.model.attach_file[0].temp}","remote":"${model.model.attach_file[0].remote}","dir":"${model.model.attach_file[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -1193,13 +1369,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[attach_file]": '$attach_file',
   "project[attach_file_lastval]": '$attach_file_last',
   "project[automatic_send_to_new_bidder]": "${model.model.automatic_send_to_new_bidder ? 1 : 0}",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBroadcastMessageResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -1211,9 +1387,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBroadcastMessageResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -1226,18 +1402,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBroadcastMessageResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBroadcastMessageResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -1254,12 +1430,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postBroadcastMessageResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postBroadcastMessageResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -1288,19 +1464,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postBroadcastMessageResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewShortDescription (BuildContext context) { 
+										Widget viewShortDescription (BuildContext context) {
 							    if(model.model.short_description == null || model.model.short_description == ''){
 								return(  Container());
 								}else{
@@ -1308,8 +1484,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.short_description,
 									caption: 'Short Description',
 								));
-								}			
-								
+								}
+
 								}
 										Widget editBroadcastMessage (State state) {
 								  return(
@@ -1336,7 +1512,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attach_file = val;
 									  });
 									},
-								));} 
+								));}
 										Widget editAutomaticSendToNewBidder (State state) {
 								  return(
 								BooleanWidget(
@@ -1349,8 +1525,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									  model.model.automatic_send_to_new_bidder = val;
 									});
 								  },
-								));} 
- 	
+								));}
+
 
 }
 
@@ -1368,13 +1544,13 @@ class BroadcastMessageMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory BroadcastMessageMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$BroadcastMessageMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$BroadcastMessageMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 
@@ -1413,7 +1589,7 @@ String?   project_id;
   List<String?>?  channels_list_str;
 
 
-	
+
 	  ModelActionCreateProjectMyProjects(
             this.id,
 			this.project_id,
@@ -1447,11 +1623,11 @@ String?   project_id;
 class CreateProjectMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	CreateProjectMyProjectsBase(this.json){
 		model = CreateProjectMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
@@ -1462,6 +1638,7 @@ class CreateProjectMyProjectsBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -1552,7 +1729,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -1572,9 +1749,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -1593,7 +1770,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
@@ -1610,11 +1787,11 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataCreateProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -1636,12 +1813,28 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCreateProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
 
 
 
@@ -1651,16 +1844,32 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postCreateProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
 
                                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
 									 Navigator.pushAndRemoveUntil(
@@ -1668,18 +1877,27 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -1774,7 +1992,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -1787,9 +2005,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -1802,7 +2020,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataCreateProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -1817,7 +2035,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllCreateProjectMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('CreateProject')){
 										my_projects.deleteAllCreateProjectMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('CreateProject')){
 										my_projects.deleteAllCreateProjectMyProjects(this.model.model.user_id);
 										}else{
@@ -1825,42 +2043,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCreateProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postCreateProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -1869,11 +2128,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'CreateProject';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -1883,7 +2142,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -1896,8 +2155,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[finish_days]": "${model.model.finish_days }",
  "project[budget_range_min]": "${model.model.budget_range_min }",
   "project[budget_range_max]": "${model.model.budget_range_max }",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"project[channels][selection][$count]": "$tag"});
@@ -1906,8 +2165,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCreateProjectResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -1919,9 +2178,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCreateProjectResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -1934,18 +2193,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCreateProjectResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCreateProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -1962,12 +2221,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postCreateProjectResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCreateProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -1996,13 +2255,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postCreateProjectResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
+   }
+
+
+
+
+
+
 										Widget editTitle (State state) {
 								  return(
 								TitleWidget(
@@ -2041,7 +2300,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attachments = val;
 									  });
 									},
-								));} 
+								));}
 										Widget editFinishDays (State state) {
 								  return(
 								NumberWidget(
@@ -2058,8 +2317,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 								  },
 								));}
 										Widget editBudgetRange (State state) {
-								  return(   
-									RangeWidget( 
+								  return(
+									RangeWidget(
 									  value: model.model.budget_range,
 									  valuemin: model.model.budget_range_min,
 									  valuemax: model.model.budget_range_max,
@@ -2085,10 +2344,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										});
 									  },
 									)
-								  );}  
+								  );}
 										Widget editChannels (State state) {
 								  return(
-								
+
 								InlineTagsWidget(
 								  value: model.model.channels_id,
 								  caption: 'Channels',
@@ -2110,7 +2369,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 								));}
 
 
- 	
+
 
 }
 
@@ -2128,13 +2387,13 @@ class CreateProjectMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory CreateProjectMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$CreateProjectMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CreateProjectMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -2169,7 +2428,7 @@ String?   project_id;
   List<String?>?  channels_list_str;
 
 
-	
+
 	  ModelActionEditDraftMyProjects(
             this.id,
 			this.project_id,
@@ -2203,17 +2462,23 @@ String?   project_id;
 class EditDraftMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	EditDraftMyProjectsBase(this.json){
 		model = EditDraftMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -2303,7 +2568,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -2323,9 +2588,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -2344,18 +2609,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataEditDraft(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -2377,50 +2642,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postEditDraftMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postEditDraftMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -2515,7 +2821,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -2528,9 +2834,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -2543,7 +2849,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataEditDraft(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -2558,7 +2864,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllEditDraftMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('EditDraft')){
 										my_projects.deleteAllEditDraftMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('EditDraft')){
 										my_projects.deleteAllEditDraftMyProjects(this.model.model.user_id);
 										}else{
@@ -2566,42 +2872,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postEditDraftMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postEditDraftMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -2610,11 +2957,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'EditDraft';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -2624,7 +2971,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -2637,8 +2984,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[finish_days]": "${model.model.finish_days }",
  "project[budget_range_min]": "${model.model.budget_range_min }",
   "project[budget_range_max]": "${model.model.budget_range_max }",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"project[channels][selection][$count]": "$tag"});
@@ -2647,8 +2994,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postEditDraftResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -2660,9 +3007,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postEditDraftResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -2675,18 +3022,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postEditDraftResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postEditDraftResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -2703,12 +3050,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postEditDraftResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postEditDraftResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -2737,13 +3084,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postEditDraftResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
+   }
+
+
+
+
+
+
 										Widget editTitle (State state) {
 								  return(
 								TitleWidget(
@@ -2782,7 +3129,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attachments = val;
 									  });
 									},
-								));} 
+								));}
 										Widget editFinishDays (State state) {
 								  return(
 								NumberWidget(
@@ -2799,8 +3146,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 								  },
 								));}
 										Widget editBudgetRange (State state) {
-								  return(   
-									RangeWidget( 
+								  return(
+									RangeWidget(
 									  value: model.model.budget_range,
 									  valuemin: model.model.budget_range_min,
 									  valuemax: model.model.budget_range_max,
@@ -2826,10 +3173,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										});
 									  },
 									)
-								  );}  
+								  );}
 										Widget editChannels (State state) {
 								  return(
-								
+
 								InlineTagsWidget(
 								  value: model.model.channels_id,
 								  caption: 'Channels',
@@ -2851,7 +3198,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 								));}
 
 
- 	
+
 
 }
 
@@ -2869,13 +3216,13 @@ class EditDraftMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory EditDraftMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$EditDraftMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$EditDraftMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -2907,7 +3254,7 @@ String?   project_id;
 	  List<String?>?   channels_str;
 	  List<String?>?  channels_url;
 
-	
+
 	  ModelActionPublishProjectMyProjects(
             this.id,
 			this.project_id,
@@ -2940,17 +3287,23 @@ String?   project_id;
 class PublishProjectMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	PublishProjectMyProjectsBase(this.json){
 		model = PublishProjectMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -3040,7 +3393,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -3060,9 +3413,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -3081,18 +3434,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataPublishProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -3114,50 +3467,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postPublishProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postPublishProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -3252,7 +3646,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -3265,9 +3659,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -3280,7 +3674,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataPublishProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -3295,7 +3689,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllPublishProjectMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('PublishProject')){
 										my_projects.deleteAllPublishProjectMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('PublishProject')){
 										my_projects.deleteAllPublishProjectMyProjects(this.model.model.user_id);
 										}else{
@@ -3303,42 +3697,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postPublishProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postPublishProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -3347,11 +3782,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'PublishProject';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -3361,14 +3796,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"project[channels][selection][$count]": "$tag"});
@@ -3377,8 +3812,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postPublishProjectResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -3390,9 +3825,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postPublishProjectResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -3405,18 +3840,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postPublishProjectResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postPublishProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -3433,12 +3868,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postPublishProjectResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postPublishProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -3467,30 +3902,30 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postPublishProjectResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewDescription (BuildContext context) {  
+										Widget viewDescription (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.description,
 									caption: 'Description',
 								));}
-										Widget viewAttachments (BuildContext context) {  
+										Widget viewAttachments (BuildContext context) {
 									if(model.model.attachments == null){
 										  return(  StringView(
 										value: '',
 										caption: 'Attachments',
 									));
-									}			
+									}
 									if(model.model.attachments_name != ''){
 									  return(  FileView(
 										value: model.model.attachments_name,
@@ -3503,19 +3938,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										caption: 'Attachments',
 									));
 									}
-								} 
-										Widget viewFinishDays (BuildContext context) { 
+								}
+										Widget viewFinishDays (BuildContext context) {
 								return(  NumberView(
 									value: model.model.finish_days,
 									caption: 'Finish Days',
 								));}
-										Widget viewBudgetRange (BuildContext context) {  
+										Widget viewBudgetRange (BuildContext context) {
 								return(  StringView(
 									value: model.model.budget_range_str,
 									caption: 'Budget Range'
 								));}
 
-							Widget viewChannels (BuildContext context) {  
+							Widget viewChannels (BuildContext context) {
 							return( 	ChannelRouteTagsWidget(
 										value: model.model.channels_id,
 										caption: '',
@@ -3528,8 +3963,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										//  Navigator.pushReplacementNamed(context, "/projectscoid");
 										  AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(val!));
 										},
-									  ));} 
- 	
+									  ));}
+
 
 }
 
@@ -3547,13 +3982,13 @@ class PublishProjectMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory PublishProjectMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$PublishProjectMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$PublishProjectMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -3585,7 +4020,7 @@ String?   project_id;
 	  List<String?>?   channels_str;
 	  List<String?>?  channels_url;
 
-	
+
 	  ModelActionCancelProjectMyProjects(
             this.id,
 			this.project_id,
@@ -3618,17 +4053,23 @@ String?   project_id;
 class CancelProjectMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	CancelProjectMyProjectsBase(this.json){
 		model = CancelProjectMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -3718,7 +4159,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -3738,9 +4179,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -3759,18 +4200,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataCancelProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -3792,50 +4233,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postCancelProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -3930,7 +4412,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -3943,9 +4425,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -3958,7 +4440,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataCancelProject(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -3973,7 +4455,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllCancelProjectMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('CancelProject')){
 										my_projects.deleteAllCancelProjectMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('CancelProject')){
 										my_projects.deleteAllCancelProjectMyProjects(this.model.model.user_id);
 										}else{
@@ -3981,42 +4463,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelProjectMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postCancelProjectMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -4025,11 +4548,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'CancelProject';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -4039,14 +4562,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"project[channels][selection][$count]": "$tag"});
@@ -4055,8 +4578,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelProjectResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -4068,9 +4591,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelProjectResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -4083,18 +4606,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelProjectResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -4111,12 +4634,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postCancelProjectResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelProjectResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -4145,30 +4668,30 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postCancelProjectResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewDescription (BuildContext context) {  
+										Widget viewDescription (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.description,
 									caption: 'Description',
 								));}
-										Widget viewAttachments (BuildContext context) {  
+										Widget viewAttachments (BuildContext context) {
 									if(model.model.attachments == null){
 										  return(  StringView(
 										value: '',
 										caption: 'Attachments',
 									));
-									}			
+									}
 									if(model.model.attachments_name != ''){
 									  return(  FileView(
 										value: model.model.attachments_name,
@@ -4181,19 +4704,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										caption: 'Attachments',
 									));
 									}
-								} 
-										Widget viewFinishDays (BuildContext context) { 
+								}
+										Widget viewFinishDays (BuildContext context) {
 								return(  NumberView(
 									value: model.model.finish_days,
 									caption: 'Finish Days',
 								));}
-										Widget viewBudgetRange (BuildContext context) {  
+										Widget viewBudgetRange (BuildContext context) {
 								return(  StringView(
 									value: model.model.budget_range_str,
 									caption: 'Budget Range'
 								));}
 
-							Widget viewChannels (BuildContext context) {  
+							Widget viewChannels (BuildContext context) {
 							return( 	ChannelRouteTagsWidget(
 										value: model.model.channels_id,
 										caption: '',
@@ -4206,8 +4729,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										//  Navigator.pushReplacementNamed(context, "/projectscoid");
 										  AppProvider.getRouter(context)!.navigateTo(context, urlToRoute(val!));
 										},
-									  ));} 
- 	
+									  ));}
+
 
 }
 
@@ -4225,13 +4748,13 @@ class CancelProjectMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory CancelProjectMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$CancelProjectMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CancelProjectMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -4251,7 +4774,7 @@ String?   project_id;
   String?   attachments_name;
   List<FileField?>? attachments;
 
-	
+
 	  ModelActionAcceptOrRejectWorkMyProjects(
             this.id,
 			this.project_id,
@@ -4272,11 +4795,11 @@ String?   project_id;
 class AcceptOrRejectWorkMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	AcceptOrRejectWorkMyProjectsBase(this.json){
 		model = AcceptOrRejectWorkMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
@@ -4295,12 +4818,14 @@ class AcceptOrRejectWorkMyProjectsBase{
 
 
 
+
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
   var ic;
   // final size =MediaQuery.of(context).size;
     double?   width = 400;
+  ic = Icons.send;
   if (button.color == 'green'){
     cl = Colors.green;
   }
@@ -4384,7 +4909,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -4404,9 +4929,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -4425,7 +4950,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
@@ -4440,11 +4965,11 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataAcceptOrRejectWork(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -4466,16 +4991,32 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOrRejectWorkMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
 
 
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-							
+
 									    if(button.text!.contains('Revision')){
 										Navigator.pushAndRemoveUntil(
 										context,
@@ -4491,15 +5032,31 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
 
 
-							  
+
                       });
                       }else{
                       final future = my_projects.postAcceptOrRejectWorkMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                        // AppProvider.getRouter(context)!.pop(context);
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
 										   if(button.text!.contains('Revision')){
@@ -4516,18 +5073,27 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										  );
 										}
 
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -4622,7 +5188,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -4635,9 +5201,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -4650,7 +5216,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataAcceptOrRejectWork(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -4665,7 +5231,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllAcceptOrRejectWorkMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('AcceptOrRejectWork')){
 										my_projects.deleteAllAcceptOrRejectWorkMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('AcceptOrRejectWork')){
 										my_projects.deleteAllAcceptOrRejectWorkMyProjects(this.model.model.user_id);
 										}else{
@@ -4673,13 +5239,29 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOrRejectWorkMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 										 if(button.text!.contains('Revision')){
 										Navigator.pushAndRemoveUntil(
 										context,
@@ -4693,18 +5275,34 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 												(Route<dynamic> route) => false,
 										  );
 										}
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postAcceptOrRejectWorkMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 										if(button.text!.contains('Revision')){
 										Navigator.pushAndRemoveUntil(
 										context,
@@ -4718,13 +5316,22 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 												(Route<dynamic> route) => false,
 										  );
 										}
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -4733,11 +5340,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'AcceptOrRejectWork';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -4747,7 +5354,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -4756,13 +5363,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[message]": "${model.model.message }",
   "project[attachments]": '$attachments',
   "project[attachments_lastval]": '$attachments_last',
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOrRejectWorkResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -4774,9 +5381,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOrRejectWorkResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -4789,18 +5396,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOrRejectWorkResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOrRejectWorkResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -4817,12 +5424,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postAcceptOrRejectWorkResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOrRejectWorkResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -4851,13 +5458,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postAcceptOrRejectWorkResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
+   }
+
+
+
+
+
+
 										Widget editMessage (State state) {
 								  return(
 								ArticleWidget(
@@ -4883,8 +5490,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attachments = val;
 									  });
 									},
-								));} 
- 	
+								));}
+
 
 }
 
@@ -4902,13 +5509,13 @@ class AcceptOrRejectWorkMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory AcceptOrRejectWorkMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$AcceptOrRejectWorkMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$AcceptOrRejectWorkMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -4938,7 +5545,7 @@ String?   project_id;
   String?   testimonial_for_projects_co_id;
   String?   testimony;
 
-	
+
 	  ModelActionRateWorkerMyProjects(
             this.id,
 			this.project_id,
@@ -4980,6 +5587,7 @@ class RateWorkerMyProjectsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -5069,7 +5677,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -5089,9 +5697,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -5110,7 +5718,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
@@ -5127,7 +5735,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataRateWorker(button.text!, model
@@ -5152,31 +5760,63 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateWorkerMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
 
 
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postRateWorkerMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
 
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
 									 Navigator.pushAndRemoveUntil(
@@ -5184,18 +5824,27 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -5290,7 +5939,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -5303,9 +5952,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -5332,7 +5981,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllRateWorkerMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('RateWorker')){
 										my_projects.deleteAllRateWorkerMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('RateWorker')){
 										my_projects.deleteAllRateWorkerMyProjects(this.model.model.user_id);
 										}else{
@@ -5340,42 +5989,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateWorkerMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postRateWorkerMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -5384,11 +6074,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'RateWorker';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
@@ -5398,13 +6088,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[worker_professionalism]": "${model.model.worker_professionalism }",
   "project[worker_feedback]": "${model.model.worker_feedback }",
   "project[testimony]": "${model.model.testimony }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateWorkerResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -5416,9 +6106,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateWorkerResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -5431,18 +6121,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateWorkerResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateWorkerResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -5459,12 +6149,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postRateWorkerResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateWorkerResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -5493,19 +6183,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postRateWorkerResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewShortDescription (BuildContext context) { 
+										Widget viewShortDescription (BuildContext context) {
 							    if(model.model.short_description == null || model.model.short_description == ''){
 								return(  Container());
 								}else{
@@ -5513,16 +6203,16 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.short_description,
 									caption: 'Short Description',
 								));
-								}			
-								
 								}
-										Widget viewAcceptedWorker (BuildContext context) {  
-								return(  
+
+								}
+										Widget viewAcceptedWorker (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.accepted_worker_str,
 									caption: 'Accepted Worker',
 								));
-								 } 
+								 }
 										Widget editWorkQuality (State state) {
 								  return(
 								RatingWidget(
@@ -5601,7 +6291,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -5619,13 +6309,13 @@ class RateWorkerMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory RateWorkerMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$RateWorkerMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RateWorkerMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -5648,7 +6338,7 @@ String?   project_id;
 	  String?   accepted_budget_str;
   int? progress;
 
-	
+
 	  ModelActionReportProgressMyProjects(
             this.id,
 			this.project_id,
@@ -5678,6 +6368,12 @@ class ReportProgressMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -5767,7 +6463,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -5787,9 +6483,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -5808,14 +6504,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataReportProgress(button.text!, model
@@ -5840,50 +6536,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportProgressMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postReportProgressMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -5978,7 +6715,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -5991,9 +6728,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -6020,7 +6757,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllReportProgressMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('ReportProgress')){
 										my_projects.deleteAllReportProgressMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('ReportProgress')){
 										my_projects.deleteAllReportProgressMyProjects(this.model.model.user_id);
 										}else{
@@ -6028,42 +6765,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportProgressMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postReportProgressMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -6072,22 +6850,22 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'ReportProgress';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
   "project[progress]": "${model.model.progress }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportProgressResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -6099,9 +6877,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportProgressResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -6114,18 +6892,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportProgressResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportProgressResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -6142,12 +6920,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postReportProgressResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportProgressResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -6176,29 +6954,29 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postReportProgressResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewDescription (BuildContext context) {  
+										Widget viewDescription (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.description,
 									caption: 'Description',
 								));}
-										Widget viewFinishDays (BuildContext context) { 
+										Widget viewFinishDays (BuildContext context) {
 								return(  NumberView(
 									value: model.model.finish_days,
 									caption: 'Finish Days',
 								));}
-										Widget viewAcceptedBudget (BuildContext context) {  
+										Widget viewAcceptedBudget (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.accepted_budget,
 									caption: 'Accepted Budget',
@@ -6218,7 +6996,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -6236,13 +7014,13 @@ class ReportProgressMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory ReportProgressMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$ReportProgressMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ReportProgressMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -6262,7 +7040,7 @@ String?   project_id;
   String?   attachments_name;
   List<FileField?>? attachments;
 
-	
+
 	  ModelActionWeeklyReportMyProjects(
             this.id,
 			this.project_id,
@@ -6283,17 +7061,23 @@ String?   project_id;
 class WeeklyReportMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	WeeklyReportMyProjectsBase(this.json){
 		model = WeeklyReportMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -6383,7 +7167,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
         ElevatedButton(
@@ -6403,9 +7187,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -6424,18 +7208,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataWeeklyReport(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -6457,50 +7241,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postWeeklyReportMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postWeeklyReportMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -6595,7 +7420,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -6608,9 +7433,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -6623,7 +7448,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataWeeklyReport(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -6638,7 +7463,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllWeeklyReportMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('WeeklyReport')){
 										my_projects.deleteAllWeeklyReportMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('WeeklyReport')){
 										my_projects.deleteAllWeeklyReportMyProjects(this.model.model.user_id);
 										}else{
@@ -6646,42 +7471,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postWeeklyReportMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postWeeklyReportMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -6690,11 +7556,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'WeeklyReport';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -6704,7 +7570,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -6713,13 +7579,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[message]": "${model.model.message }",
   "project[attachments]": '$attachments',
   "project[attachments_lastval]": '$attachments_last',
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postWeeklyReportResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -6731,9 +7597,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postWeeklyReportResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -6746,18 +7612,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postWeeklyReportResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postWeeklyReportResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -6774,12 +7640,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postWeeklyReportResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postWeeklyReportResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -6808,13 +7674,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postWeeklyReportResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
+   }
+
+
+
+
+
+
 										Widget editMessage (State state) {
 								  return(
 								ArticleWidget(
@@ -6840,8 +7706,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attachments = val;
 									  });
 									},
-								));} 
- 	
+								));}
+
 
 }
 
@@ -6859,13 +7725,13 @@ class WeeklyReportMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory WeeklyReportMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$WeeklyReportMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$WeeklyReportMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -6885,7 +7751,7 @@ String?   project_id;
   String?   attachments_name;
   List<FileField?>? attachments;
 
-	
+
 	  ModelActionReportDoneMyProjects(
             this.id,
 			this.project_id,
@@ -6906,17 +7772,23 @@ String?   project_id;
 class ReportDoneMyProjectsBase{
 	var model;
 	Map<String, dynamic> json;
-            var attachmentslast ;   
+            var attachmentslast ;
 	ReportDoneMyProjectsBase(this.json){
 		model = ReportDoneMyProjectsSuperBase.fromJson(this.json);
        if (model.model.attachments!= null) {
-            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created, 
+            attachmentslast  = FileField(model.model.attachments[0].status, model.model.attachments[0].name, model.model.attachments[0].size, model.model.attachments[0].created,
             model.model.attachments[0].modified, model.model.attachments[0].temp, model.model.attachments[0].remote, model.model.attachments[0].dir, model.model.attachments[0].date ) ;
        }
 	}
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -7006,7 +7878,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -7026,9 +7898,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -7047,18 +7919,18 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataReportDone(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects = MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -7080,50 +7952,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportDoneMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postReportDoneMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -7218,7 +8131,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -7231,9 +8144,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -7246,7 +8159,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataReportDone(button.text!, model
-											,  attachmentslast   
+											,  attachmentslast
                      					  );
                                   my_projects =  MyProjectsController(AppProvider.getApplication(context),
                                   sendPath,
@@ -7261,7 +8174,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllReportDoneMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('ReportDone')){
 										my_projects.deleteAllReportDoneMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('ReportDone')){
 										my_projects.deleteAllReportDoneMyProjects(this.model.model.user_id);
 										}else{
@@ -7269,42 +8182,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportDoneMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postReportDoneMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -7313,11 +8267,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'ReportDone';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
 	String?   attachments = '';
   String?   attachments_last = '';
    if(isEdit && attachmentslast != null){
@@ -7327,7 +8281,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
 			attachments = '[{"name":"${model.model.attachments[0].name}","size":${model.model.attachments[0].size},"created":${model.model.attachments[0].date},"modified":${model.model.attachments[0].date},"temp":"${model.model.attachments[0].temp}","remote":"${model.model.attachments[0].remote}","dir":"${model.model.attachments[0].dir}"}]';
-	     
+
   	}
 	}
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
@@ -7336,13 +8290,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[message]": "${model.model.message }",
   "project[attachments]": '$attachments',
   "project[attachments_lastval]": '$attachments_last',
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportDoneResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -7354,9 +8308,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportDoneResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -7369,18 +8323,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportDoneResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportDoneResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -7397,12 +8351,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postReportDoneResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postReportDoneResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -7431,13 +8385,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postReportDoneResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
+   }
+
+
+
+
+
+
 										Widget editMessage (State state) {
 								  return(
 								ArticleWidget(
@@ -7463,8 +8417,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										model.model.attachments = val;
 									  });
 									},
-								));} 
- 	
+								));}
+
 
 }
 
@@ -7482,13 +8436,13 @@ class ReportDoneMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory ReportDoneMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$ReportDoneMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ReportDoneMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -7518,7 +8472,7 @@ String?   project_id;
   String?   testimonial_for_projects_co_id;
   String?   testimony;
 
-	
+
 	  ModelActionRateOwnerMyProjects(
             this.id,
 			this.project_id,
@@ -7555,6 +8509,12 @@ class RateOwnerMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -7644,7 +8604,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -7664,9 +8624,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -7685,14 +8645,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataRateOwner(button.text!, model
@@ -7717,50 +8677,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateOwnerMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postRateOwnerMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -7855,7 +8856,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -7868,9 +8869,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -7897,7 +8898,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllRateOwnerMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('RateOwner')){
 										my_projects.deleteAllRateOwnerMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('RateOwner')){
 										my_projects.deleteAllRateOwnerMyProjects(this.model.model.user_id);
 										}else{
@@ -7905,42 +8906,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateOwnerMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postRateOwnerMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -7949,11 +8991,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'RateOwner';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
@@ -7963,13 +9005,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[owner_professionalism]": "${model.model.owner_professionalism }",
   "project[owner_feedback]": "${model.model.owner_feedback }",
   "project[testimony]": "${model.model.testimony }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateOwnerResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -7981,9 +9023,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateOwnerResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -7996,18 +9038,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateOwnerResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateOwnerResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -8024,12 +9066,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postRateOwnerResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRateOwnerResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -8058,19 +9100,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postRateOwnerResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewShortDescription (BuildContext context) { 
+										Widget viewShortDescription (BuildContext context) {
 							    if(model.model.short_description == null || model.model.short_description == ''){
 								return(  Container());
 								}else{
@@ -8078,16 +9120,16 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.short_description,
 									caption: 'Short Description',
 								));
-								}			
-								
 								}
-										Widget viewOwner (BuildContext context) {  
-								return(  
+
+								}
+										Widget viewOwner (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.owner_str,
 									caption: 'Owner',
 								));
-								 } 
+								 }
 										Widget editClarity (State state) {
 								  return(
 								RatingWidget(
@@ -8166,7 +9208,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -8184,13 +9226,13 @@ class RateOwnerMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory RateOwnerMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$RateOwnerMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RateOwnerMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -8216,7 +9258,7 @@ String?   project_id;
   double?   worker_receives;
   double?   owner_receives;
 
-	
+
 	  ModelActionFileArbitrationMyProjects(
             this.id,
 			this.project_id,
@@ -8249,6 +9291,12 @@ class FileArbitrationMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -8338,7 +9386,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -8358,9 +9406,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -8379,14 +9427,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataFileArbitration(button.text!, model
@@ -8418,7 +9466,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       //  } else {
                         final future = my_projects
                             .postFileArbitrationMyProjectsWithID();
-                        future.then((value) {
+                         future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                           // state.setState(() {
                           postMyProjectsResult = value;
                           //  });
@@ -8442,7 +9498,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       //  }else {
                           final future = my_projects
                               .postFileArbitrationMyProjects();
-                          future.then((value) {
+                           future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                             //state.setState(() {
                             postMyProjectsResult = value;
                             //});
@@ -8459,15 +9523,24 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                           });
                        // }
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -8562,7 +9635,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -8575,9 +9648,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -8604,7 +9677,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllFileArbitrationMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('FileArbitration')){
 										my_projects.deleteAllFileArbitrationMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('FileArbitration')){
 										my_projects.deleteAllFileArbitrationMyProjects(this.model.model.user_id);
 										}else{
@@ -8612,42 +9685,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postFileArbitrationMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postFileArbitrationMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -8656,11 +9770,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'FileArbitration';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
@@ -8668,13 +9782,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[your_wishes]": "${model.model.your_wishes }",
   "project[worker_receives]": "${model.model.worker_receives }",
   "project[owner_receives]": "${model.model.owner_receives }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postFileArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -8686,9 +9800,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postFileArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -8701,18 +9815,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postFileArbitrationResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postFileArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -8729,12 +9843,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postFileArbitrationResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postFileArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -8763,14 +9877,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postFileArbitrationResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewProjectTitle (BuildContext context) { 
+   }
+
+
+
+
+
+
+										Widget viewProjectTitle (BuildContext context) {
 							    if(model.model.project_title == null || model.model.project_title == ''){
 								return(  Container());
 								}else{
@@ -8778,10 +9892,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_title,
 									caption: 'Project Title',
 								));
-								}			
-								
 								}
-										Widget viewProjectOwner (BuildContext context) { 
+
+								}
+										Widget viewProjectOwner (BuildContext context) {
 							    if(model.model.project_owner == null || model.model.project_owner == ''){
 								return(  Container());
 								}else{
@@ -8789,10 +9903,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_owner,
 									caption: 'Project Owner',
 								));
-								}			
-								
 								}
-										Widget viewProjectWorker (BuildContext context) { 
+
+								}
+										Widget viewProjectWorker (BuildContext context) {
 							    if(model.model.project_worker == null || model.model.project_worker == ''){
 								return(  Container());
 								}else{
@@ -8800,8 +9914,8 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_worker,
 									caption: 'Project Worker',
 								));
-								}			
-								
+								}
+
 								}
 										Widget editProblemDescription (State state) {
 								  return(
@@ -8829,7 +9943,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
-										Widget viewBudget (BuildContext context) {  
+										Widget viewBudget (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.budget,
 									caption: 'Budget',
@@ -8864,7 +9978,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -8882,13 +9996,13 @@ class FileArbitrationMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory FileArbitrationMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$FileArbitrationMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$FileArbitrationMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -8911,7 +10025,7 @@ String?   project_id;
   double?   worker_receives;
   double?   owner_receives;
 
-	
+
 	  ModelActionNewOfferMyProjects(
             this.id,
 			this.project_id,
@@ -8941,6 +10055,12 @@ class NewOfferMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -9030,7 +10150,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -9050,9 +10170,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -9071,7 +10191,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
@@ -9121,7 +10241,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                      // } else {
                                         final future = my_projects
                                             .postNewOfferMyProjectsWithID();
-                                        future.then((value) {
+                                         future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                           state.setState(() {
                                             postMyProjectsResult = value;
                                             print('error3 ${value.toString()}');
@@ -9166,7 +10294,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                      // } else{
                                       final future = my_projects
                                           .postNewOfferMyProjects();
-                                      future.then((value) {
+                                       future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                         state.setState(() {
                                           postMyProjectsResult = value;
                                         });
@@ -9186,15 +10322,24 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                       });
                                    // }
                                   }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -9289,7 +10434,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -9302,9 +10447,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -9331,7 +10476,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllNewOfferMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('NewOffer')){
 										my_projects.deleteAllNewOfferMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('NewOffer')){
 										my_projects.deleteAllNewOfferMyProjects(this.model.model.user_id);
 										}else{
@@ -9339,42 +10484,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postNewOfferMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postNewOfferMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -9383,23 +10569,23 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'NewOffer';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
   "project[worker_receives]": "${model.model.worker_receives }",
   "project[owner_receives]": "${model.model.owner_receives }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postNewOfferResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -9411,9 +10597,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postNewOfferResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -9426,18 +10612,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postNewOfferResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postNewOfferResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -9454,12 +10640,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postNewOfferResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postNewOfferResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -9488,14 +10674,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postNewOfferResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewProjectTitle (BuildContext context) { 
+   }
+
+
+
+
+
+
+										Widget viewProjectTitle (BuildContext context) {
 							    if(model.model.project_title == null || model.model.project_title == ''){
 								return(  Container());
 								}else{
@@ -9503,10 +10689,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_title,
 									caption: 'Project Title',
 								));
-								}			
-								
 								}
-										Widget viewProjectOwner (BuildContext context) { 
+
+								}
+										Widget viewProjectOwner (BuildContext context) {
 							    if(model.model.project_owner == null || model.model.project_owner == ''){
 								return(  Container());
 								}else{
@@ -9514,10 +10700,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_owner,
 									caption: 'Project Owner',
 								));
-								}			
-								
 								}
-										Widget viewProjectWorker (BuildContext context) { 
+
+								}
+										Widget viewProjectWorker (BuildContext context) {
 							    if(model.model.project_worker == null || model.model.project_worker == ''){
 								return(  Container());
 								}else{
@@ -9525,10 +10711,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_worker,
 									caption: 'Project Worker',
 								));
-								}			
-								
 								}
-										Widget viewBudget (BuildContext context) {  
+
+								}
+										Widget viewBudget (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.budget,
 									caption: 'Budget',
@@ -9563,7 +10749,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -9581,13 +10767,13 @@ class NewOfferMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory NewOfferMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$NewOfferMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$NewOfferMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -9627,7 +10813,7 @@ String?   bid_id;
 	  double?   owner_receives;
 	  String?   owner_receives_str;
 
-	
+
 	  ModelActionAcceptOfferMyProjects(
             this.id,
 			this.bid_id,
@@ -9674,6 +10860,12 @@ class AcceptOfferMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -9763,7 +10955,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -9783,9 +10975,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -9804,14 +10996,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataAcceptOffer(button.text!, model
@@ -9836,50 +11028,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOfferMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postAcceptOfferMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -9974,7 +11207,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -9987,9 +11220,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -10016,7 +11249,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllAcceptOfferMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('AcceptOffer')){
 										my_projects.deleteAllAcceptOfferMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('AcceptOffer')){
 										my_projects.deleteAllAcceptOfferMyProjects(this.model.model.user_id);
 										}else{
@@ -10024,42 +11257,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOfferMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postAcceptOfferMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -10068,21 +11342,21 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'AcceptOffer';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOfferResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -10094,9 +11368,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOfferResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -10109,18 +11383,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOfferResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOfferResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -10137,12 +11411,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postAcceptOfferResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postAcceptOfferResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -10171,56 +11445,56 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postAcceptOfferResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewProject (BuildContext context) {  
-								return(  
+   }
+
+
+
+
+
+
+										Widget viewProject (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.project_str,
 									caption: 'Project',
 								));
-								 } 
-										Widget viewRequestedDate (BuildContext context) {  
+								 }
+										Widget viewRequestedDate (BuildContext context) {
 								return(  DateTimeView(
 									value: model.model.requested_date,
 									caption: 'Requested Date',
-								));} 
+								));}
 									Widget viewType (BuildContext context) {
-								 return( 
+								 return(
 								   StringView(
 									value: model.model.type_str,
 									caption: 'Type',
-								));} 
-										Widget viewPlaintiff (BuildContext context) {  
-								return(  
+								));}
+										Widget viewPlaintiff (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.plaintiff_str,
 									caption: 'Plaintiff',
 								));
-								 } 
-										Widget viewDefendant (BuildContext context) {  
-								return(  
+								 }
+										Widget viewDefendant (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.defendant_str,
 									caption: 'Defendant',
 								));
-								 } 
-										Widget viewWorkerReceives (BuildContext context) {  
+								 }
+										Widget viewWorkerReceives (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.worker_receives,
 									caption: 'Worker Receives',
 								));}
-										Widget viewOwnerReceives (BuildContext context) {  
+										Widget viewOwnerReceives (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.owner_receives,
 									caption: 'Owner Receives',
 								));}
- 	
+
 
 }
 
@@ -10238,13 +11512,13 @@ class AcceptOfferMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory AcceptOfferMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$AcceptOfferMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$AcceptOfferMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -10278,7 +11552,7 @@ String?   project_id;
   double?   worker_receives;
   double?   owner_receives;
 
-	
+
 	  ModelActionRespondArbitrationMyProjects(
             this.id,
 			this.project_id,
@@ -10319,6 +11593,12 @@ class RespondArbitrationMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -10408,7 +11688,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -10428,9 +11708,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -10449,14 +11729,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataRespondArbitration(button.text!, model
@@ -10486,7 +11766,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                        // } else {
                           final future = my_projects
                               .postRespondArbitrationMyProjectsWithID();
-                          future.then((value) {
+                           future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                             state.setState(() {
                               postMyProjectsResult = value;
                             });
@@ -10528,7 +11816,15 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                        // } else {
                           final future = my_projects
                               .postRespondArbitrationMyProjects();
-                          future.then((value) {
+                           future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                             state.setState(() {
                               postMyProjectsResult = value;
                             });
@@ -10546,13 +11842,22 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       //  }
                       }
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -10647,7 +11952,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -10660,9 +11965,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -10689,7 +11994,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllRespondArbitrationMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('RespondArbitration')){
 										my_projects.deleteAllRespondArbitrationMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('RespondArbitration')){
 										my_projects.deleteAllRespondArbitrationMyProjects(this.model.model.user_id);
 										}else{
@@ -10697,42 +12002,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRespondArbitrationMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postRespondArbitrationMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -10741,11 +12087,11 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'RespondArbitration';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
@@ -10753,13 +12099,13 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
   "project[your_wishes]": "${model.model.your_wishes }",
   "project[worker_receives]": "${model.model.worker_receives }",
   "project[owner_receives]": "${model.model.owner_receives }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRespondArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -10771,9 +12117,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRespondArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -10786,18 +12132,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRespondArbitrationResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRespondArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -10814,12 +12160,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postRespondArbitrationResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postRespondArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -10848,14 +12194,14 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postRespondArbitrationResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewProjectTitle (BuildContext context) { 
+   }
+
+
+
+
+
+
+										Widget viewProjectTitle (BuildContext context) {
 							    if(model.model.project_title == null || model.model.project_title == ''){
 								return(  Container());
 								}else{
@@ -10863,10 +12209,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_title,
 									caption: 'Project Title',
 								));
-								}			
-								
 								}
-										Widget viewProjectOwner (BuildContext context) { 
+
+								}
+										Widget viewProjectOwner (BuildContext context) {
 							    if(model.model.project_owner == null || model.model.project_owner == ''){
 								return(  Container());
 								}else{
@@ -10874,10 +12220,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_owner,
 									caption: 'Project Owner',
 								));
-								}			
-								
 								}
-										Widget viewProjectWorker (BuildContext context) { 
+
+								}
+										Widget viewProjectWorker (BuildContext context) {
 							    if(model.model.project_worker == null || model.model.project_worker == ''){
 								return(  Container());
 								}else{
@@ -10885,27 +12231,27 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.project_worker,
 									caption: 'Project Worker',
 								));
-								}			
-								
 								}
-										Widget viewRequestedDate (BuildContext context) {  
+
+								}
+										Widget viewRequestedDate (BuildContext context) {
 								return(  DateTimeView(
 									value: model.model.requested_date,
 									caption: 'Requested Date',
-								));} 
-										Widget viewPlaintiff (BuildContext context) {  
-								return(  
+								));}
+										Widget viewPlaintiff (BuildContext context) {
+								return(
 								   StringView(
 									value: model.model.plaintiff_str,
 									caption: 'Plaintiff',
 								));
-								 } 
-										Widget viewPlaintiffDescription (BuildContext context) {  
+								 }
+										Widget viewPlaintiffDescription (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.plaintiff_description,
 									caption: 'Plaintiff Description',
 								));}
-										Widget viewPlaintiffWishes (BuildContext context) {  
+										Widget viewPlaintiffWishes (BuildContext context) {
 								return(  ArticleView(
 									value: model.model.plaintiff_wishes,
 									caption: 'Plaintiff Wishes',
@@ -10936,12 +12282,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
-										Widget viewYourOffer (BuildContext context) {  
+										Widget viewYourOffer (BuildContext context) {
 								return(  TitleView(
 									value: model.model.your_offer,
 									caption: 'Your Offer',
 								));}
-										Widget viewBudget (BuildContext context) {  
+										Widget viewBudget (BuildContext context) {
 								return(  MoneyView(
 									value: model.model.budget,
 									caption: 'Budget',
@@ -10976,7 +12322,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -10994,13 +12340,13 @@ class RespondArbitrationMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory RespondArbitrationMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$RespondArbitrationMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$RespondArbitrationMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 @JsonSerializable()
@@ -11022,7 +12368,7 @@ String?   project_id;
   int? extend_deadline_days;
   String?   your_wishes;
 
-	
+
 	  ModelActionCancelArbitrationMyProjects(
             this.id,
 			this.project_id,
@@ -11051,6 +12397,12 @@ class CancelArbitrationMyProjectsBase{
 
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -11140,7 +12492,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
       if (button.icon == 'fa fa-files-o'){
         ic = Icons.file_copy_outlined;
       }
-	  
+
   if(button.type == 'custom_filter'){
     return (
 	       ElevatedButton(
@@ -11160,9 +12512,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                     initvalue: button.selections![0]);
               }
           )
-	);  
+	);
   }else{
-	return(	
+	return(
 	ButtonBar(
 		 alignment: MainAxisAlignment.center,
 		 buttonMinWidth: 0.43 * width,
@@ -11181,14 +12533,14 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
-                
+
 
              // color : Color(0xFF037f51),
               onPressed: () async{
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
                                   if (formKey.currentState.validate()) {
-								  
+
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataCancelArbitration(button.text!, model
@@ -11213,50 +12565,91 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelArbitrationMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-					 
-						  
-						  
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
+
+
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }else{
                       final future = my_projects.postCancelArbitrationMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){
-                       // AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                       // AppProvider.getRouter(context)!.pop(context);
+
 
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
-                
-             
+
+
            )
 		   ]
-		  ) 
+		  )
      );
   }
 
@@ -11351,7 +12744,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
   if(button.type == 'custom_filter'){
     return (
-	     
+
           SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -11364,9 +12757,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                         },
                       )
 
-	);  
+	);
   }else{
-	return(	
+	return(
            SpeedDialChild(
                         child: Icon(ic),
                         backgroundColor: cl,
@@ -11393,7 +12786,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										my_projects.deleteAllCancelArbitrationMyProjects(this.model.model.project_id.toString());
 										}else if(['HireMe'].contains('CancelArbitration')){
 										my_projects.deleteAllCancelArbitrationMyProjects(this.model.model.private_worker_id.toString());
-										
+
 										}else if(['InviteToBid'].contains('CancelArbitration')){
 										my_projects.deleteAllCancelArbitrationMyProjects(this.model.model.user_id);
 										}else{
@@ -11401,42 +12794,83 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 										}
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelArbitrationMyProjectsWithID();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){   
-                        //AppProvider.getRouter(context)!.pop(context);	
-							
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
+                        //AppProvider.getRouter(context)!.pop(context);
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }else{
                       final future = my_projects.postCancelArbitrationMyProjects();
-                                  future.then((value) {
+                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                  }).catchError((Error){ 
+                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }
                          // AppProvider.getRouter(context)!.pop(context);
-							
+
 									 Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
-							  
-							 
+
+
                       });
                       }
-                                
 
-                                  } else {}
+
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                       )
 
@@ -11445,23 +12879,23 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 
 }
 
-	
+
    Map<String, dynamic> convertFormDataAction(var data, String?   triger){
-  
+
    String?   action =   'CancelArbitration';
-   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));    
+   bool? isEdit = action.contains(RegExp(r'edit', caseSensitive: false));
       String?   tgr = triger!.toLowerCase().replaceAll(' ', '_');
       var formData = {
       "project[_trigger_]":"$tgr",
   "project[extend_deadline_days]": "${model.model.extend_deadline_days }",
   "project[your_wishes]": "${model.model.your_wishes }",
-	  
-  };  
+
+  };
 
 
     return( formData);
-  } 	
-	
+  }
+
   List<Widget> RlistButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<Widget> buttonChildren = <Widget>[
@@ -11473,9 +12907,9 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
+   }
 
    List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelArbitrationResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -11488,18 +12922,18 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
       }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-  
-   
-   
+   }
+
+
+
   Widget injectAction(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelArbitrationResult, State state, String?   sendPath, String?   id,  String?   title, bool? isLoading ) {
      return(Container(height: 0.0, width: 0.0)
 	 );
   }
-   
+
     Widget	 RButtons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
      // final size =MediaQuery.of(context).size;
@@ -11516,12 +12950,12 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                 buttonMinWidth: 0.9 * width,
                 children:
            RlistButton(context, formKey,controller,my_projects, postCancelArbitrationResult, state, sendPath, id,  title )
-	    
+
             )
         )
     );
-   
-   } 
+
+   }
 
  SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postCancelArbitrationResult, State state, String?   sendPath, String?   id,  String?   title ){
@@ -11550,19 +12984,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 				children: listButton(context, formKey,controller,my_projects, postCancelArbitrationResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
-		
-   
-   
-   
-   
-   
-										Widget viewTitle (BuildContext context) {  
+   }
+
+
+
+
+
+
+										Widget viewTitle (BuildContext context) {
 								return(  TitleView(
 									value: model.model.title,
 									caption: 'Title',
 								));}
-										Widget viewShortDescription (BuildContext context) { 
+										Widget viewShortDescription (BuildContext context) {
 							    if(model.model.short_description == null || model.model.short_description == ''){
 								return(  Container());
 								}else{
@@ -11570,19 +13004,19 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									value: model.model.short_description,
 									caption: 'Short Description',
 								));
-								}			
-								
 								}
-										Widget viewStartDate (BuildContext context) {  
+
+								}
+										Widget viewStartDate (BuildContext context) {
 								return(  DateTimeView(
 									value: model.model.start_date,
 									caption: 'Start Date',
-								));} 
-										Widget viewFinishDeadline (BuildContext context) {  
+								));}
+										Widget viewFinishDeadline (BuildContext context) {
 								return(  DateTimeView(
 									value: model.model.finish_deadline,
 									caption: 'Finish Deadline',
-								));} 
+								));}
 										Widget editExtendDeadlineDays (State state) {
 								  return(
 								NumberWidget(
@@ -11611,7 +13045,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
 									});
 								  },
 								));}
- 	
+
 
 }
 
@@ -11629,13 +13063,13 @@ class CancelArbitrationMyProjectsSuperBase {
 	  this.meta,
 	  this.model,
 	  );
-	
+
 
   factory CancelArbitrationMyProjectsSuperBase.fromJson(Map<String, dynamic> json) => _$CancelArbitrationMyProjectsSuperBaseFromJson(json);
 
   Map<String, dynamic> toJson() => _$CancelArbitrationMyProjectsSuperBaseToJson(this);
-  
- 
+
+
 }
 
 
@@ -11838,7 +13272,7 @@ class ModelMyProjects {
   bool? is_system_message;
   String?   admin_notes;
 
-	
+
 	  ModelMyProjects(
             this.id,
             this.project_id,
@@ -11967,15 +13401,15 @@ class MyProjectsBase{
 	Map<String, dynamic> json;
 	MyProjectsBase(this.json){
 		model = MyProjectsSuperBase.fromJson(this.json);
-			
+
 	}
-	
+
    Map<String, dynamic> convertFormDataEdit(var data){
-   
 
-		
 
-   
+
+
+
 	String?   attachments = '';
 	if (model.model.attachments!= null) {
 		if (model.model.attachments[0].temp != '') {
@@ -11988,8 +13422,8 @@ class MyProjectsBase{
 			attach_file = '[{"name":"${model.model.attach_file[0].name}","size":${model.model.attach_file[0].size},"created":${model.model.attach_file[0].date},"modified":${model.model.attach_file[0].date},"temp":"${model.model.attach_file[0].temp}","remote":"${model.model.attach_file[0].remote}","dir":"${model.model.attach_file[0].dir}"}]';
 		}
 	}
-   
-   
+
+
       var formData = {
       "my_projects[_trigger_]":"",
    "my_projects[project_id]": "${model.model.project_id }",
@@ -12083,8 +13517,8 @@ class MyProjectsBase{
   "my_projects[automatic_send_to_new_bidder]": "${model.model.automatic_send_to_new_bidder ? 1 : 0}",
   "my_projects[is_system_message]": "${model.model.is_system_message ? 1 : 0}",
   "my_projects[admin_notes]": "${model.model.admin_notes }",
-	  
-  };  
+
+  };
       int count = 0;
       for(var tag in model.model.channels_id){
         formData.addAll({"my_projects[inline_tags][selection][$count]": "$tag"});
@@ -12093,8 +13527,8 @@ class MyProjectsBase{
 
     return( formData);
 
-  } 
-	
+  }
+
   List<SpeedDialChild> listButton(BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
   var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
     final List<SpeedDialChild> buttonChildren = <SpeedDialChild>[
@@ -12103,13 +13537,13 @@ class MyProjectsBase{
     {
       if(model.buttons[i].text != "Table View"){
       buttonChildren.add(ButtonEditMyProjectsWidget(model.buttons[i], context,formKey, controller,my_projects, postMyProjectsResult, state, sendPath, id,  title ));
-      }  
+      }
     }
        return(
-	        buttonChildren 
+	        buttonChildren
 	   );
-   } 
-   
+   }
+
     SpeedDial	 Buttons(BuildContext context, bool? visible, var formKey, ScrollController controller, MyProjectsController my_projects,
   var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title ){
      return(
@@ -12137,7 +13571,7 @@ class MyProjectsBase{
 				children:listButton(context, formKey,controller,my_projects, postMyProjectsResult, state, sendPath, id,  title )
 	    )
 	 );
-   } 
+   }
 
 SpeedDialChild ButtonEditMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
@@ -12156,7 +13590,7 @@ SpeedDialChild ButtonEditMyProjectsWidget(Button button, BuildContext context,va
                         },
                       )
 
-	);  
+	);
   }else{
 	return(	SpeedDialChild(
 		  child: Icon(Icons.save),
@@ -12179,16 +13613,19 @@ SpeedDialChild ButtonEditMyProjectsWidget(Button button, BuildContext context,va
                         formData,
 						false);
                         final future = my_projects.postMyProjects();
-                        future.then((value) {
+                         future.then((value) {
+
                         state.setState(() {
                         postMyProjectsResult = value;
-						//AppProvider.getRouter(context)!.pop(context);	
+						//AppProvider.getRouter(context)!.pop(context);
                         });
-                        }).catchError((Error){
-							AppProvider.getRouter(context)!.pop(context);	
+                         }).catchError((Error){
+							AppProvider.getRouter(context)!.pop(context);
 						});
 
-                        } else {}
+                        } else {
+
+								  }
                   }
 		  }
 	  ));
@@ -14018,12 +15455,14 @@ class MyProjectsViewBase{
                         null,
 						false);
                         final future = my_projects.downloadFile();
-                        future.then((value) {
+                         future.then((value) {
+
                         state.setState(() {
                        // postMyProjectsResult = value;
 						//AppProvider.getRouter(context)!.pop(context);	
                         });
-                        }).catchError((Error){
+                         }).catchError((Error){
+
 							AppProvider.getRouter(context)!.pop(context);	
 						});
 
@@ -15276,12 +16715,14 @@ Widget itemMyProjectsButton(ItemMyProjectsModel? destination, int? index, BuildC
                         null,
 						false);
                         final future = my_projects.downloadFile();
-                        future.then((value) {
+                         future.then((value) {
+
                        // state.setState(() {
                        // postMyProjectsResult = value;
 						//AppProvider.getRouter(context)!.pop(context);	
                        // });
-                        }).catchError((Error){
+                         }).catchError((Error){
+					   
 							AppProvider.getRouter(context)!.pop(context);	
 						});
 

@@ -1610,7 +1610,7 @@ class ShowConversationListingModel extends ShowConversationListingBase {
       );
     }
     else
-    if(button.url!.contains('show_bids')){
+    if(button.url!.contains('show_bids/')){
      // print('i am here');
       return (
           SpeedDialChild(

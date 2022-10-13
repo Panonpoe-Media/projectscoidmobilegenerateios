@@ -110,6 +110,13 @@ class ConfirmPaymentMyOrdersBase{
 	}
 
 
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
+
 Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyOrdersController my_orders,
 
  var postMyOrdersResult, State state, String? sendPath, String? id,  String? title){
@@ -281,10 +288,28 @@ Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = my_orders.postConfirmPaymentMyOrdersWithID();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyOrdersResult = value;
                                   });
                                   }).catchError((Error){
+						  if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }			  
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
@@ -296,14 +321,33 @@ Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formK
 										MaterialPageRoute(builder: (context) => rt.UserMyOrdersListing(id :  id!)),
 											(Route<dynamic> route) => false,
 									  );
+					  	  
                       });
                       }else{
                       final future = my_orders.postConfirmPaymentMyOrders();
                                   future.then((value) {
+								  _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postMyOrdersResult = value;
                                   });
                                   }).catchError((Error){
+						if(!Error.toString().contains('302')){
+					     _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
+					   }	
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
@@ -326,7 +370,14 @@ Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formK
                                       );
                                     }else{
 
-
+                                       _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
                                     }
 
 
@@ -334,7 +385,16 @@ Widget RButtonActionMyOrdersWidget(Button button, BuildContext context,var formK
                       }
                                 
 
-                                  } else {}
+                                  } else {
+								  _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+								  }
                             }
                 
              

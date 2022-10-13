@@ -37,7 +37,10 @@ import 'package:projectscoid/models/BrowseProjects/action.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'dart:developer' as l;
 part 'browse_projects_base.g.dart';
+
+
 
 /** AUTOGENERATE OFF **/
 
@@ -100,7 +103,12 @@ class PlaceNewBidBrowseProjectsBase{
        }
 	}
 
-
+  void _onWidgetDidBuild(Function callback) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      callback();
+    });
+    // next = false;
+  }
 
 Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
  var postBrowseProjectsResult, State state, String?sendPath, String?id,  String?title){
@@ -266,12 +274,21 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                       if(sendPath!.contains('%s')){
                       final future = browse_projects.postPlaceNewBidBrowseProjectsWithID();
                                   future.then((value) {
+                                    _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
+                                    l.log('validhaloooooooooooo1$value');
                                   state.setState(() {
                                   postBrowseProjectsResult = value;
                                   });
                                   }).catchError((Error) {
                         // AppProvider.getRouter(context)!.pop(context);
-
+                                    l.log('errorhaloooooooooooo1${Error.toString()}');
                     if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -309,18 +326,36 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                           );
                         } else {
                           print('haloooooooooooo');
+                          _onWidgetDidBuild(() {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(Error.toString()),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          });
                         }
                        });
                       }else{
                       final future = browse_projects.postPlaceNewBidBrowseProjects();
                                   future.then((value) {
+                                    l.log('validhaloooooooooooo1$value');
+                                    _onWidgetDidBuild(() {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(value.toString()),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    });
                                   state.setState(() {
                                   postBrowseProjectsResult = value;
                                   });
                                   }).catchError((Error){
                        // AppProvider.getRouter(context)!.pop(context);	
-                                    print('haloooooooooooo11');
-                                   if(Error.toString().contains('302')){
+                                    l.log('errorhaloooooooooooo11');
+                                    l.log('haloooooooooooo1${Error.toString()}');
+                                    if(Error.toString().contains('302')){
                                      Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(builder: (context) => rt.PublicBrowseProjectsListing(id :  id!)),
@@ -335,6 +370,14 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                       );
                                     }else{
                                         print('haloooooooooooo');
+                                        _onWidgetDidBuild(() {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text(Error.toString()),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        });
 
                                     }
 
@@ -343,7 +386,17 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                       }
                                 
 
-                                  } else {}
+                                  } else {
+                                _onWidgetDidBuild(() {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Input yang Anda masukan Ada yang tidak valid.'),
+                                        backgroundColor: Colors.red,
+                                         ),
+                                       );
+                                   });
+                                    print('haloooooooooooo hanya di sini');
+                                  }
                             }
                 
              

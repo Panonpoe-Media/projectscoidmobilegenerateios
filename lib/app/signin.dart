@@ -29,6 +29,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:projectscoid/app/Env.dart';
 import 'package:projectscoid/ProjectscoidApplication.dart';
+import 'package:flutter/services.dart';
 
 class Login extends StatefulWidget {
   static const PATH = '/login/:login';
@@ -47,6 +48,8 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
   String ?username = '';
  // var _chatBloc;
   bool isBackground = false;
+  bool isVerify = false;
+  String query = '';
   var msgpusher;
   SubModelController? logout;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -90,6 +93,7 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -294,6 +298,48 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
     await prefs.setString('notification', ntf);
   }
 
+  Future<String?> _getDeepLinkPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('deep_link')) {
+      var test = prefs.getString('deep_link');
+      print('aku adalah deep link $test');
+      return test;
+    } else {
+      return '';
+    }
+  }
+
+   _setDeepLinkPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('deep_link')) {
+      print('aku adalah deep link delete');
+      await prefs.setString('deep_link', '');
+      // print('aku adalah deep link $test');
+
+    }
+  }
+
+  Future<String?> _getStringValue(String key, String file) async {
+    final MethodChannel methodChannel = MethodChannel('mypackage.com/shared_pref_migration');
+    return methodChannel.invokeMethod('getStringValue', <String, dynamic>{
+      'key': key,
+      'file': file,
+    });
+  }
+
+  Future<String?> _getDL() async {
+    try {
+      var rsl = await _getStringValue('deep_link1', 'projects_co');
+      print('aku ini susah sekali $rsl');
+      return rsl;
+    } on PlatformException catch (exception) {
+      print(exception);
+      return null;
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     accountController = AccountController(AppProvider.getApplication(context), AppAction.listing);
@@ -306,7 +352,42 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
           userID      = map['user_hash'];
           username      = map['username'];
       }});
+/*
+    String str = 'https://projects.co.id/public/new_user/verify/a65829/sayasukasupermi?auth=633e3d7b93ca0';
 
+    final uri =  Uri.parse(str);
+    List<String>   ls = uri.pathSegments;
+    print('${ls[0]}   ${ls[1]}   ${ls[2]}  ${ls[3]}  ${ls[4]}  ${uri.query}  ');
+
+    userID      = ls[3];
+    username      = ls[4];
+    isVerify = true;
+    query = uri.query;
+
+ */
+   // _getDL();
+    final future1 = _getDL();
+    future1?.then((val){
+      if(val != ''){
+       final uri =  Uri.parse(val!);
+       List<String>   ls = uri.pathSegments;
+       if(ls[0] == 'public' && ls[1] == 'new_user'){
+            isVerify  = true;
+            userID      = ls[3];
+            username      = ls[4];
+            query = uri.query;
+          }
+      // _setDeepLinkPrefs();
+      }
+
+     });
+
+
+
+    //final future1 = _getDeepLinkPrefs();
+    //future1?.then((val){
+
+     //});
     return
       BlocBuilder<AuthenticationController,AuthenticationState>(
         builder: (context, state) {
@@ -315,7 +396,7 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
             futureIntro?.then((val){
               intro = val;
               if(intro == 1){
-               // print('aku di intro');
+                print('aku di intro bro');
                 return Projectscoid(id : userID,  ctx: context);
               }else{
                 return const IntroScreen();
@@ -377,40 +458,67 @@ class _LoginState extends State<Login> with WidgetsBindingObserver{
                      });
           }
           if (state is AuthenticationUnauthenticated) {
+                print('aku di intro bro 1');
 
-                return  FutureBuilder<dynamic>(
-                    future: accountController?.getAccount(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
+                if(isVerify == true){
+                  print('aku di intro bro 11');
+                  return VerifyNewUser(id:userID, title: '$username?$query',);
+                }else{
+                  return  FutureBuilder<dynamic>(
+                      future: accountController?.getAccount(),
+                      builder: (context, snapshot) {
+                        if(isVerify == true){
+                          print('aku di intro bro 111');
+                          return VerifyNewUser(id:userID, title: '$username?$query',);
+                        }else{
+                          print('aku di intro bro 1111');
+                        if (snapshot.hasData) {
+                          if (snapshot.data.isEmpty) {
+                            AppProvider
+                                .getApplication(context)
+                                .chat
+                                ?.socketCloseSP();
+                            return widget.isLogin! ? LoginPage(
+                                application: AppProvider.getApplication(
+                                    context)) : Projectscoid(
+                                id: '', ctx: context);
+                            // return LoginPage();
+                          }
+                          // AppProvider.getApplication(context).chat.socket.connect();
+                          //  AppProvider.getApplication(context).chat.lg(snapshot.data.asMap()[0]['user_hash']);
+                          //  AppProvider.getApplication(context).chat.getFirstIndex(1);
+                          print('data      ===     ${snapshot.data
+                              .asMap()[0]['user_hash']}');
+                          return widget.isLogin!
+                              ? LoginPage(
+                              application: AppProvider.getApplication(context))
+                              : Projectscoid(
+                              id: snapshot.data.asMap()[0]['user_hash'],
+                              ctx: context);
+                        } else if (snapshot.hasError) {
+                          _onWidgetDidBuild(() {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          });
 
-                        if(snapshot.data.isEmpty){
-                          AppProvider.getApplication(context).chat?.socketCloseSP();
-                          return  widget.isLogin! ?LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : '',  ctx: context);
-                         // return LoginPage();
+                          return Text("${snapshot.error}", style: Theme
+                              .of(context)
+                              .textTheme
+                              .headline1);
+                        } else {
+                          return Container(
+                              width: 0.0, height: 0.0, color: Colors.white);
                         }
-                       // AppProvider.getApplication(context).chat.socket.connect();
-                      //  AppProvider.getApplication(context).chat.lg(snapshot.data.asMap()[0]['user_hash']);
-                      //  AppProvider.getApplication(context).chat.getFirstIndex(1);
-                          print('data      ===     ${snapshot.data.asMap()[0]['user_hash']}');
-                        return widget.isLogin! ? LoginPage(application: AppProvider.getApplication(context)) : Projectscoid(id : snapshot.data.asMap()[0]['user_hash'],  ctx: context);
-
-
-                      } else if (snapshot.hasError) {
-
-                        _onWidgetDidBuild(() {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Oopps, terjadi kendala, mohon tunggu beberapa saat lagi!'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        });
-
-                        return Text("${snapshot.error}",style: Theme.of(context).textTheme.headline1);
-                      } else {
-                        return Container(width: 0.0, height: 0.0, color:  Colors.white);
                       }
-                    });
+
+                      });
+                }
+
 
           }
           if (state is AuthenticationLoading) {
@@ -587,7 +695,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 //backgroundColor : Color(0xFF037f51),),
 
-                onPressed: (state is ! LoginLoading)  ? _onLoginButtonPressed : null,
+                onPressed: (state is !LoginLoading)  ? _onLoginButtonPressed : null,
             ),
           ]
       ),

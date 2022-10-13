@@ -143,7 +143,7 @@ String urlToRoute(String url){
     url = url.substring(url.indexOf('projects.co.id'));
   };
   rt = url.toLowerCase().replaceFirst('projects.co.id', '');
- // rt = rt.replaceFirst('https://api.projects.co.id', '');
+  rt = rt.replaceFirst('https://', '');
   rt1 = rt.replaceFirst('?', '/');
   return rt1;
 }
