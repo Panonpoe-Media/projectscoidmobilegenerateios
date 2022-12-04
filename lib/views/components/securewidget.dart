@@ -243,7 +243,7 @@ class _SecureWidget extends State<SecureWidget> {
                                 shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                                 backgroundColor:
                                 MaterialStateProperty.all<Color>( Colors.green),
-                                overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                overlayColor: MaterialStateProperty.all<Color>(Colors.green),
                                 ),
                                 child: Text('Verifikasi', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                                 onPressed:   ()async {

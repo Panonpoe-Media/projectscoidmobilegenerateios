@@ -219,7 +219,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -246,8 +246,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
                 
 
@@ -283,14 +283,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBumpUpMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								 
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -318,14 +314,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postBumpUpMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								              
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -513,14 +505,17 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBumpUpMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                     /*
+								                  _onWidgetDidBuild(() {
+                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(value.toString()),
                                           backgroundColor: Colors.red,
                                         ),
                                       );
                                     });
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -546,14 +541,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postBumpUpMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								                /*
+								                
+                                    
+								                 */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -967,7 +958,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -994,8 +985,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -1031,14 +1022,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBroadcastMessageMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -1066,14 +1050,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postBroadcastMessageMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -1261,14 +1238,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postBroadcastMessageMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -1294,14 +1264,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postBroadcastMessageMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -1740,7 +1703,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -1767,8 +1730,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -1814,14 +1777,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCreateProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -1849,14 +1805,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postCreateProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2044,14 +1993,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCreateProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2077,14 +2019,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postCreateProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2579,7 +2514,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -2606,8 +2541,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -2643,14 +2578,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postEditDraftMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2678,14 +2606,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postEditDraftMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2873,14 +2794,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postEditDraftMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -2906,14 +2820,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postEditDraftMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -3404,7 +3311,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -3431,8 +3338,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -3468,14 +3375,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postPublishProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -3503,14 +3403,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postPublishProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -3698,14 +3591,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postPublishProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -3731,14 +3617,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postPublishProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -4170,7 +4049,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -4197,8 +4076,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -4234,14 +4113,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -4269,14 +4141,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postCancelProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -4464,14 +4329,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelProjectMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -4497,14 +4355,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postCancelProjectMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -4920,7 +4771,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -4947,8 +4798,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -4992,14 +4843,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOrRejectWorkMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5037,14 +4881,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postAcceptOrRejectWorkMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5240,14 +5077,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOrRejectWorkMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5281,14 +5111,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postAcceptOrRejectWorkMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5688,7 +5511,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -5715,8 +5538,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -5761,14 +5584,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateWorkerMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5796,14 +5612,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postRateWorkerMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -5990,14 +5799,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateWorkerMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -6023,14 +5825,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postRateWorkerMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -6474,7 +6269,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -6501,8 +6296,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -6537,14 +6332,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportProgressMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -6572,14 +6360,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postReportProgressMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -6766,14 +6547,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportProgressMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -6799,14 +6573,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postReportProgressMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7178,7 +6945,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                   const TextStyle(color: Colors.white)),
               backgroundColor:
               MaterialStateProperty.all<Color>(
-                  const Color(0xFF037f51)),
+                  cl),
             ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -7205,8 +6972,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-                   overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
+                   overlayColor: MaterialStateProperty.all<Color>(cl),
                  ),
 
 
@@ -7242,14 +7009,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postWeeklyReportMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7277,14 +7037,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postWeeklyReportMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7472,14 +7225,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postWeeklyReportMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7505,14 +7251,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postWeeklyReportMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7889,7 +7628,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -7916,8 +7655,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -7953,14 +7692,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportDoneMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -7988,14 +7720,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postReportDoneMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8183,14 +7908,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postReportDoneMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8216,14 +7934,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postReportDoneMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8615,7 +8326,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -8642,8 +8353,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -8678,14 +8389,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateOwnerMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8713,14 +8417,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postRateOwnerMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8907,14 +8604,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRateOwnerMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -8940,14 +8630,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postRateOwnerMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -9397,7 +9080,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -9424,8 +9107,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -9467,14 +9150,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                         final future = my_projects
                             .postFileArbitrationMyProjectsWithID();
                          future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                           // state.setState(() {
                           postMyProjectsResult = value;
                           //  });
@@ -9499,14 +9175,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                           final future = my_projects
                               .postFileArbitrationMyProjects();
                            future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                             //state.setState(() {
                             postMyProjectsResult = value;
                             //});
@@ -9686,14 +9355,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postFileArbitrationMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -9719,14 +9381,7 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postFileArbitrationMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								 
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -10161,7 +9816,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -10188,8 +9843,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -10242,14 +9897,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                         final future = my_projects
                                             .postNewOfferMyProjectsWithID();
                                          future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                    /*       
+								                   */
                                           state.setState(() {
                                             postMyProjectsResult = value;
                                             print('error3 ${value.toString()}');
@@ -10295,14 +9944,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                       final future = my_projects
                                           .postNewOfferMyProjects();
                                        future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                         /*
+								                   
+                                    
+                                          */
                                         state.setState(() {
                                           postMyProjectsResult = value;
                                         });
@@ -10485,14 +10130,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postNewOfferMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -10518,14 +10159,17 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postNewOfferMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                                  /*   
+								                 _onWidgetDidBuild(() {
+                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(value.toString()),
                                           backgroundColor: Colors.red,
                                         ),
                                       );
                                     });
+                                    
+                                   */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -10966,7 +10610,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -10993,8 +10637,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -11029,14 +10673,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOfferMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								              
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -11064,14 +10704,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postAcceptOfferMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								               
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -11258,14 +10894,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postAcceptOfferMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								               
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -11291,14 +10923,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postAcceptOfferMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -11699,7 +11327,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -11726,8 +11354,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -11767,14 +11395,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                           final future = my_projects
                               .postRespondArbitrationMyProjectsWithID();
                            future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                             /*
+								         
+                                    
+                              */
                             state.setState(() {
                               postMyProjectsResult = value;
                             });
@@ -11817,14 +11441,17 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                           final future = my_projects
                               .postRespondArbitrationMyProjects();
                            future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
+                             /*
+								            _onWidgetDidBuild(() {
+                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
                                           content: Text(value.toString()),
                                           backgroundColor: Colors.red,
                                         ),
                                       );
                                     });
+                                    
+                              */
                             state.setState(() {
                               postMyProjectsResult = value;
                             });
@@ -12003,14 +11630,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postRespondArbitrationMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                 
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -12036,14 +11659,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postRespondArbitrationMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                 
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -12503,7 +12122,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -12530,8 +12149,8 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
             style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
+					overlayColor: MaterialStateProperty.all<Color>(cl),
 				  ),
 
 
@@ -12566,14 +12185,10 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelArbitrationMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                  
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -12601,14 +12216,11 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_projects.postCancelArbitrationMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     
+								                /*
+								                
+                                    
+								                 */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -12795,14 +12407,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       if(sendPath!.contains('%s')){
                       final future = my_projects.postCancelArbitrationMyProjectsWithID();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+								                  /*
+                                    
+                                    
+								                   */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
@@ -12828,14 +12436,10 @@ SpeedDialChild  ButtonActionMyProjectsWidget(Button button, BuildContext context
                       }else{
                       final future = my_projects.postCancelArbitrationMyProjects();
                                    future.then((value) {
-								  _onWidgetDidBuild(() {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(value.toString()),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    });
+                                     /*
+								                 
+                                    
+                                      */
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });

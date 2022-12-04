@@ -202,7 +202,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
 						  const TextStyle(color: Colors.white)),
 					  backgroundColor:
 					  MaterialStateProperty.all<Color>(
-						const Color(0xFF037f51)),
+						cl),
 					),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -229,7 +229,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
 				style: ButtonStyle(
 					shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
 					backgroundColor:
-					MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+					MaterialStateProperty.all<Color>(cl),
 					overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
 				  ),
               //textColor: button.color == 'green'? Colors.white : Colors.black,

@@ -51,6 +51,7 @@ import 'package:projectscoid/core/components/utility/tool/slide_button.dart';
 import 'package:projectscoid/core/components/utility/tool/blockquote.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/parser.dart' show parse;
+import 'package:projectscoid/app/projectscoid.dart';
 List<CameraDescription> cameras = [];
 
 
@@ -647,7 +648,7 @@ class _SearchThreadState extends State<SearchThread>  with RestorationMixin {
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.white,),
                 onPressed: ()async{
-
+                 // print('harus betul 12');
                   Navigator.pop(context, false);
                 }
             ),
@@ -1195,6 +1196,7 @@ class EditChatPicState extends State<EditChatPic>{
                 color: Colors.grey,
               ),
               onPressed: () {
+               // print('harus betul 14');
                 Navigator.pop(context, false);
               },
             ),
@@ -2913,6 +2915,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                   children: <Widget>[
                     GestureDetector(
                       onTap: ()async{
+                      //  print('harus betul 15');
                         //  widget.chatBloc!.nextTread(0);
                         //Navigator.pop(context, false);
                         isSelect = false;
@@ -2950,7 +2953,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
 
 
-                        print('multiSelectedMessage.length == ${multiSelectedMessage.length.toString()}');
+                     //   print('multiSelectedMessage.length == ${multiSelectedMessage.length.toString()}');
                         if(multiSelectedMessage.length != 1){
 
                         }else{
@@ -2992,7 +2995,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                         FocusScope.of(context).requestFocus(_focusNode);
                         String dataMsg = '';
-                        print('multiSelectedMessage.length == ${multiSelectedMessage.length.toString()}');
+                      //  print('multiSelectedMessage.length == ${multiSelectedMessage.length.toString()}');
                         if(multiSelectedMessage.length == 1){
                           dataMsg = parser.emojify(multiSelectedMessage[0]['message']);
                         }else{
@@ -3009,7 +3012,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                              }
 
-                            print(dataMsg);
+                          //  print(dataMsg);
                           }
                         }
 
@@ -3097,6 +3100,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                   children: <Widget>[
                     GestureDetector(
                       onTap: ()async{
+                      //  print('harus betul 16');
                         if(widget.trans!){
                           widget.chatBloc!.getIndexSpecial(1);
                           widget.chatBloc!.setCurrentThread();
@@ -3511,7 +3515,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
                     GestureDetector(
                       onTap: ()async{
                         //  widget.chatBloc!.nextTread(0);
-
+                      //  print('harus betul 19');
                         if(widget.trans!){
                           widget.chatBloc!.getIndexSpecial(1);
                           widget.chatBloc!.setCurrentThread();
@@ -4178,6 +4182,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
             children: <Widget>[
               GestureDetector(
                 onTap: ()async{
+                 // print('harus betul 12');
                   //  widget.chatBloc!.nextTread(0);
                   //Navigator.pop(context, false);
                   isSelect = false;
@@ -4331,7 +4336,16 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                   //  });
                     // widget.chatBloc!.getFirstThread(widget._jsonMessage['thread']);
-                    Navigator.pop(context, false);
+                  // print('harus betul 1');
+                   /*
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Projectscoid(id :  widget.userID, isChat: true)),
+                          (Route<dynamic> route) => false,
+                    );
+
+                    */
+                    Navigator.pop(context, true);
                     setState(() {
 
                     });
@@ -4354,6 +4368,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                   //  });
                     //  widget.chatBloc!.getFirstThread1(widget._jsonMessage['thread']);
+                  //  print('harus betul 2');
                     Navigator.pop(context, false);
                     setState(() {
 
@@ -4820,6 +4835,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                   //  });
                    // widget.chatBloc!.getFirstThread3(widget._jsonMessage['thread']);
+                   // print('harus betul 21');
                     Navigator.pop(context, false);
                      setState(() {
 
@@ -4842,6 +4858,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
                    //  });
                   //  widget.chatBloc!.getFirstThread3(widget._jsonMessage['thread']);
+                   // print('harus betul 22');
                     Navigator.pop(context, false);
                      setState(() {
 
@@ -7005,6 +7022,7 @@ class _ChatScreenState extends State<ChatScreen> with RestorationMixin{
 
 
   void _sendTyping() {
+   // print('test saja ya');
     if(isShowEG){
      // insertText('');
       setState(() {

@@ -406,8 +406,8 @@ class _CaptchaWidget extends State<CaptchaWidget> {
                             style: ButtonStyle(
                               shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                               backgroundColor:
-                              MaterialStateProperty.all<Color>( Colors.grey),
-                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                              MaterialStateProperty.all<Color>(Colors.green),
+                              overlayColor: MaterialStateProperty.all<Color>(Colors.green),
                             ),
                             child: Text('Refresh ${widget.oldcaption}', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                             onPressed:   ()async {

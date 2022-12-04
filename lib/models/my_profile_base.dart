@@ -300,8 +300,8 @@ Widget RButtonActionMyProfileWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-                   overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
+                   overlayColor: MaterialStateProperty.all<Color>(cl),
                  ),
                 
 
@@ -1204,8 +1204,8 @@ Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var form
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-                   overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
+                   overlayColor: MaterialStateProperty.all<Color>(cl),
                  ),
                 
 
@@ -1891,8 +1891,8 @@ Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var form
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-                   overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
+                   overlayColor: MaterialStateProperty.all<Color>(cl),
                  ),
                 
 
@@ -2496,8 +2496,8 @@ Widget RButtonActionMyProfileWidget(Button button, BuildContext context,var form
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
-                   overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
+                   overlayColor: MaterialStateProperty.all<Color>(cl),
                  ),
                 
 

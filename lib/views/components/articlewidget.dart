@@ -967,8 +967,8 @@ class _ArticleWidget extends State<ArticleWidget> {
                                                         style: ButtonStyle(
                                                           shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                                                           backgroundColor:
-                                                          MaterialStateProperty.all<Color>( Colors.grey),
-                                                          overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                                          MaterialStateProperty.all<Color>(  Colors.green),
+                                                          overlayColor: MaterialStateProperty.all<Color>( Colors.green),
                                                         ),
                                                         child: const Text('Edit ', style: TextStyle(color: Colors.white)),
                                                         onPressed:   ()async {

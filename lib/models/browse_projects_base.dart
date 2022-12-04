@@ -210,7 +210,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                  cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -237,7 +237,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                  ),
                 
@@ -274,6 +274,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                       if(sendPath!.contains('%s')){
                       final future = browse_projects.postPlaceNewBidBrowseProjectsWithID();
                                   future.then((value) {
+                                    /*
                                     _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -283,6 +284,8 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                       );
                                     });
                                     l.log('validhaloooooooooooo1$value');
+
+                                     */
                                   state.setState(() {
                                   postBrowseProjectsResult = value;
                                   });
@@ -339,6 +342,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                       }else{
                       final future = browse_projects.postPlaceNewBidBrowseProjects();
                                   future.then((value) {
+                                    /*
                                     l.log('validhaloooooooooooo1$value');
                                     _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
@@ -348,6 +352,8 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                         ),
                                       );
                                     });
+
+                                     */
                                   state.setState(() {
                                   postBrowseProjectsResult = value;
                                   });
@@ -1009,7 +1015,7 @@ Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                  cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -1036,7 +1042,7 @@ Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                  ),
                 
@@ -1696,7 +1702,7 @@ Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -1723,7 +1729,7 @@ Widget RButtonActionBrowseProjectsWidget(Button button, BuildContext context,var
                  style: ButtonStyle(
                    shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                    backgroundColor:
-                   MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                   MaterialStateProperty.all<Color>(cl),
                    overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
                  ),
                 

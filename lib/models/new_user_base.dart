@@ -176,7 +176,7 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
                    const TextStyle(color: Colors.white)),
                backgroundColor:
                MaterialStateProperty.all<Color>(
-                   const Color(0xFF037f51)),
+                   cl),
              ),
               onPressed: () {
                 showSearchSelectDialog(context: context,
@@ -193,16 +193,25 @@ Widget RButtonActionNewUserWidget(Button button, BuildContext context,var formKe
          style: ButtonStyle(
            shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
            backgroundColor:
-           MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+           MaterialStateProperty.all<Color>(cl),
            overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
          ),
                 
 
              // color : Color(0xFF037f51),
               onPressed: () async{
-                                controller.animateTo(controller.position.minScrollExtent,
-                                  duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
-                                  if (formKey.currentState.validate()) {
+                          final RegExp spExp = RegExp(r'^[a-zA-Z0-9-_.]+$');
+                          bool isvalid = true;
+
+                          controller.animateTo(controller.position.minScrollExtent,
+                              duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
+
+                          if (!spExp.hasMatch(model.model.user_name)) {
+
+                            isvalid = false;
+                          }
+
+                          if (formKey.currentState.validate() && isvalid) {
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                       var formData = await convertFormDataRegister(button.text!, model
@@ -431,9 +440,18 @@ SpeedDialChild  ButtonActionNewUserWidget(Button button, BuildContext context,va
                         label: button.text!,
                         labelStyle: TextStyle(fontSize: 18.0),
                         onTap: () async{
+                          final RegExp spExp = RegExp(r'\u{200e}', unicode: true);
+                          bool isvalid = true;
+
                                 controller.animateTo(controller.position.minScrollExtent,
                                   duration: Duration(milliseconds: 1000), curve: Curves.easeInOutCirc);
-                                  if (formKey.currentState.validate()) {
+
+                                    if (spExp.hasMatch(model.model.user_name)) {
+
+                                      isvalid = false;
+                                    }
+
+                                  if (formKey.currentState.validate() && isvalid) {
                                   //Map<String, dynamic> res = model.toJson();
                                   //print('json result == $res');
                        var formData = await convertFormDataRegister(button.text!, model

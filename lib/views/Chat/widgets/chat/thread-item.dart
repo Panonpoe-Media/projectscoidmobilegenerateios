@@ -290,6 +290,13 @@ class _ThreadItemItemState extends State<ThreadItem> {
                 setState(() {
 
                 });
+              }else{
+                print('belum ketemu');
+                Navigator.pop(context, true);
+
+               // setState(() {
+                  //widget.chatBloc?.getFirstThread1(widget._jsonMessage['thread']);
+               // });
               }
               },
               /*
@@ -944,8 +951,6 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
 
     return _isOnline;
   }
-
-
   bool isFile(String ext ){
     bool isFile = false;
     if( ext.contains('https://upload.projects.co.id/upload/')|| ext.contains('https://cdn.projects.co.id/upload/')){
@@ -1018,6 +1023,8 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                     setState(() {
 
                     });
+                  }else{
+                    print('belum ketemu 1');
                   }
                 },
 
@@ -1336,6 +1343,8 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                                 setState(() {
 
                                 });
+                              }else{
+                                print('belum ketemu 12');
                               }
                             },
                             /*
@@ -1670,6 +1679,8 @@ class _SearchThreadItemItemState extends State<SearchThreadItem> {
                       setState(() {
 
                       });
+                    }else{
+                      print('belum ketemu 123');
                     }
                   },
 

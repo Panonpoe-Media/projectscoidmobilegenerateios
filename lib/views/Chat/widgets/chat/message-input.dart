@@ -275,6 +275,7 @@ class _MessageInputState extends State<MessageInput> {
                                     border: InputBorder.none,
                                     hintText: 'Send a message...'),
                                 onTap:(){
+                                 // print('onTap saja');
                                   widget.onChanged!();
                                   if(widget.textEditingController?.value.text == ''){
                                     if(isVoice){
@@ -295,6 +296,7 @@ class _MessageInputState extends State<MessageInput> {
                                 onChanged:
 
                                     (val){
+                                   //   print('onChanged saja');
                                   widget.onTextChange!(val);
 
                                   if(widget.isEmoji!){
@@ -307,6 +309,7 @@ class _MessageInputState extends State<MessageInput> {
                                   if(val.isNotEmpty  ){
                                     if(isVoice){
                                       setState(() {
+                                        widget.onChanged!();
                                         isVoice = false;
                                       });
                                     }else{

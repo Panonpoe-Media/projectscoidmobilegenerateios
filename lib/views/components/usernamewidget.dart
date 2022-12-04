@@ -62,6 +62,11 @@ class _UsernameWidget extends State<UsernameWidget> {
         result = 'This field must have at least 6 characters.';
         isvalid = false;
       }
+      final RegExp spExp = RegExp(r'\u{200e}', unicode: true);
+      if (spExp.hasMatch(value)) {
+        result = 'This field must be without whitespace.';
+        isvalid = false;
+      }
       if (value.length > 32) {
         result = 'This field must have less than 32 characters.';
         isvalid = false;
@@ -72,7 +77,17 @@ class _UsernameWidget extends State<UsernameWidget> {
       isvalid = true;
       //}
     }
+    final RegExp nameExp = RegExp(r'^[a-zA-Z0-9-_.]+$');
+    if (!nameExp.hasMatch(value)) {
+      result = 'This field can only have a-z, 0-9, _ and .';
+      isvalid = false;
+    }
 
+    final RegExp spExp = RegExp(r'\u{200e}', unicode: true);
+    if (spExp.hasMatch(value)) {
+      result = 'This field must be without whitespace.';
+      isvalid = false;
+    }
     // if(!RegExp(r'/\.\./.').hasMatch(value)|| !RegExp(r'/\-\-/').hasMatch(value)|| !RegExp(r'/\_\_/').hasMatch(value))
     //    return 'Please use a readable username.';
 
@@ -125,7 +140,28 @@ class _UsernameWidget extends State<UsernameWidget> {
                   border: const OutlineInputBorder(),
                 ),
                 controller: contr,
-                validator: (value) {
+                validator: (value)
+                {
+                  // widget.value = value;
+                  errormessage = validateUserName(value, widget.required);
+                  if (isvalid) {
+                    setState(() {
+                      validation = true;
+                      // widget.value = value;
+                      _getvalue(value!);
+                    });
+                    return null;
+                  } else {
+                    setState(() {
+                      validation = false;
+                      // widget.value = value;
+                      _getvalue(value!);
+                    });
+                    return null;
+                  }
+                },
+                /*
+                {
                   // widget.value = value;
                   errormessage = validateUserName(value, widget.required);
                   if (isvalid) {
@@ -144,86 +180,13 @@ class _UsernameWidget extends State<UsernameWidget> {
                     return null;
                   }
                 },
+
+                 */
               ),
             )
 
             // ]
             ));
-    /*
-      new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-           new Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 14.0, 8.0, 2.0),
-              child: 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text(widget.caption, style: TextStyle(color: CurrentTheme.DisableTextColor, fontSize: 18),),
-                    new Text(errormessage, style: TextStyle(color: CurrentTheme.ErrorColor, fontSize: 14), textAlign: TextAlign.right),
 
-
-                ],)
-              
-           ),
-          new Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 6.0),
-            child:// <Widget>[
-
-              new Container(
-                // padding: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 10.0),
-                alignment: Alignment.center,
-                height: 50.0,
-
-                child: new TextFormField(
-                  
-                  style: TextStyle(color: CurrentTheme.NormalTextColor, fontSize: 20),
-                  decoration: new InputDecoration(
-                    hintText: widget.hint,
-                   // hintStyle: TextStyle(color: Colors.grey[500]),
-                    hintStyle: TextStyle(color: CurrentTheme.BackgroundColor),
-                  //  errorStyle: 
-                  //  errorBorder: UnderlineInputBorder(),
-                    border: InputBorder.none,
-                  ),
-                  
-                  controller: contr,                
-                  validator: (value) {
-                   // widget.value = value;
-                    errormessage = validateUserName(value, widget.required);
-                    if (isvalid) {
-                       setState(() {
-                          validation = true;
-                         // widget.value = value;
-                          _getvalue(value);
-                       });
-                       return null;
-                    } else {
-                       setState(() {
-                          validation = false;
-                         // widget.value = value;
-                          _getvalue(value);
-                       });
-                       return null;
-                    }
-                  },
-                
-                ),
-                
-                decoration: new BoxDecoration(
-                  //color: Colors.lightBlue[100],
-                  color: validation ? CurrentTheme.ShadeColor : CurrentTheme.ErrorColor,
-                ),
-
-              )
-
-           // ]
-           )
-        ]
-
-      );
-
-     */
   }
 }

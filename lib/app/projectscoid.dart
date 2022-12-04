@@ -2168,6 +2168,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10.0),
                                 ),
+                            /*
                                 Container(
                                     /*  decoration:    BoxDecoration(
                                 color: CurrentTheme.BackgroundColor,
@@ -2243,6 +2244,8 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                         ),
                                   ],
                                 )),
+
+                             */
 /*
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10.0),
@@ -10495,7 +10498,8 @@ class Projectscoid extends StatefulWidget {
   final String? id;
   final bool? isChat;
   BuildContext? ctx;
-  Projectscoid({this.id, this.isChat, this.ctx});
+  final int? idx;
+  Projectscoid({this.id, this.isChat, this.ctx, this.idx});
   // static const String PATH = '/';
 
   @override
@@ -10596,6 +10600,8 @@ class _ProjectscoidState extends State<Projectscoid>
   //bool _isBannerAdReady = false;
 
   Timer? _timer;
+  bool reschat = false;
+  int? tabidx = 0;
   PackageInfo _packageInfo = PackageInfo(
     appName: 'Unknown',
     packageName: 'Unknown',
@@ -10751,9 +10757,12 @@ class _ProjectscoidState extends State<Projectscoid>
     //   print('decode===${decode(widget.id).toString()}');
     //  print('encode=${encode(119)}');
     // _navigationViews[_currentIndex].controller.value = 1.0;
+    if(widget.idx != null) {
+      tabidx = widget.idx!;
+    }
 
     _tabController =
-        TabController(vsync: this, length: choices.length, initialIndex: 0);
+        TabController(vsync: this, length: choices.length, initialIndex: tabidx!);
 
     // if(widget.isChat)print('chat error......');
     // if(!widget.isChat)print('chat ok.....');
@@ -11602,7 +11611,7 @@ class _ProjectscoidState extends State<Projectscoid>
     flutterLocalNotificationsPlugin.initialize(initializationSettings!,
         onSelectNotification: (String? payload) async {
       if (payload != null && !payload.isEmpty) {
-        debugPrint('notification payload123: $payload');
+       // debugPrint('notification payload123: $payload');
 
         if (payload.contains('show_conversation')) {
           payload = '$payload***l';
@@ -11641,7 +11650,7 @@ class _ProjectscoidState extends State<Projectscoid>
             );
           }
         } else if ((payload.contains('chat'))) {
-          Navigator.push(
+         reschat = await  Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (_) => ChatScreen(
@@ -11661,6 +11670,25 @@ class _ProjectscoidState extends State<Projectscoid>
                   ctx: context,
                 ),
               ));
+         if(reschat){
+
+           print('aku 7');
+           Navigator.pushAndRemoveUntil(
+             context,
+             MaterialPageRoute(
+                 builder: (context) =>
+                     Projectscoid(id: widget.id, idx: 3)),
+                 (Route<dynamic> route) => false,
+           );
+          // Navigator.pop(context, true);
+           setState(() {
+            // reschat = true;
+             _tabController!.index = 3;
+            // cb!.getIndexSpecial(1);
+            // widget.chat!.getIndexSpecial(1);
+           });
+         }
+
         } else if (payload.contains('show_thread')) {
           payload = '$payload*20**l';
 
@@ -12079,7 +12107,7 @@ class _ProjectscoidState extends State<Projectscoid>
 
                */
     } else if ((payload.contains('chat'))) {
-      // debugPrint('notification payload2: $payload');
+       debugPrint('notification payload2: $payload');
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -12878,11 +12906,16 @@ class _ProjectscoidState extends State<Projectscoid>
       //_children.add(Text('hello'));
 
       widget.id != ''
-          ? _children.add(ThreadScreen(
-              user: widget.id,
-              chatBloc: AppProvider.getApplication(context).chat,
-              ctx: context,
-            ))
+              ? reschat? _children.add(ThreadScreen(
+                  user: widget.id,
+                  chatBloc: AppProvider.getApplication(context).chat,
+                  ctx: context,
+                )):
+              _children.add(ThreadScreen(
+                user: widget.id,
+                chatBloc: AppProvider.getApplication(context).chat,
+                ctx: context,
+              ))
           : _children.add(Container(
               height: 0.0,
               width: 0.0,

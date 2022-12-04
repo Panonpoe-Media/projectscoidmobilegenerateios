@@ -874,8 +874,8 @@ class _FileStateWidget extends State<FileWidget>{
                                             style: ButtonStyle(
                                               shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                                               backgroundColor:
-                                              MaterialStateProperty.all<Color>( Colors.grey),
-                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                              MaterialStateProperty.all<Color>( Colors.green),
+                                              overlayColor: MaterialStateProperty.all<Color>( Colors.green),
                                             ),
                                             child: const Text('Upload ', style: TextStyle(color: Colors.white)),
                                             onPressed:   ()async { await _uploadFile(context); },
@@ -886,8 +886,8 @@ class _FileStateWidget extends State<FileWidget>{
                                             style: ButtonStyle(
                                               shape: MaterialStateProperty.all<OutlinedBorder>(const StadiumBorder()),
                                               backgroundColor:
-                                              MaterialStateProperty.all<Color>( Colors.grey),
-                                              overlayColor: MaterialStateProperty.all<Color>(const Color(0x33ffcc5c)),
+                                              MaterialStateProperty.all<Color>(  Colors.green),
+                                              overlayColor: MaterialStateProperty.all<Color>( Colors.green),
                                             ),
                                             child: const Text('Remove', style: TextStyle(color: Colors.white)),
                                             onPressed:   () {_clearFile(); },

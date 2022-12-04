@@ -1315,18 +1315,26 @@ class _TextMessageWidgetState extends State<TextMessageWidget> {
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
 
-
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
                               if(url.contains('show_conversation')){
                                 AppProvider.getRouter(context)!.navigateTo(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -1550,7 +1558,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -1559,9 +1570,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -1665,7 +1679,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -1674,9 +1691,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -1733,7 +1753,10 @@ Expanded(
                     //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                     textStyle: const TextStyle(fontSize:15, color: Colors.black),
                     onTapUrl: (url) async{
-                      if(url.toLowerCase().contains('projects.co.id')){
+                                               if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                         if(url.contains(RegExp(r'[0-9]'))){
@@ -1860,7 +1883,10 @@ Expanded(
                           //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                           textStyle: const TextStyle(fontSize:14, color: Colors.black),
                           onTapUrl: (url) async{
-                            if(url.toLowerCase().contains('projects.co.id')){
+                                                     if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                               if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2112,7 +2138,10 @@ Expanded(
                             //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                             textStyle: const TextStyle(fontSize:14, color: Colors.black),
                             onTapUrl: (url) async{
-                              if(url.toLowerCase().contains('projects.co.id')){
+                                                       if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                                 if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2220,7 +2249,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2229,9 +2261,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -2288,8 +2323,9 @@ Expanded(
                     //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                     textStyle: const TextStyle(fontSize:14, color: Colors.black),
                     onTapUrl: (url) async{
-                      if(url.toLowerCase().contains('projects.co.id')){
+                                               if(url.toLowerCase().contains('projects.co.id')){
 
+                                           
 
                         if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
                           if(url.contains('show_conversation')){
@@ -2297,9 +2333,13 @@ Expanded(
                                 context,
                                 urlToRoute(url+ '/' ));
                           }else{
+                         
+                            var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
                             AppProvider.getRouter(context)!.navigateTo(
                                 context,
-                                urlToRoute(url )).catchError((onError){
+                                urlToRoute(u2 )).catchError((onError){
 
                               AppProvider.getRouter(context)!.pop(context);
                             });
@@ -2314,7 +2354,7 @@ Expanded(
                             );
 
                           }else {
-                            AppProvider.getRouter(context)!.navigateTo(
+                             AppProvider.getRouter(context)!.navigateTo(
                                 context,
                                 urlToRoute(url + '/'));
                           }
@@ -2415,7 +2455,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2424,9 +2467,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -2646,7 +2692,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2655,9 +2704,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -2720,7 +2772,10 @@ Expanded(
                     //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                     textStyle: const TextStyle(fontSize:14, color: Colors.black),
                     onTapUrl: (url) async{
-                      if(url.toLowerCase().contains('projects.co.id')){
+                                               if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                         if(url.contains(RegExp(r'[0-9]'))){
@@ -2844,7 +2899,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -2853,9 +2911,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -3074,7 +3135,10 @@ Expanded(
                         //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                         textStyle: const TextStyle(fontSize:14, color: Colors.black),
                         onTapUrl: (url) async{
-                          if(url.toLowerCase().contains('projects.co.id')){
+                                                   if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                             if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -3083,9 +3147,12 @@ Expanded(
                                     context,
                                     urlToRoute(url+ '/' ));
                               }else{
-                                AppProvider.getRouter(context)!.navigateTo(
-                                    context,
-                                    urlToRoute(url )).catchError((onError){
+                                   var u = url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            var u1 = u.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            var u2 = u1.replaceAll('user/my_products/view/','public/browse_products/view/');
+                            AppProvider.getRouter(context)!.navigateTo(
+                                context,
+                                urlToRoute(u2 )).catchError((onError){
 
                                   AppProvider.getRouter(context)!.pop(context);
                                 });
@@ -3149,7 +3216,10 @@ Expanded(
                     //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                     textStyle: const TextStyle(fontSize:14, color: Colors.black),
                     onTapUrl: (url) async{
-                      if(url.toLowerCase().contains('projects.co.id')){
+                                               if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                         if(url.toLowerCase().contains(RegExp(r'[0-9]'))){
@@ -3369,7 +3439,10 @@ Expanded(
                     //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                     textStyle: const TextStyle(fontSize:14, color: Colors.black),
                     onTapUrl: (url) async{
-                      if(url.toLowerCase().contains('projects.co.id')){
+                                               if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                         if(url.contains(RegExp(r'[0-9]'))){
@@ -3568,7 +3641,10 @@ Expanded(
                 //bodyPadding: const EdgeInsets.only(left:8, right: 8, bottom: 5),
                 textStyle: const TextStyle(fontSize:14, color: Colors.black),
                 onTapUrl: (url) async{
-                  if(url.toLowerCase().contains('projects.co.id')){
+                                           if(url.toLowerCase().contains('projects.co.id')){
+                            url.replaceAll('user/my_projects/view/','public/browse_projects/view/');
+                            url.replaceAll('user/my_services/view/','public/browse_services/view/');
+                            url.replaceAll('user/my_products/view/','public/browse_products/view/');
 
 
                     if(url.toLowerCase().contains(RegExp(r'[0-9]'))){

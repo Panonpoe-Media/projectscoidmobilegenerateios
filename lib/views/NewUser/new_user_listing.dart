@@ -729,11 +729,14 @@ class  PublicNewUserBottomLoader extends StatelessWidget {
      // next = false;
    }
    fetchData(NewUserController? new_user, BuildContext context)async {
+     /*
      if (this.model == null) {
        final hash = new_user!.getHash();
        hash.then((value) {
          this.idHash = value;
        });
+
+
        final future = new_user!.viewNewUser();
        future.then((value) {
          setState(() {
@@ -752,6 +755,8 @@ class  PublicNewUserBottomLoader extends StatelessWidget {
          });
        });
      }
+
+     */
    }
 
 
