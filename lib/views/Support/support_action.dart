@@ -54,12 +54,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-
+/** AUTOGENERATE OFF **/
 class ContactFormSupport extends StatefulWidget {
 
   static const String PATH = '/public/support/contact_form/:id/:title';
+  //+ 'ReportaViolation' + 'a*b*c';
   final String? id ;
   final String? title;
+
   ContactFormSupport({Key? key, this.id, this.title}) : super(key: key);
 
   @override
@@ -82,6 +84,10 @@ class ContactFormSupportState extends State<ContactFormSupport> with Restoration
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Contact Form';
+  var mytitle = '';
+  var myrvurl = '';
+  var isrv = false;
+
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -100,6 +106,14 @@ final RestorableInt _counter = RestorableInt(0);
   initState(){
     super.initState();
     controller = ScrollController();
+    mytitle = widget.title!;
+    mytitle.contains('ReportaViolation')? isrv = true: isrv = false;
+    if(isrv){
+      widget.title!.replaceAll('ReportaViolation', '|').split('|');
+
+      mytitle = widget.title!.replaceAll('ReportaViolation', '|').split('|')[0];
+      myrvurl = widget.title!.replaceAll('ReportaViolation', '|').split('|')[1].replaceAll('*','/');
+    }
     validation.add(true);
   }
   void _onWidgetDidBuild(Function callback) {
@@ -117,6 +131,11 @@ final RestorableInt _counter = RestorableInt(0);
         });
           try{
 		  this.model = value;
+      if(isrv){
+        this.model.model.model.question = 'Permintaan Peninjauan \nSaya ingin melaporkan URL ini: \n $myrvurl \nAlasan: \n';
+
+      }
+
 		    try{
             errmsg = value;
 			  }catch(e){
@@ -272,7 +291,7 @@ final RestorableInt _counter = RestorableInt(0);
         getPath,
         AppAction.edit,
         widget.id!,
-        widget.title!,
+        mytitle!,
         null,
 		false);
 		
@@ -301,7 +320,7 @@ final RestorableInt _counter = RestorableInt(0);
 
                                   ),
                                 ),
-                                Text('Contact Form', style: TextStyle(color: Colors.white),),
+                                isrv? Text('Report a Violation', style: TextStyle(color: Colors.white),) : Text('Contact Form', style: TextStyle(color: Colors.white),),
                               ]
                             ),
 
@@ -413,7 +432,7 @@ final RestorableInt _counter = RestorableInt(0);
                             
                             Padding(padding: const EdgeInsets.fromLTRB(
                                 8.0, 14.0, 8.0, 2.0),
-                              child:  Html(data: this.model.model.meta.title,
+                              child: isrv? Text('Report a Violation', style: TextStyle(color: Colors.grey),) :  Html(data: this.model.model.meta.title,
                                                   onLinkTap: (url, _, __, ___) async{
                                   if(url!.contains('projects.co.id')){
                                     if(url!.contains(   RegExp(r'[0-9]'))){
@@ -656,7 +675,7 @@ final RestorableInt _counter = RestorableInt(0);
                               height: 30,
                             ),
 							
-							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,contact_form, postContactFormResult, this, sendPath, widget.id!, widget.title!),
+							   isLoading!? [] : isError? null: this.model.RButtons(context, _dialVisible, formKey, controller,contact_form, postContactFormResult, this, sendPath, widget.id! , mytitle!),
           
                       
                         Container(

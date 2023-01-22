@@ -1,5 +1,5 @@
 // ignore_for_file: unused_element
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:projectscoid/app/app.dart';
 import 'package:projectscoid/ProjectscoidApplication.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:projectscoid/core/components/utility/firebase/firebase_config.dart';
@@ -35,6 +36,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
 
+}
+
+
+class sslOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 class Env {
@@ -78,10 +89,13 @@ class Env {
      // Stetho.initialize();
     }
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    HttpOverrides.global = sslOverrides();
+   // FlutterDownloader.initialize(ignoreSsl: true);
    // Bloc.observer = ProjectscoidBlocDelegate();
     var application = ProjectscoidApplication();
     await application.onCreate();
-    await FlutterDownloader.initialize(debug: debug);
+    await FlutterDownloader.initialize(debug: debug, ignoreSsl: true);
     await Firebase.initializeApp(
       options: DefaultFirebaseConfig.platformOptions,
     );

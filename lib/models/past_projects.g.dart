@@ -124,6 +124,7 @@ ViewModelPastProjectsRev _$ViewModelPastProjectsRevFromJson(
           ? null
           : UserBidsListingToolsRev.fromJson(
               json['user_bids'] as Map<String, dynamic>),
+      json['project_id'] as String?,
 
 
 
@@ -228,6 +229,7 @@ Map<String, dynamic> _$ViewModelPastProjectsRevToJson(
            'arbitration_list': instance.arbitration_list,
       'arbitration_list_str': instance.arbitration_list_str,
       'user_bids': instance.user_bids,
+      'project_id': instance.project_id
 
 
     };

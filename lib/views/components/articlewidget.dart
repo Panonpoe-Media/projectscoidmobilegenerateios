@@ -765,6 +765,10 @@ class _ArticleWidget extends State<ArticleWidget> {
         result = 'This field is required';
         isvalid= false;
       }
+      if(value.length < 11){
+        result = 'This field must have at least 10 characters';
+        isvalid= false;
+      }
     } else{
       if (value.isEmpty){
         result = '';

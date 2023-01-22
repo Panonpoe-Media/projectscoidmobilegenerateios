@@ -219,6 +219,18 @@ class DBRepository{
   }
 
   Future<void> saveOrUpdateBlacklist(String userID, String meta) async{
+    var oldblack = await loadBlacklist(userID);
+
+    if(oldblack != null && !oldblack.isEmpty){
+
+      for(var map in oldblack) {
+        meta =   map['meta']  + meta + '|';
+
+      }
+    }else{
+      meta = meta +  '|';
+    }
+
     if(userID != '') {
       _database!.transaction((txn) async {
         var batch = txn.batch();
@@ -259,14 +271,14 @@ class DBRepository{
   }
   
   Future<void> deleteBlacklist() async{
-    _database!.transaction((txn) async {
-      var batch = txn.batch();
+   // _database!.transaction((txn) async {
+   //   var batch = txn.batch();
+    var batch = _database!.batch();
 
       batch.rawDelete('DELETE FROM blacklist');
       await batch.commit(noResult: true);
-    });
+  //  });
   }
-  
  
 
   Future loadToken()async{
@@ -756,12 +768,12 @@ class DBRepository{
       }
     }
     
-    _database!.transaction((txn) async {
-      var batch = txn.batch();
+   // _database!.transaction((txn) async {
+      var batch = _database!.batch();
       batch.rawDelete('''DELETE FROM storage Where `table_id` = ''' +
           TableID_Home.toString() + ''' AND `user_id` = '$userID' ''');
       await batch.commit(noResult: true);
-    });
+   // });
   }
 
 
@@ -1166,11 +1178,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-    _database!.transaction((txn) async {
-      var batch = txn.batch();
+   // _database!.transaction((txn) async {
+      var batch = _database!.batch();
       batch.rawDelete('''DELETE FROM storage Where  `user_id` = '$userID' ''');
       await batch.commit(noResult: true);
-    });
+   // });
  }
   //-------------------------------------------------
 
@@ -1497,11 +1509,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Test.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -1829,11 +1841,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Testimonial.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -2161,11 +2173,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_CeritaSukses.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -2493,11 +2505,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Tips.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -2825,11 +2837,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_BrowseProjects.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdatePlaceNewBidBrowseProjects(PlaceNewBidBrowseProjectsModel place_new_bid, String spKey) async{
@@ -3760,11 +3772,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_PastProjects.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -4092,11 +4104,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_NewUser.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateRegisterNewUser(RegisterNewUserModel register, String spKey) async{
@@ -4826,11 +4838,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Program.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdatePromoProgram(PromoProgramModel promo, String spKey) async{
@@ -5359,11 +5371,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_ExistingUser.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateForgotPasswordExistingUser(ForgotPasswordExistingUserModel forgot_password, String spKey) async{
@@ -6093,11 +6105,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Support.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateContactFormSupport(ContactFormSupportModel contact_form, String spKey) async{
@@ -6626,11 +6638,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_BrowseServices.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdatePlaceOrderBrowseServices(PlaceOrderBrowseServicesModel place_order, String spKey) async{
@@ -7159,11 +7171,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_BrowseUsers.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateInviteToBidBrowseUsers(InviteToBidBrowseUsersModel invite_to_bid, String spKey) async{
@@ -7893,11 +7905,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_BrowseProducts.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateAddToCartBrowseProducts(AddToCartBrowseProductsModel add_to_cart, String spKey) async{
@@ -8426,11 +8438,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Cart.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateEmptyCartCart(EmptyCartCartModel empty_cart, String spKey) async{
@@ -9160,11 +9172,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Checkout.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdatePayWithAvailableBalanceCheckout(PayWithAvailableBalanceCheckoutModel pay_with_available_balance, String spKey) async{
@@ -11100,11 +11112,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Blog.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -11432,11 +11444,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyProjects.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateBumpUpMyProjects(BumpUpMyProjectsModel bump_up, String spKey) async{
@@ -15181,11 +15193,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyBids.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateCancelBidMyBids(CancelBidMyBidsModel cancel_bid, String spKey) async{
@@ -15714,11 +15726,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyProducts.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateAddNewProductMyProducts(AddNewProductMyProductsModel add_new_product, String spKey) async{
@@ -17252,11 +17264,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyServices.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateAddNewServiceMyServices(AddNewServiceMyServicesModel add_new_service, String spKey) async{
@@ -18790,11 +18802,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MySales.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -19122,11 +19134,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyOrders.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateConfirmPaymentMyOrders(ConfirmPaymentMyOrdersModel confirm_payment, String spKey) async{
@@ -19655,11 +19667,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyPurchases.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateDownloadMyPurchases(DownloadMyPurchasesModel download, String spKey) async{
@@ -20389,11 +20401,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyReferals.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -20721,11 +20733,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyFinance.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateChangePaymentSettingsMyFinance(ChangePaymentSettingsMyFinanceModel change_payment_settings, String spKey) async{
@@ -21656,11 +21668,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyPoints.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -21988,11 +22000,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyProfile.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateEditProfileMyProfile(EditProfileMyProfileModel edit_profile, String spKey) async{
@@ -23124,11 +23136,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_Kelurahan.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -23456,11 +23468,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyPortofolio.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateAddPortofolioMyPortofolio(AddPortofolioMyPortofolioModel add_portofolio, String spKey) async{
@@ -24190,11 +24202,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyBookmarks.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
 
@@ -24522,11 +24534,11 @@ Future<void> deleteAll() async{
         userID = map['id'];
       }
     }
-	_database!.transaction((txn) async {
-	   var batch = txn.batch();
+	//_database!.transaction((txn) async {
+	   var batch = _database!.batch();
     batch.rawDelete('''DELETE FROM storage Where `table_id` = '''+ TableID_MyBuddies.toString()  + ''' AND `user_id` = '$userID' ''');
     await batch.commit(noResult: true);
-	});
+	//});
  }
 
   Future<void> saveOrUpdateRemoveMyBuddies(RemoveMyBuddiesModel remove, String spKey) async{

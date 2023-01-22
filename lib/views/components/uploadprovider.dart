@@ -1,6 +1,7 @@
 
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
 import 'dart:convert';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -36,6 +37,14 @@ class DIOProvider {
 
 
     _dio = Dio(dioOptions);
+
+    (_dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
+
     //getApplicationDocumentsDirectory().then((value) {
       //var path = value.path;
     cj = PersistCookieJar(storage: FileStorage('$appDoc/.cookies/'), ignoreExpires: true);

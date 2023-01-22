@@ -4,6 +4,7 @@ import 'past_projects_item_base.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/views/components/index.dart';
 import 'package:projectscoid/core/AppProvider.dart';
@@ -149,6 +150,8 @@ class ViewModelPastProjectsRev {
   List<int?>? arbitration_list;
   List<String?>? arbitration_list_str;
   UserBidsListingToolsRev? user_bids;
+  String? project_id;
+
 
   //
   ViewModelPastProjectsRev(
@@ -226,6 +229,7 @@ class ViewModelPastProjectsRev {
           this.arbitration_list,
     this.arbitration_list_str,
     this.user_bids,
+    this.project_id,
 
 
 
@@ -707,6 +711,10 @@ class PastProjectsViewModel extends PastProjectsViewBase {
   }
 
   Widget viewDesc(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
     YoutubePlayerController _controller;
     var document = parse(this
         .model
@@ -864,7 +872,86 @@ class PastProjectsViewModel extends PastProjectsViewBase {
                   separatorBuilder: (context, _) =>
                       const SizedBox(height: 10.0),
                 ),
-              )
+              ),
+        ButtonBarTheme(
+          data: ButtonBarThemeData(
+            alignment: MainAxisAlignment.center,
+            buttonMinWidth: 0.6 * width,
+          ),
+          child: ButtonBar(
+              alignment: MainAxisAlignment.center,
+              buttonMinWidth: 0.6 * width,
+              children: <Widget>[
+
+                ElevatedButton(
+                    child: Text('Report '),
+                    style: ButtonStyle(
+                      textStyle:
+                      MaterialStateProperty.all<TextStyle>(
+                          const TextStyle(color: Colors.white)),
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(
+                          Colors.red),
+                    ),
+                    onPressed: () {
+                      //print('helooooooooooo');
+                      AppProvider.getRouter(
+                          context)!
+                          .navigateTo(
+                        context,
+                        '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*past_projects*view*${ this.model.model.project_id}*${ this.model.meta.title.replaceAll('/', ' ')}',
+                      );
+                    }),
+                ElevatedButton(
+                    child: Text('Block'),
+                    style: ButtonStyle(
+                      textStyle:
+                      MaterialStateProperty.all<TextStyle>(
+                          const TextStyle(color: Colors.white)),
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(
+                          Colors.red),
+                    ),
+                    onPressed: () async{
+                      return await showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDialog(
+                              title: Text('Block',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                              content: Text('Apakah Anda blok halaman ini?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () async{
+                                    await apiRepProvider!.loadAndSaveBlacklist('black', this.model.model.project_id + 'PastProjects');
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PublicPastProjectsListing(id: '0')),
+                                          (Route<dynamic> route) => false,
+                                    );
+                                    // Navigator.pop(context); Navigator.pop(context);
+                                  },
+                                  /*Navigator.of(context).pop(true)*/
+                                  child: Text('Ya'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(false),
+                                  child: Text('Tidak'),
+                                ),
+
+
+                              ],
+                            ),
+                      );
+                    }
+                  //print('helooooooooooo');
+                  //  await apiRepProvider!.loadAndSaveBlacklist('black', this.model!.model!.project_id + 'BrowseProjects');
+
+                ),
+              ]),
+        ),
       ],
     );
   }
@@ -2021,6 +2108,7 @@ class PastProjectsViewModel extends PastProjectsViewBase {
         padding: EdgeInsets.only(left: 10.0, top: 0.0),
         child: viewChannels1(context)));
 
+
     viewChildren.add(projectInfo(context));
     viewChildren.add(projectStatus(context));
 
@@ -2359,9 +2447,14 @@ class ItemPastProjectsContent2 extends StatelessWidget {
   final BannerAd? bannerAd;
   final bool? isBanner;
 
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
     final TextStyle titleStyle = theme.textTheme.headline1!
         .copyWith(fontSize: 15, fontWeight: FontWeight.w500);
     final TextStyle? descriptionStyle = theme.textTheme.headline5;
@@ -2572,6 +2665,85 @@ class ItemPastProjectsContent2 extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      ButtonBarTheme(
+        data: ButtonBarThemeData(
+          alignment: MainAxisAlignment.center,
+          buttonMinWidth: 0.6 * width,
+        ),
+        child: ButtonBar(
+            alignment: MainAxisAlignment.center,
+            buttonMinWidth: 0.6 * width,
+            children: <Widget>[
+
+              ElevatedButton(
+                  child: Text('Report '),
+                  style: ButtonStyle(
+                    textStyle:
+                    MaterialStateProperty.all<TextStyle>(
+                        const TextStyle(color: Colors.white)),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(
+                        Colors.red),
+                  ),
+                  onPressed: () {
+                    //print('helooooooooooo');
+                    AppProvider.getRouter(
+                        context)!
+                        .navigateTo(
+                      context,
+                      '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*past_projects*view*${destination!.item!.project_id}*${destination!.item!.title.replaceAll('/', ' ')}',
+                    );
+                  }),
+              ElevatedButton(
+                  child: Text('Block'),
+                  style: ButtonStyle(
+                    textStyle:
+                    MaterialStateProperty.all<TextStyle>(
+                        const TextStyle(color: Colors.white)),
+                    backgroundColor:
+                    MaterialStateProperty.all<Color>(
+                        Colors.red),
+                  ),
+                  onPressed: () async{
+                    return await showDialog(
+                      context: context,
+                      builder: (context) =>
+                          AlertDialog(
+                            title: Text('Block',
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                            content: Text('Apakah Anda blok halaman ini?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () async{
+                                  await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item!.project_id + 'PastProjects');
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PublicPastProjectsListing(id: '0')),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                  // Navigator.pop(context); Navigator.pop(context);
+                                },
+                                /*Navigator.of(context).pop(true)*/
+                                child: Text('Ya'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text('Tidak'),
+                              ),
+
+
+                            ],
+                          ),
+                    );
+                  }
+                //print('helooooooooooo');
+                //  await apiRepProvider!.loadAndSaveBlacklist('black', this.model!.model!.project_id + 'BrowseProjects');
+
+              ),
+            ]),
       ),
       // Description and share/explore buttons.
       Padding(

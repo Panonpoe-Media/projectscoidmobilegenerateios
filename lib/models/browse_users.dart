@@ -1,6 +1,7 @@
 import 'package:projectscoid/models/model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:projectscoid/controllers/controllers.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -813,7 +814,7 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
               style: TextStyle(fontSize: 22),
             )),
             SizedBox(height: 10),
-            _buildButtons(context, account),
+            _buildButtons(context, account, cb),
             _buildBio(context, account),
           ]),
         ),
@@ -1676,6 +1677,7 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
         children: <Widget>[
+          /*
           _buildProcentageIndicator(
               "Arbitrated",
               "%",
@@ -1685,6 +1687,8 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
                   : this.model!.model!.projects_won +
                       this.model!.model!.projects_owned,
               context),
+
+           */
           _buildProcentageIndicator(
               "Completed",
               "%",
@@ -1826,75 +1830,173 @@ class BrowseUsersViewModel extends BrowseUsersViewBase {
     );
   }
 
-  Widget _buildButtons(BuildContext context, bool? account) {
+  Widget _buildButtons(BuildContext context, bool? account, ChatBloc? cb) {
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                if (account!) {
-                  AppProvider.getRouter(context)!.navigateTo(
-                      context,
-                      urlToRoute(
-                          'public/browse_users/hire_me/${this.model!.model!.user_id}/${this.model!.meta.title}'));
-                } else {
-                  AppProvider.getRouter(context)!
-                      .navigateTo(context, '/login/1');
-                }
-              },
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                  color: Color(0xFF404A5C),
-                ),
-                child: Center(
-                  child: Text(
-                    "HIRE ME",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
+      child:
+      Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      if (account!) {
+                        AppProvider.getRouter(context)!.navigateTo(
+                            context,
+                            urlToRoute(
+                                'public/browse_users/hire_me/${this.model!.model!.user_id}/${this.model!.meta.title}'));
+                      } else {
+                        AppProvider.getRouter(context)!
+                            .navigateTo(context, '/login/1');
+                      }
+                    },
+                    child: Container(
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                        color: Color(0xFF404A5C),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "HIRE ME",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          SizedBox(width: 10.0),
-          Expanded(
-            child: InkWell(
-              onTap: () {
-                if (account!) {
-                  AppProvider.getRouter(context)!.navigateTo(
-                      context,
-                      urlToRoute(
-                          'public/browse_users/invite_to_bid/${this.model!.model!.user_id}/${this.model!.meta.title}'));
-                } else {
-                  AppProvider.getRouter(context)!
-                      .navigateTo(context, '/login/1');
-                }
-              },
-              child: Container(
-                height: 40.0,
-                decoration: BoxDecoration(
-                  border: Border.all(),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      "Invite to bid",
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                SizedBox(width: 10.0),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      if (account!) {
+                        AppProvider.getRouter(context)!.navigateTo(
+                            context,
+                            urlToRoute(
+                                'public/browse_users/invite_to_bid/${this.model!.model!.user_id}/${this.model!.meta.title}'));
+                      } else {
+                        AppProvider.getRouter(context)!
+                            .navigateTo(context, '/login/1');
+                      }
+                    },
+                    child: Container(
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Invite to bid",
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
+            SizedBox(width: 20.0),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      AppProvider.getRouter(
+                          context)!
+                          .navigateTo(
+                        context,
+                        '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*browse_users*view*${this.model!.model!.user_id}*${this.model!.model!.user_name.replaceAll('/', ' ')}',
+                      );
+                    },
+                    child: Container(
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Report",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                Expanded(
+                  child: InkWell(
+                    onTap: ()async {
+                      return await showDialog(
+                        context: context,
+                        builder: (context) =>
+                            AlertDialog(
+                              title: Text('Block',
+                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                              content: Text('Apakah Anda blok user ini?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () async{
+                                    await apiRepProvider!.loadAndSaveBlacklist('black', this.model!.model!.user_id + 'BrowseUsers');
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PublicBrowseUsersListing(
+                                                  id: '0',
+                                                  cb: cb)),
+                                          (Route<dynamic> route) => false,
+                                    );
+                                    // Navigator.pop(context); Navigator.pop(context);
+                                  },
+                                  /*Navigator.of(context).pop(true)*/
+                                  child: Text('Ya'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(false),
+                                  child: Text('Tidak'),
+                                ),
+
+
+                              ],
+                            ),
+                      );
+                    },
+                    child: Container(
+                      height: 40.0,
+                      decoration: BoxDecoration(
+                        border: Border.all(),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "Block",
+                            style: TextStyle(color: Colors.red,fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ]
+      )
+
+
     );
   }
 
@@ -7435,6 +7537,8 @@ class ItemBrowseUsersContent1 extends StatelessWidget {
 
   Widget viewHeader(BuildContext context, bool? account) {
     final ThemeData theme = Theme.of(context);
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
     final TextStyle titleStyle = theme.textTheme.headline1!
         .copyWith(color: CurrentTheme.NormalTextColor);
     final TextStyle? descriptionStyle = theme.textTheme.headline5;
@@ -7470,7 +7574,7 @@ class ItemBrowseUsersContent1 extends StatelessWidget {
                               padding: EdgeInsets.only(left: 10, right: 8),
                               icon: Icon(Icons.more_horiz, color: Colors.white),
                               //color: Colors.white,
-                              onSelected: (int value) {
+                              onSelected: (int value)async {
                                 if (value == 1) {
                                   if (account!) {
                                     AppProvider.getRouter(context)!.navigateTo(
@@ -7512,6 +7616,51 @@ class ItemBrowseUsersContent1 extends StatelessWidget {
 
                                                */
                                 }
+                                if(value == 4){
+
+                                  AppProvider.getRouter(
+                                      context)!
+                                      .navigateTo(
+                                    context,
+                                    '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*browse_users*view*${destination!.item.user_id}*${destination!.item.user_name.replaceAll('/', ' ')}',
+                                  );
+                                }
+                                if(value == 5){
+                                  return await showDialog(
+                                    context: context,
+                                    builder: (context) =>
+                                        AlertDialog(
+                                          title: Text('Block',
+                                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                          content: Text('Apakah Anda blok user ini?'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () async{
+                                                await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.user_id + 'BrowseUsers');
+                                                Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PublicBrowseUsersListing(
+                                                              id: '0',
+                                                              cb: cb)),
+                                                      (Route<dynamic> route) => false,
+                                                );
+                                                // Navigator.pop(context); Navigator.pop(context);
+                                              },
+                                              /*Navigator.of(context).pop(true)*/
+                                              child: Text('Ya'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => Navigator.of(context).pop(false),
+                                              child: Text('Tidak'),
+                                            ),
+
+
+                                          ],
+                                        ),
+                                  );
+                                }
                               },
                               itemBuilder: (BuildContext context) =>
                                   <PopupMenuItem<int>>[
@@ -7526,6 +7675,14 @@ class ItemBrowseUsersContent1 extends StatelessWidget {
                                 const PopupMenuItem<int>(
                                   value: 3,
                                   child: Text('View'),
+                                ),
+                                const PopupMenuItem<int>(
+                                  value: 4,
+                                  child: Text('Report'),
+                                ),
+                                const PopupMenuItem<int>(
+                                  value: 5,
+                                  child: Text('Block'),
                                 ),
                               ],
                             ),

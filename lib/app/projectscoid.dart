@@ -6821,7 +6821,7 @@ class CartViewState extends State<CartView> with RestorationMixin {
   }
 
   void _onWidgetDidBuild(Function callback) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       callback();
     });
     // next = false;

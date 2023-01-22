@@ -39,6 +39,7 @@ import 'package:dio/dio.dart';
 import 'package:camera/camera.dart' ;
 import 'package:flutter/services.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:projectscoid/views/Pages/page_view.dart';
 /** AUTOGENERATE OFF **/
 
 class RegisterNewUser extends StatefulWidget {
@@ -470,6 +471,7 @@ class RegisterNewUserState extends State<RegisterNewUser>with RestorationMixin{
                                 8.0, 14.0, 8.0, 2.0),
                               child: Html(data: this.model.model.meta.after_content,
                                                   onLinkTap:(url, _, __, ___) async{
+                                 print('haloooooooooosaja  ${url}');
                                   if(url!.contains('projects.co.id')){
                                     if(url!.contains(new RegExp(r'[0-9]'))){
                                       if(url!.contains('show_conversation')){
@@ -483,9 +485,25 @@ class RegisterNewUserState extends State<RegisterNewUser>with RestorationMixin{
 
                                         AppProvider.getRouter(context)!.pop(context);
                                       });
+
                                       }
 
-                                    }else{
+                                    }else if(url!.contains('/pages/syarat_layanan')){
+                                      print('haloooooooooosaja123  ${url}');
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) => PublicPageView(title: 'syarat_layanan', id: 0),
+                                              transitionDuration: const Duration(milliseconds: 600),
+                                              transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
+                                                return Opacity(
+                                                  opacity: animation.value,
+                                                  child: child,
+                                                );
+                                              }),
+                                              (Route<dynamic> route) => true);
+                                    }
+
+                                    else{
                                       AppProvider.getRouter(context)!.navigateTo(
                                         context,
                                         urlToRoute(url + '/listing/'));

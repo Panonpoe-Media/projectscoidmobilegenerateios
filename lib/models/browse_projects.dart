@@ -1,6 +1,7 @@
 import 'package:projectscoid/models/model.dart';
 import 'package:flutter/material.dart';
 import 'package:projectscoid/core/AppProvider.dart';
+import 'package:projectscoid/repository/repository.dart';
 import 'package:projectscoid/views/components/index.dart';
 import 'package:projectscoid/controllers/controllers.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
@@ -397,6 +398,7 @@ BrowseProjectsViewSuperBaseRev _$BrowseProjectsViewSuperBaseRevFromJson(Map<Stri
 
 class BrowseProjectsViewModel extends BrowseProjectsViewBase {
   Map<String, dynamic> json;
+
   // BrowseProjectsViewModel(Map<String, dynamic> this.json):super(json);
   BrowseProjectsViewModel(this.json) : super(json) {
     model = BrowseProjectsViewSuperBaseRev.fromJson(json);
@@ -812,12 +814,18 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
     }
   }
 
-  Widget viewButton(BuildContext context, bool account) {
+  Widget viewButton(BuildContext context, bool account, ChatBloc? cb) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
+
     return (this.model!.model!.project_status_id != 3
         ? Container()
-        : ButtonBarTheme(
+        :
+
+
+         ButtonBarTheme(
             data: ButtonBarThemeData(
               alignment: MainAxisAlignment.center,
               buttonMinWidth: 0.6 * width,
@@ -850,6 +858,75 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                               .navigateTo(context, '/login/1');
                         }
                       }),
+                  ElevatedButton(
+                      child: Text('Report '),
+                      style: ButtonStyle(
+                        textStyle:
+                        MaterialStateProperty.all<TextStyle>(
+                            const TextStyle(color: Colors.white)),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(
+                            Colors.red),
+                      ),
+                      onPressed: () {
+                        //print('helooooooooooo');
+                        AppProvider.getRouter(
+                            context)!
+                            .navigateTo(
+                          context,
+                          '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*browse_projects*view*${this.model!.model!.project_id}*${this.model!.meta.title.replaceAll('/', ' ')}',
+                        );
+                      }),
+                  ElevatedButton(
+                      child: Text('Block'),
+                      style: ButtonStyle(
+                        textStyle:
+                        MaterialStateProperty.all<TextStyle>(
+                            const TextStyle(color: Colors.white)),
+                        backgroundColor:
+                        MaterialStateProperty.all<Color>(
+                            Colors.red),
+                      ),
+                      onPressed: () async{
+                        return await showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AlertDialog(
+                                title: Text('Block',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                content: Text('Apakah Anda blok halaman / user ini?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () async{
+                                      await apiRepProvider!.loadAndSaveBlacklist('black', this.model!.model!.project_id + 'BrowseProjects');
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PublicBrowseProjectsListing(
+                                                    id: '0',
+                                                    cb: cb)),
+                                            (Route<dynamic> route) => false,
+                                      );
+                                     // Navigator.pop(context); Navigator.pop(context);
+                                    },
+                                    /*Navigator.of(context).pop(true)*/
+                                    child: Text('Ya'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.of(context).pop(false),
+                                    child: Text('Tidak'),
+                                  ),
+
+
+                                ],
+                              ),
+                           );
+                        }
+                        //print('helooooooooooo');
+                      //  await apiRepProvider!.loadAndSaveBlacklist('black', this.model!.model!.project_id + 'BrowseProjects');
+
+                      ),
                 ]),
           ));
   }
@@ -2328,7 +2405,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
     viewChildren.add(viewBidder(context));
     viewChildren.add(viewOwner(context));
 
-    viewChildren.add(viewButton(context, account));
+    viewChildren.add(viewButton(context, account, cb));
     viewChildren.add(viewButton1(context, account, state, idHash, cb));
 
     // viewChildren.add(viewHeader(context));
@@ -4108,6 +4185,8 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
   Widget build(BuildContext context) {
     // ChatBloc _chatBloc;
     final ThemeData theme = Theme.of(context);
+    APIRepository? apiRepProvider =
+        AppProvider.getApplication(context).projectsAPIRepository;
     final TextStyle titleStyle = theme.textTheme.headline1!
         .copyWith(fontSize: 15, fontWeight: FontWeight.w500);
     final TextStyle descriptionStyle = theme.textTheme.headline5!;
@@ -4117,6 +4196,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
     // print('owner str $owner_id_str1');
     // int?owner_id1 = int.parse(owner_id_str1);
     var ownerID = owner_id_str1; //encode(owner_id1);
+    final mediaQueryData = MediaQuery.of(context);
     final List<Widget> children = <Widget>[
       //viewHeader(context, account, _chatBloc),
       Row(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
@@ -4245,6 +4325,98 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                               ),
                             ]),
                       ),
+/*
+                      Padding(
+                          padding: const EdgeInsets.only(left: 10 ,bottom: 1.0, top: 1.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              // crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                GestureDetector(
+                                  onTap: () {
+                                    //destination!.item.buttons[2].url
+
+                                    AppProvider.getRouter(
+                                        context)!
+                                        .navigateTo(
+                                      context,
+                                      '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*${destination!.item.buttons[2].url.replaceAll('/','*')}',
+                                    );
+
+                                  },
+                                  child:  const Text('Report',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.red,
+                                    ),
+
+                                  ),
+                                ),
+                                const SizedBox(width : 3),
+                                const Text('|',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+
+                                ),
+                                const SizedBox(width : 3),
+                                GestureDetector(
+                                  onTap: () async{
+                                    return await showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          AlertDialog(
+                                            title: Text('Block',
+                                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                            content: Text('Apakah Anda blok halaman / user ini?'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () async{
+                                                  await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.project_id + 'BrowseProjects');
+                                                  Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PublicBrowseProjectsListing(
+                                                                id: '0',
+                                                                cb: cb)),
+                                                        (Route<dynamic> route) => false,
+                                                  );
+                                                  // Navigator.pop(context); Navigator.pop(context);
+                                                },
+                                                /*Navigator.of(context).pop(true)*/
+                                                child: Text('Ya'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.of(context).pop(false),
+                                                child: Text('Tidak'),
+                                              ),
+
+
+                                            ],
+                                          ),
+                                    );
+
+                                  },
+                                  child:  const Text('Block',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w300,
+                                      color: Colors.red,
+                                    ),
+
+                                  ),
+
+                                ),
+                              ]
+                          )
+                      ),
+
+ */
+
+
                     ]),
               ),
             ),
@@ -4253,6 +4425,107 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
         Expanded(
           child:
               Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+             /*
+                GestureDetector(
+                  onTap: () {
+                    //destination!.item.buttons[2].url
+
+                    AppProvider.getRouter(
+                        context)!
+                        .navigateTo(
+                      context,
+                      '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*${destination!.item.buttons[2].url.replaceAll('/','*')}',
+                    );
+
+                  },
+                  child: Container(
+                    height: 60.0,
+                    width: 40.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Icon(
+                            Icons.warning_rounded,
+                            size: 20.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                        Text('Report',
+                            style: TextStyle(
+                                fontSize: 8,
+                                fontWeight: FontWeight.w300)),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () async{
+                    return await showDialog(
+                      context: context,
+                      builder: (context) =>
+                          AlertDialog(
+                            title: Text('Block',
+                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                            content: Text('Apakah Anda blok halaman / user ini?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () async{
+                                  await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.project_id + 'BrowseProjects');
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PublicBrowseProjectsListing(
+                                                id: '0',
+                                                cb: cb)),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                  // Navigator.pop(context); Navigator.pop(context);
+                                },
+                                /*Navigator.of(context).pop(true)*/
+                                child: Text('Ya'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text('Tidak'),
+                              ),
+
+
+                            ],
+                          ),
+                    );
+
+                  },
+                  child: Container(
+                    height: 60.0,
+                    width: 40.0,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 8),
+                          child: Icon(
+                            Icons.block_rounded,
+                            size: 20.0,
+                            color: Colors.red,
+                          ),
+                        ),
+                        Text('Block',
+                            style: TextStyle(
+                                fontSize: 8,
+                                fontWeight: FontWeight.w300)),
+                      ],
+                    ),
+                  ),
+                ),
+
+              */
+
+
             GestureDetector(
               onTap: () {
                 if (account!) {
@@ -4265,7 +4538,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
               },
               child: Container(
                 height: 60.0,
-                width: 44.0,
+                width: 40.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -4373,7 +4646,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
               },
               child: Container(
                 height: 60.0,
-                width: 44.0,
+                width: 40.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -4393,7 +4666,9 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                 ),
               ),
             ),
-            // if(_isRewardedAdReady)
+
+
+                // if(_isRewardedAdReady)
             GestureDetector(
               onTap: () {
                 if (account!) {
@@ -4412,7 +4687,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
               },
               child: Container(
                 height: 60.0,
-                width: 58.0,
+                width: 42.0,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -4441,28 +4716,30 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
         height: 0.3,
         color: Colors.grey,
       ),
-      GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => PublicBrowseProjectsView(
-                    id:
+      Row(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PublicBrowseProjectsView(
+                        id:
                         '${urlToRoute(destination!.item.buttons[2].url).split('/')[4]}',
-                    title:
+                        title:
                         '${urlToRoute(destination!.item.buttons[2].url).split('/')[5]}',
-                    cb: cb)),
-          );
-          /*
+                        cb: cb)),
+              );
+              /*
                       AppProvider.getRouter(context)!.navigateTo(
                       context,
                       urlToRoute(destination!.item.buttons[3].url ));
 
                    */
-        },
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 8.0),
-          child:
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 8.0),
+              child:
               /*
                          Html(data: readText(destination!.item.title, 45),
                              style: {
@@ -4475,12 +4752,108 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
                              })
 
                           */
-              Text(destination!.item.title.replaceAll('&amp;', '&'),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
-        ),
+              Container(
+                width: mediaQueryData.size.width * 3/4,
+
+                child: Text(destination!.item.title.replaceAll('&amp;', '&'),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                 ),
+              ),
+
+          ),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 1.0, top: 1.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        //destination!.item.buttons[2].url
+
+                        AppProvider.getRouter(
+                            context)!
+                            .navigateTo(
+                          context,
+                          '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*${destination!.item.buttons[2].url.replaceAll('/','*')}',
+                        );
+
+                      },
+                      child:  const Text('Report',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.red,
+                        ),
+
+                      ),
+                    ),
+                    const SizedBox(width : 3),
+                    const Text('|',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w300,
+                      ),
+
+                    ),
+                    const SizedBox(width : 3),
+                    GestureDetector(
+                      onTap: () async{
+                        return await showDialog(
+                          context: context,
+                          builder: (context) =>
+                              AlertDialog(
+                                title: Text('Block',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                content: Text('Apakah Anda blok halaman / user ini?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () async{
+                                      await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.project_id + 'BrowseProjects');
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PublicBrowseProjectsListing(
+                                                    id: '0',
+                                                    cb: cb)),
+                                            (Route<dynamic> route) => false,
+                                      );
+                                      // Navigator.pop(context); Navigator.pop(context);
+                                    },
+                                    /*Navigator.of(context).pop(true)*/
+                                    child: Text('Ya'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.of(context).pop(false),
+                                    child: Text('Tidak'),
+                                  ),
+
+
+                                ],
+                              ),
+                        );
+
+                      },
+                      child:  const Text('Block',
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.red,
+                        ),
+
+                      ),
+
+                    ),
+                  ]
+              )
+          ),
+        ],
       ),
+
+
       Container(
         // height:  120.0,
         padding: const EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 8.0),
@@ -4708,6 +5081,7 @@ class ItemBrowseProjectsContent2 extends StatelessWidget {
         height: 0.3,
         color: Colors.white,
       ),
+
 
       //  if(index! % 10 == 0 )
 

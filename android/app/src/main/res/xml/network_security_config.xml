@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">https://api.projects.co.id</domain>
-    </domain-config>
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+xmlns:android="http://schemas.android.com/apk/res/android">
+<domain-config cleartextTrafficPermitted="true">
+    <domain includeSubdomains="true">https://api.projects.co.id</domain>
+    <domain includeSubdomains="true">https://upload.projects.co.id</domain>
+    <domain includeSubdomains="true">https://projects.co.id</domain>
+    <trust-anchors>
+        <certificates src="system" />
+        <certificates src="user" />
+    </trust-anchors>
+</domain-config>
 </network-security-config>

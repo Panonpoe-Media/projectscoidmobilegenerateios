@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/adapter.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -12,6 +13,8 @@ import 'package:sprintf/sprintf.dart';
 //import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'dart:convert';
 import 'dart:developer' as l;
+import 'package:projectscoid/core/components/utility/secure/secure.dart';
+import 'package:intl/intl.dart';
 
 
 //non generate import
@@ -95,6 +98,13 @@ class APIProvider {
       BaseOptions dioOptions =  BaseOptions()//(contentType: ContentType.json, responseType: ResponseType.plain)
         ..baseUrl = '';//APIProvider._baseUrl;
       dio = Dio(dioOptions);
+      (dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (HttpClient client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+        return client;
+      };
+
       dio!.interceptors.add(CookieManager(cj));
      if(EnvType.DEVELOPMENT == Env.value!.environmentType || EnvType.STAGING == Env.value!.environmentType){
 
@@ -541,7 +551,7 @@ class APIProvider {
   }
 
 
-  Future getListTest(String url, int page) async{
+  Future getListTest(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -550,8 +560,13 @@ class APIProvider {
   // final future = TestListingAPI();
    TestListingModel test;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = TestListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['test_id'] == element);
+	  }
+	final data = TestListingModel(datajson);
 	return data;
 
   
@@ -638,7 +653,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListTestimonial(String url, int page) async{
+  Future getListTestimonial(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -647,8 +662,13 @@ dio!.options.headers = {
   // final future = TestimonialListingAPI();
    TestimonialListingModel testimonial;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = TestimonialListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['testimony_id'] == element);
+	  }
+	final data = TestimonialListingModel(datajson);
 	return data;
 
   
@@ -735,7 +755,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListCeritaSukses(String url, int page) async{
+  Future getListCeritaSukses(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -744,8 +764,13 @@ dio!.options.headers = {
   // final future = CeritaSuksesListingAPI();
    CeritaSuksesListingModel cerita_sukses;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = CeritaSuksesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['article_id'] == element);
+	  }
+	final data = CeritaSuksesListingModel(datajson);
 	return data;
 
   
@@ -832,7 +857,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListTips(String url, int page) async{
+  Future getListTips(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -841,8 +866,13 @@ dio!.options.headers = {
   // final future = TipsListingAPI();
    TipsListingModel tips;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = TipsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['article_id'] == element);
+	  }
+	final data = TipsListingModel(datajson);
 	return data;
 
   
@@ -929,7 +959,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListBrowseProjects(String url, int page) async{
+  Future getListBrowseProjects(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -938,8 +968,13 @@ dio!.options.headers = {
   // final future = BrowseProjectsListingAPI();
    BrowseProjectsListingModel browse_projects;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = BrowseProjectsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['project_id'] == element);
+	  }
+	final data = BrowseProjectsListingModel(datajson);
 	return data;
 
   
@@ -1026,7 +1061,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListPastProjects(String url, int page) async{
+  Future getListPastProjects(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1035,8 +1070,13 @@ dio!.options.headers = {
   // final future = PastProjectsListingAPI();
    PastProjectsListingModel past_projects;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = PastProjectsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['project_id'] == element);
+	  }
+	final data = PastProjectsListingModel(datajson);
 	return data;
 
   
@@ -1123,7 +1163,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListNewUser(String url, int page) async{
+  Future getListNewUser(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1132,8 +1172,13 @@ dio!.options.headers = {
   // final future = NewUserListingAPI();
    NewUserListingModel new_user;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = NewUserListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = NewUserListingModel(datajson);
 	return data;
 
   
@@ -1219,7 +1264,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListProgram(String url, int page) async{
+  Future getListProgram(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1228,8 +1273,13 @@ dio!.options.headers = {
   // final future = ProgramListingAPI();
    ProgramListingModel program;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = ProgramListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = ProgramListingModel(datajson);
 	return data;
 
   
@@ -1315,7 +1365,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListExistingUser(String url, int page) async{
+  Future getListExistingUser(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1324,8 +1374,13 @@ dio!.options.headers = {
   // final future = ExistingUserListingAPI();
    ExistingUserListingModel existing_user;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = ExistingUserListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = ExistingUserListingModel(datajson);
 	return data;
 
   
@@ -1411,7 +1466,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListSupport(String url, int page) async{
+  Future getListSupport(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1420,8 +1475,13 @@ dio!.options.headers = {
   // final future = SupportListingAPI();
    SupportListingModel support;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = SupportListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['contact_form_id'] == element);
+	  }
+	final data = SupportListingModel(datajson);
 	return data;
 
   
@@ -1508,7 +1568,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListBrowseServices(String url, int page) async{
+  Future getListBrowseServices(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1517,8 +1577,13 @@ dio!.options.headers = {
   // final future = BrowseServicesListingAPI();
    BrowseServicesListingModel browse_services;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = BrowseServicesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['service_id'] == element);
+	  }
+	final data = BrowseServicesListingModel(datajson);
 	return data;
 
   
@@ -1605,7 +1670,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListBrowseUsers(String url, int page) async{
+  Future getListBrowseUsers(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1614,8 +1679,13 @@ dio!.options.headers = {
   // final future = BrowseUsersListingAPI();
    BrowseUsersListingModel browse_users;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = BrowseUsersListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = BrowseUsersListingModel(datajson);
 	return data;
 
   
@@ -1702,7 +1772,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListBrowseProducts(String url, int page) async{
+  Future getListBrowseProducts(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1711,8 +1781,13 @@ dio!.options.headers = {
   // final future = BrowseProductsListingAPI();
    BrowseProductsListingModel browse_products;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = BrowseProductsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['product_id'] == element);
+	  }
+	final data = BrowseProductsListingModel(datajson);
 	return data;
 
   
@@ -1799,7 +1874,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListCart(String url, int page) async{
+  Future getListCart(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1808,8 +1883,13 @@ dio!.options.headers = {
   // final future = CartListingAPI();
    CartListingModel cart;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = CartListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = CartListingModel(datajson);
 	return data;
 
   
@@ -1896,7 +1976,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListCheckout(String url, int page) async{
+  Future getListCheckout(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -1905,8 +1985,13 @@ dio!.options.headers = {
   // final future = CheckoutListingAPI();
    CheckoutListingModel checkout;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = CheckoutListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = CheckoutListingModel(datajson);
 	return data;
 
   
@@ -1993,7 +2078,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListBlog(String url, int page) async{
+  Future getListBlog(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2002,8 +2087,13 @@ dio!.options.headers = {
   // final future = BlogListingAPI();
    BlogListingModel blog;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = BlogListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['article_id'] == element);
+	  }
+	final data = BlogListingModel(datajson);
 	return data;
 
   
@@ -2090,7 +2180,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyProjects(String url, int page) async{
+  Future getListMyProjects(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2099,8 +2189,13 @@ dio!.options.headers = {
   // final future = MyProjectsListingAPI();
    MyProjectsListingModel my_projects;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyProjectsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['project_id'] == element);
+	  }
+	final data = MyProjectsListingModel(datajson);
 	return data;
 
   
@@ -2187,7 +2282,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyBids(String url, int page) async{
+  Future getListMyBids(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2196,8 +2291,13 @@ dio!.options.headers = {
   // final future = MyBidsListingAPI();
    MyBidsListingModel my_bids;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyBidsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['bid_id'] == element);
+	  }
+	final data = MyBidsListingModel(datajson);
 	return data;
 
   
@@ -2283,7 +2383,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyProducts(String url, int page) async{
+  Future getListMyProducts(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2292,8 +2392,13 @@ dio!.options.headers = {
   // final future = MyProductsListingAPI();
    MyProductsListingModel my_products;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyProductsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['product_id'] == element);
+	  }
+	final data = MyProductsListingModel(datajson);
 	return data;
 
   
@@ -2380,7 +2485,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyServices(String url, int page) async{
+  Future getListMyServices(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2389,8 +2494,13 @@ dio!.options.headers = {
   // final future = MyServicesListingAPI();
    MyServicesListingModel my_services;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyServicesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['service_id'] == element);
+	  }
+	final data = MyServicesListingModel(datajson);
 	return data;
 
   
@@ -2477,7 +2587,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMySales(String url, int page) async{
+  Future getListMySales(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2486,8 +2596,13 @@ dio!.options.headers = {
   // final future = MySalesListingAPI();
    MySalesListingModel my_sales;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MySalesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['order_item_id'] == element);
+	  }
+	final data = MySalesListingModel(datajson);
 	return data;
 
   
@@ -2581,7 +2696,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyOrders(String url, int page) async{
+  Future getListMyOrders(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2590,8 +2705,13 @@ dio!.options.headers = {
   // final future = MyOrdersListingAPI();
    MyOrdersListingModel my_orders;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyOrdersListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['order_id'] == element);
+	  }
+	final data = MyOrdersListingModel(datajson);
 	return data;
 
   
@@ -2685,7 +2805,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyPurchases(String url, int page) async{
+  Future getListMyPurchases(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2694,8 +2814,13 @@ dio!.options.headers = {
   // final future = MyPurchasesListingAPI();
    MyPurchasesListingModel my_purchases;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyPurchasesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['order_item_id'] == element);
+	  }
+	final data = MyPurchasesListingModel(datajson);
 	return data;
 
   
@@ -2789,7 +2914,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyReferals(String url, int page) async{
+  Future getListMyReferals(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2798,8 +2923,13 @@ dio!.options.headers = {
   // final future = MyReferalsListingAPI();
    MyReferalsListingModel my_referals;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyReferalsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = MyReferalsListingModel(datajson);
 	return data;
 
   
@@ -2886,7 +3016,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyFinance(String url, int page) async{
+  Future getListMyFinance(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2895,8 +3025,13 @@ dio!.options.headers = {
   // final future = MyFinanceListingAPI();
    MyFinanceListingModel my_finance;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyFinanceListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = MyFinanceListingModel(datajson);
 	return data;
 
   
@@ -2983,7 +3118,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyPoints(String url, int page) async{
+  Future getListMyPoints(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -2992,8 +3127,13 @@ dio!.options.headers = {
   // final future = MyPointsListingAPI();
    MyPointsListingModel my_points;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyPointsListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = MyPointsListingModel(datajson);
 	return data;
 
   
@@ -3080,7 +3220,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyProfile(String url, int page) async{
+  Future getListMyProfile(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -3089,8 +3229,13 @@ dio!.options.headers = {
   // final future = MyProfileListingAPI();
    MyProfileListingModel my_profile;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyProfileListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['user_id'] == element);
+	  }
+	final data = MyProfileListingModel(datajson);
 	return data;
 
   
@@ -3177,7 +3322,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListKelurahan(String url, int page) async{
+  Future getListKelurahan(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -3186,8 +3331,13 @@ dio!.options.headers = {
   // final future = KelurahanListingAPI();
    KelurahanListingModel kelurahan;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = KelurahanListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['kelurahan_id'] == element);
+	  }
+	final data = KelurahanListingModel(datajson);
 	return data;
 
   
@@ -3274,7 +3424,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyPortofolio(String url, int page) async{
+  Future getListMyPortofolio(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -3283,8 +3433,13 @@ dio!.options.headers = {
   // final future = MyPortofolioListingAPI();
    MyPortofolioListingModel my_portofolio;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyPortofolioListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['portofolio_id'] == element);
+	  }
+	final data = MyPortofolioListingModel(datajson);
 	return data;
 
   
@@ -3370,7 +3525,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyBookmarks(String url, int page) async{
+  Future getListMyBookmarks(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -3379,8 +3534,13 @@ dio!.options.headers = {
   // final future = MyBookmarksListingAPI();
    MyBookmarksListingModel my_bookmarks;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyBookmarksListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['bookmark_id'] == element);
+	  }
+	final data = MyBookmarksListingModel(datajson);
 	return data;
 
   
@@ -3466,7 +3626,7 @@ dio!.options.headers = {
   }
 
 
-  Future getListMyBuddies(String url, int page) async{
+  Future getListMyBuddies(String url, int page, List<String> list) async{
   dio!.options.connectTimeout = 15000;
   dio!.options.headers = {
       'User-Agent': 'ProjectMobile/1.0',
@@ -3475,8 +3635,13 @@ dio!.options.headers = {
   // final future = MyBuddiesListingAPI();
    MyBuddiesListingModel my_buddies;
     Response response = await dio!.get(sprintf(url, [page]));
-
-	final data = MyBuddiesListingModel(response.data);
+    Map<String, dynamic> datajson = response.data;
+	 // print('====lsit==> ' + list[0]);
+	  for (var element in list) {
+	   // print('====element==> ' + element);
+		(datajson!['items'] as List).removeWhere((item) => item['buddy_id'] == element);
+	  }
+	final data = MyBuddiesListingModel(datajson);
 	return data;
 
   
@@ -8012,7 +8177,13 @@ dio!.options.headers = {
 
   Future userLogin(String username, String pwd) async{
   dio!.options.connectTimeout = 15000;
-    String url = Env.value!.baseUrl! + '/public/home/login/?ajax=1';
+   String url = Env.value!.baseUrl! + '/public/home/login/?ajax=1';
+   //  var now = DateTime.now();
+   //  var format = DateFormat('yyyy-MM-dd hh:mm'); //yyyy-mm-dd hh:nn yyyy-MM-dd hh:mm
+   //  var md5val = generateMd5('802c28projects9731${format.format(now)}');
+  //  String url = Env.value!.baseUrl! + '/public/home/impersonate/802c28/$md5val';
+  //  String url = Env.value!.baseUrl! + '/public/home/impersonate/802c28/${generateMd5('802c28')}projects9731${format.format(now)}';
+    print(url);
     // String  projectsResponse = '';
     dio!.options.headers = {
       'content-type': 'application/x-www-form-urlencoded',
@@ -8021,8 +8192,12 @@ dio!.options.headers = {
     };
    // dio!.options.contentType = ContentType.parse('application/x-www-form-urlencoded');
     Response response = await dio!.post(url, data :'LoginActivity[_trigger_]=1&LoginActivity[user_name]=' + username +  '&LoginActivity[password]='+  pwd +'&LoginActivity[remember]=1');
-    throwIfNoSuccess(response);
+ // '/public/home/impersonate/' . encodeID($model->user_id) . '/' . md5(encodeID($model->user_id) . 'projects9731' . date('Y-m-d H:i'));
+  //  Response response = await dio!.get(url);
+   // throwIfNoSuccess(response);
+   // print(response.data);
     return response.data;
+   // return '{"result":"OK","user_id":"41611016842","user_name":"RickFalco","user_display":"Falco","user_photo":"https:\/\/cdn.projects.co.id\/upload\/usr581611\/202111156191d3b7629a7-thumb.jpg","user_hash":"802c28","notif_count":null}';
   }
 
   Future getContact(String url) async{

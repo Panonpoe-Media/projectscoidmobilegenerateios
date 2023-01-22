@@ -646,7 +646,7 @@ class APIRepository{
           datahome = await _dbRepository.loadDataHomeInfo('');
           datahome = await _dbRepository.loadDataHome('');
         }else{
-          datahome = await _apiProvider.getListTest(url, page)
+          datahome = await _apiProvider.getListTest(url, page, [])
               .then((responseDataHome) {
             //  print(responseDataHome);
             //    DataHomeingModel list = null;
@@ -706,16 +706,32 @@ class APIRepository{
   }
    Future<TestListingModel?> getTestList(String url, int page)async{
   TestListingModel? test ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllTestList();
+      for (var element in barr) {
+        if(element.contains('Test')){
+          barrsp.add(element.replaceAll('Test',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllTestList();
-            test = await _apiProvider.getListTest(url, page)
+            test = await _apiProvider.getListTest(url, page , barrsp)
                   .then((responseTestList) {
                     _loadAndSaveTestList1(responseTestList, '', page);
 					return responseTestList;
                   });
    }else{
-      test = await _apiProvider.getListTest(url, page)
+      test = await _apiProvider.getListTest(url, page, barrsp)
                   .then((responseTestList) {
 				  try{
 				      return  _loadAndSaveTestList(responseTestList, '', page);
@@ -733,7 +749,21 @@ class APIRepository{
 
 Future<TestListingModel?> getTestListSearch(String url, int page)async{
   TestListingModel? test ;   
-  test = await _apiProvider.getListTest(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Test
+    barr.forEach((element){
+      if(element.contains('Test')){
+        barrsp.add(element.replaceAll('Test',''));
+      }
+    });
+  }
+  test = await _apiProvider.getListTest(url, page, barrsp)
 		  .then((responseTestList) {
 		  
    if(page == -1 ){
@@ -804,6 +834,21 @@ Future<void> _loadAndSaveTestList1(TestListingModel list, String searchKey, int 
     TestListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateTestListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Test')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllTestList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemTestModel test;
@@ -884,16 +929,32 @@ Future<void> _loadAndSaveTestList1(TestListingModel list, String searchKey, int 
   }
    Future<TestimonialListingModel?> getTestimonialList(String url, int page)async{
   TestimonialListingModel? testimonial ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllTestimonialList();
+      for (var element in barr) {
+        if(element.contains('Testimonial')){
+          barrsp.add(element.replaceAll('Testimonial',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllTestimonialList();
-            testimonial = await _apiProvider.getListTestimonial(url, page)
+            testimonial = await _apiProvider.getListTestimonial(url, page , barrsp)
                   .then((responseTestimonialList) {
                     _loadAndSaveTestimonialList1(responseTestimonialList, '', page);
 					return responseTestimonialList;
                   });
    }else{
-      testimonial = await _apiProvider.getListTestimonial(url, page)
+      testimonial = await _apiProvider.getListTestimonial(url, page, barrsp)
                   .then((responseTestimonialList) {
 				  try{
 				      return  _loadAndSaveTestimonialList(responseTestimonialList, '', page);
@@ -911,7 +972,21 @@ Future<void> _loadAndSaveTestList1(TestListingModel list, String searchKey, int 
 
 Future<TestimonialListingModel?> getTestimonialListSearch(String url, int page)async{
   TestimonialListingModel? testimonial ;   
-  testimonial = await _apiProvider.getListTestimonial(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Testimonial
+    barr.forEach((element){
+      if(element.contains('Testimonial')){
+        barrsp.add(element.replaceAll('Testimonial',''));
+      }
+    });
+  }
+  testimonial = await _apiProvider.getListTestimonial(url, page, barrsp)
 		  .then((responseTestimonialList) {
 		  
    if(page == -1 ){
@@ -976,6 +1051,21 @@ Future<void> _loadAndSaveTestimonialList1(TestimonialListingModel list, String s
     TestimonialListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateTestimonialListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Testimonial')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllTestimonialList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemTestimonialModel testimonial;
@@ -1053,16 +1143,32 @@ Future<void> _loadAndSaveTestimonialList1(TestimonialListingModel list, String s
   }
    Future<CeritaSuksesListingModel?> getCeritaSuksesList(String url, int page)async{
   CeritaSuksesListingModel? cerita_sukses ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllCeritaSuksesList();
+      for (var element in barr) {
+        if(element.contains('CeritaSukses')){
+          barrsp.add(element.replaceAll('CeritaSukses',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllCeritaSuksesList();
-            cerita_sukses = await _apiProvider.getListCeritaSukses(url, page)
+            cerita_sukses = await _apiProvider.getListCeritaSukses(url, page , barrsp)
                   .then((responseCeritaSuksesList) {
                     _loadAndSaveCeritaSuksesList1(responseCeritaSuksesList, '', page);
 					return responseCeritaSuksesList;
                   });
    }else{
-      cerita_sukses = await _apiProvider.getListCeritaSukses(url, page)
+      cerita_sukses = await _apiProvider.getListCeritaSukses(url, page, barrsp)
                   .then((responseCeritaSuksesList) {
 				  try{
 				      return  _loadAndSaveCeritaSuksesList(responseCeritaSuksesList, '', page);
@@ -1080,7 +1186,21 @@ Future<void> _loadAndSaveTestimonialList1(TestimonialListingModel list, String s
 
 Future<CeritaSuksesListingModel?> getCeritaSuksesListSearch(String url, int page)async{
   CeritaSuksesListingModel? cerita_sukses ;   
-  cerita_sukses = await _apiProvider.getListCeritaSukses(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // CeritaSukses
+    barr.forEach((element){
+      if(element.contains('CeritaSukses')){
+        barrsp.add(element.replaceAll('CeritaSukses',''));
+      }
+    });
+  }
+  cerita_sukses = await _apiProvider.getListCeritaSukses(url, page, barrsp)
 		  .then((responseCeritaSuksesList) {
 		  
    if(page == -1 ){
@@ -1147,6 +1267,21 @@ Future<void> _loadAndSaveCeritaSuksesList1(CeritaSuksesListingModel list, String
     CeritaSuksesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateCeritaSuksesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('CeritaSukses')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllCeritaSuksesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemCeritaSuksesModel cerita_sukses;
@@ -1225,16 +1360,32 @@ Future<void> _loadAndSaveCeritaSuksesList1(CeritaSuksesListingModel list, String
   }
    Future<TipsListingModel?> getTipsList(String url, int page)async{
   TipsListingModel? tips ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllTipsList();
+      for (var element in barr) {
+        if(element.contains('Tips')){
+          barrsp.add(element.replaceAll('Tips',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllTipsList();
-            tips = await _apiProvider.getListTips(url, page)
+            tips = await _apiProvider.getListTips(url, page , barrsp)
                   .then((responseTipsList) {
                     _loadAndSaveTipsList1(responseTipsList, '', page);
 					return responseTipsList;
                   });
    }else{
-      tips = await _apiProvider.getListTips(url, page)
+      tips = await _apiProvider.getListTips(url, page, barrsp)
                   .then((responseTipsList) {
 				  try{
 				      return  _loadAndSaveTipsList(responseTipsList, '', page);
@@ -1252,7 +1403,21 @@ Future<void> _loadAndSaveCeritaSuksesList1(CeritaSuksesListingModel list, String
 
 Future<TipsListingModel?> getTipsListSearch(String url, int page)async{
   TipsListingModel? tips ;   
-  tips = await _apiProvider.getListTips(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Tips
+    barr.forEach((element){
+      if(element.contains('Tips')){
+        barrsp.add(element.replaceAll('Tips',''));
+      }
+    });
+  }
+  tips = await _apiProvider.getListTips(url, page, barrsp)
 		  .then((responseTipsList) {
 		  
    if(page == -1 ){
@@ -1319,6 +1484,21 @@ Future<void> _loadAndSaveTipsList1(TipsListingModel list, String searchKey, int 
     TipsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateTipsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Tips')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllTipsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemTipsModel tips;
@@ -1398,16 +1578,32 @@ Future<void> _loadAndSaveTipsList1(TipsListingModel list, String searchKey, int 
   }
    Future<BrowseProjectsListingModel?> getBrowseProjectsList(String url, int page)async{
   BrowseProjectsListingModel? browse_projects ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllBrowseProjectsList();
+      for (var element in barr) {
+        if(element.contains('BrowseProjects')){
+          barrsp.add(element.replaceAll('BrowseProjects',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllBrowseProjectsList();
-            browse_projects = await _apiProvider.getListBrowseProjects(url, page)
+            browse_projects = await _apiProvider.getListBrowseProjects(url, page , barrsp)
                   .then((responseBrowseProjectsList) {
                     _loadAndSaveBrowseProjectsList1(responseBrowseProjectsList, '', page);
 					return responseBrowseProjectsList;
                   });
    }else{
-      browse_projects = await _apiProvider.getListBrowseProjects(url, page)
+      browse_projects = await _apiProvider.getListBrowseProjects(url, page, barrsp)
                   .then((responseBrowseProjectsList) {
 				  try{
 				      return  _loadAndSaveBrowseProjectsList(responseBrowseProjectsList, '', page);
@@ -1425,7 +1621,21 @@ Future<void> _loadAndSaveTipsList1(TipsListingModel list, String searchKey, int 
 
 Future<BrowseProjectsListingModel?> getBrowseProjectsListSearch(String url, int page)async{
   BrowseProjectsListingModel? browse_projects ;   
-  browse_projects = await _apiProvider.getListBrowseProjects(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // BrowseProjects
+    barr.forEach((element){
+      if(element.contains('BrowseProjects')){
+        barrsp.add(element.replaceAll('BrowseProjects',''));
+      }
+    });
+  }
+  browse_projects = await _apiProvider.getListBrowseProjects(url, page, barrsp)
 		  .then((responseBrowseProjectsList) {
 		  
    if(page == -1 ){
@@ -1494,6 +1704,21 @@ Future<void> _loadAndSaveBrowseProjectsList1(BrowseProjectsListingModel list, St
     BrowseProjectsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateBrowseProjectsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('BrowseProjects')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllBrowseProjectsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemBrowseProjectsModel browse_projects;
@@ -1873,16 +2098,32 @@ Future<void> _loadAndSaveBrowseProjectsList1(BrowseProjectsListingModel list, St
   }
    Future<PastProjectsListingModel?> getPastProjectsList(String url, int page)async{
   PastProjectsListingModel? past_projects ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllPastProjectsList();
+      for (var element in barr) {
+        if(element.contains('PastProjects')){
+          barrsp.add(element.replaceAll('PastProjects',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllPastProjectsList();
-            past_projects = await _apiProvider.getListPastProjects(url, page)
+            past_projects = await _apiProvider.getListPastProjects(url, page , barrsp)
                   .then((responsePastProjectsList) {
                     _loadAndSavePastProjectsList1(responsePastProjectsList, '', page);
 					return responsePastProjectsList;
                   });
    }else{
-      past_projects = await _apiProvider.getListPastProjects(url, page)
+      past_projects = await _apiProvider.getListPastProjects(url, page, barrsp)
                   .then((responsePastProjectsList) {
 				  try{
 				      return  _loadAndSavePastProjectsList(responsePastProjectsList, '', page);
@@ -1900,7 +2141,21 @@ Future<void> _loadAndSaveBrowseProjectsList1(BrowseProjectsListingModel list, St
 
 Future<PastProjectsListingModel?> getPastProjectsListSearch(String url, int page)async{
   PastProjectsListingModel? past_projects ;   
-  past_projects = await _apiProvider.getListPastProjects(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // PastProjects
+    barr.forEach((element){
+      if(element.contains('PastProjects')){
+        barrsp.add(element.replaceAll('PastProjects',''));
+      }
+    });
+  }
+  past_projects = await _apiProvider.getListPastProjects(url, page, barrsp)
 		  .then((responsePastProjectsList) {
 		  
    if(page == -1 ){
@@ -1969,6 +2224,21 @@ Future<void> _loadAndSavePastProjectsList1(PastProjectsListingModel list, String
     PastProjectsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdatePastProjectsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('PastProjects')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllPastProjectsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemPastProjectsModel past_projects;
@@ -2048,16 +2318,32 @@ Future<void> _loadAndSavePastProjectsList1(PastProjectsListingModel list, String
   }
    Future<NewUserListingModel?> getNewUserList(String url, int page)async{
   NewUserListingModel? new_user ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllNewUserList();
+      for (var element in barr) {
+        if(element.contains('NewUser')){
+          barrsp.add(element.replaceAll('NewUser',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllNewUserList();
-            new_user = await _apiProvider.getListNewUser(url, page)
+            new_user = await _apiProvider.getListNewUser(url, page , barrsp)
                   .then((responseNewUserList) {
                     _loadAndSaveNewUserList1(responseNewUserList, '', page);
 					return responseNewUserList;
                   });
    }else{
-      new_user = await _apiProvider.getListNewUser(url, page)
+      new_user = await _apiProvider.getListNewUser(url, page, barrsp)
                   .then((responseNewUserList) {
 				  try{
 				      return  _loadAndSaveNewUserList(responseNewUserList, '', page);
@@ -2075,7 +2361,21 @@ Future<void> _loadAndSavePastProjectsList1(PastProjectsListingModel list, String
 
 Future<NewUserListingModel?> getNewUserListSearch(String url, int page)async{
   NewUserListingModel? new_user ;   
-  new_user = await _apiProvider.getListNewUser(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // NewUser
+    barr.forEach((element){
+      if(element.contains('NewUser')){
+        barrsp.add(element.replaceAll('NewUser',''));
+      }
+    });
+  }
+  new_user = await _apiProvider.getListNewUser(url, page, barrsp)
 		  .then((responseNewUserList) {
 		  
    if(page == -1 ){
@@ -2148,6 +2448,21 @@ Future<void> _loadAndSaveNewUserList1(NewUserListingModel list, String searchKey
     NewUserListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateNewUserListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('NewUser')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllNewUserList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemNewUserModel new_user;
@@ -2429,16 +2744,32 @@ Future<void> _loadAndSaveNewUserList1(NewUserListingModel list, String searchKey
   }
    Future<ProgramListingModel?> getProgramList(String url, int page)async{
   ProgramListingModel? program ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllProgramList();
+      for (var element in barr) {
+        if(element.contains('Program')){
+          barrsp.add(element.replaceAll('Program',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllProgramList();
-            program = await _apiProvider.getListProgram(url, page)
+            program = await _apiProvider.getListProgram(url, page , barrsp)
                   .then((responseProgramList) {
                     _loadAndSaveProgramList1(responseProgramList, '', page);
 					return responseProgramList;
                   });
    }else{
-      program = await _apiProvider.getListProgram(url, page)
+      program = await _apiProvider.getListProgram(url, page, barrsp)
                   .then((responseProgramList) {
 				  try{
 				      return  _loadAndSaveProgramList(responseProgramList, '', page);
@@ -2456,7 +2787,21 @@ Future<void> _loadAndSaveNewUserList1(NewUserListingModel list, String searchKey
 
 Future<ProgramListingModel?> getProgramListSearch(String url, int page)async{
   ProgramListingModel? program ;   
-  program = await _apiProvider.getListProgram(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Program
+    barr.forEach((element){
+      if(element.contains('Program')){
+        barrsp.add(element.replaceAll('Program',''));
+      }
+    });
+  }
+  program = await _apiProvider.getListProgram(url, page, barrsp)
 		  .then((responseProgramList) {
 		  
    if(page == -1 ){
@@ -2529,6 +2874,21 @@ Future<void> _loadAndSaveProgramList1(ProgramListingModel list, String searchKey
     ProgramListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateProgramListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Program')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllProgramList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemProgramModel program;
@@ -2710,16 +3070,32 @@ Future<void> _loadAndSaveProgramList1(ProgramListingModel list, String searchKey
   }
    Future<ExistingUserListingModel?> getExistingUserList(String url, int page)async{
   ExistingUserListingModel? existing_user ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllExistingUserList();
+      for (var element in barr) {
+        if(element.contains('ExistingUser')){
+          barrsp.add(element.replaceAll('ExistingUser',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllExistingUserList();
-            existing_user = await _apiProvider.getListExistingUser(url, page)
+            existing_user = await _apiProvider.getListExistingUser(url, page , barrsp)
                   .then((responseExistingUserList) {
                     _loadAndSaveExistingUserList1(responseExistingUserList, '', page);
 					return responseExistingUserList;
                   });
    }else{
-      existing_user = await _apiProvider.getListExistingUser(url, page)
+      existing_user = await _apiProvider.getListExistingUser(url, page, barrsp)
                   .then((responseExistingUserList) {
 				  try{
 				      return  _loadAndSaveExistingUserList(responseExistingUserList, '', page);
@@ -2737,7 +3113,21 @@ Future<void> _loadAndSaveProgramList1(ProgramListingModel list, String searchKey
 
 Future<ExistingUserListingModel?> getExistingUserListSearch(String url, int page)async{
   ExistingUserListingModel? existing_user ;   
-  existing_user = await _apiProvider.getListExistingUser(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // ExistingUser
+    barr.forEach((element){
+      if(element.contains('ExistingUser')){
+        barrsp.add(element.replaceAll('ExistingUser',''));
+      }
+    });
+  }
+  existing_user = await _apiProvider.getListExistingUser(url, page, barrsp)
 		  .then((responseExistingUserList) {
 		  
    if(page == -1 ){
@@ -2810,6 +3200,21 @@ Future<void> _loadAndSaveExistingUserList1(ExistingUserListingModel list, String
     ExistingUserListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateExistingUserListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('ExistingUser')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllExistingUserList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemExistingUserModel existing_user;
@@ -3091,16 +3496,32 @@ Future<void> _loadAndSaveExistingUserList1(ExistingUserListingModel list, String
   }
    Future<SupportListingModel?> getSupportList(String url, int page)async{
   SupportListingModel? support ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllSupportList();
+      for (var element in barr) {
+        if(element.contains('Support')){
+          barrsp.add(element.replaceAll('Support',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllSupportList();
-            support = await _apiProvider.getListSupport(url, page)
+            support = await _apiProvider.getListSupport(url, page , barrsp)
                   .then((responseSupportList) {
                     _loadAndSaveSupportList1(responseSupportList, '', page);
 					return responseSupportList;
                   });
    }else{
-      support = await _apiProvider.getListSupport(url, page)
+      support = await _apiProvider.getListSupport(url, page, barrsp)
                   .then((responseSupportList) {
 				  try{
 				      return  _loadAndSaveSupportList(responseSupportList, '', page);
@@ -3118,7 +3539,21 @@ Future<void> _loadAndSaveExistingUserList1(ExistingUserListingModel list, String
 
 Future<SupportListingModel?> getSupportListSearch(String url, int page)async{
   SupportListingModel? support ;   
-  support = await _apiProvider.getListSupport(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Support
+    barr.forEach((element){
+      if(element.contains('Support')){
+        barrsp.add(element.replaceAll('Support',''));
+      }
+    });
+  }
+  support = await _apiProvider.getListSupport(url, page, barrsp)
 		  .then((responseSupportList) {
 		  
    if(page == -1 ){
@@ -3183,6 +3618,21 @@ Future<void> _loadAndSaveSupportList1(SupportListingModel list, String searchKey
     SupportListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateSupportListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Support')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllSupportList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemSupportModel support;
@@ -3360,16 +3810,32 @@ Future<void> _loadAndSaveSupportList1(SupportListingModel list, String searchKey
   }
    Future<BrowseServicesListingModel?> getBrowseServicesList(String url, int page)async{
   BrowseServicesListingModel? browse_services ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllBrowseServicesList();
+      for (var element in barr) {
+        if(element.contains('BrowseServices')){
+          barrsp.add(element.replaceAll('BrowseServices',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllBrowseServicesList();
-            browse_services = await _apiProvider.getListBrowseServices(url, page)
+            browse_services = await _apiProvider.getListBrowseServices(url, page , barrsp)
                   .then((responseBrowseServicesList) {
                     _loadAndSaveBrowseServicesList1(responseBrowseServicesList, '', page);
 					return responseBrowseServicesList;
                   });
    }else{
-      browse_services = await _apiProvider.getListBrowseServices(url, page)
+      browse_services = await _apiProvider.getListBrowseServices(url, page, barrsp)
                   .then((responseBrowseServicesList) {
 				  try{
 				      return  _loadAndSaveBrowseServicesList(responseBrowseServicesList, '', page);
@@ -3387,7 +3853,21 @@ Future<void> _loadAndSaveSupportList1(SupportListingModel list, String searchKey
 
 Future<BrowseServicesListingModel?> getBrowseServicesListSearch(String url, int page)async{
   BrowseServicesListingModel? browse_services ;   
-  browse_services = await _apiProvider.getListBrowseServices(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // BrowseServices
+    barr.forEach((element){
+      if(element.contains('BrowseServices')){
+        barrsp.add(element.replaceAll('BrowseServices',''));
+      }
+    });
+  }
+  browse_services = await _apiProvider.getListBrowseServices(url, page, barrsp)
 		  .then((responseBrowseServicesList) {
 		  
    if(page == -1 ){
@@ -3454,6 +3934,21 @@ Future<void> _loadAndSaveBrowseServicesList1(BrowseServicesListingModel list, St
     BrowseServicesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateBrowseServicesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('BrowseServices')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllBrowseServicesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemBrowseServicesModel browse_services;
@@ -3630,10 +4125,26 @@ Future<void> _loadAndSaveBrowseServicesList1(BrowseServicesListingModel list, St
       return true;
     }
   }
-    Future<BrowseUsersListingModel?> getBrowseUsersList(String url, int page)async{
+   Future<BrowseUsersListingModel?> getBrowseUsersList(String url, int page)async{
   BrowseUsersListingModel? browse_users ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllBrowseUsersList();
+      for (var element in barr) {
+        if(element.contains('BrowseUsers')){
+          barrsp.add(element.replaceAll('BrowseUsers',''));
+        }
+      }
+    }
+  
+  
   final isEmpty = await isEmptyBrowseUsersListDB();
   final isOld = await isOldBrowseUsersList();
+  
 
   if((page == 1)&& (!isEmpty) &&(!isOld)) {
     browse_users = await _dbRepository.loadBrowseUsersListInfo('');
@@ -3641,7 +4152,7 @@ Future<void> _loadAndSaveBrowseServicesList1(BrowseServicesListingModel list, St
     browse_users.items.items.addAll(await _dbRepository.loadBrowseUsersList(''));
   }else {
     if(isEmpty || isOld ){
-      browse_users = await _apiProvider.getListBrowseUsers(url, page)
+      browse_users = await _apiProvider.getListBrowseUsers(url, page, barrsp)
                   .then((responseBrowseUsersList) {
 				//  print(responseBrowseUsersList);
                 //  BrowseUsersListingModel list = null;
@@ -3656,7 +4167,7 @@ Future<void> _loadAndSaveBrowseServicesList1(BrowseServicesListingModel list, St
 	      browse_users.items.items.clear();
           browse_users.items.items.addAll(await _dbRepository.loadBrowseUsersList(''));
       }else{
-        browse_users = await _apiProvider.getListBrowseUsers(url, page)
+        browse_users = await _apiProvider.getListBrowseUsers(url, page , barrsp)
                     .then((responseBrowseUsersList) {
 					 //  print(responseBrowseUsersList);
                     //    BrowseUsersListingModel list = null;
@@ -3677,7 +4188,21 @@ Future<void> _loadAndSaveBrowseServicesList1(BrowseServicesListingModel list, St
 
 Future<BrowseUsersListingModel?> getBrowseUsersListSearch(String url, int page)async{
   BrowseUsersListingModel? browse_users ;   
-  browse_users = await _apiProvider.getListBrowseUsers(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // BrowseUsers
+    barr.forEach((element){
+      if(element.contains('BrowseUsers')){
+        barrsp.add(element.replaceAll('BrowseUsers',''));
+      }
+    });
+  }
+  browse_users = await _apiProvider.getListBrowseUsers(url, page, barrsp)
 		  .then((responseBrowseUsersList) {
 		  
    if(page == -1 ){
@@ -3744,6 +4269,21 @@ Future<void> _loadAndSaveBrowseUsersList1(BrowseUsersListingModel list, String s
     BrowseUsersListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateBrowseUsersListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('BrowseUsers')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllBrowseUsersList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemBrowseUsersModel browse_users;
@@ -4022,16 +4562,32 @@ Future<void> _loadAndSaveBrowseUsersList1(BrowseUsersListingModel list, String s
   }
    Future<BrowseProductsListingModel?> getBrowseProductsList(String url, int page)async{
   BrowseProductsListingModel? browse_products ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllBrowseProductsList();
+      for (var element in barr) {
+        if(element.contains('BrowseProducts')){
+          barrsp.add(element.replaceAll('BrowseProducts',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllBrowseProductsList();
-            browse_products = await _apiProvider.getListBrowseProducts(url, page)
+            browse_products = await _apiProvider.getListBrowseProducts(url, page , barrsp)
                   .then((responseBrowseProductsList) {
                     _loadAndSaveBrowseProductsList1(responseBrowseProductsList, '', page);
 					return responseBrowseProductsList;
                   });
    }else{
-      browse_products = await _apiProvider.getListBrowseProducts(url, page)
+      browse_products = await _apiProvider.getListBrowseProducts(url, page, barrsp)
                   .then((responseBrowseProductsList) {
 				  try{
 				      return  _loadAndSaveBrowseProductsList(responseBrowseProductsList, '', page);
@@ -4049,7 +4605,21 @@ Future<void> _loadAndSaveBrowseUsersList1(BrowseUsersListingModel list, String s
 
 Future<BrowseProductsListingModel?> getBrowseProductsListSearch(String url, int page)async{
   BrowseProductsListingModel? browse_products ;   
-  browse_products = await _apiProvider.getListBrowseProducts(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // BrowseProducts
+    barr.forEach((element){
+      if(element.contains('BrowseProducts')){
+        barrsp.add(element.replaceAll('BrowseProducts',''));
+      }
+    });
+  }
+  browse_products = await _apiProvider.getListBrowseProducts(url, page, barrsp)
 		  .then((responseBrowseProductsList) {
 		  
    if(page == -1 ){
@@ -4116,6 +4686,21 @@ Future<void> _loadAndSaveBrowseProductsList1(BrowseProductsListingModel list, St
     BrowseProductsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateBrowseProductsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('BrowseProducts')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllBrowseProductsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemBrowseProductsModel browse_products;
@@ -4294,16 +4879,32 @@ Future<void> _loadAndSaveBrowseProductsList1(BrowseProductsListingModel list, St
   }
    Future<CartListingModel?> getCartList(String url, int page)async{
   CartListingModel? cart ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllCartList();
+      for (var element in barr) {
+        if(element.contains('Cart')){
+          barrsp.add(element.replaceAll('Cart',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllCartList();
-            cart = await _apiProvider.getListCart(url, page)
+            cart = await _apiProvider.getListCart(url, page , barrsp)
                   .then((responseCartList) {
                     _loadAndSaveCartList1(responseCartList, '', page);
 					return responseCartList;
                   });
    }else{
-      cart = await _apiProvider.getListCart(url, page)
+      cart = await _apiProvider.getListCart(url, page, barrsp)
                   .then((responseCartList) {
 				  try{
 				      return  _loadAndSaveCartList(responseCartList, '', page);
@@ -4321,7 +4922,21 @@ Future<void> _loadAndSaveBrowseProductsList1(BrowseProductsListingModel list, St
 
 Future<CartListingModel?> getCartListSearch(String url, int page)async{
   CartListingModel? cart ;   
-  cart = await _apiProvider.getListCart(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Cart
+    barr.forEach((element){
+      if(element.contains('Cart')){
+        barrsp.add(element.replaceAll('Cart',''));
+      }
+    });
+  }
+  cart = await _apiProvider.getListCart(url, page, barrsp)
 		  .then((responseCartList) {
 		  
    if(page == -1 ){
@@ -4394,6 +5009,21 @@ Future<void> _loadAndSaveCartList1(CartListingModel list, String searchKey, int 
     CartListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateCartListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Cart')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllCartList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemCartModel cart;
@@ -4675,16 +5305,32 @@ Future<void> _loadAndSaveCartList1(CartListingModel list, String searchKey, int 
   }
    Future<CheckoutListingModel?> getCheckoutList(String url, int page)async{
   CheckoutListingModel? checkout ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllCheckoutList();
+      for (var element in barr) {
+        if(element.contains('Checkout')){
+          barrsp.add(element.replaceAll('Checkout',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllCheckoutList();
-            checkout = await _apiProvider.getListCheckout(url, page)
+            checkout = await _apiProvider.getListCheckout(url, page , barrsp)
                   .then((responseCheckoutList) {
                     _loadAndSaveCheckoutList1(responseCheckoutList, '', page);
 					return responseCheckoutList;
                   });
    }else{
-      checkout = await _apiProvider.getListCheckout(url, page)
+      checkout = await _apiProvider.getListCheckout(url, page, barrsp)
                   .then((responseCheckoutList) {
 				  try{
 				      return  _loadAndSaveCheckoutList(responseCheckoutList, '', page);
@@ -4702,7 +5348,21 @@ Future<void> _loadAndSaveCartList1(CartListingModel list, String searchKey, int 
 
 Future<CheckoutListingModel?> getCheckoutListSearch(String url, int page)async{
   CheckoutListingModel? checkout ;   
-  checkout = await _apiProvider.getListCheckout(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Checkout
+    barr.forEach((element){
+      if(element.contains('Checkout')){
+        barrsp.add(element.replaceAll('Checkout',''));
+      }
+    });
+  }
+  checkout = await _apiProvider.getListCheckout(url, page, barrsp)
 		  .then((responseCheckoutList) {
 		  
    if(page == -1 ){
@@ -4775,6 +5435,21 @@ Future<void> _loadAndSaveCheckoutList1(CheckoutListingModel list, String searchK
     CheckoutListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateCheckoutListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Checkout')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllCheckoutList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemCheckoutModel checkout;
@@ -5656,16 +6331,32 @@ Future<void> _loadAndSaveCheckoutList1(CheckoutListingModel list, String searchK
   }
    Future<BlogListingModel?> getBlogList(String url, int page)async{
   BlogListingModel? blog ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllBlogList();
+      for (var element in barr) {
+        if(element.contains('Blog')){
+          barrsp.add(element.replaceAll('Blog',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllBlogList();
-            blog = await _apiProvider.getListBlog(url, page)
+            blog = await _apiProvider.getListBlog(url, page , barrsp)
                   .then((responseBlogList) {
                     _loadAndSaveBlogList1(responseBlogList, '', page);
 					return responseBlogList;
                   });
    }else{
-      blog = await _apiProvider.getListBlog(url, page)
+      blog = await _apiProvider.getListBlog(url, page, barrsp)
                   .then((responseBlogList) {
 				  try{
 				      return  _loadAndSaveBlogList(responseBlogList, '', page);
@@ -5683,7 +6374,21 @@ Future<void> _loadAndSaveCheckoutList1(CheckoutListingModel list, String searchK
 
 Future<BlogListingModel?> getBlogListSearch(String url, int page)async{
   BlogListingModel? blog ;   
-  blog = await _apiProvider.getListBlog(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Blog
+    barr.forEach((element){
+      if(element.contains('Blog')){
+        barrsp.add(element.replaceAll('Blog',''));
+      }
+    });
+  }
+  blog = await _apiProvider.getListBlog(url, page, barrsp)
 		  .then((responseBlogList) {
 		  
    if(page == -1 ){
@@ -5750,6 +6455,21 @@ Future<void> _loadAndSaveBlogList1(BlogListingModel list, String searchKey, int 
     BlogListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateBlogListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Blog')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllBlogList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemBlogModel blog;
@@ -5828,16 +6548,32 @@ Future<void> _loadAndSaveBlogList1(BlogListingModel list, String searchKey, int 
   }
    Future<MyProjectsListingModel?> getMyProjectsList(String url, int page)async{
   MyProjectsListingModel? my_projects ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyProjectsList();
+      for (var element in barr) {
+        if(element.contains('MyProjects')){
+          barrsp.add(element.replaceAll('MyProjects',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyProjectsList();
-            my_projects = await _apiProvider.getListMyProjects(url, page)
+            my_projects = await _apiProvider.getListMyProjects(url, page , barrsp)
                   .then((responseMyProjectsList) {
                     _loadAndSaveMyProjectsList1(responseMyProjectsList, '', page);
 					return responseMyProjectsList;
                   });
    }else{
-      my_projects = await _apiProvider.getListMyProjects(url, page)
+      my_projects = await _apiProvider.getListMyProjects(url, page, barrsp)
                   .then((responseMyProjectsList) {
 				  try{
 				      return  _loadAndSaveMyProjectsList(responseMyProjectsList, '', page);
@@ -5855,7 +6591,21 @@ Future<void> _loadAndSaveBlogList1(BlogListingModel list, String searchKey, int 
 
 Future<MyProjectsListingModel?> getMyProjectsListSearch(String url, int page)async{
   MyProjectsListingModel? my_projects ;   
-  my_projects = await _apiProvider.getListMyProjects(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyProjects
+    barr.forEach((element){
+      if(element.contains('MyProjects')){
+        barrsp.add(element.replaceAll('MyProjects',''));
+      }
+    });
+  }
+  my_projects = await _apiProvider.getListMyProjects(url, page, barrsp)
 		  .then((responseMyProjectsList) {
 		  
    if(page == -1 ){
@@ -5924,6 +6674,21 @@ Future<void> _loadAndSaveMyProjectsList1(MyProjectsListingModel list, String sea
     MyProjectsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyProjectsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyProjects')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyProjectsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyProjectsModel my_projects;
@@ -7848,16 +8613,32 @@ Future<ShowConversationListingModel> _loadAndSaveShowConversationMyProjectsListS
   }
    Future<MyBidsListingModel?> getMyBidsList(String url, int page)async{
   MyBidsListingModel? my_bids ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyBidsList();
+      for (var element in barr) {
+        if(element.contains('MyBids')){
+          barrsp.add(element.replaceAll('MyBids',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyBidsList();
-            my_bids = await _apiProvider.getListMyBids(url, page)
+            my_bids = await _apiProvider.getListMyBids(url, page , barrsp)
                   .then((responseMyBidsList) {
                     _loadAndSaveMyBidsList1(responseMyBidsList, '', page);
 					return responseMyBidsList;
                   });
    }else{
-      my_bids = await _apiProvider.getListMyBids(url, page)
+      my_bids = await _apiProvider.getListMyBids(url, page, barrsp)
                   .then((responseMyBidsList) {
 				  try{
 				      return  _loadAndSaveMyBidsList(responseMyBidsList, '', page);
@@ -7875,7 +8656,21 @@ Future<ShowConversationListingModel> _loadAndSaveShowConversationMyProjectsListS
 
 Future<MyBidsListingModel?> getMyBidsListSearch(String url, int page)async{
   MyBidsListingModel? my_bids ;   
-  my_bids = await _apiProvider.getListMyBids(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyBids
+    barr.forEach((element){
+      if(element.contains('MyBids')){
+        barrsp.add(element.replaceAll('MyBids',''));
+      }
+    });
+  }
+  my_bids = await _apiProvider.getListMyBids(url, page, barrsp)
 		  .then((responseMyBidsList) {
 		  
    if(page == -1 ){
@@ -7938,6 +8733,21 @@ Future<void> _loadAndSaveMyBidsList1(MyBidsListingModel list, String searchKey, 
     MyBidsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyBidsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyBids')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyBidsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyBidsModel my_bids;
@@ -8150,16 +8960,32 @@ Future<ShowConversationListingModel> _loadAndSaveShowConversationMyBidsListSearc
   }
    Future<MyProductsListingModel?> getMyProductsList(String url, int page)async{
   MyProductsListingModel? my_products ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyProductsList();
+      for (var element in barr) {
+        if(element.contains('MyProducts')){
+          barrsp.add(element.replaceAll('MyProducts',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyProductsList();
-            my_products = await _apiProvider.getListMyProducts(url, page)
+            my_products = await _apiProvider.getListMyProducts(url, page , barrsp)
                   .then((responseMyProductsList) {
                     _loadAndSaveMyProductsList1(responseMyProductsList, '', page);
 					return responseMyProductsList;
                   });
    }else{
-      my_products = await _apiProvider.getListMyProducts(url, page)
+      my_products = await _apiProvider.getListMyProducts(url, page, barrsp)
                   .then((responseMyProductsList) {
 				  try{
 				      return  _loadAndSaveMyProductsList(responseMyProductsList, '', page);
@@ -8177,7 +9003,21 @@ Future<ShowConversationListingModel> _loadAndSaveShowConversationMyBidsListSearc
 
 Future<MyProductsListingModel?> getMyProductsListSearch(String url, int page)async{
   MyProductsListingModel? my_products ;   
-  my_products = await _apiProvider.getListMyProducts(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyProducts
+    barr.forEach((element){
+      if(element.contains('MyProducts')){
+        barrsp.add(element.replaceAll('MyProducts',''));
+      }
+    });
+  }
+  my_products = await _apiProvider.getListMyProducts(url, page, barrsp)
 		  .then((responseMyProductsList) {
 		  
    if(page == -1 ){
@@ -8246,6 +9086,21 @@ Future<void> _loadAndSaveMyProductsList1(MyProductsListingModel list, String sea
     MyProductsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyProductsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyProducts')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyProductsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyProductsModel my_products;
@@ -9034,16 +9889,32 @@ Future<ScreenshotsListingModel> _loadAndSaveScreenshotsMyProductsListSearch(Scre
   }
    Future<MyServicesListingModel?> getMyServicesList(String url, int page)async{
   MyServicesListingModel? my_services ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyServicesList();
+      for (var element in barr) {
+        if(element.contains('MyServices')){
+          barrsp.add(element.replaceAll('MyServices',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyServicesList();
-            my_services = await _apiProvider.getListMyServices(url, page)
+            my_services = await _apiProvider.getListMyServices(url, page , barrsp)
                   .then((responseMyServicesList) {
                     _loadAndSaveMyServicesList1(responseMyServicesList, '', page);
 					return responseMyServicesList;
                   });
    }else{
-      my_services = await _apiProvider.getListMyServices(url, page)
+      my_services = await _apiProvider.getListMyServices(url, page, barrsp)
                   .then((responseMyServicesList) {
 				  try{
 				      return  _loadAndSaveMyServicesList(responseMyServicesList, '', page);
@@ -9061,7 +9932,21 @@ Future<ScreenshotsListingModel> _loadAndSaveScreenshotsMyProductsListSearch(Scre
 
 Future<MyServicesListingModel?> getMyServicesListSearch(String url, int page)async{
   MyServicesListingModel? my_services ;   
-  my_services = await _apiProvider.getListMyServices(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyServices
+    barr.forEach((element){
+      if(element.contains('MyServices')){
+        barrsp.add(element.replaceAll('MyServices',''));
+      }
+    });
+  }
+  my_services = await _apiProvider.getListMyServices(url, page, barrsp)
 		  .then((responseMyServicesList) {
 		  
    if(page == -1 ){
@@ -9130,6 +10015,21 @@ Future<void> _loadAndSaveMyServicesList1(MyServicesListingModel list, String sea
     MyServicesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyServicesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyServices')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyServicesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyServicesModel my_services;
@@ -9929,16 +10829,32 @@ Future<ScreenshotsListingModel> _loadAndSaveScreenshotsMyServicesListSearch(Scre
   }
    Future<MySalesListingModel?> getMySalesList(String url, int page)async{
   MySalesListingModel? my_sales ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMySalesList();
+      for (var element in barr) {
+        if(element.contains('MySales')){
+          barrsp.add(element.replaceAll('MySales',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMySalesList();
-            my_sales = await _apiProvider.getListMySales(url, page)
+            my_sales = await _apiProvider.getListMySales(url, page , barrsp)
                   .then((responseMySalesList) {
                     _loadAndSaveMySalesList1(responseMySalesList, '', page);
 					return responseMySalesList;
                   });
    }else{
-      my_sales = await _apiProvider.getListMySales(url, page)
+      my_sales = await _apiProvider.getListMySales(url, page, barrsp)
                   .then((responseMySalesList) {
 				  try{
 				      return  _loadAndSaveMySalesList(responseMySalesList, '', page);
@@ -9956,7 +10872,21 @@ Future<ScreenshotsListingModel> _loadAndSaveScreenshotsMyServicesListSearch(Scre
 
 Future<MySalesListingModel?> getMySalesListSearch(String url, int page)async{
   MySalesListingModel? my_sales ;   
-  my_sales = await _apiProvider.getListMySales(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MySales
+    barr.forEach((element){
+      if(element.contains('MySales')){
+        barrsp.add(element.replaceAll('MySales',''));
+      }
+    });
+  }
+  my_sales = await _apiProvider.getListMySales(url, page, barrsp)
 		  .then((responseMySalesList) {
 		  
    if(page == -1 ){
@@ -10019,6 +10949,21 @@ Future<void> _loadAndSaveMySalesList1(MySalesListingModel list, String searchKey
     MySalesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMySalesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MySales')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMySalesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMySalesModel my_sales;
@@ -10106,16 +11051,32 @@ Future<void> _loadAndSaveMySalesList1(MySalesListingModel list, String searchKey
   }
    Future<MyOrdersListingModel?> getMyOrdersList(String url, int page)async{
   MyOrdersListingModel? my_orders ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyOrdersList();
+      for (var element in barr) {
+        if(element.contains('MyOrders')){
+          barrsp.add(element.replaceAll('MyOrders',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyOrdersList();
-            my_orders = await _apiProvider.getListMyOrders(url, page)
+            my_orders = await _apiProvider.getListMyOrders(url, page , barrsp)
                   .then((responseMyOrdersList) {
                     _loadAndSaveMyOrdersList1(responseMyOrdersList, '', page);
 					return responseMyOrdersList;
                   });
    }else{
-      my_orders = await _apiProvider.getListMyOrders(url, page)
+      my_orders = await _apiProvider.getListMyOrders(url, page, barrsp)
                   .then((responseMyOrdersList) {
 				  try{
 				      return  _loadAndSaveMyOrdersList(responseMyOrdersList, '', page);
@@ -10133,7 +11094,21 @@ Future<void> _loadAndSaveMySalesList1(MySalesListingModel list, String searchKey
 
 Future<MyOrdersListingModel?> getMyOrdersListSearch(String url, int page)async{
   MyOrdersListingModel? my_orders ;   
-  my_orders = await _apiProvider.getListMyOrders(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyOrders
+    barr.forEach((element){
+      if(element.contains('MyOrders')){
+        barrsp.add(element.replaceAll('MyOrders',''));
+      }
+    });
+  }
+  my_orders = await _apiProvider.getListMyOrders(url, page, barrsp)
 		  .then((responseMyOrdersList) {
 		  
    if(page == -1 ){
@@ -10196,6 +11171,21 @@ Future<void> _loadAndSaveMyOrdersList1(MyOrdersListingModel list, String searchK
     MyOrdersListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyOrdersListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyOrders')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyOrdersList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyOrdersModel my_orders;
@@ -10383,16 +11373,32 @@ Future<void> _loadAndSaveMyOrdersList1(MyOrdersListingModel list, String searchK
   }
    Future<MyPurchasesListingModel?> getMyPurchasesList(String url, int page)async{
   MyPurchasesListingModel? my_purchases ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyPurchasesList();
+      for (var element in barr) {
+        if(element.contains('MyPurchases')){
+          barrsp.add(element.replaceAll('MyPurchases',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyPurchasesList();
-            my_purchases = await _apiProvider.getListMyPurchases(url, page)
+            my_purchases = await _apiProvider.getListMyPurchases(url, page , barrsp)
                   .then((responseMyPurchasesList) {
                     _loadAndSaveMyPurchasesList1(responseMyPurchasesList, '', page);
 					return responseMyPurchasesList;
                   });
    }else{
-      my_purchases = await _apiProvider.getListMyPurchases(url, page)
+      my_purchases = await _apiProvider.getListMyPurchases(url, page, barrsp)
                   .then((responseMyPurchasesList) {
 				  try{
 				      return  _loadAndSaveMyPurchasesList(responseMyPurchasesList, '', page);
@@ -10410,7 +11416,21 @@ Future<void> _loadAndSaveMyOrdersList1(MyOrdersListingModel list, String searchK
 
 Future<MyPurchasesListingModel?> getMyPurchasesListSearch(String url, int page)async{
   MyPurchasesListingModel? my_purchases ;   
-  my_purchases = await _apiProvider.getListMyPurchases(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyPurchases
+    barr.forEach((element){
+      if(element.contains('MyPurchases')){
+        barrsp.add(element.replaceAll('MyPurchases',''));
+      }
+    });
+  }
+  my_purchases = await _apiProvider.getListMyPurchases(url, page, barrsp)
 		  .then((responseMyPurchasesList) {
 		  
    if(page == -1 ){
@@ -10473,6 +11493,21 @@ Future<void> _loadAndSaveMyPurchasesList1(MyPurchasesListingModel list, String s
     MyPurchasesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyPurchasesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyPurchases')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyPurchasesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyPurchasesModel my_purchases;
@@ -10749,16 +11784,32 @@ Future<void> _loadAndSaveMyPurchasesList1(MyPurchasesListingModel list, String s
   }
    Future<MyReferalsListingModel?> getMyReferalsList(String url, int page)async{
   MyReferalsListingModel? my_referals ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyReferalsList();
+      for (var element in barr) {
+        if(element.contains('MyReferals')){
+          barrsp.add(element.replaceAll('MyReferals',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyReferalsList();
-            my_referals = await _apiProvider.getListMyReferals(url, page)
+            my_referals = await _apiProvider.getListMyReferals(url, page , barrsp)
                   .then((responseMyReferalsList) {
                     _loadAndSaveMyReferalsList1(responseMyReferalsList, '', page);
 					return responseMyReferalsList;
                   });
    }else{
-      my_referals = await _apiProvider.getListMyReferals(url, page)
+      my_referals = await _apiProvider.getListMyReferals(url, page, barrsp)
                   .then((responseMyReferalsList) {
 				  try{
 				      return  _loadAndSaveMyReferalsList(responseMyReferalsList, '', page);
@@ -10776,7 +11827,21 @@ Future<void> _loadAndSaveMyPurchasesList1(MyPurchasesListingModel list, String s
 
 Future<MyReferalsListingModel?> getMyReferalsListSearch(String url, int page)async{
   MyReferalsListingModel? my_referals ;   
-  my_referals = await _apiProvider.getListMyReferals(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyReferals
+    barr.forEach((element){
+      if(element.contains('MyReferals')){
+        barrsp.add(element.replaceAll('MyReferals',''));
+      }
+    });
+  }
+  my_referals = await _apiProvider.getListMyReferals(url, page, barrsp)
 		  .then((responseMyReferalsList) {
 		  
    if(page == -1 ){
@@ -10849,6 +11914,21 @@ Future<void> _loadAndSaveMyReferalsList1(MyReferalsListingModel list, String sea
     MyReferalsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyReferalsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyReferals')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyReferalsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyReferalsModel my_referals;
@@ -10930,16 +12010,32 @@ Future<void> _loadAndSaveMyReferalsList1(MyReferalsListingModel list, String sea
   }
    Future<MyFinanceListingModel?> getMyFinanceList(String url, int page)async{
   MyFinanceListingModel? my_finance ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyFinanceList();
+      for (var element in barr) {
+        if(element.contains('MyFinance')){
+          barrsp.add(element.replaceAll('MyFinance',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyFinanceList();
-            my_finance = await _apiProvider.getListMyFinance(url, page)
+            my_finance = await _apiProvider.getListMyFinance(url, page , barrsp)
                   .then((responseMyFinanceList) {
                     _loadAndSaveMyFinanceList1(responseMyFinanceList, '', page);
 					return responseMyFinanceList;
                   });
    }else{
-      my_finance = await _apiProvider.getListMyFinance(url, page)
+      my_finance = await _apiProvider.getListMyFinance(url, page, barrsp)
                   .then((responseMyFinanceList) {
 				  try{
 				      return  _loadAndSaveMyFinanceList(responseMyFinanceList, '', page);
@@ -10957,7 +12053,21 @@ Future<void> _loadAndSaveMyReferalsList1(MyReferalsListingModel list, String sea
 
 Future<MyFinanceListingModel?> getMyFinanceListSearch(String url, int page)async{
   MyFinanceListingModel? my_finance ;   
-  my_finance = await _apiProvider.getListMyFinance(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyFinance
+    barr.forEach((element){
+      if(element.contains('MyFinance')){
+        barrsp.add(element.replaceAll('MyFinance',''));
+      }
+    });
+  }
+  my_finance = await _apiProvider.getListMyFinance(url, page, barrsp)
 		  .then((responseMyFinanceList) {
 		  
    if(page == -1 ){
@@ -11030,6 +12140,21 @@ Future<void> _loadAndSaveMyFinanceList1(MyFinanceListingModel list, String searc
     MyFinanceListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyFinanceListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyFinance')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyFinanceList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyFinanceModel my_finance;
@@ -11411,16 +12536,32 @@ Future<void> _loadAndSaveMyFinanceList1(MyFinanceListingModel list, String searc
   }
    Future<MyPointsListingModel?> getMyPointsList(String url, int page)async{
   MyPointsListingModel? my_points ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyPointsList();
+      for (var element in barr) {
+        if(element.contains('MyPoints')){
+          barrsp.add(element.replaceAll('MyPoints',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyPointsList();
-            my_points = await _apiProvider.getListMyPoints(url, page)
+            my_points = await _apiProvider.getListMyPoints(url, page , barrsp)
                   .then((responseMyPointsList) {
                     _loadAndSaveMyPointsList1(responseMyPointsList, '', page);
 					return responseMyPointsList;
                   });
    }else{
-      my_points = await _apiProvider.getListMyPoints(url, page)
+      my_points = await _apiProvider.getListMyPoints(url, page, barrsp)
                   .then((responseMyPointsList) {
 				  try{
 				      return  _loadAndSaveMyPointsList(responseMyPointsList, '', page);
@@ -11438,7 +12579,21 @@ Future<void> _loadAndSaveMyFinanceList1(MyFinanceListingModel list, String searc
 
 Future<MyPointsListingModel?> getMyPointsListSearch(String url, int page)async{
   MyPointsListingModel? my_points ;   
-  my_points = await _apiProvider.getListMyPoints(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyPoints
+    barr.forEach((element){
+      if(element.contains('MyPoints')){
+        barrsp.add(element.replaceAll('MyPoints',''));
+      }
+    });
+  }
+  my_points = await _apiProvider.getListMyPoints(url, page, barrsp)
 		  .then((responseMyPointsList) {
 		  
    if(page == -1 ){
@@ -11511,6 +12666,21 @@ Future<void> _loadAndSaveMyPointsList1(MyPointsListingModel list, String searchK
     MyPointsListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyPointsListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyPoints')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyPointsList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyPointsModel my_points;
@@ -11592,16 +12762,32 @@ Future<void> _loadAndSaveMyPointsList1(MyPointsListingModel list, String searchK
   }
    Future<MyProfileListingModel?> getMyProfileList(String url, int page)async{
   MyProfileListingModel? my_profile ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyProfileList();
+      for (var element in barr) {
+        if(element.contains('MyProfile')){
+          barrsp.add(element.replaceAll('MyProfile',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyProfileList();
-            my_profile = await _apiProvider.getListMyProfile(url, page)
+            my_profile = await _apiProvider.getListMyProfile(url, page , barrsp)
                   .then((responseMyProfileList) {
                     _loadAndSaveMyProfileList1(responseMyProfileList, '', page);
 					return responseMyProfileList;
                   });
    }else{
-      my_profile = await _apiProvider.getListMyProfile(url, page)
+      my_profile = await _apiProvider.getListMyProfile(url, page, barrsp)
                   .then((responseMyProfileList) {
 				  try{
 				      return  _loadAndSaveMyProfileList(responseMyProfileList, '', page);
@@ -11619,7 +12805,21 @@ Future<void> _loadAndSaveMyPointsList1(MyPointsListingModel list, String searchK
 
 Future<MyProfileListingModel?> getMyProfileListSearch(String url, int page)async{
   MyProfileListingModel? my_profile ;   
-  my_profile = await _apiProvider.getListMyProfile(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyProfile
+    barr.forEach((element){
+      if(element.contains('MyProfile')){
+        barrsp.add(element.replaceAll('MyProfile',''));
+      }
+    });
+  }
+  my_profile = await _apiProvider.getListMyProfile(url, page, barrsp)
 		  .then((responseMyProfileList) {
 		  
    if(page == -1 ){
@@ -11692,6 +12892,21 @@ Future<void> _loadAndSaveMyProfileList1(MyProfileListingModel list, String searc
     MyProfileListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyProfileListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyProfile')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyProfileList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyProfileModel my_profile;
@@ -12210,16 +13425,32 @@ Future<PortofolioListingModel> _loadAndSavePortofolioMyProfileListSearch(Portofo
   }
    Future<KelurahanListingModel?> getKelurahanList(String url, int page)async{
   KelurahanListingModel? kelurahan ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllKelurahanList();
+      for (var element in barr) {
+        if(element.contains('Kelurahan')){
+          barrsp.add(element.replaceAll('Kelurahan',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllKelurahanList();
-            kelurahan = await _apiProvider.getListKelurahan(url, page)
+            kelurahan = await _apiProvider.getListKelurahan(url, page , barrsp)
                   .then((responseKelurahanList) {
                     _loadAndSaveKelurahanList1(responseKelurahanList, '', page);
 					return responseKelurahanList;
                   });
    }else{
-      kelurahan = await _apiProvider.getListKelurahan(url, page)
+      kelurahan = await _apiProvider.getListKelurahan(url, page, barrsp)
                   .then((responseKelurahanList) {
 				  try{
 				      return  _loadAndSaveKelurahanList(responseKelurahanList, '', page);
@@ -12237,7 +13468,21 @@ Future<PortofolioListingModel> _loadAndSavePortofolioMyProfileListSearch(Portofo
 
 Future<KelurahanListingModel?> getKelurahanListSearch(String url, int page)async{
   KelurahanListingModel? kelurahan ;   
-  kelurahan = await _apiProvider.getListKelurahan(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // Kelurahan
+    barr.forEach((element){
+      if(element.contains('Kelurahan')){
+        barrsp.add(element.replaceAll('Kelurahan',''));
+      }
+    });
+  }
+  kelurahan = await _apiProvider.getListKelurahan(url, page, barrsp)
 		  .then((responseKelurahanList) {
 		  
    if(page == -1 ){
@@ -12298,6 +13543,21 @@ Future<void> _loadAndSaveKelurahanList1(KelurahanListingModel list, String searc
     KelurahanListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateKelurahanListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('Kelurahan')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllKelurahanList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemKelurahanModel kelurahan;
@@ -12373,16 +13633,32 @@ Future<void> _loadAndSaveKelurahanList1(KelurahanListingModel list, String searc
   }
    Future<MyPortofolioListingModel?> getMyPortofolioList(String url, int page)async{
   MyPortofolioListingModel? my_portofolio ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyPortofolioList();
+      for (var element in barr) {
+        if(element.contains('MyPortofolio')){
+          barrsp.add(element.replaceAll('MyPortofolio',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyPortofolioList();
-            my_portofolio = await _apiProvider.getListMyPortofolio(url, page)
+            my_portofolio = await _apiProvider.getListMyPortofolio(url, page , barrsp)
                   .then((responseMyPortofolioList) {
                     _loadAndSaveMyPortofolioList1(responseMyPortofolioList, '', page);
 					return responseMyPortofolioList;
                   });
    }else{
-      my_portofolio = await _apiProvider.getListMyPortofolio(url, page)
+      my_portofolio = await _apiProvider.getListMyPortofolio(url, page, barrsp)
                   .then((responseMyPortofolioList) {
 				  try{
 				      return  _loadAndSaveMyPortofolioList(responseMyPortofolioList, '', page);
@@ -12400,7 +13676,21 @@ Future<void> _loadAndSaveKelurahanList1(KelurahanListingModel list, String searc
 
 Future<MyPortofolioListingModel?> getMyPortofolioListSearch(String url, int page)async{
   MyPortofolioListingModel? my_portofolio ;   
-  my_portofolio = await _apiProvider.getListMyPortofolio(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyPortofolio
+    barr.forEach((element){
+      if(element.contains('MyPortofolio')){
+        barrsp.add(element.replaceAll('MyPortofolio',''));
+      }
+    });
+  }
+  my_portofolio = await _apiProvider.getListMyPortofolio(url, page, barrsp)
 		  .then((responseMyPortofolioList) {
 		  
    if(page == -1 ){
@@ -12465,6 +13755,21 @@ Future<void> _loadAndSaveMyPortofolioList1(MyPortofolioListingModel list, String
     MyPortofolioListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyPortofolioListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyPortofolio')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyPortofolioList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyPortofolioModel my_portofolio;
@@ -12742,16 +14047,32 @@ Future<void> _loadAndSaveMyPortofolioList1(MyPortofolioListingModel list, String
   }
    Future<MyBookmarksListingModel?> getMyBookmarksList(String url, int page)async{
   MyBookmarksListingModel? my_bookmarks ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyBookmarksList();
+      for (var element in barr) {
+        if(element.contains('MyBookmarks')){
+          barrsp.add(element.replaceAll('MyBookmarks',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyBookmarksList();
-            my_bookmarks = await _apiProvider.getListMyBookmarks(url, page)
+            my_bookmarks = await _apiProvider.getListMyBookmarks(url, page , barrsp)
                   .then((responseMyBookmarksList) {
                     _loadAndSaveMyBookmarksList1(responseMyBookmarksList, '', page);
 					return responseMyBookmarksList;
                   });
    }else{
-      my_bookmarks = await _apiProvider.getListMyBookmarks(url, page)
+      my_bookmarks = await _apiProvider.getListMyBookmarks(url, page, barrsp)
                   .then((responseMyBookmarksList) {
 				  try{
 				      return  _loadAndSaveMyBookmarksList(responseMyBookmarksList, '', page);
@@ -12769,7 +14090,21 @@ Future<void> _loadAndSaveMyPortofolioList1(MyPortofolioListingModel list, String
 
 Future<MyBookmarksListingModel?> getMyBookmarksListSearch(String url, int page)async{
   MyBookmarksListingModel? my_bookmarks ;   
-  my_bookmarks = await _apiProvider.getListMyBookmarks(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyBookmarks
+    barr.forEach((element){
+      if(element.contains('MyBookmarks')){
+        barrsp.add(element.replaceAll('MyBookmarks',''));
+      }
+    });
+  }
+  my_bookmarks = await _apiProvider.getListMyBookmarks(url, page, barrsp)
 		  .then((responseMyBookmarksList) {
 		  
    if(page == -1 ){
@@ -12834,6 +14169,21 @@ Future<void> _loadAndSaveMyBookmarksList1(MyBookmarksListingModel list, String s
     MyBookmarksListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyBookmarksListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyBookmarks')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyBookmarksList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyBookmarksModel my_bookmarks;
@@ -12911,16 +14261,32 @@ Future<void> _loadAndSaveMyBookmarksList1(MyBookmarksListingModel list, String s
   }
    Future<MyBuddiesListingModel?> getMyBuddiesList(String url, int page)async{
   MyBuddiesListingModel? my_buddies ;
+  
+   String? black = await getBlacklist('black');
+   List<String> barr = [];
+   List<String> barrsp = [];
+    if(black != null && black != ''){
+      barr = black.split('|');
+      await _dbRepository.deleteAllMyBuddiesList();
+      for (var element in barr) {
+        if(element.contains('MyBuddies')){
+          barrsp.add(element.replaceAll('MyBuddies',''));
+        }
+      }
+    }
+  
+  
+
 
    if(page == 1){
 			//await _dbRepository.deleteAllMyBuddiesList();
-            my_buddies = await _apiProvider.getListMyBuddies(url, page)
+            my_buddies = await _apiProvider.getListMyBuddies(url, page , barrsp)
                   .then((responseMyBuddiesList) {
                     _loadAndSaveMyBuddiesList1(responseMyBuddiesList, '', page);
 					return responseMyBuddiesList;
                   });
    }else{
-      my_buddies = await _apiProvider.getListMyBuddies(url, page)
+      my_buddies = await _apiProvider.getListMyBuddies(url, page, barrsp)
                   .then((responseMyBuddiesList) {
 				  try{
 				      return  _loadAndSaveMyBuddiesList(responseMyBuddiesList, '', page);
@@ -12938,7 +14304,21 @@ Future<void> _loadAndSaveMyBookmarksList1(MyBookmarksListingModel list, String s
 
 Future<MyBuddiesListingModel?> getMyBuddiesListSearch(String url, int page)async{
   MyBuddiesListingModel? my_buddies ;   
-  my_buddies = await _apiProvider.getListMyBuddies(url, page)
+  var black = await getBlacklist('black');
+  List<String> barr = [];
+  List<String> barrsp = [];
+  //l.log('black ==== $black');
+
+  if(black != null && black != ''){
+    barr = black.split('|');
+    // MyBuddies
+    barr.forEach((element){
+      if(element.contains('MyBuddies')){
+        barrsp.add(element.replaceAll('MyBuddies',''));
+      }
+    });
+  }
+  my_buddies = await _apiProvider.getListMyBuddies(url, page, barrsp)
 		  .then((responseMyBuddiesList) {
 		  
    if(page == -1 ){
@@ -13005,6 +14385,21 @@ Future<void> _loadAndSaveMyBuddiesList1(MyBuddiesListingModel list, String searc
     MyBuddiesListingModel appList = list;
     int age = DateTime.now().toUtc().millisecondsSinceEpoch;
 	await _dbRepository.saveOrUpdateMyBuddiesListInfo(list);
+    var black = await getBlacklist('black');
+    List<String> barr = [];
+    bool isDelete = false;
+    if(black != null && black != '') {
+      barr = black.split('|');
+      barr.forEach((element) {
+        if (element.contains('MyBuddies')) {
+          isDelete = true;
+        }
+      });
+    }
+
+	   if(isDelete){
+		await _dbRepository.deleteAllMyBuddiesList();
+	   }
 	
     for(var i = 0; i < list.items.items.length ; i++){
       ItemMyBuddiesModel my_buddies;

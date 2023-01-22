@@ -1985,7 +1985,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
     super.initState();
 
     _bindBackgroundIsolate();
-
+  //  FlutterDownloader.initialize(ignoreSsl: true);
     FlutterDownloader.registerCallback(downloadCallback);
 
     _isLoading = true;
@@ -2665,7 +2665,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
     super.initState();
 
     _bindBackgroundIsolate();
-
+  //  FlutterDownloader.initialize(ignoreSsl: true);
     FlutterDownloader.registerCallback(downloadCallback);
 
     _isLoading = true;
@@ -2772,6 +2772,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
   Widget build(BuildContext context) {
     final size =MediaQuery.of(context).size;
     final width =size.width;
+    print('ini irvan');
 
     return
 
@@ -2883,12 +2884,12 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
                                         :
                                                GestureDetector(
                                               onTap:(){
-                                                print('halooooo123');
+                                               // print('halooooo123');
                                                 if(_tasks![0]!.status !=
                                                   //  DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
                                                     DownloadTaskStatus.complete && !fileExists! && _tasks![0]!.status != DownloadTaskStatus.running){
                                                   _requestDownload(item.task!);
-                                                print('halooooo1');
+                                              //  print('halooooo1');
                                                 }else if(item.task!.status ==
                                                     DownloadTaskStatus.complete )
                                                     {  _openDownloadedFile(item.task!)
@@ -3093,7 +3094,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
      // _permissionReady = await _checkPermission();
      // widget.platform == TargetPlatform.android ? _localPath = (_findLocalPath()): _localPath = (_findLocalPath()) + Platform.pathSeparator + 'ProjectscoidDownload';
 
-      print('aku disini');
+    //  print('aku disini');
       return Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -3177,6 +3178,9 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
   }
 
   void _requestDownload(_TaskInfo task) async {
+    setState(() {
+      fileExists = true;
+    });
     task.taskId = await FlutterDownloader.enqueue(
         url: task.link!,
         headers: {"auth": "test_for_sql_encoding"},
@@ -3184,9 +3188,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
         showNotification: true,
         saveInPublicStorage:true,
         openFileFromNotification: true);
-        setState(() {
-          fileExists = true;
-        });
+
 
      //await _prepare();
      //widget.st.setState(() {});
