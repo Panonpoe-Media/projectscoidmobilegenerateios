@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyFinance/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'my_finance_base.g.dart';
@@ -126,6 +127,7 @@ class ChangePaymentSettingsMyFinanceBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
@@ -307,7 +309,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -317,7 +319,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                      				  
 					 if(_isRewardedAdReady!){
                       state.setState(() {
@@ -349,7 +351,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -360,6 +362,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                           );
                                         });
 					   }	
+					   
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -930,6 +933,20 @@ class WithdrawPaymentMyFinanceBase{
     // next = false;
   }
 
+Future<int?> _getRateCountSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('apprate_count')) {
+      return prefs.getInt('apprate_count');
+    } else {
+      return 0;
+    }
+  }
+
+  Future<void> _setRateCountSF(int i) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_count', i);
+  }
+
 Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady, Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
   var cl;
@@ -1110,7 +1127,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1120,7 +1137,46 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
+					   var x = await _getRateCountSF();
+                                   // l.log('aku getRateCountSF ${x.toString()}');
+                                    if(x == 0){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            AlertDialog(
+                                              title: Text('App Ratting',
+                                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                              content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () async{
+                                                    await _setRateCountSF(1);
+                                                    if (await canLaunch(
+                                                        'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                                      await launch(
+                                                          'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                                    } else {
+                                                      throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                                    }
+                                                    Navigator.of(context).pop(true);
+                                                    },
+                                                  
+                                                  child: Text('Rate'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(false),
+                                                  child: Text('Nanti'),
+                                                ),
+
+                                          
+                                              ],
+                                            ),
+                                      );
+                                    }else{
+                                      await _setRateCountSF(1);
+                                    }
+
                      				  
 					 if(_isRewardedAdReady!){
                       state.setState(() {
@@ -1152,7 +1208,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1163,6 +1219,46 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                           );
                                         });
 					   }	
+					   
+					   var x = await _getRateCountSF();
+                                   // l.log('aku getRateCountSF ${x.toString()}');
+                                    if(x == 0){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            AlertDialog(
+                                              title: Text('App Ratting',
+                                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                              content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () async{
+                                                    await _setRateCountSF(1);
+                                                    if (await canLaunch(
+                                                        'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                                      await launch(
+                                                          'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                                    } else {
+                                                      throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                                    }
+                                                    Navigator.of(context).pop(true);
+                                                    },
+                                                  
+                                                  child: Text('Rate'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(false),
+                                                  child: Text('Nanti'),
+                                                ),
+
+                                          
+                                              ],
+                                            ),
+                                      );
+                                    }else{
+                                      await _setRateCountSF(1);
+                                    }
+
 					 if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;
@@ -1612,6 +1708,7 @@ class DepositBalanceMyFinanceBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyFinanceController my_finance,
 
  var postMyFinanceResult, State state, String? sendPath, String? id,  String? title){
@@ -1793,7 +1890,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1803,7 +1900,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
@@ -1826,7 +1923,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1837,6 +1934,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                           );
                                         });
 					   }	
+					   
                           AppProvider.getRouter(context)!.pop(context);
                        // AppProvider.getRouter(context)!.pop(context);	
 

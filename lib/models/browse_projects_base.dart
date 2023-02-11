@@ -38,7 +38,9 @@ import 'package:projectscoid/views/route.dart' as rt;
 import 'package:projectscoid/core/components/helpers/ad_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'dart:developer' as l;
+import 'package:shared_preferences/shared_preferences.dart';
 part 'browse_projects_base.g.dart';
+
 
 
 
@@ -108,6 +110,21 @@ class PlaceNewBidBrowseProjectsBase{
       callback();
     });
     // next = false;
+  }
+
+
+  Future<int?> _getRateCountSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('apprate_count')) {
+      return prefs.getInt('apprate_count');
+    } else {
+      return 0;
+    }
+  }
+
+  Future<void> _setRateCountSF(int i) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_count', i);
   }
 
 Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
@@ -289,9 +306,49 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                   state.setState(() {
                                   postBrowseProjectsResult = value;
                                   });
-                                  }).catchError((Error) {
+                                  }).catchError((Error)async {
                         // AppProvider.getRouter(context)!.pop(context);
-                                    l.log('errorhaloooooooooooo1${Error.toString()}');
+                                   // l.log('errorhaloooooooooooo1${Error.toString()}');
+
+                                    var x = await _getRateCountSF();
+                                   // l.log('aku getRateCountSF ${x.toString()}');
+                                    if(x == 0){
+                                      await showDialog(
+                                        context: context,
+                                        builder: (context) =>
+                                            AlertDialog(
+                                              title: Text('App Ratting',
+                                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                              content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () async{
+                                                    await _setRateCountSF(1);
+                                                    if (await canLaunch(
+                                                        'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                                      await launch(
+                                                          'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                                    } else {
+                                                      throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                                    }
+                                                    Navigator.of(context).pop(true);
+                                                    },
+
+                                                  child: Text('Rate'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () => Navigator.of(context).pop(false),
+                                                  child: Text('Nanti'),
+                                                ),
+
+
+                                              ],
+                                            ),
+                                      );
+                                    }else{
+                                      await _setRateCountSF(1);
+                                    }
+
                     if(_isRewardedAdReady!){
                       state.setState(() {
                         _isRewardedAdReady = false;

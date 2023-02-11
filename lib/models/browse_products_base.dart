@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/BrowseProducts/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'browse_products_base.g.dart';
@@ -100,6 +101,7 @@ class AddToCartBrowseProductsBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseProductsController browse_products,
 
@@ -282,7 +284,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                                   state.setState(() {
                                   postBrowseProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -292,7 +294,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -319,7 +321,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                                   state.setState(() {
                                   postBrowseProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -330,6 +332,7 @@ Widget RButtonActionBrowseProductsWidget(Button button, BuildContext context,var
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){

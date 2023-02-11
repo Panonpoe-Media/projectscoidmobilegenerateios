@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/Program/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'program_base.g.dart';
@@ -84,6 +85,7 @@ class PromoProgramBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKey, ScrollController controller, ProgramController program,
 
@@ -266,7 +268,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                   state.setState(() {
                                   postProgramResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -276,7 +278,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -303,7 +305,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                   state.setState(() {
                                   postProgramResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -314,6 +316,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){

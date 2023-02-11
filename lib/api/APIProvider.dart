@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/adapter.dart';
 import 'package:projectscoid/models/model.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -10,11 +9,10 @@ import 'package:projectscoid/app/Env.dart';
 import 'package:projectscoid/core/components/utility/http/HttpException.dart';
 import 'package:projectscoid/core/components/utility/log/DioLogger.dart';
 import 'package:sprintf/sprintf.dart';
+import 'package:dio/adapter.dart';
 //import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'dart:convert';
 import 'dart:developer' as l;
-import 'package:projectscoid/core/components/utility/secure/secure.dart';
-import 'package:intl/intl.dart';
 
 
 //non generate import
@@ -98,13 +96,12 @@ class APIProvider {
       BaseOptions dioOptions =  BaseOptions()//(contentType: ContentType.json, responseType: ResponseType.plain)
         ..baseUrl = '';//APIProvider._baseUrl;
       dio = Dio(dioOptions);
-      (dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+	 (dio!.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
           (HttpClient client) {
         client.badCertificateCallback =
             (X509Certificate cert, String host, int port) => true;
         return client;
       };
-
       dio!.interceptors.add(CookieManager(cj));
      if(EnvType.DEVELOPMENT == Env.value!.environmentType || EnvType.STAGING == Env.value!.environmentType){
 
@@ -8177,13 +8174,7 @@ dio!.options.headers = {
 
   Future userLogin(String username, String pwd) async{
   dio!.options.connectTimeout = 15000;
-   String url = Env.value!.baseUrl! + '/public/home/login/?ajax=1';
-   //  var now = DateTime.now();
-   //  var format = DateFormat('yyyy-MM-dd hh:mm'); //yyyy-mm-dd hh:nn yyyy-MM-dd hh:mm
-   //  var md5val = generateMd5('802c28projects9731${format.format(now)}');
-  //  String url = Env.value!.baseUrl! + '/public/home/impersonate/802c28/$md5val';
-  //  String url = Env.value!.baseUrl! + '/public/home/impersonate/802c28/${generateMd5('802c28')}projects9731${format.format(now)}';
-    print(url);
+    String url = Env.value!.baseUrl! + '/public/home/login/?ajax=1';
     // String  projectsResponse = '';
     dio!.options.headers = {
       'content-type': 'application/x-www-form-urlencoded',
@@ -8192,12 +8183,8 @@ dio!.options.headers = {
     };
    // dio!.options.contentType = ContentType.parse('application/x-www-form-urlencoded');
     Response response = await dio!.post(url, data :'LoginActivity[_trigger_]=1&LoginActivity[user_name]=' + username +  '&LoginActivity[password]='+  pwd +'&LoginActivity[remember]=1');
- // '/public/home/impersonate/' . encodeID($model->user_id) . '/' . md5(encodeID($model->user_id) . 'projects9731' . date('Y-m-d H:i'));
-  //  Response response = await dio!.get(url);
-   // throwIfNoSuccess(response);
-   // print(response.data);
+    throwIfNoSuccess(response);
     return response.data;
-   // return '{"result":"OK","user_id":"41611016842","user_name":"RickFalco","user_display":"Falco","user_photo":"https:\/\/cdn.projects.co.id\/upload\/usr581611\/202111156191d3b7629a7-thumb.jpg","user_hash":"802c28","notif_count":null}';
   }
 
   Future getContact(String url) async{

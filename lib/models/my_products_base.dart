@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyProducts/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'my_products_base.g.dart';
@@ -131,6 +132,7 @@ class AddNewProductMyProductsBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
@@ -316,7 +318,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -326,7 +328,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -353,7 +355,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -364,6 +366,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -992,6 +995,7 @@ class PublishProductMyProductsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
  var postMyProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -1176,7 +1180,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1186,7 +1190,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -1213,7 +1217,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1224,6 +1228,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -1809,6 +1814,7 @@ class EditProductMyProductsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
  var postMyProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -1993,7 +1999,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2003,7 +2009,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -2030,7 +2036,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2041,6 +2047,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -2669,6 +2676,7 @@ class BumpUpMyProductsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
  var postMyProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -2853,7 +2861,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2863,7 +2871,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -2890,7 +2898,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2901,6 +2909,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -3484,6 +3493,7 @@ class UnlistMyProductsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
  var postMyProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -3668,7 +3678,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -3678,7 +3688,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -3705,7 +3715,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -3716,6 +3726,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -4298,6 +4309,7 @@ class ReactivateProductMyProductsBase{
     // next = false;
   }
 
+
 Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProductsController my_products,
 
  var postMyProductsResult, State state, String? sendPath, String? id,  String? title){
@@ -4482,7 +4494,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4492,7 +4504,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -4519,7 +4531,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4530,6 +4542,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){

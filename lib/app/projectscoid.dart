@@ -83,6 +83,9 @@ import 'package:koukicons_jw/briefcase.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:flutter/services.dart';
+import 'package:rate_my_app/rate_my_app.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /////////////////////////////
 //        ____         ___ //
@@ -101,6 +104,7 @@ class homeView extends StatefulWidget {
   BuildContext? ctx;
 
   ChatBloc? notif;
+
   homeView(
       {Key? key,
       this.hasID,
@@ -149,7 +153,17 @@ class homeViewState extends State<homeView> with RestorationMixin {
   final List<TestimonialItemModel?>? _cte = [];
   final List<TestimonialItemModel?>? _ctet = [];
   String oldCte = '';
-
+  RateMyApp rateMyApp = RateMyApp(
+    preferencesPrefix: 'rateMyApp_',
+    minDays: 0,
+    // minLaunches: 10,
+    // remindDays: 7,
+    // remindLaunches: 10,
+    googlePlayIdentifier: 'id.co.projectscoid',
+    appStoreIdentifier: '1491556149',
+  );
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
   void scrollup(bool? su) {
     widget.scrollUp!(su!);
   }
@@ -178,12 +192,118 @@ class homeViewState extends State<homeView> with RestorationMixin {
   @override
   initState() {
     controller.addListener(_onScroll);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+     // print('rateMyApp1');
+      await rateMyApp.init();
+    //  print('rateMyApp2');
+     // if (mounted && rateMyApp.shouldOpenDialog) {
+      //  print('rateMyApp3');
+        /*
+
+        rateMyApp.showStarRateDialog(
+          context,
+          title: 'Rate this app', // The dialog title.
+          message: 'You like this app ? Then take a little bit of your time to leave a rating :', // The dialog message.
+          // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
+          actionsBuilder: (context, stars) { // Triggered when the user updates the star rating.
+            return [ // Return a list of actions (that will be shown at the bottom of the dialog).
+              TextButton(
+                child: Text('OK'),
+                onPressed: () async {
+                  print('Thanks for the ' + (stars == null ? '0' : stars.round().toString()) + ' star(s) !');
+                  // You can handle the result as you want (for instance if the user puts 1 star then open your contact page, if he puts more then open the store page, etc...).
+                  // This allows to mimic the behavior of the default "Rate" button. See "Advanced > Broadcasting events" for more information :
+                  await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
+                  Navigator.pop<RateMyAppDialogButton>(context, RateMyAppDialogButton.rate);
+                },
+              ),
+            ];
+          },
+          ignoreNativeDialog: Platform.isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+          dialogStyle: const DialogStyle( // Custom dialog styles.
+            titleAlign: TextAlign.center,
+            messageAlign: TextAlign.center,
+            messagePadding: EdgeInsets.only(bottom: 20),
+          ),
+          starRatingOptions: const StarRatingOptions(), // Custom star bar rating options.
+          onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+        );
+     // }
+
+         */
+      if (mounted && rateMyApp.shouldOpenDialog) {
+        rateMyApp.showRateDialog(
+          context,
+          title: 'Rate this app',
+          // The dialog title.
+          message: 'If you like this app, please take a little bit of your time to review it !\nIt really helps us and it shouldn\'t take you more than one minute.',
+          // The dialog message.
+          rateButton: 'RATE',
+          // The dialog "rate" button text.
+          noButton: 'NO THANKS',
+          // The dialog "no" button text.
+          laterButton: 'MAYBE LATER',
+          // The dialog "later" button text.
+          listener: (
+              button) { // The button click listener (useful if you want to cancel the click event).
+            switch (button) {
+              case RateMyAppDialogButton.rate:
+                print('Clicked on "Rate".');
+                break;
+              case RateMyAppDialogButton.later:
+                print('Clicked on "Later".');
+                break;
+              case RateMyAppDialogButton.no:
+                print('Clicked on "No".');
+                break;
+            }
+
+            return true; // Return false if you want to cancel the click event.
+          },
+          ignoreNativeDialog: Platform.isAndroid,
+          // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+          dialogStyle: const DialogStyle(),
+          // Custom dialog styles.
+          onDismissed: () =>
+              rateMyApp.callEvent(RateMyAppEventType
+                  .laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+          // contentBuilder: (context, defaultContent) => content, // This one allows you to change the default dialog content.
+          // actionsBuilder: (context) => [], // This one allows you to use your own buttons.
+        );
+      }
+
+    });
+
+
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+            setState(() {
+              _isBannerAdReady = true;
+            });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+
+
+
     activefab(false);
     Home = SubModelController(
         AppProvider.getApplication(widget.ctx!), getPath, null);
 
     fetchData(Home);
     super.initState();
+
   }
 
   Future<void> fetchData(SubModelController? Home) async {
@@ -1507,7 +1627,22 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                                       ]))),
                                           categoryServicesIcon(context),
                                         ])),
-
+                                if (_isBannerAdReady)
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                if (_isBannerAdReady)
+                                  Center(
+                                    child: Container(
+                                      width: _bannerAd.size.width.toDouble(),
+                                      height: _bannerAd.size.height.toDouble(),
+                                      child: AdWidget(ad: _bannerAd),
+                                    ),
+                                  ),
+                                if (_isBannerAdReady)
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
                                 Container(
                                   decoration: const BoxDecoration(
                                     color: Colors.transparent,
@@ -1756,7 +1891,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10.0),
                                 ),
-
+                                adsWidget(title: 'Title'),
                                 Container(
                                     decoration: widget.isDark!
                                         ? const BoxDecoration(
@@ -3484,14 +3619,23 @@ class homeViewState extends State<homeView> with RestorationMixin {
                   color: darkMode ? Colors.white : Colors.black),
               elevation: 1.5,
               label: 'Create Project',
-              onTap: () {
-                if (widget.hasID!) {
-                  AppProvider.getRouter(context)!.navigateTo(
-                      context, "/user/my_projects/create_project//");
-                } else {
-                  AppProvider.getRouter(context)!
-                      .navigateTo(context, "/login/1");
-                }
+              onTap: (){
+               // _requestReview();
+
+               //  if (await inAppReview.isAvailable()) {
+               //  inAppReview.requestReview();
+
+                 if (widget.hasID!) {
+                   AppProvider.getRouter(context)!.navigateTo(
+                       context, "/user/my_projects/create_project//");
+                 } else {
+                   AppProvider.getRouter(context)!
+                       .navigateTo(context, "/login/1");
+                 }
+               //  }
+
+
+
               }),
         ],
       ),
@@ -3736,6 +3880,7 @@ class homeViewState extends State<homeView> with RestorationMixin {
 
   @override
   void dispose() {
+    _bannerAd.dispose();
     super.dispose();
   }
 
@@ -3749,6 +3894,77 @@ class homeViewState extends State<homeView> with RestorationMixin {
     }
     lastScroll = currentScroll;
   }
+}
+
+class adsWidget extends StatefulWidget{
+  final String? title;
+  adsWidget({Key? key, this.title})
+      : super(key: key);
+  @override
+  adsWidgetState createState() => adsWidgetState();
+}
+
+class adsWidgetState extends State<adsWidget> {
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+
+  @override
+  initState() {
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.mediumRectangle,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+    _bannerAd.load();
+    super.initState();
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        alignment: Alignment.center,
+        child: Column(
+            children: [
+              if (_isBannerAdReady)
+                const SizedBox(
+                  height: 10,
+                ),
+              if (_isBannerAdReady)
+                Center(
+                  child: Container(
+                    width: _bannerAd.size.width.toDouble(),
+                    height: _bannerAd.size.height.toDouble(),
+                    child: AdWidget(ad: _bannerAd),
+                  ),
+                ),
+              if (_isBannerAdReady)
+                const SizedBox(
+                  height: 10,
+                ),
+            ]
+        )
+    );
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
 }
 
 class ProjectsBottomLoader extends StatelessWidget {
@@ -10609,6 +10825,22 @@ class _ProjectscoidState extends State<Projectscoid>
     buildNumber: 'Unknown',
   );
 
+
+  // In this snippet, I'm giving a value to all parameters.
+// Please note that not all are required (those that are required are marked with the @required annotation).
+
+  RateMyApp rateMyApp = RateMyApp(
+    preferencesPrefix: 'rateMyApp_',
+    minDays: 0,
+   // minLaunches: 10,
+   // remindDays: 7,
+   // remindLaunches: 10,
+    googlePlayIdentifier: 'id.co.projectscoid',
+    appStoreIdentifier: '1491556149',
+  );
+
+
+
 /*
   Future<void> initPusher() async {
     try {
@@ -10720,6 +10952,7 @@ class _ProjectscoidState extends State<Projectscoid>
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
+
     // TODO: Initialize _bannerAd
     /*
     _bannerAd = BannerAd(
@@ -11319,7 +11552,10 @@ class _ProjectscoidState extends State<Projectscoid>
 
     // }
     if (widget.id != '') {
-      getApplicationDocumentsDirectory().then((value) {
+      getApplicationDocumentsDirectory().then((value){
+       // if (await inAppReview.isAvailable()) {
+       // inAppReview.requestReview();
+       // }
         APIProvider projectsAPIProvider = APIProvider(value.path);
         final future = projectsAPIProvider
             .getData(Env.value!.baseUrl! + '/user/program/ping');
@@ -11340,6 +11576,8 @@ class _ProjectscoidState extends State<Projectscoid>
       });
       _timer = Timer.periodic(const Duration(milliseconds: 300000), (timer) {
         getApplicationDocumentsDirectory().then((value) {
+
+
           APIProvider projectsAPIProvider = APIProvider(value.path);
           final future = projectsAPIProvider
               .getData(Env.value!.baseUrl! + '/user/program/ping');
@@ -11401,13 +11639,14 @@ class _ProjectscoidState extends State<Projectscoid>
 
     if (widget.id != '') _checkCart();
     _tabController!.addListener(_handleTabSelection);
+
   }
 
   String toPicFile(String json) {
     if (json.contains('chat-file') || json.contains('chat-file')) {
-      return 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â½ Attachment';
+      return '📎 Attachment';
     } else if (json.contains('chat-image') || json.contains('chat-image')) {
-      return 'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â°ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¸ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã¢â‚¬Å“ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· Image';
+      return '📷 Image';
     } else {
       return json;
     }

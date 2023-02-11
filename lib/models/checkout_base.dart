@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/Checkout/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'checkout_base.g.dart';
@@ -88,6 +89,7 @@ class PayWithAvailableBalanceCheckoutBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
@@ -270,7 +272,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -280,7 +282,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -307,7 +309,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -318,6 +320,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -756,6 +759,7 @@ class PayViaBankTransferCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -937,7 +941,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -947,7 +951,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -974,7 +978,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -985,6 +989,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -1439,6 +1444,7 @@ class PayWithCreditCardCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -1620,7 +1626,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1630,7 +1636,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -1657,7 +1663,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1668,6 +1674,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -2095,6 +2102,7 @@ class PayWithCimbClicksCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -2276,7 +2284,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2286,7 +2294,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -2313,7 +2321,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2324,6 +2332,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -2751,6 +2760,7 @@ class PayWithBcaKlikpayCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -2932,7 +2942,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2942,7 +2952,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -2969,7 +2979,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -2980,6 +2990,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -3407,6 +3418,7 @@ class PayWithMandiriClickpayCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -3588,7 +3600,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -3598,7 +3610,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -3625,7 +3637,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -3636,6 +3648,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -4063,6 +4076,7 @@ class PayWithQrisCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -4244,7 +4258,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4254,7 +4268,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -4281,7 +4295,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4292,6 +4306,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -4719,6 +4734,7 @@ class PayWithPaypalCheckoutBase{
     // next = false;
   }
 
+
 Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formKey, ScrollController controller, CheckoutController checkout,
 
  var postCheckoutResult, State state, String? sendPath, String? id,  String? title){
@@ -4900,7 +4916,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4910,7 +4926,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -4937,7 +4953,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -4948,6 +4964,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){

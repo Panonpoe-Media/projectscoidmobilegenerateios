@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/BrowseUsers/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
 
 part 'browse_users_base.g.dart';
@@ -100,6 +101,7 @@ class InviteToBidBrowseUsersBase{
     });
     // next = false;
   }
+
 
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
 
@@ -282,7 +284,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -292,7 +294,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -319,7 +321,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -330,6 +332,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){
@@ -851,6 +854,7 @@ class HireMeBrowseUsersBase{
     // next = false;
   }
 
+
 Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseUsersController browse_users,
 
  var postBrowseUsersResult, State state, String? sendPath, String? id,  String? title){
@@ -1033,7 +1037,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						  if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1043,7 +1047,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                             ),
                                           );
                                         });
-					   }			  
+					   }	
                        // AppProvider.getRouter(context)!.pop(context);	
 					 
 						  
@@ -1070,7 +1074,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                   state.setState(() {
                                   postBrowseUsersResult = value;
                                   });
-                                  }).catchError((Error){
+                                  }).catchError((Error)async{
 						if(!Error.toString().contains('302')){
 					     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1081,6 +1085,7 @@ Widget RButtonActionBrowseUsersWidget(Button button, BuildContext context,var fo
                                           );
                                         });
 					   }	
+					   
                        // AppProvider.getRouter(context)!.pop(context);	
 							        
                                    if(Error.toString().contains('302')){

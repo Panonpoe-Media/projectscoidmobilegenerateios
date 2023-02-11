@@ -1603,6 +1603,110 @@ class BrowseProductsViewModel extends BrowseProductsViewBase {
                                 ),
                               ),
                               SizedBox(
+                                height: 5,
+                              ),
+                              Center(
+                                child:  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                                    child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: <Widget>[
+                                          GestureDetector(
+                                            onTap: () {
+                                              //destination!.item.buttons[2].url
+
+                                              AppProvider.getRouter(
+                                                  context)!
+                                                  .navigateTo(
+                                                context,
+
+                                                '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*browse_products*view*${this
+                                                    .model!
+                                                    .model!.product_id}*${this
+                                                    .model!.meta!.title.replaceAll('/','*')}* product reviews id = ${this
+                                                    .model!
+                                                    .model!
+                                                    .product_reviews
+                                                    .items[0]
+                                                    .product_id}',
+                                              );
+
+                                            },
+                                            child:  const Text('Report',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.red,
+                                              ),
+
+                                            ),
+                                          ),
+                                          const SizedBox(width : 3),
+                                          const Text('|',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.w300,
+                                            ),
+
+                                          ),
+                                          const SizedBox(width : 3),
+                                          GestureDetector(
+                                            onTap: () async{
+                                              return await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AlertDialog(
+                                                      title: Text('Block',
+                                                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                                      content: Text('Apakah Anda blok halaman / user ini?'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                          onPressed: () async{
+                                                            /*
+                                                                        await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.service_id + 'BrowseServices');
+                                                                        Navigator.pushAndRemoveUntil(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                              builder: (context) =>
+                                                                                  PublicBrowseServicesListing(
+                                                                                      id: '0',
+                                                                                      cb: cb)),
+                                                                              (Route<dynamic> route) => false,
+                                                                        );
+                                                                        // Navigator.pop(context); Navigator.pop(context);
+
+                                                                         */
+                                                          },
+                                                          /*Navigator.of(context).pop(true)*/
+                                                          child: Text('Ya'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () => Navigator.of(context).pop(false),
+                                                          child: Text('Tidak'),
+                                                        ),
+
+
+                                                      ],
+                                                    ),
+                                              );
+
+                                            },
+                                            child:  const Text('Block',
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w300,
+                                                color: Colors.red,
+                                              ),
+
+                                            ),
+
+                                          ),
+                                        ]
+                                    )
+                                ),
+                              ),
+                              SizedBox(
                                 height: 20,
                               ),
                             ])),
@@ -1864,7 +1968,107 @@ class BrowseProductsViewModel extends BrowseProductsViewBase {
                                                 ),
                                               ),
                                             ),
+
                                           ],
+                                        ),
+                                        Padding(
+                                            padding: const EdgeInsets.only(bottom: 1.0, top: 1.0),
+                                            child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                children: <Widget>[
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      //destination!.item.buttons[2].url
+
+                                                      AppProvider.getRouter(
+                                                          context)!
+                                                          .navigateTo(
+                                                        context,
+
+                                                        '/public/support/contact_form/1/contact_formReportaViolationhttps:**projects.co.id*public*browse_products*view*${this
+                                                            .model!
+                                                            .model!.product_id}*${this
+                                                            .model!.meta!.title}* message id = ${this
+                                                            .model!
+                                                            .model!
+                                                            .product_comments
+                                                            .items[0]
+                                                            .product_post_id}',
+                                                      );
+
+                                                    },
+                                                    child:  const Text('Report',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight: FontWeight.w300,
+                                                        color: Colors.red,
+                                                      ),
+
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width : 3),
+                                                  const Text('|',
+                                                    style: TextStyle(
+                                                      fontSize: 10,
+                                                      fontWeight: FontWeight.w300,
+                                                    ),
+
+                                                  ),
+                                                  const SizedBox(width : 3),
+                                                  GestureDetector(
+                                                    onTap: () async{
+                                                      return await showDialog(
+                                                        context: context,
+                                                        builder: (context) =>
+                                                            AlertDialog(
+                                                              title: Text('Block',
+                                                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                                              content: Text('Apakah Anda blok halaman / user ini?'),
+                                                              actions: <Widget>[
+                                                                TextButton(
+                                                                  onPressed: () async{
+                                                                    /*
+                                                                        await apiRepProvider!.loadAndSaveBlacklist('black', destination!.item.service_id + 'BrowseServices');
+                                                                        Navigator.pushAndRemoveUntil(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                              builder: (context) =>
+                                                                                  PublicBrowseServicesListing(
+                                                                                      id: '0',
+                                                                                      cb: cb)),
+                                                                              (Route<dynamic> route) => false,
+                                                                        );
+                                                                        // Navigator.pop(context); Navigator.pop(context);
+
+                                                                         */
+                                                                  },
+                                                                  /*Navigator.of(context).pop(true)*/
+                                                                  child: Text('Ya'),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed: () => Navigator.of(context).pop(false),
+                                                                  child: Text('Tidak'),
+                                                                ),
+
+
+                                                              ],
+                                                            ),
+                                                      );
+
+                                                    },
+                                                    child:  const Text('Block',
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight: FontWeight.w300,
+                                                        color: Colors.red,
+                                                      ),
+
+                                                    ),
+
+                                                  ),
+                                                ]
+                                            )
                                         ),
                                         Padding(
                                           padding:

@@ -35,6 +35,7 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/models/MyProjects/action.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:shared_preferences/shared_preferences.dart';
 part 'my_projects_base.g.dart';
 
 /** AUTOGENERATE OFF **/
@@ -4668,6 +4669,19 @@ class AcceptOrRejectWorkMyProjectsBase{
 
 
 
+  Future<int?> _getRateCountSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('apprate_count')) {
+      return prefs.getInt('apprate_count');
+    } else {
+      return 0;
+    }
+  }
+
+  Future<void> _setRateCountSF(int i) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_count', i);
+  }
 
 
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
@@ -4847,7 +4861,9 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                   }).catchError((Error)async{
+                                     if(!Error.toString().contains('302')){
+                                       _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(Error.toString()),
@@ -4868,7 +4884,47 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 											(Route<dynamic> route) => false,
 										  );
 										}else{
- 											Navigator.pushAndRemoveUntil(
+
+                        var x = await _getRateCountSF();
+                        // l.log('aku getRateCountSF ${x.toString()}');
+                        if(x == 0){
+                          await showDialog(
+                              context: context,
+                              builder: (context) =>
+                              AlertDialog(
+                                title: Text('App Ratting',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () async{
+                                      await _setRateCountSF(1);
+                                      if (await canLaunch(
+                                          'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                        await launch(
+                                            'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                      } else {
+                                        throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                      }
+                                      Navigator.of(context).pop(true);
+                                    },
+
+                                    child: Text('Rate'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.of(context).pop(false),
+                                    child: Text('Nanti'),
+                                  ),
+
+
+                                ],
+                              ),
+                                     );
+                                     }else{
+                                     await _setRateCountSF(1);
+                                     }
+
+                                     Navigator.pushAndRemoveUntil(
 											context,
 											MaterialPageRoute(builder: (context) => rt.RateWorkerMyProjects(id :  id!, title: 'zzzz')),
 												(Route<dynamic> route) => false,
@@ -4885,7 +4941,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                   }).catchError((Error)async{					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(Error.toString()),
@@ -4903,7 +4959,46 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 											(Route<dynamic> route) => false,
 										  );
 										}else{
- 											Navigator.pushAndRemoveUntil(
+                         var x = await _getRateCountSF();
+                         // l.log('aku getRateCountSF ${x.toString()}');
+                         if(x == 0){
+                           await showDialog(
+                             context: context,
+                             builder: (context) =>
+                                 AlertDialog(
+                                   title: Text('App Ratting',
+                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                   content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                   actions: <Widget>[
+                                     TextButton(
+                                       onPressed: () async{
+                                         await _setRateCountSF(1);
+                                         if (await canLaunch(
+                                             'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                           await launch(
+                                               'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                         } else {
+                                           throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                         }
+                                         Navigator.of(context).pop(true);
+                                       },
+
+                                       child: Text('Rate'),
+                                     ),
+                                     TextButton(
+                                       onPressed: () => Navigator.of(context).pop(false),
+                                       child: Text('Nanti'),
+                                     ),
+
+
+                                   ],
+                                 ),
+                           );
+                         }else{
+                           await _setRateCountSF(1);
+                         }
+
+                         Navigator.pushAndRemoveUntil(
 											context,
 											MaterialPageRoute(builder: (context) => rt.RateWorkerMyProjects(id :  id!, title: 'zzzz')),
 												(Route<dynamic> route) => false,
@@ -5411,6 +5506,20 @@ class RateWorkerMyProjectsBase{
   }
 
 
+  Future<int?> _getRateCountSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('apprate_count')) {
+      return prefs.getInt('apprate_count');
+    } else {
+      return 0;
+    }
+  }
+
+  Future<void> _setRateCountSF(int i) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_count', i);
+  }
+
 Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, MyProjectsController my_projects,
  var postMyProjectsResult, State state, String?   sendPath, String?   id,  String?   title){
   var cl;
@@ -5588,7 +5697,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                   }).catchError((Error)async{					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(Error.toString()),
@@ -5601,8 +5710,46 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
 
 
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                                   var x = await _getRateCountSF();
+                                   // l.log('aku getRateCountSF ${x.toString()}');
+                                   if(x == 0){
+                                     await showDialog(
+                                         context: context,
+                                         builder: (context) =>
+                                         AlertDialog(
+                                           title: Text('App Ratting',
+                                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                           content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                           actions: <Widget>[
+                                             TextButton(
+                                               onPressed: () async{
+                                                 await _setRateCountSF(1);
+                                                 if (await canLaunch(
+                                                     'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                                   await launch(
+                                                       'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                                 } else {
+                                                   throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                                 }
+                                                 Navigator.of(context).pop(true);
+                                               },
 
-									 Navigator.pushAndRemoveUntil(
+                                               child: Text('Rate'),
+                                             ),
+                                             TextButton(
+                                               onPressed: () => Navigator.of(context).pop(false),
+                                               child: Text('Nanti'),
+                                             ),
+
+
+                                           ],
+                                         ),
+                                     );
+                                     }else{
+                                     await _setRateCountSF(1);
+                                     }
+
+                                     Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
@@ -5616,7 +5763,7 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                                   state.setState(() {
                                   postMyProjectsResult = value;
                                   });
-                                   }).catchError((Error){					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
+                                   }).catchError((Error)async{					  if(!Error.toString().contains('302')){			     _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
                                               content: Text(Error.toString()),
@@ -5628,7 +5775,46 @@ Widget RButtonActionMyProjectsWidget(Button button, BuildContext context,var for
                        // AppProvider.getRouter(context)!.pop(context);
 
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-									 Navigator.pushAndRemoveUntil(
+                                   var x = await _getRateCountSF();
+                                   // l.log('aku getRateCountSF ${x.toString()}');
+                                   if(x == 0){
+                                     await showDialog(
+                                       context: context,
+                                       builder: (context) =>
+                                           AlertDialog(
+                                             title: Text('App Ratting',
+                                               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                             content: Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini'),
+                                             actions: <Widget>[
+                                               TextButton(
+                                                 onPressed: () async{
+                                                   await _setRateCountSF(1);
+                                                   if (await canLaunch(
+                                                       'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                                     await launch(
+                                                         'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                                   } else {
+                                                     throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                                   }
+                                                   Navigator.of(context).pop(true);
+                                                 },
+
+                                                 child: Text('Rate'),
+                                               ),
+                                               TextButton(
+                                                 onPressed: () => Navigator.of(context).pop(false),
+                                                 child: Text('Nanti'),
+                                               ),
+
+
+                                             ],
+                                           ),
+                                     );
+                                   }else{
+                                     await _setRateCountSF(1);
+                                   }
+
+                                   Navigator.pushAndRemoveUntil(
 										context,
 										MaterialPageRoute(builder: (context) => rt.UserMyProjectsListing(id :  id!)),
 											(Route<dynamic> route) => false,
