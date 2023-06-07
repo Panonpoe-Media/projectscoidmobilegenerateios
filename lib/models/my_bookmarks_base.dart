@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyBookmarks/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_bookmarks_base.g.dart';
 

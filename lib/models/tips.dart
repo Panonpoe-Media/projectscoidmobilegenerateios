@@ -284,7 +284,7 @@ class TipsViewModel extends TipsViewBase {
 
   @override
   Widget view(
-      BuildContext context, ScrollController controller, bool? account) {
+      BuildContext context, ScrollController controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
     viewChildren.clear();
     viewChildren.add(viewTitle(context));
     viewChildren.add(viewImage(context));
@@ -294,7 +294,36 @@ class TipsViewModel extends TipsViewBase {
 
     viewChildren.add(viewContent(context));
     // viewChildren.add(viewFiles(context));
+    viewChildren!.add(
 
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
     return (SingleChildScrollView(
         controller: controller,
         physics: const AlwaysScrollableScrollPhysics(),

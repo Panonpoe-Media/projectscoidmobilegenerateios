@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyFinance/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_finance_base.g.dart';
 
@@ -298,6 +300,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postChangePaymentSettingsMyFinanceWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -306,6 +309,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -340,6 +344,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       }else{
                       final future = my_finance.postChangePaymentSettingsMyFinance();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -348,6 +353,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -1116,6 +1122,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postWithdrawPaymentMyFinanceWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1124,6 +1131,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -1197,6 +1205,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                       }else{
                       final future = my_finance.postWithdrawPaymentMyFinance();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1205,6 +1214,7 @@ Widget RButtonActionMyFinanceWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdR
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -1879,6 +1889,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                       if(sendPath!.contains('%s')){
                       final future = my_finance.postDepositBalanceMyFinanceWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1887,6 +1898,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -1912,6 +1924,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                       }else{
                       final future = my_finance.postDepositBalanceMyFinance();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1920,6 +1933,7 @@ Widget RButtonActionMyFinanceWidget(Button button, BuildContext context,var form
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyFinanceResult = value;
                                   });
@@ -6372,7 +6386,7 @@ class MyFinanceViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -6421,6 +6435,37 @@ class MyFinanceViewBase{
 	   viewChildren!.add(viewCutOffAmount(context)); 
 		
 		
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

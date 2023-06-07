@@ -37,6 +37,8 @@ import 'package:projectscoid/models/PastProjects/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'past_projects_base.g.dart';
 
@@ -2469,7 +2471,7 @@ class PastProjectsViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -2537,6 +2539,37 @@ class PastProjectsViewBase{
 	   viewChildren!.add(viewOwnerFeedback(context)); 
 	   viewChildren!.add(viewArbitration(context)); 
 		
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

@@ -49,6 +49,7 @@ ItemMyProjects _$ItemMyProjectsFromJson(Map<String, dynamic> json) =>
       json['owner_owner_ranking'] as int?,
       json['owner_owner_ranking_str'] as String?,
       json['title'] as String?,
+      json['admin_note'] as String?,
       json['short_description'] as String?,
       (json['channels_id'] as List<dynamic>?)?.map((e) => e as int?).toList(),
       (json['channels_str'] as List<dynamic>?)

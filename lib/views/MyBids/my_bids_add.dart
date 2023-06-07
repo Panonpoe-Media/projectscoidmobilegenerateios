@@ -95,6 +95,7 @@ class UserMyBidsAddState extends State<UserMyBidsAdd>{
 							  ),
 							   this.model.editProject(this),  
 							   this.model.editStatus(this),  
+							   this.model.editMark(this),  
 							   this.model.editDate(this),  
 							   this.model.editWorker(this),  
 							   this.model.editLocation(this),  

@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyProducts/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_products_base.g.dart';
 
@@ -307,6 +309,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postAddNewProductMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -315,6 +318,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -344,6 +348,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postAddNewProductMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -352,6 +357,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -1169,6 +1175,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postPublishProductMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1177,6 +1184,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -1206,6 +1214,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postPublishProductMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1214,6 +1223,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -1988,6 +1998,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postEditProductMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1996,6 +2007,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -2025,6 +2037,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postEditProductMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2033,6 +2046,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -2850,6 +2864,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postBumpUpMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2858,6 +2873,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -2887,6 +2903,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postBumpUpMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2895,6 +2912,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -3667,6 +3685,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postUnlistMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3675,6 +3694,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -3704,6 +3724,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postUnlistMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3712,6 +3733,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -4483,6 +4505,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_products.postReactivateProductMyProductsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4491,6 +4514,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -4520,6 +4544,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_products.postReactivateProductMyProducts();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4528,6 +4553,7 @@ Widget RButtonActionMyProductsWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyProductsResult = value;
                                   });
@@ -6415,7 +6441,7 @@ class MyProductsViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -6473,6 +6499,37 @@ class MyProductsViewBase{
 	   viewChildren!.add(viewPoints(context)); 
 	   viewChildren!.add(viewRanking(context)); 
 	   viewChildren!.add(viewAdminNote(context)); 
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

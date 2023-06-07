@@ -52,6 +52,10 @@ String? bid_id;
 	  String? status_str;
 	  List<int?>? status_list;
 	  List<String?>? status_list_str;
+		  int? mark_id;
+	  String? mark_str;
+	  List<int?>? mark_list;
+	  List<String?>? mark_list_str;
 		  DateTime? date;
 		  int? location_id;
 	  String? location_str;
@@ -87,6 +91,10 @@ String? bid_id;
 				this.status_str,
 				this.status_list,
 				this.status_list_str,
+				this.mark_id,
+				this.mark_str,
+				this.mark_list,
+				this.mark_list_str,
         this.date,
 				this.location_id,
 				this.location_str,
@@ -554,6 +562,14 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 			caption: 'Status',
 			idenum: model.model.status_list?? [],
 			nameenum: model.model.status_list_str?? model.model.status_str,
+		));} 
+			Widget viewMark (BuildContext context) {
+		  return( 
+		 EnumView(
+			value: model.model.mark_id,
+			caption: 'Mark',
+			idenum: model.model.mark_list?? [],
+			nameenum: model.model.mark_list_str?? model.model.mark_str,
 		));} 
 				Widget viewDate (BuildContext context) {  
 		return(  DateTimeView(

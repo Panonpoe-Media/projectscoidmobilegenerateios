@@ -191,12 +191,6 @@ export 'package:projectscoid/models/kelurahan_state.dart';
 export 'package:projectscoid/models/kelurahan_item.dart';
 //---------------------------------------------
 //---------------------------------------------
-export 'package:projectscoid/models/my_portofolio.dart';
-export 'package:projectscoid/models/my_portofolio_event.dart';
-export 'package:projectscoid/models/my_portofolio_state.dart';
-export 'package:projectscoid/models/my_portofolio_item.dart';
-//---------------------------------------------
-//---------------------------------------------
 export 'package:projectscoid/models/my_bookmarks.dart';
 export 'package:projectscoid/models/my_bookmarks_event.dart';
 export 'package:projectscoid/models/my_bookmarks_state.dart';
@@ -208,6 +202,7 @@ export 'package:projectscoid/models/my_buddies_event.dart';
 export 'package:projectscoid/models/my_buddies_state.dart';
 export 'package:projectscoid/models/my_buddies_item.dart';
 //---------------------------------------------
+
 
 
 export 'package:projectscoid/models/BrowseProjects/user_bids_view.dart';

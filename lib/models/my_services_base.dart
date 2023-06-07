@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyServices/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_services_base.g.dart';
 
@@ -287,6 +289,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postAddNewServiceMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -295,6 +298,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -324,6 +328,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postAddNewServiceMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -332,6 +337,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -1133,6 +1139,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postPublishServiceMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1141,6 +1148,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -1170,6 +1178,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postPublishServiceMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1178,6 +1187,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -1908,6 +1918,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postBumpUpMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1916,6 +1927,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -1945,6 +1957,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postBumpUpMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1953,6 +1966,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -2684,6 +2698,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postEditServiceMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2692,6 +2707,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -2721,6 +2737,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postEditServiceMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2729,6 +2746,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -3531,6 +3549,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postUnlistMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3539,6 +3558,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -3568,6 +3588,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postUnlistMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3576,6 +3597,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -4306,6 +4328,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       if(sendPath!.contains('%s')){
                       final future = my_services.postReactivateServiceMyServicesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4314,6 +4337,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -4343,6 +4367,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                       }else{
                       final future = my_services.postReactivateServiceMyServices();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4351,6 +4376,7 @@ Widget RButtonActionMyServicesWidget(Button button, BuildContext context,var for
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyServicesResult = value;
                                   });
@@ -6225,7 +6251,7 @@ class MyServicesViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -6283,6 +6309,37 @@ class MyServicesViewBase{
 	   viewChildren!.add(viewPoints(context)); 
 	   viewChildren!.add(viewRanking(context)); 
 	   viewChildren!.add(viewAdminNote(context)); 
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

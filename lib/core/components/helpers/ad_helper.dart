@@ -52,4 +52,16 @@ class AdHelper {
     }
   }
 
+  static int get timerSet {
+      return 15;
+  }
+
+  static double get delaySet {
+    return 4.00;
+  }
+
+  static double get delaySetList {
+    return 20.00;
+  }
+
 }

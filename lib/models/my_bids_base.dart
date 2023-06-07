@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyBids/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_bids_base.g.dart';
 
@@ -288,6 +290,7 @@ Widget RButtonActionMyBidsWidget(Button button, BuildContext context,var formKey
                       if(sendPath!.contains('%s')){
                       final future = my_bids.postCancelBidMyBidsWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -296,6 +299,7 @@ Widget RButtonActionMyBidsWidget(Button button, BuildContext context,var formKey
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyBidsResult = value;
                                   });
@@ -325,6 +329,7 @@ Widget RButtonActionMyBidsWidget(Button button, BuildContext context,var formKey
                       }else{
                       final future = my_bids.postCancelBidMyBids();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -333,6 +338,7 @@ Widget RButtonActionMyBidsWidget(Button button, BuildContext context,var formKey
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyBidsResult = value;
                                   });
@@ -821,6 +827,10 @@ class ModelMyBids {
   String? status_str;
   List<int?>? status_list;
   List<String?>? status_list_str;
+  int? mark_id;
+  String? mark_str;
+  List<int?>? mark_list;
+  List<String?>? mark_list_str;
   DateTime? date;
   int? worker_id;
   String? worker_url;
@@ -865,6 +875,10 @@ class ModelMyBids {
 			this.status_str,
 			this.status_list,
 			this.status_list_str,
+			this.mark_id,
+			this.mark_str,
+			this.mark_list,
+			this.mark_list_str,
 			this.worker_id,
 			this.worker_str,
 			this.worker_list,
@@ -921,6 +935,7 @@ class MyBidsBase{
    "my_bids[bid_id]": "${model.model.bid_id }",
   "my_bids[project_id]": "${model.model.project_id }",
    "my_bids[status_id]": "${model.model.status_id}",
+   "my_bids[mark_id]": "${model.model.mark_id}",
   "my_bids[date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.date)}",
   "my_bids[worker_id]": "${model.model.worker_id }",
   "my_bids[location_id]": "${model.model.location_id }",
@@ -1084,6 +1099,23 @@ SpeedDialChild ButtonEditMyBidsWidget(Button button, BuildContext context,var fo
 	  	;
 		state.setState(() {
 		  model.model.status_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editMark (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.mark_id,
+	  caption: 'Mark',
+	  hint: 'pilih Enum',
+	  required: false,
+	  idenum: model.model.mark_list,
+	  nameenum: model.model.mark_list_str,
+	  getValue: (int? val) {
+	  	;
+		state.setState(() {
+		  model.model.mark_id = val;
 		});
 	  },
 	));}

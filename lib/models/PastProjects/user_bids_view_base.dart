@@ -78,6 +78,10 @@ class ViewModelUserBids {
   String? status_str;
   List<int?>? status_list;
   List<String?>? status_list_str;
+  int? mark_id;
+  String? mark_str;
+  List<int?>? mark_list;
+  List<String?>? mark_list_str;
   DateTime? date;
   int? worker_id;
   String? worker_str;
@@ -114,6 +118,10 @@ class ViewModelUserBids {
 			this.status_str,
 			this.status_list,
 			this.status_list_str,
+			this.mark_id,
+			this.mark_str,
+			this.mark_list,
+			this.mark_list_str,
 			this.date,
 			this.worker_id,
 			this.worker_str,
@@ -228,6 +236,12 @@ class UserBidsViewBase{
 	   return(  StringView(
 			value: model.model.status_str,
 			caption: 'Status',
+		));
+		} 
+	    Widget viewMark (BuildContext context) {
+	   return(  StringView(
+			value: model.model.mark_str,
+			caption: 'Mark',
 		));
 		} 
 		    Widget viewDate (BuildContext context) {  

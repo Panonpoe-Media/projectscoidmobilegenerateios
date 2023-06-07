@@ -50,6 +50,10 @@ String? bid_id;
   String? status_str;
   List<int?>? status_list;
   List<String?>? status_list_str;
+  int? mark_id;
+  String? mark_str;
+  List<int?>? mark_list;
+  List<String?>? mark_list_str;
   DateTime? date;
   int? location_id;
   String? location_str;
@@ -91,6 +95,10 @@ String? bid_id;
 			this.status_str,
 			this.status_list,
 			this.status_list_str,
+			this.mark_id,
+			this.mark_str,
+			this.mark_list,
+			this.mark_list_str,
 			this.date,
 			this.location_id,
 			this.location_str,
@@ -440,6 +448,7 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
   formData.addAll({"bid[worker_id]": "${model.model.worker_id }"});
   formData.addAll({"bid[project_id]": "${model.model.project_id }"});
    formData.addAll({"bid[status_id]": "${model.model.status_id }"});
+   formData.addAll({"bid[mark_id]": "${model.model.mark_id }"});
   formData.addAll({"bid[date]": "${DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.date)}"});
   formData.addAll({"bid[location_id]": "${model.model.location_id }"});
   formData.addAll({"bid[rating]": "${model.model.rating }"});
@@ -595,6 +604,21 @@ SpeedDialChild ButtonActionShowBidsWidget(Button button, BuildContext context,va
 	  getValue: (int? val) {
 		state.setState(() {
 		  model.model.status_id = val;
+		});
+	  },
+	));}
+   	    Widget editMark (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.mark_id,
+	  caption: 'Mark',
+	  hint: 'pilih Mark',
+	   required: false,
+	  idenum: model.model.mark_list,
+	  nameenum: model.model.mark_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.mark_id = val;
 		});
 	  },
 	));}

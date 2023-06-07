@@ -27,6 +27,7 @@ class PusherMessage {
 
 class ChatBloc  implements YaWebsocketDelegate{
   late YaWebsocket socket;
+ // late YaWebsocket socket1;
 
   List<dynamic> messages = [];
   List<dynamic> searchMessages = [];
@@ -98,7 +99,9 @@ class ChatBloc  implements YaWebsocketDelegate{
   ChatBloc() {
     //socket = WebsocketManager(ConfigurationModel().wsUrl);
     socket = YaWebsocket();
+  //  socket1 = YaWebsocket();
     socket.delegate = this;
+  //  socket1.delegate = this;
     _threadController = BehaviorSubject<dynamic>.seeded([]);
     _adminsController = BehaviorSubject<dynamic>.seeded([]);
     _searchThreadController = BehaviorSubject<dynamic>.seeded([]);
@@ -133,6 +136,8 @@ class ChatBloc  implements YaWebsocketDelegate{
        }else{
          socket = YaWebsocket();
          socket.connect(_webSocketURI);
+        // socket1 = YaWebsocket();
+        // socket1.connect(_webSocketURI);
           if(id != ''){
              lg(id);
            }

@@ -31,6 +31,12 @@ ViewModelShortlistedBids _$ViewModelShortlistedBidsFromJson(
       (json['status_list_str'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
+          json['mark_id'] as int?,
+          json['mark_str'] as String?,
+          (json['mark_list'] as List<dynamic>?)?.map((e) => e as int?).toList(),
+          (json['mark_list_str'] as List<dynamic>?)
+              ?.map((e) => e as String?)
+              .toList(),
       json['date'] == null ? null : DateTime.parse(json['date'] as String),
       json['location_id'] as int?,
       json['location_str'] as String?,

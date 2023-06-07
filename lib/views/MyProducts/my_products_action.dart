@@ -87,10 +87,10 @@ class  SalesMyProductsState1 extends State<SalesMyProducts> with TickerProviderS
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
-	   
+	 
    
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -532,7 +532,6 @@ class  SalesMyProductsState1 extends State<SalesMyProducts> with TickerProviderS
   @override
   void dispose() {
     sales!.listingSales!.dispose();
-	
     super.dispose();
   }
 
@@ -612,10 +611,10 @@ class  CommentsMyProductsState1 extends State<CommentsMyProducts> with TickerPro
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
-	   
+	 
    
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1057,7 +1056,6 @@ class  CommentsMyProductsState1 extends State<CommentsMyProducts> with TickerPro
   @override
   void dispose() {
     comments!.listingComments!.dispose();
-	
     super.dispose();
   }
 
@@ -3707,10 +3705,10 @@ class  ScreenshotsMyProductsState1 extends State<ScreenshotsMyProducts> with Tic
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
-	   
+	 
    
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4152,7 +4150,6 @@ class  ScreenshotsMyProductsState1 extends State<ScreenshotsMyProducts> with Tic
   @override
   void dispose() {
     screenshots!.listingScreenshots!.dispose();
-	
     super.dispose();
   }
 

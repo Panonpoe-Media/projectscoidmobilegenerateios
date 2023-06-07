@@ -42,16 +42,6 @@ class UserBidsListingBase{
     double height = 0;
 	double totalHeight = 0;
 	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
-	    totalHeight = totalHeight + 2 ;
 	  height = totalHeight * 50;
 	    return Visibility (
         visible: (search == '' || allModelWords(jsonEncode(item!.item!.toJson())).contains(search!)),
@@ -332,17 +322,7 @@ class ItemUserBidsContent extends StatelessWidget {
 		child: Html(data: "<h3>Header</h3>"),
 	  ));
 	  */
-	   children.add(destination!.viewUserId(context));
 	   children.add(destination!.viewPhoto(context));
-	   children.add(destination!.viewUserName(context));
-	   children.add(destination!.viewWorkerRating(context));
-	   children.add(destination!.viewWorkerRatingNum(context));
-	   children.add(destination!.viewLastSeen(context));
-	   children.add(destination!.viewProjectsWon(context));
-	   children.add(destination!.viewProjectsCompleted(context));
-	   children.add(destination!.viewProjectsArbitrated(context));
-	   children.add(destination!.viewProjectsWonInArbitration(context));
-	   children.add(destination!.viewProjectsLostInArbitration(context));
         /*  children.add(Padding(
                             padding: const EdgeInsets.fromLTRB(
                                 8.0, 14.0, 8.0, 2.0),

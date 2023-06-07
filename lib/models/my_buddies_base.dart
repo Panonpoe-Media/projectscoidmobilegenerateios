@@ -37,6 +37,8 @@ import 'package:projectscoid/models/MyBuddies/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_buddies_base.g.dart';
 
@@ -271,6 +273,7 @@ Widget RButtonActionMyBuddiesWidget(Button button, BuildContext context,var form
                       if(sendPath!.contains('%s')){
                       final future = my_buddies.postRemoveMyBuddiesWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -279,6 +282,7 @@ Widget RButtonActionMyBuddiesWidget(Button button, BuildContext context,var form
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyBuddiesResult = value;
                                   });
@@ -308,6 +312,7 @@ Widget RButtonActionMyBuddiesWidget(Button button, BuildContext context,var form
                       }else{
                       final future = my_buddies.postRemoveMyBuddies();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -316,6 +321,7 @@ Widget RButtonActionMyBuddiesWidget(Button button, BuildContext context,var form
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postMyBuddiesResult = value;
                                   });
@@ -1376,7 +1382,7 @@ class MyBuddiesViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -1449,6 +1455,37 @@ class MyBuddiesViewBase{
 	   viewChildren!.add(viewProductSoldCumulative(context));
 	   viewChildren!.add(viewProductBought(context));
 	   viewChildren!.add(viewProductBoughtCumulative(context));
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

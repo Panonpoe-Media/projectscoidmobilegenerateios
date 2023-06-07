@@ -37,6 +37,8 @@ import 'package:projectscoid/models/Checkout/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'checkout_base.g.dart';
 
@@ -261,6 +263,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithAvailableBalanceCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -269,6 +272,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -298,6 +302,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithAvailableBalanceCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -306,6 +311,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -930,6 +936,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayViaBankTransferCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -938,6 +945,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -967,6 +975,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayViaBankTransferCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -975,6 +984,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -1615,6 +1625,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithCreditCardCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1623,6 +1634,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -1652,6 +1664,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithCreditCardCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -1660,6 +1673,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -2273,6 +2287,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithCimbClicksCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2281,6 +2296,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -2310,6 +2326,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithCimbClicksCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2318,6 +2335,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -2931,6 +2949,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithBcaKlikpayCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2939,6 +2958,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -2968,6 +2988,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithBcaKlikpayCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -2976,6 +2997,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -3589,6 +3611,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithMandiriClickpayCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3597,6 +3620,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -3626,6 +3650,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithMandiriClickpayCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -3634,6 +3659,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -4247,6 +4273,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithQrisCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4255,6 +4282,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -4284,6 +4312,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithQrisCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4292,6 +4321,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -4905,6 +4935,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       if(sendPath!.contains('%s')){
                       final future = checkout.postPayWithPaypalCheckoutWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4913,6 +4944,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -4942,6 +4974,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                       }else{
                       final future = checkout.postPayWithPaypalCheckout();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -4950,6 +4983,7 @@ Widget RButtonActionCheckoutWidget(Button button, BuildContext context,var formK
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postCheckoutResult = value;
                                   });
@@ -9352,7 +9386,7 @@ class CheckoutViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool?account) {
+	Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren!.clear();
@@ -9392,6 +9426,37 @@ class CheckoutViewBase{
 
 	 	  
 		
+	  
+	  viewChildren!.add(
+	  
+				  Column(
+					mainAxisAlignment: MainAxisAlignment.center,
+					crossAxisAlignment: CrossAxisAlignment.center,
+					children: [
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+					  if (_isBannerAdReady)
+						Center(
+						  child: Container(
+							width: _bannerAd.size.width.toDouble(),
+							height: _bannerAd.size.height.toDouble(),
+							child: AdWidget(ad: _bannerAd),
+						  ),
+						),
+
+
+					  if (_isBannerAdReady)
+						const SizedBox(
+						  height: 10,
+						),
+						const SizedBox(
+						  height: 10,
+						),
+					],
+				  )
+				 ); 
 
 	 //
 	if(this.model.meta.after_content != null){ viewChildren!.add(Padding(

@@ -1535,7 +1535,6 @@ Future<UserBidsListingModel> _loadAndSaveUserBidsListSearch(UserBidsListingModel
 	  list.items.items[i].item.sbttl = '';
 	  
 	  list.items.items[i].item.pht = list.items.items[i].item.worker_photo_url;
-	  list.items.items[i].item.ttl = list.items.items[i].item.worker_user_name;
     }
     return list;
  }

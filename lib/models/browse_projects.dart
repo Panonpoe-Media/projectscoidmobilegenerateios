@@ -739,7 +739,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
                       },
                       child: Container(
                         height: 62.0,
-                        width: 150.0,
+                        width: 135.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -2453,7 +2453,7 @@ class BrowseProjectsViewModel extends BrowseProjectsViewBase {
 }
 
 class BidItemInfo extends StatelessWidget {
-  final UserBidsListingTools? info;
+  final UserBidsListingToolsRev? info;
   BidItemInfo({this.info});
   var _appbar = AppBar(
     backgroundColor: CurrentTheme.MainAccentColor,
@@ -2496,7 +2496,7 @@ class BidItemInfo extends StatelessWidget {
 }
 
 class ItemInfo extends StatelessWidget {
-  final ItemUserBids? model;
+  final ItemUserBidsRev? model;
   ItemInfo({this.model});
   @override
   Widget build(BuildContext context) {
@@ -2609,7 +2609,7 @@ class BidItem extends StatelessWidget {
                                   ),
                                   SizedBox(
                                     height: 92.0,
-                                    width: 115.0,
+                                    width: 106.0,
                                     child: Stack(children: <Widget>[
                                       Positioned.fill(
                                           bottom: 0.0,
@@ -3417,6 +3417,8 @@ class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1> {
   //      super(key: key);
   // This height will allow for all the Card's content to fit comfortably within the card.
   late BannerAd _bannerAd;
+  bool _isSetRatting = true;
+
 
   // TODO: Add _isBannerAdReady
   bool _isBannerAdReady = false;
@@ -3444,7 +3446,121 @@ class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1> {
       );
 
       _bannerAd.load();
+      getRevStatus();
     }
+  }
+
+
+
+  Future<void> _setRevStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_timestamp', tm);
+    setState(() {
+      _isSetRatting = false;
+    });
+  }
+  Future<void> _setRevEndStatus() async {
+   // var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_timestamp', 0);
+    setState(() {
+      _isSetRatting = false;
+    });
+  }
+  Future<void> _setRS() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('apprate_timestamp1', tm);
+    setState(() {
+      _isSetRatting = false;
+    });
+  }
+  Future<void> getRevStatus() async {
+    var ts;
+    var ts1;
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('apprate_timestamp')) {
+      ts =  prefs.getInt('apprate_timestamp');
+
+    } else {
+
+    }
+
+    if (prefs.containsKey('apprate_timestamp1')) {
+
+      ts1 =  prefs.getInt('apprate_timestamp1');
+
+    } else {
+
+    }
+
+    if(ts != null){
+      if(ts == 0){
+        if (!mounted) {
+          setState(() {
+            _isSetRatting = false;
+          });
+        }else{
+          _isSetRatting = false;
+        }
+      }else {
+        if (ts1 != null) {
+          final date1 = DateTime.fromMillisecondsSinceEpoch(ts * 1000).toUtc();
+          final date2 = DateTime.fromMillisecondsSinceEpoch(tm * 1000).toUtc();
+          final date3 = DateTime.fromMillisecondsSinceEpoch(ts1 * 1000).toUtc();
+          double difference = double.parse(date2
+              .difference(date3)
+              .inDays
+              .toString());
+          if (difference <= 365.00) {
+            if (!mounted) {
+              setState(() {
+                _isSetRatting = false;
+              });
+            } else {
+              _isSetRatting = false;
+            }
+          }
+        } else {
+          final date1 = DateTime.fromMillisecondsSinceEpoch(ts * 1000).toUtc();
+          final date2 = DateTime.fromMillisecondsSinceEpoch(tm * 1000).toUtc();
+          double difference = double.parse(date2
+              .difference(date1)
+              .inDays
+              .toString());
+          if (difference <= 7.00) {
+            if (!mounted) {
+              setState(() {
+                _isSetRatting = false;
+              });
+            } else {
+              _isSetRatting = false;
+            }
+          }
+        }
+      }
+
+
+    }else{
+      if(ts1 != null){
+        final date1 = DateTime.fromMillisecondsSinceEpoch(ts1 * 1000).toUtc();
+        final date2 = DateTime.fromMillisecondsSinceEpoch(tm * 1000).toUtc();
+        double difference = double.parse(date2.difference(date1).inDays.toString());
+        if(difference <= 365.00){
+          if (!mounted) {
+            setState(() {
+              _isSetRatting = false;
+            });
+          }else{
+            _isSetRatting = false;
+          }
+        }
+
+      }
+    }
+
   }
 
   @override
@@ -3465,6 +3581,177 @@ class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1> {
       child: Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 0.5, 0.0, 0.5),
           child: Column(children: [
+            if (_isBannerAdReady && _isSetRatting) Card(
+              color: Colors.red,
+              elevation: 12.0,
+              shape: RoundedRectangleBorder(
+
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child:  Column(
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                    //  const SizedBox(
+                    //    width: 20,
+                    //  ),
+                      Container(
+                        height: 100,
+                        width: 320,
+                        child: const Text('Jika Anda merasa terbantu dengan aplikasi ini, berkenankah untuk memberikan rating? Terima kasih atas dukungan Anda selama ini.',style: TextStyle( color: Colors.white, fontSize: 18,), textAlign: TextAlign.center,overflow:TextOverflow.clip, maxLines: 4)
+
+                      ) ,
+                      //  const SizedBox(
+                      //    width: 5,
+                       // ),
+                      ]
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                      children: [
+                        SizedBox(width: 10),
+                        Expanded(child:  TextButton(
+                          style: TextButton.styleFrom( //<-- SEE HERE
+                            side: BorderSide(width: 1.5, color: Colors.white),
+                          ),
+                          onPressed: () async{
+                            //  await _setRateCountSF(1);
+
+                            await  _setRevStatus();
+                            // Navigator.of(context).pop(true);
+                          },
+
+                          child: Text('Nanti Saja', style: TextStyle(fontSize: 15, color: Colors.white)),
+                        ),),
+
+                        SizedBox(width: 5),
+                        Expanded(child: TextButton(
+                          style: TextButton.styleFrom( //<-- SEE HERE
+                            side: BorderSide(width: 1.5, color: Colors.white),
+                          ),
+                          onPressed: () async{
+                            //  await _setRateCountSF(1);
+
+                            // await  _setRevEndStatus();
+                            await  _setRS();
+
+                            // Navigator.of(context).pop(true);
+                          },
+
+                          child: Text('Sudah Pernah', style: TextStyle(fontSize: 15, color: Colors.white)),
+                        ),),
+
+                        SizedBox(width: 5),
+                        /*
+                        TextButton(
+                          onPressed: () async{
+                            //  await _setRateCountSF(1);
+                            if (await canLaunch(
+                                'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                              await launch(
+                                  'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                            } else {
+                              throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                            }
+                            Navigator.of(context).pop(true);
+                          },
+
+                          child: Text('Silahkan Merating', style: TextStyle(fontSize: 18, color: Colors.white)),
+                        ),
+
+                         */
+                        Expanded(child:TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+
+                          ),
+                          onPressed: () async{
+                            // await  _setRevStatus();
+                            await   _setRS();
+                            if (await canLaunch(
+                                'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                              await launch(
+                                  'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                            } else {
+                              throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                            }
+                            Navigator.of(context).pop(true);
+
+                          },
+                          child: const Text('Tentu Saja', style: TextStyle(fontSize: 15, color: Colors.red)),
+                        ), ),
+
+                        SizedBox(width: 10),
+                        /*
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Stack(
+                            children: <Widget>[
+                              Positioned.fill(
+                                child: Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: const BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: <Color>[
+                                        Color(0xFFff8f00),
+                                        Color(0xFFff8f00),
+                                        Color(0xFFffc046),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  padding: const EdgeInsets.all(16.0),
+                                  textStyle: const TextStyle(fontSize: 18),
+                                ),
+                                onPressed: () async{
+                                 // await  _setRevStatus();
+                                  await   _setRS();
+                                  if (await canLaunch(
+                                      'https://play.google.com/store/apps/details?id=id.co.projectscoid')) {
+                                    await launch(
+                                        'https://play.google.com/store/apps/details?id=id.co.projectscoid');
+                                  } else {
+                                    throw 'Could not launch https://play.google.com/store/apps/details?id=id.co.projectscoid';
+                                  }
+                                  Navigator.of(context).pop(true);
+
+                                },
+                                child: const Text('Silahkan Merating', style: TextStyle(fontSize: 18, color: Colors.white)),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                         */
+                        /*
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text('Nanti', style: TextStyle(fontSize: 18, color: Colors.white)),
+                        ),
+
+                         */
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+                  ],
+                ),
+
+            ),
             Card(
                 elevation: 6.0,
                 shape: RoundedRectangleBorder(
@@ -3504,6 +3791,8 @@ class _ItemBrowseProjectsCard1State extends State<ItemBrowseProjectsCard1> {
                   child: AdWidget(ad: _bannerAd),
                 ),
               ),
+
+
             if (_isBannerAdReady)
               const SizedBox(
                 height: 10,

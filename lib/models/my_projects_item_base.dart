@@ -140,6 +140,11 @@ class ItemMyProjectsBase {
 		value: item.title,
 		caption: 'Title',
 	));}
+		    Widget viewAdminNote (BuildContext context) {  
+	return(  ArticleView(
+		value: item.admin_note,
+		caption: 'Admin Note',
+	));}
 		    Widget viewShortDescription (BuildContext context) { 
 	return(  DisplayNameView(
 		value: item.short_description,
@@ -317,6 +322,7 @@ class ItemMyProjects{
   int? owner_owner_ranking;
   String?  owner_owner_ranking_str;
   String?  title;
+  String?  admin_note;
   String?  short_description;
   List<int?>? channels_id;
   List<String?>?  channels_str;
@@ -395,6 +401,7 @@ class ItemMyProjects{
 			this.owner_owner_ranking,
 			this.owner_owner_ranking_str,
 			this.title,
+			this.admin_note,
 			this.short_description,
 			this.channels_id,
 			this.channels_str,

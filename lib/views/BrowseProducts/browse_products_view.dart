@@ -20,6 +20,9 @@ import 'product_comments_list.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
 import 'package:projectscoid/views/Chat/blocs/chat_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 /** AUTOGENERATE OFF **/
 class  PublicBrowseProductsView extends StatefulWidget {
@@ -52,6 +55,16 @@ class  PublicBrowseProductsViewState extends State< PublicBrowseProductsView>{
   var model;
   AccountController? accountController;
   bool account = true;
+
+  Timer? timer;
+  bool isEnd = false;
+  bool _isSetAds = true;
+  StateSetter? _setState;
+  late BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+  late BannerAd _bannerAd1;
+  bool _isBannerAdReady1 = false;
+
  PublicBrowseProductsViewState(){
     controller.addListener(_onScroll);
   }
@@ -59,8 +72,267 @@ class  PublicBrowseProductsViewState extends State< PublicBrowseProductsView>{
   @override
   initState(){
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd1 = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady1 = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady1 = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+      _bannerAd1.load();
+      // await getAdsStatus();
+      final future = getAdsStatus();
+      future.then((val) {
+        if(_isSetAds){
+        //  print('apakah bisa man????');
+          Future.delayed(Duration.zero, () => showAds());
+          //  WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   showAds();
+          // });
+          timer = Timer(
+             Duration(seconds: AdHelper.timerSet),
+                () {
+              if (!mounted) {
+                _setState!(() {
+                  isEnd = true;
+                });
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }else{
+                _setState!(() {
+                  isEnd = true;
+                });
+
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }
+
+            },
+          );
+        }
+      });
+
+      //setState(() { });
+    });
    // controller = ScrollController();
   }
+
+
+  void showAds() {
+
+    showDialog(
+        barrierDismissible: false,
+        builder: (BuildContext context){
+          return AlertDialog(
+              scrollable: true,
+              content:StatefulBuilder(  // You need this, notice the parameters below:
+                  builder: (BuildContext context1, StateSetter setState)
+                  {
+
+                    _setState = setState;
+                    return  Column(
+                      //clipBehavior : Clip.none,
+                      children: <Widget>[
+                        Row(
+
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            isEnd?
+                            Container(
+                              decoration: new BoxDecoration(
+                                  color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+                              ),
+
+
+                              child:  GestureDetector(
+
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async{
+                                  await _setAdsStatus();
+
+                                  // Navigator.of(context).pop();
+                                  // Navigator.of(context1).pop();
+                                  Navigator.of(context).pop();
+
+                                },
+                                child: const  CircleAvatar(
+
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.red,
+                                )
+                                ,
+
+                              ),
+                            )
+
+
+                                :
+                            Container(
+                                decoration: new BoxDecoration(
+                                    color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+
+                                ),
+
+
+                                child:
+                                const  CircleAvatar(
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.grey,
+                                )
+                            ),
+                          ],
+                        ),
+
+                        SingleChildScrollView(
+                          child:   Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Hard Work, Work Smarter",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, decoration: TextDecoration.none, color: Colors.black),
+                              ),
+                              if (_isBannerAdReady)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd.size.width.toDouble(),
+                                    height: _bannerAd.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd1.size.width.toDouble(),
+                                    height: _bannerAd1.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd1),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            ],
+                          ),
+                        ),
+
+
+
+
+
+                      ],
+                    );
+                  }
+
+
+              )
+          );
+        },
+
+
+        context: context);
+  }
+  Future<void> _setAdsStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('appads_timestamp', tm);
+    ///print('apakah bisa man123456????');
+    //setState(() {
+    //  _isSetAds = false;
+    //});
+  }
+  Future<bool> getAdsStatus() async {
+    var ts;
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('appads_timestamp')) {
+      //print('apakah bisa man123????');
+      ts =  prefs.getInt('appads_timestamp');
+      // print('apakah bisa man123${tm}????${ts}');
+      final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
+      final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
+      double difference = double.parse(date2.difference(date1).inMinutes.toString());
+      if(difference <= AdHelper.delaySet){
+        // if (!mounted) {
+        // print('apakah bisa 1 ${difference}');
+        //setState(() {
+        _isSetAds = false;
+        //});
+        // }else{
+        // print('apakah bisa 2');
+        // _isSetAds = false;
+        //  }
+      }else{
+        // print('apakah bisa 2 ${difference}');
+      }
+    } else {
+      //print('apakah bisa 3');
+      _isSetAds = true;
+    }
+
+    return true;
+
+  }
+
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -73,9 +345,9 @@ class  PublicBrowseProductsViewState extends State< PublicBrowseProductsView>{
 	   hash.then((value) {
           this.idHash = value;
         });
-	   print('Test 1234');
+	  // print('Test 1234');
       final future = browse_products!.viewBrowseProducts();
-      print('test12345');
+     // print('test12345');
       future.then((value) {
         setState(() {
           isLoading = false;
@@ -229,6 +501,7 @@ class  PublicBrowseProductsViewState extends State< PublicBrowseProductsView>{
   @override
   void dispose() {
     super.dispose();
+    timer?.cancel();
   }
 }
 

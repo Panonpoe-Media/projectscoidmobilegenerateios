@@ -183,6 +183,7 @@ final RestorableInt _counter = RestorableInt(0);
 									this.model.viewWorker(context),
 									this.model.viewProject(context),
 									this.model.viewStatus(context),
+									this.model.viewMark(context),
 									this.model.viewDate(context),
 									this.model.viewLocation(context),
 									this.model.viewRating(context),

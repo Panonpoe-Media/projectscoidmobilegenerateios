@@ -41,6 +41,8 @@ import 'my_services_item_base.dart';
 import 'package:projectscoid/models/my_services_base.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'my_services.g.dart';
 /** AUTOGENERATE OFF **/
@@ -1396,7 +1398,7 @@ class MyServicesViewModel  extends MyServicesViewBase{
 
 
   @override
-  Widget view (BuildContext context, ScrollController? controller, bool? account) {
+  Widget view (BuildContext context, ScrollController? controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
 
 
     viewChildren.clear();
@@ -1434,6 +1436,36 @@ class MyServicesViewModel  extends MyServicesViewBase{
     //product_reviews
     //product-comments
 
+    viewChildren!.add(
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
 
     return(  SingleChildScrollView(
         controller: controller!,

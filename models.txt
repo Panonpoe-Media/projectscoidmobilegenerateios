@@ -1027,6 +1027,14 @@ Model Title: Bid Status
 - BidStatusName => bid_status_name => Bid Status Name
 
 ----------------------------
+Model UCase: BidMark
+Model ID: bid_mark
+Model Title: Bid Mark
+
+- BidMarkId => bid_mark_id => Bid Mark ID
+- BidMarkName => bid_mark_name => Bid Mark Name
+
+----------------------------
 Model UCase: Bid
 Model ID: bid
 Model Title: Bid
@@ -1034,6 +1042,7 @@ Model Title: Bid
 - BidId => bid_id => Bid ID
 - Project => project_id => Project
 - Status => status_id => Status
+- Mark => mark_id => Mark
 - Date => date => Date
 - Worker => worker_id => Worker
 - Location => location_id => Location

@@ -37,6 +37,8 @@ import 'package:projectscoid/models/Program/action.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projectscoid/views/route.dart' as rt;
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 part 'program_base.g.dart';
 
@@ -257,6 +259,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                       if(sendPath!.contains('%s')){
                       final future = program.postPromoProgramWithID();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -265,6 +268,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postProgramResult = value;
                                   });
@@ -294,6 +298,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                       }else{
                       final future = program.postPromoProgram();
                                   future.then((value) {
+								  /*
 								  _onWidgetDidBuild(() {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         SnackBar(
@@ -302,6 +307,7 @@ Widget RButtonActionProgramWidget(Button button, BuildContext context,var formKe
                                         ),
                                       );
                                     });
+									*/
                                   state.setState(() {
                                   postProgramResult = value;
                                   });

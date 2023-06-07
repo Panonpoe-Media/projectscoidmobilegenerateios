@@ -23,6 +23,7 @@
       var formData = {"bid[_trigger_]":"$tgr"};
   formData.addAll({"bid[project_id]": "${model.model.project_id }"});
    formData.addAll({"bid[status_id]": "${model.model.status_id }"});
+   formData.addAll({"bid[mark_id]": "${model.model.mark_id }"});
   formData.addAll({"bid[date]": "${model.model.date == null? '':DateFormat('dd/MM/yyyy HH:mm:ss').format(model.model.date)}"});
   formData.addAll({"bid[worker_id]": "${model.model.worker_id }"});
   formData.addAll({"bid[location_id]": "${model.model.location_id }"});

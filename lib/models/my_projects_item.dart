@@ -376,6 +376,7 @@ class ItemMyProjectsRev{
  double? accepted_budget;
  String? accepted_budget_str;
  int?progress;
+ String? admin_note;
  int?arbitration_id;
  String? arbitration_str;
  String? arbitration_url;
@@ -455,6 +456,7 @@ class ItemMyProjectsRev{
      this.accepted_budget,
      this.accepted_budget_str,
      this.progress,
+     this.admin_note,
      this.arbitration_id,
      this.arbitration_str,
      this.arbitration_url,

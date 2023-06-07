@@ -17,6 +17,9 @@ import 'user_bids_list.dart';
 
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:projectscoid/core/components/helpers/color_helpers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 
 class  PublicPastProjectsView extends StatefulWidget {
@@ -47,6 +50,12 @@ class  PublicPastProjectsViewState extends State< PublicPastProjectsView> with R
   var model;
   AccountController? accountController;
   bool account = true;
+  
+    Timer? timer;
+    late BannerAd _bannerAd;
+    bool _isBannerAdReady = false;
+  
+  
  PublicPastProjectsViewState(){
     controller.addListener(_onScroll);
   }
@@ -68,6 +77,31 @@ final RestorableDouble cs = RestorableDouble(0);
   initState(){
     super.initState();
    // controller = ScrollController();
+   WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+             setState(() {
+              _isBannerAdReady = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+      _bannerAd.load();
+      //setState(() { });
+    });
   }
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -187,7 +221,7 @@ final RestorableDouble cs = RestorableDouble(0);
           ))
 			 :Form(
 			  key: formKey,
-			  child: this.model.view(context, controller, account)
+			  child: this.model.view(context, controller, account, _isBannerAdReady,  _bannerAd)
 		  ),	  
 			//floatingActionButton: isLoading? null :  this.model.Buttons(context, _dialVisible)
 			 floatingActionButton: isLoading? null : this.model.model.buttons.length == 0? null: this.model.Buttons(context, _dialVisible, formKey, controller,past_projects,  this, Env.value!.baseUrl!, widget.id, widget.title, account)

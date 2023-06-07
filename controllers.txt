@@ -118,6 +118,8 @@
    // Tentang Kami
    pengelola => "Pengelola" => page,   
    // Pengelola
+   investing => "Investing" => page,   
+   // Investing
    syarat_layanan => "Syarat Layanan" => page,   
    // Syarat Layanan
    kebijakan_privasi => "Kebijakan Privasi" => page,   
@@ -1126,6 +1128,7 @@ helooo project_id
 - 1 owner_owner_point => expose => Owner Point => number
 - 1 owner_owner_ranking => expose => Owner Ranking => number
 - 3 title => title => Title
+- 3 admin_note => article => Admin Note
 - 3 short_description => string => Short Description
 - 3 channels => inlinetags => Channels
 - 2 project_class => enum => Project Class
@@ -1241,6 +1244,7 @@ Id123
 Worker123
 Project123
 Status123
+Mark123
 Date123
 Location123
 Rating123
@@ -2320,54 +2324,6 @@ View1
 - 3 kode_pos => string => Kode Pos
 
 
-
-
-
-----------------------------
-Model UCase: MyPortofolio
-Model ID: my_portofolio
-Model Title: My Portofolio
-
-
-Listing1
-helooo portofolio_id 
-
-- 3 year => number => Year
-- 3 description => multiline => Description
-- 3 link => url => Link
-- 3 image => image => Image
-
-
-Listing Index
-helooo portofolio_id 
-
-- 3 portofolio_id => primary => My Portofolio ID
-- 2 user => model => User
-- 3 year => number => Year
-- 3 description => multiline => Description
-- 3 link => url => Link
-
-
-
-View1
-
-
-
-
-AddPortofolio => add_portofolio => Add Portofolio => insert =>model
-- Year => number => Year => editable
-- Description => multiline => Description => editable
-- Link => url => Link => editable
-- Image => image => Image => editable
-+ button: Save => save => Save => green 
-
-
-Edit => edit => Edit => edit =>model
-- Year => number => Year => editable
-- Description => multiline => Description => editable
-- Link => url => Link => editable
-- Image => image => Image => editable
-+ button: Save => save => Save => green 
 
 
 

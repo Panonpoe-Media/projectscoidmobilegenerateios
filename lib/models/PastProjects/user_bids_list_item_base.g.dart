@@ -15,7 +15,8 @@ ItemUserBids _$ItemUserBidsFromJson(Map<String, dynamic> json) => ItemUserBids(
       json['worker_photo_url'] as String?,
       json['worker_photo'] == null
           ? null
-          : Photo.fromJson(json['worker_photo'] as Map<String, dynamic>),
+          : Photo.fromJson(json['worker_photo'] as Map<String, dynamic>)
+      /*,
       (json['worker_worker_rating_num'] as num?)?.toDouble(),
       json['worker_worker_rating_num_str'] as String?,
       json['worker_projects_won'] as int?,
@@ -28,6 +29,8 @@ ItemUserBids _$ItemUserBidsFromJson(Map<String, dynamic> json) => ItemUserBids(
       json['worker_projects_won_in_arbitration_str'] as String?,
       json['worker_projects_lost_in_arbitration'] as int?,
       json['worker_projects_lost_in_arbitration_str'] as String?,
+
+       */
     )
       ..age = json['age'] as int?
       ..cnt = json['cnt'] as int?
@@ -35,11 +38,14 @@ ItemUserBids _$ItemUserBidsFromJson(Map<String, dynamic> json) => ItemUserBids(
       ..id = json['id'] as String?
       ..ttl = json['ttl'] as String?
       ..pht = json['pht'] as String?
-      ..sbttl = json['sbttl'] as String?
+      ..sbttl = json['sbttl'] as String?;
+    /*
       ..worker_user_id = json['worker_user_id'] as String?
       ..worker_user_name = json['worker_user_name'] as String?
       ..worker_worker_rating = json['worker_worker_rating'] as int?
       ..worker_last_seen = json['worker_last_seen'] as String?;
+
+     */
 
 Map<String, dynamic> _$ItemUserBidsToJson(ItemUserBids instance) =>
     <String, dynamic>{
@@ -52,9 +58,10 @@ Map<String, dynamic> _$ItemUserBidsToJson(ItemUserBids instance) =>
       'sbttl': instance.sbttl,
       'buttons': instance.buttons,
       'bid_id': instance.bid_id,
-      'worker_user_id': instance.worker_user_id,
+    //  'worker_user_id': instance.worker_user_id,
       'worker_photo_url': instance.worker_photo_url,
       'worker_photo': instance.worker_photo,
+      /*
       'worker_user_name': instance.worker_user_name,
       'worker_worker_rating': instance.worker_worker_rating,
       'worker_worker_rating_num': instance.worker_worker_rating_num,
@@ -74,4 +81,6 @@ Map<String, dynamic> _$ItemUserBidsToJson(ItemUserBids instance) =>
           instance.worker_projects_lost_in_arbitration,
       'worker_projects_lost_in_arbitration_str':
           instance.worker_projects_lost_in_arbitration_str,
+
+       */
     };

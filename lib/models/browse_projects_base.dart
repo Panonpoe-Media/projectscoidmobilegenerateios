@@ -349,16 +349,17 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                       await _setRateCountSF(1);
                                     }
 
-                    if(_isRewardedAdReady!){
-                      state.setState(() {
-                        _isRewardedAdReady = false;
-                      });
-                      _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-                        // Reward the user for watching an ad.
-                      });
-                    }
-                        print('haloooooooooooo1');
+
+                      //  print('haloooooooooooo1');
                         if (Error.toString().contains('302')) {
+                          if(_isRewardedAdReady!){
+                            state.setState(() {
+                              _isRewardedAdReady = false;
+                            });
+                            _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                              // Reward the user for watching an ad.
+                            });
+                          }
 
                           Navigator.pushAndRemoveUntil(
                             context,
@@ -385,7 +386,26 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                 (Route<dynamic> route) => false,
                           );
                         } else {
-                          print('haloooooooooooo');
+                          if(Error.toString().contains('Timeout')){
+                            _onWidgetDidBuild(() {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Silahkan cek koneksi Anda, mungkin terjadi gangguan.'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            });
+                          }else{
+                            _onWidgetDidBuild(() {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(Error.toString()),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            });
+                          }
+                       //   print('haloooooooooooo');
                           _onWidgetDidBuild(() {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -416,8 +436,8 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                   });
                                   }).catchError((Error){
                        // AppProvider.getRouter(context)!.pop(context);	
-                                    l.log('errorhaloooooooooooo11');
-                                    l.log('haloooooooooooo1${Error.toString()}');
+                                 //   l.log('errorhaloooooooooooo11');
+                                 //   l.log('haloooooooooooo1${Error.toString()}');
                                     if(Error.toString().contains('302')){
                                      Navigator.pushAndRemoveUntil(
                                       context,
@@ -432,7 +452,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                             (Route<dynamic> route) => false,
                                       );
                                     }else{
-                                        print('haloooooooooooo');
+                                    //    print('haloooooooooooo');
                                         _onWidgetDidBuild(() {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
@@ -447,8 +467,6 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
 
                       });
                       }
-                                
-
                                   } else {
                                 _onWidgetDidBuild(() {
                                     ScaffoldMessenger.of(context).showSnackBar(
@@ -458,7 +476,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
                                          ),
                                        );
                                    });
-                                    print('haloooooooooooo hanya di sini');
+                                 //   print('haloooooooooooo hanya di sini');
                                   }
                             }
                 

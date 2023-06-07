@@ -54,7 +54,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:open_file_safe/open_file_safe.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'my_orders.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -1109,7 +1110,7 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
   }
 
   @override
-  Widget view (BuildContext context, ScrollController controller, bool?account) {
+  Widget view (BuildContext context, ScrollController controller, bool?account, bool _isBannerAdReady,  _bannerAd) {
 
 
     viewChildren.clear();
@@ -1127,6 +1128,36 @@ class MyOrdersViewModel  extends MyOrdersViewBase{
    // viewChildren.add(viewTable(context));
 
 
+    viewChildren!.add(
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
     return(  SingleChildScrollView(
         controller: controller,
         physics: const AlwaysScrollableScrollPhysics(),

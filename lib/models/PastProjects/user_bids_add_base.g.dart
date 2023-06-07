@@ -22,6 +22,12 @@ AddModelUserBids _$AddModelUserBidsFromJson(Map<String, dynamic> json) =>
       (json['status_list_str'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
+      json['mark_id'] as int?,
+      json['mark_str'] as String?,
+      (json['mark_list'] as List<dynamic>?)?.map((e) => e as int?).toList(),
+      (json['mark_list_str'] as List<dynamic>?)
+          ?.map((e) => e as String?)
+          .toList(),
       json['worker_id'] as int?,
       json['worker_str'] as String?,
       (json['worker_list'] as List<dynamic>?)?.map((e) => e as int?).toList(),

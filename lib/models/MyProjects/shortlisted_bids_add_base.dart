@@ -101,6 +101,10 @@ class AddModelShortlistedBids {
   String? status_str;
   List<int?>? status_list;
   List<String?>? status_list_str;
+   int?mark_id;
+  String? mark_str;
+  List<int?>? mark_list;
+  List<String?>? mark_list_str;
   DateTime? date;
    int?location_id;
   String? location_url;
@@ -139,6 +143,10 @@ class AddModelShortlistedBids {
 			this.status_str,
 			this.status_list,
 			this.status_list_str,
+			this.mark_id,
+			this.mark_str,
+			this.mark_list,
+			this.mark_list_str,
 			this.location_id,
 			this.location_str,
 			this.location_list,
@@ -196,6 +204,7 @@ class ShortlistedBidsAddBase{
   "shortlisted_bids[worker_id]": "${model.model.worker_id }",
   "shortlisted_bids[project_id]": "${model.model.project_id }",
    "shortlisted_bids[status_id]": "${model.model.status_id}",
+   "shortlisted_bids[mark_id]": "${model.model.mark_id}",
   "shortlisted_bids[date]": "${model.model.date}",
   "shortlisted_bids[location_id]": "${model.model.location_id }",
   "shortlisted_bids[rating]": "${model.model.rating }",
@@ -317,6 +326,22 @@ class ShortlistedBidsAddBase{
 	  getValue: ( int?val) {
 		state.setState(() {
 		  model.model.status_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editMark (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.mark_id,
+	  caption: 'Mark',
+	  hint: 'pilih Enum',
+	  required:true,
+	  idenum: model.model.mark_list,
+	  nameenum: model.model.mark_list_str,
+	  getValue: ( int?val) {
+		state.setState(() {
+		  model.model.mark_id = val;
 		});
 	  },
 	));}

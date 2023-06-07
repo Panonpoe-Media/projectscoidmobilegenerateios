@@ -2092,7 +2092,7 @@ class PastProjectsViewModel extends PastProjectsViewBase {
 
   @override
   Widget view(
-      BuildContext context, ScrollController controller, bool? account) {
+      BuildContext context, ScrollController controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
     viewChildren.clear();
 
     //viewHeader
@@ -2120,6 +2120,38 @@ class PastProjectsViewModel extends PastProjectsViewBase {
     // viewChildren.add(viewProjectOwner(context));
 
     // viewChildren.add(viewInfo(context));
+
+
+    viewChildren!.add(
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
 
     if (this.model.meta.after_content != null) {
       viewChildren.add(Padding(

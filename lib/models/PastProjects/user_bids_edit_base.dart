@@ -295,6 +295,10 @@ class EditModelUserBids {
   String? status_str;
   List<int?>? status_list;
   List<String?>? status_list_str;
+  int? mark_id;
+  String? mark_str;
+  List<int?>? mark_list;
+  List<String?>? mark_list_str;
   DateTime? date;
   int? worker_id;
   String? worker_url;
@@ -334,6 +338,10 @@ class EditModelUserBids {
 			this.status_str,
 			this.status_list,
 			this.status_list_str,
+			this.mark_id,
+			this.mark_str,
+			this.mark_list,
+			this.mark_list_str,
 			this.worker_id,
 			this.worker_str,
 			this.worker_list,
@@ -394,6 +402,7 @@ class EditUserBidsBase{
       "user_bids[_trigger_]":"",
   "user_bids[project_id]": "${model.model.project_id }",
    "user_bids[status_id]": "${model.model.status_id}",
+   "user_bids[mark_id]": "${model.model.mark_id}",
   "user_bids[date]": "${model.model.date}",
   "user_bids[worker_id]": "${model.model.worker_id }",
   "user_bids[location_id]": "${model.model.location_id }",
@@ -531,6 +540,22 @@ class EditUserBidsBase{
 	  getValue: (int? val) {
 		state.setState(() {
 		  model.model.status_id = val;
+		});
+	  },
+	));}
+
+   	    Widget editMark (State state) {
+      return(
+	  EnumWidget(
+	  value: model.model.mark_id,
+	  caption: 'Mark',
+	  hint: 'pilih Enum',
+	  required:true,
+	  idenum: model.model.mark_list,
+	  nameenum: model.model.mark_list_str,
+	  getValue: (int? val) {
+		state.setState(() {
+		  model.model.mark_id = val;
 		});
 	  },
 	));}

@@ -33,6 +33,7 @@ class UserBidsListingToolsRev{
 }
 
 
+
 /*
 UserBidsListingToolsRev _$UserBidsListingToolsRevFromJson(Map<String, dynamic> json) {
   return UserBidsListingToolsRev(

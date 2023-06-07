@@ -183,6 +183,7 @@ final RestorableInt _counter = RestorableInt(0);
 								  this.model.editWorker(this), 
 								  this.model.editProject(this), 
 								  this.model.editStatus(this), 
+								  this.model.editMark(this), 
 								  this.model.editDate(this), 
 								  this.model.editLocation(this), 
 								  this.model.editRating(this), 

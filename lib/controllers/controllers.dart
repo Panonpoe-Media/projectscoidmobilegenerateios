@@ -26,10 +26,8 @@ export 'package:projectscoid/controllers/MyFinanceController.dart';
 export 'package:projectscoid/controllers/MyPointsController.dart';
 export 'package:projectscoid/controllers/MyProfileController.dart';
 export 'package:projectscoid/controllers/KelurahanController.dart';
-export 'package:projectscoid/controllers/MyPortofolioController.dart';
 export 'package:projectscoid/controllers/MyBookmarksController.dart';
 export 'package:projectscoid/controllers/MyBuddiesController.dart';
-
 
 //export 'package:projectscoid/controllers/user/TestController.dart';
 export 'package:projectscoid/controllers/SubModelController.dart';

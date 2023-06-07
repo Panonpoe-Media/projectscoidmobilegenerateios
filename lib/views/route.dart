@@ -174,12 +174,6 @@ export 'package:projectscoid/views/Kelurahan/kelurahan_edit.dart';
 export 'package:projectscoid/views/Kelurahan/kelurahan_view.dart';
 export 'package:projectscoid/views/Kelurahan/kelurahan_action.dart';
 export 'package:projectscoid/views/Kelurahan/kelurahan_add.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_listing.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_index.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_edit.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_view.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_action.dart';
-export 'package:projectscoid/views/MyPortofolio/my_portofolio_add.dart';
 export 'package:projectscoid/views/MyBookmarks/my_bookmarks_listing.dart';
 export 'package:projectscoid/views/MyBookmarks/my_bookmarks_index.dart';
 export 'package:projectscoid/views/MyBookmarks/my_bookmarks_edit.dart';
@@ -192,6 +186,7 @@ export 'package:projectscoid/views/MyBuddies/my_buddies_edit.dart';
 export 'package:projectscoid/views/MyBuddies/my_buddies_view.dart';
 export 'package:projectscoid/views/MyBuddies/my_buddies_action.dart';
 export 'package:projectscoid/views/MyBuddies/my_buddies_add.dart';
+
 
 
 export 'package:projectscoid/views/BrowseProjects/user_bids_view.dart';

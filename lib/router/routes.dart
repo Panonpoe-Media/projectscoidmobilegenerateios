@@ -375,14 +375,6 @@ class Routes {
 	router.define(PublicKelurahanAdd.PATH, handler: addKelurahanPublic);
     router.define(PublicKelurahanView.PATH, handler:viewKelurahanPublic);
     router.define(PublicKelurahanListing.PATH, handler: listingKelurahanPublic);
-    router.define(UserMyPortofolioEdit.PATH, handler: editMyPortofolioUser);
-	router.define(UserMyPortofolioAdd.PATH, handler: addMyPortofolioUser);
-    router.define(UserMyPortofolioView.PATH, handler:viewMyPortofolioUser);
-    router.define(UserMyPortofolioListing.PATH, handler: listingMyPortofolioUser);
-	 router.define(AddPortofolioMyPortofolio.PATH, handler: AddPortofolioMyPortofolioHandler);
-
-	 router.define(EditMyPortofolio.PATH, handler: EditMyPortofolioHandler);
-
     router.define(UserMyBookmarksEdit.PATH, handler: editMyBookmarksUser);
 	router.define(UserMyBookmarksAdd.PATH, handler: addMyBookmarksUser);
     router.define(UserMyBookmarksView.PATH, handler:viewMyBookmarksUser);

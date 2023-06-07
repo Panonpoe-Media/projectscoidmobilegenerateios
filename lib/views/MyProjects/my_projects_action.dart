@@ -1364,10 +1364,10 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
-	   
+	 
    
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1809,7 +1809,6 @@ class  ShowBidsMyProjectsState1 extends State<ShowBidsMyProjects> with TickerPro
   @override
   void dispose() {
     show_bids!.listingShowBids!.dispose();
-	
     super.dispose();
   }
 
@@ -1920,12 +1919,19 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
     bool sendCheck = false;
     String? sendMsgTemp = '';
    PermissionStatus _permissionStatus = PermissionStatus.denied;
-
+	 Timer? timer;
+	  bool isEnd = false;
+	  bool _isSetAds = true;
+	  StateSetter? _setState;
+	  late BannerAd _bannerAd;
+	  bool _isBannerAdReady = false;
+	  late BannerAd _bannerAd1;
+	  bool _isBannerAdReady1 = false; 
      // ChatBloc? _chatBloc;
       var data;
       List<Map> listAccount = [];
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -1953,16 +1959,270 @@ class  ShowThreadMyProjectsState1 extends State<ShowThreadMyProjects> with Ticke
  @override
   void initState() {
     super.initState();
-
+      
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
       });
     });
 	//_chatBloc =    ChatBloc();
+	 WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd1 = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady1 = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady1 = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+      _bannerAd1.load();
+      // await getAdsStatus();
+      final future = getAdsStatus();
+      future.then((val) {
+        if(_isSetAds){
+         // print('apakah bisa man????');
+          Future.delayed(Duration.zero, () => showAds());
+          //  WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   showAds();
+          // });
+          timer = Timer(
+             Duration(seconds: AdHelper.timerSet),
+                () {
+              if (!mounted) {
+                _setState!(() {
+                  isEnd = true;
+                });
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }else{
+                _setState!(() {
+                  isEnd = true;
+                });
+
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }
+
+            },
+          );
+        }
+      });
+
+      //setState(() { });
+    });
     _focusNode = FocusNode();
   }
+  void showAds() {
 
+    showDialog(
+        barrierDismissible: false,
+        builder: (BuildContext context){
+          return AlertDialog(
+              scrollable: true,
+              content:StatefulBuilder(  // You need this, notice the parameters below:
+                  builder: (BuildContext context1, StateSetter setState)
+                  {
+
+                    _setState = setState;
+                    return  Column(
+                      //clipBehavior : Clip.none,
+                      children: <Widget>[
+                        Row(
+
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            isEnd?
+                            Container(
+                              decoration: new BoxDecoration(
+                                  color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+                              ),
+
+
+                              child:  GestureDetector(
+
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async{
+                                  await _setAdsStatus();
+
+                                  // Navigator.of(context).pop();
+                                  // Navigator.of(context1).pop();
+                                  Navigator.of(context).pop();
+
+                                },
+                                child: const  CircleAvatar(
+
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.red,
+                                )
+                                ,
+
+                              ),
+                            )
+
+
+                                :
+                            Container(
+                                decoration: new BoxDecoration(
+                                    color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+
+                                ),
+
+
+                                child:
+                                const  CircleAvatar(
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.grey,
+                                )
+                            ),
+                          ],
+                        ),
+
+                        SingleChildScrollView(
+                          child:   Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Hard Work, Work Smarter",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, decoration: TextDecoration.none, color: Colors.black),
+                              ),
+                              if (_isBannerAdReady)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd.size.width.toDouble(),
+                                    height: _bannerAd.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd1.size.width.toDouble(),
+                                    height: _bannerAd1.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd1),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            ],
+                          ),
+                        ),
+
+
+
+
+
+                      ],
+                    );
+                  }
+
+
+              )
+          );
+        },
+
+
+        context: context);
+  }
+  Future<void> _setAdsStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('appads_timestamp', tm);
+    ///print('apakah bisa man123456????');
+    //setState(() {
+    //  _isSetAds = false;
+    //});
+  }
+  Future<bool> getAdsStatus() async {
+    var ts;
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('appads_timestamp')) {
+      //print('apakah bisa man123????');
+      ts =  prefs.getInt('appads_timestamp');
+      // print('apakah bisa man123${tm}????${ts}');
+      final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
+      final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
+      double difference = double.parse(date2.difference(date1).inMinutes.toString());
+      if(difference <= AdHelper.delaySetList){
+        // if (!mounted) {
+        // print('apakah bisa 1 ${difference}');
+        //setState(() {
+        _isSetAds = false;
+        //});
+        // }else{
+        // print('apakah bisa 2');
+        // _isSetAds = false;
+        //  }
+      }else{
+        // print('apakah bisa 2 ${difference}');
+      }
+    } else {
+      //print('apakah bisa 3');
+      _isSetAds = true;
+    }
+
+    return true;
+
+  }
 
   void _onSelect(){
 
@@ -4006,7 +4266,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_thread!.listingShowThread!.dispose();
-	
+	  timer?.cancel();
     super.dispose();
   }
 
@@ -4341,10 +4601,10 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
   AccountController? accountController;
 	final ValueNotifier<int> firstSelectIndex = ValueNotifier<int>(0);
 	   List<Map> listAccount = [];
-	   
+	 
    
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4786,7 +5046,6 @@ class  ShowFilesMyProjectsState1 extends State<ShowFilesMyProjects> with TickerP
   @override
   void dispose() {
     show_files!.listingShowFiles!.dispose();
-	
     super.dispose();
   }
 
@@ -4898,12 +5157,19 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
     bool sendCheck = false;
     String? sendMsgTemp = '';
    PermissionStatus _permissionStatus = PermissionStatus.denied;
-
+	 Timer? timer;
+	  bool isEnd = false;
+	  bool _isSetAds = true;
+	  StateSetter? _setState;
+	  late BannerAd _bannerAd;
+	  bool _isBannerAdReady = false;
+	  late BannerAd _bannerAd1;
+	  bool _isBannerAdReady1 = false; 
      // ChatBloc? _chatBloc;
       var data;
       List<Map> listAccount = [];
 	
-	
+
 	int firstIndex = 0;
 	var _keys = {};
    List<int> _selectedItemsIndex = [];
@@ -4931,16 +5197,270 @@ class  ShowConversationMyProjectsState1 extends State<ShowConversationMyProjects
  @override
   void initState() {
     super.initState();
-
+      
      _checkPermission().then((hasGranted) {
       setState(() {
         _permissionReady = hasGranted;
       });
     });
 	//_chatBloc =    ChatBloc();
+	 WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _bannerAd = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd1 = BannerAd(
+        adUnitId: AdHelper.bannerAdUnitId,
+        request: AdRequest(),
+        size: AdSize.mediumRectangle,
+        listener: BannerAdListener(
+          onAdLoaded: (_) {
+
+            _setState!(() {
+              _isBannerAdReady1 = true;
+            });
+            //  setState(() {
+            //  _isBannerAdReady = true;
+            // });
+          },
+          onAdFailedToLoad: (ad, err) {
+            print('Failed to load a banner ad: ${err.message}');
+            _isBannerAdReady1 = false;
+            ad.dispose();
+          },
+        ),
+      );
+
+      _bannerAd.load();
+      _bannerAd1.load();
+      // await getAdsStatus();
+      final future = getAdsStatus();
+      future.then((val) {
+        if(_isSetAds){
+         // print('apakah bisa man????');
+          Future.delayed(Duration.zero, () => showAds());
+          //  WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   showAds();
+          // });
+          timer = Timer(
+             Duration(seconds: AdHelper.timerSet),
+                () {
+              if (!mounted) {
+                _setState!(() {
+                  isEnd = true;
+                });
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }else{
+                _setState!(() {
+                  isEnd = true;
+                });
+
+                // Navigator.pop(dialogContext);
+                // showAds(ctx!);
+              }
+
+            },
+          );
+        }
+      });
+
+      //setState(() { });
+    });
     _focusNode = FocusNode();
   }
+  void showAds() {
 
+    showDialog(
+        barrierDismissible: false,
+        builder: (BuildContext context){
+          return AlertDialog(
+              scrollable: true,
+              content:StatefulBuilder(  // You need this, notice the parameters below:
+                  builder: (BuildContext context1, StateSetter setState)
+                  {
+
+                    _setState = setState;
+                    return  Column(
+                      //clipBehavior : Clip.none,
+                      children: <Widget>[
+                        Row(
+
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            isEnd?
+                            Container(
+                              decoration: new BoxDecoration(
+                                  color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+                              ),
+
+
+                              child:  GestureDetector(
+
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () async{
+                                  await _setAdsStatus();
+
+                                  // Navigator.of(context).pop();
+                                  // Navigator.of(context1).pop();
+                                  Navigator.of(context).pop();
+
+                                },
+                                child: const  CircleAvatar(
+
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.red,
+                                )
+                                ,
+
+                              ),
+                            )
+
+
+                                :
+                            Container(
+                                decoration: new BoxDecoration(
+                                    color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
+
+                                ),
+
+
+                                child:
+                                const  CircleAvatar(
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.grey,
+                                )
+                            ),
+                          ],
+                        ),
+
+                        SingleChildScrollView(
+                          child:   Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Hard Work, Work Smarter",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, decoration: TextDecoration.none, color: Colors.black),
+                              ),
+                              if (_isBannerAdReady)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd.size.width.toDouble(),
+                                    height: _bannerAd.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              if (_isBannerAdReady1)
+                                Center(
+                                  child: Container(
+                                    width: _bannerAd1.size.width.toDouble(),
+                                    height: _bannerAd1.size.height.toDouble(),
+                                    child: AdWidget(ad: _bannerAd1),
+                                  ),
+                                ),
+
+
+                              if (_isBannerAdReady1)
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            ],
+                          ),
+                        ),
+
+
+
+
+
+                      ],
+                    );
+                  }
+
+
+              )
+          );
+        },
+
+
+        context: context);
+  }
+  Future<void> _setAdsStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('appads_timestamp', tm);
+    ///print('apakah bisa man123456????');
+    //setState(() {
+    //  _isSetAds = false;
+    //});
+  }
+  Future<bool> getAdsStatus() async {
+    var ts;
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('appads_timestamp')) {
+      //print('apakah bisa man123????');
+      ts =  prefs.getInt('appads_timestamp');
+      // print('apakah bisa man123${tm}????${ts}');
+      final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
+      final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
+      double difference = double.parse(date2.difference(date1).inMinutes.toString());
+      if(difference <= AdHelper.delaySetList){
+        // if (!mounted) {
+        // print('apakah bisa 1 ${difference}');
+        //setState(() {
+        _isSetAds = false;
+        //});
+        // }else{
+        // print('apakah bisa 2');
+        // _isSetAds = false;
+        //  }
+      }else{
+        // print('apakah bisa 2 ${difference}');
+      }
+    } else {
+      //print('apakah bisa 3');
+      _isSetAds = true;
+    }
+
+    return true;
+
+  }
 
   void _onSelect(){
 
@@ -6984,7 +7504,7 @@ void _sendMessage()async{
   @override
   void dispose() {
     show_conversation!.listingShowConversation!.dispose();
-	
+	  timer?.cancel();
     super.dispose();
   }
 

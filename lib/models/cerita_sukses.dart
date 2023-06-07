@@ -34,6 +34,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:projectscoid/core/AppProvider.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_html/style.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 /** AUTOGENERATE OFF **/
 
 
@@ -268,7 +270,7 @@ class CeritaSuksesViewModel  extends CeritaSuksesViewBase{
   }
 
   @override
-  Widget view (BuildContext context, ScrollController controller, bool? account) {
+  Widget view (BuildContext context, ScrollController controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
 
 
     viewChildren.clear();
@@ -280,6 +282,36 @@ class CeritaSuksesViewModel  extends CeritaSuksesViewBase{
 
 
     viewChildren.add(viewContent(context));
+    viewChildren!.add(
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
     // viewChildren.add(viewFiles(context));
 
     return(  SingleChildScrollView(

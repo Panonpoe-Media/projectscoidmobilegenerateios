@@ -252,7 +252,7 @@ class BlogViewModel extends BlogViewBase {
 
   @override
   Widget view(
-      BuildContext context, ScrollController controller, bool? account) {
+      BuildContext context, ScrollController controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
     viewChildren.clear();
     viewChildren.add(viewTitle(context));
     viewChildren.add(viewImage(context));
@@ -261,6 +261,36 @@ class BlogViewModel extends BlogViewBase {
     viewChildren.add(viewAuthor(context));
 
     viewChildren.add(viewContent(context));
+    viewChildren!.add(
+
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
     // viewChildren.add(viewFiles(context));
 
     return (SingleChildScrollView(
