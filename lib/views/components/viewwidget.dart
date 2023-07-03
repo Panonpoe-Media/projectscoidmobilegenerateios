@@ -29,7 +29,7 @@ import 'dart:io';
 import 'package:projectscoid/models/file_fields.dart';
 import 'package:projectscoid/models/option_fields.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as bg;
 import 'package:path/path.dart' as p;
 import 'package:flutter_html/style.dart';
 
@@ -2051,7 +2051,7 @@ class _FileViewStateAtt extends State<FileViewAtt>{
 
 
   static void downloadCallback(
-      String? id, DownloadTaskStatus status, int? progress) {
+      String? id, int status, int progress) {
     if (true) {
       print(
           'Background Isolate Callback: task ($id) is in status ($status) and process ($progress)');
@@ -2734,7 +2734,7 @@ class _FileViewStateAttFix extends State<FileViewAttFix>{
 
 
   static void downloadCallback(
-      String? id, DownloadTaskStatus status, int? progress) {
+      String? id, int status, int progress) {
     if (true) {
       print(
           'Background Isolate Callback: task ($id) is in status ($status) and process ($progress)');
@@ -3883,10 +3883,10 @@ class _ChannelRouteTagsWidgetState extends State<ChannelRouteTagsWidget> {
               widget.getValue!(widget.urlroutetags![widget.nameroutetags!.indexOf(name)]);
             },
             child:
-            Badge(
+            bg.Badge(
               toAnimate: false,
               elevation: 0,
-              shape: BadgeShape.square,
+              shape: bg.BadgeShape.square,
               badgeColor: Colors.black26,
               padding: EdgeInsets.fromLTRB(5, 3, 5, 5),
               borderRadius: BorderRadius.circular(8),

@@ -105,7 +105,18 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('np_count', i);
   }
+  Future<void> _setAdsStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('appads_timestamp', tm);
 
+  }
+
+  Future<void> _setFistAddPrefs()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('first_delay', true);
+    await _setAdsStatus();
+  }
 
   Future<List<String>?> _getListSharedPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -429,6 +440,7 @@ class _SplashPageState extends State<SplashPage> with WidgetsBindingObserver {
         payload: data);
   }
   fetchData()async {
+    await _setFistAddPrefs();
     getApplicationDocumentsDirectory().then((value) {
       APIProvider projectsAPIProvider = APIProvider(value.path);
       var future = projectsAPIProvider.getDataRC(

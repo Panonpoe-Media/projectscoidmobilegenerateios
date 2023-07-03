@@ -73,14 +73,13 @@ class  PublicPageViewState extends State< PublicPageView>{
   var viewPage;
   var recentNews;
   var isLoading = true;
-  Timer? timer;
+
   bool isEnd = false;
   bool _isSetAds = true;
   StateSetter? _setState;
-  late BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-  late BannerAd _bannerAd1;
-  bool _isBannerAdReady1 = false;
+  InterstitialAd? _interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
+  int? maxFailedLoadAttempts = 2;
 
   @override
   initState(){
@@ -88,217 +87,77 @@ class  PublicPageViewState extends State< PublicPageView>{
     controller = ScrollController();
     getPath = getPath + widget.title!;
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _bannerAd = BannerAd(
-        adUnitId: AdHelper.bannerAdUnitId,
-        request: AdRequest(),
-        size: AdSize.mediumRectangle,
-        listener: BannerAdListener(
-          onAdLoaded: (_) {
 
-            _setState!(() {
-              _isBannerAdReady = true;
-            });
-            //  setState(() {
-            //  _isBannerAdReady = true;
-            // });
-          },
-          onAdFailedToLoad: (ad, err) {
-            print('Failed to load a banner ad: ${err.message}');
-            _isBannerAdReady = false;
-            ad.dispose();
-          },
-        ),
-      );
-
-      _bannerAd1 = BannerAd(
-        adUnitId: AdHelper.bannerAdUnitId,
-        request: AdRequest(),
-        size: AdSize.mediumRectangle,
-        listener: BannerAdListener(
-          onAdLoaded: (_) {
-
-            _setState!(() {
-              _isBannerAdReady1 = true;
-            });
-            //  setState(() {
-            //  _isBannerAdReady = true;
-            // });
-          },
-          onAdFailedToLoad: (ad, err) {
-            print('Failed to load a banner ad: ${err.message}');
-            _isBannerAdReady1 = false;
-            ad.dispose();
-          },
-        ),
-      );
-
-      _bannerAd.load();
-      _bannerAd1.load();
       // await getAdsStatus();
+      final future = getAdsStatus();
+      future.then((val) {
+        if(_isSetAds){
+          //  print('apakah bisa man????');
+          Future.delayed(Duration.zero, () =>  _createInterstitialAd());
+          //  WidgetsBinding.instance.addPostFrameCallback((_) {
+          //   showAds();
+          // });
 
-      //  print('apakah bisa man????');
-      Future.delayed(Duration.zero, () => showAds());
-      //  WidgetsBinding.instance.addPostFrameCallback((_) {
-      //   showAds();
-      // });
-      timer = Timer(
-        const Duration(seconds: 15),
-            () {
-          if (!mounted) {
-            _setState!(() {
-              isEnd = true;
-            });
-            // Navigator.pop(dialogContext);
-            // showAds(ctx!);
-          }else{
-            _setState!(() {
-              isEnd = true;
-            });
+        }
+      });
 
-            // Navigator.pop(dialogContext);
-            // showAds(ctx!);
-          }
-
-        },
-      );
 
 
       //setState(() { });
     });
   }
 
-  void showAds() {
-
-    showDialog(
-        barrierDismissible: false,
-        builder: (BuildContext context){
-          return AlertDialog(
-              scrollable: true,
-              content:StatefulBuilder(  // You need this, notice the parameters below:
-                  builder: (BuildContext context1, StateSetter setState)
-                  {
-
-                    _setState = setState;
-                    return  Column(
-                      //clipBehavior : Clip.none,
-                      children: <Widget>[
-                        Row(
-
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            isEnd?
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
-                              ),
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+            _numInterstitialLoadAttempts = 0;
+            _interstitialAd!.setImmersiveMode(true);
+            // print('berhasil 1234 ${this.model.model.model.price.toString()}');
 
 
-                              child:  GestureDetector(
-
-                                behavior: HitTestBehavior.translucent,
-                                onTap: () {
-                                 // await _setAdsStatus();
-
-                                  // Navigator.of(context).pop();
-                                  // Navigator.of(context1).pop();
-                                  Navigator.of(context).pop();
-
-                                },
-                                child: const  CircleAvatar(
-
-                                  child: Icon(Icons.close),
-                                  backgroundColor: Colors.red,
-                                )
-                                ,
-
-                              ),
-                            )
-
-
-                                :
-                            Container(
-                                decoration: new BoxDecoration(
-                                    color:   const Color(0xFFFFFFFF).withOpacity(0.5)//here i want to add opacity
-
-                                ),
-
-
-                                child:
-                                const  CircleAvatar(
-                                  child: Icon(Icons.close),
-                                  backgroundColor: Colors.grey,
-                                )
-                            ),
-                          ],
-                        ),
-
-                        SingleChildScrollView(
-                          child:   Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Hard Work, Work Smarter",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, decoration: TextDecoration.none, color: Colors.black),
-                              ),
-                              if (_isBannerAdReady)
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              if (_isBannerAdReady)
-                                Center(
-                                  child: Container(
-                                    width: _bannerAd.size.width.toDouble(),
-                                    height: _bannerAd.size.height.toDouble(),
-                                    child: AdWidget(ad: _bannerAd),
-                                  ),
-                                ),
-
-
-                              if (_isBannerAdReady1)
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              if (_isBannerAdReady1)
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                              if (_isBannerAdReady1)
-                                Center(
-                                  child: Container(
-                                    width: _bannerAd1.size.width.toDouble(),
-                                    height: _bannerAd1.size.height.toDouble(),
-                                    child: AdWidget(ad: _bannerAd1),
-                                  ),
-                                ),
-
-
-                              if (_isBannerAdReady1)
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                            ],
-                          ),
-                        ),
+            _showInterstitialAd();
+            //  Future.delayed(Duration.zero, () => _showInterstitialAd());
 
 
 
-
-
-                      ],
-                    );
-                  }
-
-
-              )
-          );
-        },
-
-
-        context: context);
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+            _numInterstitialLoadAttempts += 1;
+            _interstitialAd = null;
+            if (_numInterstitialLoadAttempts < maxFailedLoadAttempts!) {
+              _createInterstitialAd();
+            }
+          },
+        ));
+  }
+  void _showInterstitialAd() {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        // _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        //_createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+    _setAdsStatus();
   }
   Future<void> _setAdsStatus() async {
     var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
@@ -310,29 +169,47 @@ class  PublicPageViewState extends State< PublicPageView>{
     //});
   }
   Future<bool> getAdsStatus() async {
-    var ts;
+    var ts, fd;
+    var delay;
     var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey('appads_timestamp')) {
       //print('apakah bisa man123????');
       ts =  prefs.getInt('appads_timestamp');
-      // print('apakah bisa man123${tm}????${ts}');
+      fd =  prefs.getBool('first_delay');
       final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
       final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
       double difference = double.parse(date2.difference(date1).inMinutes.toString());
-      if(difference <= 4.00){
-        // if (!mounted) {
-        // print('apakah bisa 1 ${difference}');
-        //setState(() {
-        _isSetAds = false;
-        //});
-        // }else{
-        // print('apakah bisa 2');
-        // _isSetAds = false;
-        //  }
+      if(fd){
+        if(difference <= AdHelper.FirstDelay){
+          _isSetAds = false;
+         // delay = AdHelper.FirstDelay;
+        }else{
+          prefs.setBool('first_delay', false);
+          //delay = AdHelper.delaySet;
+          _isSetAds = true;
+        }
+
       }else{
-        // print('apakah bisa 2 ${difference}');
+
+        if(difference <= AdHelper.delaySet){
+          // if (!mounted) {
+          // print('apakah bisa 1 ${difference}');
+          //setState(() {
+          _isSetAds = false;
+          //});
+          // }else{
+          // print('apakah bisa 2');
+          // _isSetAds = false;
+          //  }
+        }else{
+          _isSetAds = true;
+          // print('apakah bisa 2 ${difference}');
+        }
+
       }
+
+
     } else {
       //print('apakah bisa 3');
       _isSetAds = true;
@@ -797,7 +674,9 @@ class  PublicPageViewState extends State< PublicPageView>{
   @override
   void dispose() {
     super.dispose();
-    timer?.cancel();
+    if(_isSetAds) {
+      _interstitialAd?.dispose();
+    }
   }
 
   JavascriptChannel _toasterJavascriptChannel(BuildContext context) {

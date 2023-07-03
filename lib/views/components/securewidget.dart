@@ -245,7 +245,7 @@ class _SecureWidget extends State<SecureWidget> {
                                 MaterialStateProperty.all<Color>( Colors.green),
                                 overlayColor: MaterialStateProperty.all<Color>(Colors.green),
                                 ),
-                                child: Text('Verifikasi', style: TextStyle(color: CurrentTheme.BackgroundColor)),
+                                child: Text('Kirim Secure Code', style: TextStyle(color: CurrentTheme.BackgroundColor)),
                                 onPressed:   ()async {
                                   hint = await _refreshSecure();
 

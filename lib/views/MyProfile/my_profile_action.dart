@@ -86,44 +86,12 @@ class EditProfileMyProfileState extends State<EditProfileMyProfile> with Restora
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Edit Profile';
-   RewardedAd? _rewardedAd;
+  InterstitialAd? _interstitialAd;
 
-  // TODO: Add _isRewardedAdReady
-  bool _isRewardedAdReady = false;
 
-  // TODO: Implement _loadRewardedAd()
-  void _loadRewardedAd() {
-    RewardedAd.load(
-      adUnitId: AdHelper.rewardedAdUnitId,
-      request: AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (ad) {
-          _rewardedAd = ad;
 
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
 
-            //  setState(() {
-                _isRewardedAdReady = false;
-            //  });
-             // _loadRewardedAd();
-            },
-          );
 
-        //  setState(() {
-            _isRewardedAdReady = true;
-
-        //  });
-        },
-        onAdFailedToLoad: (err) {
-          print('Failed to load a rewarded ad: ${err.message}');
-        //  setState(() {
-            _isRewardedAdReady = false;
-       //   });
-        },
-      ),
-    );
-  }
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -143,7 +111,7 @@ final RestorableInt _counter = RestorableInt(0);
     super.initState();
     controller = ScrollController();
     validation.add(true);
-	 _loadRewardedAd();
+
   }
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -717,7 +685,7 @@ final RestorableInt _counter = RestorableInt(0);
                               height: 30,
                             ),
 							
-							   isLoading!? [] : isError? null: this.model.RButtons(_rewardedAd,_isRewardedAdReady, context, _dialVisible, formKey, controller,edit_profile, postEditProfileResult, this, sendPath, widget.id!, widget.title!),
+							   isLoading!? [] : isError? null: this.model.RButtons(_interstitialAd, context, _dialVisible, formKey, controller,edit_profile, postEditProfileResult, this, sendPath, widget.id!, widget.title!),
           
                       
                         Container(
@@ -742,12 +710,13 @@ final RestorableInt _counter = RestorableInt(0);
 
   @override
   void dispose() {
-   _rewardedAd?.dispose();
+
     super.dispose();
   }
   
    
 }
+
 
 
 

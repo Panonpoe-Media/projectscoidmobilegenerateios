@@ -37,6 +37,7 @@ import 'package:provider/provider.dart';
 import 'package:projectscoid/core/components/utility/widget/widget_function.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'my_profile.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -1153,8 +1154,13 @@ class MyProfileViewModel extends MyProfileViewBase {
   // MyProfileViewModel(Map<String, dynamic> this.json):super(json);
   MyProfileViewModel(Map<String, dynamic> this.json) : super(json) {
     model = MyProfileViewSuperBaseRev.fromJson(this.json);
+    setPrefAvatar(model!.model!.photo_url);
+   // print('ini cahaya'+ model!.model!.photo_url);
   }
-
+  Future<void> setPrefAvatar(String Avatar) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('avatar', Avatar);
+  }
   @override
   Widget body(BuildContext context, ScrollController controller, bool? account,
       GlobalKey<ScaffoldState> ss, State state) {

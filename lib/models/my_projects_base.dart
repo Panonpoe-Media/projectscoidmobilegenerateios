@@ -15330,7 +15330,7 @@ class MyProjectsViewBase{
 		return(Container(width: 0.0, height: 0.0,color: Colors.white ));	
 	}
 
-	Widget view (BuildContext context, ScrollController controller, bool? account) {
+	Widget view (BuildContext context, ScrollController controller, bool? account, bool _isBannerAdReady,  _bannerAd) {
 
 
 	  viewChildren.clear();

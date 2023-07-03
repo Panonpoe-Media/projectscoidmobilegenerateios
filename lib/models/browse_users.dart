@@ -7571,7 +7571,7 @@ class _ItemBrowseUsersCard2State extends State<ItemBrowseUsersCard2> {
                         // Navigator.of(context).pop(true);
                       },
 
-                      child: Text('Sudah Pernah', style: TextStyle(fontSize: 15, color: Colors.white)),
+                      child: Text('Sudah', style: TextStyle(fontSize: 15, color: Colors.white)),
                     ),),
 
                     SizedBox(width: 5),

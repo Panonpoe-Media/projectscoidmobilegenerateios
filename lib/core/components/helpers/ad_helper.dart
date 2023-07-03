@@ -53,15 +53,15 @@ class AdHelper {
   }
 
   static int get timerSet {
-      return 15;
+      return 2;
   }
 
   static double get delaySet {
-    return 4.00;
+    return 61.00;
   }
 
-  static double get delaySetList {
-    return 20.00;
+  static double get FirstDelay{
+    return 2.00;
   }
 
 }

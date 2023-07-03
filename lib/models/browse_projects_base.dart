@@ -127,7 +127,7 @@ class PlaceNewBidBrowseProjectsBase{
     prefs.setInt('apprate_count', i);
   }
 
-Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+Widget RButtonActionBrowseProjectsWidget(InterstitialAd? _interstitialAd,Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
  var postBrowseProjectsResult, State state, String?sendPath, String?id,  String?title){
   var cl;
   var ic;
@@ -352,14 +352,7 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
 
                       //  print('haloooooooooooo1');
                         if (Error.toString().contains('302')) {
-                          if(_isRewardedAdReady!){
-                            state.setState(() {
-                              _isRewardedAdReady = false;
-                            });
-                            _rewardedAd?.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-                              // Reward the user for watching an ad.
-                            });
-                          }
+                          _createInterstitialAd( _interstitialAd);
 
                           Navigator.pushAndRemoveUntil(
                             context,
@@ -488,6 +481,119 @@ Widget RButtonActionBrowseProjectsWidget(RewardedAd? _rewardedAd,bool? _isReward
   }
 
 }
+
+  void _createInterstitialAd(InterstitialAd? _interstitialAd) {
+    int _numInterstitialLoadAttempts = 0;
+    int maxFailedLoadAttempts = 2;
+    InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            print('$ad loaded');
+            _interstitialAd = ad;
+            _numInterstitialLoadAttempts = 0;
+            _interstitialAd!.setImmersiveMode(true);
+            // print('berhasil 1234 ${this.model.model.model.price.toString()}');
+
+
+            _showInterstitialAd(_interstitialAd);
+            //  Future.delayed(Duration.zero, () => _showInterstitialAd());
+
+
+
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error.');
+            _numInterstitialLoadAttempts += 1;
+            _interstitialAd = null;
+            if (_numInterstitialLoadAttempts < maxFailedLoadAttempts!) {
+              _createInterstitialAd(_interstitialAd);
+            }
+          },
+        ));
+  }
+  void _showInterstitialAd(InterstitialAd? _interstitialAd) {
+    if (_interstitialAd == null) {
+      print('Warning: attempt to show interstitial before loaded.');
+      return;
+    }
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
+          print('ad onAdShowedFullScreenContent.'),
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        print('$ad onAdDismissedFullScreenContent.');
+        ad.dispose();
+        // _createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        print('$ad onAdFailedToShowFullScreenContent: $error');
+        ad.dispose();
+        //_createInterstitialAd();
+      },
+    );
+    _interstitialAd!.show();
+    _interstitialAd = null;
+    _setAdsStatus();
+  }
+  Future<void> _setAdsStatus() async {
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('appads_timestamp', tm);
+    ///print('apakah bisa man123456????');
+    //setState(() {
+    //  _isSetAds = false;
+    //});
+  }
+  Future<bool> getAdsStatus() async {
+    bool _isSetAds;
+    var ts, fd;
+    var delay;
+    var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('appads_timestamp')) {
+      //print('apakah bisa man123????');
+      ts =  prefs.getInt('appads_timestamp');
+      fd =  prefs.getBool('first_delay');
+      final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
+      final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
+      double difference = double.parse(date2.difference(date1).inMinutes.toString());
+      if(fd){
+        if(difference <= AdHelper.FirstDelay){
+          _isSetAds = false;
+          // delay = AdHelper.FirstDelay;
+        }else{
+          prefs.setBool('first_delay', false);
+          //delay = AdHelper.delaySet;
+          _isSetAds = true;
+        }
+
+      }else{
+
+        if(difference <= AdHelper.delaySet){
+          // if (!mounted) {
+          // print('apakah bisa 1 ${difference}');
+          //setState(() {
+          _isSetAds = false;
+          //});
+          // }else{
+          // print('apakah bisa 2');
+          // _isSetAds = false;
+          //  }
+        }else{
+          _isSetAds = true;
+          // print('apakah bisa 2 ${difference}');
+        }
+
+      }
+    } else {
+      //print('apakah bisa 3');
+      _isSetAds = true;
+    }
+
+    return _isSetAds;
+
+  }
 
 SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
  var postBrowseProjectsResult, State state, String?sendPath, String?id,  String?title){
@@ -703,14 +809,14 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
     return( formData);
   } 	
 	
-  List<Widget> RlistButton(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+  List<Widget> RlistButton(InterstitialAd? _interstitialAd,BuildContext context,var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title){
     final List<Widget> buttonChildren = <Widget>[
     ];
 	for(var i = 0; i < model.buttons.length; i++)
     {
       if(model.buttons[i].text != "Table View"){
-      buttonChildren.add(RButtonActionBrowseProjectsWidget(_rewardedAd, _isRewardedAdReady, model.buttons[i], context,formKey, controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title));
+      buttonChildren.add(RButtonActionBrowseProjectsWidget(_interstitialAd, model.buttons[i], context,formKey, controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title));
       }
     }
        return(
@@ -741,7 +847,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
 	 );
   }
    
-    Widget	 RButtons(RewardedAd? _rewardedAd,bool? _isRewardedAdReady,BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
+    Widget	 RButtons(InterstitialAd? _interstitialAd,BuildContext context, bool?visible, var formKey, ScrollController controller, BrowseProjectsController browse_projects,
   var postPlaceNewBidResult, State state, String?sendPath, String?id,  String?title ){
      // final size =MediaQuery.of(context).size;
     double? width = 400;
@@ -756,7 +862,7 @@ SpeedDialChild  ButtonActionBrowseProjectsWidget(Button button, BuildContext con
                 alignment: MainAxisAlignment.center,
                 buttonMinWidth: 0.9 * width,
                 children:
-           RlistButton(_rewardedAd, _isRewardedAdReady, context, formKey,controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title )
+           RlistButton(_interstitialAd, context, formKey,controller,browse_projects, postPlaceNewBidResult, state, sendPath, id!,  title )
 	    
             )
         )

@@ -55,7 +55,7 @@ class BlockQuote extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(
             left: BorderSide(
-              color: blockColor ?? Theme.of(context).accentColor,
+              color: blockColor ?? Theme.of(context).cardColor,
               width: blockWidth ?? 4.0,
             ),
           ),

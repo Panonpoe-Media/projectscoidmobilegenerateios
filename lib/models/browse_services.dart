@@ -46,7 +46,7 @@ import 'package:projectscoid/views/Chat/blocs/chat_bloc.dart';
 import 'package:projectscoid/views/Chat/pages/chat_screen.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as bg;
 import 'package:html/parser.dart' show parse;
 import 'package:html/dom.dart' as dom;
 import 'package:flutter/rendering.dart';
@@ -4715,7 +4715,7 @@ class _ItemBrowseServicesCard3State extends State<ItemBrowseServicesCard3> {
                               // Navigator.of(context).pop(true);
                             },
 
-                            child: Text('Sudah Pernah', style: TextStyle(fontSize: 15, color: Colors.white)),
+                            child: Text('Sudah', maxLines: 1, style: TextStyle(fontSize: 15, color: Colors.white)),
                           ),),
 
                           SizedBox(width: 5),
@@ -6115,9 +6115,9 @@ class ItemBrowseServicesContent3 extends StatelessWidget {
                                           cb: cb)),
                             );
                           },
-                          child: Badge(
+                          child: bg.Badge(
                             toAnimate: false,
-                            shape: BadgeShape.square,
+                            shape: bg.BadgeShape.square,
                             badgeColor: Colors.black12,
                             borderRadius: BorderRadius.circular(8),
                             badgeContent: Text(
@@ -6172,9 +6172,9 @@ class ItemBrowseServicesContent3 extends StatelessWidget {
                                           cb: cb)),
                             );
                           },
-                          child: Badge(
+                          child: bg.Badge(
                             toAnimate: false,
-                            shape: BadgeShape.square,
+                            shape: bg.BadgeShape.square,
                             badgeColor: Colors.black12,
                             borderRadius: BorderRadius.circular(8),
                             badgeContent: Text(
@@ -6215,9 +6215,9 @@ class ItemBrowseServicesContent3 extends StatelessWidget {
                                               cb: cb)),
                                 );
                               },
-                              child: Badge(
+                              child: bg.Badge(
                                 toAnimate: false,
-                                shape: BadgeShape.square,
+                                shape: bg.BadgeShape.square,
                                 badgeColor: Colors.black12,
                                 borderRadius: BorderRadius.circular(8),
                                 badgeContent: Text(

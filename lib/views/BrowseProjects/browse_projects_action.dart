@@ -85,44 +85,12 @@ class PlaceNewBidBrowseProjectsState extends State<PlaceNewBidBrowseProjects> wi
   var isLoading = true;
   var isError = false;
   var errmsg= 'Unauthorized  :'+'Place New Bid';
-   RewardedAd? _rewardedAd;
+     InterstitialAd? _interstitialAd;
+    int _numInterstitialLoadAttempts = 0;
+    int? maxFailedLoadAttempts = 2;
 
-  // TODO: Add _isRewardedAdReady
-  bool _isRewardedAdReady = false;
 
-  // TODO: Implement _loadRewardedAd()
-  void _loadRewardedAd() {
-    RewardedAd.load(
-      adUnitId: AdHelper.rewardedAdUnitId,
-      request: AdRequest(),
-      rewardedAdLoadCallback: RewardedAdLoadCallback(
-        onAdLoaded: (ad) {
-          _rewardedAd = ad;
 
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-
-              setState(() {
-                _isRewardedAdReady = false;
-              });
-             // _loadRewardedAd();
-            },
-          );
-
-          setState(() {
-            _isRewardedAdReady = true;
-
-          });
-        },
-        onAdFailedToLoad: (err) {
-          print('Failed to load a rewarded ad: ${err.message}');
-          setState(() {
-            _isRewardedAdReady = false;
-          });
-        },
-      ),
-    );
-  }
   final List<Widget> actionChildren = <Widget>[
 	];
 
@@ -142,8 +110,11 @@ final RestorableInt _counter = RestorableInt(0);
     super.initState();
     controller = ScrollController();
     validation.add(true);
-	 _loadRewardedAd();
+
+	 //_loadRewardedAd();
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -703,7 +674,7 @@ final RestorableInt _counter = RestorableInt(0);
                               height: 30,
                             ),
 							
-							   isLoading!? [] : isError? null: this.model.RButtons(_rewardedAd,_isRewardedAdReady, context, _dialVisible, formKey, controller,place_new_bid, postPlaceNewBidResult, this, sendPath, widget.id!, widget.title!),
+							   isLoading!? [] : isError? null: this.model.RButtons(_interstitialAd, context, _dialVisible, formKey, controller,place_new_bid, postPlaceNewBidResult, this, sendPath, widget.id!, widget.title!),
           
                       
                         Container(
@@ -728,7 +699,7 @@ final RestorableInt _counter = RestorableInt(0);
 
   @override
   void dispose() {
-   _rewardedAd?.dispose();
+   //_rewardedAd?.dispose();
     super.dispose();
   }
   
@@ -788,6 +759,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -1430,6 +1403,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();

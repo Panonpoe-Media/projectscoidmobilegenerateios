@@ -64,7 +64,7 @@ class _ScrollableLayoutState extends State<ScrollableLayout> {
                     showDialog(context: context, builder: _buildThanks),
                 child: Text(
                   'Submit',
-                  style: Theme.of(context).accentTextTheme.button,
+                  //style: Theme.of(context).accentTextTheme.button,
                 ),
               ),
             ),

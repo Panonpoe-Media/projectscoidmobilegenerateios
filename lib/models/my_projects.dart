@@ -44,6 +44,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:projectscoid/views/MyProjects/my_projects_listing.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:projectscoid/core/components/helpers/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 part 'my_projects.g.dart';
 /** AUTOGENERATE OFF **/
 
@@ -3805,7 +3807,7 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
 
 
   @override
-  Widget view (BuildContext context, ScrollController? controller , bool? account) {
+  Widget view (BuildContext context, ScrollController? controller , bool? account, bool _isBannerAdReady,  _bannerAd) {
 
 
     viewChildren.clear();
@@ -3828,7 +3830,36 @@ class MyProjectsViewModel  extends MyProjectsViewBase{
     viewChildren.add(viewOwner(context));
     viewChildren.add(viewWorker(context));
     viewChildren.add(viewBidder(context));
+    viewChildren!.add(
 
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            if (_isBannerAdReady)
+              Center(
+                child: Container(
+                  width: _bannerAd.size.width.toDouble(),
+                  height: _bannerAd.size.height.toDouble(),
+                  child: AdWidget(ad: _bannerAd),
+                ),
+              ),
+
+
+            if (_isBannerAdReady)
+              const SizedBox(
+                height: 10,
+              ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )
+    );
     // viewChildren.add(viewAcceptedWorker(context));
     // viewChildren.add(viewProjectOwner(context));
 

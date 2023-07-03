@@ -61,10 +61,7 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
     bool isEnd = false;
     bool _isSetAds = true;
     StateSetter? _setState;
-    late BannerAd _bannerAd;
-    bool _isBannerAdReady = false;
-    late BannerAd _bannerAd1;
-    bool _isBannerAdReady1 = false;
+
 
     late BannerAd _bannerAd2;
     bool _isBannerAdReady2 = false;
@@ -81,51 +78,8 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
     initState(){
 
         super.initState();
-        _createInterstitialAd();
+
         WidgetsBinding.instance.addPostFrameCallback((_) async {
-            _bannerAd = BannerAd(
-                adUnitId: AdHelper.bannerAdUnitId,
-                request: AdRequest(),
-                size: AdSize.mediumRectangle,
-                listener: BannerAdListener(
-                    onAdLoaded: (_) {
-
-                        _setState!(() {
-                            _isBannerAdReady = true;
-                        });
-                        //  setState(() {
-                        //  _isBannerAdReady = true;
-                        // });
-                    },
-                    onAdFailedToLoad: (ad, err) {
-                        print('Failed to load a banner ad: ${err.message}');
-                        _isBannerAdReady = false;
-                        ad.dispose();
-                    },
-                ),
-            );
-
-            _bannerAd1 = BannerAd(
-                adUnitId: AdHelper.bannerAdUnitId,
-                request: AdRequest(),
-                size: AdSize.mediumRectangle,
-                listener: BannerAdListener(
-                    onAdLoaded: (_) {
-
-                        _setState!(() {
-                            _isBannerAdReady1 = true;
-                        });
-                        //  setState(() {
-                        //  _isBannerAdReady = true;
-                        // });
-                    },
-                    onAdFailedToLoad: (ad, err) {
-                        print('Failed to load a banner ad: ${err.message}');
-                        _isBannerAdReady1 = false;
-                        ad.dispose();
-                    },
-                ),
-            );
 
             _bannerAd2 = BannerAd(
                 adUnitId: AdHelper.bannerAdUnitId,
@@ -168,8 +122,7 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
             );
 
 
-            _bannerAd.load();
-            _bannerAd1.load();
+
             _bannerAd2.load();
             _bannerAd3.load();
             // await getAdsStatus();
@@ -178,30 +131,11 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
                // print('berhasil ${this.model.model.model.price.toString()}');
                 if(_isSetAds){
                   //  print('apakah bisa man????');
-                    Future.delayed(Duration.zero, () => showAds());
+                    Future.delayed(Duration.zero, () => _createInterstitialAd());
                     //  WidgetsBinding.instance.addPostFrameCallback((_) {
                     //   showAds();
                     // });
-                    timer = Timer(
-                         Duration(seconds: AdHelper.timerSet),
-                            () {
-                            if (!mounted) {
-                                _setState!(() {
-                                    isEnd = true;
-                                });
-                                // Navigator.pop(dialogContext);
-                                // showAds(ctx!);
-                            }else{
-                                _setState!(() {
-                                    isEnd = true;
-                                });
 
-                                // Navigator.pop(dialogContext);
-                                // showAds(ctx!);
-                            }
-
-                        },
-                    );
                 }else{
 
                 }
@@ -262,6 +196,7 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
         );
         _interstitialAd!.show();
         _interstitialAd = null;
+        _setAdsStatus();
     }
     void showAds() {
 
@@ -340,42 +275,7 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, decoration: TextDecoration.none, color: Colors.black),
                                                 ),
-                                                if (_isBannerAdReady)
-                                                    const SizedBox(
-                                                        height: 10,
-                                                    ),
-                                                if (_isBannerAdReady)
-                                                    Center(
-                                                        child: Container(
-                                                            width: _bannerAd.size.width.toDouble(),
-                                                            height: _bannerAd.size.height.toDouble(),
-                                                            child: AdWidget(ad: _bannerAd),
-                                                        ),
-                                                    ),
 
-
-                                                if (_isBannerAdReady1)
-                                                    const SizedBox(
-                                                        height: 10,
-                                                    ),
-                                                if (_isBannerAdReady1)
-                                                    const SizedBox(
-                                                        height: 10,
-                                                    ),
-                                                if (_isBannerAdReady1)
-                                                    Center(
-                                                        child: Container(
-                                                            width: _bannerAd1.size.width.toDouble(),
-                                                            height: _bannerAd1.size.height.toDouble(),
-                                                            child: AdWidget(ad: _bannerAd1),
-                                                        ),
-                                                    ),
-
-
-                                                if (_isBannerAdReady1)
-                                                    const SizedBox(
-                                                        height: 10,
-                                                    ),
                                             ],
                                         ),
                                     ),
@@ -406,28 +306,44 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
         //});
     }
     Future<bool> getAdsStatus() async {
-        var ts;
+        var ts, fd;
+        var delay;
         var tm = DateTime.now().toUtc().millisecondsSinceEpoch;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         if (prefs.containsKey('appads_timestamp')) {
             //print('apakah bisa man123????');
             ts =  prefs.getInt('appads_timestamp');
-            // print('apakah bisa man123${tm}????${ts}');
+            fd =  prefs.getBool('first_delay');
             final date1 = DateTime.fromMillisecondsSinceEpoch(ts).toUtc();
             final date2 = DateTime.fromMillisecondsSinceEpoch(tm).toUtc();
             double difference = double.parse(date2.difference(date1).inMinutes.toString());
-            if(difference <= AdHelper.delaySet){
-                // if (!mounted) {
-                // print('apakah bisa 1 ${difference}');
-                //setState(() {
-                _isSetAds = false;
-                //});
-                // }else{
-                // print('apakah bisa 2');
-                // _isSetAds = false;
-                //  }
+            if(fd){
+                if(difference <= AdHelper.FirstDelay){
+                    _isSetAds = false;
+                    // delay = AdHelper.FirstDelay;
+                }else{
+                    prefs.setBool('first_delay', false);
+                    //delay = AdHelper.delaySet;
+                    _isSetAds = true;
+                }
+
             }else{
-                // print('apakah bisa 2 ${difference}');
+
+                if(difference <= AdHelper.delaySet){
+                    // if (!mounted) {
+                    // print('apakah bisa 1 ${difference}');
+                    //setState(() {
+                    _isSetAds = false;
+                    //});
+                    // }else{
+                    // print('apakah bisa 2');
+                    // _isSetAds = false;
+                    //  }
+                }else{
+                    _isSetAds = true;
+                    // print('apakah bisa 2 ${difference}');
+                }
+
             }
         } else {
             //print('apakah bisa 3');
@@ -613,8 +529,10 @@ class  PublicBrowseServicesViewState extends State< PublicBrowseServicesView>{
     @override
     void dispose() {
         super.dispose();
-        _interstitialAd?.dispose();
-        timer?.cancel();
+        if(_isSetAds) {
+          _interstitialAd?.dispose();
+        }
+       // timer?.cancel();
     }
 }
 

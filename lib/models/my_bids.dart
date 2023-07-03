@@ -837,7 +837,7 @@ class ItemMyBidsContent1 extends StatelessWidget {
 
             },
             child:
-            Text('Shortlisted: ${destination!.item.shortlisted ? 'No': 'Yes'}'),
+            Text('Shortlisted: ${destination!.item.shortlisted ? 'Yes': 'No'}'),
           )
       ),
 

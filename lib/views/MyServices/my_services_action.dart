@@ -1153,6 +1153,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -1795,6 +1797,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -2436,6 +2440,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -3077,6 +3083,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -4243,6 +4251,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();
@@ -4884,6 +4894,8 @@ final RestorableInt _counter = RestorableInt(0);
     controller = ScrollController();
     validation.add(true);
   }
+  
+
   void _onWidgetDidBuild(Function callback) {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       callback();

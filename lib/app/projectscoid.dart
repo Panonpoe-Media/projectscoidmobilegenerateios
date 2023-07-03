@@ -12815,12 +12815,8 @@ class _ProjectscoidState extends State<Projectscoid>
             //  print('halooooo ${widget.id}');
              // await messaging.unsubscribeFromTopic(widget.id!);
               _timer!.cancel();
-
+              await setPrefAvatar();
               await logout!.getData();
-
-
-
-
               messaging.unsubscribeFromTopic(widget.id!);
               SC.SchedulerBinding.instance!.addPostFrameCallback((_) {
                 BlocProvider.of<AuthenticationController>(context)
@@ -12990,6 +12986,20 @@ class _ProjectscoidState extends State<Projectscoid>
     prefs.setString('chat_link', '');
   }
 
+  Future<void> setPrefAvatar() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('avatar', '');
+  }
+
+  Future<String?> _getAvatarPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey('avatar')) {
+      return prefs.getString('avatar');
+    } else {
+      return '';
+    }
+  }
+
   fetchData(AccountController? accountController, BuildContext context,
       String? id) async {
     final ftr = _getChatSharedPrefs();
@@ -13059,6 +13069,7 @@ class _ProjectscoidState extends State<Projectscoid>
     //  var vlll = generateMd5('12345678910');
     //  print('MD5 === $vlll');
     if (listAccount == null) {
+    //  setPrefAvatar();
       listAccount = [];
       final future = accountController!.getAccount();
       future.then((val) {
@@ -13096,13 +13107,24 @@ class _ProjectscoidState extends State<Projectscoid>
          */
       });
     } else {
-      for (var map in listAccount) {
-        username = map['user_name'];
-        userDisplayName = map['user_display'];
-        userPhoto = map['user_photo'];
-        userID = map['user_hash'];
-        // ntf = int.parse(map['notif_count']);
-      }
+
+
+
+      final av = _getAvatarPrefs();
+      av.then((value){
+       // print('ini cahaya1'+ value!);
+        for (var map in listAccount) {
+          username = map['user_name'];
+          userDisplayName = map['user_display'];
+          userPhoto = map['user_photo'];
+          userID = map['user_hash'];
+          // ntf = int.parse(map['notif_count']);
+        }
+        if(value != ''){
+          userPhoto = value!;
+        }
+
+      });
 
       if (firstimeConnect) {
         if (AppProvider.getApplication(context).chat!.socket == null) {

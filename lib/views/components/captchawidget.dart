@@ -31,7 +31,7 @@ class CapthcaContent extends StatelessWidget {
     final List<Widget> children = <Widget>[
       // Photo and title.
       SizedBox(
-        height: 75.0,
+        height: 115.0,
        // width: 100.0,
         child: Stack(
           children: <Widget>[
@@ -51,9 +51,20 @@ class CapthcaContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // three line description
+                      /*
+                      islink? Image.network(
+                        imagelink!,
+                      ):Image.memory(bytes!),
+
+                       */
+
                       Container(
-                          height: 40.0,
-                          width : 280.0,
+                          height: Image.network(
+                            imagelink!,
+                          ).height,
+                          width : Image.network(
+                            imagelink!,
+                          ).width,
                           child : islink? Image.network(
                                  imagelink!,
                               ):Image.memory(bytes!)
@@ -63,6 +74,8 @@ class CapthcaContent extends StatelessWidget {
                                 
                               ),*/
                       ),
+
+
                       Container(
                         height: 20,
                         padding: const EdgeInsets.fromLTRB(8.0, 5.0, 8.0, 0.0),
